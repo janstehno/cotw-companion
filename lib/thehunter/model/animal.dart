@@ -1,6 +1,7 @@
 // Copyright (c) 2022 Jan Stehno
 
 import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 
 class AnimalList {
@@ -144,9 +145,9 @@ class Animal {
   String getNameEN() => en;
 
   String getNameENBasedOnReserve(int reserveID) {
-    if ((id == 34 && reserveID == 5) || (id == 55 && reserveID == 9)) {
+    if ((id == 34 && reserveID == 5) || (id == 55 && reserveID == 9) || (id == 60 && reserveID == 10)) {
       return en.split("/")[0];
-    } else if ((id == 34 && reserveID == 8) || (id == 55 && reserveID == 11)) {
+    } else if ((id == 34 && reserveID == 8) || (id == 55 && reserveID == 11) || (id == 60 && reserveID == 13)) {
       return en.split("/")[1];
     } else {
       return getNameEN();
@@ -156,10 +157,12 @@ class Animal {
   String getNameBasedOnReserve(Locale locale, int reserveID) {
     if (reserveID == -1) return getName(locale);
     if ((locale.languageCode.toString() == "en" && id == 34 && reserveID == 5) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveID == 9)) {
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveID == 9) ||
+        (id == 60 && reserveID == 10)) {
       return getNameByLocale(locale).split("/")[0];
     } else if ((locale.languageCode.toString() == "en" && id == 34 && reserveID == 8) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveID == 11)) {
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveID == 11) ||
+        (id == 60 && reserveID == 13)) {
       return getNameByLocale(locale).split("/")[1];
     } else {
       return getName(locale);

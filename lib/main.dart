@@ -21,9 +21,10 @@ void main() async {
   int color = sharedPreferences.getInt("color") ?? Values.colorThird;
   int fontSize = sharedPreferences.getInt("fontSize") ?? 3;
   bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
+  bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
+  bool mapZonesStyle = sharedPreferences.getBool("mapZonesStyle") ?? false;
   bool dateOfRecord = sharedPreferences.getBool("dateOfRecord") ?? false;
   bool trophyLodgeRecord = sharedPreferences.getBool("trophyLodgeRecord") ?? false;
-  bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
   Values.setColors(darkMode);
   Values.setPrimaryColor(color);
   Values.setFontSize(fontSize);
@@ -54,9 +55,10 @@ void main() async {
             color: color,
             fontSize: fontSize,
             furRarityPerCent: furRarityPerCent,
+            bestWeaponsForAnimal: bestWeaponsForAnimal,
+            mapZonesStyle: mapZonesStyle,
             dateOfRecord: dateOfRecord,
-            trophyLodgeRecord: trophyLodgeRecord,
-            bestWeaponsForAnimal: bestWeaponsForAnimal),
+            trophyLodgeRecord: trophyLodgeRecord),
         child: const App(),
       )));
 }

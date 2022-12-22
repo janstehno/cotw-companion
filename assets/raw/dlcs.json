@@ -1563,5 +1563,67 @@
             42,
             43
         ]
+    },
+    {
+        "ID": 35,
+        "NAME": "New England Mountains",
+        "DATE": "2022-12-06",
+        "TYPE": 1,
+        "DESCRIPTION": {
+            "EN": [
+                "Unlocks new reserve for you to hunt in."
+            ],
+            "RU": [
+                "Открывает новый резерв для охоты."
+            ],
+            "CS": [
+                "Odemyká novou rezervaci, kde můžete lovit."
+            ],
+            "PL": [
+                "Odblokowuje nową rezerwę, na którą możesz polować."
+            ],
+            "DE": [
+                "Schaltet neue Reserven frei, in denen du jagen kannst."
+            ],
+            "FR": [
+                "Déverrouille une nouvelle réserve dans laquelle vous pourrez chasser."
+            ],
+            "ES": [
+                "Desbloquea una nueva reserva para que puedas cazar."
+            ],
+            "PT": [
+                "Desbloqueia uma nova reserva para você caçar."
+            ],
+            "JA": [
+                "新しい保護区をアンロックする。"
+            ]
+        },
+        "MAP": {
+            "MAP": [
+                13
+            ],
+            "ANIMALS": [
+                4,
+                13,
+                28,
+                29,
+                36,
+                51,
+                57,
+                60,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                81
+            ],
+            "WEAPONS": [
+                44
+            ],
+            "CALLERS": [
+            ]
+        }
     }
 ]

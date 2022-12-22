@@ -1,7 +1,7 @@
 // Copyright (c) 2022 Jan Stehno
 
 class Values {
-  static const String appVersion = "1.5.0";
+  static const String appVersion = "1.5.1";
   static const int greatOneID = 100;
 
   static bool darkMode = false;

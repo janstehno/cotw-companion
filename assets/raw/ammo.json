@@ -1258,5 +1258,41 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 12,
         "EXPANSION": 36
+    },
+    {
+        "ID": 71,
+        "EN": ".50 polymer",
+        "RU": ".50 полимерным",
+        "CS": ".50 s polymerovým hrotem",
+        "PL": ".50 z polimerowym stożkiem",
+        "DE": ".50 PSG",
+        "FR": ".50 polymère",
+        "ES": ".50 plástico",
+        "PT": ".50 polímero",
+        "JA": ".50ポリマーチップ弾",
+        "MIN_LEVEL": 4,
+        "MAX_LEVEL": 8,
+        "RANGE_M": 200,
+        "RANGE_YD": 218.72,
+        "PENETRATION": 42,
+        "EXPANSION": 20
+    },
+    {
+        "ID": 72,
+        "EN": ".50 hollow",
+        "RU": ".50 экспансивная",
+        "CS": ".50 s dutým hrotem",
+        "PL": ".50 z wgłębieniem wierychołkowym",
+        "DE": ".50 HSG",
+        "FR": ".50 creuse",
+        "ES": ".50 hueca",
+        "PT": ".50 oca",
+        "JA": ".50被甲ホローポイント弾",
+        "MIN_LEVEL": 4,
+        "MAX_LEVEL": 8,
+        "RANGE_M": 200,
+        "RANGE_YD": 218.72,
+        "PENETRATION": 20,
+        "EXPANSION": 60
     }
 ]

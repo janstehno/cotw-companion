@@ -1,9 +1,12 @@
 // Copyright (c) 2022 Jan Stehno
 
-import 'package:cotwcompanion/thehunter/widgets/animal_fur.dart';
-import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/helpers/helper_json.dart';
+import 'package:cotwcompanion/helpers/helper_values.dart';
 import 'package:cotwcompanion/thehunter/model/animal_fur.dart';
+import 'package:cotwcompanion/thehunter/widgets/animal_fur.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 
 class BuilderAnimalFurs extends StatefulWidget {
   final int animalID;
@@ -33,14 +36,20 @@ class BuilderAnimalFursState extends State<BuilderAnimalFurs> {
   }
 
   Widget _buildWidgets() {
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _furs.length,
-        itemBuilder: (context, index) {
-          AnimalFur fur = _furs[index];
-          return EntryAnimalFur(fur: fur);
-        });
+    return _furs.isEmpty
+        ? Row(mainAxisSize: MainAxisSize.max, children: [
+            Expanded(
+                child: AutoSizeText(tr('none'),
+                    maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400)))
+          ])
+        : ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: _furs.length,
+            itemBuilder: (context, index) {
+              AnimalFur fur = _furs[index];
+              return EntryAnimalFur(fur: fur);
+            });
   }
 
   @override

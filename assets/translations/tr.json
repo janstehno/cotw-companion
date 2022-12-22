@@ -97,6 +97,7 @@
   "logbook_info_8_3": "Ayrıca dosyayı uygulamaya geri aktarabilirsiniz. Dosya gerekli yapıya sahip olmayacaksa, yüklenmez. Dosyanın, adının sonunda *.json* olması gerekir. İçe aktarılan dosya, şu ana kadar oluşturulan her şeyin *üzerine yazacaktır*.",
   "logbook_info_8_4": "*Depolama alanına erişime izin vermeniz* gerekir. Başka yolu yok. Buna izin vermezseniz, uygulama dosyayı oluşturamaz ve kaydedemez veya cihazınızın depolama alanından içe aktaramaz. Öte yandan, uygulama cihazınıza yüklendiği sürece kayıtlar uygulamanın depolama alanına kaydedilmeye devam eder. İzin verilen izni her zaman beğenmezseniz, cihazın ayarlarından bu izne her zaman manuel olarak izin vermeyebilirsiniz.",
   "map": "Harita",
+  "map_zones_style": "Hayvan oluşumlarını haritada daireler olarak göster",
   "max": "Maksimum",
   "meters": "m",
   "metric_units": "Metrik",

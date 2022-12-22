@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/helpers/helper_json.dart';
 import 'package:cotwcompanion/helpers/helper_map.dart';
+import 'package:cotwcompanion/helpers/helper_settings.dart';
 import 'package:cotwcompanion/helpers/helper_values.dart';
 import 'package:cotwcompanion/thehunter/activities/map_layers.dart';
 import 'package:cotwcompanion/thehunter/model/animal.dart';
@@ -12,6 +13,7 @@ import 'package:cotwcompanion/thehunter/model/reserve.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_button.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_switch.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ActivityMap extends StatefulWidget {
   final int reserveID;
@@ -25,6 +27,7 @@ class ActivityMap extends StatefulWidget {
 class ActivityMapState extends State<ActivityMap> {
   late final Reserve _reserve;
 
+  late Settings _settings;
   late double _screenHeight, _screenWidth;
 
   double _opacity = 1;
@@ -35,6 +38,8 @@ class ActivityMapState extends State<ActivityMap> {
   @override
   void initState() {
     _reserve = JSONHelper.getReserve(widget.reserveID);
+    _settings = Provider.of<Settings>(context, listen: false);
+    _showCircularZones = _settings.getMapZonesStyle;
     super.initState();
   }
 
@@ -149,11 +154,12 @@ class ActivityMapState extends State<ActivityMap> {
                                 inactiveBackground: Values.colorAlwaysLight,
                                 icon: "assets/graphics/icons/other.svg",
                                 size: 40,
-                                isActive: _showCircularZones,
+                                isActive: _settings.getMapZonesStyle,
                                 noInactiveOpacity: true,
                                 onTap: () {
                                   setState(() {
                                     _showCircularZones = !_showCircularZones;
+                                    _settings.changeMapZonesStyle();
                                   });
                                 }))))
                 : Container(),

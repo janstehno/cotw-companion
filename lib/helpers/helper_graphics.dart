@@ -14,7 +14,8 @@ class Graphics {
     "teawaroanationalpark",
     "ranchodelarroyo",
     "mississippiacrespreserve",
-    "revontulicoast"
+    "revontulicoast",
+    "newenglandmountains"
   ];
 
   static const List<String> _callers = [
@@ -85,7 +86,8 @@ class Graphics {
     "zarza10308",
     "243rcuomo",
     "45rolleston",
-    "10mmdavani"
+    "10mmdavani",
+    "curman50inline"
   ];
 
   static const List<String> _animals = [
@@ -168,7 +170,8 @@ class Graphics {
     "rockptarmigan",
     "willowptarmigan",
     "mountainhare",
-    "raccoondog"
+    "raccoondog",
+    "greenwingedteal"
   ];
 
   static String getReserveIcon(int i) {

@@ -16,6 +16,7 @@ class EntryNameWithDualSwitch extends StatelessWidget {
   final int? activeButtonBackground;
   final bool isActive;
   final bool noInactiveOpacity;
+  final bool oneLine;
   final Function onTap;
 
   const EntryNameWithDualSwitch(
@@ -30,6 +31,7 @@ class EntryNameWithDualSwitch extends StatelessWidget {
       this.activeButtonBackground,
       required this.isActive,
       this.noInactiveOpacity = false,
+      this.oneLine = false,
       required this.onTap})
       : super(key: key);
 
@@ -44,10 +46,10 @@ class EntryNameWithDualSwitch extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 30),
                   child: AutoSizeText(
                     text,
-                    maxLines: 2,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600),
-                  ))),
+                        maxLines: oneLine ? 1 : 2,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600),
+                      ))),
           WidgetSwitch(
               text: leftButtonText,
               size: size,

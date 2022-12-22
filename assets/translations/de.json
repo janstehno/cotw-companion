@@ -97,6 +97,7 @@
     "logbook_info_8_3": "Sie können die Datei auch wieder in die App importieren. Wenn die Datei nicht die erforderliche Struktur hat, wird sie nicht geladen. Die Datei muss das *.json* am Ende ihres Namens haben. Die importierte Datei *überschreibt* alles bisher erstellte.",
     "logbook_info_8_4": "Sie müssen *den Zugriff auf den Speicher erlauben*. Es geht nicht anders. Wenn Sie dies nicht zulassen, kann die App die Datei nicht erstellen und speichern oder die Datei aus dem Speicher Ihres Geräts importieren. Andererseits werden die Aufzeichnungen weiterhin im Speicher der App gespeichert, solange die App auf Ihrem Gerät installiert wird. Wenn Ihnen die ständig gewährte Berechtigung nicht gefällt, können Sie diese Berechtigung jederzeit manuell in den Einstellungen des Geräts verweigern.",
     "map": "Karte",
+    "map_zones_style": "Tiervorkommen als Kreise in der Karte anzeigen",
     "max": "Maximal",
     "meters": "m",
     "metric_units": "Metrische",

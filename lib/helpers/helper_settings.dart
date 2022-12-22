@@ -12,9 +12,10 @@ class Settings extends ChangeNotifier {
   late bool _darkMode;
   late bool _imperialUnits;
   late bool _furRarityPerCent;
+  late bool _bestWeaponsForAnimal;
+  late bool _mapZonesStyle;
   late bool _dateOfRecord;
   late bool _trophyLodgeRecord;
-  late bool _bestWeaponsForAnimal;
   late SharedPreferences _sharedPreferences;
 
   Settings(
@@ -25,9 +26,10 @@ class Settings extends ChangeNotifier {
       fontSize,
       compactLogbook,
       bool furRarityPerCent = false,
+      bool bestWeaponsForAnimal = false,
+      bool mapZonesStyle = false,
       bool dateOfRecord = false,
-      bool trophyLodgeRecord = false,
-      bool bestWeaponsForAnimal = false}) {
+      bool trophyLodgeRecord = false}) {
     _darkMode = darkMode;
     _imperialUnits = imperialUnits;
     _language = language;
@@ -35,9 +37,10 @@ class Settings extends ChangeNotifier {
     _fontSize = fontSize;
     _compactLogbook = compactLogbook;
     _furRarityPerCent = furRarityPerCent;
+    _bestWeaponsForAnimal = bestWeaponsForAnimal;
+    _mapZonesStyle = mapZonesStyle;
     _dateOfRecord = dateOfRecord;
     _trophyLodgeRecord = trophyLodgeRecord;
-    _bestWeaponsForAnimal = bestWeaponsForAnimal;
   }
 
   //['en', 'ru', 'cs', 'pl', 'de', 'fr', 'es', 'pt', 'ja']
@@ -55,11 +58,13 @@ class Settings extends ChangeNotifier {
 
   bool get getFurRarityPerCent => _furRarityPerCent;
 
+  bool get getBestWeaponsForAnimal => _bestWeaponsForAnimal;
+
+  bool get getMapZonesStyle => _mapZonesStyle;
+
   bool get getDateOfRecord => _dateOfRecord;
 
   bool get getTrophyLodgeRecord => _trophyLodgeRecord;
-
-  bool get getBestWeaponsForAnimal => _bestWeaponsForAnimal;
 
   Future<void> changeTheme() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -134,6 +139,30 @@ class Settings extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> changeBestWeaponsForAnimal() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    if (_bestWeaponsForAnimal == true) {
+      _bestWeaponsForAnimal = false;
+      await _sharedPreferences.setBool("bestWeaponsForAnimal", false);
+    } else {
+      _bestWeaponsForAnimal = true;
+      await _sharedPreferences.setBool("bestWeaponsForAnimal", true);
+    }
+    notifyListeners();
+  }
+
+  Future<void> changeMapZonesStyle() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    if (_mapZonesStyle == true) {
+      _mapZonesStyle = false;
+      await _sharedPreferences.setBool("mapZonesStyle", false);
+    } else {
+      _mapZonesStyle = true;
+      await _sharedPreferences.setBool("mapZonesStyle", true);
+    }
+    notifyListeners();
+  }
+
   Future<void> changeDateOfRecord() async {
     _sharedPreferences = await SharedPreferences.getInstance();
     if (_dateOfRecord == true) {
@@ -154,18 +183,6 @@ class Settings extends ChangeNotifier {
     } else {
       _trophyLodgeRecord = true;
       await _sharedPreferences.setBool("trophyLodgeRecord", true);
-    }
-    notifyListeners();
-  }
-
-  Future<void> changeBestWeaponsForAnimal() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    if (_bestWeaponsForAnimal == true) {
-      _bestWeaponsForAnimal = false;
-      await _sharedPreferences.setBool("bestWeaponsForAnimal", false);
-    } else {
-      _bestWeaponsForAnimal = true;
-      await _sharedPreferences.setBool("bestWeaponsForAnimal", true);
     }
     notifyListeners();
   }

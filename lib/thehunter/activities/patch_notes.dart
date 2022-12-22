@@ -42,6 +42,11 @@ class ActivityPatchNotes extends StatelessWidget {
 
   Widget _buildList() {
     return Column(children: [
+      EntryPatchNote(
+        color: Values.colorOdd,
+        version: "1.5.1",
+        changes: const ["- New England Mountains update."],
+      ),
       EntryPatchNote(color: Values.colorEven, version: "1.5.0", changes: const [
         "- Improvement of the Catch book and Trophy lodge. Fixed few problems when creating a record.",
         "- Changed word values (mostly from rare to uncommon) of furs for almost every animal. Per cent values remained the same."

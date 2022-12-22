@@ -691,8 +691,11 @@
         "GOLD": 194.09,
         "DIAMOND": 274.99,
         "TROPHY": 320.0,
+        "TROPHY_GO": 0.0,
         "WEIGHT_KG": 620.0,
         "WEIGHT_LB": 1366.9,
+        "WEIGHT_GO_KG": 0.0,
+        "WEIGHT_GO_LB": 0.0,
         "SIGHT": 0,
         "HEARING": 3,
         "SMELL": 4,
@@ -1131,7 +1134,7 @@
         "SIGHT": 3,
         "HEARING": 0,
         "SMELL": 1,
-        "DLC": 1
+        "DLC": 0
     },
     {
         "ID": 48,
@@ -1374,7 +1377,7 @@
         "SIGHT": 3,
         "HEARING": 3,
         "SMELL": 1,
-        "DLC": 1
+        "DLC": 0
     },
     {
         "ID": 58,
@@ -1426,15 +1429,15 @@
     },
     {
         "ID": 60,
-        "EN": "Mexican Bobcat",
-        "RU": "Мексиканская Рысь",
-        "CS": "Rys Červený",
-        "PL": "Ryś Rudy",
-        "DE": "Mexikanischer Rotluchs",
-        "FR": "Lynx Roux",
-        "ES": "Lince Rojo Mexicano",
-        "PT": "Lince-Pardo Do México",
-        "JA": "メキシカンボブキャット",
+        "EN": "Mexican Bobcat/Bobcat",
+        "RU": "Мексиканская Рысь/Bobcat",
+        "CS": "Rys Červený/Bobcat",
+        "PL": "Ryś Rudy/Bobcat",
+        "DE": "Mexikanischer Rotluchs/Bobcat",
+        "FR": "Lynx Roux/Bobcat",
+        "ES": "Lince Rojo Mexicano/Bobcat",
+        "PT": "Lince-Pardo Do México/Bobcat",
+        "JA": "メキシカンボブキャット/Bobcat",
         "LEVEL": 3,
         "DIFFICULTY": 9,
         "SILVER": 18.58,
@@ -1926,6 +1929,30 @@
         "SIGHT": 1,
         "HEARING": 2,
         "SMELL": 4,
+        "DLC": 1
+    },
+    {
+        "ID": 81,
+        "EN": "Green-Winged Teal",
+        "RU": "Зеленокрылый Чирок",
+        "CS": "Čírka Karolínská",
+        "PL": "Cyraneczka Karolińska",
+        "DE": "Nordamerikanische Krickente",
+        "FR": "Sarcelle à Ailes Vertes",
+        "ES": "Cerceta Americana",
+        "PT": "Merrequinha-Americana",
+        "JA": "アメリカコガモ",
+        "LEVEL": 1,
+        "DIFFICULTY": 3,
+        "SILVER": 340.0,
+        "GOLD": 420.0,
+        "DIAMOND": 480.0,
+        "TROPHY": 0.0,
+        "WEIGHT_KG": 0.0,
+        "WEIGHT_LB": 0.0,
+        "SIGHT": 4,
+        "HEARING": 0,
+        "SMELL": 0,
         "DLC": 1
     }
 ]

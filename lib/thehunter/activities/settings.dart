@@ -147,6 +147,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
       EntryNameWithDualSwitch(
           text: tr('interface'),
           size: 40,
+          oneLine: true,
           leftButtonText: tr('light_mode'),
           rightButtonText: tr('dark_mode'),
           background: Values.colorContentSubTitleBackground,
@@ -163,6 +164,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
       EntryNameWithDualSwitch(
           text: tr('units'),
           size: 40,
+          oneLine: true,
           leftButtonText: tr('metric_units'),
           rightButtonText: tr('imperial_units'),
           background: Values.colorContentSubTitleBackground,
@@ -205,6 +207,19 @@ class ActivitySettingsState extends State<ActivitySettings> {
           onTap: () {
             setState(() {
               _settings.changeBestWeaponsForAnimal();
+              widget.callback();
+            });
+          }),
+      EntryName.withSwitch(
+          text: tr('map_zones_style'),
+          color: Values.colorContentSubTitle,
+          buttonActiveColor: Values.colorAccent,
+          buttonActiveBackground: Values.colorPrimary,
+          size: 40,
+          isActive: _settings.getMapZonesStyle,
+          onTap: () {
+            setState(() {
+              _settings.changeMapZonesStyle();
               widget.callback();
             });
           }),

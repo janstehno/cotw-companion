@@ -643,5 +643,20 @@
         "TYPE": 2,
         "MAG": 15,
         "DLC": 1
+    },
+    {
+        "ID": 44,
+        "EN": "Curman .50 Inline",
+        "RU": "Curman .50 Inline",
+        "CS": "Curman .50 Inline",
+        "PL": "Curman .50 Inline",
+        "DE": "Curman .50 Inline",
+        "FR": "Curman .50 Inline",
+        "ES": "Curman .50 Inline",
+        "PT": "Curman .50 Inline",
+        "JA": "Curman .50 Inline",
+        "TYPE": 0,
+        "MAG": 1,
+        "DLC": 1
     }
 ]

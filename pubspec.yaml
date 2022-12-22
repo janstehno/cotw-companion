@@ -2,7 +2,7 @@ name: cotwcompanion
 description: Companion for the game theHunter Call of the Wild
 
 publish_to: 'none'
-version: 1.5.0+21
+version: 1.5.1+23
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -13,7 +13,7 @@ dependencies:
   equatable: ^2.0.3
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
-  meta: ^1.7.0
+  meta: ^1.8.0
   flutter_lints: ^2.0.1
   flutter_svg: ^1.1.0
   flutter_circular_text: ^0.3.1
@@ -27,17 +27,17 @@ dependencies:
   fl_chart: ^0.55.0
   smooth_page_indicator: ^1.0.0+2
   url_launcher: ^6.1.2
-  package_info_plus: ^1.4.2
+  package_info_plus: ^3.0.2
   wakelock: ^0.6.1+2
   easy_rich_text: ^1.0.4
   path_provider: ^2.0.10
   simple_shadow: ^0.3.0
-  file_picker: ^4.6.1
+  file_picker: ^5.2.4
   permission_handler: ^10.0.0
   provider: ^6.0.3
-  async: ^2.8.2
+  async: ^2.9.0
   http: ^0.13.4
-  internet_connection_checker: ^0.0.1+4
+  internet_connection_checker: ^1.0.0+1
   flutter_cache_manager: ^3.3.0
   logger: ^1.1.0
 
@@ -70,6 +70,7 @@ flutter:
     - assets/graphics/maps/ranchodelarroyo/
     - assets/graphics/maps/mississippiacrespreserve/
     - assets/graphics/maps/revontulicoast/
+    - assets/graphics/maps/newenglandmountains/
   fonts:
     - family: Manrope
       fonts:

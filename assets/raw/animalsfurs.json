@@ -4642,5 +4642,32 @@
         "RARITY": 1,
         "MALE": 0,
         "FEMALE": 0
+    },
+    {
+        "ID": 517,
+        "ANIMAL_ID": 81,
+        "FUR_ID": 73,
+        "PERCENT": 0.0,
+        "RARITY": 4,
+        "MALE": 0,
+        "FEMALE": 0
+    },
+    {
+        "ID": 518,
+        "ANIMAL_ID": 81,
+        "FUR_ID": 3,
+        "PERCENT": 0.0,
+        "RARITY": 2,
+        "MALE": 0,
+        "FEMALE": 0
+    },
+    {
+        "ID": 519,
+        "ANIMAL_ID": 81,
+        "FUR_ID": 1,
+        "PERCENT": 0.0,
+        "RARITY": 1,
+        "MALE": 0,
+        "FEMALE": 0
     }
 ]

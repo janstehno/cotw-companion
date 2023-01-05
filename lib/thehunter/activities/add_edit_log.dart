@@ -509,7 +509,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 isShowSeconds: false,
                 startInitialDate: _dateTime,
                 startFirstDate: DateTime(2017),
-                startLastDate: DateTime(2022, 12, 31),
+                startLastDate: DateTime(2030, 12, 31),
                 borderRadius: const Radius.circular(10),
               )) ??
               _dateTime;

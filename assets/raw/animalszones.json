@@ -619,7 +619,7 @@
         "ID": 78,
         "ANIMAL_ID": 41,
         "RESERVE_ID": 2,
-        "ZONE": 1,
+        "ZONE": 0,
         "TIME_FROM": 16,
         "TIME_TO": 20
     },
@@ -693,18 +693,10 @@
         "RESERVE_ID": 2,
         "ZONE": 0,
         "TIME_FROM": 18,
-        "TIME_TO": 21
-    },
-    {
-        "ID": 88,
-        "ANIMAL_ID": 50,
-        "RESERVE_ID": 2,
-        "ZONE": 2,
-        "TIME_FROM": 21,
         "TIME_TO": 24
     },
     {
-        "ID": 89,
+        "ID": 88,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 2,
         "ZONE": 2,
@@ -712,7 +704,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 90,
+        "ID": 89,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 2,
         "ZONE": 0,
@@ -720,7 +712,7 @@
         "TIME_TO": 8
     },
     {
-        "ID": 91,
+        "ID": 90,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 2,
         "ZONE": 1,
@@ -728,7 +720,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 92,
+        "ID": 91,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 2,
         "ZONE": 2,
@@ -736,7 +728,7 @@
         "TIME_TO": 16
     },
     {
-        "ID": 93,
+        "ID": 92,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 2,
         "ZONE": 0,
@@ -744,7 +736,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 94,
+        "ID": 93,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 2,
         "ZONE": 2,
@@ -752,7 +744,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 95,
+        "ID": 94,
         "ANIMAL_ID": 8,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -760,7 +752,7 @@
         "TIME_TO": 8
     },
     {
-        "ID": 96,
+        "ID": 95,
         "ANIMAL_ID": 8,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -768,7 +760,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 97,
+        "ID": 96,
         "ANIMAL_ID": 8,
         "RESERVE_ID": 3,
         "ZONE": 1,
@@ -776,7 +768,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 98,
+        "ID": 97,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -784,7 +776,7 @@
         "TIME_TO": 3
     },
     {
-        "ID": 99,
+        "ID": 98,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 3,
         "ZONE": 1,
@@ -792,7 +784,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 100,
+        "ID": 99,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -800,7 +792,7 @@
         "TIME_TO": 9
     },
     {
-        "ID": 101,
+        "ID": 100,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -808,7 +800,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 102,
+        "ID": 101,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -816,7 +808,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 103,
+        "ID": 102,
         "ANIMAL_ID": 20,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -824,7 +816,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 104,
+        "ID": 103,
         "ANIMAL_ID": 20,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -832,7 +824,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 105,
+        "ID": 104,
         "ANIMAL_ID": 20,
         "RESERVE_ID": 3,
         "ZONE": 1,
@@ -840,7 +832,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 106,
+        "ID": 105,
         "ANIMAL_ID": 20,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -848,31 +840,31 @@
         "TIME_TO": 24
     },
     {
-        "ID": 107,
+        "ID": 106,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 3,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 4
+    },
+    {
+        "ID": 107,
+        "ANIMAL_ID": 29,
+        "RESERVE_ID": 3,
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 8
     },
     {
         "ID": 108,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 3,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 8
-    },
-    {
-        "ID": 109,
-        "ANIMAL_ID": 29,
-        "RESERVE_ID": 3,
         "ZONE": 2,
         "TIME_FROM": 8,
         "TIME_TO": 12
     },
     {
-        "ID": 110,
+        "ID": 109,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 3,
         "ZONE": 1,
@@ -880,7 +872,7 @@
         "TIME_TO": 16
     },
     {
-        "ID": 111,
+        "ID": 110,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -888,7 +880,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 112,
+        "ID": 111,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -896,7 +888,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 113,
+        "ID": 112,
         "ANIMAL_ID": 37,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -904,7 +896,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 114,
+        "ID": 113,
         "ANIMAL_ID": 37,
         "RESERVE_ID": 3,
         "ZONE": 1,
@@ -912,7 +904,7 @@
         "TIME_TO": 8
     },
     {
-        "ID": 115,
+        "ID": 114,
         "ANIMAL_ID": 37,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -920,7 +912,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 116,
+        "ID": 115,
         "ANIMAL_ID": 37,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -928,7 +920,7 @@
         "TIME_TO": 16
     },
     {
-        "ID": 117,
+        "ID": 116,
         "ANIMAL_ID": 37,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -936,7 +928,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 118,
+        "ID": 117,
         "ANIMAL_ID": 37,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -944,7 +936,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 119,
+        "ID": 118,
         "ANIMAL_ID": 43,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -952,7 +944,7 @@
         "TIME_TO": 8
     },
     {
-        "ID": 120,
+        "ID": 119,
         "ANIMAL_ID": 43,
         "RESERVE_ID": 3,
         "ZONE": 1,
@@ -960,7 +952,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 121,
+        "ID": 120,
         "ANIMAL_ID": 43,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -968,7 +960,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 122,
+        "ID": 121,
         "ANIMAL_ID": 43,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -976,7 +968,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 123,
+        "ID": 122,
         "ANIMAL_ID": 52,
         "RESERVE_ID": 3,
         "ZONE": 1,
@@ -984,7 +976,7 @@
         "TIME_TO": 3
     },
     {
-        "ID": 124,
+        "ID": 123,
         "ANIMAL_ID": 52,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -992,7 +984,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 125,
+        "ID": 124,
         "ANIMAL_ID": 52,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -1000,7 +992,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 126,
+        "ID": 125,
         "ANIMAL_ID": 52,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -1008,7 +1000,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 127,
+        "ID": 126,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -1016,7 +1008,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 128,
+        "ID": 127,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -1024,7 +1016,7 @@
         "TIME_TO": 11
     },
     {
-        "ID": 129,
+        "ID": 128,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -1032,7 +1024,7 @@
         "TIME_TO": 14
     },
     {
-        "ID": 130,
+        "ID": 129,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 3,
         "ZONE": 0,
@@ -1040,7 +1032,7 @@
         "TIME_TO": 21
     },
     {
-        "ID": 131,
+        "ID": 130,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 3,
         "ZONE": 2,
@@ -1048,7 +1040,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 132,
+        "ID": 131,
         "ANIMAL_ID": 7,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1056,7 +1048,7 @@
         "TIME_TO": 3
     },
     {
-        "ID": 133,
+        "ID": 132,
         "ANIMAL_ID": 7,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1064,7 +1056,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 134,
+        "ID": 133,
         "ANIMAL_ID": 7,
         "RESERVE_ID": 4,
         "ZONE": 1,
@@ -1072,7 +1064,7 @@
         "TIME_TO": 9
     },
     {
-        "ID": 135,
+        "ID": 134,
         "ANIMAL_ID": 7,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1080,7 +1072,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 136,
+        "ID": 135,
         "ANIMAL_ID": 7,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1088,7 +1080,7 @@
         "TIME_TO": 15
     },
     {
-        "ID": 137,
+        "ID": 136,
         "ANIMAL_ID": 7,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1096,7 +1088,7 @@
         "TIME_TO": 18
     },
     {
-        "ID": 138,
+        "ID": 137,
         "ANIMAL_ID": 7,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1104,7 +1096,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 139,
+        "ID": 138,
         "ANIMAL_ID": 10,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1112,7 +1104,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 140,
+        "ID": 139,
         "ANIMAL_ID": 10,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1120,7 +1112,7 @@
         "TIME_TO": 9
     },
     {
-        "ID": 141,
+        "ID": 140,
         "ANIMAL_ID": 10,
         "RESERVE_ID": 4,
         "ZONE": 1,
@@ -1128,7 +1120,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 142,
+        "ID": 141,
         "ANIMAL_ID": 10,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1136,7 +1128,7 @@
         "TIME_TO": 18
     },
     {
-        "ID": 143,
+        "ID": 142,
         "ANIMAL_ID": 10,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1144,7 +1136,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 144,
+        "ID": 143,
         "ANIMAL_ID": 19,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1152,7 +1144,7 @@
         "TIME_TO": 3
     },
     {
-        "ID": 145,
+        "ID": 144,
         "ANIMAL_ID": 19,
         "RESERVE_ID": 4,
         "ZONE": 1,
@@ -1160,7 +1152,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 146,
+        "ID": 145,
         "ANIMAL_ID": 19,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1168,7 +1160,7 @@
         "TIME_TO": 10
     },
     {
-        "ID": 147,
+        "ID": 146,
         "ANIMAL_ID": 19,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1176,7 +1168,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 148,
+        "ID": 147,
         "ANIMAL_ID": 19,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1184,7 +1176,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 149,
+        "ID": 148,
         "ANIMAL_ID": 26,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1192,7 +1184,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 150,
+        "ID": 149,
         "ANIMAL_ID": 26,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1200,7 +1192,7 @@
         "TIME_TO": 18
     },
     {
-        "ID": 151,
+        "ID": 150,
         "ANIMAL_ID": 26,
         "RESERVE_ID": 4,
         "ZONE": 1,
@@ -1208,7 +1200,7 @@
         "TIME_TO": 21
     },
     {
-        "ID": 152,
+        "ID": 151,
         "ANIMAL_ID": 26,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1216,7 +1208,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 153,
+        "ID": 152,
         "ANIMAL_ID": 27,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1224,7 +1216,7 @@
         "TIME_TO": 8
     },
     {
-        "ID": 154,
+        "ID": 153,
         "ANIMAL_ID": 27,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1232,7 +1224,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 155,
+        "ID": 154,
         "ANIMAL_ID": 27,
         "RESERVE_ID": 4,
         "ZONE": 1,
@@ -1240,7 +1232,7 @@
         "TIME_TO": 15
     },
     {
-        "ID": 156,
+        "ID": 155,
         "ANIMAL_ID": 27,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1248,31 +1240,31 @@
         "TIME_TO": 24
     },
     {
-        "ID": 157,
+        "ID": 156,
         "ANIMAL_ID": 42,
         "RESERVE_ID": 4,
         "ZONE": 0,
         "TIME_FROM": 0,
         "TIME_TO": 6
+    },
+    {
+        "ID": 157,
+        "ANIMAL_ID": 42,
+        "RESERVE_ID": 4,
+        "ZONE": 2,
+        "TIME_FROM": 6,
+        "TIME_TO": 18
     },
     {
         "ID": 158,
         "ANIMAL_ID": 42,
         "RESERVE_ID": 4,
-        "ZONE": 2,
-        "TIME_FROM": 6,
-        "TIME_TO": 18
-    },
-    {
-        "ID": 159,
-        "ANIMAL_ID": 42,
-        "RESERVE_ID": 4,
         "ZONE": 0,
         "TIME_FROM": 18,
         "TIME_TO": 24
     },
     {
-        "ID": 160,
+        "ID": 159,
         "ANIMAL_ID": 44,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1280,7 +1272,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 161,
+        "ID": 160,
         "ANIMAL_ID": 44,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1288,7 +1280,7 @@
         "TIME_TO": 18
     },
     {
-        "ID": 162,
+        "ID": 161,
         "ANIMAL_ID": 44,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1296,7 +1288,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 163,
+        "ID": 162,
         "ANIMAL_ID": 46,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1304,7 +1296,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 164,
+        "ID": 163,
         "ANIMAL_ID": 46,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1312,7 +1304,7 @@
         "TIME_TO": 14
     },
     {
-        "ID": 165,
+        "ID": 164,
         "ANIMAL_ID": 46,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1320,7 +1312,7 @@
         "TIME_TO": 18
     },
     {
-        "ID": 166,
+        "ID": 165,
         "ANIMAL_ID": 46,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1328,7 +1320,7 @@
         "TIME_TO": 21
     },
     {
-        "ID": 167,
+        "ID": 166,
         "ANIMAL_ID": 46,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1336,7 +1328,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 168,
+        "ID": 167,
         "ANIMAL_ID": 48,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1344,7 +1336,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 169,
+        "ID": 168,
         "ANIMAL_ID": 48,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1352,7 +1344,7 @@
         "TIME_TO": 15
     },
     {
-        "ID": 170,
+        "ID": 169,
         "ANIMAL_ID": 48,
         "RESERVE_ID": 4,
         "ZONE": 1,
@@ -1360,7 +1352,7 @@
         "TIME_TO": 18
     },
     {
-        "ID": 171,
+        "ID": 170,
         "ANIMAL_ID": 48,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1368,7 +1360,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 172,
+        "ID": 171,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1376,7 +1368,7 @@
         "TIME_TO": 5
     },
     {
-        "ID": 173,
+        "ID": 172,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1384,7 +1376,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 174,
+        "ID": 173,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1392,7 +1384,7 @@
         "TIME_TO": 9
     },
     {
-        "ID": 175,
+        "ID": 174,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1400,7 +1392,7 @@
         "TIME_TO": 11
     },
     {
-        "ID": 176,
+        "ID": 175,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1408,7 +1400,7 @@
         "TIME_TO": 13
     },
     {
-        "ID": 177,
+        "ID": 176,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1416,7 +1408,7 @@
         "TIME_TO": 15
     },
     {
-        "ID": 178,
+        "ID": 177,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1424,7 +1416,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 179,
+        "ID": 178,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 0,
@@ -1432,7 +1424,7 @@
         "TIME_TO": 19
     },
     {
-        "ID": 180,
+        "ID": 179,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 4,
         "ZONE": 2,
@@ -1440,7 +1432,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 181,
+        "ID": 180,
         "ANIMAL_ID": 1,
         "RESERVE_ID": 5,
         "ZONE": 2,
@@ -1448,7 +1440,7 @@
         "TIME_TO": 3
     },
     {
-        "ID": 182,
+        "ID": 181,
         "ANIMAL_ID": 1,
         "RESERVE_ID": 5,
         "ZONE": 1,
@@ -1456,7 +1448,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 183,
+        "ID": 182,
         "ANIMAL_ID": 1,
         "RESERVE_ID": 5,
         "ZONE": 0,
@@ -1464,11 +1456,19 @@
         "TIME_TO": 12
     },
     {
-        "ID": 184,
+        "ID": 183,
         "ANIMAL_ID": 1,
         "RESERVE_ID": 5,
         "ZONE": 2,
         "TIME_FROM": 12,
+        "TIME_TO": 21
+    },
+    {
+        "ID": 184,
+        "ANIMAL_ID": 1,
+        "RESERVE_ID": 5,
+        "ZONE": 0,
+        "TIME_FROM": 21,
         "TIME_TO": 24
     },
     {
@@ -2573,14 +2573,14 @@
         "RESERVE_ID": 7,
         "ZONE": 0,
         "TIME_FROM": 3,
-        "TIME_TO": 10
+        "TIME_TO": 6
     },
     {
         "ID": 323,
         "ANIMAL_ID": 52,
         "RESERVE_ID": 7,
         "ZONE": 2,
-        "TIME_FROM": 10,
+        "TIME_FROM": 6,
         "TIME_TO": 17
     },
     {
@@ -3365,14 +3365,14 @@
         "RESERVE_ID": 9,
         "ZONE": 2,
         "TIME_FROM": 13,
-        "TIME_TO": 15
+        "TIME_TO": 17
     },
     {
         "ID": 422,
         "ANIMAL_ID": 56,
         "RESERVE_ID": 9,
         "ZONE": 0,
-        "TIME_FROM": 15,
+        "TIME_FROM": 17,
         "TIME_TO": 21
     },
     {
@@ -3389,18 +3389,26 @@
         "RESERVE_ID": 10,
         "ZONE": 2,
         "TIME_FROM": 0,
-        "TIME_TO": 7
+        "TIME_TO": 4
     },
     {
         "ID": 425,
         "ANIMAL_ID": 3,
         "RESERVE_ID": 10,
         "ZONE": 0,
-        "TIME_FROM": 7,
-        "TIME_TO": 11
+        "TIME_FROM": 4,
+        "TIME_TO": 8
     },
     {
         "ID": 426,
+        "ANIMAL_ID": 3,
+        "RESERVE_ID": 10,
+        "ZONE": 2,
+        "TIME_FROM": 8,
+        "TIME_TO": 11
+    },
+    {
+        "ID": 427,
         "ANIMAL_ID": 3,
         "RESERVE_ID": 10,
         "ZONE": 1,
@@ -3408,7 +3416,7 @@
         "TIME_TO": 14
     },
     {
-        "ID": 427,
+        "ID": 428,
         "ANIMAL_ID": 3,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3416,7 +3424,7 @@
         "TIME_TO": 21
     },
     {
-        "ID": 428,
+        "ID": 429,
         "ANIMAL_ID": 3,
         "RESERVE_ID": 10,
         "ZONE": 2,
@@ -3424,7 +3432,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 429,
+        "ID": 430,
         "ANIMAL_ID": 13,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3432,7 +3440,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 430,
+        "ID": 431,
         "ANIMAL_ID": 13,
         "RESERVE_ID": 10,
         "ZONE": 2,
@@ -3440,7 +3448,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 431,
+        "ID": 432,
         "ANIMAL_ID": 13,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3448,7 +3456,7 @@
         "TIME_TO": 21
     },
     {
-        "ID": 432,
+        "ID": 433,
         "ANIMAL_ID": 13,
         "RESERVE_ID": 10,
         "ZONE": 1,
@@ -3456,7 +3464,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 433,
+        "ID": 434,
         "ANIMAL_ID": 31,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3464,7 +3472,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 434,
+        "ID": 435,
         "ANIMAL_ID": 31,
         "RESERVE_ID": 10,
         "ZONE": 2,
@@ -3472,7 +3480,7 @@
         "TIME_TO": 14
     },
     {
-        "ID": 435,
+        "ID": 436,
         "ANIMAL_ID": 31,
         "RESERVE_ID": 10,
         "ZONE": 1,
@@ -3480,7 +3488,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 436,
+        "ID": 437,
         "ANIMAL_ID": 31,
         "RESERVE_ID": 10,
         "ZONE": 2,
@@ -3488,7 +3496,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 437,
+        "ID": 438,
         "ANIMAL_ID": 31,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3496,7 +3504,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 438,
+        "ID": 439,
         "ANIMAL_ID": 33,
         "RESERVE_ID": 10,
         "ZONE": 2,
@@ -3504,7 +3512,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 439,
+        "ID": 440,
         "ANIMAL_ID": 33,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3512,7 +3520,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 440,
+        "ID": 441,
         "ANIMAL_ID": 33,
         "RESERVE_ID": 10,
         "ZONE": 2,
@@ -3520,7 +3528,7 @@
         "TIME_TO": 15
     },
     {
-        "ID": 441,
+        "ID": 442,
         "ANIMAL_ID": 33,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3528,7 +3536,7 @@
         "TIME_TO": 18
     },
     {
-        "ID": 442,
+        "ID": 443,
         "ANIMAL_ID": 33,
         "RESERVE_ID": 10,
         "ZONE": 1,
@@ -3536,7 +3544,7 @@
         "TIME_TO": 21
     },
     {
-        "ID": 443,
+        "ID": 444,
         "ANIMAL_ID": 33,
         "RESERVE_ID": 10,
         "ZONE": 2,
@@ -3544,127 +3552,127 @@
         "TIME_TO": 24
     },
     {
-        "ID": 444,
+        "ID": 445,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 10,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 4
-    },
-    {
-        "ID": 445,
-        "ANIMAL_ID": 51,
-        "RESERVE_ID": 10,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 8
     },
     {
         "ID": 446,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 10,
-        "ZONE": 1,
-        "TIME_FROM": 8,
-        "TIME_TO": 11
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 8
     },
     {
         "ID": 447,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 10,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 1,
+        "TIME_FROM": 8,
+        "TIME_TO": 11
     },
     {
         "ID": 448,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 10,
-        "ZONE": 0,
-        "TIME_FROM": 14,
-        "TIME_TO": 21
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
     },
     {
         "ID": 449,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 10,
-        "ZONE": 2,
-        "TIME_FROM": 21,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 14,
+        "TIME_TO": 21
     },
     {
         "ID": 450,
-        "ANIMAL_ID": 57,
+        "ANIMAL_ID": 51,
         "RESERVE_ID": 10,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 4
+        "TIME_FROM": 21,
+        "TIME_TO": 24
     },
     {
         "ID": 451,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 10,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 4
     },
     {
         "ID": 452,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 10,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 11
     },
     {
         "ID": 453,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 10,
-        "ZONE": 0,
-        "TIME_FROM": 14,
-        "TIME_TO": 21
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
     },
     {
         "ID": 454,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 10,
-        "ZONE": 2,
-        "TIME_FROM": 21,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 14,
+        "TIME_TO": 21
     },
     {
         "ID": 455,
-        "ANIMAL_ID": 58,
+        "ANIMAL_ID": 57,
         "RESERVE_ID": 10,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 4
+        "TIME_FROM": 21,
+        "TIME_TO": 24
     },
     {
         "ID": 456,
         "ANIMAL_ID": 58,
         "RESERVE_ID": 10,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 4
     },
     {
         "ID": 457,
         "ANIMAL_ID": 58,
         "RESERVE_ID": 10,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 11
     },
     {
         "ID": 458,
         "ANIMAL_ID": 58,
         "RESERVE_ID": 10,
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
+    },
+    {
+        "ID": 459,
+        "ANIMAL_ID": 58,
+        "RESERVE_ID": 10,
         "ZONE": 0,
         "TIME_FROM": 14,
         "TIME_TO": 21
     },
     {
-        "ID": 459,
+        "ID": 460,
         "ANIMAL_ID": 58,
         "RESERVE_ID": 10,
         "ZONE": 2,
@@ -3672,55 +3680,55 @@
         "TIME_TO": 24
     },
     {
-        "ID": 460,
+        "ID": 461,
         "ANIMAL_ID": 59,
         "RESERVE_ID": 10,
         "ZONE": 1,
         "TIME_FROM": 0,
         "TIME_TO": 3
-    },
-    {
-        "ID": 461,
-        "ANIMAL_ID": 59,
-        "RESERVE_ID": 10,
-        "ZONE": 2,
-        "TIME_FROM": 3,
-        "TIME_TO": 7
     },
     {
         "ID": 462,
         "ANIMAL_ID": 59,
         "RESERVE_ID": 10,
-        "ZONE": 0,
-        "TIME_FROM": 7,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 3,
+        "TIME_TO": 7
     },
     {
         "ID": 463,
         "ANIMAL_ID": 59,
         "RESERVE_ID": 10,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 7,
+        "TIME_TO": 11
     },
     {
         "ID": 464,
         "ANIMAL_ID": 59,
         "RESERVE_ID": 10,
-        "ZONE": 0,
-        "TIME_FROM": 14,
-        "TIME_TO": 17
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
     },
     {
         "ID": 465,
         "ANIMAL_ID": 59,
         "RESERVE_ID": 10,
+        "ZONE": 0,
+        "TIME_FROM": 14,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 466,
+        "ANIMAL_ID": 59,
+        "RESERVE_ID": 10,
         "ZONE": 2,
         "TIME_FROM": 17,
         "TIME_TO": 20
     },
     {
-        "ID": 466,
+        "ID": 467,
         "ANIMAL_ID": 59,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3728,55 +3736,55 @@
         "TIME_TO": 24
     },
     {
-        "ID": 467,
+        "ID": 468,
         "ANIMAL_ID": 60,
         "RESERVE_ID": 10,
         "ZONE": 0,
         "TIME_FROM": 0,
         "TIME_TO": 7
-    },
-    {
-        "ID": 468,
-        "ANIMAL_ID": 60,
-        "RESERVE_ID": 10,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 17
     },
     {
         "ID": 469,
         "ANIMAL_ID": 60,
         "RESERVE_ID": 10,
-        "ZONE": 1,
-        "TIME_FROM": 17,
-        "TIME_TO": 20
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 17
     },
     {
         "ID": 470,
         "ANIMAL_ID": 60,
         "RESERVE_ID": 10,
-        "ZONE": 0,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 1,
+        "TIME_FROM": 17,
+        "TIME_TO": 20
     },
     {
         "ID": 471,
-        "ANIMAL_ID": 61,
+        "ANIMAL_ID": 60,
         "RESERVE_ID": 10,
         "ZONE": 0,
-        "TIME_FROM": 0,
-        "TIME_TO": 7
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 472,
         "ANIMAL_ID": 61,
         "RESERVE_ID": 10,
+        "ZONE": 0,
+        "TIME_FROM": 0,
+        "TIME_TO": 7
+    },
+    {
+        "ID": 473,
+        "ANIMAL_ID": 61,
+        "RESERVE_ID": 10,
         "ZONE": 2,
         "TIME_FROM": 7,
         "TIME_TO": 17
     },
     {
-        "ID": 473,
+        "ID": 474,
         "ANIMAL_ID": 61,
         "RESERVE_ID": 10,
         "ZONE": 0,
@@ -3784,119 +3792,119 @@
         "TIME_TO": 24
     },
     {
-        "ID": 474,
+        "ID": 475,
         "ANIMAL_ID": 4,
         "RESERVE_ID": 11,
         "ZONE": 0,
         "TIME_FROM": 0,
         "TIME_TO": 8
-    },
-    {
-        "ID": 475,
-        "ANIMAL_ID": 4,
-        "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 8,
-        "TIME_TO": 20
     },
     {
         "ID": 476,
         "ANIMAL_ID": 4,
         "RESERVE_ID": 11,
-        "ZONE": 1,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 2,
+        "TIME_FROM": 8,
+        "TIME_TO": 20
     },
     {
         "ID": 477,
-        "ANIMAL_ID": 51,
+        "ANIMAL_ID": 4,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 4
+        "ZONE": 1,
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 478,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 8
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 4
     },
     {
         "ID": 479,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 11,
-        "ZONE": 1,
-        "TIME_FROM": 8,
-        "TIME_TO": 11
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 8
     },
     {
         "ID": 480,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 1,
+        "TIME_FROM": 8,
+        "TIME_TO": 11
     },
     {
         "ID": 481,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 14,
-        "TIME_TO": 21
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
     },
     {
         "ID": 482,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 21,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 14,
+        "TIME_TO": 21
     },
     {
         "ID": 483,
-        "ANIMAL_ID": 55,
+        "ANIMAL_ID": 51,
         "RESERVE_ID": 11,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 3
+        "TIME_FROM": 21,
+        "TIME_TO": 24
     },
     {
         "ID": 484,
         "ANIMAL_ID": 55,
         "RESERVE_ID": 11,
-        "ZONE": 1,
-        "TIME_FROM": 3,
-        "TIME_TO": 6
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 3
     },
     {
         "ID": 485,
         "ANIMAL_ID": 55,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 6,
-        "TIME_TO": 10
+        "ZONE": 1,
+        "TIME_FROM": 3,
+        "TIME_TO": 6
     },
     {
         "ID": 486,
         "ANIMAL_ID": 55,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 10,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 6,
+        "TIME_TO": 10
     },
     {
         "ID": 487,
         "ANIMAL_ID": 55,
         "RESERVE_ID": 11,
+        "ZONE": 2,
+        "TIME_FROM": 10,
+        "TIME_TO": 14
+    },
+    {
+        "ID": 488,
+        "ANIMAL_ID": 55,
+        "RESERVE_ID": 11,
         "ZONE": 0,
         "TIME_FROM": 14,
         "TIME_TO": 20
     },
     {
-        "ID": 488,
+        "ID": 489,
         "ANIMAL_ID": 55,
         "RESERVE_ID": 11,
         "ZONE": 2,
@@ -3904,295 +3912,295 @@
         "TIME_TO": 24
     },
     {
-        "ID": 489,
+        "ID": 490,
         "ANIMAL_ID": 62,
         "RESERVE_ID": 11,
         "ZONE": 0,
         "TIME_FROM": 0,
         "TIME_TO": 8
-    },
-    {
-        "ID": 490,
-        "ANIMAL_ID": 62,
-        "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 8,
-        "TIME_TO": 20
     },
     {
         "ID": 491,
         "ANIMAL_ID": 62,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 2,
+        "TIME_FROM": 8,
+        "TIME_TO": 20
     },
     {
         "ID": 492,
-        "ANIMAL_ID": 63,
+        "ANIMAL_ID": 62,
         "RESERVE_ID": 11,
         "ZONE": 0,
-        "TIME_FROM": 0,
-        "TIME_TO": 7
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 493,
         "ANIMAL_ID": 63,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 0,
+        "TIME_TO": 7
     },
     {
         "ID": 494,
         "ANIMAL_ID": 63,
         "RESERVE_ID": 11,
-        "ZONE": 1,
-        "TIME_FROM": 17,
-        "TIME_TO": 20
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 17
     },
     {
         "ID": 495,
         "ANIMAL_ID": 63,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 1,
+        "TIME_FROM": 17,
+        "TIME_TO": 20
     },
     {
         "ID": 496,
-        "ANIMAL_ID": 64,
+        "ANIMAL_ID": 63,
         "RESERVE_ID": 11,
-        "ZONE": 1,
-        "TIME_FROM": 0,
-        "TIME_TO": 3
+        "ZONE": 0,
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 497,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 3,
-        "TIME_TO": 6
+        "ZONE": 1,
+        "TIME_FROM": 0,
+        "TIME_TO": 3
     },
     {
         "ID": 498,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 6,
-        "TIME_TO": 10
+        "ZONE": 0,
+        "TIME_FROM": 3,
+        "TIME_TO": 6
     },
     {
         "ID": 499,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 10,
-        "TIME_TO": 13
+        "ZONE": 2,
+        "TIME_FROM": 6,
+        "TIME_TO": 10
     },
     {
         "ID": 500,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 13,
-        "TIME_TO": 20
+        "ZONE": 0,
+        "TIME_FROM": 10,
+        "TIME_TO": 13
     },
     {
         "ID": 501,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 2,
+        "TIME_FROM": 13,
+        "TIME_TO": 20
     },
     {
         "ID": 502,
-        "ANIMAL_ID": 65,
+        "ANIMAL_ID": 64,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 4
+        "ZONE": 0,
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 503,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 13
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 4
     },
     {
         "ID": 504,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 13,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 13
     },
     {
         "ID": 505,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 17,
-        "TIME_TO": 21
+        "ZONE": 2,
+        "TIME_FROM": 13,
+        "TIME_TO": 17
     },
     {
         "ID": 506,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 21,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 17,
+        "TIME_TO": 21
     },
     {
         "ID": 507,
-        "ANIMAL_ID": 66,
+        "ANIMAL_ID": 65,
         "RESERVE_ID": 11,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 4
+        "TIME_FROM": 21,
+        "TIME_TO": 24
     },
     {
         "ID": 508,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 4
     },
     {
         "ID": 509,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 11
     },
     {
         "ID": 510,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 14,
-        "TIME_TO": 20
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
     },
     {
         "ID": 511,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 14,
+        "TIME_TO": 20
     },
     {
         "ID": 512,
-        "ANIMAL_ID": 67,
+        "ANIMAL_ID": 66,
         "RESERVE_ID": 11,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 4
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 513,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 10
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 4
     },
     {
         "ID": 514,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 10,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 10
     },
     {
         "ID": 515,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 20
+        "ZONE": 2,
+        "TIME_FROM": 10,
+        "TIME_TO": 13
     },
     {
         "ID": 516,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 20
     },
     {
         "ID": 517,
-        "ANIMAL_ID": 81,
+        "ANIMAL_ID": 67,
         "RESERVE_ID": 11,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 5
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 518,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 5
     },
     {
         "ID": 519,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 520,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 521,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 522,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 11,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 523,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 11,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 524,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 11,
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 525,
+        "ANIMAL_ID": 81,
+        "RESERVE_ID": 11,
         "ZONE": 0,
         "TIME_FROM": 17,
         "TIME_TO": 19
     },
     {
-        "ID": 525,
+        "ID": 526,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 11,
         "ZONE": 2,
@@ -4200,95 +4208,95 @@
         "TIME_TO": 24
     },
     {
-        "ID": 526,
+        "ID": 527,
         "ANIMAL_ID": 8,
         "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 0,
         "TIME_TO": 8
-    },
-    {
-        "ID": 527,
-        "ANIMAL_ID": 8,
-        "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 8,
-        "TIME_TO": 20
     },
     {
         "ID": 528,
         "ANIMAL_ID": 8,
         "RESERVE_ID": 12,
-        "ZONE": 1,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 2,
+        "TIME_FROM": 8,
+        "TIME_TO": 20
     },
     {
         "ID": 529,
-        "ANIMAL_ID": 9,
+        "ANIMAL_ID": 8,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 5
+        "ZONE": 1,
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 530,
         "ANIMAL_ID": 9,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 5
     },
     {
         "ID": 531,
         "ANIMAL_ID": 9,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 532,
         "ANIMAL_ID": 9,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 533,
         "ANIMAL_ID": 9,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 534,
         "ANIMAL_ID": 9,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 535,
         "ANIMAL_ID": 9,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 536,
         "ANIMAL_ID": 9,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 537,
+        "ANIMAL_ID": 9,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 17,
         "TIME_TO": 19
     },
     {
-        "ID": 537,
+        "ID": 538,
         "ANIMAL_ID": 9,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -4296,39 +4304,39 @@
         "TIME_TO": 24
     },
     {
-        "ID": 538,
+        "ID": 539,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 0,
         "TIME_TO": 3
-    },
-    {
-        "ID": 539,
-        "ANIMAL_ID": 14,
-        "RESERVE_ID": 12,
-        "ZONE": 1,
-        "TIME_FROM": 3,
-        "TIME_TO": 6
     },
     {
         "ID": 540,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 6,
-        "TIME_TO": 9
+        "ZONE": 1,
+        "TIME_FROM": 3,
+        "TIME_TO": 6
     },
     {
         "ID": 541,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 12,
+        "ZONE": 0,
+        "TIME_FROM": 6,
+        "TIME_TO": 9
+    },
+    {
+        "ID": 542,
+        "ANIMAL_ID": 14,
+        "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 9,
         "TIME_TO": 20
     },
     {
-        "ID": 542,
+        "ID": 543,
         "ANIMAL_ID": 14,
         "RESERVE_ID": 12,
         "ZONE": 0,
@@ -4336,311 +4344,311 @@
         "TIME_TO": 24
     },
     {
-        "ID": 543,
+        "ID": 544,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 5
-    },
-    {
-        "ID": 544,
-        "ANIMAL_ID": 28,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
     },
     {
         "ID": 545,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 546,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 547,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 548,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 549,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 550,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 17,
-        "TIME_TO": 19
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
     },
     {
         "ID": 551,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 19,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 17,
+        "TIME_TO": 19
     },
     {
         "ID": 552,
-        "ANIMAL_ID": 29,
+        "ANIMAL_ID": 28,
         "RESERVE_ID": 12,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 4
+        "TIME_FROM": 19,
+        "TIME_TO": 24
     },
     {
         "ID": 553,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 8
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 4
     },
     {
         "ID": 554,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 8,
-        "TIME_TO": 12
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 8
     },
     {
         "ID": 555,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 12,
-        "ZONE": 1,
-        "TIME_FROM": 12,
-        "TIME_TO": 16
+        "ZONE": 2,
+        "TIME_FROM": 8,
+        "TIME_TO": 12
     },
     {
         "ID": 556,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 16,
-        "TIME_TO": 20
+        "ZONE": 1,
+        "TIME_FROM": 12,
+        "TIME_TO": 16
     },
     {
         "ID": 557,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 16,
+        "TIME_TO": 20
     },
     {
         "ID": 558,
-        "ANIMAL_ID": 51,
+        "ANIMAL_ID": 29,
         "RESERVE_ID": 12,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 4
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 559,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 8
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 4
     },
     {
         "ID": 560,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 12,
-        "ZONE": 1,
-        "TIME_FROM": 8,
-        "TIME_TO": 12
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 8
     },
     {
         "ID": 561,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 12,
-        "TIME_TO": 16
+        "ZONE": 1,
+        "TIME_FROM": 8,
+        "TIME_TO": 12
     },
     {
         "ID": 562,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 16,
-        "TIME_TO": 20
+        "ZONE": 2,
+        "TIME_FROM": 12,
+        "TIME_TO": 16
     },
     {
         "ID": 563,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 16,
+        "TIME_TO": 20
     },
     {
         "ID": 564,
-        "ANIMAL_ID": 68,
+        "ANIMAL_ID": 51,
         "RESERVE_ID": 12,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 5
+        "TIME_FROM": 20,
+        "TIME_TO": 24
     },
     {
         "ID": 565,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 5
     },
     {
         "ID": 566,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 567,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 568,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 569,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 570,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 571,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 17,
-        "TIME_TO": 19
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
     },
     {
         "ID": 572,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 19,
-        "TIME_TO": 24
+        "ZONE": 0,
+        "TIME_FROM": 17,
+        "TIME_TO": 19
     },
     {
         "ID": 573,
-        "ANIMAL_ID": 69,
+        "ANIMAL_ID": 68,
         "RESERVE_ID": 12,
         "ZONE": 2,
-        "TIME_FROM": 0,
-        "TIME_TO": 5
+        "TIME_FROM": 19,
+        "TIME_TO": 24
     },
     {
         "ID": 574,
         "ANIMAL_ID": 69,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
+        "ZONE": 2,
+        "TIME_FROM": 0,
+        "TIME_TO": 5
     },
     {
         "ID": 575,
         "ANIMAL_ID": 69,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 576,
         "ANIMAL_ID": 69,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 577,
         "ANIMAL_ID": 69,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 578,
         "ANIMAL_ID": 69,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 579,
         "ANIMAL_ID": 69,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 580,
         "ANIMAL_ID": 69,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 581,
+        "ANIMAL_ID": 69,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 17,
         "TIME_TO": 19
     },
     {
-        "ID": 581,
+        "ID": 582,
         "ANIMAL_ID": 69,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -4648,71 +4656,71 @@
         "TIME_TO": 24
     },
     {
-        "ID": 582,
+        "ID": 583,
         "ANIMAL_ID": 70,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 5
-    },
-    {
-        "ID": 583,
-        "ANIMAL_ID": 70,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
     },
     {
         "ID": 584,
         "ANIMAL_ID": 70,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 585,
         "ANIMAL_ID": 70,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 586,
         "ANIMAL_ID": 70,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 587,
         "ANIMAL_ID": 70,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 588,
         "ANIMAL_ID": 70,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 589,
         "ANIMAL_ID": 70,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 590,
+        "ANIMAL_ID": 70,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 17,
         "TIME_TO": 19
     },
     {
-        "ID": 590,
+        "ID": 591,
         "ANIMAL_ID": 70,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -4720,71 +4728,71 @@
         "TIME_TO": 24
     },
     {
-        "ID": 591,
+        "ID": 592,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 5
-    },
-    {
-        "ID": 592,
-        "ANIMAL_ID": 71,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
     },
     {
         "ID": 593,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 594,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 595,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 596,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 597,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 598,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 599,
+        "ANIMAL_ID": 71,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 17,
         "TIME_TO": 19
     },
     {
-        "ID": 599,
+        "ID": 600,
         "ANIMAL_ID": 71,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -4792,71 +4800,71 @@
         "TIME_TO": 24
     },
     {
-        "ID": 600,
+        "ID": 601,
         "ANIMAL_ID": 72,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 5
-    },
-    {
-        "ID": 601,
-        "ANIMAL_ID": 72,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
     },
     {
         "ID": 602,
         "ANIMAL_ID": 72,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 603,
         "ANIMAL_ID": 72,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 604,
         "ANIMAL_ID": 72,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 605,
         "ANIMAL_ID": 72,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 606,
         "ANIMAL_ID": 72,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 607,
         "ANIMAL_ID": 72,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 608,
+        "ANIMAL_ID": 72,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 17,
         "TIME_TO": 19
     },
     {
-        "ID": 608,
+        "ID": 609,
         "ANIMAL_ID": 72,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -4864,71 +4872,71 @@
         "TIME_TO": 24
     },
     {
-        "ID": 609,
+        "ID": 610,
         "ANIMAL_ID": 73,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 5
-    },
-    {
-        "ID": 610,
-        "ANIMAL_ID": 73,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 5,
-        "TIME_TO": 7
     },
     {
         "ID": 611,
         "ANIMAL_ID": 73,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 7,
-        "TIME_TO": 9
+        "ZONE": 0,
+        "TIME_FROM": 5,
+        "TIME_TO": 7
     },
     {
         "ID": 612,
         "ANIMAL_ID": 73,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 9,
-        "TIME_TO": 11
+        "ZONE": 2,
+        "TIME_FROM": 7,
+        "TIME_TO": 9
     },
     {
         "ID": 613,
         "ANIMAL_ID": 73,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 13
+        "ZONE": 0,
+        "TIME_FROM": 9,
+        "TIME_TO": 11
     },
     {
         "ID": 614,
         "ANIMAL_ID": 73,
         "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 13,
-        "TIME_TO": 15
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 13
     },
     {
         "ID": 615,
         "ANIMAL_ID": 73,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 15,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 13,
+        "TIME_TO": 15
     },
     {
         "ID": 616,
         "ANIMAL_ID": 73,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 15,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 617,
+        "ANIMAL_ID": 73,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 17,
         "TIME_TO": 19
     },
     {
-        "ID": 617,
+        "ID": 618,
         "ANIMAL_ID": 73,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -4936,39 +4944,39 @@
         "TIME_TO": 24
     },
     {
-        "ID": 618,
+        "ID": 619,
         "ANIMAL_ID": 74,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 4
-    },
-    {
-        "ID": 619,
-        "ANIMAL_ID": 74,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 11
     },
     {
         "ID": 620,
         "ANIMAL_ID": 74,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 11
     },
     {
         "ID": 621,
         "ANIMAL_ID": 74,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
+    },
+    {
+        "ID": 622,
+        "ANIMAL_ID": 74,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 14,
         "TIME_TO": 21
     },
     {
-        "ID": 622,
+        "ID": 623,
         "ANIMAL_ID": 74,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -4976,39 +4984,39 @@
         "TIME_TO": 24
     },
     {
-        "ID": 623,
+        "ID": 624,
         "ANIMAL_ID": 75,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 4
-    },
-    {
-        "ID": 624,
-        "ANIMAL_ID": 75,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 11
     },
     {
         "ID": 625,
         "ANIMAL_ID": 75,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 11
     },
     {
         "ID": 626,
         "ANIMAL_ID": 75,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
+    },
+    {
+        "ID": 627,
+        "ANIMAL_ID": 75,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 14,
         "TIME_TO": 21
     },
     {
-        "ID": 627,
+        "ID": 628,
         "ANIMAL_ID": 75,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -5016,39 +5024,39 @@
         "TIME_TO": 24
     },
     {
-        "ID": 628,
+        "ID": 629,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 4
-    },
-    {
-        "ID": 629,
-        "ANIMAL_ID": 76,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 11
     },
     {
         "ID": 630,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 11
     },
     {
         "ID": 631,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
+    },
+    {
+        "ID": 632,
+        "ANIMAL_ID": 76,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 14,
         "TIME_TO": 21
     },
     {
-        "ID": 632,
+        "ID": 633,
         "ANIMAL_ID": 76,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -5056,39 +5064,39 @@
         "TIME_TO": 24
     },
     {
-        "ID": 633,
+        "ID": 634,
         "ANIMAL_ID": 77,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 4
-    },
-    {
-        "ID": 634,
-        "ANIMAL_ID": 77,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 11
     },
     {
         "ID": 635,
         "ANIMAL_ID": 77,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 11
     },
     {
         "ID": 636,
         "ANIMAL_ID": 77,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
+    },
+    {
+        "ID": 637,
+        "ANIMAL_ID": 77,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 14,
         "TIME_TO": 21
     },
     {
-        "ID": 637,
+        "ID": 638,
         "ANIMAL_ID": 77,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -5096,39 +5104,39 @@
         "TIME_TO": 24
     },
     {
-        "ID": 638,
+        "ID": 639,
         "ANIMAL_ID": 78,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 4
-    },
-    {
-        "ID": 639,
-        "ANIMAL_ID": 78,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 11
     },
     {
         "ID": 640,
         "ANIMAL_ID": 78,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 11,
-        "TIME_TO": 14
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 11
     },
     {
         "ID": 641,
         "ANIMAL_ID": 78,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 11,
+        "TIME_TO": 14
+    },
+    {
+        "ID": 642,
+        "ANIMAL_ID": 78,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 14,
         "TIME_TO": 21
     },
     {
-        "ID": 642,
+        "ID": 643,
         "ANIMAL_ID": 78,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -5136,39 +5144,39 @@
         "TIME_TO": 24
     },
     {
-        "ID": 643,
+        "ID": 644,
         "ANIMAL_ID": 79,
         "RESERVE_ID": 12,
         "ZONE": 2,
         "TIME_FROM": 0,
         "TIME_TO": 4
-    },
-    {
-        "ID": 644,
-        "ANIMAL_ID": 79,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 4,
-        "TIME_TO": 13
     },
     {
         "ID": 645,
         "ANIMAL_ID": 79,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 13,
-        "TIME_TO": 17
+        "ZONE": 0,
+        "TIME_FROM": 4,
+        "TIME_TO": 13
     },
     {
         "ID": 646,
         "ANIMAL_ID": 79,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 13,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 647,
+        "ANIMAL_ID": 79,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 17,
         "TIME_TO": 21
     },
     {
-        "ID": 647,
+        "ID": 648,
         "ANIMAL_ID": 79,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -5176,39 +5184,39 @@
         "TIME_TO": 24
     },
     {
-        "ID": 648,
+        "ID": 649,
         "ANIMAL_ID": 80,
         "RESERVE_ID": 12,
         "ZONE": 1,
         "TIME_FROM": 0,
         "TIME_TO": 3
-    },
-    {
-        "ID": 649,
-        "ANIMAL_ID": 80,
-        "RESERVE_ID": 12,
-        "ZONE": 0,
-        "TIME_FROM": 3,
-        "TIME_TO": 6
     },
     {
         "ID": 650,
         "ANIMAL_ID": 80,
         "RESERVE_ID": 12,
-        "ZONE": 2,
-        "TIME_FROM": 6,
-        "TIME_TO": 10
+        "ZONE": 0,
+        "TIME_FROM": 3,
+        "TIME_TO": 6
     },
     {
         "ID": 651,
         "ANIMAL_ID": 80,
         "RESERVE_ID": 12,
+        "ZONE": 2,
+        "TIME_FROM": 6,
+        "TIME_TO": 10
+    },
+    {
+        "ID": 652,
+        "ANIMAL_ID": 80,
+        "RESERVE_ID": 12,
         "ZONE": 0,
         "TIME_FROM": 10,
         "TIME_TO": 13
     },
     {
-        "ID": 652,
+        "ID": 653,
         "ANIMAL_ID": 80,
         "RESERVE_ID": 12,
         "ZONE": 2,
@@ -5216,7 +5224,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 653,
+        "ID": 654,
         "ANIMAL_ID": 80,
         "RESERVE_ID": 12,
         "ZONE": 0,
@@ -5224,7 +5232,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 654,
+        "ID": 655,
         "ANIMAL_ID": 4,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5232,7 +5240,7 @@
         "TIME_TO": 8
     },
     {
-        "ID": 655,
+        "ID": 656,
         "ANIMAL_ID": 4,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5240,7 +5248,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 656,
+        "ID": 657,
         "ANIMAL_ID": 4,
         "RESERVE_ID": 13,
         "ZONE": 1,
@@ -5248,7 +5256,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 657,
+        "ID": 658,
         "ANIMAL_ID": 13,
         "RESERVE_ID": 13,
         "ZONE": 1,
@@ -5256,7 +5264,7 @@
         "TIME_TO": 3
     },
     {
-        "ID": 658,
+        "ID": 659,
         "ANIMAL_ID": 13,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5264,7 +5272,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 659,
+        "ID": 660,
         "ANIMAL_ID": 13,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5272,7 +5280,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 660,
+        "ID": 661,
         "ANIMAL_ID": 13,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5280,7 +5288,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 661,
+        "ID": 662,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5288,7 +5296,7 @@
         "TIME_TO": 5
     },
     {
-        "ID": 662,
+        "ID": 663,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5296,7 +5304,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 663,
+        "ID": 664,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5304,7 +5312,7 @@
         "TIME_TO": 9
     },
     {
-        "ID": 664,
+        "ID": 665,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5312,7 +5320,7 @@
         "TIME_TO": 11
     },
     {
-        "ID": 665,
+        "ID": 666,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5320,7 +5328,7 @@
         "TIME_TO": 13
     },
     {
-        "ID": 666,
+        "ID": 667,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5328,7 +5336,7 @@
         "TIME_TO": 15
     },
     {
-        "ID": 667,
+        "ID": 668,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5336,7 +5344,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 668,
+        "ID": 669,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5344,7 +5352,7 @@
         "TIME_TO": 19
     },
     {
-        "ID": 669,
+        "ID": 670,
         "ANIMAL_ID": 28,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5352,7 +5360,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 670,
+        "ID": 671,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5360,7 +5368,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 671,
+        "ID": 672,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5368,7 +5376,7 @@
         "TIME_TO": 8
     },
     {
-        "ID": 672,
+        "ID": 673,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5376,7 +5384,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 673,
+        "ID": 674,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 13,
         "ZONE": 1,
@@ -5384,7 +5392,7 @@
         "TIME_TO": 16
     },
     {
-        "ID": 674,
+        "ID": 675,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5392,7 +5400,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 675,
+        "ID": 676,
         "ANIMAL_ID": 29,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5400,7 +5408,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 676,
+        "ID": 677,
         "ANIMAL_ID": 36,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5408,7 +5416,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 677,
+        "ID": 678,
         "ANIMAL_ID": 36,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5416,7 +5424,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 678,
+        "ID": 679,
         "ANIMAL_ID": 36,
         "RESERVE_ID": 13,
         "ZONE": 1,
@@ -5424,7 +5432,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 679,
+        "ID": 680,
         "ANIMAL_ID": 36,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5432,7 +5440,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 680,
+        "ID": 681,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5440,7 +5448,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 681,
+        "ID": 682,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5448,7 +5456,7 @@
         "TIME_TO": 8
     },
     {
-        "ID": 682,
+        "ID": 683,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 13,
         "ZONE": 1,
@@ -5456,7 +5464,7 @@
         "TIME_TO": 12
     },
     {
-        "ID": 683,
+        "ID": 684,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5464,7 +5472,7 @@
         "TIME_TO": 16
     },
     {
-        "ID": 684,
+        "ID": 685,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5472,7 +5480,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 685,
+        "ID": 686,
         "ANIMAL_ID": 51,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5480,7 +5488,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 686,
+        "ID": 687,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5488,7 +5496,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 687,
+        "ID": 688,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5496,7 +5504,7 @@
         "TIME_TO": 11
     },
     {
-        "ID": 688,
+        "ID": 689,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5504,7 +5512,7 @@
         "TIME_TO": 14
     },
     {
-        "ID": 689,
+        "ID": 690,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5512,7 +5520,7 @@
         "TIME_TO": 21
     },
     {
-        "ID": 690,
+        "ID": 691,
         "ANIMAL_ID": 57,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5520,7 +5528,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 691,
+        "ID": 692,
         "ANIMAL_ID": 60,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5528,7 +5536,7 @@
         "TIME_TO": 3
     },
     {
-        "ID": 692,
+        "ID": 693,
         "ANIMAL_ID": 60,
         "RESERVE_ID": 13,
         "ZONE": 1,
@@ -5536,7 +5544,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 693,
+        "ID": 694,
         "ANIMAL_ID": 60,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5544,7 +5552,7 @@
         "TIME_TO": 9
     },
     {
-        "ID": 694,
+        "ID": 695,
         "ANIMAL_ID": 60,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5552,7 +5560,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 695,
+        "ID": 696,
         "ANIMAL_ID": 60,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5560,7 +5568,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 696,
+        "ID": 697,
         "ANIMAL_ID": 63,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5568,7 +5576,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 697,
+        "ID": 698,
         "ANIMAL_ID": 63,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5576,7 +5584,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 698,
+        "ID": 699,
         "ANIMAL_ID": 63,
         "RESERVE_ID": 13,
         "ZONE": 1,
@@ -5584,7 +5592,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 699,
+        "ID": 700,
         "ANIMAL_ID": 63,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5592,7 +5600,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 700,
+        "ID": 701,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5600,7 +5608,7 @@
         "TIME_TO": 3
     },
     {
-        "ID": 701,
+        "ID": 702,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 13,
         "ZONE": 1,
@@ -5608,7 +5616,7 @@
         "TIME_TO": 6
     },
     {
-        "ID": 702,
+        "ID": 703,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5616,7 +5624,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 703,
+        "ID": 704,
         "ANIMAL_ID": 64,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5624,7 +5632,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 704,
+        "ID": 705,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5632,7 +5640,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 705,
+        "ID": 706,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5640,7 +5648,7 @@
         "TIME_TO": 13
     },
     {
-        "ID": 706,
+        "ID": 707,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5648,7 +5656,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 707,
+        "ID": 708,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5656,7 +5664,7 @@
         "TIME_TO": 21
     },
     {
-        "ID": 708,
+        "ID": 709,
         "ANIMAL_ID": 65,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5664,7 +5672,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 709,
+        "ID": 710,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5672,7 +5680,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 710,
+        "ID": 711,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5680,7 +5688,7 @@
         "TIME_TO": 11
     },
     {
-        "ID": 711,
+        "ID": 712,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5688,7 +5696,7 @@
         "TIME_TO": 14
     },
     {
-        "ID": 712,
+        "ID": 713,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5696,7 +5704,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 713,
+        "ID": 714,
         "ANIMAL_ID": 66,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5704,7 +5712,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 714,
+        "ID": 715,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5712,7 +5720,7 @@
         "TIME_TO": 4
     },
     {
-        "ID": 715,
+        "ID": 716,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5720,7 +5728,7 @@
         "TIME_TO": 10
     },
     {
-        "ID": 716,
+        "ID": 717,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5728,7 +5736,7 @@
         "TIME_TO": 13
     },
     {
-        "ID": 717,
+        "ID": 718,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5736,7 +5744,7 @@
         "TIME_TO": 20
     },
     {
-        "ID": 718,
+        "ID": 719,
         "ANIMAL_ID": 67,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5744,7 +5752,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 719,
+        "ID": 720,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5752,7 +5760,7 @@
         "TIME_TO": 5
     },
     {
-        "ID": 720,
+        "ID": 721,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5760,7 +5768,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 721,
+        "ID": 722,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5768,7 +5776,7 @@
         "TIME_TO": 9
     },
     {
-        "ID": 722,
+        "ID": 723,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5776,7 +5784,7 @@
         "TIME_TO": 11
     },
     {
-        "ID": 723,
+        "ID": 724,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5784,7 +5792,7 @@
         "TIME_TO": 13
     },
     {
-        "ID": 724,
+        "ID": 725,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5792,7 +5800,7 @@
         "TIME_TO": 15
     },
     {
-        "ID": 725,
+        "ID": 726,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5800,7 +5808,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 726,
+        "ID": 727,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5808,7 +5816,7 @@
         "TIME_TO": 19
     },
     {
-        "ID": 727,
+        "ID": 728,
         "ANIMAL_ID": 68,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5816,7 +5824,7 @@
         "TIME_TO": 24
     },
     {
-        "ID": 728,
+        "ID": 729,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5824,7 +5832,7 @@
         "TIME_TO": 5
     },
     {
-        "ID": 729,
+        "ID": 730,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5832,7 +5840,7 @@
         "TIME_TO": 7
     },
     {
-        "ID": 730,
+        "ID": 731,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5840,7 +5848,7 @@
         "TIME_TO": 9
     },
     {
-        "ID": 731,
+        "ID": 732,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5848,7 +5856,7 @@
         "TIME_TO": 11
     },
     {
-        "ID": 732,
+        "ID": 733,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5856,7 +5864,7 @@
         "TIME_TO": 13
     },
     {
-        "ID": 733,
+        "ID": 734,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5864,7 +5872,7 @@
         "TIME_TO": 15
     },
     {
-        "ID": 734,
+        "ID": 735,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 2,
@@ -5872,7 +5880,7 @@
         "TIME_TO": 17
     },
     {
-        "ID": 735,
+        "ID": 736,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 0,
@@ -5880,7 +5888,7 @@
         "TIME_TO": 19
     },
     {
-        "ID": 736,
+        "ID": 737,
         "ANIMAL_ID": 81,
         "RESERVE_ID": 13,
         "ZONE": 2,

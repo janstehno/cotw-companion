@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/helpers/helper_json.dart';
 import 'package:cotwcompanion/helpers/helper_loadout.dart';
 import 'package:cotwcompanion/helpers/helper_values.dart';
+import 'package:cotwcompanion/thehunter/activities/add_edit_loadout.dart';
 import 'package:cotwcompanion/thehunter/model/caller.dart';
 import 'package:cotwcompanion/thehunter/model/loadout.dart';
 import 'package:cotwcompanion/thehunter/model/weapon.dart';
@@ -11,6 +12,7 @@ import 'package:cotwcompanion/thehunter/widgets/misc/custom_snackbar.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class EntryLoadout extends StatefulWidget {
   final Loadout loadout;
@@ -200,7 +202,33 @@ class EntryLoadoutState extends State<EntryLoadout> {
                         _undo();
                       }))));
         },
-        child: Column(children: [_buildName(), _buildDetail()]));
+        child: Dismissible(
+            key: Key(widget.loadout.getID.toString()),
+            direction: DismissDirection.startToEnd,
+            confirmDismiss: (direction) async {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ActivityLoadoutsAddEdit(toEdit: {
+                            "id": widget.loadout.getID,
+                            "name": widget.loadout.getName,
+                            "weapons": widget.loadout.getWeapons,
+                            "callers": widget.loadout.getCallers
+                          }, callback: widget.callback)));
+            },
+            background: Container(
+                alignment: Alignment.centerLeft,
+                color: const Color(Values.colorSeventh),
+                child: Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: SvgPicture.asset(
+                      "assets/graphics/icons/edit.svg",
+                      height: 20,
+                      width: 20,
+                      color: Color(Values.colorAlwaysDark),
+                      alignment: Alignment.centerLeft,
+                    ))),
+            child: Column(children: [_buildName(), _buildDetail()])));
   }
 
   @override

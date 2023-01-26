@@ -1,5 +1,6 @@
 // Copyright (c) 2022 Jan Stehno
 
+import 'package:cotwcompanion/helpers/helper_json.dart';
 import 'package:cotwcompanion/helpers/helper_loadout.dart';
 import 'package:cotwcompanion/helpers/helper_types.dart';
 import 'package:cotwcompanion/helpers/helper_values.dart';
@@ -18,23 +19,27 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ActivityAddLoadout extends StatefulWidget {
-  final Function? callback;
+class ActivityLoadoutsAddEdit extends StatefulWidget {
+  final Function callback;
+  final Map<String, dynamic> toEdit;
 
-  const ActivityAddLoadout({Key? key, this.callback}) : super(key: key);
+  const ActivityLoadoutsAddEdit({Key? key, required this.callback, this.toEdit = const {}}) : super(key: key);
 
   @override
-  ActivityAddLoadoutState createState() => ActivityAddLoadoutState();
+  ActivityLoadoutsAddEditState createState() => ActivityLoadoutsAddEditState();
 }
 
-class ActivityAddLoadoutState extends State<ActivityAddLoadout> {
+class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   final List<Weapon> _selectedWeapons = [];
   final List<Caller> _selectedCallers = [];
 
   final _controller = TextEditingController();
 
+  int _loadoutID = 0;
   bool _correctName = false;
   String _errorMessage = "";
+
+  bool _initialization = true;
 
   late ScaffoldMessengerState _scaffoldMessengerState;
 
@@ -48,6 +53,24 @@ class ActivityAddLoadoutState extends State<ActivityAddLoadout> {
   void dispose() {
     _scaffoldMessengerState.clearSnackBars();
     super.dispose();
+  }
+
+  _getData() {
+    if (_initialization) {
+      if (widget.toEdit.isNotEmpty) {
+        //WHEN EDITING LOADOUT
+        _loadoutID = widget.toEdit["id"];
+        _controller.text = widget.toEdit["name"];
+        for (int w in widget.toEdit["weapons"]) {
+          _selectedWeapons.add(JSONHelper.getWeaponAmmo(w));
+        }
+        for (int c in widget.toEdit["callers"]) {
+          _selectedCallers.add(JSONHelper.getCaller(c));
+        }
+      }
+      _initialization = false;
+    }
+    _nameListener();
   }
 
   _nameListener() {
@@ -139,7 +162,8 @@ class ActivityAddLoadoutState extends State<ActivityAddLoadout> {
     return selectedIDs;
   }
 
-  Loadout _createLoadout() => Loadout(id: LoadoutHelper.loadouts.length, name: _controller.text, weapons: _weaponsIDs(), callers: _callersIDs());
+  Loadout _createLoadout() => Loadout(
+      id: widget.toEdit.isEmpty ? LoadoutHelper.loadouts.length : _loadoutID, name: _controller.text, weapons: _weaponsIDs(), callers: _callersIDs());
 
   _buildSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -198,8 +222,8 @@ class ActivityAddLoadoutState extends State<ActivityAddLoadout> {
               _scaffoldMessengerState.hideCurrentSnackBar();
             });
             Loadout loadout = _createLoadout();
-            LoadoutHelper.addLoadout(loadout);
-            widget.callback!();
+            widget.toEdit.isEmpty ? LoadoutHelper.addLoadout(loadout) : LoadoutHelper.editLoadout(loadout);
+            widget.callback();
             Navigator.pop(context);
           }
         },
@@ -207,7 +231,8 @@ class ActivityAddLoadoutState extends State<ActivityAddLoadout> {
             height: 90,
             alignment: Alignment.center,
             color: Color(Values.colorPrimary),
-            child: SvgPicture.asset("assets/graphics/icons/plus.svg", height: 20, width: 20, color: Color(Values.colorAccent))));
+            child: SvgPicture.asset(widget.toEdit.isEmpty ? "assets/graphics/icons/plus.svg" : "assets/graphics/icons/edit.svg",
+                height: 20, width: 20, color: Color(Values.colorAccent))));
   }
 
   Widget _buildWidgets() {
@@ -238,6 +263,7 @@ class ActivityAddLoadoutState extends State<ActivityAddLoadout> {
 
   @override
   Widget build(BuildContext context) {
+    _getData();
     return _buildWidgets();
   }
 }

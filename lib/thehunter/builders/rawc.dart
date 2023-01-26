@@ -46,9 +46,10 @@ class BuilderRAWCState extends State<BuilderRAWC> {
   }
 
   _filter() {
-    _filtered.clear();
-    _filtered.addAll(HelperFilter.filterListByName(_items, _controller.text, context));
-    setState(() {});
+    setState(() {
+      _filtered.clear();
+      _filtered.addAll(HelperFilter.filterListByName(_items, _controller.text, context));
+    });
   }
 
   _focus() {

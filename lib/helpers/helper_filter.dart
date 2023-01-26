@@ -1,8 +1,10 @@
 // Copyright (c) 2022 Jan Stehno
 
 import 'package:cotwcompanion/helpers/helper_json.dart';
+import 'package:cotwcompanion/helpers/helper_loadout.dart';
 import 'package:cotwcompanion/helpers/helper_log.dart';
 import 'package:cotwcompanion/thehunter/model/animal.dart';
+import 'package:cotwcompanion/thehunter/model/loadout.dart';
 import 'package:cotwcompanion/thehunter/model/log.dart';
 import 'package:cotwcompanion/thehunter/model/weapon.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -29,7 +31,22 @@ class HelperFilter {
       filtered.addAll(JSONHelper.weaponsInfo);
     } else {
       for (dynamic r in JSONHelper.weaponsInfo) {
-        if (r.getName(context.locale).toLowerCase().contains(text.toLowerCase()) || r.getNameAmmo(context.locale).toLowerCase().contains(text.toLowerCase())) {
+        if (r.getName(context.locale).toLowerCase().contains(text.toLowerCase()) ||
+            r.getNameAmmo(context.locale).toLowerCase().contains(text.toLowerCase())) {
+          filtered.add(r);
+        }
+      }
+    }
+    return filtered;
+  }
+
+  static List<Loadout> filterLoadoutsByName(String text, BuildContext context) {
+    List<Loadout> filtered = [];
+    if (text.isEmpty) {
+      filtered.addAll(LoadoutHelper.loadouts);
+    } else {
+      for (dynamic r in LoadoutHelper.loadouts) {
+        if (r.getName.toLowerCase().contains(text.toLowerCase())) {
           filtered.add(r);
         }
       }

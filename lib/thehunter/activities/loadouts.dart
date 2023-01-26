@@ -1,13 +1,15 @@
 // Copyright (c) 2022 Jan Stehno
 
+import 'package:cotwcompanion/helpers/helper_filter.dart';
 import 'package:cotwcompanion/helpers/helper_loadout.dart';
 import 'package:cotwcompanion/helpers/helper_values.dart';
-import 'package:cotwcompanion/thehunter/activities/add_loadout.dart';
+import 'package:cotwcompanion/thehunter/activities/add_edit_loadout.dart';
 import 'package:cotwcompanion/thehunter/model/loadout.dart';
 import 'package:cotwcompanion/thehunter/widgets/loadout.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_appbar.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_button.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_scaffold_advanced.dart';
+import 'package:cotwcompanion/thehunter/widgets/misc/custom_searchbar.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_snackbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ class ActivityLoadouts extends StatefulWidget {
 class ActivityLoadoutsState extends State<ActivityLoadouts> {
   final List<Loadout> _filtered = [];
 
-  final controller = TextEditingController();
+  final _controller = TextEditingController();
 
   bool _fileOptionsOpened = false;
 
@@ -32,7 +34,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   @override
   void initState() {
     _filtered.addAll(LoadoutHelper.loadouts);
-    controller.addListener(() => _filter());
+    _controller.addListener(() => _filter());
     super.initState();
   }
 
@@ -45,7 +47,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   _filter() {
     setState(() {
       _filtered.clear();
-      _filtered.addAll(LoadoutHelper.loadouts);
+      _filtered.addAll(HelperFilter.filterLoadoutsByName(_controller.text, context));
     });
   }
 
@@ -114,8 +116,6 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
 
   Widget _buildLoadouts() {
     return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
         itemCount: _filtered.length,
         itemBuilder: (context, index) {
           bool last = false;
@@ -204,7 +204,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
                         color: Values.colorAccent,
                         background: Values.colorPrimary,
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityAddLoadout(callback: _filter)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLoadoutsAddEdit(callback: _filter)));
                           _focus();
                         }))
               ]))),
@@ -225,6 +225,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
           Navigator.pop(context);
         },
       ),
+      Expanded(flex: 0, child: WidgetSearchBar(background: Values.colorSearchBackground, color: Values.colorSearch, controller: _controller)),
       Expanded(child: _buildStack())
     ]));
   }

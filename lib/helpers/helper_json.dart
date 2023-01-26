@@ -75,6 +75,10 @@ class JSONHelper {
     return _weapons.elementAt(id - 1);
   }
 
+  static Weapon getWeaponAmmo(int id) {
+    return _weaponsInfo.elementAt(id - 1);
+  }
+
   static Ammo getAmmo(int id) {
     return _ammo.elementAt(id - 1);
   }

@@ -27,8 +27,7 @@ class BuilderLoadouts extends StatelessWidget {
             LoadoutHelper.setLoadouts(loadouts);
             return widget;
           } else {
-            return Container(
-                padding: const EdgeInsets.all(30), color: Color(Values.colorBody), child: SpinKitThreeBounce(size: 30, color: Color(Values.colorDark)));
+            return Container(padding: const EdgeInsets.all(30), color: Color(Values.colorBody), child: SpinKitThreeBounce(size: 30, color: Color(Values.colorDark)));
           }
         });
   }

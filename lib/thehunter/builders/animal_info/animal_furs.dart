@@ -39,8 +39,7 @@ class BuilderAnimalFursState extends State<BuilderAnimalFurs> {
     return _furs.isEmpty
         ? Row(mainAxisSize: MainAxisSize.max, children: [
             Expanded(
-                child: AutoSizeText(tr('none'),
-                    maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400)))
+                child: AutoSizeText(tr('none'), maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400)))
           ])
         : ListView.builder(
             shrinkWrap: true,

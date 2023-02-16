@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/helpers/helper_settings.dart';
 import 'package:cotwcompanion/helpers/helper_values.dart';
 import 'package:cotwcompanion/thehunter/widgets/entries/entry_name_with.dart';
-import 'package:cotwcompanion/thehunter/widgets/entries/entry_name_with_dual_switch.dart';
+import 'package:cotwcompanion/thehunter/widgets/misc/title_with_dual_switch.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_appbar.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_button.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_container.dart';
@@ -26,8 +26,8 @@ class ActivitySettings extends StatefulWidget {
 
 class ActivitySettingsState extends State<ActivitySettings> {
   late Settings _settings;
-  final List<String> _languages = ["English", "Русский", "Čeština", "Polski", "Deutsch", "Français", "Español", "Português", "日本語", "Türkçe"];
-  final List<String> _languageCodes = ['en', 'ru', 'cs', 'pl', 'de', 'fr', 'es', 'pt', 'ja', 'tr'];
+  final List<String> _languages = ["English", "Русский", "Čeština", "Polski", "Deutsch", "Français", "Español", "Português", "日本語", "Magyar", "Türkçe"];
+  final List<String> _languageCodes = ['en', 'ru', 'cs', 'pl', 'de', 'fr', 'es', 'pt', 'ja', 'hu', 'tr'];
   late int _selectedLanguage;
   late int _fontSize;
 
@@ -144,7 +144,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
 
   Widget _buildInterface() {
     return Column(children: [
-      EntryNameWithDualSwitch(
+      WidgetTitleWithDialSwitch(
           text: tr('interface'),
           size: 40,
           oneLine: true,
@@ -161,7 +161,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
               widget.callback();
             });
           }),
-      EntryNameWithDualSwitch(
+      WidgetTitleWithDialSwitch(
           text: tr('units'),
           size: 40,
           oneLine: true,

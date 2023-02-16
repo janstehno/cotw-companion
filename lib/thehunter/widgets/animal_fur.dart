@@ -73,8 +73,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
           height: Values.fontSize26,
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(right: 10),
-          child:
-              AutoSizeText(percent, maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize14, fontWeight: FontWeight.w400)))
+          child: AutoSizeText(percent, maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize14, fontWeight: FontWeight.w400)))
     ]);
   }
 

@@ -175,30 +175,28 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
                 child: AutoSizeText(_hour.toInt().toString(),
                     maxLines: 1,
                     textAlign: TextAlign.right,
-                    style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w700))),
+                    style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w800, fontFamily: 'Title'))),
             SizedBox(
                 width: 15,
-                child: Text(":",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w700))),
+                child:
+                    Text(":", textAlign: TextAlign.center, style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w700))),
             SizedBox(
                 width: 40,
                 child: AutoSizeText(_minute.toInt().toString(),
                     maxLines: 1,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w700))),
+                    style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w800, fontFamily: 'Title'))),
             SizedBox(
                 width: 15,
-                child: Text(":",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w700))),
+                child:
+                    Text(":", textAlign: TextAlign.center, style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w700))),
             Container(
                 padding: const EdgeInsets.only(left: 3),
                 width: 40,
                 child: AutoSizeText(_second.toInt().toString(),
                     maxLines: 1,
                     textAlign: TextAlign.left,
-                    style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w700))),
+                    style: TextStyle(color: Color(Values.colorAccent), fontSize: Values.fontSize30, fontWeight: FontWeight.w800, fontFamily: 'Title'))),
           ]))
         ]));
   }
@@ -206,6 +204,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   Widget _buildTimeAndReserve() {
     return Column(children: [
       EntryName.withSwitch(
+          isTitle: true,
           text: tr('time'),
           size: 40,
           background: Values.colorContentSubTitleBackground,
@@ -223,6 +222,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           }),
       WidgetContainer(visible: _visible, padding: const EdgeInsets.fromLTRB(30, 15, 30, 15), child: _buildSliders()),
       EntryName.withTap(
+          isTitle: true,
           text: tr('reserve'),
           size: 40,
           background: Values.colorContentSubTitleBackground,

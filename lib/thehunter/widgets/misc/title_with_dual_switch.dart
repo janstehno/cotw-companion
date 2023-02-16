@@ -5,7 +5,7 @@ import 'package:cotwcompanion/helpers/helper_values.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_switch.dart';
 import 'package:flutter/material.dart';
 
-class EntryNameWithDualSwitch extends StatelessWidget {
+class WidgetTitleWithDialSwitch extends StatelessWidget {
   final String text;
   final String leftButtonText;
   final String rightButtonText;
@@ -19,7 +19,7 @@ class EntryNameWithDualSwitch extends StatelessWidget {
   final bool oneLine;
   final Function onTap;
 
-  const EntryNameWithDualSwitch(
+  const WidgetTitleWithDialSwitch(
       {Key? key,
       required this.text,
       required this.leftButtonText,
@@ -45,11 +45,11 @@ class EntryNameWithDualSwitch extends StatelessWidget {
               child: Container(
                   padding: const EdgeInsets.only(right: 30),
                   child: AutoSizeText(
-                    text,
-                        maxLines: oneLine ? 1 : 2,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600),
-                      ))),
+                    text.toUpperCase(),
+                    maxLines: oneLine ? 1 : 2,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w800, fontFamily: 'Title'),
+                  ))),
           WidgetSwitch(
               text: leftButtonText,
               size: size,

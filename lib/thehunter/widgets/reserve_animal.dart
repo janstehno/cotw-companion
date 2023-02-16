@@ -73,12 +73,12 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                     Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
                       (LoadoutHelper.loadoutMin <= _animal.getLevel && _animal.getLevel <= LoadoutHelper.loadoutMax)
                           ? Container(
-                          padding: EdgeInsets.only(bottom: (LoadoutHelper.containsCallerForAnimal(_animal.getID)) ? 3 : 0),
+                              padding: EdgeInsets.only(bottom: (LoadoutHelper.containsCallerForAnimal(_animal.getID)) ? 3 : 0),
                               child: SvgPicture.asset("assets/graphics/icons/loadout.svg", color: Color(Values.colorDark), width: 11))
                           : Container(),
                       LoadoutHelper.containsCallerForAnimal(_animal.getID)
                           ? Container(
-                          padding: EdgeInsets.only(top: (LoadoutHelper.loadoutMin <= _animal.getLevel && _animal.getLevel <= LoadoutHelper.loadoutMax) ? 3 : 0),
+                              padding: EdgeInsets.only(top: (LoadoutHelper.loadoutMin <= _animal.getLevel && _animal.getLevel <= LoadoutHelper.loadoutMax) ? 3 : 0),
                               child: SvgPicture.asset("assets/graphics/icons/sense_hearing.svg", color: Color(Values.colorDark), width: 11))
                           : Container()
                     ]),

@@ -374,41 +374,41 @@ class ActivityLogsState extends State<ActivityLogs> {
             opacity: _yesNoOpened ? 1 : 0,
             child: _yesNoOpened
                 ? Container(
-                color: Color(Values.colorShadow).withOpacity(0.8),
-                child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Container(
-                      padding: const EdgeInsets.all(30),
-                      alignment: Alignment.center,
-                      child: AutoSizeText(tr('remove_all_items'),
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Color(Values.colorAlwaysLight), fontSize: Values.fontSize20, fontWeight: FontWeight.w600))),
-                  Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                    WidgetButton(
-                        icon: "assets/graphics/icons/remove_bin.svg",
-                        size: 80,
-                        color: Values.colorAlwaysDark,
-                        background: Values.colorFirst,
-                        onTap: () {
-                          setState(() {
-                            _removeLogs();
-                            _yesNoOpened = false;
-                            _focus();
-                          });
-                        }),
-                    WidgetButton(
-                        icon: "assets/graphics/icons/menu_close.svg",
-                        size: 80,
-                        color: Values.colorLight,
-                        background: Values.colorDark,
-                        onTap: () {
-                          setState(() {
-                            _yesNoOpened = false;
-                            _focus();
-                          });
-                        })
-                  ])
-                ]))
+                    color: Color(Values.colorShadow).withOpacity(0.8),
+                    child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          padding: const EdgeInsets.all(30),
+                          alignment: Alignment.center,
+                          child: AutoSizeText(tr('remove_all_items'),
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Color(Values.colorAlwaysLight), fontSize: Values.fontSize20, fontWeight: FontWeight.w600))),
+                      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                        WidgetButton(
+                            icon: "assets/graphics/icons/remove_bin.svg",
+                            size: 80,
+                            color: Values.colorAlwaysDark,
+                            background: Values.colorFirst,
+                            onTap: () {
+                              setState(() {
+                                _removeLogs();
+                                _yesNoOpened = false;
+                                _focus();
+                              });
+                            }),
+                        WidgetButton(
+                            icon: "assets/graphics/icons/menu_close.svg",
+                            size: 80,
+                            color: Values.colorLight,
+                            background: Values.colorDark,
+                            onTap: () {
+                              setState(() {
+                                _yesNoOpened = false;
+                                _focus();
+                              });
+                            })
+                      ])
+                    ]))
                 : Container()));
   }
 
@@ -424,26 +424,19 @@ class ActivityLogsState extends State<ActivityLogs> {
           index == _filtered.length - 1 ? last = true : last = false;
           return last
               ? Column(children: [
-            EntryLog(
-                log: log,
-                animal: animal,
-                reserve: reserve,
-                animalFur: animalFur,
-                index: index,
-                trophyLodge: widget.trophyLodge,
-                callback: _filter,
-                context: context),
-            const SizedBox(height: 75)
-          ])
+                  EntryLog(
+                      log: log,
+                      animal: animal,
+                      reserve: reserve,
+                      animalFur: animalFur,
+                      index: index,
+                      trophyLodge: widget.trophyLodge,
+                      callback: _filter,
+                      context: context),
+                  const SizedBox(height: 75)
+                ])
               : EntryLog(
-              log: log,
-              animal: animal,
-              reserve: reserve,
-              animalFur: animalFur,
-              index: index,
-              trophyLodge: widget.trophyLodge,
-              callback: _filter,
-              context: context);
+                  log: log, animal: animal, reserve: reserve, animalFur: animalFur, index: index, trophyLodge: widget.trophyLodge, callback: _filter, context: context);
         });
   }
 
@@ -457,8 +450,8 @@ class ActivityLogsState extends State<ActivityLogs> {
           height: _fileOptionsOpened || _viewOptionsOpened
               ? 232.5
               : _sortOptionsOpened
-              ? 282.5
-              : 75,
+                  ? 282.5
+                  : 75,
           child: SingleChildScrollView(
               reverse: true,
               scrollDirection: Axis.horizontal,
@@ -672,29 +665,29 @@ class ActivityLogsState extends State<ActivityLogs> {
                       widget.trophyLodge
                           ? Container()
                           : AnimatedPositioned(
-                          duration: const Duration(milliseconds: 200),
-                          right: 0,
-                          bottom: _viewOptionsOpened ? 175 : 0,
-                          child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
-                              opacity: _viewOptionsOpened ? 1 : 0,
-                              child: WidgetSwitch(
-                                  icon: "assets/graphics/icons/trophy_lodge.svg",
-                                  size: 40,
-                                  activeColor: Values.colorAccent,
-                                  activeBackground: Values.colorPrimary,
-                                  inactiveColor: Values.colorLight,
-                                  inactiveBackground: Values.colorDark,
-                                  noInactiveOpacity: true,
-                                  isActive: _settings.getTrophyLodgeRecord,
-                                  onTap: () {
-                                    setState(() {
-                                      _showTrophyLodgeRecords = !_showTrophyLodgeRecords;
-                                      _settings.changeTrophyLodgeRecord();
-                                      _filter();
-                                      _focus();
-                                    });
-                                  }))),
+                              duration: const Duration(milliseconds: 200),
+                              right: 0,
+                              bottom: _viewOptionsOpened ? 175 : 0,
+                              child: AnimatedOpacity(
+                                  duration: const Duration(milliseconds: 300),
+                                  opacity: _viewOptionsOpened ? 1 : 0,
+                                  child: WidgetSwitch(
+                                      icon: "assets/graphics/icons/trophy_lodge.svg",
+                                      size: 40,
+                                      activeColor: Values.colorAccent,
+                                      activeBackground: Values.colorPrimary,
+                                      inactiveColor: Values.colorLight,
+                                      inactiveBackground: Values.colorDark,
+                                      noInactiveOpacity: true,
+                                      isActive: _settings.getTrophyLodgeRecord,
+                                      onTap: () {
+                                        setState(() {
+                                          _showTrophyLodgeRecords = !_showTrophyLodgeRecords;
+                                          _settings.changeTrophyLodgeRecord();
+                                          _filter();
+                                          _focus();
+                                        });
+                                      }))),
                       AnimatedPositioned(
                           duration: const Duration(milliseconds: 200),
                           right: 0,
@@ -730,8 +723,8 @@ class ActivityLogsState extends State<ActivityLogs> {
                                   icon: _settings.getCompactLogbook == 3
                                       ? "assets/graphics/icons/view_semi_compact.svg"
                                       : _settings.getCompactLogbook == 2
-                                      ? "assets/graphics/icons/view_compact.svg"
-                                      : "assets/graphics/icons/view_expanded.svg",
+                                          ? "assets/graphics/icons/view_compact.svg"
+                                          : "assets/graphics/icons/view_expanded.svg",
                                   size: 40,
                                   color: Values.colorLight,
                                   background: Values.colorDark,
@@ -787,152 +780,169 @@ class ActivityLogsState extends State<ActivityLogs> {
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
     return WidgetScaffoldAdvanced(
         body: Stack(children: [
-          Column(mainAxisSize: MainAxisSize.max, children: [
-            WidgetAppBar(
-              text: widget.trophyLodge ? tr('trophy_lodge') : tr('logbook'),
-              height: 90,
-              fontSize: Values.fontSize30,
-              fontWeight: FontWeight.w700,
-              alignment: Alignment.centerRight,
-              function: () {
-                Navigator.pop(context);
-              },
-            ),
-            Container(
-                height: 60,
-                color: Color(Values.colorContentNumberOfLogsBackground),
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                    Expanded(
-                        flex: 1,
-                        child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                  width: 20,
-                                  height: 25,
-                                  alignment: Alignment.center,
-                                  margin: const EdgeInsets.only(right: 3),
-                                  child:
-                                  SvgPicture.asset("assets/graphics/icons/list.svg", height: 14, width: 14, color: Color(Values.colorAlwaysLight))),
-                              Container(
-                                  height: 25,
-                                  alignment: Alignment.center,
-                                  child: AutoSizeText(_numberOfLogs.toString(),
-                                      maxLines: 1,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(color: Color(Values.colorAlwaysLight), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
-                            ])),
-                    Expanded(
-                        flex: 1,
-                        child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Container(width: 20, height: 25, alignment: Alignment.center, margin: const EdgeInsets.only(right: 3), child: SvgPicture.asset("assets/graphics/icons/list.svg", height: 14, width: 14, color: const Color(Values.colorFirst))),
-                          Container(height: 25, alignment: Alignment.center, child: AutoSizeText(_numberOfCorruptedLogs.toString(), maxLines: 1, textAlign: TextAlign.left, style: TextStyle(color: const Color(Values.colorFirst), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
-                        ])),
-                    Expanded(
-                        flex: 1,
-                        child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Container(width: 20, height: 25, alignment: Alignment.center, margin: const EdgeInsets.only(right: 3), child: SvgPicture.asset("assets/graphics/icons/trophy_none.svg", height: 17, width: 17, color: Color(Values.colorDisabled))),
-                          Container(height: 25, alignment: Alignment.center, child: AutoSizeText(_numberOfNoneLogs.toString(), maxLines: 1, textAlign: TextAlign.left, style: TextStyle(color: Color(Values.colorDisabled), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
-                        ])),
-                    Expanded(
-                        flex: 1,
-                        child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Container(
-                              width: 20,
-                              height: 25,
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.only(right: 3),
-                              child: SvgPicture.asset("assets/graphics/icons/trophy_great_one.svg", height: 16, width: 16, color: Color(Values.colorAlwaysLight))),
-                          Container(
-                              height: 25,
-                              alignment: Alignment.center,
-                              child: AutoSizeText(_numberOfGreatOneLogs.toString(),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Color(Values.colorAlwaysLight), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
-                        ]))
-                  ]),
-                  Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                    Expanded(
-                        flex: 1,
-                        child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Container(
-                              width: 20,
-                              height: 25,
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.only(right: 3),
-                              child: SvgPicture.asset("assets/graphics/icons/trophy_bronze.svg", height: 17, width: 17, color: Color(Values.colorBronze))),
-                          Container(
-                              height: 25,
-                              alignment: Alignment.center,
-                              child: AutoSizeText(_numberOfBronzeLogs.toString(),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Color(Values.colorBronze), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
-                        ])),
-                    Expanded(
-                        flex: 1,
-                        child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Container(
-                              width: 20,
-                              height: 25,
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.only(right: 3),
-                              child: SvgPicture.asset("assets/graphics/icons/trophy_silver.svg", height: 17, width: 17, color: Color(Values.colorSilver))),
-                          Container(
-                              height: 25,
-                              alignment: Alignment.center,
-                              child: AutoSizeText(_numberOfSilverLogs.toString(),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Color(Values.colorSilver), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
-                        ])),
-                    Expanded(
-                        flex: 1,
-                        child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Container(
-                              width: 20,
-                              height: 25,
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.only(right: 3),
-                              child: SvgPicture.asset("assets/graphics/icons/trophy_gold.svg", height: 17, width: 17, color: Color(Values.colorGold))),
-                          Container(
-                              height: 25,
-                              alignment: Alignment.center,
-                              child: AutoSizeText(_numberOfGoldLogs.toString(),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Color(Values.colorGold), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
-                        ])),
-                    Expanded(
-                        flex: 1,
-                        child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Container(
-                              width: 20,
-                              height: 25,
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.only(right: 3),
-                              child: SvgPicture.asset("assets/graphics/icons/trophy_diamond.svg", height: 17, width: 17, color: Color(Values.colorDiamond))),
-                          Container(
-                              height: 25,
-                              alignment: Alignment.center,
-                              child: AutoSizeText(_numberOfDiamondLogs.toString(),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(color: Color(Values.colorDiamond), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
-                        ]))
-                  ])
-                ])),
-            Expanded(flex: 0, child: WidgetSearchBar(background: Values.colorSearchBackground, color: Values.colorSearch, controller: _controller)),
-            Expanded(child: _buildStack())
-          ]),
-          _buildYesNo()
-        ]));
+      Column(mainAxisSize: MainAxisSize.max, children: [
+        WidgetAppBar(
+          text: widget.trophyLodge ? tr('trophy_lodge') : tr('logbook'),
+          height: 90,
+          fontSize: Values.fontSize30,
+          fontWeight: FontWeight.w700,
+          alignment: Alignment.centerRight,
+          function: () {
+            Navigator.pop(context);
+          },
+        ),
+        Container(
+            height: 60,
+            color: Color(Values.colorContentNumberOfLogsBackground),
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                Expanded(
+                    flex: 1,
+                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          width: 20,
+                          height: 25,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 3),
+                          child: SvgPicture.asset("assets/graphics/icons/list.svg", height: 14, width: 14, color: Color(Values.colorAlwaysLight))),
+                      Container(
+                          height: 25,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(_numberOfLogs.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(Values.colorAlwaysLight), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
+                    ])),
+                Expanded(
+                    flex: 1,
+                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          width: 20,
+                          height: 25,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 3),
+                          child: SvgPicture.asset("assets/graphics/icons/list.svg", height: 14, width: 14, color: const Color(Values.colorFirst))),
+                      Container(
+                          height: 25,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(_numberOfCorruptedLogs.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: const Color(Values.colorFirst), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
+                    ])),
+                Expanded(
+                    flex: 1,
+                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          width: 20,
+                          height: 25,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 3),
+                          child: SvgPicture.asset("assets/graphics/icons/trophy_none.svg", height: 17, width: 17, color: Color(Values.colorDisabled))),
+                      Container(
+                          height: 25,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(_numberOfNoneLogs.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(Values.colorDisabled), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
+                    ])),
+                Expanded(
+                    flex: 1,
+                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          width: 20,
+                          height: 25,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 3),
+                          child: SvgPicture.asset("assets/graphics/icons/trophy_great_one.svg", height: 16, width: 16, color: Color(Values.colorAlwaysLight))),
+                      Container(
+                          height: 25,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(_numberOfGreatOneLogs.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(Values.colorAlwaysLight), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
+                    ]))
+              ]),
+              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                Expanded(
+                    flex: 1,
+                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          width: 20,
+                          height: 25,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 3),
+                          child: SvgPicture.asset("assets/graphics/icons/trophy_bronze.svg", height: 17, width: 17, color: Color(Values.colorBronze))),
+                      Container(
+                          height: 25,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(_numberOfBronzeLogs.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(Values.colorBronze), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
+                    ])),
+                Expanded(
+                    flex: 1,
+                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          width: 20,
+                          height: 25,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 3),
+                          child: SvgPicture.asset("assets/graphics/icons/trophy_silver.svg", height: 17, width: 17, color: Color(Values.colorSilver))),
+                      Container(
+                          height: 25,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(_numberOfSilverLogs.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(Values.colorSilver), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
+                    ])),
+                Expanded(
+                    flex: 1,
+                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          width: 20,
+                          height: 25,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 3),
+                          child: SvgPicture.asset("assets/graphics/icons/trophy_gold.svg", height: 17, width: 17, color: Color(Values.colorGold))),
+                      Container(
+                          height: 25,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(_numberOfGoldLogs.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(Values.colorGold), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
+                    ])),
+                Expanded(
+                    flex: 1,
+                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          width: 20,
+                          height: 25,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(right: 3),
+                          child: SvgPicture.asset("assets/graphics/icons/trophy_diamond.svg", height: 17, width: 17, color: Color(Values.colorDiamond))),
+                      Container(
+                          height: 25,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(_numberOfDiamondLogs.toString(),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(Values.colorDiamond), fontSize: Values.fontSize18, fontWeight: FontWeight.w600)))
+                    ]))
+              ])
+            ])),
+        Expanded(flex: 0, child: WidgetSearchBar(background: Values.colorSearchBackground, color: Values.colorSearch, controller: _controller)),
+        Expanded(child: _buildStack())
+      ]),
+      _buildYesNo()
+    ]));
   }
 
   @override

@@ -23,14 +23,7 @@ class EntryNeedZone extends StatefulWidget {
   final bool compact;
 
   const EntryNeedZone(
-      {Key? key,
-      required this.animal,
-      required this.reserveID,
-      required this.zones,
-      required this.hour,
-      required this.index,
-      required this.count,
-      required this.compact})
+      {Key? key, required this.animal, required this.reserveID, required this.zones, required this.hour, required this.index, required this.count, required this.compact})
       : super(key: key);
 
   @override
@@ -96,8 +89,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      ActivityLogsAddEdit(animalID: widget.animal.getID, reserveID: widget.reserveID, callback: () {}, fromTrophyLodge: false)));
+                  builder: (context) => ActivityLogsAddEdit(animalID: widget.animal.getID, reserveID: widget.reserveID, callback: () {}, fromTrophyLodge: false)));
           return false;
         },
         background: Container(

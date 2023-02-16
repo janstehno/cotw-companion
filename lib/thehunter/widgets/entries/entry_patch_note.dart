@@ -18,39 +18,32 @@ class EntryPatchNote extends StatelessWidget {
         color: Color(color),
         child: WidgetContainer(
             child: Column(children: [
-          Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    alignment: Alignment.centerLeft,
-                    child:
-                        AutoSizeText(version, style: TextStyle(color: Color(textColor), fontSize: Values.fontSize24, fontWeight: FontWeight.w800))),
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: AutoSizeText(
-                        changes.isNotEmpty
-                            ? version == "1.0.0"
-                                ? "Release"
-                                : "Update"
-                            : "Hotfix",
-                        style: TextStyle(color: Color(textColor), fontSize: Values.fontSize16, fontWeight: FontWeight.w800))),
-              ]),
-              Container(
-                  margin: EdgeInsets.only(top: changes.isNotEmpty ? 10 : 0),
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: changes.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                            alignment: Alignment.centerLeft,
-                            child: AutoSizeText(changes[index],
-                                style: TextStyle(
-                                    color: Color(textColor), fontSize: Values.fontSize20, fontWeight: FontWeight.w400)));
-                      }))
-            ])));
+          Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+            Container(
+                alignment: Alignment.centerLeft,
+                child: AutoSizeText(version, style: TextStyle(color: Color(textColor), fontSize: Values.fontSize24, fontWeight: FontWeight.w800))),
+            Container(
+                alignment: Alignment.centerRight,
+                child: AutoSizeText(
+                    changes.isNotEmpty
+                        ? version == "1.0.0"
+                            ? "Release"
+                            : "Update"
+                        : "Hotfix",
+                    style: TextStyle(color: Color(textColor), fontSize: Values.fontSize16, fontWeight: FontWeight.w800))),
+          ]),
+          Container(
+              margin: EdgeInsets.only(top: changes.isNotEmpty ? 10 : 0),
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: changes.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                        alignment: Alignment.centerLeft,
+                        child: AutoSizeText(changes[index], style: TextStyle(color: Color(textColor), fontSize: Values.fontSize20, fontWeight: FontWeight.w400)));
+                  }))
+        ])));
   }
 
   @override

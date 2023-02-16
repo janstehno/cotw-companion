@@ -46,22 +46,22 @@ class EntryCallerState extends State<EntryCaller> {
             color: widget.index % 2 == 0 ? Color(Values.colorEven) : Color(Values.colorOdd),
             child: WidgetContainer(
                 child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                  EntryPartNameImage(text: widget.caller.getName(context.locale), icon: Graphics.getCallerIcon(widget.caller.getID)),
-                  EntryPartTagsButton(tags: [
-                    WidgetTag.medium(
+              EntryPartNameImage(text: widget.caller.getName(context.locale), icon: Graphics.getCallerIcon(widget.caller.getID)),
+              EntryPartTagsButton(tags: [
+                WidgetTag.medium(
                     margin: const EdgeInsets.only(right: 5),
                     color: Values.colorAccent,
                     background: Values.colorPrimary,
                     icon: "assets/graphics/icons/dlc.svg",
                     size: 20,
                     visible: widget.caller.getDlc),
-                    WidgetTag.medium(
+                WidgetTag.medium(
                     text: widget.caller.getRange(_settings.getImperialUnits),
                     icon: "assets/graphics/icons/range.svg",
                     color: Values.colorDark,
                     background: Values.colorTag)
               ])
-                ]))));
+            ]))));
   }
 
   @override

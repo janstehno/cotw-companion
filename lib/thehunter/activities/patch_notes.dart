@@ -42,9 +42,12 @@ class ActivityPatchNotes extends StatelessWidget {
 
   Widget _buildList() {
     return Column(children: [
-      EntryPatchNote(color: Values.colorOdd, version: "1.5.5", changes: const [
-        "- Improvement of the Loadouts. Loadouts can be edited now."
-      ]),
+      EntryPatchNote(
+        color: Values.colorEven,
+        version: "1.5.6",
+        changes: const ["- Hungarian language."],
+      ),
+      EntryPatchNote(color: Values.colorOdd, version: "1.5.5", changes: const ["- Improvement of the Loadouts. Loadouts can be edited now."]),
       EntryPatchNote(color: Values.colorEven, version: "1.5.2 - 1.5.4"),
       EntryPatchNote(
         color: Values.colorOdd,
@@ -85,10 +88,7 @@ class ActivityPatchNotes extends StatelessWidget {
         "- Revontuli Coast update.",
         "- Improvement of the UI. As there is very low variety in ammo for shotguns, bows, and crossbows, animal's recommended weapons of these types now show as an ammo instead of a weapon."
       ]),
-      EntryPatchNote(
-          color: Values.colorOdd,
-          version: "1.3.9",
-          changes: const ["- Improvement of the Catch book and Trophy lodge. They are loaded separately now."]),
+      EntryPatchNote(color: Values.colorOdd, version: "1.3.9", changes: const ["- Improvement of the Catch book and Trophy lodge. They are loaded separately now."]),
       EntryPatchNote(color: Values.colorEven, version: "1.3.8"),
       EntryPatchNote(color: Values.colorOdd, version: "1.3.7"),
       EntryPatchNote(color: Values.colorEven, version: "1.3.6", changes: const [
@@ -98,8 +98,7 @@ class ActivityPatchNotes extends StatelessWidget {
         "- Improvement of the UI. Overhauled have been map zones (some zones can overlap) and various icons. Animal's images have been added including their anatomy. Filter for animal's recommended weapons in the settings. It chooses the weapons based on the highest minimum class and the greatest penetration. If possible at least one weapon is chosen from the base game and at least one is chosen from DLC."
       ]),
       EntryPatchNote(color: Values.colorOdd, version: "1.3.5"),
-      EntryPatchNote(
-          color: Values.colorEven, version: "1.3.4", changes: const ["- Improvement of the Catch book and Trophy lodge.", "- Great Ones added."]),
+      EntryPatchNote(color: Values.colorEven, version: "1.3.4", changes: const ["- Improvement of the Catch book and Trophy lodge.", "- Great Ones added."]),
       EntryPatchNote(color: Values.colorOdd, version: "1.3.3"),
       EntryPatchNote(color: Values.colorEven, version: "1.3.2", changes: const ["- Trophy lodge feature.", "- Japanese language."]),
       EntryPatchNote(
@@ -113,9 +112,7 @@ class ActivityPatchNotes extends StatelessWidget {
       EntryPatchNote(color: Values.colorOdd, version: "1.2.9"),
       EntryPatchNote(color: Values.colorEven, version: "1.2.8", changes: const ["- Improvement of the landscape UI."]),
       EntryPatchNote(
-          color: Values.colorOdd,
-          version: "1.2.7",
-          changes: const ["- Improvement of the UI. Need zones are changing over time. Improvement for colorblind users."]),
+          color: Values.colorOdd, version: "1.2.7", changes: const ["- Improvement of the UI. Need zones are changing over time. Improvement for colorblind users."]),
       EntryPatchNote(color: Values.colorEven, version: "1.2.6"),
       EntryPatchNote(color: Values.colorOdd, version: "1.2.5", changes: const ["- Mississippi Acres Preserve update."]),
       EntryPatchNote(color: Values.colorEven, version: "1.2.4"),
@@ -125,9 +122,7 @@ class ActivityPatchNotes extends StatelessWidget {
       EntryPatchNote(color: Values.colorEven, version: "1.2.0", changes: const ["- Rancho Del Arroyo update."]),
       EntryPatchNote(color: Values.colorOdd, version: "1.1.4 - 1.1.9"),
       EntryPatchNote(
-          color: Values.colorEven,
-          version: "1.1.3",
-          changes: const ["- Improvement of the UI. Need zones are changing based on set time. Temporary dark mode."]),
+          color: Values.colorEven, version: "1.1.3", changes: const ["- Improvement of the UI. Need zones are changing based on set time. Temporary dark mode."]),
       EntryPatchNote(color: Values.colorOdd, version: "1.1.2"),
       EntryPatchNote(color: Values.colorEven, version: "1.1.1", changes: const ["- Improvement of the UI. Language option in the settings."]),
       EntryPatchNote(color: Values.colorOdd, version: "1.1.0", changes: const [

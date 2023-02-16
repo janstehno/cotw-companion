@@ -42,6 +42,7 @@ void main() async {
         Locale('es'),
         Locale('pt'),
         Locale('ja'),
+        Locale('hu'),
         Locale('tr')
       ],
       saveLocale: true,
@@ -89,7 +90,7 @@ class App extends StatelessWidget {
             brightness: Brightness.dark,
             scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(const Color(Values.color61))),
             textSelectionTheme: TextSelectionThemeData(selectionColor: Color(Values.colorLight), selectionHandleColor: Color(Values.colorDark)),
-            fontFamily: 'Manrope'),
+            fontFamily: 'Text'),
         home: Column(mainAxisSize: MainAxisSize.max, children: [Expanded(child: Container(color: Color(Values.colorPrimary), child: const BuilderHome()))]));
   }
 }

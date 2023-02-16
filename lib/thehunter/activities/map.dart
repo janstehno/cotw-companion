@@ -91,9 +91,7 @@ class ActivityMapState extends State<ActivityMap> {
                                         alignment: Alignment.centerLeft,
                                         height: orientation == Orientation.portrait ? _screenHeight : _screenWidth,
                                         width: orientation == Orientation.portrait ? _screenHeight : _screenWidth,
-                                        child: orientation == Orientation.portrait
-                                            ? _buildMapLayers(BoxFit.fitWidth)
-                                            : _buildMapLayers(BoxFit.fitWidth)))
+                                        child: orientation == Orientation.portrait ? _buildMapLayers(BoxFit.fitWidth) : _buildMapLayers(BoxFit.fitWidth)))
                               ]))))
                 ])),
             _showInterface
@@ -236,7 +234,8 @@ class ActivityMapState extends State<ActivityMap> {
           alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH).withOpacity(HelperMap.getOpacityE(0))),
       Image.asset("assets/graphics/maps/$reserve/lookouts.png",
           alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH).withOpacity(HelperMap.getOpacityE(1))),
-      Image.asset("assets/graphics/maps/$reserve/hides.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH).withOpacity(HelperMap.getOpacityE(2))),
+      Image.asset("assets/graphics/maps/$reserve/hides.png",
+          alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH).withOpacity(HelperMap.getOpacityE(2))),
       for (int s = 0; s < HelperMap.getAnimals.length; s++) _buildAnimalLayers(HelperMap.getAnimal(s), s, reserve, fit, false),
       for (int s = 0; s < HelperMap.getAnimals.length; s++) _buildAnimalLayers(HelperMap.getAnimal(s), s, reserve, fit, true)
     ]);

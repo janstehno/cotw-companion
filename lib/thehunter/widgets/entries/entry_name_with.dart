@@ -23,6 +23,7 @@ class EntryName extends StatelessWidget {
   final bool withSwitch;
   final bool oneLine;
   final bool noInactiveOpacity;
+  final bool isTitle;
   final bool isActive;
   final bool visible;
   final Function onTap;
@@ -46,6 +47,7 @@ class EntryName extends StatelessWidget {
       this.oneLine = false,
       this.noInactiveOpacity = false,
       this.visible = true,
+      this.isTitle = false,
       required this.isActive,
       required this.onTap})
       : super(key: key);
@@ -69,6 +71,7 @@ class EntryName extends StatelessWidget {
       this.oneLine = false,
       this.noInactiveOpacity = false,
       this.visible = true,
+      this.isTitle = false,
       this.isActive = true,
       required this.onTap})
       : super(key: key);
@@ -83,10 +86,12 @@ class EntryName extends StatelessWidget {
               child: Container(
                   padding: const EdgeInsets.only(right: 30),
                   child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    AutoSizeText(text,
+                    AutoSizeText(isTitle ? text.toUpperCase() : text,
                         maxLines: oneLine ? 1 : 2,
                         textAlign: TextAlign.start,
-                        style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)),
+                        style: isTitle
+                            ? TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w800, fontFamily: 'Title')
+                            : TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)),
                     subText.isNotEmpty
                         ? AutoSizeText(subText,
                             maxLines: 1,

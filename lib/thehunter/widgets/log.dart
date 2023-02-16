@@ -122,8 +122,10 @@ class EntryLogState extends State<EntryLog> {
       height: 30,
       margin: EdgeInsets.only(right: 30, bottom: _settings.getCompactLogbook == 1 ? 1 : 5),
       alignment: Alignment.centerLeft,
-      child: AutoSizeText(widget.animal.getNameBasedOnReserve(context.locale, widget.log.getReserveID),
-          maxLines: 2, textAlign: TextAlign.left, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w800)),
+      child: AutoSizeText(widget.animal.getNameBasedOnReserve(context.locale, widget.log.getReserveID).toUpperCase(),
+          maxLines: 2,
+          textAlign: TextAlign.left,
+          style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w800, fontFamily: 'Title')),
     );
   }
 

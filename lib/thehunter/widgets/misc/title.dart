@@ -21,10 +21,14 @@ class WidgetTitle extends StatelessWidget {
         alignment: alignment,
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
         child: AutoSizeText(
-          text,
+          text.toUpperCase(),
           maxLines: 1,
           textAlign: TextAlign.start,
-          style: TextStyle(color: Color(Values.colorContentSubTitle), fontSize: fontSize == 24 ? Values.fontSize24 : Values.fontSize20, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              color: Color(Values.colorContentSubTitle),
+              fontSize: fontSize == 24 ? Values.fontSize24 : Values.fontSize20,
+              fontWeight: FontWeight.w800,
+              fontFamily: 'Title'),
         ));
   }
 

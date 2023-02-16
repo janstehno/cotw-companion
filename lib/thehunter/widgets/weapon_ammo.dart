@@ -42,8 +42,8 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
           leftToRight
               ? Container()
               : Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Text(text, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize18, fontWeight: FontWeight.w400))),
+                  margin: const EdgeInsets.only(right: 10),
+                  child: Text(text, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize18, fontWeight: FontWeight.w400))),
           SvgPicture.asset(
             icon,
             width: 15,
@@ -52,8 +52,8 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
           ),
           leftToRight
               ? Container(
-              margin: const EdgeInsets.only(left: 10),
-              child: Text(text, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize18, fontWeight: FontWeight.w400)))
+                  margin: const EdgeInsets.only(left: 10),
+                  child: Text(text, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize18, fontWeight: FontWeight.w400)))
               : Container()
         ]));
   }

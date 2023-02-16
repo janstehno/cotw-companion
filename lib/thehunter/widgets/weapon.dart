@@ -36,22 +36,22 @@ class EntryWeaponState extends State<EntryWeapon> {
             color: widget.index % 2 == 0 ? Color(Values.colorEven) : Color(Values.colorOdd),
             child: WidgetContainer(
                 child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                  EntryPartNameImage(text: widget.weapon.getName(context.locale), icon: Graphics.getWeaponIcon(widget.weapon.getID)),
-                  EntryPartTagsButton(tags: [
-                    WidgetTag.medium(
+              EntryPartNameImage(text: widget.weapon.getName(context.locale), icon: Graphics.getWeaponIcon(widget.weapon.getID)),
+              EntryPartTagsButton(tags: [
+                WidgetTag.medium(
                     margin: const EdgeInsets.only(right: 5),
                     color: Values.colorAccent,
                     background: Values.colorPrimary,
                     icon: "assets/graphics/icons/dlc.svg",
                     size: 20,
                     visible: widget.weapon.getDlc),
-                    WidgetTag.medium(
+                WidgetTag.medium(
                     text: widget.weapon.getID == 21 ? "1/2" : widget.weapon.getMag.toString(),
                     icon: "assets/graphics/icons/weapon_mag.svg",
                     color: Values.colorDark,
                     background: Values.colorTag)
               ])
-                ]))));
+            ]))));
   }
 
   @override

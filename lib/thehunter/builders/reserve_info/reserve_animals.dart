@@ -55,8 +55,7 @@ class BuilderReserveAnimalsState extends State<BuilderReserveAnimals> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            ActivityLogsAddEdit(animalID: animalID, reserveID: widget.reserveID, callback: () {}, fromTrophyLodge: false)));
+                        builder: (context) => ActivityLogsAddEdit(animalID: animalID, reserveID: widget.reserveID, callback: () {}, fromTrophyLodge: false)));
                 return false;
               });
         });

@@ -79,7 +79,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
         child: Row(mainAxisSize: MainAxisSize.max, children: [
           Expanded(
               child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-            AutoSizeText(widget.loadout.getName, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)),
+            AutoSizeText(widget.loadout.getName, maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)),
             Row(children: [
               Container(
                   margin: const EdgeInsets.only(right: 15),
@@ -107,7 +107,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
         color: widget.index % 2 == 0 ? Color(Values.colorEven) : Color(Values.colorOdd),
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 15),
         height: _detailContainer
-            ? ((20 * _actualWeapons.length) + (20 * _actualCallers.length) + (_actualWeapons.isNotEmpty ? 40 : 0) + (_actualCallers.isNotEmpty ? 40 : 0) + 15)
+            ? ((20 * _actualWeapons.length) + (20 * _actualCallers.length) + (_actualWeapons.isNotEmpty ? 40 : 0) + (_actualCallers.isNotEmpty ? 40 : 0))
             : 0,
         duration: _duration,
         child: AnimatedOpacity(
@@ -117,10 +117,10 @@ class EntryLoadoutState extends State<EntryLoadout> {
               _actualWeapons.isEmpty
                   ? Container()
                   : Container(
-                      height: 30,
-                      alignment: Alignment.topLeft,
-                      child:
-                          AutoSizeText(tr("weapon_ammo"), style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize20, fontWeight: FontWeight.w400))),
+                      height: 20,
+                      alignment: Alignment.centerLeft,
+                      child: AutoSizeText(tr("weapon_ammo").toUpperCase(),
+                          style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize20, fontWeight: FontWeight.w800, fontFamily: 'Title'))),
               _actualWeapons.isEmpty
                   ? Container()
                   : ListView.builder(
@@ -138,9 +138,10 @@ class EntryLoadoutState extends State<EntryLoadout> {
               _actualCallers.isEmpty
                   ? Container()
                   : Container(
-                      height: 30,
-                      alignment: Alignment.topLeft,
-                      child: AutoSizeText(tr("callers"), style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize20, fontWeight: FontWeight.w400))),
+                      height: 20,
+                      alignment: Alignment.centerLeft,
+                      child: AutoSizeText(tr("callers").toUpperCase(),
+                          style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize20, fontWeight: FontWeight.w800, fontFamily: 'Title'))),
               _actualCallers.isEmpty
                   ? Container()
                   : ListView.builder(

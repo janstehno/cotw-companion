@@ -57,13 +57,13 @@ class WidgetAppBar extends StatelessWidget {
               height: height,
               color: Color(background ?? Values.colorPrimary),
               alignment: alignment,
-              padding: padding ?? const EdgeInsets.only(right: 30, left: 30),
+              padding: padding ?? const EdgeInsets.only(right: 30),
               child: custom ??
                   AutoSizeText(
-                    text,
+                    text.toUpperCase(),
                     maxLines: maxLines ?? 2,
                     textAlign: TextAlign.right,
-                    style: TextStyle(color: Color(color ?? Values.colorAccent), fontSize: fontSize, fontWeight: fontWeight),
+                    style: TextStyle(color: Color(color ?? Values.colorAccent), fontSize: fontSize, fontWeight: fontWeight, fontFamily: 'Title'),
                   )))
     ]);
   }

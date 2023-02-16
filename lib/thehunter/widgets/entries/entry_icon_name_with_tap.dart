@@ -35,7 +35,9 @@ class EntryIconNameWithTap extends StatelessWidget {
                         color: Color(color ?? Values.colorDark),
                       ))
                   : Container(),
-              Expanded(child: AutoSizeText(text, maxLines: 1, style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)))
+              Expanded(
+                  child: AutoSizeText(text,
+                      maxLines: 1, style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)))
             ])));
   }
 

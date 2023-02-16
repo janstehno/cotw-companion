@@ -24,14 +24,15 @@ class AnimalFur {
   int male, female;
   bool chosen;
 
-  AnimalFur({required this.id,
-    required this.animalID,
-    required this.furID,
-    required this.rarity,
-    required this.perCent,
-    required this.male,
-    required this.female,
-    required this.chosen});
+  AnimalFur(
+      {required this.id,
+      required this.animalID,
+      required this.furID,
+      required this.rarity,
+      required this.perCent,
+      required this.male,
+      required this.female,
+      required this.chosen});
 
   int get getID => id;
 

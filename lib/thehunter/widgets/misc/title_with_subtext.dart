@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/helpers/helper_values.dart';
 import 'package:flutter/material.dart';
 
-class EntryNameWithSubtext extends StatelessWidget {
+class TitleWithSubtext extends StatelessWidget {
   final String text;
   final String subText;
   final double size;
@@ -13,15 +13,7 @@ class EntryNameWithSubtext extends StatelessWidget {
   final bool oneLine;
   final bool visible;
 
-  const EntryNameWithSubtext(
-      {Key? key,
-      required this.text,
-      this.subText = "",
-      this.size = 50,
-      this.color,
-      this.background,
-      this.oneLine = false,
-      this.visible = true})
+  const TitleWithSubtext({Key? key, required this.text, this.subText = "", this.size = 50, this.color, this.background, this.oneLine = false, this.visible = true})
       : super(key: key);
 
   Widget _buildWidgets() {
@@ -34,10 +26,10 @@ class EntryNameWithSubtext extends StatelessWidget {
               child: Container(
                   padding: const EdgeInsets.only(right: 30),
                   child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    AutoSizeText(text,
+                    AutoSizeText(text.toUpperCase(),
                         maxLines: oneLine ? 1 : 2,
                         textAlign: TextAlign.start,
-                        style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)),
+                        style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w800, fontFamily: 'Title')),
                     subText.isNotEmpty
                         ? AutoSizeText(subText,
                             maxLines: 1,

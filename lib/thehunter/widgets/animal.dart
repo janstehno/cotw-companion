@@ -36,32 +36,32 @@ class EntryAnimalState extends State<EntryAnimal> {
             color: widget.index % 2 == 0 ? Color(Values.colorEven) : Color(Values.colorOdd),
             child: WidgetContainer(
                 child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                  EntryPartNameImage(text: widget.animal.getName(context.locale), icon: Graphics.getAnimalIcon(widget.animal.getID)),
-                  EntryPartTagsButton(tags: [
-                    WidgetTag.medium(
+              EntryPartNameImage(text: widget.animal.getName(context.locale), icon: Graphics.getAnimalIcon(widget.animal.getID)),
+              EntryPartTagsButton(tags: [
+                WidgetTag.medium(
                     margin: const EdgeInsets.only(right: 5),
                     color: Values.colorAccent,
                     background: Values.colorPrimary,
                     icon: "assets/graphics/icons/dlc.svg",
                     size: 20,
                     visible: widget.animal.getDlc),
-                    WidgetTag.medium(
+                WidgetTag.medium(
                     margin: const EdgeInsets.only(right: 5),
                     text: widget.animal.getLevel.toString(),
                     color: Values.colorDark,
                     background: Values.colorTag,
                     icon: "assets/graphics/icons/level.svg"),
-                    WidgetTag.medium(
+                WidgetTag.medium(
                     margin: const EdgeInsets.only(right: 5),
                     color: Values.colorAlwaysDark,
                     background: Values.colorDiamond,
                     icon: "assets/graphics/icons/trophy_diamond.svg",
                     size: 18,
                     text: widget.animal.removePointZero(widget.animal.getDiamond.toString())),
-                    WidgetTag.medium(
+                WidgetTag.medium(
                     color: Values.colorLight, background: Values.colorDark, icon: "assets/graphics/icons/trophy_great_one.svg", size: 20, visible: widget.animal.getGO)
               ])
-                ]))));
+            ]))));
   }
 
   @override

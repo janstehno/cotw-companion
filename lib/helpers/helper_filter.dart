@@ -31,8 +31,7 @@ class HelperFilter {
       filtered.addAll(JSONHelper.weaponsInfo);
     } else {
       for (dynamic r in JSONHelper.weaponsInfo) {
-        if (r.getName(context.locale).toLowerCase().contains(text.toLowerCase()) ||
-            r.getNameAmmo(context.locale).toLowerCase().contains(text.toLowerCase())) {
+        if (r.getName(context.locale).toLowerCase().contains(text.toLowerCase()) || r.getNameAmmo(context.locale).toLowerCase().contains(text.toLowerCase())) {
           filtered.add(r);
         }
       }

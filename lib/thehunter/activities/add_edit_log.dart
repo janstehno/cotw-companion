@@ -12,7 +12,7 @@ import 'package:cotwcompanion/thehunter/model/fur.dart';
 import 'package:cotwcompanion/thehunter/model/idtoid.dart';
 import 'package:cotwcompanion/thehunter/model/log.dart';
 import 'package:cotwcompanion/thehunter/widgets/entries/entry_name_with.dart';
-import 'package:cotwcompanion/thehunter/widgets/entries/entry_name_with_subtext.dart';
+import 'package:cotwcompanion/thehunter/widgets/misc/title_with_subtext.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_appbar.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_container.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_scaffold_advanced.dart';
@@ -33,8 +33,7 @@ class ActivityLogsAddEdit extends StatefulWidget {
   final Map<String, dynamic> toEdit;
   final bool fromTrophyLodge;
 
-  const ActivityLogsAddEdit(
-      {Key? key, this.animalID = -1, this.reserveID = -1, required this.fromTrophyLodge, required this.callback, this.toEdit = const {}})
+  const ActivityLogsAddEdit({Key? key, this.animalID = -1, this.reserveID = -1, required this.fromTrophyLodge, required this.callback, this.toEdit = const {}})
       : super(key: key);
 
   @override
@@ -197,8 +196,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   _textTrophyAndWeightListener(int controller) {
     setState(() {
       if (controller == 0) {
-        if (_equalsDoubleTrophyNumber.hasMatch(_controllerTrophyNumber.text) &&
-            (double.parse(_controllerTrophyNumber.text) <= _maxTrophy || _maxTrophy == 0)) {
+        if (_equalsDoubleTrophyNumber.hasMatch(_controllerTrophyNumber.text) && (double.parse(_controllerTrophyNumber.text) <= _maxTrophy || _maxTrophy == 0)) {
           _correctTrophyNumber = true;
           _trophy = double.parse(_controllerTrophyNumber.text);
         } else {
@@ -212,8 +210,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         }
         if (!_manuallySetTrophyRating) _getTrophyRating();
       } else if (controller == 1) {
-        if (_equalsDoubleWeightNumber.hasMatch(_controllerWeightNumber.text) &&
-            (double.parse(_controllerWeightNumber.text) <= _maxWeight || _maxWeight == 0)) {
+        if (_equalsDoubleWeightNumber.hasMatch(_controllerWeightNumber.text) && (double.parse(_controllerWeightNumber.text) <= _maxWeight || _maxWeight == 0)) {
           _correctWeightNumber = true;
           _weight = double.parse(_controllerWeightNumber.text);
         } else {
@@ -249,8 +246,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         }
       }
     }
-    _animals.sort(
-        (a, b) => a.getNameBasedOnReserve(context.locale, _selectedReserveID).compareTo(b.getNameBasedOnReserve(context.locale, _selectedReserveID)));
+    _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, _selectedReserveID).compareTo(b.getNameBasedOnReserve(context.locale, _selectedReserveID)));
     for (Animal a in _animals) {
       _animalsIDs.add(a.getID);
     }
@@ -522,10 +518,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
             child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
               AutoSizeText(
-                tr('time'),
+                tr('time').toUpperCase(),
                 maxLines: 1,
                 textAlign: TextAlign.start,
-                style: TextStyle(color: Color(Values.colorContentSubTitle), fontSize: Values.fontSize24, fontWeight: FontWeight.w600),
+                style: TextStyle(color: Color(Values.colorContentSubTitle), fontSize: Values.fontSize24, fontWeight: FontWeight.w800, fontFamily: 'Title'),
               ),
               AutoSizeText(LogHelper.getDateFormatted(_dateTime),
                   maxLines: 1,
@@ -603,6 +599,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildGender() {
     return Column(children: [
       EntryName.withSwitch(
+          isTitle: true,
           text: tr('animal_gender'),
           color: Values.colorContentSubTitle,
           background: Values.colorContentSubTitleBackground,
@@ -629,12 +626,13 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     _textTrophyAndWeightListener(0);
     return Column(children: [
       widget.toEdit.isNotEmpty
-          ? EntryNameWithSubtext(
+          ? TitleWithSubtext(
               text: tr('animal_trophy'),
               subText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
               color: Values.colorContentSubTitle,
               background: Values.colorContentSubTitleBackground)
           : EntryName.withTap(
+              isTitle: true,
               text: tr('animal_trophy'),
               subText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
               buttonIcon: "assets/graphics/icons/list.svg",
@@ -655,8 +653,11 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildWeight() {
     _textTrophyAndWeightListener(1);
     return Column(children: [
-      EntryNameWithSubtext(
-          text: tr('animal_weight'), subText: "${tr('max')}: ${_maxWeight == 0 ? "?" : _maxWeight.toString()}", color: Values.colorContentSubTitle, background: Values.colorContentSubTitleBackground),
+      TitleWithSubtext(
+          text: tr('animal_weight'),
+          subText: "${tr('max')}: ${_maxWeight == 0 ? "?" : _maxWeight.toString()}",
+          color: Values.colorContentSubTitle,
+          background: Values.colorContentSubTitleBackground),
       WidgetTextField(numberOnly: true, correct: _correctWeightNumber, controller: _controllerWeightNumber)
     ]);
   }
@@ -823,6 +824,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             color: Color(Values.colorBody),
             child: Column(children: [
               EntryName.withTap(
+                  isTitle: true,
                   text: tr('trophy_lodge'),
                   buttonIcon: "assets/graphics/icons/menu_close.svg",
                   color: Values.colorContentSubTitle,

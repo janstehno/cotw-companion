@@ -268,22 +268,13 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              WidgetTag.small(
-                  text: tr('animal_other'), color: Values.colorLight, background: Values.colorZoneOther, margin: const EdgeInsets.only(right: 2.5)),
-              WidgetTag.small(
-                  text: tr('animal_feed'), color: Values.colorAlwaysDark, background: Values.colorZoneFeed, margin: const EdgeInsets.only(left: 2.5))
+              WidgetTag.small(text: tr('animal_other'), color: Values.colorLight, background: Values.colorZoneOther, margin: const EdgeInsets.only(right: 2.5)),
+              WidgetTag.small(text: tr('animal_feed'), color: Values.colorAlwaysDark, background: Values.colorZoneFeed, margin: const EdgeInsets.only(left: 2.5))
             ]),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
               WidgetTag.small(
-                  text: tr('animal_drink'),
-                  color: Values.colorAlwaysDark,
-                  background: Values.colorZoneDrink,
-                  margin: const EdgeInsets.only(right: 2.5, top: 5)),
-              WidgetTag.small(
-                  text: tr('animal_rest'),
-                  color: Values.colorAlwaysDark,
-                  background: Values.colorZoneRest,
-                  margin: const EdgeInsets.only(left: 2.5, top: 5))
+                  text: tr('animal_drink'), color: Values.colorAlwaysDark, background: Values.colorZoneDrink, margin: const EdgeInsets.only(right: 2.5, top: 5)),
+              WidgetTag.small(text: tr('animal_rest'), color: Values.colorAlwaysDark, background: Values.colorZoneRest, margin: const EdgeInsets.only(left: 2.5, top: 5))
             ])
           ])),
       BuilderAnimalZones(animalID: widget.animalID)
@@ -321,7 +312,8 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   Widget _buildCallers() {
     return Column(children: [
       WidgetTitle.sub(text: tr('recommended_callers')),
-      WidgetContainer(alignment: Alignment.centerLeft, child: BuilderAnimalCallers(animalID: widget.animalID))]);
+      WidgetContainer(alignment: Alignment.centerLeft, child: BuilderAnimalCallers(animalID: widget.animalID))
+    ]);
   }
 
   Widget _buildWeapons() {
@@ -352,17 +344,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             Navigator.pop(context);
           },
         ),
-        children: [
-          _buildName(),
-          _buildReserves(),
-          _buildTrophy(),
-          _buildFurs(),
-          _buildZones(),
-          _buildAnatomy(),
-          _buildSenses(),
-          _buildCallers(),
-          _buildWeapons()
-        ]);
+        children: [_buildName(), _buildReserves(), _buildTrophy(), _buildFurs(), _buildZones(), _buildAnatomy(), _buildSenses(), _buildCallers(), _buildWeapons()]);
   }
 
   @override

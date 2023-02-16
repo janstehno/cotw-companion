@@ -17,9 +17,7 @@ class EntryPartNameImage extends StatelessWidget {
           child: Container(
               padding: const EdgeInsets.only(right: 30),
               child: AutoSizeText(text,
-                  maxLines: 3,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)))),
+                  maxLines: 3, textAlign: TextAlign.left, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)))),
       Container(width: 100, height: 100, alignment: Alignment.center, child: SvgPicture.asset(icon, color: Color(Values.colorContentIconTintDark), width: 70, height: 70))
     ]);
   }

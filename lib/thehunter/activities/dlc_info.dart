@@ -22,7 +22,7 @@ class ActivityDlcInfo extends StatefulWidget {
 
 class ActivityDlcInfoState extends State<ActivityDlcInfo> {
   Widget _buildName() {
-    return Column(children: [WidgetTitle.detail(text: widget.dlc.getDate, alignment: Alignment.center)]);
+    return Column(children: [WidgetTitle.sub(text: widget.dlc.getDate, alignment: Alignment.center)]);
   }
 
   Widget _buildDescription() {

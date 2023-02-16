@@ -41,7 +41,7 @@ class BuilderRAWCState extends State<BuilderRAWC> {
             : widget.type == ObjectType.weapon
                 ? JSONHelper.weapons
                 : JSONHelper.callers);
-    _controller.addListener(()=>_filter());
+    _controller.addListener(() => _filter());
     super.initState();
   }
 

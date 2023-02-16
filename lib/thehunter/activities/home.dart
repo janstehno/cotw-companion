@@ -32,9 +32,7 @@ class ActivityHomeState extends State<ActivityHome> {
   bool _menuOpened = false;
 
   _callback() {
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   _getScreenSizes() {
@@ -43,7 +41,7 @@ class ActivityHomeState extends State<ActivityHome> {
     _screenPadding = MediaQuery.of(context).viewPadding.top;
   }
 
-  Widget _theHunter() {
+  Widget _theHunterMenu() {
     return SingleChildScrollView(
         child: Container(
             padding: const EdgeInsets.only(bottom: 30, top: 90),
@@ -142,7 +140,7 @@ class ActivityHomeState extends State<ActivityHome> {
             ])));
   }
 
-  Widget _buildName(String name, String icon, Orientation orientation) {
+  Widget _buildName(Orientation orientation) {
     return Container(
         width: _screenWidth,
         height: _screenHeight,
@@ -151,53 +149,35 @@ class ActivityHomeState extends State<ActivityHome> {
             padding: const EdgeInsets.fromLTRB(30, 30, 30, 80),
             child: orientation == Orientation.portrait
                 ? Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                    SizedBox(width: 190, child: SvgPicture.asset(icon, width: 180, height: 180, color: Color(Values.colorAccent))),
+                    SizedBox(width: 190, child: SvgPicture.asset("assets/graphics/icons/app_stag.svg", width: 180, height: 180, color: Color(Values.colorAccent))),
                     Column(children: [
-                      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                        AutoSizeText(name,
-                            maxLines: 1,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontFamily: 'Lexend', letterSpacing: -1.3, color: Color(Values.colorAccent), height: 1.8, fontSize: Values.fontSize30)),
-                        Padding(
-                            padding: const EdgeInsets.only(left: 2),
-                            child: AutoSizeText("TM",
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Color(Values.colorAccent), letterSpacing: -0.2, height: 0.02, fontSize: Values.fontSize10, fontWeight: FontWeight.w400)))
-                      ]),
                       AutoSizeText("COTW COMPANION",
                           maxLines: 1,
                           textAlign: TextAlign.center,
-                          style: TextStyle(letterSpacing: 1.3, color: Color(Values.colorAccent), height: 1, fontSize: Values.fontSize20))
+                          style: TextStyle(
+                              fontFamily: 'Title',
+                              letterSpacing: -1.3,
+                              color: Color(Values.colorAccent),
+                              height: 1.8,
+                              fontSize: Values.fontSize30,
+                              fontWeight: FontWeight.w800))
                     ])
                   ])
                 : Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                    SizedBox(width: 150, child: SvgPicture.asset(icon, width: 120, height: 120, color: Color(Values.colorAccent))),
+                    SizedBox(width: 150, child: SvgPicture.asset("assets/graphics/icons/app_stag.svg", width: 120, height: 120, color: Color(Values.colorAccent))),
                     Container(
-                        height: 190,
                         margin: const EdgeInsets.only(left: 15),
                         padding: const EdgeInsets.only(bottom: 15),
-                        child:
-                            Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, children: [
-                            AutoSizeText(name,
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontFamily: 'Lexend', letterSpacing: -1.3, color: Color(Values.colorAccent), height: 1.7, fontSize: Values.fontSize30)),
-                            Padding(
-                                padding: const EdgeInsets.only(left: 2),
-                                child: AutoSizeText("TM",
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(Values.colorAccent), letterSpacing: -0.2, height: 0.02, fontSize: Values.fontSize10, fontWeight: FontWeight.w400)))
-                          ]),
-                          AutoSizeText("COTW COMPANION",
-                              maxLines: 1,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(letterSpacing: 1.3, color: Color(Values.colorAccent), height: 1, fontSize: Values.fontSize20))
-                        ]))
+                        child: AutoSizeText("COTW COMPANION",
+                            maxLines: 1,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Title',
+                                letterSpacing: -1.3,
+                                color: Color(Values.colorAccent),
+                                height: 1.8,
+                                fontSize: Values.fontSize30,
+                                fontWeight: FontWeight.w800)))
                   ])));
   }
 
@@ -207,7 +187,7 @@ class ActivityHomeState extends State<ActivityHome> {
         body: OrientationBuilder(builder: (context, orientation) {
           return Stack(alignment: Alignment.center, children: [
             Container(color: Color(Values.colorPrimary), width: _screenWidth, height: _screenHeight),
-            SizedBox(height: _screenHeight, child: _buildName("theHUNTER", "assets/graphics/icons/app_stag.svg", orientation)),
+            SizedBox(height: _screenHeight, child: _buildName(orientation)),
             Positioned(bottom: 90, left: 0, right: 0, child: Container(alignment: Alignment.center, height: 50, child: Container())),
             Positioned(
                 top: 0,
@@ -238,15 +218,13 @@ class ActivityHomeState extends State<ActivityHome> {
                                         AutoSizeText(tr('patch_notes'),
                                             maxLines: 1,
                                             textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                color: Color(Values.colorPrimary), fontSize: Values.fontSize18, fontWeight: FontWeight.w800)),
+                                            style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize18, fontWeight: FontWeight.w800)),
                                         Container(
                                             margin: const EdgeInsets.only(left: 5),
                                             child: AutoSizeText("( English )",
                                                 maxLines: 1,
                                                 textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                    color: Color(Values.colorPrimary), fontSize: Values.fontSize14, fontWeight: FontWeight.w400)))
+                                                style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize14, fontWeight: FontWeight.w400)))
                                       ]))),
                               AutoSizeText(Values.appVersion,
                                   maxLines: 1,
@@ -266,7 +244,7 @@ class ActivityHomeState extends State<ActivityHome> {
                           height: _screenHeight - _screenPadding,
                           margin: _menuOpened ? const EdgeInsets.only(top: 0) : const EdgeInsets.only(top: 80),
                           color: Color(Values.colorBody),
-                          child: _theHunter()),
+                          child: _theHunterMenu()),
                       Positioned(
                           top: 0,
                           child: Stack(alignment: Alignment.topRight, children: [

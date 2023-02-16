@@ -91,6 +91,12 @@ class ActivityAbout extends StatelessWidget {
                   Text(tr("translation_pt_2"), style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize18, fontWeight: FontWeight.w200))
                 ])),
             Container(
+                margin: const EdgeInsets.only(top: 5, bottom: 5),
+                child: Column(children: [
+                  Text(tr("translation_hu"), style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize22, fontWeight: FontWeight.w400)),
+                  Text(tr("translation_hu_1"), style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize18, fontWeight: FontWeight.w200))
+                ])),
+            Container(
                 margin: const EdgeInsets.only(top: 5),
                 child: Column(children: [
                   Text(tr("translation_tr"), style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize22, fontWeight: FontWeight.w400)),
@@ -117,7 +123,7 @@ class ActivityAbout extends StatelessWidget {
                 onTap: () {
                   _redirectToPayPal();
                 },
-                text: tr('support_me')))
+                text: tr('support_me').toUpperCase()))
       ]))
     ]);
   }
@@ -129,10 +135,8 @@ class ActivityAbout extends StatelessWidget {
             child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           AutoSizeText("${tr('version')} $version",
               maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400)),
-          AutoSizeText("Email: $email",
-              maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400)),
-          AutoSizeText("Discord: $discord",
-              maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400))
+          AutoSizeText("Email: $email", maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400)),
+          AutoSizeText("Discord: $discord", maxLines: 1, style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400))
         ])));
   }
 

@@ -143,7 +143,7 @@ class BuilderAddLoadoutItemsState extends State<BuilderAddLoadoutItems> {
             ),
             WidgetSearchBar(background: Values.colorSearchBackground, color: Values.colorSearch, controller: _controller)
           ]),
-          Expanded(child: SingleChildScrollView(child:Column(children: [_buildItems()])))
+          Expanded(child: SingleChildScrollView(child: Column(children: [_buildItems()])))
         ])));
   }
 

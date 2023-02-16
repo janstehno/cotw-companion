@@ -162,8 +162,8 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
     return selectedIDs;
   }
 
-  Loadout _createLoadout() => Loadout(
-      id: widget.toEdit.isEmpty ? LoadoutHelper.loadouts.length : _loadoutID, name: _controller.text, weapons: _weaponsIDs(), callers: _callersIDs());
+  Loadout _createLoadout() =>
+      Loadout(id: widget.toEdit.isEmpty ? LoadoutHelper.loadouts.length : _loadoutID, name: _controller.text, weapons: _weaponsIDs(), callers: _callersIDs());
 
   _buildSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -188,6 +188,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   Widget _buildWeaponsCallers() {
     return Column(children: [
       EntryName.withTap(
+          isTitle: true,
           text: tr('weapons'),
           size: 40,
           buttonIcon: "assets/graphics/icons/list.svg",
@@ -198,6 +199,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
           }),
       _listOfWeapons(),
       EntryName.withTap(
+          isTitle: true,
           text: tr('callers'),
           size: 40,
           buttonIcon: "assets/graphics/icons/list.svg",
@@ -244,7 +246,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
         SingleChildScrollView(
             child: Column(mainAxisSize: MainAxisSize.max, children: [
           WidgetAppBar(
-            text: tr('add'),
+            text: widget.toEdit.isEmpty ? tr('add') : tr('edit'),
             height: 90,
             fontSize: Values.fontSize30,
             fontWeight: FontWeight.w700,

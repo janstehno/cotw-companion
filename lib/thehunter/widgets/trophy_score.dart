@@ -13,7 +13,8 @@ class EntryTrophyWithUnknown extends StatefulWidget {
   final bool isValueKnown;
   final bool alignIconLeft;
 
-  const EntryTrophyWithUnknown({Key? key, required this.text, required this.icon, this.iconSize = 17, this.imperialUnits = false, required this.isValueKnown, this.alignIconLeft = false})
+  const EntryTrophyWithUnknown(
+      {Key? key, required this.text, required this.icon, this.iconSize = 17, this.imperialUnits = false, required this.isValueKnown, this.alignIconLeft = false})
       : super(key: key);
 
   @override

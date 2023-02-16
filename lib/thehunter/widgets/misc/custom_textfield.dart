@@ -12,7 +12,8 @@ class WidgetTextField extends StatelessWidget {
   final bool correct;
   final TextEditingController controller;
 
-  const WidgetTextField({Key? key, this.size = 60, this.color, this.background, this.numberOnly = false, required this.correct, required this.controller}) : super(key: key);
+  const WidgetTextField({Key? key, this.size = 60, this.color, this.background, this.numberOnly = false, required this.correct, required this.controller})
+      : super(key: key);
 
   Widget _buildWidgets() {
     return Container(

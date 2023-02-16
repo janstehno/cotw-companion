@@ -3,10 +3,8 @@
 import 'package:logger/logger.dart';
 
 class HelperLogger {
-  final Logger logger = Logger(
-      filter: null,
-      output: null,
-      printer: PrettyPrinter(methodCount: 0, noBoxingByDefault: true, colors: true, printEmojis: false, printTime: false));
+  final Logger logger =
+      Logger(filter: null, output: null, printer: PrettyPrinter(methodCount: 0, noBoxingByDefault: true, colors: true, printEmojis: false, printTime: false));
   final String identifier;
 
   HelperLogger(this.identifier);

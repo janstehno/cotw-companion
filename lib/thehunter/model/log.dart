@@ -31,7 +31,23 @@ class Log {
   int harvestCorrectAmmo, harvestTwoShots, harvestVitalOrgan, harvestNoTrophyOrgan;
   bool corrupted;
 
-  Log({required this.id, required this.date, required this.animalID, this.animalName = "", required this.reserveID, required this.furID, required this.trophy, required this.weight, required this.imperials, required this.lodge, required this.gender, required this.harvestCorrectAmmo, required this.harvestTwoShots, required this.harvestVitalOrgan, required this.harvestNoTrophyOrgan, this.corrupted = false});
+  Log(
+      {required this.id,
+      required this.date,
+      required this.animalID,
+      this.animalName = "",
+      required this.reserveID,
+      required this.furID,
+      required this.trophy,
+      required this.weight,
+      required this.imperials,
+      required this.lodge,
+      required this.gender,
+      required this.harvestCorrectAmmo,
+      required this.harvestTwoShots,
+      required this.harvestVitalOrgan,
+      required this.harvestNoTrophyOrgan,
+      this.corrupted = false});
 
   @override
   String toString() {
@@ -74,7 +90,8 @@ class Log {
 
   bool get isCorrupted => corrupted;
 
-  String toJson() => '{"ID":$id,"DATE":"${_getDate()}","ANIMAL_ID":$animalID,"RESERVE_ID":$reserveID,"FUR_ID":$furID,"TROPHY":$trophy,"WEIGHT":$weight,"IMPERIALS":$imperials,"LODGE":$lodge,"GENDER":$gender,"CORRECT_AMMUNITION":$harvestCorrectAmmo,"MAX_TWO_SHOTS":$harvestTwoShots,"VITAL_ORGAN":$harvestVitalOrgan,"NO_TROPHY_ORGAN":$harvestNoTrophyOrgan}';
+  String toJson() =>
+      '{"ID":$id,"DATE":"${_getDate()}","ANIMAL_ID":$animalID,"RESERVE_ID":$reserveID,"FUR_ID":$furID,"TROPHY":$trophy,"WEIGHT":$weight,"IMPERIALS":$imperials,"LODGE":$lodge,"GENDER":$gender,"CORRECT_AMMUNITION":$harvestCorrectAmmo,"MAX_TWO_SHOTS":$harvestTwoShots,"VITAL_ORGAN":$harvestVitalOrgan,"NO_TROPHY_ORGAN":$harvestNoTrophyOrgan}';
 
   String _getDate() {
     int y = int.parse(date.split("-")[0]);

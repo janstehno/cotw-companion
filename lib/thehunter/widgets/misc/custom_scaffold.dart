@@ -11,8 +11,7 @@ class WidgetScaffold extends StatelessWidget {
   final TextEditingController? searchBarController;
   final bool showSearchBar;
 
-  const WidgetScaffold({Key? key, required this.appBar, required this.children, this.searchBarController, this.showSearchBar = false})
-      : super(key: key);
+  const WidgetScaffold({Key? key, required this.appBar, required this.children, this.searchBarController, this.showSearchBar = false}) : super(key: key);
 
   Widget _buildWidgets() {
     return Scaffold(
@@ -21,8 +20,7 @@ class WidgetScaffold extends StatelessWidget {
         body: Column(mainAxisSize: MainAxisSize.max, children: [
           showSearchBar ? appBar : Container(),
           showSearchBar
-              ? WidgetSearchBar(
-                  background: Values.colorSearchBackground, color: Values.colorSearch, controller: searchBarController ?? TextEditingController())
+              ? WidgetSearchBar(background: Values.colorSearchBackground, color: Values.colorSearch, controller: searchBarController ?? TextEditingController())
               : Container(),
           Expanded(
               child: Container(

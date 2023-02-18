@@ -20,12 +20,9 @@ class ActivityOtherState extends State<ActivityOther> {
     return WidgetScaffold(
         appBar: WidgetAppBar(
           text: tr('other'),
-          height: 90,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize30,
-          fontWeight: FontWeight.w700,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

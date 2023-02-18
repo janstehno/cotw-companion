@@ -78,13 +78,12 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-          text: _reserve.getName(context.locale),
           height: 150,
+          text: _reserve.getName(context.locale),
+          maxLines: _reserve.getName(context.locale).split(" ").length == 1 ? 1 : 2,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize40,
-          fontWeight: FontWeight.w800,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

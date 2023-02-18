@@ -256,12 +256,9 @@ class ActivitySettingsState extends State<ActivitySettings> {
     return WidgetScaffold(
         appBar: WidgetAppBar(
           text: tr('settings'),
-          height: 90,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize30,
-          fontWeight: FontWeight.w700,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

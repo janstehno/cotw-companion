@@ -217,10 +217,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
         body: Column(mainAxisSize: MainAxisSize.max, children: [
       WidgetAppBar(
         text: tr('loadouts'),
-        height: 90,
         fontSize: Values.fontSize30,
-        fontWeight: FontWeight.w700,
-        alignment: Alignment.centerRight,
         function: () {
           Navigator.pop(context);
         },

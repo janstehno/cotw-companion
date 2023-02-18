@@ -42,6 +42,7 @@ class ActivityPatchNotes extends StatelessWidget {
 
   Widget _buildList() {
     return Column(children: [
+      EntryPatchNote(color: Values.colorOdd, version: "1.5.7"),
       EntryPatchNote(
         color: Values.colorEven,
         version: "1.5.6",
@@ -156,12 +157,9 @@ class ActivityPatchNotes extends StatelessWidget {
     return WidgetScaffold(
         appBar: WidgetAppBar(
           text: tr('patch_notes'),
-          height: 90,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize30,
-          fontWeight: FontWeight.w700,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

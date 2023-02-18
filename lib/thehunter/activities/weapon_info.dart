@@ -70,13 +70,12 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-          text: _weapon.getName(context.locale),
           height: 150,
+          text: _weapon.getName(context.locale),
+          maxLines: _weapon.getName(context.locale).split(" ").length == 1 ? 1 : 2,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize40,
-          fontWeight: FontWeight.w800,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

@@ -18,7 +18,7 @@ class Dlc {
   int id;
   int type;
   String name, date;
-  late List<dynamic> en, ru, cs, pl, de, fr, es, pt, ja;
+  late List<dynamic> en, ru, cs, pl, de, fr, es, pt, ja, hu;
   List<dynamic> reserve = [], animals = [], callers = [], weapons = [];
 
   Dlc({required this.id, required this.type, required this.name, required this.date});
@@ -57,6 +57,10 @@ class Dlc {
 
   setJA(List<dynamic> s) {
     ja = s;
+  }
+
+  setHU(List<dynamic> s) {
+    hu = s;
   }
 
   setReserve(List<dynamic> l) {
@@ -102,6 +106,7 @@ class Dlc {
       c.setES(json['DESCRIPTION']['ES']);
       c.setPT(json['DESCRIPTION']['PT']);
       c.setJA(json['DESCRIPTION']['JA']);
+      c.setHU(json['DESCRIPTION']['HU']);
     }
     if (contentType == 1) {
       c.setReserve(json['MAP']['MAP']);
@@ -137,6 +142,8 @@ class Dlc {
         return pt.isEmpty ? en : pt;
       case "ja":
         return ja.isEmpty ? en : ja;
+      case "hu":
+        return hu.isEmpty ? en : hu;
       case "sk":
         return cs.isEmpty ? en : cs;
       default:

@@ -247,10 +247,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
             child: Column(mainAxisSize: MainAxisSize.max, children: [
           WidgetAppBar(
             text: widget.toEdit.isEmpty ? tr('add') : tr('edit'),
-            height: 90,
             fontSize: Values.fontSize30,
-            fontWeight: FontWeight.w700,
-            alignment: Alignment.centerRight,
             function: () {
               Navigator.pop(context);
             },

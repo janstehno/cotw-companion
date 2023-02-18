@@ -130,12 +130,9 @@ class BuilderAddLoadoutItemsState extends State<BuilderAddLoadoutItems> {
           Column(children: [
             WidgetAppBar(
               text: widget.type == ObjectType.weapon ? tr('weapon_ammo') : tr('callers'),
-              height: 90,
               color: Values.colorAccent,
               background: Values.colorPrimary,
               fontSize: Values.fontSize30,
-              fontWeight: FontWeight.w700,
-              alignment: Alignment.centerRight,
               function: () {
                 widget.set(widget.type, _selectedList);
                 Navigator.pop(context);

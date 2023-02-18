@@ -144,7 +144,6 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return WidgetAppBar(
         height: _visible ? 90 : 50,
         fontSize: Values.fontSize30,
-        fontWeight: FontWeight.w700,
         alignment: Alignment.center,
         padding: const EdgeInsets.only(right: 23),
         function: () {

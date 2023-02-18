@@ -15,10 +15,7 @@ class ActivityLogsInformation extends StatelessWidget {
     return WidgetScaffold(
         appBar: WidgetAppBar(
           text: tr('logbook_info'),
-          height: 90,
           fontSize: Values.fontSize30,
-          fontWeight: FontWeight.w700,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

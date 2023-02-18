@@ -861,10 +861,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                     child: Column(children: [
                   WidgetAppBar(
                     text: widget.toEdit.isEmpty ? tr('add') : tr('edit'),
-                    height: 90,
                     fontSize: Values.fontSize30,
-                    fontWeight: FontWeight.w700,
-                    alignment: Alignment.centerRight,
                     function: () {
                       Navigator.pop(context);
                     },

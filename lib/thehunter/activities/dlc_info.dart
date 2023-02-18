@@ -96,11 +96,10 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
         appBar: WidgetAppBar(
           height: 150,
           text: widget.dlc.getName,
+          maxLines: widget.dlc.getName.split(" ").length == 1 ? 1 : 2,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize40,
-          fontWeight: FontWeight.w800,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

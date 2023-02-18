@@ -9,13 +9,13 @@ class WidgetAppBar extends StatelessWidget {
   final String text;
   final int? maxLines;
   final Widget? custom;
-  final double height;
+  final double? height;
   final int? color;
   final int? background;
   final double fontSize;
-  final FontWeight fontWeight;
   final EdgeInsets? padding;
-  final Alignment alignment;
+  final FontWeight? fontWeight;
+  final Alignment? alignment;
   final Function function;
 
   const WidgetAppBar(
@@ -23,13 +23,13 @@ class WidgetAppBar extends StatelessWidget {
       this.text = "",
       this.maxLines,
       this.custom,
-      required this.height,
+      this.height = 90,
       this.color,
       this.background,
       required this.fontSize,
-      required this.fontWeight,
       this.padding,
-      required this.alignment,
+      this.fontWeight = FontWeight.w800,
+      this.alignment = Alignment.centerRight,
       required this.function})
       : super(key: key);
 

@@ -104,12 +104,9 @@ class BuilderRAWCState extends State<BuilderRAWC> {
     return WidgetScaffold(
         appBar: WidgetAppBar(
           text: widget.text.tr(),
-          height: 90,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize30,
-          fontWeight: FontWeight.w700,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

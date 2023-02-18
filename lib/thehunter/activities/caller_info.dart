@@ -81,11 +81,10 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
         appBar: WidgetAppBar(
           height: 150,
           text: _caller.getName(context.locale),
+          maxLines: _caller.getName(context.locale).split(" ").length == 1 ? 1 : 2,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize40,
-          fontWeight: FontWeight.w800,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

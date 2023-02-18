@@ -32,12 +32,9 @@ class BuilderOtherDlcsState extends State<BuilderOtherDlcs> {
         appBar: WidgetAppBar(
           text: tr('content_downloadable_content'),
           maxLines: 1,
-          height: 90,
           color: Values.colorAccent,
           background: Values.colorPrimary,
           fontSize: Values.fontSize30,
-          fontWeight: FontWeight.w700,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

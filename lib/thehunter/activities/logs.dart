@@ -783,10 +783,7 @@ class ActivityLogsState extends State<ActivityLogs> {
       Column(mainAxisSize: MainAxisSize.max, children: [
         WidgetAppBar(
           text: widget.trophyLodge ? tr('trophy_lodge') : tr('logbook'),
-          height: 90,
           fontSize: Values.fontSize30,
-          fontWeight: FontWeight.w700,
-          alignment: Alignment.centerRight,
           function: () {
             Navigator.pop(context);
           },

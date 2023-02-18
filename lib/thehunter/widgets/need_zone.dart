@@ -120,7 +120,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                           child: AutoSizeText(
                             widget.animal.getNameBasedOnReserve(context.locale, widget.reserveID),
                             textAlign: TextAlign.start,
-                            maxLines: 2,
+                            maxLines: widget.animal.getNameBasedOnReserve(context.locale, widget.reserveID).split(" ").length == 1 ? 1 : 2,
                             style: TextStyle(color: Color(Values.colorDark), fontSize: Values.fontSize20, fontWeight: FontWeight.w400),
                           ))),
                   WidgetContainer(

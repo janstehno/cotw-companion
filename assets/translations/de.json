@@ -50,6 +50,7 @@
     "file_not_imported": "Die Datei konnte nicht importiert werden.",
     "font": "Schriftart",
     "fur_rarity_per_cent": "Prozentuale Chance für den Felltyp",
+    "fur_rarity_warning": "Dies ist eine aus Daten gewonnene Information aus Spieldateien. Es wird als Cheaten / Hacken angesehen. Bitte verwenden Sie diese Informationen nur für Ihren eigenen Bedarf und geben Sie die Werte NIEMALS weiter.",
     "handgun": "Pistole",
     "harvest_check": "Überprüfung des Fangs",
     "hour": ":00",

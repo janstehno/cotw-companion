@@ -40,13 +40,13 @@ class BuilderReserveCallersState extends State<BuilderReserveCallers> {
         if (a.getID == ac.getFirstID) {
           for (Caller c in JSONHelper.callers) {
             if (c.getID == ac.getSecondID) {
-              if (!firstCallerAdded) {
+              if (!firstCallerAdded && !_callers.contains(c)) {
                 _callers.add(c);
                 firstCallerAdded = true;
               } else {
                 if (_callers[_callers.length - 1].getStrength < c.getStrength) {
                   _callers.removeLast();
-                  _callers.add(c);
+                  if (!_callers.contains(c)) _callers.add(c);
                 }
               }
               break;

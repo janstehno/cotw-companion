@@ -50,6 +50,7 @@
   "file_not_imported": "Le fichier n'a pas pu être importé.",
   "font": "Police de caractère",
   "fur_rarity_per_cent": "Pourcentage de chance pour le type de fourrure",
+  "fur_rarity_warning": "Il s'agit d'informations extraites de données à partir de fichiers de jeu. C'est considéré comme de la triche / du piratage. Veuillez utiliser ces informations uniquement pour vos propres besoins et NE PAS partager les valeurs nulle part.",
   "handgun": "Arme de Poing",
   "harvest_check": "Vérification de la prise",
   "hour": ":00",

@@ -185,19 +185,6 @@ class ActivitySettingsState extends State<ActivitySettings> {
     return Column(children: [
       WidgetTitle.sub(text: tr('other')),
       EntryName.withSwitch(
-          text: tr('fur_rarity_per_cent'),
-          color: Values.colorContentSubTitle,
-          buttonActiveColor: Values.colorAccent,
-          buttonActiveBackground: Values.colorPrimary,
-          size: 40,
-          isActive: _settings.getFurRarityPerCent,
-          onTap: () {
-            setState(() {
-              _settings.changeFurRarityPerCent();
-              widget.callback();
-            });
-          }),
-      EntryName.withSwitch(
           text: tr('best_weapons'),
           color: Values.colorContentSubTitle,
           buttonActiveColor: Values.colorAccent,
@@ -246,6 +233,21 @@ class ActivitySettingsState extends State<ActivitySettings> {
           onTap: () {
             setState(() {
               _settings.changeTrophyLodgeRecord();
+              widget.callback();
+            });
+          }),
+      EntryName.withSwitch(
+          text: tr('fur_rarity_per_cent'),
+          subText: tr('fur_rarity_warning'),
+          color: Values.colorContentSubTitle,
+          subColor: Values.colorFirst,
+          buttonActiveColor: Values.colorAccent,
+          buttonActiveBackground: Values.colorPrimary,
+          size: 40,
+          isActive: _settings.getFurRarityPerCent,
+          onTap: () {
+            setState(() {
+              _settings.changeFurRarityPerCent();
               widget.callback();
             });
           })

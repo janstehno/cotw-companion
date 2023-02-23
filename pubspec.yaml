@@ -2,7 +2,7 @@ name: cotwcompanion
 description: Companion for the game theHunter Call of the Wild
 
 publish_to: 'none'
-version: 1.5.7+29
+version: 1.5.8+30
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

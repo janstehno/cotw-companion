@@ -64,19 +64,6 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
                 widget.callback();
               });
             },
-          ),
-          WidgetSwitch(
-            size: 50,
-            icon: "assets/graphics/icons/environment_fields.svg",
-            activeColor: Values.colorAlwaysDark,
-            activeBackground: HelperMap.getColorE(3),
-            isActive: HelperMap.isActiveE(3),
-            onTap: () {
-              setState(() {
-                HelperMap.activateE(3);
-                widget.callback();
-              });
-            },
           )
         ]));
   }

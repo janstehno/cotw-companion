@@ -11,11 +11,14 @@ class HelperMap {
   static final List<bool> _activeE = [
     true, //OUTPOSTS
     true, //LOOKOUTS
-    false, //HIDES
-    false //FIELDS
+    false //HIDES
+  ];
+  static final List<int> _colorsE = [
+    Values.colorDark, //OUTPOSTS
+    Values.colorDark, //LOOKOUTS
+    Values.colorDark //HIDES
   ];
   static final List<bool> _active = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
-  static final List<int> _colorsE = [Values.colorDark, Values.colorDark, Values.colorDark, Values.colorMapFields];
   static const List<int> _colors = [
     0xFF7C4DFF,
     0xFFAB47BC,

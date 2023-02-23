@@ -15,6 +15,7 @@ class EntryName extends StatelessWidget {
   final String? buttonInactiveIcon;
   final double size;
   final int? color;
+  final int? subColor;
   final int? background;
   final int? buttonActiveColor;
   final int? buttonInactiveColor;
@@ -38,6 +39,7 @@ class EntryName extends StatelessWidget {
       this.buttonInactiveIcon,
       this.size = 50,
       this.color,
+      this.subColor,
       this.background,
       this.buttonActiveColor,
       this.buttonInactiveColor,
@@ -62,6 +64,7 @@ class EntryName extends StatelessWidget {
       this.buttonInactiveIcon,
       this.size = 50,
       this.color,
+      this.subColor,
       this.background,
       this.buttonActiveColor,
       this.buttonInactiveColor,
@@ -78,9 +81,8 @@ class EntryName extends StatelessWidget {
 
   Widget _buildWidgets() {
     return Container(
-        height: 75,
         color: Color(background ?? Values.colorTransparent),
-        padding: const EdgeInsets.only(left: 30, right: 30),
+        padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
           Expanded(
               child: Container(
@@ -93,10 +95,11 @@ class EntryName extends StatelessWidget {
                             ? TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w800, fontFamily: 'Title')
                             : TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize24, fontWeight: FontWeight.w600)),
                     subText.isNotEmpty
-                        ? AutoSizeText(subText,
-                            maxLines: 1,
-                            textAlign: TextAlign.start,
-                            style: TextStyle(color: Color(color ?? Values.colorDark), fontSize: Values.fontSize14, fontWeight: FontWeight.w400))
+                        ? Container(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Text(subText,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(color: Color(subColor ?? Values.colorDark), fontSize: Values.fontSize14, fontWeight: FontWeight.w600)))
                         : Container()
                   ]))),
           withSwitch

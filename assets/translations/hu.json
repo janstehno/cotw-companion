@@ -50,6 +50,7 @@
   "file_not_imported": "A fájl nem importálható.",
   "font": "Betűtípus",
   "fur_rarity_per_cent": "Százalékos esély a szőrtípusra",
+  "fur_rarity_warning": "Ez egy játékfájlokból származó adatbányászott információ. Csalásnak/hackelésnek minősül. Kérjük, ezeket az információkat csak saját igényeire használja, és NE ossza meg az értékeket sehol.",
   "handgun": "Kézifegyver",
   "harvest_check": "Teríték ellenőrzése",
   "hour": ":00",

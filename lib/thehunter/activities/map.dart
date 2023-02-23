@@ -1,7 +1,5 @@
 // Copyright (c) 2022 Jan Stehno
 
-import 'dart:async';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/helpers/helper_json.dart';
 import 'package:cotwcompanion/helpers/helper_map.dart';
@@ -59,27 +57,29 @@ class ActivityMapState extends State<ActivityMap> {
       return Container(
           color: const Color(Values.colorMapBackground),
           child: Stack(children: [
-            GestureDetector(
-                onTap: () {
-                  if (_opacity == 1) {
-                    _opacity = 0;
-                    Future.delayed(const Duration(milliseconds: 100), () {
-                      _showInterface = false;
-                      setState(() {});
-                    });
-                  } else if (_opacity == 0) {
-                    _showInterface = true;
-                    Future.delayed(const Duration(milliseconds: 100), () {
-                      _opacity = 1;
-                      setState(() {});
-                    });
-                  }
-                  setState(() {});
-                },
-                child: Column(mainAxisSize: MainAxisSize.max, children: [
-                  Expanded(
-                      child: SingleChildScrollView(
-                          scrollDirection: orientation == Orientation.portrait ? Axis.horizontal : Axis.vertical,
+            Column(mainAxisSize: MainAxisSize.max, children: [
+              Expanded(
+                  child: InteractiveViewer(
+                      constrained: false,
+                      minScale: 1,
+                      maxScale: 3,
+                      child: GestureDetector(
+                          onTap: () {
+                            if (_opacity == 1) {
+                              _opacity = 0;
+                              Future.delayed(const Duration(milliseconds: 100), () {
+                                _showInterface = false;
+                                setState(() {});
+                              });
+                            } else if (_opacity == 0) {
+                              _showInterface = true;
+                              Future.delayed(const Duration(milliseconds: 100), () {
+                                _opacity = 1;
+                                setState(() {});
+                              });
+                            }
+                            setState(() {});
+                          },
                           child: SizedBox(
                               height: orientation == Orientation.portrait ? _screenHeight : _screenWidth,
                               width: orientation == Orientation.portrait ? _screenHeight : _screenWidth,
@@ -92,8 +92,8 @@ class ActivityMapState extends State<ActivityMap> {
                                         height: orientation == Orientation.portrait ? _screenHeight : _screenWidth,
                                         width: orientation == Orientation.portrait ? _screenHeight : _screenWidth,
                                         child: orientation == Orientation.portrait ? _buildMapLayers(BoxFit.fitWidth) : _buildMapLayers(BoxFit.fitWidth)))
-                              ]))))
-                ])),
+                              ])))))
+            ]),
             _showInterface
                 ? Positioned(
                     right: 165,
@@ -226,10 +226,10 @@ class ActivityMapState extends State<ActivityMap> {
   Widget _buildMapLayers(BoxFit fit) {
     String reserve = _reserve.getNameEN().replaceAll(" ", "").toLowerCase();
     return Stack(fit: StackFit.expand, children: [
-      Image.asset("assets/graphics/maps/$reserve/fields.png",
-          alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapFields).withOpacity(HelperMap.getOpacityE(3))),
+      Image.asset("assets/graphics/maps/$reserve/background.png", alignment: Alignment.center, fit: fit),
+      Container(color: const Color(Values.colorMapBackground).withOpacity(0.5)),
       Image.asset("assets/graphics/maps/$reserve/roads.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapRoads)),
-      Image.asset("assets/graphics/maps/$reserve/water.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapWater)),
+      //Image.asset("assets/graphics/maps/$reserve/water.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapWater)),
       Image.asset("assets/graphics/maps/$reserve/outposts.png",
           alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH).withOpacity(HelperMap.getOpacityE(0))),
       Image.asset("assets/graphics/maps/$reserve/lookouts.png",

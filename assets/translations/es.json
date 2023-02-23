@@ -50,6 +50,7 @@
   "file_not_imported": "No se pudo importar el archivo.",
   "font": "Fuente",
   "fur_rarity_per_cent": "Porcentaje de probabilidad para el tipo de pelaje",
+  "fur_rarity_warning": "Esta es una información extraída de datos de los archivos del juego. Se considera trampa/hackeo. Por favor, use esta información solo para su propia necesidad y NO comparta los valores en ninguna parte.",
   "handgun": "Arma Corta",
   "harvest_check": "Comprobación de la captura",
   "hour": ":00",

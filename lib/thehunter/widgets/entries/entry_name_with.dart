@@ -98,8 +98,8 @@ class EntryName extends StatelessWidget {
                         ? Container(
                             padding: const EdgeInsets.only(top: 5),
                             child: Text(subText,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(color: Color(subColor ?? Values.colorDark), fontSize: Values.fontSize14, fontWeight: FontWeight.w600)))
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(color: Color(subColor ?? Values.colorDark), fontSize: Values.fontSize16, fontWeight: FontWeight.w400)))
                         : Container()
                   ]))),
           withSwitch

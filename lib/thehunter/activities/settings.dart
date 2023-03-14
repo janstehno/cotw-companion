@@ -181,6 +181,36 @@ class ActivitySettingsState extends State<ActivitySettings> {
     ]);
   }
 
+  Widget _buildFurPercentageChange() {
+    return Column(children: [
+      Container(
+          padding: const EdgeInsets.only(top: 10),
+          color: Color(Values.colorContentSubTitleBackground),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            EntryName.withSwitch(
+                text: tr('fur_rarity_per_cent'),
+                color: Values.colorContentSubTitle,
+                buttonActiveColor: Values.colorAccent,
+                buttonActiveBackground: Values.colorPrimary,
+                size: 40,
+                isTitle: true,
+                isActive: _settings.getFurRarityPerCent,
+                onTap: () {
+                  setState(() {
+                    _settings.changeFurRarityPerCent();
+                    widget.callback();
+                  });
+                }),
+            Container(
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: AutoSizeText("by Ramalamadingdong7", style: TextStyle(color: Color(Values.colorDark), fontSize: 14, fontWeight: FontWeight.w600))),
+            Container(
+                padding: const EdgeInsets.fromLTRB(30, 5, 30, 25),
+                child: Text(tr('fur_rarity_warning'), style: const TextStyle(color: Color(Values.colorFirst), fontSize: 10, fontWeight: FontWeight.w400)))
+          ]))
+    ]);
+  }
+
   Widget _buildOther() {
     return Column(children: [
       WidgetTitle.sub(text: tr('other')),
@@ -235,21 +265,6 @@ class ActivitySettingsState extends State<ActivitySettings> {
               _settings.changeTrophyLodgeRecord();
               widget.callback();
             });
-          }),
-      EntryName.withSwitch(
-          text: tr('fur_rarity_per_cent'),
-          subText: tr('fur_rarity_warning'),
-          color: Values.colorContentSubTitle,
-          subColor: Values.colorFirst,
-          buttonActiveColor: Values.colorAccent,
-          buttonActiveBackground: Values.colorPrimary,
-          size: 40,
-          isActive: _settings.getFurRarityPerCent,
-          onTap: () {
-            setState(() {
-              _settings.changeFurRarityPerCent();
-              widget.callback();
-            });
           })
     ]);
   }
@@ -265,7 +280,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
             Navigator.pop(context);
           },
         ),
-        children: [_buildLanguage(), _buildColor(), _buildInterface(), _buildFont(), _buildOther()]);
+        children: [_buildLanguage(), _buildColor(), _buildInterface(), _buildFont(), _buildOther(), _buildFurPercentageChange()]);
   }
 
   @override

@@ -42,7 +42,11 @@ class ActivityPatchNotes extends StatelessWidget {
 
   Widget _buildList() {
     return Column(children: [
-      EntryPatchNote(color: Values.colorEven, version: "1.5.8", changes: const ["- Improvement of the maps. Added zoom feature. Added new background."]),
+      EntryPatchNote(color: Values.colorOdd, version: "1.5.9", changes: const ["- Hunter Power Pack update."]),
+      EntryPatchNote(
+          color: Values.colorEven,
+          version: "1.5.8",
+          changes: const ["- Improvement of the maps. Added zoom feature. Added new background. Possible performance issues."]),
       EntryPatchNote(color: Values.colorOdd, version: "1.5.7"),
       EntryPatchNote(
         color: Values.colorEven,

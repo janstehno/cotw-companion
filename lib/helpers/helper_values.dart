@@ -1,7 +1,7 @@
 // Copyright (c) 2022 Jan Stehno
 
 class Values {
-  static const String appVersion = "1.5.8";
+  static const String appVersion = "1.5.9";
   static const int greatOneID = 100;
 
   static bool darkMode = false;
@@ -49,9 +49,6 @@ class Values {
 
   static const int colorMapOLH = 0xFFEEEEEE;
   static const int colorMapBackground = 0xFF0D0D0D;
-  static const int colorMapWater = 0xFF37474F;
-  static const int colorMapRoads = 0xFF1D2429;
-  static const int colorMapFields = 0xFFFF9800;
 
   static double fontSize40 = 40.0;
   static double fontSize30 = 30.0;

@@ -216,6 +216,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                             "weapons": widget.loadout.getWeapons,
                             "callers": widget.loadout.getCallers
                           }, callback: widget.callback)));
+              return false;
             },
             background: Container(
                 alignment: Alignment.centerLeft,

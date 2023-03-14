@@ -1686,6 +1686,18 @@
   },
   {
     "ID": 35,
+    "NAME": "New England Scout Cosmetic Pack",
+    "DATE": "2022-12-06",
+    "TYPE": -1
+  },
+  {
+    "ID": 36,
+    "NAME": "New England Veteran Cosmetic Pack",
+    "DATE": "2022-12-06",
+    "TYPE": -1
+  },
+  {
+    "ID": 37,
     "NAME": "New England Mountains",
     "DATE": "2022-12-06",
     "TYPE": 1,
@@ -1748,5 +1760,54 @@
       "CALLERS": [
       ]
     }
+  },
+  {
+    "ID": 38,
+    "NAME": "Hirschfelden Veteran Cosmetic Pack",
+    "DATE": "2023-03-14",
+    "TYPE": -1
+  },
+  {
+    "ID": 39,
+    "NAME": "Hunter Power Pack",
+    "DATE": "2023-03-14",
+    "TYPE": 2,
+    "DESCRIPTION": {
+      "EN": [
+        "Unlocks new weapons for you to hunt with."
+      ],
+      "RU": [
+        "Открывает новое оружие для охоты."
+      ],
+      "CS": [
+        "Odemyká nové zbraně, kterými můžete lovit."
+      ],
+      "PL": [
+        "Odblokowuje nowe bronie do polowania."
+      ],
+      "DE": [
+        "Schaltet neue Waffen frei, mit denen du jagen kannst."
+      ],
+      "FR": [
+        "Déverrouille de nouvelles armes avec lesquelles vous pourrez chasser."
+      ],
+      "ES": [
+        "Desbloquea nuevas armas para que caces."
+      ],
+      "PT": [
+        "Desbloqueia novas armas para você caçar."
+      ],
+      "JA": [
+        "新しい武器をアンロックする。"
+      ],
+      "HU": [
+        "Feloldja az új vadász fegyvereket."
+      ]
+    },
+    "WEAPONS": [
+      45,
+      46,
+      47
+    ]
   }
 ]

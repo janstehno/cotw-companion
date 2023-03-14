@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 class HelperMap {
   static final List<Animal> _animals = [];
   static final List<String> _names = [];
+  static final List<dynamic> _outposts = [];
+  static final List<dynamic> _lookouts = [];
 
   static final List<bool> _activeE = [
     true, //OUTPOSTS
@@ -59,7 +61,11 @@ class HelperMap {
 
   static double getOpacity(int i) => isActive(i) ? 1 : 0;
 
-  static double getOpacityE(int i) => isActiveE(i) ? 1 : 0;
+  static bool getOpacityE(int i) => isActiveE(i);
+
+  static List<dynamic> getOutposts() => _outposts;
+
+  static List<dynamic> getLookouts() => _lookouts;
 
   static activate(int i) {
     _active[i] = (!_active[i]);
@@ -74,6 +80,7 @@ class HelperMap {
   static clearMap() {
     _animals.clear();
     _names.clear();
+    _lookouts.clear();
     for (int i = 0; i < _activeE.length; i++) {
       _activeE[i] = (i == 0 || i == 1) ? true : false;
     }
@@ -91,5 +98,13 @@ class HelperMap {
     for (Animal a in _animals) {
       _names.add(a.getNameBasedOnReserve(locale, reserveID));
     }
+  }
+
+  static addOutposts(List<dynamic> list) {
+    _outposts.addAll(list);
+  }
+
+  static addLookouts(List<dynamic> list) {
+    _lookouts.addAll(list);
   }
 }

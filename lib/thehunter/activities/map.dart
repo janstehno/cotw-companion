@@ -64,7 +64,7 @@ class ActivityMapState extends State<ActivityMap> {
                       minScale: 1,
                       maxScale: 3,
                       child: GestureDetector(
-                          onTap: () {
+                          onLongPress: () {
                             if (_opacity == 1) {
                               _opacity = 0;
                               Future.delayed(const Duration(milliseconds: 100), () {
@@ -91,7 +91,9 @@ class ActivityMapState extends State<ActivityMap> {
                                         alignment: Alignment.centerLeft,
                                         height: orientation == Orientation.portrait ? _screenHeight : _screenWidth,
                                         width: orientation == Orientation.portrait ? _screenHeight : _screenWidth,
-                                        child: orientation == Orientation.portrait ? _buildMapLayers(BoxFit.fitWidth) : _buildMapLayers(BoxFit.fitWidth)))
+                                        child: orientation == Orientation.portrait
+                                            ? _buildMapLayers(BoxFit.fitWidth, orientation)
+                                            : _buildMapLayers(BoxFit.fitWidth, orientation)))
                               ])))))
             ]),
             _showInterface
@@ -223,19 +225,20 @@ class ActivityMapState extends State<ActivityMap> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: widgets);
   }
 
-  Widget _buildMapLayers(BoxFit fit) {
+  Widget _buildMapLayers(BoxFit fit, Orientation orientation) {
     String reserve = _reserve.getNameEN().replaceAll(" ", "").toLowerCase();
     return Stack(fit: StackFit.expand, children: [
       Image.asset("assets/graphics/maps/$reserve/background.png", alignment: Alignment.center, fit: fit),
       Container(color: const Color(Values.colorMapBackground).withOpacity(0.5)),
-      Image.asset("assets/graphics/maps/$reserve/roads.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapRoads)),
-      //Image.asset("assets/graphics/maps/$reserve/water.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapWater)),
-      Image.asset("assets/graphics/maps/$reserve/outposts.png",
-          alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH).withOpacity(HelperMap.getOpacityE(0))),
-      Image.asset("assets/graphics/maps/$reserve/lookouts.png",
-          alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH).withOpacity(HelperMap.getOpacityE(1))),
-      Image.asset("assets/graphics/maps/$reserve/hides.png",
-          alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH).withOpacity(HelperMap.getOpacityE(2))),
+      HelperMap.getOpacityE(0)
+          ? Image.asset("assets/graphics/maps/$reserve/outposts.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH))
+          : const SizedBox.shrink(),
+      HelperMap.getOpacityE(1)
+          ? Image.asset("assets/graphics/maps/$reserve/lookouts.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH))
+          : const SizedBox.shrink(),
+      HelperMap.getOpacityE(2)
+          ? Image.asset("assets/graphics/maps/$reserve/hides.png", alignment: Alignment.center, fit: fit, color: const Color(Values.colorMapOLH))
+          : const SizedBox.shrink(),
       for (int s = 0; s < HelperMap.getAnimals.length; s++) _buildAnimalLayers(HelperMap.getAnimal(s), s, reserve, fit, false),
       for (int s = 0; s < HelperMap.getAnimals.length; s++) _buildAnimalLayers(HelperMap.getAnimal(s), s, reserve, fit, true)
     ]);

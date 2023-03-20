@@ -5,7 +5,7 @@ import 'package:cotwcompanion/helpers/helper_values.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_switch.dart';
 import 'package:flutter/material.dart';
 
-class WidgetTitleWithDialSwitch extends StatelessWidget {
+class WidgetTitleWithDualSwitch extends StatelessWidget {
   final String text;
   final String leftButtonText;
   final String rightButtonText;
@@ -19,7 +19,7 @@ class WidgetTitleWithDialSwitch extends StatelessWidget {
   final bool oneLine;
   final Function onTap;
 
-  const WidgetTitleWithDialSwitch(
+  const WidgetTitleWithDualSwitch(
       {Key? key,
       required this.text,
       required this.leftButtonText,

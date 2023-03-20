@@ -16,6 +16,8 @@ import 'package:cotwcompanion/thehunter/widgets/misc/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:simple_shadow/simple_shadow.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ActivityHome extends StatefulWidget {
   const ActivityHome({Key? key}) : super(key: key);
@@ -29,8 +31,6 @@ class ActivityHomeState extends State<ActivityHome> {
 
   late double _screenWidth, _screenHeight, _screenPadding;
 
-  bool _menuOpened = false;
-
   _callback() {
     setState(() {});
   }
@@ -39,6 +39,43 @@ class ActivityHomeState extends State<ActivityHome> {
     _screenWidth = MediaQuery.of(context).size.width;
     _screenHeight = MediaQuery.of(context).size.height - 1;
     _screenPadding = MediaQuery.of(context).viewPadding.top;
+  }
+
+  bool _menuOpened = false;
+
+  void _redirectToGitHub() async {
+    if (!await launchUrl(Uri(scheme: "https", host: "github.com", path: "/janstehno/cotwcompanion"))) {
+      throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
+    }
+  }
+
+  void _redirectToReddit() async {
+    if (!await launchUrl(Uri(scheme: "https", host: "reddit.com", path: "/user/Toastovac"))) {
+      throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
+    }
+  }
+
+  void _redirectToPayPal() async {
+    if (!await launchUrl(Uri(scheme: "https", host: "paypal.me", path: "/toastovac"))) {
+      throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
+    }
+  }
+
+  Widget _buildLink(String icon, Function redirect) {
+    return GestureDetector(
+        onTap: () {
+          redirect();
+        },
+        child: Container(
+            height: 30,
+            padding: const EdgeInsets.only(top: 5, bottom: 5),
+            margin: const EdgeInsets.only(left: 15),
+            child: SimpleShadow(
+                sigma: 7,
+                opacity: 0.2,
+                offset: const Offset(-0.1, -0.1),
+                color: _menuOpened ? Color(Values.colorAccent) : Color(Values.colorPrimary),
+                child: SvgPicture.asset("assets/graphics/icons/$icon.svg", color: _menuOpened ? Color(Values.colorAccent) : Color(Values.colorPrimary)))));
   }
 
   Widget _theHunterMenu() {
@@ -208,24 +245,18 @@ class ActivityHomeState extends State<ActivityHome> {
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
                                   },
                                   child: Container(
-                                      padding: const EdgeInsets.fromLTRB(20, 7, 20, 7),
+                                      height: 30,
+                                      padding: const EdgeInsets.only(left: 20, right: 20),
+                                      alignment: Alignment.center,
                                       decoration: ShapeDecoration(
                                         color: Color(Values.colorAccent),
                                         shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(topRight: Radius.circular(2.0), bottomRight: Radius.circular(2.0))),
+                                            borderRadius: BorderRadius.only(topRight: Radius.circular(5.0), bottomRight: Radius.circular(5.0))),
                                       ),
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                                        AutoSizeText(tr('patch_notes'),
-                                            maxLines: 1,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize18, fontWeight: FontWeight.w800)),
-                                        Container(
-                                            margin: const EdgeInsets.only(left: 5),
-                                            child: AutoSizeText("( English )",
-                                                maxLines: 1,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize14, fontWeight: FontWeight.w400)))
-                                      ]))),
+                                      child: AutoSizeText(tr('patch_notes'),
+                                          maxLines: 1,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(color: Color(Values.colorPrimary), fontSize: Values.fontSize18, fontWeight: FontWeight.w800)))),
                               AutoSizeText(Values.appVersion,
                                   maxLines: 1,
                                   textAlign: TextAlign.right,
@@ -257,6 +288,18 @@ class ActivityHomeState extends State<ActivityHome> {
                                 opacity: _menuOpened ? 0 : 1,
                                 child: Container(color: Color(Values.colorAccent), width: _screenWidth, height: 80)),
                             AnimatedPositioned(
+                                left: 0,
+                                duration: const Duration(milliseconds: 200),
+                                child: Container(
+                                    height: 80,
+                                    padding: const EdgeInsets.only(left: 10),
+                                    alignment: Alignment.centerLeft,
+                                    child: Row(children: [
+                                      _buildLink("paypal", _redirectToPayPal),
+                                      _buildLink("github", _redirectToGitHub),
+                                      _buildLink("reddit", _redirectToReddit)
+                                    ]))),
+                            AnimatedPositioned(
                                 top: _menuOpened ? 0 : 0,
                                 duration: const Duration(milliseconds: 200),
                                 child: Stack(alignment: Alignment.centerRight, children: [
@@ -267,12 +310,17 @@ class ActivityHomeState extends State<ActivityHome> {
                                           width: 80,
                                           height: 80,
                                           alignment: Alignment.center,
-                                          child: WidgetButton(
-                                              size: 60,
-                                              color: Values.colorPrimary,
-                                              background: Values.colorTransparent,
-                                              icon: "assets/graphics/icons/menu_open.svg",
-                                              onTap: () {}))),
+                                          child: SimpleShadow(
+                                              sigma: 7,
+                                              opacity: 0.2,
+                                              offset: const Offset(-0.1, -0.1),
+                                              color: _menuOpened ? Color(Values.colorAccent) : Color(Values.colorPrimary),
+                                              child: WidgetButton(
+                                                  size: 60,
+                                                  color: Values.colorPrimary,
+                                                  background: Values.colorTransparent,
+                                                  icon: "assets/graphics/icons/menu_open.svg",
+                                                  onTap: () {})))),
                                   AnimatedOpacity(
                                       duration: const Duration(milliseconds: 200),
                                       opacity: _menuOpened ? 1 : 0,
@@ -280,16 +328,21 @@ class ActivityHomeState extends State<ActivityHome> {
                                           width: 80,
                                           height: 80,
                                           alignment: Alignment.center,
-                                          child: WidgetButton(
-                                              size: 60,
-                                              color: Values.colorAccent,
-                                              background: Values.colorTransparent,
-                                              icon: "assets/graphics/icons/menu_close.svg",
-                                              onTap: () {
-                                                setState(() {
-                                                  _menuOpened = !_menuOpened;
-                                                });
-                                              })))
+                                          child: SimpleShadow(
+                                              sigma: 7,
+                                              opacity: 0.2,
+                                              offset: const Offset(-0.1, -0.1),
+                                              color: _menuOpened ? Color(Values.colorAccent) : Color(Values.colorPrimary),
+                                              child: WidgetButton(
+                                                  size: 60,
+                                                  color: Values.colorAccent,
+                                                  background: Values.colorTransparent,
+                                                  icon: "assets/graphics/icons/menu_close.svg",
+                                                  onTap: () {
+                                                    setState(() {
+                                                      _menuOpened = !_menuOpened;
+                                                    });
+                                                  }))))
                                 ]))
                           ]))
                     ])))

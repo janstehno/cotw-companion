@@ -2,7 +2,7 @@ name: cotwcompanion
 description: Companion for the game theHunter Call of the Wild
 
 publish_to: 'none'
-version: 1.5.9+31
+version: 1.6.0+32
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -40,7 +40,8 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   flutter_cache_manager: ^3.3.0
   logger: ^1.1.0
-  flutter_map: ^3.1.0
+  latlng: ^0.2.0
+  map: ^1.3.5+1
 
 dev_dependencies:
   flutter_test:
@@ -53,25 +54,55 @@ flutter:
     - assets/raw/
     - assets/translations/
     - assets/graphics/icons/
+    - assets/graphics/icons/pngs/1/
+    - assets/graphics/icons/pngs/2/
+    - assets/graphics/icons/pngs/3/
     - assets/graphics/animals/
+    - assets/graphics/animals/pngs/
     - assets/graphics/reserves/
     - assets/graphics/weapons/
     - assets/graphics/callers/
     - assets/graphics/anatomy/
     - assets/graphics/heads/
-    - assets/graphics/maps/hirschfeldenhuntingreserve/
-    - assets/graphics/maps/laytonlakedistrict/
-    - assets/graphics/maps/medvedtaiganationalpark/
-    - assets/graphics/maps/vurhongasavannareserve/
-    - assets/graphics/maps/parquefernando/
-    - assets/graphics/maps/yukonvalley/
-    - assets/graphics/maps/cuatrocolinasgamereserve/
-    - assets/graphics/maps/silverridgepeaks/
-    - assets/graphics/maps/teawaroanationalpark/
-    - assets/graphics/maps/ranchodelarroyo/
-    - assets/graphics/maps/mississippiacrespreserve/
-    - assets/graphics/maps/revontulicoast/
-    - assets/graphics/maps/newenglandmountains/
+    - assets/graphics/maps/hirschfeldenhuntingreserve/1/
+    - assets/graphics/maps/hirschfeldenhuntingreserve/2/
+    - assets/graphics/maps/hirschfeldenhuntingreserve/3/
+    - assets/graphics/maps/laytonlakedistrict/1/
+    - assets/graphics/maps/laytonlakedistrict/2/
+    - assets/graphics/maps/laytonlakedistrict/3/
+    - assets/graphics/maps/medvedtaiganationalpark/1/
+    - assets/graphics/maps/medvedtaiganationalpark/2/
+    - assets/graphics/maps/medvedtaiganationalpark/3/
+    - assets/graphics/maps/vurhongasavannareserve/1/
+    - assets/graphics/maps/vurhongasavannareserve/2/
+    - assets/graphics/maps/vurhongasavannareserve/3/
+    - assets/graphics/maps/parquefernando/1/
+    - assets/graphics/maps/parquefernando/2/
+    - assets/graphics/maps/parquefernando/3/
+    - assets/graphics/maps/yukonvalley/1/
+    - assets/graphics/maps/yukonvalley/2/
+    - assets/graphics/maps/yukonvalley/3/
+    - assets/graphics/maps/cuatrocolinasgamereserve/1/
+    - assets/graphics/maps/cuatrocolinasgamereserve/2/
+    - assets/graphics/maps/cuatrocolinasgamereserve/3/
+    - assets/graphics/maps/silverridgepeaks/1/
+    - assets/graphics/maps/silverridgepeaks/2/
+    - assets/graphics/maps/silverridgepeaks/3/
+    - assets/graphics/maps/teawaroanationalpark/1/
+    - assets/graphics/maps/teawaroanationalpark/2/
+    - assets/graphics/maps/teawaroanationalpark/3/
+    - assets/graphics/maps/ranchodelarroyo/1/
+    - assets/graphics/maps/ranchodelarroyo/2/
+    - assets/graphics/maps/ranchodelarroyo/3/
+    - assets/graphics/maps/mississippiacrespreserve/1/
+    - assets/graphics/maps/mississippiacrespreserve/2/
+    - assets/graphics/maps/mississippiacrespreserve/3/
+    - assets/graphics/maps/revontulicoast/1/
+    - assets/graphics/maps/revontulicoast/2/
+    - assets/graphics/maps/revontulicoast/3/
+    - assets/graphics/maps/newenglandmountains/1/
+    - assets/graphics/maps/newenglandmountains/2/
+    - assets/graphics/maps/newenglandmountains/3/
   fonts:
     - family: Text
       fonts:

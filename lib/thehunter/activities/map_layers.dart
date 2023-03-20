@@ -7,7 +7,6 @@ import 'package:cotwcompanion/thehunter/widgets/misc/custom_appbar.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_container.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_scaffold.dart';
 import 'package:cotwcompanion/thehunter/widgets/misc/custom_switch.dart';
-import 'package:cotwcompanion/thehunter/widgets/misc/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +69,23 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
 
   Widget _buildList() {
     return Column(children: [
-      WidgetTitle.sub(text: tr('wildlife')),
+      EntryName.withSwitch(
+          text: tr('wildlife'),
+          isTitle: true,
+          size: 40,
+          color: Values.colorContentSubTitle,
+          background: Values.colorContentSubTitleBackground,
+          buttonActiveBackground: Values.colorDark,
+          buttonActiveColor: Values.colorLight,
+          buttonIcon: "assets/graphics/icons/empty.svg",
+          buttonInactiveIcon: "assets/graphics/icons/full.svg",
+          onTap: () {
+            setState(() {
+              HelperMap.activateAll();
+              widget.callback();
+            });
+          },
+          isActive: HelperMap.isEverythingActive()),
       ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

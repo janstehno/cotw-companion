@@ -1,7 +1,6 @@
 // Copyright (c) 2022 Jan Stehno
 
 import 'dart:convert';
-
 import 'package:cotwcompanion/thehunter/model/ammo.dart';
 import 'package:cotwcompanion/thehunter/model/animal.dart';
 import 'package:cotwcompanion/thehunter/model/animal_fur.dart';
@@ -28,9 +27,23 @@ class JSONHelper {
   static final List<Weapon> _weapons = [];
   static final List<IDtoID> _weaponsAmmo = [];
   static final List<Weapon> _weaponsInfo = [];
+  static final Map<String, dynamic> _mapObjects = {};
 
-  static setLists(List<Ammo> ammo, List<Animal> animals, List<IDtoID> animalsCallers, List<AnimalFur> animalsFurs, List<IDtoID> animalsReserves, List<Zone> animalsZones,
-      List<Caller> callers, List<Dlc> dlcs, List<Fur> furs, List<Reserve> reserves, List<Weapon> weapons, List<IDtoID> weaponsAmmo, List<Weapon> weaponsInfo) {
+  static setLists(
+      List<Ammo> ammo,
+      List<Animal> animals,
+      List<IDtoID> animalsCallers,
+      List<AnimalFur> animalsFurs,
+      List<IDtoID> animalsReserves,
+      List<Zone> animalsZones,
+      List<Caller> callers,
+      List<Dlc> dlcs,
+      List<Fur> furs,
+      List<Reserve> reserves,
+      List<Weapon> weapons,
+      List<IDtoID> weaponsAmmo,
+      List<Weapon> weaponsInfo,
+      Map<String, dynamic> mapObjects) {
     _ammo.clear();
     _animals.clear();
     _animalsCallers.clear();
@@ -57,6 +70,7 @@ class JSONHelper {
     _weapons.addAll(weapons);
     _weaponsAmmo.addAll(weaponsAmmo);
     _weaponsInfo.addAll(weaponsInfo);
+    _mapObjects.addAll(mapObjects);
   }
 
   static Reserve getReserve(int id) {
@@ -89,6 +103,10 @@ class JSONHelper {
 
   static AnimalFur getAnimalFur(int id) {
     return _animalsFurs.elementAt(id - 1);
+  }
+
+  static dynamic getMapObjects(int reserveID) {
+    return _mapObjects[reserveID.toString()];
   }
 
   static List<Ammo> get ammo => _ammo;
@@ -199,6 +217,12 @@ class JSONHelper {
     final data = await _getData('weaponsinfo');
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Weapon.fromJsonWithAdditionalInfo(e)).toList();
+  }
+
+  static Future<Map<String, dynamic>> readMapObjects() async {
+    final data = await _getData('mapobjects');
+    Map<String, dynamic> result = Map.castFrom(json.decode(data));
+    return result;
   }
 
   static String listToJson(List<dynamic> list) {

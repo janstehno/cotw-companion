@@ -44,6 +44,7 @@ class BuilderHome extends StatelessWidget {
           JSONHelper.readWeapons(),
           JSONHelper.readWeaponsAmmo(),
           JSONHelper.readWeaponsInfo(),
+          JSONHelper.readMapObjects(),
           LogHelper.readLogs(),
           _forcedDelay()
         ]),
@@ -64,10 +65,11 @@ class BuilderHome extends StatelessWidget {
             var weapons = snapshot.data![10] as List<Weapon>;
             var weaponsAmmo = snapshot.data![11] as List<IDtoID>;
             var weaponsInfo = snapshot.data![12] as List<Weapon>;
-            var logs = snapshot.data![13] as List<Log>;
-            var widget = snapshot.data![14] as Widget;
+            var mapObjects = snapshot.data![13] as Map<String, dynamic>;
+            var logs = snapshot.data![14] as List<Log>;
+            var widget = snapshot.data![15] as Widget;
             JSONHelper.setLists(
-                ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, weaponsInfo);
+                ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, weaponsInfo, mapObjects);
             LogHelper.setLogs(logs, context);
             return widget;
           } else {

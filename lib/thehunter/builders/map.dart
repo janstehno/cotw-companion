@@ -19,7 +19,6 @@ class BuilderMap extends StatefulWidget {
 
 class BuilderMapState extends State<BuilderMap> {
   _getAnimals() {
-    HelperMap.clearMap();
     for (IDtoID ar in JSONHelper.animalsReserves) {
       if (ar.getSecondID == widget.reserveID) {
         for (Animal a in JSONHelper.animals) {
@@ -33,13 +32,19 @@ class BuilderMapState extends State<BuilderMap> {
     HelperMap.addNames(context.locale, widget.reserveID);
   }
 
+  _getMapObjects() {
+    HelperMap.clearMap();
+    HelperMap.addObjects(JSONHelper.getMapObjects(widget.reserveID));
+    _getAnimals();
+  }
+
   Widget _buildWidgets() {
     return ActivityMap(reserveID: widget.reserveID);
   }
 
   @override
   Widget build(BuildContext context) {
-    _getAnimals();
+    _getMapObjects();
     return _buildWidgets();
   }
 }

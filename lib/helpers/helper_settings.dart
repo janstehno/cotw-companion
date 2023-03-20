@@ -11,36 +11,39 @@ class Settings extends ChangeNotifier {
   late int _compactLogbook;
   late bool _darkMode;
   late bool _imperialUnits;
-  late bool _furRarityPerCent;
-  late bool _bestWeaponsForAnimal;
   late bool _mapZonesStyle;
+  late bool _mapZonesAccuracy;
+  late bool _bestWeaponsForAnimal;
   late bool _dateOfRecord;
   late bool _trophyLodgeRecord;
+  late bool _furRarityPerCent;
   late SharedPreferences _sharedPreferences;
 
   Settings(
-      {bool darkMode = false,
-      bool imperialUnits = false,
-      language,
+      {language,
       color,
       fontSize,
       compactLogbook,
-      bool furRarityPerCent = false,
+      bool darkMode = false,
+      bool imperialUnits = false,
+      bool mapZonesAccuracy = false,
       bool bestWeaponsForAnimal = false,
       bool mapZonesStyle = false,
       bool dateOfRecord = false,
-      bool trophyLodgeRecord = false}) {
-    _darkMode = darkMode;
-    _imperialUnits = imperialUnits;
+      bool trophyLodgeRecord = false,
+      bool furRarityPerCent = false}) {
     _language = language;
     _color = color;
     _fontSize = fontSize;
     _compactLogbook = compactLogbook;
-    _furRarityPerCent = furRarityPerCent;
-    _bestWeaponsForAnimal = bestWeaponsForAnimal;
+    _darkMode = darkMode;
+    _imperialUnits = imperialUnits;
     _mapZonesStyle = mapZonesStyle;
+    _mapZonesAccuracy = mapZonesAccuracy;
+    _bestWeaponsForAnimal = bestWeaponsForAnimal;
     _dateOfRecord = dateOfRecord;
     _trophyLodgeRecord = trophyLodgeRecord;
+    _furRarityPerCent = furRarityPerCent;
   }
 
   //['en', 'ru', 'cs', 'pl', 'de', 'fr', 'es', 'pt', 'ja']
@@ -56,15 +59,17 @@ class Settings extends ChangeNotifier {
 
   bool get getImperialUnits => _imperialUnits;
 
-  bool get getFurRarityPerCent => _furRarityPerCent;
+  bool get getMapZonesStyle => _mapZonesStyle;
+
+  bool get getMapZonesAccuracy => _mapZonesAccuracy;
 
   bool get getBestWeaponsForAnimal => _bestWeaponsForAnimal;
-
-  bool get getMapZonesStyle => _mapZonesStyle;
 
   bool get getDateOfRecord => _dateOfRecord;
 
   bool get getTrophyLodgeRecord => _trophyLodgeRecord;
+
+  bool get getFurRarityPerCent => _furRarityPerCent;
 
   Future<void> changeTheme() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -127,14 +132,26 @@ class Settings extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> changeFurRarityPerCent() async {
+  Future<void> changeMapZonesStyle() async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    if (_furRarityPerCent == true) {
-      _furRarityPerCent = false;
-      await _sharedPreferences.setBool("furRarityPerCent", false);
+    if (_mapZonesStyle == true) {
+      _mapZonesStyle = false;
+      await _sharedPreferences.setBool("mapZonesStyle", false);
     } else {
-      _furRarityPerCent = true;
-      await _sharedPreferences.setBool("furRarityPerCent", true);
+      _mapZonesStyle = true;
+      await _sharedPreferences.setBool("mapZonesStyle", true);
+    }
+    notifyListeners();
+  }
+
+  Future<void> changeMapZonesAccuracy() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    if (_mapZonesAccuracy == true) {
+      _mapZonesAccuracy = false;
+      await _sharedPreferences.setBool("mapZonesAccuracy", false);
+    } else {
+      _mapZonesAccuracy = true;
+      await _sharedPreferences.setBool("mapZonesAccuracy", true);
     }
     notifyListeners();
   }
@@ -147,18 +164,6 @@ class Settings extends ChangeNotifier {
     } else {
       _bestWeaponsForAnimal = true;
       await _sharedPreferences.setBool("bestWeaponsForAnimal", true);
-    }
-    notifyListeners();
-  }
-
-  Future<void> changeMapZonesStyle() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    if (_mapZonesStyle == true) {
-      _mapZonesStyle = false;
-      await _sharedPreferences.setBool("mapZonesStyle", false);
-    } else {
-      _mapZonesStyle = true;
-      await _sharedPreferences.setBool("mapZonesStyle", true);
     }
     notifyListeners();
   }
@@ -183,6 +188,18 @@ class Settings extends ChangeNotifier {
     } else {
       _trophyLodgeRecord = true;
       await _sharedPreferences.setBool("trophyLodgeRecord", true);
+    }
+    notifyListeners();
+  }
+
+  Future<void> changeFurRarityPerCent() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    if (_furRarityPerCent == true) {
+      _furRarityPerCent = false;
+      await _sharedPreferences.setBool("furRarityPerCent", false);
+    } else {
+      _furRarityPerCent = true;
+      await _sharedPreferences.setBool("furRarityPerCent", true);
     }
     notifyListeners();
   }

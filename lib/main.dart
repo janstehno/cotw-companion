@@ -14,17 +14,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  bool darkMode = sharedPreferences.getBool("darkMode") ?? false;
-  bool imperialUnits = sharedPreferences.getBool("imperialUnits") ?? false;
-  int compactLogbook = sharedPreferences.getInt("compactLogbook") ?? 3;
   int language = sharedPreferences.getInt("language") ?? 0;
   int color = sharedPreferences.getInt("color") ?? Values.colorThird;
   int fontSize = sharedPreferences.getInt("fontSize") ?? 3;
-  bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
-  bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
+  int compactLogbook = sharedPreferences.getInt("compactLogbook") ?? 3;
+  bool darkMode = sharedPreferences.getBool("darkMode") ?? false;
+  bool imperialUnits = sharedPreferences.getBool("imperialUnits") ?? false;
   bool mapZonesStyle = sharedPreferences.getBool("mapZonesStyle") ?? false;
+  bool mapZonesAccuracy = sharedPreferences.getBool("mapZonesAccuracy") ?? false;
+  bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
   bool dateOfRecord = sharedPreferences.getBool("dateOfRecord") ?? false;
   bool trophyLodgeRecord = sharedPreferences.getBool("trophyLodgeRecord") ?? false;
+  bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
   Values.setColors(darkMode);
   Values.setPrimaryColor(color);
   Values.setFontSize(fontSize);
@@ -49,17 +50,18 @@ void main() async {
       useOnlyLangCode: true,
       child: ChangeNotifierProvider(
         create: (BuildContext context) => Settings(
-            darkMode: darkMode,
-            imperialUnits: imperialUnits,
-            compactLogbook: compactLogbook,
             language: language,
             color: color,
             fontSize: fontSize,
-            furRarityPerCent: furRarityPerCent,
-            bestWeaponsForAnimal: bestWeaponsForAnimal,
+            compactLogbook: compactLogbook,
+            darkMode: darkMode,
+            imperialUnits: imperialUnits,
             mapZonesStyle: mapZonesStyle,
+            mapZonesAccuracy: mapZonesAccuracy,
+            bestWeaponsForAnimal: bestWeaponsForAnimal,
             dateOfRecord: dateOfRecord,
-            trophyLodgeRecord: trophyLodgeRecord),
+            trophyLodgeRecord: trophyLodgeRecord,
+            furRarityPerCent: furRarityPerCent),
         child: const App(),
       )));
 }
@@ -78,7 +80,7 @@ class App extends StatelessWidget {
           ErrorWidget.builder = ((details) => MaterialApp(
                 debugShowCheckedModeBanner: false,
                 home: WidgetError(
-                text: details.exceptionAsString(),
+                  text: details.exceptionAsString(),
                 ),
               ));
           return ScrollConfiguration(

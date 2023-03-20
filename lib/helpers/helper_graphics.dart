@@ -1,7 +1,9 @@
 // Copyright (c) 2022 Jan Stehno
 
+import 'package:cotwcompanion/helpers/helper_types.dart';
+
 class Graphics {
-  static const String _directory = "assets/graphics/";
+  static const String _directory = "assets/graphics";
   static const List<String> _reserves = [
     "hirschfeldenhuntingreserve",
     "laytonlakedistrict",
@@ -178,26 +180,48 @@ class Graphics {
   ];
 
   static String getReserveIcon(int i) {
-    return "${_directory}reserves/${_reserves[i - 1]}.svg";
+    return "$_directory/reserves/${_reserves[i - 1]}.svg";
   }
 
   static String getCallerIcon(int i) {
-    return "${_directory}callers/${_callers[i - 1]}.svg";
+    return "$_directory/callers/${_callers[i - 1]}.svg";
   }
 
   static String getWeaponIcon(int i) {
-    return "${_directory}weapons/${_weapons[i - 1]}.svg";
+    return "$_directory/weapons/${_weapons[i - 1]}.svg";
   }
 
   static String getAnimalIcon(int i) {
-    return "${_directory}animals/${_animals[i - 1]}.svg";
+    return "$_directory/animals/${_animals[i - 1]}.svg";
   }
 
   static String getAnimalHead(int i) {
-    return "${_directory}heads/${_animals[i - 1]}.svg";
+    return "$_directory/heads/${_animals[i - 1]}.svg";
   }
 
   static String getAnimalBackground(int i) {
-    return "${_directory}backgrounds/${_animals[i - 1]}.jpg";
+    return "$_directory/backgrounds/${_animals[i - 1]}.jpg";
+  }
+
+  static String getMapTile(int i, int x, int y, int z) {
+    return "$_directory/maps/${_reserves[i - 1]}/$z/[$x][$y].png";
+  }
+
+  static String getMapObjectIcon(MapObjectType type, int z) {
+    String asset = "$_directory/icons/pngs/$z";
+    switch (type.index) {
+      case 0:
+        return "$asset/outpost.png";
+      case 1:
+        return "$asset/lookout.png";
+      case 2:
+        return "$asset/hide.png";
+      default:
+        return "";
+    }
+  }
+
+  static String getAnimalMapIcon(int i) {
+    return "$_directory/animals/pngs/${_animals[i - 1]}.png";
   }
 }

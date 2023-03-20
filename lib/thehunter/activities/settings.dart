@@ -144,7 +144,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
 
   Widget _buildInterface() {
     return Column(children: [
-      WidgetTitleWithDialSwitch(
+      WidgetTitleWithDualSwitch(
           text: tr('interface'),
           size: 40,
           oneLine: true,
@@ -161,7 +161,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
               widget.callback();
             });
           }),
-      WidgetTitleWithDialSwitch(
+      WidgetTitleWithDualSwitch(
           text: tr('units'),
           size: 40,
           oneLine: true,
@@ -215,19 +215,6 @@ class ActivitySettingsState extends State<ActivitySettings> {
     return Column(children: [
       WidgetTitle.sub(text: tr('other')),
       EntryName.withSwitch(
-          text: tr('best_weapons'),
-          color: Values.colorContentSubTitle,
-          buttonActiveColor: Values.colorAccent,
-          buttonActiveBackground: Values.colorPrimary,
-          size: 40,
-          isActive: _settings.getBestWeaponsForAnimal,
-          onTap: () {
-            setState(() {
-              _settings.changeBestWeaponsForAnimal();
-              widget.callback();
-            });
-          }),
-      EntryName.withSwitch(
           text: tr('map_zones_style'),
           color: Values.colorContentSubTitle,
           buttonActiveColor: Values.colorAccent,
@@ -237,6 +224,32 @@ class ActivitySettingsState extends State<ActivitySettings> {
           onTap: () {
             setState(() {
               _settings.changeMapZonesStyle();
+              widget.callback();
+            });
+          }),
+      EntryName.withSwitch(
+          text: tr('map_zones_accuracy'),
+          color: Values.colorContentSubTitle,
+          buttonActiveColor: Values.colorAccent,
+          buttonActiveBackground: Values.colorPrimary,
+          size: 40,
+          isActive: _settings.getMapZonesAccuracy,
+          onTap: () {
+            setState(() {
+              _settings.changeMapZonesAccuracy();
+              widget.callback();
+            });
+          }),
+      EntryName.withSwitch(
+          text: tr('best_weapons'),
+          color: Values.colorContentSubTitle,
+          buttonActiveColor: Values.colorAccent,
+          buttonActiveBackground: Values.colorPrimary,
+          size: 40,
+          isActive: _settings.getBestWeaponsForAnimal,
+          onTap: () {
+            setState(() {
+              _settings.changeBestWeaponsForAnimal();
               widget.callback();
             });
           }),

@@ -145,24 +145,18 @@ class Animal {
   String getNameEN() => en;
 
   String getNameENBasedOnReserve(int reserveID) {
-    if ((id == 34 && reserveID == 5) || (id == 55 && reserveID == 9) || (id == 60 && reserveID == 10)) {
-      return en.split("/")[0];
-    } else if ((id == 34 && reserveID == 8) || (id == 55 && reserveID == 11) || (id == 60 && reserveID == 13)) {
-      return en.split("/")[1];
-    } else {
-      return getNameEN();
-    }
+    return getNameBasedOnReserve(const Locale("en"), reserveID);
   }
 
   String getNameBasedOnReserve(Locale locale, int reserveID) {
     if (reserveID == -1) return getName(locale);
-    if ((locale.languageCode.toString() == "en" && id == 34 && reserveID == 5) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveID == 9) ||
-        (id == 60 && reserveID == 10)) {
+    if ((locale.languageCode.toString() == "en" && id == 34 && reserveID == 5 /*Puma in Parque Fernando*/) ||
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveID == 9 /*Feral Pig in Te Awaroa National Park*/) ||
+        (locale.languageCode.toString() != "pl" && (id == 60 && reserveID == 10) /*Mexican Bobcat in Rancho del Arroyo*/)) {
       return getNameByLocale(locale).split("/")[0];
-    } else if ((locale.languageCode.toString() == "en" && id == 34 && reserveID == 8) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveID == 11) ||
-        (id == 60 && reserveID == 13)) {
+    } else if ((locale.languageCode.toString() == "en" && id == 34 && reserveID == 8 /*Mountain Lion in Silver Ridge Peaks*/) ||
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveID == 11 /*Wild Hog in Mississippi Acres Preserve*/) ||
+        (locale.languageCode.toString() != "pl" && (id == 60 && reserveID == 13) /*Bobcat in New England Mountains*/)) {
       return getNameByLocale(locale).split("/")[1];
     } else {
       return getName(locale);

@@ -13,7 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ActivityPatchNotes extends StatelessWidget {
   const ActivityPatchNotes({Key? key}) : super(key: key);
 
-  void _redirectToTrello() async {
+  void _redirectToGitHub() async {
     if (!await launchUrl(Uri(scheme: "https", host: "github.com", path: "/janstehno/cotwcompanion/issues"))) {
       throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
     }
@@ -22,7 +22,7 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildLink() {
     return GestureDetector(
         onTap: () {
-          _redirectToTrello();
+          _redirectToGitHub();
         },
         child: Container(
             padding: const EdgeInsets.fromLTRB(35, 10, 35, 10),
@@ -42,6 +42,7 @@ class ActivityPatchNotes extends StatelessWidget {
 
   Widget _buildList() {
     return Column(children: [
+      EntryPatchNote(color: Values.colorEven, version: "1.6.0", changes: const ["- Improvement of the maps."]),
       EntryPatchNote(color: Values.colorOdd, version: "1.5.9", changes: const ["- Hunter Power Pack update."]),
       EntryPatchNote(
           color: Values.colorEven,
@@ -100,7 +101,7 @@ class ActivityPatchNotes extends StatelessWidget {
       EntryPatchNote(color: Values.colorEven, version: "1.3.6", changes: const [
         "- Improvement of the Catch book and Trophy lodge. Added Export / Import feature.",
         "- Catch book record can now be created from Need Zones feature and Reserve's animal list. You can create it by swiping the list item to the right.",
-        "- Patch Notes feature. Only in English for now. Link on Trello website with future plans and issues of the newest version of the app.",
+        "- Patch Notes feature. Only in English for now. Link on GitHub website with future plans and issues of the newest version of the app.",
         "- Improvement of the UI. Overhauled have been map zones (some zones can overlap) and various icons. Animal's images have been added including their anatomy. Filter for animal's recommended weapons in the settings. It chooses the weapons based on the highest minimum class and the greatest penetration. If possible at least one weapon is chosen from the base game and at least one is chosen from DLC."
       ]),
       EntryPatchNote(color: Values.colorOdd, version: "1.3.5"),

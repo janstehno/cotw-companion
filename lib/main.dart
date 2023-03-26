@@ -1,10 +1,10 @@
 // Copyright (c) 2022 Jan Stehno
 
-import 'package:cotwcompanion/helpers/helper_settings.dart';
-import 'package:cotwcompanion/helpers/helper_values.dart';
-import 'package:cotwcompanion/helpers/scroll_behavior.dart';
-import 'package:cotwcompanion/thehunter/builders/home.dart';
-import 'package:cotwcompanion/thehunter/widgets/misc/custom_error.dart';
+import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/scroll_behavior.dart';
+import 'package:cotwcompanion/builders/home.dart';
+import 'package:cotwcompanion/widgets/error.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   int language = sharedPreferences.getInt("language") ?? 0;
-  int color = sharedPreferences.getInt("color") ?? Values.colorThird;
+  int color = sharedPreferences.getInt("color") ?? Interface.orange.value;
   int fontSize = sharedPreferences.getInt("fontSize") ?? 3;
   int compactLogbook = sharedPreferences.getInt("compactLogbook") ?? 3;
   bool darkMode = sharedPreferences.getBool("darkMode") ?? false;
@@ -26,9 +26,9 @@ void main() async {
   bool dateOfRecord = sharedPreferences.getBool("dateOfRecord") ?? false;
   bool trophyLodgeRecord = sharedPreferences.getBool("trophyLodgeRecord") ?? false;
   bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
-  Values.setColors(darkMode);
-  Values.setPrimaryColor(color);
-  Values.setFontSize(fontSize);
+  Interface.setPrimaryColor(Color(color));
+  Interface.setColors(darkMode);
+  Interface.setFontSize(fontSize);
   runApp(EasyLocalization(
       path: 'assets/translations',
       startLocale: const Locale('en'),
@@ -90,9 +90,9 @@ class App extends StatelessWidget {
         },
         theme: ThemeData(
             brightness: Brightness.dark,
-            scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(const Color(Values.color61))),
-            textSelectionTheme: TextSelectionThemeData(selectionColor: Color(Values.colorLight), selectionHandleColor: Color(Values.colorDark)),
+            scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Interface.ff42)),
+            textSelectionTheme: TextSelectionThemeData(selectionColor: Interface.light, selectionHandleColor: Interface.dark),
             fontFamily: 'Text'),
-        home: Column(mainAxisSize: MainAxisSize.max, children: [Expanded(child: Container(color: Color(Values.colorPrimary), child: const BuilderHome()))]));
+        home: Column(mainAxisSize: MainAxisSize.max, children: [Expanded(child: Container(color: Interface.primary, child: const BuilderHome()))]));
   }
 }

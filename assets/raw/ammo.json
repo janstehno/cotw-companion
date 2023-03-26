@@ -15,7 +15,8 @@
         "RANGE_M": 20,
         "RANGE_YD": 21.87,
         "PENETRATION": 10,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 0
     },
     {
         "ID": 2,
@@ -33,7 +34,8 @@
         "RANGE_M": 20,
         "RANGE_YD": 21.87,
         "PENETRATION": 50,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 0
     },
     {
         "ID": 3,
@@ -51,7 +53,8 @@
         "RANGE_M": 20,
         "RANGE_YD": 21.87,
         "PENETRATION": 90,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 0
     },
     {
         "ID": 4,
@@ -69,7 +72,8 @@
         "RANGE_M": 20,
         "RANGE_YD": 21.87,
         "PENETRATION": 15,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 5,
@@ -87,7 +91,8 @@
         "RANGE_M": 20,
         "RANGE_YD": 21.87,
         "PENETRATION": 75,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 6,
@@ -105,7 +110,8 @@
         "RANGE_M": 20,
         "RANGE_YD": 21.87,
         "PENETRATION": 90,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 7,
@@ -123,7 +129,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 8,
@@ -141,7 +148,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 10,
-        "EXPANSION": 12
+        "EXPANSION": 12,
+        "DLC": 0
     },
     {
         "ID": 9,
@@ -159,7 +167,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 20,
-        "EXPANSION": 3
+        "EXPANSION": 3,
+        "DLC": 0
     },
     {
         "ID": 10,
@@ -177,7 +186,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 15,
-        "EXPANSION": 17
+        "EXPANSION": 17,
+        "DLC": 0
     },
     {
         "ID": 11,
@@ -195,7 +205,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 30,
-        "EXPANSION": 4
+        "EXPANSION": 4,
+        "DLC": 0
     },
     {
         "ID": 12,
@@ -213,7 +224,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 17,
-        "EXPANSION": 24
+        "EXPANSION": 24,
+        "DLC": 0
     },
     {
         "ID": 13,
@@ -231,7 +243,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 35,
-        "EXPANSION": 5
+        "EXPANSION": 5,
+        "DLC": 0
     },
     {
         "ID": 14,
@@ -249,7 +262,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 20,
-        "EXPANSION": 53
+        "EXPANSION": 53,
+        "DLC": 0
     },
     {
         "ID": 15,
@@ -267,7 +281,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 40,
-        "EXPANSION": 12
+        "EXPANSION": 12,
+        "DLC": 0
     },
     {
         "ID": 16,
@@ -285,7 +300,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 21,
-        "EXPANSION": 60
+        "EXPANSION": 60,
+        "DLC": 1
     },
     {
         "ID": 17,
@@ -303,7 +319,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 42,
-        "EXPANSION": 14
+        "EXPANSION": 14,
+        "DLC": 1
     },
     {
         "ID": 18,
@@ -321,7 +338,8 @@
         "RANGE_M": 75,
         "RANGE_YD": 82.02,
         "PENETRATION": 20,
-        "EXPANSION": 27
+        "EXPANSION": 27,
+        "DLC": 0
     },
     {
         "ID": 19,
@@ -339,7 +357,8 @@
         "RANGE_M": 75,
         "RANGE_YD": 82.02,
         "PENETRATION": 40,
-        "EXPANSION": 6
+        "EXPANSION": 6,
+        "DLC": 0
     },
     {
         "ID": 20,
@@ -357,7 +376,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 20,
-        "EXPANSION": 53
+        "EXPANSION": 53,
+        "DLC": 1
     },
     {
         "ID": 21,
@@ -375,7 +395,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 40,
-        "EXPANSION": 12
+        "EXPANSION": 12,
+        "DLC": 1
     },
     {
         "ID": 22,
@@ -393,7 +414,8 @@
         "RANGE_M": 75,
         "RANGE_YD": 82.02,
         "PENETRATION": 25,
-        "EXPANSION": 100
+        "EXPANSION": 100,
+        "DLC": 1
     },
     {
         "ID": 23,
@@ -411,7 +433,8 @@
         "RANGE_M": 75,
         "RANGE_YD": 82.02,
         "PENETRATION": 100,
-        "EXPANSION": 23
+        "EXPANSION": 23,
+        "DLC": 1
     },
     {
         "ID": 24,
@@ -429,7 +452,8 @@
         "RANGE_M": 200,
         "RANGE_YD": 218.72,
         "PENETRATION": 20,
-        "EXPANSION": 20
+        "EXPANSION": 20,
+        "DLC": 1
     },
     {
         "ID": 25,
@@ -447,7 +471,8 @@
         "RANGE_M": 200,
         "RANGE_YD": 218.72,
         "PENETRATION": 40,
-        "EXPANSION": 4
+        "EXPANSION": 4,
+        "DLC": 1
     },
     {
         "ID": 26,
@@ -465,7 +490,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 22,
-        "EXPANSION": 68
+        "EXPANSION": 68,
+        "DLC": 0
     },
     {
         "ID": 27,
@@ -483,7 +509,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 45,
-        "EXPANSION": 16
+        "EXPANSION": 16,
+        "DLC": 0
     },
     {
         "ID": 28,
@@ -501,7 +528,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 15,
-        "EXPANSION": 17
+        "EXPANSION": 17,
+        "DLC": 1
     },
     {
         "ID": 29,
@@ -519,7 +547,8 @@
         "RANGE_M": 100,
         "RANGE_YD": 109.36,
         "PENETRATION": 5,
-        "EXPANSION": 10
+        "EXPANSION": 10,
+        "DLC": 1
     },
     {
         "ID": 30,
@@ -537,7 +566,8 @@
         "RANGE_M": 75,
         "RANGE_YD": 82.02,
         "PENETRATION": 17,
-        "EXPANSION": 17
+        "EXPANSION": 17,
+        "DLC": 0
     },
     {
         "ID": 31,
@@ -555,7 +585,8 @@
         "RANGE_M": 75,
         "RANGE_YD": 82.02,
         "PENETRATION": 35,
-        "EXPANSION": 4
+        "EXPANSION": 4,
+        "DLC": 0
     },
     {
         "ID": 32,
@@ -573,7 +604,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 17,
-        "EXPANSION": 70
+        "EXPANSION": 70,
+        "DLC": 0
     },
     {
         "ID": 33,
@@ -591,7 +623,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 70,
-        "EXPANSION": 16
+        "EXPANSION": 16,
+        "DLC": 0
     },
     {
         "ID": 34,
@@ -609,7 +642,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 12,
-        "EXPANSION": 18
+        "EXPANSION": 18,
+        "DLC": 0
     },
     {
         "ID": 35,
@@ -627,7 +661,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 50,
-        "EXPANSION": 4
+        "EXPANSION": 4,
+        "DLC": 0
     },
     {
         "ID": 36,
@@ -645,7 +680,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 17,
-        "EXPANSION": 70
+        "EXPANSION": 70,
+        "DLC": 1
     },
     {
         "ID": 37,
@@ -663,7 +699,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 25,
-        "EXPANSION": 100
+        "EXPANSION": 100,
+        "DLC": 0
     },
     {
         "ID": 38,
@@ -681,7 +718,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 100,
-        "EXPANSION": 23
+        "EXPANSION": 23,
+        "DLC": 0
     },
     {
         "ID": 39,
@@ -699,7 +737,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 15,
-        "EXPANSION": 70
+        "EXPANSION": 70,
+        "DLC": 1
     },
     {
         "ID": 40,
@@ -717,7 +756,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 27,
-        "EXPANSION": 6
+        "EXPANSION": 6,
+        "DLC": 1
     },
     {
         "ID": 41,
@@ -735,7 +775,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 19,
-        "EXPANSION": 53
+        "EXPANSION": 53,
+        "DLC": 1
     },
     {
         "ID": 42,
@@ -753,7 +794,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 45,
-        "EXPANSION": 13
+        "EXPANSION": 13,
+        "DLC": 1
     },
     {
         "ID": 43,
@@ -771,7 +813,8 @@
         "RANGE_M": 100,
         "RANGE_YD": 109.36,
         "PENETRATION": 30,
-        "EXPANSION": 30
+        "EXPANSION": 30,
+        "DLC": 1
     },
     {
         "ID": 44,
@@ -789,7 +832,8 @@
         "RANGE_M": 200,
         "RANGE_YD": 218.72,
         "PENETRATION": 40,
-        "EXPANSION": 30
+        "EXPANSION": 30,
+        "DLC": 1
     },
     {
         "ID": 45,
@@ -807,7 +851,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 20,
-        "EXPANSION": 53
+        "EXPANSION": 53,
+        "DLC": 1
     },
     {
         "ID": 46,
@@ -825,7 +870,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 40,
-        "EXPANSION": 12
+        "EXPANSION": 12,
+        "DLC": 1
     },
     {
         "ID": 47,
@@ -843,7 +889,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 48,
@@ -861,7 +908,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 5,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 49,
@@ -879,7 +927,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 37,
-        "EXPANSION": 16
+        "EXPANSION": 16,
+        "DLC": 1
     },
     {
         "ID": 50,
@@ -897,7 +946,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 0
     },
     {
         "ID": 51,
@@ -915,7 +965,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 5,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 0
     },
     {
         "ID": 52,
@@ -933,7 +984,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 40,
-        "EXPANSION": 19
+        "EXPANSION": 19,
+        "DLC": 0
     },
     {
         "ID": 53,
@@ -951,7 +1003,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 54,
@@ -969,7 +1022,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 55,
@@ -987,7 +1041,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 4,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 56,
@@ -1005,7 +1060,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 33,
-        "EXPANSION": 16
+        "EXPANSION": 16,
+        "DLC": 1
     },
     {
         "ID": 57,
@@ -1023,7 +1079,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 58,
@@ -1041,7 +1098,8 @@
         "RANGE_M": 25,
         "RANGE_YD": 27.34,
         "PENETRATION": 5,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 59,
@@ -1059,7 +1117,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 45,
-        "EXPANSION": 22
+        "EXPANSION": 22,
+        "DLC": 1
     },
     {
         "ID": 60,
@@ -1077,7 +1136,8 @@
         "RANGE_M": 30,
         "RANGE_YD": 32.81,
         "PENETRATION": 10,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 61,
@@ -1095,7 +1155,8 @@
         "RANGE_M": 30,
         "RANGE_YD": 32.81,
         "PENETRATION": 50,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 62,
@@ -1113,7 +1174,8 @@
         "RANGE_M": 30,
         "RANGE_YD": 32.81,
         "PENETRATION": 90,
-        "EXPANSION": 0
+        "EXPANSION": 0,
+        "DLC": 1
     },
     {
         "ID": 63,
@@ -1131,7 +1193,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 15,
-        "EXPANSION": 3
+        "EXPANSION": 3,
+        "DLC": 1
     },
     {
         "ID": 64,
@@ -1149,7 +1212,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 7,
-        "EXPANSION": 10
+        "EXPANSION": 10,
+        "DLC": 1
     },
     {
         "ID": 65,
@@ -1167,7 +1231,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 19,
-        "EXPANSION": 52
+        "EXPANSION": 52,
+        "DLC": 1
     },
     {
         "ID": 66,
@@ -1185,7 +1250,8 @@
         "RANGE_M": 150,
         "RANGE_YD": 164.04,
         "PENETRATION": 44,
-        "EXPANSION": 13
+        "EXPANSION": 13,
+        "DLC": 1
     },
     {
         "ID": 67,
@@ -1203,7 +1269,8 @@
         "RANGE_M": 100,
         "RANGE_YD": 109.36,
         "PENETRATION": 17,
-        "EXPANSION": 1
+        "EXPANSION": 1,
+        "DLC": 1
     },
     {
         "ID": 68,
@@ -1221,7 +1288,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 55,
-        "EXPANSION": 6
+        "EXPANSION": 6,
+        "DLC": 1
     },
     {
         "ID": 69,
@@ -1239,7 +1307,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 50,
-        "EXPANSION": 8
+        "EXPANSION": 8,
+        "DLC": 1
     },
     {
         "ID": 70,
@@ -1257,7 +1326,8 @@
         "RANGE_M": 50,
         "RANGE_YD": 54.68,
         "PENETRATION": 12,
-        "EXPANSION": 36
+        "EXPANSION": 36,
+        "DLC": 1
     },
     {
         "ID": 71,
@@ -1275,7 +1345,8 @@
         "RANGE_M": 200,
         "RANGE_YD": 218.72,
         "PENETRATION": 42,
-        "EXPANSION": 20
+        "EXPANSION": 20,
+        "DLC": 1
     },
     {
         "ID": 72,
@@ -1293,6 +1364,7 @@
         "RANGE_M": 200,
         "RANGE_YD": 218.72,
         "PENETRATION": 20,
-        "EXPANSION": 60
+        "EXPANSION": 60,
+        "DLC": 1
     }
 ]

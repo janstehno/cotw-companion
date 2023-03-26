@@ -139,7 +139,7 @@
         "ANIMAL_ID": 3,
         "FUR_ID": 24,
         "PERCENT": 8.35,
-        "RARITY": 2,
+        "RARITY": 3,
         "MALE": 0,
         "FEMALE": 0
     },
@@ -148,7 +148,7 @@
         "ANIMAL_ID": 3,
         "FUR_ID": 41,
         "PERCENT": 8.35,
-        "RARITY": 2,
+        "RARITY": 3,
         "MALE": 0,
         "FEMALE": 0
     },
@@ -157,7 +157,7 @@
         "ANIMAL_ID": 3,
         "FUR_ID": 59,
         "PERCENT": 8.35,
-        "RARITY": 2,
+        "RARITY": 3,
         "MALE": 0,
         "FEMALE": 0
     },

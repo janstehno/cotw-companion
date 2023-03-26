@@ -150,7 +150,7 @@
     "CS": "Béžová",
     "PL": "Beżowy",
     "DE": "Beige",
-    "FR": "Beige",
+    "FR": "Beige (Beige)",
     "ES": "Beige",
     "PT": "Bege",
     "JA": "ベージュ"
@@ -546,10 +546,10 @@
     "CS": "Skvrnitá",
     "PL": "Cętkowany",
     "DE": "Gefleckt",
-    "FR": "Tacheté",
+    "FR": "Tacheté (Spotted)",
     "ES": "Moteado",
     "PT": "Manchas",
-    "JA": "まだら"
+    "JA": "まだら (Spotted)"
   },
   {
     "ID": 49,
@@ -606,10 +606,10 @@
     "CS": "",
     "PL": "",
     "DE": "",
-    "FR": "Tacheté",
+    "FR": "Tacheté (Mottled)",
     "ES": "",
     "PT": "",
-    "JA": "まだら"
+    "JA": "まだら (Mottled)"
   },
   {
     "ID": 54,
@@ -630,7 +630,7 @@
     "CS": "",
     "PL": "",
     "DE": "",
-    "FR": "Beige",
+    "FR": "Beige (Buff)",
     "ES": "",
     "PT": "",
     "JA": "バフ"
@@ -854,13 +854,13 @@
   {
     "ID": 100,
     "EN": "Great One",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
+    "RU": "Великое",
+    "CS": "Velikán",
+    "PL": "Świetny Okaz",
+    "DE": "Die Großen",
     "FR": "Grandiose",
-    "ES": "",
-    "PT": "",
+    "ES": "Magnífico",
+    "PT": "Gradioso",
     "JA": "グレートワン"
   }
 ]

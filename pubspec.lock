@@ -287,6 +287,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.5"
+  material_scrollbar:
+    dependency: "direct main"
+    description:
+      name: material_scrollbar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   meta:
     dependency: "direct main"
     description:

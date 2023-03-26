@@ -7,18 +7,14 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 class Loadout {
   int _id;
   String _name;
-  List<dynamic> _ammo = [];
-  List<dynamic> _callers = [];
+  final List<dynamic> _ammo = [];
+  final List<dynamic> _callers = [];
 
   Loadout({
     required id,
     required name,
-    required ammo,
-    required callers,
   })  : _id = id,
-        _name = name,
-        _ammo = ammo,
-        _callers = callers;
+        _name = name;
 
   int get id => _id;
 
@@ -43,11 +39,12 @@ class Loadout {
   set setId(int i) => _id = i;
 
   factory Loadout.fromJson(Map<String, dynamic> json) {
-    return Loadout(
+    Loadout loadout = Loadout(
       id: json['ID'],
       name: json['NAME'],
-      ammo: json['AMMO'],
-      callers: json['CALLERS'],
     );
+    loadout.setAmmo = json['AMMO'] ?? [];
+    loadout.setCallers = json['CALLERS'] ?? [];
+    return loadout;
   }
 }

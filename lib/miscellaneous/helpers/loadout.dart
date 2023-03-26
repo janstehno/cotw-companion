@@ -14,7 +14,7 @@ class HelperLoadout {
   static late Loadout _lastRemovedLoadout;
 
   static final List<Loadout> _loadouts = [];
-  static final Loadout _defaultLoadout = Loadout(id: -1, name: "Default", ammo: [], callers: []);
+  static final Loadout _defaultLoadout = Loadout(id: -1, name: "Default");
 
   static Loadout _activeLoadout = _defaultLoadout;
 
@@ -73,7 +73,6 @@ class HelperLoadout {
   }
 
   static bool isActive(int loadoutId) {
-
     return loadoutId == _activeLoadout.id;
   }
 

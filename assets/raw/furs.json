@@ -350,12 +350,12 @@
   {
     "ID": 30,
     "EN": "Olive",
-    "RU": "",
+    "RU": "Оливка",
     "CS": "Olivová",
     "PL": "Oliwkowy",
     "DE": "Oliven",
     "FR": "Vert olive",
-    "ES": "",
+    "ES": "Verde oliva",
     "PT": "Oliva",
     "JA": "オリーブ"
   },
@@ -494,12 +494,12 @@
   {
     "ID": 42,
     "EN": "White brown",
-    "RU": "",
+    "RU": "Бело-коричневый",
     "CS": "Bílohnědá",
     "PL": "Biało-brązowe",
     "DE": "Weißbraun",
     "FR": "Brun blanc",
-    "ES": "",
+    "ES": "Blanco y pardo",
     "PT": "Pardo e branco",
     "JA": "ホワイトブラウン"
   },
@@ -686,13 +686,13 @@
   {
     "ID": 60,
     "EN": "Dark spotted",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
+    "RU": "Темный в крапинку",
+    "CS": "Tmavé skvrny",
+    "PL": "Ciemne cętki",
+    "DE": "Dunkel gefleckt",
     "FR": "Noir tacheté",
-    "ES": "",
-    "PT": "",
+    "ES": "Moteado oscuro",
+    "PT": "Escuro e pintado",
     "JA": "濃いまだら"
   },
   {

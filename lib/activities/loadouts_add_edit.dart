@@ -161,8 +161,12 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
         });
   }
 
-  Loadout _createLoadout() =>
-      Loadout(id: widget.toEdit.isEmpty ? HelperLoadout.loadouts.length : _loadoutId, name: _controller.text, ammo: _selectedAmmo, callers: _selectedCallers);
+  Loadout _createLoadout() {
+    Loadout loadout = Loadout(id: widget.toEdit.isEmpty ? HelperLoadout.loadouts.length : _loadoutId, name: _controller.text);
+    loadout.setAmmo = _selectedAmmo;
+    loadout.setCallers = _selectedCallers;
+    return loadout;
+  }
 
   _buildSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

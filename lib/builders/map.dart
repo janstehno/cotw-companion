@@ -23,11 +23,11 @@ class BuilderMap extends StatefulWidget {
 class BuilderMapState extends State<BuilderMap> {
   void _getAnimals() {
     _getMapObjects();
-    for (IdtoId ar in HelperJSON.animalsReserves) {
-      if (ar.secondId == widget.reserveId) {
-        for (Animal a in HelperJSON.animals) {
-          if (a.id == ar.firstId) {
-            HelperMap.addAnimal(a);
+    for (IdtoId iti in HelperJSON.animalsReserves) {
+      if (iti.secondId == widget.reserveId) {
+        for (Animal animal in HelperJSON.animals) {
+          if (animal.id == iti.firstId) {
+            HelperMap.addAnimal(animal);
             break;
           }
         }

@@ -69,8 +69,8 @@ class Weapon {
 
   int get getMaxPenetration {
     int max = 0;
-    for (int i in _ammo) {
-      int pen = HelperJSON.getAmmo(i).penetration;
+    for (int index in _ammo) {
+      int pen = HelperJSON.getAmmo(index).penetration;
       if (max < pen) max = pen;
     }
     return max;

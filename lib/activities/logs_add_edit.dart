@@ -8,7 +8,6 @@ import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
-import 'package:cotwcompanion/model/fur.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/title_functional.dart';
@@ -28,17 +27,17 @@ import 'package:provider/provider.dart';
 class ActivityLogsAddEdit extends StatefulWidget {
   final int animalId;
   final int reserveId;
-  final Function callback;
-  final Map<String, dynamic> toEdit;
+  final Log? log;
   final bool fromTrophyLodge;
+  final Function callback;
 
   const ActivityLogsAddEdit({
     Key? key,
     this.animalId = -1,
     this.reserveId = -1,
-    required this.callback,
-    this.toEdit = const {},
+    this.log,
     required this.fromTrophyLodge,
+    required this.callback,
   }) : super(key: key);
 
   @override
@@ -46,20 +45,17 @@ class ActivityLogsAddEdit extends StatefulWidget {
 }
 
 class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
-  final _controllerTrophyNumber = TextEditingController();
-  final _controllerWeightNumber = TextEditingController();
-  final _equalsDoubleTrophyNumber = RegExp(r'^([0-9]){1,4}(\.{1}[0-9]{1,3})?$');
-  final _equalsDoubleWeightNumber = RegExp(r'^([0-9]){1,4}(\.{1}[0-9]{1,3})?$');
-  final HelperLogger logger = HelperLogger("[LOGS] [ADD & EDIT]");
-  final List<int> _animalsIds = [];
-  final List<int> _fursIds = [];
-
-  late final List<Log> _trophyLodgeRecords = [];
-  late final List<Animal> _animals = [];
-  late final List<AnimalFur> _furs = [];
-  late final List<DropdownMenuItem> _dropDownListAnimals = [];
-  late final List<DropdownMenuItem> _dropDownListAnimalFurs = [];
-  late final List<DropdownMenuItem> _dropDownListReserves = [];
+  final TextEditingController _controllerTrophyNumber = TextEditingController();
+  final TextEditingController _controllerWeightNumber = TextEditingController();
+  final RegExp _equalsDoubleTrophyNumber = RegExp(r'^\d{1,4}(\.\d{1,3})?$');
+  final RegExp _equalsDoubleWeightNumber = RegExp(r'^\d{1,4}(\.\d{1,3})?$');
+  final HelperLogger _logger = HelperLogger("[LOGS] [ADD & EDIT]");
+  final List<Animal> _animals = [];
+  final List<AnimalFur> _furs = [];
+  final List<DropdownMenuItem> _dropDownListReserves = [];
+  final List<DropdownMenuItem> _dropDownListAnimals = [];
+  final List<DropdownMenuItem> _dropDownListAnimalFurs = [];
+  final List<Log> _trophyLodgeRecords = [];
 
   DateTime _dateTime = DateTime.now();
   int _minute = DateTime.now().minute;
@@ -71,25 +67,24 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   bool _init = true;
   bool _editing = false;
   bool _fromOtherSource = false;
-  bool _recordsOpened = false;
 
   bool _reserveChanged = false;
   bool _animalChanged = false;
   bool _genderChanged = false;
   bool _furChanged = false;
 
+  bool _recordsOpened = false;
   bool _correctTrophyNumber = true;
   bool _correctWeightNumber = true;
   bool _manuallySetTrophyRating = false;
 
-  int _logId = 0;
-  bool _lodge = false;
-  bool _gender = true;
-  bool _imperialUnits = false;
-  bool _correctAmmunition = true;
-  bool _maxTwoShots = true;
-  bool _vitalOrgan = true;
-  bool _noTrophyOrgan = true;
+  bool _isInLodge = false;
+  bool _isMale = true;
+  bool _usesImperials = false;
+  bool _correctAmmoUsed = true;
+  bool _twoShotsFired = true;
+  bool _vitalOrganHit = true;
+  bool _trophyOrganUndamaged = true;
   double _silver = 0;
   double _gold = 0;
   double _diamond = 0;
@@ -99,58 +94,58 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   double _maxWeight = 0;
 
   int _trophyRating = 0;
-  int _selectedAnimal = 0;
-  int _selectedAnimalId = 0;
   int _selectedReserve = 0;
   int _selectedReserveId = 0;
+  int _selectedAnimal = 0;
+  int _selectedAnimalId = 0;
   int _selectedFur = 0;
   int _selectedFurId = 0;
 
   @override
   void initState() {
-    _imperialUnits = Provider.of<Settings>(context, listen: false).getImperialUnits;
+    _usesImperials = Provider.of<Settings>(context, listen: false).getImperialUnits;
     _controllerTrophyNumber.addListener(() => _textTrophyAndWeightListener(0));
     _controllerWeightNumber.addListener(() => _textTrophyAndWeightListener(1));
     super.initState();
   }
 
   void _initialize() {
-    if (widget.animalId > -1 && widget.reserveId > -1) {
+    if (widget.animalId != -1 && widget.reserveId != -1) {
       //WHEN CREATING RECORD FROM RESERVE'S ANIMAL LIST OR FROM NEED ZONES FEATURE
-      _selectedReserveId = widget.reserveId;
-      _selectedReserve = _selectedReserveId - 1;
-      _selectedAnimalId = widget.animalId;
       _fromOtherSource = true;
-    } else if (widget.toEdit.isNotEmpty) {
+      _selectedReserve = _selectedReserveId - 1;
+      _selectedReserveId = widget.reserveId;
+      _selectedAnimalId = widget.animalId;
+    } else if (widget.log != null) {
       //WHEN EDITING RECORD
-      _logId = widget.toEdit["id"];
-      _gender = widget.toEdit["gender"];
-      _imperialUnits = widget.toEdit["imperials"];
-      _lodge = widget.toEdit["lodge"];
-      _correctAmmunition = widget.toEdit["correctAmmunition"];
-      _maxTwoShots = widget.toEdit["maxTwoShots"];
-      _vitalOrgan = widget.toEdit["vitalOrgan"];
-      _noTrophyOrgan = widget.toEdit["noTrophyOrgan"];
-      _trophy = widget.toEdit["trophy"];
-      _weight = widget.toEdit["weight"];
-      _selectedReserveId = widget.toEdit["reserveId"];
-      _selectedReserve = widget.toEdit["reserveId"] - 1;
-      _selectedAnimalId = widget.toEdit["animalId"];
-      _selectedFurId = widget.toEdit["furId"];
-      _dateTime = _getDateTime(widget.toEdit["date"]);
+      _editing = true;
+      _isMale = widget.log!.isMale;
+      _usesImperials = widget.log!.usesImperials;
+      _isInLodge = widget.log!.isInLodge;
+      _correctAmmoUsed = widget.log!.correctAmmoUsed;
+      _twoShotsFired = widget.log!.twoShotsFired;
+      _vitalOrganHit = widget.log!.vitalOrganHit;
+      _trophyOrganUndamaged = widget.log!.trophyOrganUndamaged;
+      _trophy = widget.log!.trophy;
+      _weight = widget.log!.weight;
+      _selectedReserveId = widget.log!.reserveId;
+      _selectedReserve = widget.log!.reserveId - 1;
+      _selectedAnimalId = widget.log!.animalId;
+      _selectedFurId = widget.log!.furId;
+      _dateTime = _getDateTime(widget.log!.date);
       _controllerTrophyNumber.text = _trophy.toString().split(".")[1] == "0" ? _trophy.toString().split(".")[0] : _trophy.toString();
       _controllerWeightNumber.text = _weight.toString().split(".")[1] == "0" ? _weight.toString().split(".")[0] : _weight.toString();
-      _editing = true;
     } else {
       //OTHERWISE
-      logger.i("Creating log");
+      _logger.i("Creating log");
       _dropDownListReserves.clear();
       _dropDownListReserves.addAll(_listOfReserves());
-      _selectedReserveId = HelperJSON.getReserve(_selectedReserve + 1).id;
+      _selectedReserve = 0;
+      _selectedReserveId = 1;
       _getAnimalsData();
-      _getAnimal(false, false);
+      _getAnimal(true);
       _getFursData();
-      _getFur(false, false);
+      _getFur(true);
     }
   }
 
@@ -160,42 +155,42 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       _init = false;
     }
     if (_fromOtherSource) {
-      logger.i("Creating log from other source");
+      _logger.i("Creating log from other source");
       _getAnimalsData();
-      _getAnimal(true, false);
+      _getAnimal(false);
       _getFursData();
-      _getFur(false, true);
+      _getFur(true);
       _fromOtherSource = false;
     } else if (_editing) {
-      logger.i("Editing log");
+      _logger.i("Editing log");
       _getAnimalsData();
-      _getAnimal(true, false);
+      _getAnimal(false);
       _getFursData();
-      _getFur(true, false);
+      _getFur(false);
       _getTrophyRating();
       _editing = false;
     } else if (_reserveChanged) {
-      logger.i("Reserve changed");
-      _selectedReserveId = HelperJSON.getReserve(_selectedReserve + 1).id;
+      _logger.i("Reserve changed");
+      _selectedReserveId = HelperJSON.reserves[_selectedReserve].id;
       _getAnimalsData();
-      _getAnimal(false, true);
+      _getAnimal(true);
       _getFursData();
-      _getFur(false, true);
+      _getFur(true);
       _reserveChanged = false;
     } else if (_animalChanged) {
-      logger.i("Animal changed");
-      _getAnimal(false, false);
+      _logger.i("Animal changed");
+      _getAnimal(false);
       _getFursData();
-      _getFur(false, true);
+      _getFur(true);
       _animalChanged = false;
     } else if (_furChanged) {
-      logger.i("Fur changed");
-      _getFur(false, false);
+      _logger.i("Fur changed");
+      _getFur(false);
       _furChanged = false;
     } else if (_genderChanged) {
-      logger.i("Gender changed");
+      _logger.i("Gender changed");
       _getFursData();
-      _getFur(false, true);
+      _getFur(true);
       _genderChanged = false;
     }
     _getTrophyOf(_animals.elementAt(_selectedAnimal));
@@ -235,86 +230,64 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   }
 
   void _getAnimalsData() {
-    logger.v("Getting animals");
-    _dropDownListAnimals.clear();
-    _dropDownListAnimals.addAll(_listOfAnimals());
+    _logger.v("Getting animals");
     _animals.clear();
-    _animalsIds.clear();
+    _dropDownListAnimals.clear();
     if (widget.fromTrophyLodge) {
       _animals.addAll(HelperJSON.animals);
     } else {
       for (IdtoId iti in HelperJSON.animalsReserves) {
         if (iti.secondId == _selectedReserveId) {
-          for (Animal a in HelperJSON.animals) {
-            if (iti.firstId == a.id) {
-              _animals.add(a);
-              break;
-            }
-          }
+          _animals.add(HelperJSON.getAnimal(iti.firstId));
         }
       }
     }
     _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, _selectedReserveId).compareTo(b.getNameBasedOnReserve(context.locale, _selectedReserveId)));
-    for (Animal a in _animals) {
-      _animalsIds.add(a.id);
-    }
+    _dropDownListAnimals.addAll(_listOfAnimals());
   }
 
-  void _getAnimal(bool hasSource, bool needToBeInitialized) {
-    if (hasSource) {
-      if (_animalsIds.contains(_selectedAnimalId)) {
-        _selectedAnimal = _animalsIds.indexOf(_selectedAnimalId);
-      } else {
-        _selectedAnimal = 0;
-        _selectedAnimalId = _animalsIds.elementAt(_selectedAnimal);
-      }
-    } else if (needToBeInitialized) {
+  void _getAnimal(bool init) {
+    if (init) {
       _selectedAnimal = 0;
-      _selectedAnimalId = _animalsIds.elementAt(_selectedAnimal);
+      _selectedAnimalId = _animals.elementAt(_selectedAnimal).id;
+    } else if (_editing) {
+      for (Animal animal in _animals) {
+        if (animal.id == _selectedAnimalId) _selectedAnimal = _animals.indexOf(animal);
+      }
     } else {
-      _selectedAnimalId = _animalsIds.elementAt(_selectedAnimal);
+      _selectedAnimalId = _animals.elementAt(_selectedAnimal).id;
     }
-    logger.v("Selected animal NUM $_selectedAnimal with ID $_selectedAnimalId");
-    if (widget.toEdit.isEmpty) _getTrophyLodgeRecords();
+    _logger.v("Selected animal NUM $_selectedAnimal with ID $_selectedAnimalId");
+    if (widget.log == null) _getTrophyLodgeRecords();
   }
 
   void _getFursData() {
-    logger.v("Getting furs");
-    _dropDownListAnimalFurs.clear();
-    _dropDownListAnimalFurs.addAll(_listOfFurs());
+    _logger.v("Getting furs");
     _furs.clear();
-    _fursIds.clear();
-    for (AnimalFur af in HelperJSON.animalsFurs) {
-      if (af.animalId == _selectedAnimalId) {
-        for (Fur f in HelperJSON.furs) {
-          if (af.furId == f.id && ((!af.male && !af.female) || (af.male && _gender) || (af.female && !_gender))) {
-            _furs.add(af);
-            break;
-          }
+    _dropDownListAnimalFurs.clear();
+    for (AnimalFur animalFur in HelperJSON.animalsFurs) {
+      if (animalFur.animalId == _selectedAnimalId) {
+        if ((!animalFur.male && !animalFur.female) || (animalFur.male && _isMale) || (animalFur.female && !_isMale)) {
+          _furs.add(animalFur);
         }
       }
     }
     _furs.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
-    for (AnimalFur af in _furs) {
-      _fursIds.add(af.furId);
-    }
+    _dropDownListAnimalFurs.addAll(_listOfFurs());
   }
 
-  void _getFur(bool hasSource, bool needToBeInitialized) {
-    if (hasSource) {
-      if (_fursIds.contains(_selectedFurId)) {
-        _selectedFur = _fursIds.indexOf(_selectedFurId);
-      } else {
-        _selectedFur = 0;
-        _selectedFurId = _fursIds.elementAt(_selectedFur);
-      }
-    } else if (needToBeInitialized) {
+  void _getFur(bool init) {
+    if (init) {
       _selectedFur = 0;
-      _selectedFurId = _fursIds.elementAt(_selectedFur);
+      _selectedFurId = _furs.elementAt(_selectedFur).furId;
+    } else if (_editing) {
+      for (AnimalFur animalFur in _furs) {
+        if (animalFur.furId == _selectedFurId) _selectedFur = _furs.indexOf(animalFur);
+      }
     } else {
-      _selectedFurId = _fursIds.elementAt(_selectedFur);
+      _selectedFurId = _furs.elementAt(_selectedFur).furId;
     }
-    logger.v("Selected fur NUM $_selectedFur with ID $_selectedFurId");
+    _logger.v("Selected fur NUM $_selectedFur with ID $_selectedFurId");
   }
 
   void _getTrophyRating() {
@@ -332,46 +305,46 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     if (_selectedFurId == Interface.greatOneId) {
       _trophyRating = 4; //GREAT ONE ADJUSTMENT
     }
-    if (widget.toEdit.isNotEmpty) {
-      _trophyRating = widget.toEdit["trophyRating"];
-      if (_trophyRating == 5) _trophyRating = 4; //GREAT ONE ADJUSTMENT
+    if (widget.log != null) {
+      _trophyRating = widget.log!.getTrophyRating(HelperJSON.getAnimal(_selectedAnimalId), true);
+      if (_trophyRating == 5) _trophyRating = 4; //GREAT ONE
     }
   }
 
-  void _getTrophyOf(Animal a) {
-    _silver = a.silver;
-    _gold = a.gold;
-    _diamond = a.diamond;
+  void _getTrophyOf(Animal animal) {
+    _silver = animal.silver;
+    _gold = animal.gold;
+    _diamond = animal.diamond;
     if (_selectedFurId == Interface.greatOneId) {
-      //GREAT ONE ADJUSTMENT
-      _maxTrophy = a.trophyGO;
-      _maxWeight = a.getWeightGOWithoutUnits(_imperialUnits);
+      //GREAT ONE
+      _maxTrophy = animal.trophyGO;
+      _maxWeight = animal.getWeightGOWithoutUnits(_usesImperials);
     } else {
-      _maxTrophy = a.trophy;
-      _maxWeight = a.getWeightWithoutUnits(_imperialUnits);
+      _maxTrophy = animal.trophy;
+      _maxWeight = animal.getWeightWithoutUnits(_usesImperials);
     }
   }
 
   void _getTrophyLodgeRecords() {
     _trophyLodgeRecords.clear();
-    for (Log l in HelperLog.logs) {
-      if (l.animalId == _selectedAnimalId && l.isInLodge) _trophyLodgeRecords.add(l);
+    for (Log log in HelperLog.logs) {
+      if (log.animalId == _selectedAnimalId && log.isInLodge) _trophyLodgeRecords.add(log);
     }
     _trophyLodgeRecords.sort((a, b) => b.trophy.compareTo(a.trophy));
-    logger.v("Found ${_trophyLodgeRecords.length} trophy lodge record/s with this animal");
+    _logger.v("Found ${_trophyLodgeRecords.length} trophy lodge record/s with this animal");
   }
 
   List<DropdownMenuItem> _listOfReserves() {
     List<DropdownMenuItem> dropItems = [];
-    for (int i = 0; i < HelperJSON.reserves.length; i++) {
+    for (int index = 0; index < HelperJSON.reserves.length; index++) {
       dropItems.add(DropdownMenuItem(
-          value: i,
+          value: index,
           child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 50,
               padding: const EdgeInsets.only(left: 30, right: 30),
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(HelperJSON.getReserve(i + 1).getName(context.locale),
+              child: AutoSizeText(HelperJSON.reserves[index].getName(context.locale),
                   maxLines: 1,
                   style: TextStyle(
                     color: Interface.dark,
@@ -384,15 +357,15 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   List<DropdownMenuItem> _listOfAnimals() {
     List<DropdownMenuItem> dropItems = [];
-    for (int i = 0; i < _animals.length; i++) {
+    for (int index = 0; index < _animals.length; index++) {
       dropItems.add(DropdownMenuItem(
-          value: i,
+          value: index,
           child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 50,
               padding: const EdgeInsets.only(left: 30, right: 30),
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(_animals[i].getNameBasedOnReserve(context.locale, _selectedReserveId),
+              child: AutoSizeText(_animals[index].getNameBasedOnReserve(context.locale, _selectedReserveId),
                   maxLines: 1,
                   style: TextStyle(
                     color: Interface.dark,
@@ -405,15 +378,15 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   List<DropdownMenuItem> _listOfFurs() {
     List<DropdownMenuItem> dropItems = [];
-    for (int i = 0; i < _furs.length; i++) {
+    for (int index = 0; index < _furs.length; index++) {
       dropItems.add(DropdownMenuItem(
-          value: i,
+          value: index,
           child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 50,
               padding: const EdgeInsets.only(left: 30, right: 30),
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(_furs[i].getName(context.locale),
+              child: AutoSizeText(_furs[index].getName(context.locale),
                   maxLines: 1,
                   style: TextStyle(
                     color: Interface.dark,
@@ -440,77 +413,77 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     }
   }
 
-  void _check() {
+  void _isTrophyCorrect() {
     if (_trophy < _diamond && _selectedFurId == Interface.greatOneId) {
       _trophy = _diamond;
     }
     if (widget.fromTrophyLodge) {
-      _correctAmmunition = true;
-      _maxTwoShots = true;
-      _vitalOrgan = true;
-      _noTrophyOrgan = true;
+      _correctAmmoUsed = true;
+      _twoShotsFired = true;
+      _vitalOrganHit = true;
+      _trophyOrganUndamaged = true;
       if (_trophy >= _diamond) {
         if (_trophyRating < 4) {
           _trophyRating = 3;
-          _correctAmmunition = false;
-          _maxTwoShots = false;
-          _vitalOrgan = false;
-          _noTrophyOrgan = false;
+          _correctAmmoUsed = false;
+          _twoShotsFired = false;
+          _vitalOrganHit = false;
+          _trophyOrganUndamaged = false;
         }
       } else if (_trophy >= _gold) {
         if (_trophyRating > 3) {
           _trophyRating = 3;
         } else if (_trophyRating < 3) {
           _trophyRating = 2;
-          _correctAmmunition = false;
-          _maxTwoShots = false;
-          _vitalOrgan = false;
-          _noTrophyOrgan = false;
+          _correctAmmoUsed = false;
+          _twoShotsFired = false;
+          _vitalOrganHit = false;
+          _trophyOrganUndamaged = false;
         }
       } else if (_trophy >= _silver) {
         if (_trophyRating > 2) {
           _trophyRating = 2;
         } else if (_trophyRating < 2) {
           _trophyRating = 1;
-          _correctAmmunition = false;
-          _maxTwoShots = false;
-          _vitalOrgan = false;
-          _noTrophyOrgan = false;
+          _correctAmmoUsed = false;
+          _twoShotsFired = false;
+          _vitalOrganHit = false;
+          _trophyOrganUndamaged = false;
         }
       } else if (_trophy > 0) {
         if (_trophyRating > 1) {
           _trophyRating = 1;
         } else if (_trophyRating < 1) {
           _trophyRating = 0;
-          _correctAmmunition = false;
-          _maxTwoShots = false;
-          _vitalOrgan = false;
-          _noTrophyOrgan = false;
+          _correctAmmoUsed = false;
+          _twoShotsFired = false;
+          _vitalOrganHit = false;
+          _trophyOrganUndamaged = false;
         }
       } else {
-        _correctAmmunition = false;
-        _maxTwoShots = false;
-        _vitalOrgan = false;
-        _noTrophyOrgan = false;
+        _correctAmmoUsed = false;
+        _twoShotsFired = false;
+        _vitalOrganHit = false;
+        _trophyOrganUndamaged = false;
       }
     }
   }
 
   Log _createLog() => Log(
-        id: widget.toEdit.isEmpty ? HelperLog.logs.length : _logId,
+        id: widget.log == null ? HelperLog.logs.length : widget.log!.id,
         date: HelperLog.getDate(_dateTime),
         reserveId: widget.fromTrophyLodge ? -1 : _selectedReserveId,
         animalId: _selectedAnimalId,
         furId: _selectedFurId,
         trophy: _trophy,
         weight: _weight,
-        imperials: _imperialUnits ? 1 : 0,
-        lodge: widget.fromTrophyLodge || _lodge ? 1 : 0,
-        gender: _gender ? 1 : 0,
-        harvestCorrectAmmo: _correctAmmunition ? 1 : 0,
-        harvestTwoShots: _maxTwoShots ? 1 : 0,
-        harvestVitalOrgan: _vitalOrgan ? 1 : 0,
-        harvestNoTrophyOrgan: _noTrophyOrgan ? 1 : 0,
+        imperials: _usesImperials ? 1 : 0,
+        lodge: widget.fromTrophyLodge || _isInLodge ? 1 : 0,
+        gender: _isMale ? 1 : 0,
+        harvestCorrectAmmo: _correctAmmoUsed ? 1 : 0,
+        harvestTwoShots: _twoShotsFired ? 1 : 0,
+        harvestVitalOrgan: _vitalOrganHit ? 1 : 0,
+        harvestNoTrophyOrgan: _trophyOrganUndamaged ? 1 : 0,
         animalName: HelperJSON.getAnimal(_selectedAnimalId).getNameBasedOnReserve(context.locale, _selectedReserveId),
         corrupted: false,
       );
@@ -653,10 +626,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           iconInactiveColor: Interface.alwaysDark,
           buttonInactiveBackground: Interface.female,
           isTitle: true,
-          isActive: _gender,
+          isActive: _isMale,
           onTap: () {
             setState(() {
-              _gender = !_gender;
+              _isMale = !_isMale;
               _genderChanged = true;
               _focus();
             });
@@ -667,7 +640,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildTrophy() {
     _textTrophyAndWeightListener(0);
     return Column(children: [
-      widget.toEdit.isNotEmpty
+      widget.log != null
           ? WidgetTitle(
               text: tr('animal_trophy'),
               subText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
@@ -732,10 +705,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               activeBackground: Interface.primary,
               inactiveColor: Interface.disabled,
               inactiveBackground: Interface.disabled.withOpacity(0.3),
-              isActive: _correctAmmunition,
+              isActive: _correctAmmoUsed,
               onTap: () {
                 setState(() {
-                  _correctAmmunition = !_correctAmmunition;
+                  _correctAmmoUsed = !_correctAmmoUsed;
                   _focus();
                 });
               },
@@ -747,10 +720,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 activeBackground: Interface.primary,
                 inactiveColor: Interface.disabled,
                 inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _maxTwoShots,
+                isActive: _twoShotsFired,
                 onTap: () {
                   setState(() {
-                    _maxTwoShots = !_maxTwoShots;
+                    _twoShotsFired = !_twoShotsFired;
                     _focus();
                   });
                 }),
@@ -761,10 +734,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 activeBackground: Interface.primary,
                 inactiveColor: Interface.disabled,
                 inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _noTrophyOrgan,
+                isActive: _trophyOrganUndamaged,
                 onTap: () {
                   setState(() {
-                    _noTrophyOrgan = !_noTrophyOrgan;
+                    _trophyOrganUndamaged = !_trophyOrganUndamaged;
                     _focus();
                   });
                 }),
@@ -775,10 +748,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 activeBackground: Interface.primary,
                 inactiveColor: Interface.disabled,
                 inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _vitalOrgan,
+                isActive: _vitalOrganHit,
                 onTap: () {
                   setState(() {
-                    _vitalOrgan = !_vitalOrgan;
+                    _vitalOrganHit = !_vitalOrganHit;
                     _focus();
                   });
                 })
@@ -877,9 +850,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     return GestureDetector(
         onTap: () {
           _focus();
-          _check();
+          _isTrophyCorrect();
           Log log = _createLog();
-          widget.toEdit.isEmpty ? HelperLog.addLog(log) : HelperLog.editLog(log);
+          widget.log != null ? HelperLog.editLog(log) : HelperLog.addLog(log);
           widget.callback();
           Navigator.pop(context);
         },
@@ -887,8 +860,12 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             height: 90,
             alignment: Alignment.center,
             color: Interface.primary,
-            child: SvgPicture.asset(widget.toEdit.isEmpty ? "assets/graphics/icons/plus.svg" : "assets/graphics/icons/edit.svg",
-                height: 20, width: 20, color: Interface.accent)));
+            child: SvgPicture.asset(
+              widget.log != null ? "assets/graphics/icons/edit.svg" : "assets/graphics/icons/plus.svg",
+              height: 20,
+              width: 20,
+              color: Interface.accent,
+            )));
   }
 
   Widget _buildRecords() {
@@ -936,7 +913,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           child: SingleChildScrollView(
               child: Column(children: [
         WidgetAppBar(
-          text: widget.toEdit.isEmpty ? tr('add') : tr('edit'),
+          text: widget.log != null ? tr('edit') : tr('add'),
           fontSize: Interface.s30,
           context: context,
         ),
@@ -950,7 +927,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         widget.fromTrophyLodge ? _buildTrophyRating() : _buildHarvestCheck(),
         _buildAdd(),
       ]))),
-      widget.toEdit.isNotEmpty ? const SizedBox.shrink() : _buildRecords(),
+      widget.log != null ? const SizedBox.shrink() : _buildRecords(),
     ]));
   }
 

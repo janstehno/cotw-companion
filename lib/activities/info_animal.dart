@@ -53,12 +53,12 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
     super.initState();
   }
 
-  void _toggleRarity(int r) {
+  void _toggleRarity(int rarity) {
     setState(() {
-      if (_toggledRarity == r) {
+      if (_toggledRarity == rarity) {
         _toggledRarity = -1;
       } else {
-        _toggledRarity = r;
+        _toggledRarity = rarity;
       }
     });
   }

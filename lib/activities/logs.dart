@@ -11,9 +11,7 @@ import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/activities/logs_add_edit.dart';
 import 'package:cotwcompanion/activities/logs_information.dart';
 import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/log.dart';
-import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/widgets/entries/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button.dart';
@@ -124,24 +122,24 @@ class ActivityLogsState extends State<ActivityLogs> {
     List<dynamic> values = [];
     List<int> types = [];
     List<String> searchTextList = searchText.split("|");
-    for (String s in searchTextList) {
-      if (s.isNotEmpty) {
-        if (equalsString.hasMatch(s)) {
-          values.add(s);
+    for (String searchText in searchTextList) {
+      if (searchText.isNotEmpty) {
+        if (equalsString.hasMatch(searchText)) {
+          values.add(searchText);
           types.add(0);
-        } else if (equalsNumber.hasMatch(s)) {
+        } else if (equalsNumber.hasMatch(searchText)) {
           if (!types.contains(2) && !types.contains(3)) {
-            values.add(double.parse(s));
+            values.add(double.parse(searchText));
             types.add(1);
           }
-        } else if (greaterNumber.hasMatch(s)) {
+        } else if (greaterNumber.hasMatch(searchText)) {
           if (!types.contains(1) && !types.contains(2)) {
-            values.add(double.parse(s.split(">")[1]));
+            values.add(double.parse(searchText.split(">")[1]));
             types.add(2);
           }
-        } else if (lesserNumber.hasMatch(s)) {
+        } else if (lesserNumber.hasMatch(searchText)) {
           if (!types.contains(1) && !types.contains(3)) {
-            values.add(double.parse(s.split("<")[1]));
+            values.add(double.parse(searchText.split("<")[1]));
             types.add(3);
           }
         }
@@ -161,10 +159,10 @@ class ActivityLogsState extends State<ActivityLogs> {
     _numberOfGoldLogs = 0;
     _numberOfDiamondLogs = 0;
     _numberOfGreatOneLogs = 0;
-    for (Log l in _filtered) {
-      Animal a = HelperJSON.getAnimal(l.animalId);
-      int t = _getTrophyRating(a, l);
-      switch (t) {
+    for (Log log in _filtered) {
+      Animal animal = HelperJSON.getAnimal(log.animalId);
+      int trophyRating = _getTrophyRating(animal, log);
+      switch (trophyRating) {
         case 1:
           _numberOfBronzeLogs++;
           break;
@@ -187,13 +185,13 @@ class ActivityLogsState extends State<ActivityLogs> {
     }
   }
 
-  int _getTrophyRating(Animal a, Log l) {
-    double trophy = l.trophy;
-    double silver = a.silver;
-    double gold = a.gold;
-    double diamond = a.diamond;
-    int decrease = l.harvestCheckPassed ? 0 : 1;
-    if (l.furId == Interface.greatOneId) {
+  int _getTrophyRating(Animal animal, Log log) {
+    double trophy = log.trophy;
+    double silver = animal.silver;
+    double gold = animal.gold;
+    double diamond = animal.diamond;
+    int decrease = log.harvestCheckPassed ? 0 : 1;
+    if (log.furId == Interface.greatOneId) {
       return 5 - (decrease * 2);
     }
     if (trophy >= diamond) {
@@ -213,12 +211,6 @@ class ActivityLogsState extends State<ActivityLogs> {
     setState(() {
       HelperLog.removeLogs();
       _reload();
-    });
-  }
-
-  void _changeView() {
-    setState(() {
-      _settings.changeCompactLogbook();
     });
   }
 
@@ -249,8 +241,8 @@ class ActivityLogsState extends State<ActivityLogs> {
     });
   }
 
-  void _addSeparator(bool b) {
-    String searchText = b ? _controller.text += "|" : _controller.text;
+  void _addSeparator() {
+    String searchText = _controller.text += "|";
     _controller.setTextAndPosition(searchText);
   }
 
@@ -272,11 +264,11 @@ class ActivityLogsState extends State<ActivityLogs> {
     });
   }
 
-  void _setPreferencesAndCriteria(int pref) {
-    String p = _criteriaNames[pref];
-    if (!_preferences.contains(p)) {
-      _preferences.add(p);
-      switch (pref) {
+  void _setPreferencesAndCriteria(int preferenceId) {
+    String preference = _criteriaNames[preferenceId];
+    if (!_preferences.contains(preference)) {
+      _preferences.add(preference);
+      switch (preferenceId) {
         case 0:
           _namePreferenceSet = _preferences.length - 1;
           _criteria.add(_nameCriteria);
@@ -291,7 +283,7 @@ class ActivityLogsState extends State<ActivityLogs> {
           break;
       }
     } else {
-      switch (pref) {
+      switch (preferenceId) {
         case 0:
           _nameCriteria = !_nameCriteria;
           _criteria[_namePreferenceSet] = _nameCriteria;
@@ -328,8 +320,8 @@ class ActivityLogsState extends State<ActivityLogs> {
     if (!status.isGranted) {
       await Permission.storage.request();
     }
-    final bool b = await HelperLog.loadFile();
-    if (b) {
+    final bool fileLoaded = await HelperLog.loadFile();
+    if (fileLoaded) {
       _reload();
       _buildSnackBar(tr('file_imported'));
     } else {
@@ -342,8 +334,8 @@ class ActivityLogsState extends State<ActivityLogs> {
     if (!status.isGranted) {
       await Permission.storage.request();
     }
-    final bool b = await HelperLog.saveFile();
-    if (b) {
+    final bool fileSaved = await HelperLog.saveFile();
+    if (fileSaved) {
       _buildSnackBar(tr('file_exported'));
     } else {
       _buildSnackBar(tr('file_not_exported'));
@@ -420,33 +412,22 @@ class ActivityLogsState extends State<ActivityLogs> {
             itemCount: _filtered.length,
             itemBuilder: (context, index) {
               Log log = _filtered[index];
-              Animal animal = log.animal;
-              Reserve reserve = log.reserve;
-              AnimalFur animalFur = log.animalFur;
               bool last = false;
               index == _filtered.length - 1 ? last = true : last = false;
               return last
                   ? Column(children: [
                       EntryLog(
-                          log: log,
-                          animal: animal,
-                          reserve: reserve,
-                          animalFur: animalFur,
-                          index: index,
-                          trophyLodge: widget.trophyLodge,
-                          callback: _reload,
-                          context: context),
+                        log: log,
+                        callback: _reload,
+                        context: context,
+                      ),
                       const SizedBox(height: 75)
                     ])
                   : EntryLog(
                       log: log,
-                      animal: animal,
-                      reserve: reserve,
-                      animalFur: animalFur,
-                      index: index,
-                      trophyLodge: widget.trophyLodge,
                       callback: _reload,
-                      context: context);
+                      context: context,
+                    );
             }));
   }
 
@@ -704,7 +685,6 @@ class ActivityLogsState extends State<ActivityLogs> {
                                   onTap: () {
                                     setState(() {
                                       _settings.changeDateOfRecord();
-                                      _reload();
                                       _focus();
                                     });
                                   }))),
@@ -725,7 +705,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                                   background: Interface.dark,
                                   onTap: () {
                                     setState(() {
-                                      _changeView();
+                                      _settings.changeCompactLogbook();
                                       _focus();
                                     });
                                   }))),
@@ -751,7 +731,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                         color: Interface.light,
                         background: Interface.dark,
                         onTap: () {
-                          _addSeparator(true);
+                          _addSeparator();
                         })),
                 //ADD
                 Container(

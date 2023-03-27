@@ -131,13 +131,13 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
 
   List<DropdownMenuItem> _buildDropDownReserves() {
     List<DropdownMenuItem> items = [];
-    for (Reserve r in HelperJSON.reserves) {
+    for (Reserve reserve in HelperJSON.reserves) {
       items.add(DropdownMenuItem(
-          value: r.id,
+          value: reserve.id,
           child: Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: 30, right: 30),
-              child: AutoSizeText(r.getName(context.locale),
+              child: AutoSizeText(reserve.getName(context.locale),
                   maxLines: 1,
                   style: TextStyle(
                     color: Interface.dark,

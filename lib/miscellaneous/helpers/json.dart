@@ -1,6 +1,7 @@
 // Copyright (c) 2022 Jan Stehno
 
 import 'dart:convert';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
@@ -94,6 +95,7 @@ class HelperJSON {
   }
 
   static Fur getFur(int id) {
+    if (id == Interface.greatOneId) return _furs.last;
     return _furs.elementAt(id - 1);
   }
 
@@ -222,9 +224,9 @@ class HelperJSON {
 
   static String listToJson(List<dynamic> list) {
     String parsed = "[";
-    for (int i = 0; i < list.length; i++) {
-      parsed += list[i].toString();
-      if (i != list.length - 1) {
+    for (int index = 0; index < list.length; index++) {
+      parsed += list[index].toString();
+      if (index != list.length - 1) {
         parsed += ",";
       }
     }

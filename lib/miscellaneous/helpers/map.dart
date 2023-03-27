@@ -16,14 +16,14 @@ class HelperMap {
   static final List<bool> _activeE = [
     true, //OUTPOSTS
     false, //LOOKOUTS
-    false //HIdES
+    false, //HIdES
   ];
   static final List<Color> _colorsE = [
     Interface.dark, //OUTPOSTS
     Interface.dark, //LOOKOUTS
-    Interface.dark //HIdES
+    Interface.dark, //HIdES
   ];
-  static final List<bool> _active = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+  static final List<bool> _active = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   static const List<Color> _colors = [
     Color(0xFF7C4DFF),
     Color(0xFFAB47BC),
@@ -56,21 +56,21 @@ class HelperMap {
 
   static List<LatLng> get getHides => _hides;
 
-  static Animal getAnimal(int i) => _animals[i];
+  static Animal getAnimal(int index) => _animals[index];
 
-  static String getName(int i) => _names[i];
+  static String getName(int index) => _names[index];
 
-  static bool isActive(int i) => _active[i];
+  static bool isActive(int index) => _active[index];
 
-  static bool isActiveE(int i) => _activeE[i];
+  static bool isActiveE(int index) => _activeE[index];
 
-  static Color getColor(int i) => _colors[i];
+  static Color getColor(int index) => _colors[index];
 
-  static Color getColorE(int i) => _colorsE[i];
+  static Color getColorE(int index) => _colorsE[index];
 
-  static bool getOpacity(int i) => isActive(i);
+  static bool getOpacity(int index) => isActive(index);
 
-  static bool getOpacityE(int i) => isActiveE(i);
+  static bool getOpacityE(int index) => isActiveE(index);
 
   static List<LatLng> getAnimalZones(int animalId, int zoom) {
     List<LatLng> result = [];
@@ -86,22 +86,22 @@ class HelperMap {
     return LatLng(lat, lng);
   }
 
-  static void activate(int i) {
-    _active[i] = (!_active[i]);
+  static void activate(int index) {
+    _active[index] = (!_active[index]);
   }
 
-  static void activateE(int i) {
-    _activeE[i] = (!_activeE[i]);
+  static void activateE(int index) {
+    _activeE[index] = (!_activeE[index]);
   }
 
   static void activateAll() {
     if (isEverythingActive()) {
-      for (int i = 0; i < _active.length; i++) {
-        _active[i] = false;
+      for (int index = 0; index < _active.length; index++) {
+        _active[index] = false;
       }
     } else {
-      for (int i = 0; i < _active.length; i++) {
-        _active[i] = true;
+      for (int index = 0; index < _active.length; index++) {
+        _active[index] = true;
       }
     }
   }
@@ -126,12 +126,12 @@ class HelperMap {
       _activeE[i] = (i == 0) ? true : false;
     }
     for (int i = 0; i < _active.length; i++) {
-      _active[i] = true;
+      _active[i] = false;
     }
   }
 
-  static void addAnimal(Animal a) {
-    _animals.add(a);
+  static void addAnimal(Animal animal) {
+    _animals.add(animal);
   }
 
   static void addNames(Locale locale, int reserveId) {

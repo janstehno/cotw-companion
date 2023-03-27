@@ -33,7 +33,7 @@ class WidgetSense extends StatelessWidget {
 
   List<Widget> _getSenseLevel() {
     List<Widget> result = [];
-    for (int i = 0; i < sense; i++) {
+    for (int count = 0; count < sense; count++) {
       result.add(Container(
           width: 7,
           height: 7,

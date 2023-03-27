@@ -21,21 +21,21 @@ class WidgetIcon extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
-    Color c = isActive ? color : Interface.dark.withOpacity(inactiveOpacity);
-    Color b = isActive ? background : Interface.disabled.withOpacity(inactiveOpacity);
+    Color clr = isActive ? color : Interface.dark.withOpacity(inactiveOpacity);
+    Color bcg = isActive ? background : Interface.disabled.withOpacity(inactiveOpacity);
     return Container(
         width: size,
         height: size,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: b,
+          color: bcg,
           borderRadius: BorderRadius.circular(size / 3),
         ),
         child: SvgPicture.asset(
           icon,
           width: size / 2.3,
           height: size / 2.3,
-          color: c,
+          color: clr,
         ));
   }
 

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.6.2";
+  static const String version = "1.6.3";
   static const int greatOneId = 100;
 
   static bool _darkMode = false;
@@ -225,9 +225,9 @@ class Interface {
     }
   }
 
-  static void setColors(bool b) {
-    _darkMode = b;
-    if (b) {
+  static void setColors(bool darkMode) {
+    _darkMode = darkMode;
+    if (darkMode) {
       //DARK MODE
       mainBody = ff06;
 

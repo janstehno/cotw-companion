@@ -26,11 +26,11 @@ class BuilderReserveAnimalsState extends State<BuilderReserveAnimals> {
   late final List<Animal> _animals = [];
 
   void _getAnimals() {
-    for (IdtoId ar in HelperJSON.animalsReserves) {
-      if (ar.secondId == widget.reserveId) {
-        for (Animal a in HelperJSON.animals) {
-          if (a.id == ar.firstId) {
-            _animals.add(a);
+    for (IdtoId iti in HelperJSON.animalsReserves) {
+      if (iti.secondId == widget.reserveId) {
+        for (Animal animal in HelperJSON.animals) {
+          if (animal.id == iti.firstId) {
+            _animals.add(animal);
             break;
           }
         }

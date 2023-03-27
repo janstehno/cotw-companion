@@ -18,11 +18,11 @@ class IdtoId {
 
   int get secondId => _secondId;
 
-  factory IdtoId.fromJson(Map<String, dynamic> json, String f, String s) {
+  factory IdtoId.fromJson(Map<String, dynamic> json, String first, String second) {
     return IdtoId(
       id: json['ID'],
-      firstId: json[f],
-      secondId: json[s],
+      firstId: json[first],
+      secondId: json[second],
     );
   }
 }

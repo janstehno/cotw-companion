@@ -42,8 +42,8 @@ class WidgetDlcListsState extends State<WidgetDlcLists> {
         break;
     }
     List<dynamic> result = [];
-    for (int d in widget.list) {
-      result.add(list[d - 1]);
+    for (int index in widget.list) {
+      result.add(list[index - 1]);
     }
     _items.addAll(result);
     widget.type == 1 && widget.reserves.isNotEmpty

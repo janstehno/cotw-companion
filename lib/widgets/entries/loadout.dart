@@ -238,7 +238,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => ActivityLoadoutsAddEdit(
-                            toEdit: {"id": widget.loadout.id, "name": widget.loadout.name, "ammo": widget.loadout.ammo, "callers": widget.loadout.callers},
+                            loadout: widget.loadout,
                             callback: widget.callback,
                           )));
               return false;

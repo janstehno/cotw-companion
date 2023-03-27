@@ -11,17 +11,17 @@ extension MultiSort on List {
       return this;
     }
 
-    int compare(int i, dynamic a, dynamic b) {
-      return criteria[i] ? a.get(preference[i]).compareTo(b.get(preference[i])) : b.get(preference[i]).compareTo(a.get(preference[i]));
+    int compare(int index, dynamic a, dynamic b) {
+      return criteria[index] ? a.get(preference[index]).compareTo(b.get(preference[index])) : b.get(preference[index]).compareTo(a.get(preference[index]));
     }
 
     int sortAll(a, b) {
-      int i = 0;
+      int index = 0;
       int result = 0;
-      while (i < preference.length) {
-        result = compare(i, a, b);
+      while (index < preference.length) {
+        result = compare(index, a, b);
         if (result != 0) break;
-        i++;
+        index++;
       }
       return result;
     }

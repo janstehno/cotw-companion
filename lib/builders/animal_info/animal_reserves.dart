@@ -32,9 +32,9 @@ class BuilderAnimalReservesState extends State<BuilderAnimalReserves> {
     _reserves.clear();
     for (IdtoId iti in HelperJSON.animalsReserves) {
       if (iti.firstId == widget.animalId) {
-        for (Reserve r in HelperJSON.reserves) {
-          if (r.id == iti.secondId) {
-            _reserves.add(r);
+        for (Reserve reserve in HelperJSON.reserves) {
+          if (reserve.id == iti.secondId) {
+            _reserves.add(reserve);
             break;
           }
         }

@@ -20,9 +20,9 @@ class Loadout {
 
   String get name => _name;
 
-  List<dynamic> get ammo => _ammo;
+  List<int> get ammo => _ammo.cast();
 
-  List<dynamic> get callers => _callers;
+  List<int> get callers => _callers.cast();
 
   String toJson() => '{"ID":$_id,"NAME":"$_name","AMMO":${HelperJSON.listToJson(_ammo)},"CALLERS":${HelperJSON.listToJson(_callers)}}';
 
@@ -36,7 +36,7 @@ class Loadout {
     _callers.addAll(callers);
   }
 
-  set setId(int i) => _id = i;
+  set setId(int id) => _id = id;
 
   factory Loadout.fromJson(Map<String, dynamic> json) {
     Loadout loadout = Loadout(

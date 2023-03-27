@@ -30,26 +30,26 @@ class BuilderReserveCallersState extends State<BuilderReserveCallers> {
     bool firstCallerAdded = false;
     for (IdtoId ar in HelperJSON.animalsReserves) {
       if (ar.secondId == widget.reserveId) {
-        for (Animal a in HelperJSON.animals) {
-          if (a.id == ar.firstId) {
-            _animals.add(a);
+        for (Animal animal in HelperJSON.animals) {
+          if (animal.id == ar.firstId) {
+            _animals.add(animal);
             break;
           }
         }
       }
     }
-    for (Animal a in _animals) {
-      for (IdtoId ac in HelperJSON.animalsCallers) {
-        if (a.id == ac.firstId) {
-          for (Caller c in HelperJSON.callers) {
-            if (c.id == ac.secondId) {
-              if (!firstCallerAdded && !_callers.contains(c)) {
-                _callers.add(c);
+    for (Animal animal in _animals) {
+      for (IdtoId iti in HelperJSON.animalsCallers) {
+        if (animal.id == iti.firstId) {
+          for (Caller caller in HelperJSON.callers) {
+            if (caller.id == iti.secondId) {
+              if (!firstCallerAdded && !_callers.contains(caller)) {
+                _callers.add(caller);
                 firstCallerAdded = true;
               } else {
-                if (_callers[_callers.length - 1].strength < c.strength) {
+                if (_callers[_callers.length - 1].strength < caller.strength) {
                   _callers.removeLast();
-                  if (!_callers.contains(c)) _callers.add(c);
+                  if (!_callers.contains(caller)) _callers.add(caller);
                 }
               }
               break;

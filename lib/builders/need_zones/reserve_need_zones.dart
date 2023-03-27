@@ -31,9 +31,9 @@ class BuilderReserveNeedZonesState extends State<BuilderReserveNeedZones> {
     _animals.clear();
     for (IdtoId iti in HelperJSON.animalsReserves) {
       if (iti.secondId == widget.reserveId) {
-        for (Animal a in HelperJSON.animals) {
-          if (iti.firstId == a.id) {
-            _animals.add(a);
+        for (Animal animal in HelperJSON.animals) {
+          if (iti.firstId == animal.id) {
+            _animals.add(animal);
             break;
           }
         }

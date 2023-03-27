@@ -96,10 +96,10 @@ class BuilderAddLoadoutItemsState extends State<BuilderAddLoadoutItems> {
               buttonBackground: Interface.selected,
               buttonInactiveBackground: Interface.unselected,
               oneLine: true,
-              isActive: _contains(itemId),
+              isActive: widget.type == ObjectType.ammo ? _contains(HelperJSON.getWeaponsAmmo(itemId).secondId) : _contains(itemId),
               onTap: () {
                 setState(() {
-                  _addOrRemove(itemId);
+                  _addOrRemove(widget.type == ObjectType.ammo ? HelperJSON.getWeaponsAmmo(itemId).secondId : itemId);
                   widget.set(widget.type, _selectedList);
                 });
               });

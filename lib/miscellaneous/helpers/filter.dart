@@ -96,50 +96,53 @@ class HelperFilter {
     if (searchText.isEmpty) {
       return HelperLog.logs;
     } else {
-      for (int i = 0; i < compareList[1].length; i++) {
-        dynamic d = compareList[0][i];
-        int c = compareList[1][i];
-        for (Log l in HelperLog.logs) {
-          Animal a = HelperJSON.getAnimal(l.animalId);
+      for (int index = 0; index < compareList[1].length; index++) {
+        dynamic d = compareList[0][index];
+        int c = compareList[1][index];
+        for (Log log in HelperLog.logs) {
+          Animal animal = HelperJSON.getAnimal(log.animalId);
           if (c == 0) {
             if (compareList[1].contains(1)) {
               dynamic d2 = compareList[0][compareList[1].indexOf(1)];
-              if (l.trophy == d2 && a.getNameBasedOnReserve(context.locale, l.reserveId).toLowerCase().contains(d) && !filtered.contains(l)) filtered.add(l);
+              if (log.trophy == d2 && animal.getNameBasedOnReserve(context.locale, log.reserveId).toLowerCase().contains(d) && !filtered.contains(log)) filtered.add(log);
             } else if (compareList[1].contains(2) && compareList[1].contains(3)) {
               dynamic d2 = compareList[0][compareList[1].indexOf(2)];
               dynamic d3 = compareList[0][compareList[1].indexOf(3)];
-              if (l.trophy >= d2 && l.trophy <= d3 && a.getNameBasedOnReserve(context.locale, l.reserveId).toLowerCase().contains(d) && !filtered.contains(l)) {
-                filtered.add(l);
+              if (log.trophy >= d2 &&
+                  log.trophy <= d3 &&
+                  animal.getNameBasedOnReserve(context.locale, log.reserveId).toLowerCase().contains(d) &&
+                  !filtered.contains(log)) {
+                filtered.add(log);
               }
             } else if (compareList[1].contains(3)) {
               dynamic d2 = compareList[0][compareList[1].indexOf(3)];
-              if (l.trophy <= d2 && a.getNameBasedOnReserve(context.locale, l.reserveId).toLowerCase().contains(d) && !filtered.contains(l)) filtered.add(l);
+              if (log.trophy <= d2 && animal.getNameBasedOnReserve(context.locale, log.reserveId).toLowerCase().contains(d) && !filtered.contains(log)) filtered.add(log);
             } else if (compareList[1].contains(2)) {
               dynamic d2 = compareList[0][compareList[1].indexOf(2)];
-              if (l.trophy >= d2 && a.getNameBasedOnReserve(context.locale, l.reserveId).toLowerCase().contains(d) && !filtered.contains(l)) filtered.add(l);
+              if (log.trophy >= d2 && animal.getNameBasedOnReserve(context.locale, log.reserveId).toLowerCase().contains(d) && !filtered.contains(log)) filtered.add(log);
             } else {
-              if (a.getNameBasedOnReserve(context.locale, l.reserveId).toLowerCase().contains(d) && !filtered.contains(l)) filtered.add(l);
+              if (animal.getNameBasedOnReserve(context.locale, log.reserveId).toLowerCase().contains(d) && !filtered.contains(log)) filtered.add(log);
             }
           } else if (c == 1) {
             if (!compareList[1].contains(0)) {
-              if (l.trophy == d && !filtered.contains(l)) filtered.add(l);
+              if (log.trophy == d && !filtered.contains(log)) filtered.add(log);
             }
           } else if (c == 2) {
             if (!compareList[1].contains(0)) {
               if (compareList[1].contains(3)) {
                 dynamic d2 = compareList[0][compareList[1].indexOf(3)];
-                if (l.trophy >= d && l.trophy <= d2 && !filtered.contains(l)) filtered.add(l);
+                if (log.trophy >= d && log.trophy <= d2 && !filtered.contains(log)) filtered.add(log);
               } else {
-                if (l.trophy >= d && !filtered.contains(l)) filtered.add(l);
+                if (log.trophy >= d && !filtered.contains(log)) filtered.add(log);
               }
             }
           } else if (c == 3) {
             if (!compareList[1].contains(0)) {
               if (compareList[1].contains(2)) {
                 dynamic d2 = compareList[0][compareList[0].indexOf(2)];
-                if (l.trophy >= d2 && l.trophy <= d && !filtered.contains(l)) filtered.add(l);
+                if (log.trophy >= d2 && log.trophy <= d && !filtered.contains(log)) filtered.add(log);
               } else {
-                if (l.trophy <= d && !filtered.contains(l)) filtered.add(l);
+                if (log.trophy <= d && !filtered.contains(log)) filtered.add(log);
               }
             }
           }

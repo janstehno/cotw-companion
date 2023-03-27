@@ -67,10 +67,10 @@ class BuilderWeaponAnimalsState extends State<BuilderWeaponAnimals> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: animals.length,
               itemBuilder: (context, index) {
-                Animal a = animals[index];
+                Animal animal = animals[index];
                 return WidgetTextDlc(
-                  text: a.getName(context.locale),
-                  dlc: a.isFromDlc,
+                  text: animal.getName(context.locale),
+                  dlc: animal.isFromDlc,
                 );
               }))
     ]);
@@ -78,8 +78,8 @@ class BuilderWeaponAnimalsState extends State<BuilderWeaponAnimals> {
 
   Widget _buildWidgets() {
     List<List<Animal>> animals = [];
-    for (List<Animal> a in _splitAnimals) {
-      if (a.isNotEmpty) animals.add(a);
+    for (List<Animal> animalList in _splitAnimals) {
+      if (animalList.isNotEmpty) animals.add(animalList);
     }
     return ListView.builder(
         shrinkWrap: true,

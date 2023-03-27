@@ -46,7 +46,7 @@ class AnimalFur {
 
   bool get isChosen => _chosen;
 
-  set chosen(bool b) => _chosen = b;
+  set chosen(bool chosen) => _chosen = chosen;
 
   Color get color {
     switch (_rarity) {

@@ -40,32 +40,32 @@ class HelperLoadout {
 
   static void _addLoadouts(List<Loadout> loadouts) {
     _loadouts.clear();
-    for (Loadout l in loadouts) {
-      l.setAmmo = knownAmmo(l);
-      l.setCallers = knownCallers(l);
-      _loadouts.add(l);
+    for (Loadout loadout in loadouts) {
+      loadout.setAmmo = knownAmmo(loadout);
+      loadout.setCallers = knownCallers(loadout);
+      _loadouts.add(loadout);
     }
   }
 
-  static List<int> knownAmmo(Loadout l) {
+  static List<int> knownAmmo(Loadout loadout) {
     List<int> result = [];
-    for (int w in l.ammo) {
-      if (w > 0 && w <= HelperJSON.ammo.length) result.add(w);
+    for (int ammo in loadout.ammo) {
+      if (ammo > 0 && ammo <= HelperJSON.ammo.length) result.add(ammo);
     }
     return result;
   }
 
-  static List<int> knownCallers(Loadout l) {
+  static List<int> knownCallers(Loadout loadout) {
     List<int> result = [];
-    for (int c in l.callers) {
-      if (c > 0 && c <= HelperJSON.callers.length) result.add(c);
+    for (int caller in loadout.callers) {
+      if (caller > 0 && caller <= HelperJSON.callers.length) result.add(caller);
     }
     return result;
   }
 
-  static void useLoadout(int i) {
-    if (_loadouts.isNotEmpty && i > -1) {
-      _activeLoadout = _loadouts[i];
+  static void useLoadout(int loadoutId) {
+    if (_loadouts.isNotEmpty && loadoutId > -1) {
+      _activeLoadout = _loadouts[loadoutId];
     } else {
       _activeLoadout = _defaultLoadout;
     }
@@ -80,11 +80,11 @@ class HelperLoadout {
     _min = 9;
     _max = 1;
     if (_activeLoadout.ammo.isNotEmpty) {
-      Ammo a;
-      for (int i in _activeLoadout.ammo) {
-        a = HelperJSON.getAmmo(i);
-        if (_min > a.min) _min = a.min;
-        if (_max < a.max) _max = a.max;
+      Ammo ammo;
+      for (int index in _activeLoadout.ammo) {
+        ammo = HelperJSON.getAmmo(index);
+        if (_min > ammo.min) _min = ammo.min;
+        if (_max < ammo.max) _max = ammo.max;
       }
     }
   }
@@ -93,8 +93,8 @@ class HelperLoadout {
     if (_activeLoadout.ammo.isEmpty) return false;
     for (IdtoId iti in HelperJSON.animalsCallers) {
       if (iti.firstId == animalId) {
-        for (int c in _activeLoadout.callers) {
-          if (c == iti.secondId) return true;
+        for (int index in _activeLoadout.callers) {
+          if (index == iti.secondId) return true;
         }
       }
     }
@@ -122,10 +122,10 @@ class HelperLoadout {
     _reIndex();
   }
 
-  static void removeLoadoutOnIndex(int i) {
-    _lastRemovedLoadout = _loadouts.elementAt(i);
-    _loadouts.removeAt(i);
-    if (_loadouts.isEmpty || _activeLoadout.id == i) {
+  static void removeLoadoutOnIndex(int index) {
+    _lastRemovedLoadout = _loadouts.elementAt(index);
+    _loadouts.removeAt(index);
+    if (_loadouts.isEmpty || _activeLoadout.id == index) {
       useLoadout(-1);
     }
     _reIndex();
@@ -189,9 +189,8 @@ class HelperLoadout {
     return File('$path/loadouts.json');
   }
 
-  static Future<String> readExternalFile(File f) async {
+  static Future<String> readExternalFile(File file) async {
     try {
-      final file = f;
       final String contents;
       await file.exists() ? contents = await file.readAsString() : contents = "[]";
       if (contents.startsWith("[") && contents.endsWith("]")) return contents;
@@ -226,9 +225,9 @@ class HelperLoadout {
 
   static String _parseLoadoutsToJsonString() {
     String parsed = "[";
-    for (int i = 0; i < _loadouts.length; i++) {
-      parsed += _loadouts[i].toJson();
-      if (i != _loadouts.length - 1) {
+    for (int index = 0; index < _loadouts.length; index++) {
+      parsed += _loadouts[index].toJson();
+      if (index != _loadouts.length - 1) {
         parsed += ",";
       }
     }

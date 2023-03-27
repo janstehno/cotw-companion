@@ -198,8 +198,8 @@ class Animal {
     }
   }
 
-  String removePointZero(String s) {
-    String text = s;
+  String removePointZero(String value) {
+    String text = value;
     List<String> tmp = text.split(".");
     List<String> split = tmp[1].split(" ");
     if (int.parse(split[0]) == 0) {

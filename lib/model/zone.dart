@@ -77,9 +77,9 @@ class Zone {
     List<Zone> animalZones = [];
     for (IdtoId iti in HelperJSON.animalsReserves) {
       if (iti.firstId == animalId) {
-        for (Zone z in HelperJSON.animalsZones) {
-          if (iti.secondId == z.reserveId && z.animalId == animalId) {
-            animalZones.add(z);
+        for (Zone zone in HelperJSON.animalsZones) {
+          if (iti.secondId == zone.reserveId && zone.animalId == animalId) {
+            animalZones.add(zone);
           }
         }
         allAnimalZones[iti.secondId] = animalZones;

@@ -22,12 +22,12 @@ import 'package:flutter_svg/svg.dart';
 
 class ActivityLoadoutsAddEdit extends StatefulWidget {
   final Function callback;
-  final Map<String, dynamic> toEdit;
+  final Loadout? loadout;
 
   const ActivityLoadoutsAddEdit({
     Key? key,
     required this.callback,
-    this.toEdit = const {},
+    this.loadout,
   }) : super(key: key);
 
   @override
@@ -36,12 +36,13 @@ class ActivityLoadoutsAddEdit extends StatefulWidget {
 
 class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   final TextEditingController _controller = TextEditingController();
+  final RegExp _nameRegex = RegExp(r'^(\p{L}|[\d_\-]){1,30}$', unicode: true);
   final List<int> _selectedAmmo = [];
   final List<int> _selectedCallers = [];
 
   late ScaffoldMessengerState _scaffoldMessengerState;
 
-  int _loadoutId = 0;
+  bool _editing = false;
   bool _correctName = false;
   String _errorMessage = "";
 
@@ -59,28 +60,20 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   }
 
   void _getData() {
-    if (widget.toEdit.isNotEmpty) {
+    _selectedAmmo.clear();
+    _selectedCallers.clear();
+    if (widget.loadout != null) {
       //WHEN EDITING LOADOUT
-      _loadoutId = widget.toEdit["id"];
-      _controller.text = widget.toEdit["name"];
-      for (int index in widget.toEdit["ammo"]) {
-        _selectedAmmo.add(HelperJSON.getAmmo(index).id);
-      }
-      for (int index in widget.toEdit["callers"]) {
-        _selectedCallers.add(HelperJSON.getCaller(index).id);
-      }
+      _editing = true;
+      _controller.text = widget.loadout!.name;
+      _selectedAmmo.addAll(widget.loadout!.ammo);
+      _selectedCallers.addAll(widget.loadout!.callers);
     }
   }
 
   void _reload() {
-    String s = _controller.text;
-    RegExp regex = RegExp(r'^(\p{L}|[\d_\-]){1,30}$', unicode: true);
     setState(() {
-      if (regex.hasMatch(s)) {
-        _correctName = true;
-      } else {
-        _correctName = false;
-      }
+      _correctName = _nameRegex.hasMatch(_controller.text);
     });
   }
 
@@ -91,7 +84,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
     }
   }
 
-  void _check() {
+  void _isNameCorrect() {
     if (_controller.text.isEmpty) {
       _errorMessage = tr('error_no_name');
     } else if (!_correctName) {
@@ -118,16 +111,16 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   Widget _listOfAmmo() {
     Ammo ammo;
     _selectedAmmo.sort((a, b) {
-      String nA = HelperJSON.getAmmo(a).getName(context.locale);
-      String nB = HelperJSON.getAmmo(b).getName(context.locale);
-      return (nA.compareTo(nB));
+      String nameA = HelperJSON.getAmmo(a).getName(context.locale);
+      String nameB = HelperJSON.getAmmo(b).getName(context.locale);
+      return (nameA.compareTo(nameB));
     });
     return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _selectedAmmo.length,
         itemBuilder: (context, index) {
-          ammo = HelperJSON.getAmmo(HelperJSON.getWeaponsAmmo(_selectedAmmo[index]).secondId);
+          ammo = HelperJSON.getAmmo(_selectedAmmo[index]);
           return Container(
               padding: EdgeInsets.only(top: index == 0 ? 25 : 2, bottom: index == _selectedAmmo.length - 1 ? 25 : 2),
               child: WidgetText(
@@ -141,9 +134,9 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   Widget _listOfCallers() {
     Caller caller;
     _selectedCallers.sort((a, b) {
-      String nA = HelperJSON.getCaller(a).getName(context.locale);
-      String nB = HelperJSON.getCaller(b).getName(context.locale);
-      return (nA.compareTo(nB));
+      String nameA = HelperJSON.getCaller(a).getName(context.locale);
+      String nameB = HelperJSON.getCaller(b).getName(context.locale);
+      return (nameA.compareTo(nameB));
     });
     return ListView.builder(
         shrinkWrap: true,
@@ -162,13 +155,14 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   }
 
   Loadout _createLoadout() {
-    Loadout loadout = Loadout(id: widget.toEdit.isEmpty ? HelperLoadout.loadouts.length : _loadoutId, name: _controller.text);
+    int loadoutId = _editing ? widget.loadout!.id : HelperLoadout.loadouts.length;
+    Loadout loadout = Loadout(id: loadoutId, name: _controller.text);
     loadout.setAmmo = _selectedAmmo;
     loadout.setCallers = _selectedCallers;
     return loadout;
   }
 
-  _buildSnackBar(String message) {
+  void _buildSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(milliseconds: 3000),
         padding: const EdgeInsets.all(0),
@@ -232,7 +226,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
     return GestureDetector(
         onTap: () {
           _focus();
-          _check();
+          _isNameCorrect();
           if (_errorMessage.isNotEmpty) {
             _buildSnackBar(_errorMessage);
           } else {
@@ -240,7 +234,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
               _scaffoldMessengerState.hideCurrentSnackBar();
             });
             Loadout loadout = _createLoadout();
-            widget.toEdit.isEmpty ? HelperLoadout.addLoadout(loadout) : HelperLoadout.editLoadout(loadout);
+            _editing ? HelperLoadout.editLoadout(loadout) : HelperLoadout.addLoadout(loadout);
             widget.callback();
             Navigator.pop(context);
           }
@@ -250,7 +244,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
             alignment: Alignment.center,
             color: Interface.primary,
             child: SvgPicture.asset(
-              widget.toEdit.isEmpty ? "assets/graphics/icons/plus.svg" : "assets/graphics/icons/edit.svg",
+              _editing ? "assets/graphics/icons/edit.svg" : "assets/graphics/icons/plus.svg",
               height: 20,
               width: 20,
               color: Interface.accent,
@@ -264,7 +258,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
             child: SingleChildScrollView(
                 child: Column(mainAxisSize: MainAxisSize.max, children: [
       WidgetAppBar(
-        text: widget.toEdit.isEmpty ? tr('add') : tr('edit'),
+        text: _editing ? tr('edit') : tr('add'),
         fontSize: Interface.s30,
         context: context,
       ),

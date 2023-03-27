@@ -85,7 +85,9 @@ class Log {
 
   bool get isInLodge => _lodge == 1;
 
-  bool get isFemale => _gender == 1;
+  bool get isFemale => _gender == 0;
+
+  bool get isMale => _gender == 1;
 
   bool get correctAmmoUsed => _harvestCorrectAmmo == 1;
 
@@ -137,7 +139,7 @@ class Log {
 
   Animal get animal => HelperJSON.getAnimal(_animalId == -1 ? 1 : _animalId);
 
-  AnimalFur get animalFur => HelperJSON.getAnimalFur(null, _animalId, _furId);
+  AnimalFur get fur => HelperJSON.getAnimalFur(null, _animalId, _furId);
 
   int getTrophyRating(Animal animal, bool harvestCheck) {
     int decrease = 0;

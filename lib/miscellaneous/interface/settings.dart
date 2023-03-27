@@ -75,9 +75,9 @@ class Settings extends ChangeNotifier {
 
   List<String> get getLanguages => _languages;
 
-  Locale getLocale(int i) => Locale(_languageCodes[i]);
+  Locale getLocale(int index) => Locale(_languageCodes[index]);
 
-  String getLocaleName(int i) => _languages[i];
+  String getLocaleName(int index) => _languages[index];
 
   Future<void> changeTheme() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -105,18 +105,18 @@ class Settings extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> changeLanguage(int l) async {
+  Future<void> changeLanguage(int languageId) async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    _language = l;
-    await _sharedPreferences.setInt("language", l);
+    _language = languageId;
+    await _sharedPreferences.setInt("language", languageId);
     notifyListeners();
   }
 
   Future<void> changeColor(Color color) async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    final int c = color.value;
+    final int hex = color.value;
     Interface.setPrimaryColor(color);
-    await _sharedPreferences.setInt("color", c);
+    await _sharedPreferences.setInt("color", hex);
     notifyListeners();
   }
 

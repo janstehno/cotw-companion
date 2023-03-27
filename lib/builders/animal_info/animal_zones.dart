@@ -34,20 +34,20 @@ class BuilderAnimalZonesState extends State<BuilderAnimalZones> {
     _zones.addAll(Zone.animalZones(widget.animalId));
   }
 
-  Widget _buildZoneChart(List<Zone> lz) {
+  Widget _buildZoneChart(List<Zone> zoneList) {
     _data.clear();
     _numberData.clear();
-    String reserveName = HelperJSON.getReserve(lz[0].reserveId).getName(context.locale);
-    for (int p = 0; p < lz.length; p++) {
-      Zone z = lz[p];
+    String reserveName = HelperJSON.getReserve(zoneList[0].reserveId).getName(context.locale);
+    for (int index = 0; index < zoneList.length; index++) {
+      Zone zone = zoneList[index];
       const radius = 23.0;
-      if (lz.length == 1) {
-        for (int i = z.from; i < z.to; i++) {
-          _data.add(PieChartSectionData(color: z.color, radius: radius));
+      if (zoneList.length == 1) {
+        for (int hour = zone.from; hour < zone.to; hour++) {
+          _data.add(PieChartSectionData(color: zone.color, radius: radius));
           _numberData.add(PieChartSectionData(
               color: Colors.transparent,
               radius: 50.0,
-              title: i.toString(),
+              title: hour.toString(),
               showTitle: true,
               titleStyle: TextStyle(
                 color: Interface.dark,
@@ -56,32 +56,32 @@ class BuilderAnimalZonesState extends State<BuilderAnimalZones> {
               )));
         }
       } else {
-        for (int i = z.from; i < z.to; i++) {
-          if (i == z.from) {
-            if (p == 0 && z.zone == lz[lz.length - 1].zone) {
-              _data.add(PieChartSectionData(color: z.color, radius: radius));
+        for (int hour = zone.from; hour < zone.to; hour++) {
+          if (hour == zone.from) {
+            if (index == 0 && zone.zone == zoneList[zoneList.length - 1].zone) {
+              _data.add(PieChartSectionData(color: zone.color, radius: radius));
             } else {
               _data.add(PieChartSectionData(
-                  color: z.color,
+                  color: zone.color,
                   radius: radius,
                   badgeWidget: SvgPicture.asset(
-                    z.icon,
+                    zone.icon,
                     height: 12,
                     width: 12,
-                    color: z.zone == 4
+                    color: zone.zone == 4
                         ? Interface.dark
-                        : z.zone == 3
+                        : zone.zone == 3
                             ? Interface.light
                             : Interface.alwaysDark,
                   )));
             }
           } else {
-            _data.add(PieChartSectionData(color: z.color, radius: radius));
+            _data.add(PieChartSectionData(color: zone.color, radius: radius));
           }
           _numberData.add(PieChartSectionData(
               color: Colors.transparent,
               radius: 50.0,
-              title: i.toString(),
+              title: hour.toString(),
               showTitle: true,
               titleStyle: TextStyle(
                 color: Interface.dark,

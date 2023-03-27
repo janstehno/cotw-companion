@@ -27,24 +27,24 @@ class HelperLog {
 
   static void _reIndex() {
     _logs.sort((a, b) => b.dateForCompare.compareTo(a.dateForCompare));
-    for (Log l in _logs) {
-      if (l.reserveId <= -1) l.setLodge = 1;
-      l.setId = _logs.indexOf(l);
+    for (Log log in _logs) {
+      if (log.reserveId <= -1) log.setLodge = 1;
+      log.setId = _logs.indexOf(log);
     }
-    for (Log l in _corruptedLogs) {
-      if (l.reserveId <= -1) l.setLodge = 1;
-      l.setId = _corruptedLogs.indexOf(l);
+    for (Log log in _corruptedLogs) {
+      if (log.reserveId <= -1) log.setLodge = 1;
+      log.setId = _corruptedLogs.indexOf(log);
     }
   }
 
   static void _reName() {
-    for (Log l in _logs) {
-      Animal a = HelperJSON.getAnimal(l.animalId);
+    for (Log log in _logs) {
+      Animal animal = HelperJSON.getAnimal(log.animalId);
       //FOR SORTING & FILTERING
-      if (l.reserveId == -1) {
-        l.setAnimalName = a.getName(_context.locale);
+      if (log.reserveId == -1) {
+        log.setAnimalName = animal.getName(_context.locale);
       } else {
-        l.setAnimalName = a.getNameBasedOnReserve(_context.locale, l.reserveId);
+        log.setAnimalName = animal.getNameBasedOnReserve(_context.locale, log.reserveId);
       }
     }
   }
@@ -52,18 +52,18 @@ class HelperLog {
   static void _addLogs(List<Log> logs) {
     _logs.clear();
     _corruptedLogs.clear();
-    for (Log l in logs) {
-      l.setCorrupted = true;
-      _corruptedLogs.add(l);
-      if (!_dateReg.hasMatch(l.date)) continue;
-      if (l.animalId <= 0 || l.animalId > HelperJSON.animals.length) continue;
-      if (l.reserveId == 0 || l.reserveId > HelperJSON.reserves.length) continue;
-      if (l.furId <= 0 || l.furId == 45 || l.furId == 46 || (l.furId >= 74 && l.furId <= 99) || l.furId > 100) continue;
-      if (l.trophy < 0 || l.trophy > 9999.999) continue;
-      if (l.weight < 0 || l.weight > 9999.999) continue;
-      l.setCorrupted = false;
+    for (Log log in logs) {
+      log.setCorrupted = true;
+      _corruptedLogs.add(log);
+      if (!_dateReg.hasMatch(log.date)) continue;
+      if (log.animalId <= 0 || log.animalId > HelperJSON.animals.length) continue;
+      if (log.reserveId == 0 || log.reserveId > HelperJSON.reserves.length) continue;
+      if (log.furId <= 0 || log.furId == 45 || log.furId == 46 || (log.furId >= 74 && log.furId <= 99) || log.furId > 100) continue;
+      if (log.trophy < 0 || log.trophy > 9999.999) continue;
+      if (log.weight < 0 || log.weight > 9999.999) continue;
+      log.setCorrupted = false;
       _corruptedLogs.removeLast();
-      _logs.add(l);
+      _logs.add(log);
     }
   }
 
@@ -92,9 +92,9 @@ class HelperLog {
     _reIndex();
   }
 
-  static void removeLogOnIndex(int i) {
-    _lastRemovedLog = _logs.elementAt(i);
-    _logs.removeAt(i);
+  static void removeLogOnIndex(int index) {
+    _lastRemovedLog = _logs.elementAt(index);
+    _logs.removeAt(index);
     _reIndex();
     _writeFile();
   }
@@ -106,9 +106,9 @@ class HelperLog {
     _writeFile();
   }
 
-  static void moveLogToLodge(int i) {
-    bool lodge = _logs[i].isInLodge ? false : true;
-    _logs[i].setLodge = lodge ? 1 : 0;
+  static void moveLogToLodge(int loadoutId) {
+    bool lodge = _logs[loadoutId].isInLodge ? false : true;
+    _logs[loadoutId].setLodge = lodge ? 1 : 0;
     _writeFile();
   }
 
@@ -170,9 +170,8 @@ class HelperLog {
     return File('$path/logbook.json');
   }
 
-  static Future<String> readExternalFile(File f) async {
+  static Future<String> readExternalFile(File file) async {
     try {
-      final file = f;
       final String contents;
       await file.exists() ? contents = await file.readAsString() : contents = "[]";
       if (contents.startsWith("[") && contents.endsWith("]")) return contents;
@@ -207,17 +206,17 @@ class HelperLog {
 
   static String _parseLogsToJsonString() {
     String parsed = "[";
-    for (int i = 0; i < _logs.length; i++) {
-      parsed += _logs[i].toJson();
-      if (i != _logs.length - 1) {
+    for (int index = 0; index < _logs.length; index++) {
+      parsed += _logs[index].toJson();
+      if (index != _logs.length - 1) {
         parsed += ",";
       } else if (_corruptedLogs.isNotEmpty) {
         parsed += ",";
       }
     }
-    for (int i = 0; i < _corruptedLogs.length; i++) {
-      parsed += _corruptedLogs[i].toJson();
-      if (i != _corruptedLogs.length - 1) {
+    for (int index = 0; index < _corruptedLogs.length; index++) {
+      parsed += _corruptedLogs[index].toJson();
+      if (index != _corruptedLogs.length - 1) {
         parsed += ",";
       }
     }
@@ -240,6 +239,6 @@ class HelperLog {
     int day = dateTime.day;
     int hour = dateTime.hour;
     int minute = dateTime.minute;
-    return "$day.$month.$year  $hour:$minute";
+    return "$day.$month.$year  $hour:${minute / 10 < 1 ? "0$minute" : minute}";
   }
 }

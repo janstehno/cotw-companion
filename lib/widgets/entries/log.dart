@@ -18,24 +18,12 @@ import 'package:provider/provider.dart';
 
 class EntryLog extends StatefulWidget {
   final Log log;
-  final Animal animal;
-  final Reserve reserve;
-  final AnimalFur animalFur;
-  final int index;
-  final int? style;
-  final bool trophyLodge;
   final Function callback;
   final BuildContext context;
 
   const EntryLog({
     Key? key,
     required this.log,
-    required this.animal,
-    required this.reserve,
-    required this.animalFur,
-    required this.trophyLodge,
-    required this.index,
-    this.style,
     required this.callback,
     required this.context,
     dismissible = true,
@@ -46,14 +34,26 @@ class EntryLog extends StatefulWidget {
 }
 
 class EntryLogState extends State<EntryLog> {
-  late final int _compactLogbook;
-  late final bool _dateOfRecord;
+  late final Settings _settings;
+
+  late int _style;
+  late bool _dateOfRecord;
+  late Reserve _reserve;
+  late Animal _animal;
+  late AnimalFur _fur;
 
   @override
   void initState() {
-    _compactLogbook = Provider.of<Settings>(context, listen: false).getCompactLogbook;
-    _dateOfRecord = Provider.of<Settings>(context, listen: false).getDateOfRecord;
+    _settings = Provider.of<Settings>(context, listen: false);
     super.initState();
+  }
+
+  void _getData() {
+    _style = _settings.getCompactLogbook;
+    _dateOfRecord = _settings.getDateOfRecord;
+    _reserve = widget.log.reserve;
+    _animal = widget.log.animal;
+    _fur = widget.log.fur;
   }
 
   void _hideSnackBar() {
@@ -71,25 +71,8 @@ class EntryLogState extends State<EntryLog> {
         context,
         MaterialPageRoute(
             builder: (context) => ActivityLogsAddEdit(
+                  log: widget.log,
                   fromTrophyLodge: widget.log.reserveId == -1,
-                  toEdit: {
-                    "id": widget.log.id,
-                    "gender": widget.log.isFemale,
-                    "imperials": widget.log.usesImperials,
-                    "lodge": widget.log.isInLodge,
-                    "correctAmmunition": widget.log.correctAmmoUsed,
-                    "maxTwoShots": widget.log.twoShotsFired,
-                    "vitalOrgan": widget.log.vitalOrganHit,
-                    "noTrophyOrgan": widget.log.trophyOrganUndamaged,
-                    "trophy": widget.log.trophy,
-                    "weight": widget.log.weight,
-                    "animalId": widget.log.animalId,
-                    "reserveId": widget.log.reserveId,
-                    "furId": widget.log.furId,
-                    //TROPHY RATING WITHOUT HARVEST CHECK
-                    "trophyRating": widget.log.getTrophyRating(widget.animal, true),
-                    "date": widget.log.date
-                  },
                   callback: widget.callback,
                 )));
   }
@@ -130,9 +113,9 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildName() {
     return Container(
       height: 30,
-      margin: EdgeInsets.only(right: 30, bottom: _compactLogbook == 1 ? 1 : 5),
+      margin: EdgeInsets.only(right: 30, bottom: _style == 1 ? 1 : 5),
       alignment: Alignment.centerLeft,
-      child: AutoSizeText(widget.animal.getNameBasedOnReserve(context.locale, widget.log.reserveId).toUpperCase(),
+      child: AutoSizeText(_animal.getNameBasedOnReserve(context.locale, widget.log.reserveId).toUpperCase(),
           maxLines: 2,
           textAlign: TextAlign.left,
           style: TextStyle(
@@ -147,7 +130,7 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildLodge() {
     return widget.log.isInLodge
         ? Container(
-            margin: EdgeInsets.only(right: 5, bottom: _compactLogbook == 1 ? 1 : 4),
+            margin: EdgeInsets.only(right: 5, bottom: _style == 1 ? 1 : 4),
             alignment: Alignment.centerLeft,
             child: SvgPicture.asset(
               "assets/graphics/icons/trophy_lodge.svg",
@@ -162,10 +145,10 @@ class EntryLogState extends State<EntryLog> {
     return Container(
         alignment: Alignment.centerRight,
         child: SvgPicture.asset(
-          widget.log.isFemale ? "assets/graphics/icons/male.svg" : "assets/graphics/icons/female.svg",
+          widget.log.isMale ? "assets/graphics/icons/male.svg" : "assets/graphics/icons/female.svg",
           width: 15,
           height: 15,
-          color: widget.log.isFemale ? Interface.male : Interface.female,
+          color: widget.log.isMale ? Interface.male : Interface.female,
         ));
   }
 
@@ -189,7 +172,7 @@ class EntryLogState extends State<EntryLog> {
           child: Container(
               height: 15,
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(widget.reserve.getName(context.locale),
+              child: AutoSizeText(_reserve.getName(context.locale),
                   maxLines: 1,
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -212,14 +195,14 @@ class EntryLogState extends State<EntryLog> {
               width: 10,
               height: 10,
               decoration: ShapeDecoration(
-                color: widget.animalFur.color,
+                color: _fur.color,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               ))),
       Expanded(
           child: Container(
               height: 15,
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(widget.animalFur.getName(context.locale),
+              child: AutoSizeText(_fur.getName(context.locale),
                   maxLines: 1,
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -293,12 +276,12 @@ class EntryLogState extends State<EntryLog> {
             maxWidth: 120,
             minHeight: widget.log.weight > 0 && buildWeight
                 ? 50
-                : _compactLogbook == 3
+                : _style == 3
                     ? 45
                     : 30,
             maxHeight: widget.log.weight > 0 && buildWeight
                 ? 50
-                : _compactLogbook == 3
+                : _style == 3
                     ? 45
                     : 30),
         child: Container(
@@ -306,7 +289,7 @@ class EntryLogState extends State<EntryLog> {
             margin: EdgeInsets.only(
                 top: widget.log.weight > 0
                     ? 0
-                    : _compactLogbook == 3
+                    : _style == 3
                         ? 15
                         : 0),
             child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end, children: [
@@ -317,10 +300,10 @@ class EntryLogState extends State<EntryLog> {
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(right: 5),
                     child: SvgPicture.asset(
-                      widget.log.getTrophyRatingIcon(widget.animal, true),
+                      widget.log.getTrophyRatingIcon(_animal, true),
                       height: 20,
                       width: 20,
-                      color: widget.log.getTrophyColor(widget.animal, true),
+                      color: widget.log.getTrophyColor(_animal, true),
                     )),
                 Container(
                     width: 12,
@@ -328,10 +311,10 @@ class EntryLogState extends State<EntryLog> {
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(right: 5),
                     child: SvgPicture.asset(
-                      widget.log.getTrophyRatingIcon(widget.animal, false),
+                      widget.log.getTrophyRatingIcon(_animal, false),
                       height: 20,
                       width: 20,
-                      color: widget.log.getTrophyColor(widget.animal, false),
+                      color: widget.log.getTrophyColor(_animal, false),
                     )),
                 Expanded(
                     child: Container(
@@ -413,27 +396,28 @@ class EntryLogState extends State<EntryLog> {
 
   Widget _buildLog() {
     return Container(
-        color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+        color: widget.log.id % 2 == 0 ? Interface.even : Interface.odd,
         child: Padding(
-            padding: EdgeInsets.fromLTRB(30, _compactLogbook == 1 ? 20 : 25, 30, _compactLogbook == 1 ? 20 : 25),
+            padding: EdgeInsets.fromLTRB(30, _style == 1 ? 20 : 25, 30, _style == 1 ? 20 : 25),
             child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-              (widget.style ?? _compactLogbook) == 1
+              _style == 1
                   ? _buildLogCompact()
-                  : (widget.style ?? _compactLogbook) == 2
+                  : _style == 2
                       ? _buildLogSemiCompact()
-                      : (widget.style ?? _compactLogbook) == 3
+                      : _style == 3
                           ? _buildLogNonCompact()
                           : Container()
             ])));
   }
 
   Widget _buildWidgets() {
+    _getData();
     return GestureDetector(
         onTap: () {
           setState(() {
             widget.callback();
           });
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityAnimalInfo(animalId: widget.animal.id)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityAnimalInfo(animalId: _animal.id)));
         },
         onDoubleTap: () {
           setState(() {

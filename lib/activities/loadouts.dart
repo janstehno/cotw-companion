@@ -79,8 +79,8 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     if (!status.isGranted) {
       await Permission.storage.request();
     }
-    final bool b = await HelperLoadout.loadFile();
-    if (b) {
+    final bool fileLoaded = await HelperLoadout.loadFile();
+    if (fileLoaded) {
       _filter();
       _buildSnackBar(tr('file_imported'));
     } else {
@@ -93,8 +93,8 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     if (!status.isGranted) {
       await Permission.storage.request();
     }
-    final bool b = await HelperLoadout.saveFile();
-    if (b) {
+    final bool fileSaved = await HelperLoadout.saveFile();
+    if (fileSaved) {
       _buildSnackBar(tr('file_exported'));
     } else {
       _buildSnackBar(tr('file_not_exported'));
@@ -117,11 +117,11 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   Widget _buildLoadouts() {
+    bool last = false;
     return WidgetScrollbar(
         child: ListView.builder(
             itemCount: _filtered.length,
             itemBuilder: (context, index) {
-              bool last = false;
               index == _filtered.length - 1 ? last = true : last = false;
               return last
                   ? Column(children: [

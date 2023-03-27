@@ -29,9 +29,9 @@ class WidgetSwitchSort extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
-    Color c = isActive ? activeColor : inactiveColor.withOpacity(inactiveOpacity);
-    Color b = isActive ? activeBackground : inactiveBackground.withOpacity(inactiveOpacity);
-    String i = isAscended ? "assets/graphics/icons/sort_ascended.svg" : "assets/graphics/icons/sort_descended.svg";
+    Color clr = isActive ? activeColor : inactiveColor.withOpacity(inactiveOpacity);
+    Color bcg = isActive ? activeBackground : inactiveBackground.withOpacity(inactiveOpacity);
+    String icon = isAscended ? "assets/graphics/icons/sort_ascended.svg" : "assets/graphics/icons/sort_descended.svg";
     return Stack(children: [
       AnimatedOpacity(
           opacity: isActive ? 1 : 0,
@@ -43,21 +43,21 @@ class WidgetSwitchSort extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(size / 4)),
-                color: b,
+                color: bcg,
               ),
               child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 SvgPicture.asset(
                   icon,
                   width: 10,
                   height: 10,
-                  color: c,
+                  color: clr,
                 ),
                 Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                   SvgPicture.asset(
-                    i,
+                    icon,
                     width: 12,
                     height: 12,
-                    color: c,
+                    color: clr,
                   ),
                   AutoSizeText(orderNumber.toString(),
                       maxLines: 1,

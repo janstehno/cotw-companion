@@ -179,32 +179,32 @@ class Graphics {
     "greenwingedteal"
   ];
 
-  static String getReserveIcon(int i) {
-    return "$_directory/reserves/${_reserves[i - 1]}.svg";
+  static String getReserveIcon(int id) {
+    return "$_directory/reserves/${_reserves[id - 1]}.svg";
   }
 
-  static String getCallerIcon(int i) {
-    return "$_directory/callers/${_callers[i - 1]}.svg";
+  static String getCallerIcon(int id) {
+    return "$_directory/callers/${_callers[id - 1]}.svg";
   }
 
-  static String getWeaponIcon(int i) {
-    return "$_directory/weapons/${_weapons[i - 1]}.svg";
+  static String getWeaponIcon(int id) {
+    return "$_directory/weapons/${_weapons[id - 1]}.svg";
   }
 
-  static String getAnimalIcon(int i) {
-    return "$_directory/animals/${_animals[i - 1]}.svg";
+  static String getAnimalIcon(int id) {
+    return "$_directory/animals/${_animals[id - 1]}.svg";
   }
 
-  static String getAnimalHead(int i) {
-    return "$_directory/heads/${_animals[i - 1]}.svg";
+  static String getAnimalHead(int id) {
+    return "$_directory/heads/${_animals[id - 1]}.svg";
   }
 
-  static String getAnimalBackground(int i) {
-    return "$_directory/backgrounds/${_animals[i - 1]}.jpg";
+  static String getAnimalBackground(int id) {
+    return "$_directory/backgrounds/${_animals[id - 1]}.jpg";
   }
 
-  static String getMapTile(int i, int x, int y, int z) {
-    return "$_directory/maps/${_reserves[i - 1]}/$z/[$x][$y].png";
+  static String getMapTile(int id, int x, int y, int z) {
+    return "$_directory/maps/${_reserves[id - 1]}/$z/[$x][$y].png";
   }
 
   static String getMapObjectIcon(MapObjectType type, int z) {
@@ -221,7 +221,7 @@ class Graphics {
     }
   }
 
-  static String getAnimalMapIcon(int i) {
-    return "$_directory/animals/pngs/${_animals[i - 1]}.png";
+  static String getAnimalMapIcon(int id) {
+    return "$_directory/animals/pngs/${_animals[id - 1]}.png";
   }
 }

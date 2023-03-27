@@ -24,20 +24,14 @@ class EntryTrophyLodgeRecord extends StatefulWidget {
 }
 
 class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
-  late final Animal animal;
-
-  @override
-  void initState() {
-    animal = HelperJSON.getAnimal(widget.log.animalId);
-    super.initState();
-  }
+  late Animal _animal;
 
   Widget _buildName() {
     return Container(
       height: 30,
       padding: const EdgeInsets.only(right: 30),
       alignment: Alignment.centerLeft,
-      child: AutoSizeText(animal.getNameBasedOnReserve(context.locale, widget.log.reserveId),
+      child: AutoSizeText(_animal.getNameBasedOnReserve(context.locale, widget.log.reserveId),
           maxLines: 1,
           textAlign: TextAlign.left,
           style: TextStyle(
@@ -54,15 +48,15 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
         padding: const EdgeInsets.only(right: 8),
         alignment: Alignment.centerLeft,
         child: SvgPicture.asset(
-          widget.log.isFemale ? "assets/graphics/icons/male.svg" : "assets/graphics/icons/female.svg",
+          widget.log.isMale ? "assets/graphics/icons/male.svg" : "assets/graphics/icons/female.svg",
           width: 17,
           height: 17,
-          color: widget.log.isFemale ? Interface.male : Interface.female,
+          color: widget.log.isMale ? Interface.male : Interface.female,
         ));
   }
 
   Widget _buildFur() {
-    String furName = widget.log.animalFur.getName(context.locale);
+    String furName = widget.log.fur.getName(context.locale);
     return Container(
         height: 20,
         alignment: widget.log.weight > 0 ? Alignment.bottomLeft : Alignment.centerLeft,
@@ -89,10 +83,10 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 5),
                 child: SvgPicture.asset(
-                  widget.log.getTrophyRatingIcon(animal, true),
+                  widget.log.getTrophyRatingIcon(_animal, true),
                   height: 20,
                   width: 20,
-                  color: widget.log.getTrophyColor(animal, true),
+                  color: widget.log.getTrophyColor(_animal, true),
                 )),
             Container(
                 width: 12,
@@ -100,10 +94,10 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 5),
                 child: SvgPicture.asset(
-                  widget.log.getTrophyRatingIcon(animal, false),
+                  widget.log.getTrophyRatingIcon(_animal, false),
                   height: 20,
                   width: 20,
-                  color: widget.log.getTrophyColor(animal, false),
+                  color: widget.log.getTrophyColor(_animal, false),
                 )),
             Expanded(
                 child: Container(
@@ -141,6 +135,7 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
   }
 
   Widget _buildWidgets() {
+    _animal = HelperJSON.getAnimal(widget.log.animalId);
     return Container(
         color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
         child: Padding(

@@ -26,9 +26,9 @@ class BuilderCallerAnimalsState extends State<BuilderCallerAnimals> {
     _animals.clear();
     for (IdtoId iti in HelperJSON.animalsCallers) {
       if (iti.secondId == widget.callerId) {
-        for (Animal a in HelperJSON.animals) {
-          if (a.id == iti.firstId) {
-            _animals.add(a);
+        for (Animal animal in HelperJSON.animals) {
+          if (animal.id == iti.firstId) {
+            _animals.add(animal);
             break;
           }
         }

@@ -40,13 +40,13 @@ class ActivitySettingsState extends State<ActivitySettings> {
 
   List<DropdownMenuItem> _buildDropDownLanguages() {
     List<DropdownMenuItem> items = [];
-    for (int i = 0; i < _settings.getLanguages.length; i++) {
+    for (int index = 0; index < _settings.getLanguages.length; index++) {
       items.add(DropdownMenuItem(
-          value: i,
+          value: index,
           child: Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: 30, right: 30),
-              child: AutoSizeText(_settings.getLocaleName(i),
+              child: AutoSizeText(_settings.getLocaleName(index),
                   maxLines: 1,
                   style: TextStyle(
                     color: Interface.dark,

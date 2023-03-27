@@ -83,18 +83,18 @@ class ActivityMapState extends State<ActivityMap> {
     return x;
   }
 
-  void _values(double x) {
-    if (x >= 1) {
+  void _values(double zoom) {
+    if (zoom >= 1) {
       _level = 1;
       _circle = 200;
       _circleBorder = 2;
     }
-    if (x > 1.667) {
+    if (zoom > 1.667) {
       _level = 2;
       _circle = 150;
       _circleBorder = 3;
     }
-    if (x > 2.334) {
+    if (zoom > 2.334) {
       _level = 3;
       _circle = 10;
       _circleBorder = 5;
@@ -216,7 +216,7 @@ class ActivityMapState extends State<ActivityMap> {
                 ..._buildObjectMarkers(transformer, HelperMap.getOutposts, Graphics.getMapObjectIcon(MapObjectType.outpost, _level), Interface.colorMapOLH, 15, 0),
                 ..._buildObjectMarkers(transformer, HelperMap.getLookouts, Graphics.getMapObjectIcon(MapObjectType.lookout, _level), Interface.colorMapOLH, 15, 1),
                 ..._buildObjectMarkers(transformer, HelperMap.getHides, Graphics.getMapObjectIcon(MapObjectType.hide, _level), Interface.colorMapOLH, 3, 2),
-                for (int s = 0; s < HelperMap.getAnimals.length; s++) ..._buildZones(transformer, s)
+                for (int index = 0; index < HelperMap.getAnimals.length; index++) ..._buildZones(transformer, index)
               ]));
         });
   }
@@ -238,11 +238,11 @@ class ActivityMapState extends State<ActivityMap> {
     );
   }
 
-  Iterable<Widget> _buildZones(MapTransformer transformer, int s) {
-    if (HelperMap.isActive(s)) {
-      Animal a = HelperMap.getAnimals[s];
+  Iterable<Widget> _buildZones(MapTransformer transformer, int index) {
+    if (HelperMap.isActive(index)) {
+      Animal a = HelperMap.getAnimals[index];
       String asset = Graphics.getAnimalMapIcon(a.id);
-      return _buildZoneMarkers(transformer, HelperMap.getAnimalZones(a.id, _level), asset, HelperMap.getColor(s), 30, s);
+      return _buildZoneMarkers(transformer, HelperMap.getAnimalZones(a.id, _level), asset, HelperMap.getColor(index), 30, index);
     } else {
       return [];
     }

@@ -31,7 +31,7 @@ class WidgetSwitchSort extends StatelessWidget {
   Widget _buildWidgets() {
     Color clr = isActive ? activeColor : inactiveColor.withOpacity(inactiveOpacity);
     Color bcg = isActive ? activeBackground : inactiveBackground.withOpacity(inactiveOpacity);
-    String icon = isAscended ? "assets/graphics/icons/sort_ascended.svg" : "assets/graphics/icons/sort_descended.svg";
+    String orderArrow = isAscended ? "assets/graphics/icons/sort_ascended.svg" : "assets/graphics/icons/sort_descended.svg";
     return Stack(children: [
       AnimatedOpacity(
           opacity: isActive ? 1 : 0,
@@ -54,7 +54,7 @@ class WidgetSwitchSort extends StatelessWidget {
                 ),
                 Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                   SvgPicture.asset(
-                    icon,
+                    orderArrow,
                     width: 12,
                     height: 12,
                     color: clr,

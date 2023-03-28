@@ -31,12 +31,7 @@ class BuilderReserveNeedZonesState extends State<BuilderReserveNeedZones> {
     _animals.clear();
     for (IdtoId iti in HelperJSON.animalsReserves) {
       if (iti.secondId == widget.reserveId) {
-        for (Animal animal in HelperJSON.animals) {
-          if (iti.firstId == animal.id) {
-            _animals.add(animal);
-            break;
-          }
-        }
+        _animals.add(HelperJSON.getAnimal(iti.firstId));
       }
     }
     _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserveId).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserveId)));
@@ -49,15 +44,16 @@ class BuilderReserveNeedZonesState extends State<BuilderReserveNeedZones> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _animals.length,
         itemBuilder: (context, index) {
-          Map<int, List<Zone>> zonesList = Zone.animalZones(_animals[index].id);
-          List<Zone> zones = [];
-          for (int key in zonesList.keys) {
-            if (key == widget.reserveId) {
-              zones.addAll(zonesList[key]!);
-            }
-          }
+          List<Zone> zones = Zone.animalZones(_animals[index].id, widget.reserveId);
           return EntryNeedZone(
-              animal: _animals[index], reserveId: widget.reserveId, zones: zones, hour: widget.hour, index: index, count: _animals.length, compact: widget.compact);
+            index: index,
+            animal: _animals[index],
+            reserveId: widget.reserveId,
+            hour: widget.hour,
+            count: _animals.length,
+            compact: widget.compact,
+            zones: zones,
+          );
         });
   }
 

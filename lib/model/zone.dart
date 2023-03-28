@@ -72,24 +72,21 @@ class Zone {
     }
   }
 
-  static Map<int, List<Zone>> animalZones(int animalId) {
-    Map<int, List<Zone>> allAnimalZones = {};
+  static List<Zone> animalZones(int animalId, int reserveId) {
     List<Zone> animalZones = [];
+    animalZones.addAll(HelperJSON.getAnimalZones(animalId, reserveId));
+    if (animalZones.isEmpty) animalZones.add(Zone(id: -1, animalId: animalId, reserveId: reserveId, zone: 4, from: 0, to: 24));
+    return animalZones;
+  }
+
+  static Map<int, List<Zone>> allAnimalZones(int animalId) {
+    Map<int, List<Zone>> allAnimalZones = {};
+    List<int> animalReserves = [];
     for (IdtoId iti in HelperJSON.animalsReserves) {
-      if (iti.firstId == animalId) {
-        for (Zone zone in HelperJSON.animalsZones) {
-          if (iti.secondId == zone.reserveId && zone.animalId == animalId) {
-            animalZones.add(zone);
-          }
-        }
-        allAnimalZones[iti.secondId] = animalZones;
-        animalZones = [];
-      }
+      if (iti.firstId == animalId) animalReserves.add(iti.secondId);
     }
-    for (int reserveId in allAnimalZones.keys) {
-      if (allAnimalZones[reserveId]!.isEmpty) {
-        allAnimalZones[reserveId]!.add(Zone(id: -1, animalId: animalId, reserveId: reserveId, zone: 4, from: 0, to: 24));
-      }
+    for (int reserveId in animalReserves) {
+      allAnimalZones[reserveId] = animalZones(animalId, reserveId);
     }
     return allAnimalZones;
   }

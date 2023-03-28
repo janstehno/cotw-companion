@@ -110,7 +110,7 @@ class Log {
     int day = int.parse(date.split("-")[2]);
     int hour = int.parse(date.split("-")[3]);
     int minute = int.parse(date.split("-")[4]);
-    return formatted ? "$day.$month.$year  $hour:$minute" : "$year-$month-$day-$hour-$minute";
+    return formatted ? "$day.$month.$year  $hour:${minute / 10 < 1 ? "0$minute" : minute}" : "$year-$month-$day-$hour-$minute";
   }
 
   String _getDateForCompare() {

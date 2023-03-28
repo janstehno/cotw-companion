@@ -29,106 +29,128 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
   Widget _buildName() {
     return Container(
       height: 30,
-      padding: const EdgeInsets.only(right: 30),
       alignment: Alignment.centerLeft,
-      child: AutoSizeText(_animal.getNameBasedOnReserve(context.locale, widget.log.reserveId),
-          maxLines: 1,
+      margin: const EdgeInsets.only(right: 10),
+      child: AutoSizeText(_animal.getNameBasedOnReserve(context.locale, widget.log.reserveId).toUpperCase(),
+          maxLines: 2,
+          minFontSize: 10,
           textAlign: TextAlign.left,
           style: TextStyle(
             color: Interface.dark,
-            fontSize: Interface.s18,
-            fontWeight: FontWeight.w600,
+            fontSize: 14,
+            fontWeight: FontWeight.w800,
+            fontFamily: 'Title',
           )),
     );
   }
 
   Widget _buildGender() {
     return Container(
-        height: 30,
-        padding: const EdgeInsets.only(right: 8),
-        alignment: Alignment.centerLeft,
+        width: 15,
+        height: 15,
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(right: 5),
         child: SvgPicture.asset(
           widget.log.isMale ? "assets/graphics/icons/male.svg" : "assets/graphics/icons/female.svg",
-          width: 17,
-          height: 17,
+          width: 13,
+          height: 13,
           color: widget.log.isMale ? Interface.male : Interface.female,
         ));
   }
 
   Widget _buildFur() {
     String furName = widget.log.fur.getName(context.locale);
-    return Container(
-        height: 20,
-        alignment: widget.log.weight > 0 ? Alignment.bottomLeft : Alignment.centerLeft,
-        child: AutoSizeText(furName,
-            maxLines: 1,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              color: Interface.dark,
-              fontSize: Interface.s14,
-              fontWeight: FontWeight.w400,
-            )));
+    return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
+      Container(
+          width: 15,
+          height: 15,
+          alignment: Alignment.center,
+          margin: const EdgeInsets.only(right: 5),
+          child: Container(
+              width: 10,
+              height: 10,
+              decoration: ShapeDecoration(
+                color: widget.log.fur.color,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              ))),
+      Expanded(
+          child: Container(
+              height: 15,
+              alignment: Alignment.centerLeft,
+              child: AutoSizeText(furName,
+                  maxLines: 1,
+                  minFontSize: 10,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Interface.dark,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ))))
+    ]);
   }
 
   Widget _buildTrophy() {
-    return Container(
-        height: 30,
-        width: 120,
-        alignment: Alignment.centerRight,
-        child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Container(
-                width: 25,
-                height: 30,
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 5),
-                child: SvgPicture.asset(
-                  widget.log.getTrophyRatingIcon(_animal, true),
-                  height: 20,
-                  width: 20,
-                  color: widget.log.getTrophyColor(_animal, true),
-                )),
-            Container(
-                width: 12,
-                height: 30,
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 5),
-                child: SvgPicture.asset(
-                  widget.log.getTrophyRatingIcon(_animal, false),
-                  height: 20,
-                  width: 20,
-                  color: widget.log.getTrophyColor(_animal, false),
-                )),
-            Expanded(
-                child: Container(
+    return ConstrainedBox(
+        constraints: const BoxConstraints(
+          minWidth: 110,
+          maxWidth: 110,
+          minHeight: 30,
+          maxHeight: 30,
+        ),
+        child: Container(
+            alignment: Alignment.centerRight,
+            child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end, children: [
+              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                Container(
+                    width: 20,
                     height: 30,
-                    alignment: Alignment.centerRight,
-                    child: AutoSizeText(widget.log.trophy.toString(),
-                        maxLines: 1,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Interface.dark,
-                          fontSize: Interface.s20,
-                          fontWeight: FontWeight.w800,
-                        ))))
-          ])
-        ]));
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(right: 5),
+                    child: SvgPicture.asset(
+                      widget.log.getTrophyRatingIcon(_animal, true),
+                      color: widget.log.getTrophyColor(_animal, true),
+                      fit: BoxFit.fitWidth,
+                    )),
+                Container(
+                    width: 10,
+                    height: 30,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(right: 10),
+                    child: SvgPicture.asset(
+                      widget.log.getTrophyRatingIcon(_animal, false),
+                      color: widget.log.getTrophyColor(_animal, false),
+                      fit: BoxFit.fitWidth,
+                    )),
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerRight,
+                        child: AutoSizeText(widget.log.trophy.toString(),
+                            maxLines: 1,
+                            minFontSize: 10,
+                            style: TextStyle(
+                              color: Interface.dark,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                            ))))
+              ]),
+            ])));
   }
 
   Widget _buildWeight() {
-    return Container(
-        height: 20,
-        alignment: Alignment.centerRight,
+    return SizedBox(
+        width: 65,
+        height: 15,
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.only(left: 10),
               child: AutoSizeText(widget.log.usesImperials ? ("${widget.log.weight} ${tr('pounds')}") : ("${widget.log.weight} ${tr('kilograms')}"),
                   maxLines: 1,
+                  minFontSize: 10,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Interface.dark,
-                    fontSize: Interface.s14,
+                    fontSize: 14,
                     fontWeight: FontWeight.w400,
                   )))
         ]));
@@ -147,7 +169,7 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                 _buildTrophy(),
               ]),
               Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Expanded(child: _buildFur()),
+                Expanded(child: widget.log.fur.furId == Interface.greatOneId ? Container() : _buildFur()),
                 widget.log.weight > 0 ? _buildWeight() : Container(),
               ])
             ])));

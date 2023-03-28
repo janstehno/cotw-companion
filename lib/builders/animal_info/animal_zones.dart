@@ -31,7 +31,7 @@ class BuilderAnimalZonesState extends State<BuilderAnimalZones> {
 
   void _getZones() {
     _zones.clear();
-    _zones.addAll(Zone.animalZones(widget.animalId));
+    _zones.addAll(Zone.allAnimalZones(widget.animalId));
   }
 
   Widget _buildZoneChart(List<Zone> zoneList) {

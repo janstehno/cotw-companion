@@ -113,8 +113,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     if (widget.animalId != -1 && widget.reserveId != -1) {
       //WHEN CREATING RECORD FROM RESERVE'S ANIMAL LIST OR FROM NEED ZONES FEATURE
       _fromOtherSource = true;
-      _selectedReserve = _selectedReserveId - 1;
       _selectedReserveId = widget.reserveId;
+      _selectedReserve = _selectedReserveId - 1;
       _selectedAnimalId = widget.animalId;
     } else if (widget.log != null) {
       //WHEN EDITING RECORD
@@ -250,7 +250,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     if (init) {
       _selectedAnimal = 0;
       _selectedAnimalId = _animals.elementAt(_selectedAnimal).id;
-    } else if (_editing) {
+    } else if (_fromOtherSource || _editing) {
       for (Animal animal in _animals) {
         if (animal.id == _selectedAnimalId) _selectedAnimal = _animals.indexOf(animal);
       }

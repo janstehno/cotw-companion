@@ -99,6 +99,14 @@ class HelperJSON {
     return _furs.elementAt(id - 1);
   }
 
+  static List<Zone> getAnimalZones(int animalId, int reserveId) {
+    List<Zone> zones = [];
+    for (Zone zone in _animalsZones) {
+      if (zone.animalId == animalId && zone.reserveId == reserveId) zones.add(zone);
+    }
+    return zones;
+  }
+
   static AnimalFur getAnimalFur(int? id, int? animalId, int? furId) {
     if (id != null) {
       return _animalsFurs.elementAt(id - 1);

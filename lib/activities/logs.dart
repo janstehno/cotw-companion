@@ -418,6 +418,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                   ? Column(children: [
                       EntryLog(
                         log: log,
+                        index: index,
                         callback: _reload,
                         context: context,
                       ),
@@ -425,6 +426,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                     ])
                   : EntryLog(
                       log: log,
+                      index: index,
                       callback: _reload,
                       context: context,
                     );

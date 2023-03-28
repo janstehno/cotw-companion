@@ -38,12 +38,6 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
   int _zoneNext = 4;
   String _zoneTill = "-";
 
-  @override
-  void initState() {
-    _getZones();
-    super.initState();
-  }
-
   double _getSize() {
     return !widget.compact ? (MediaQuery.of(context).size.height - 75) / (widget.count <= 10 ? widget.count : 10) : 75;
   }
@@ -86,6 +80,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
   }
 
   Widget _buildWidgets() {
+    _getZones();
     return Dismissible(
         key: Key(widget.index.toString()),
         direction: DismissDirection.startToEnd,

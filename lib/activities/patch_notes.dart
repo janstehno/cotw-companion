@@ -54,6 +54,14 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        color: Interface.odd,
+        version: "1.6.5",
+        changes: const [
+          "- Improvement of the UI. Need zones feature now shows what zone animal has at, and will have after the current and next hour. There is now also a slider to filter animals based on their class.",
+          "- Added filter for the Weapons. You can now filter weapons by their type. E.g. If you type 'shotgun' in the search box, there will be only shotguns in the list."
+        ],
+      ),
+      WidgetPatchNote(
         color: Interface.even,
         version: "1.6.2 - 1.6.4",
       ),
@@ -68,7 +76,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.even,
         version: "1.6.0",
         changes: const [
-          "- Improvement of the maps.",
+          "- Improvement of the UI. Maps were reworked due to performance issues. There are now 3 zoom levels. First one shows the most general positions for animals, as well as outposts and lookouts. Second one shows more accurate positions for animals, as well as outposts, lookouts, and hides. Third level shows positions of need zones for animals, as well as everything before. Keep in mind that there could still appear some performance issues.",
         ],
       ),
       WidgetPatchNote(
@@ -82,7 +90,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.even,
         version: "1.5.8",
         changes: const [
-          "- Improvement of the maps. Added zoom feature. Added new background. Possible performance issues.",
+          "- Improvement of the UI. Added zoom feature for maps. As well as new background. There could appear some performance issues.",
         ],
       ),
       WidgetPatchNote(
@@ -100,7 +108,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.odd,
         version: "1.5.5",
         changes: const [
-          "- Improvement of the Loadouts. Loadouts can be edited now.",
+          "- Improvement of the UI. Loadouts can be edited now.",
         ],
       ),
       WidgetPatchNote(
@@ -118,7 +126,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.even,
         version: "1.5.0",
         changes: const [
-          "- Improvement of the Catch book and Trophy lodge. Fixed few problems when creating a record.",
+          "- Improvement of the UI. Fixed few problems when creating a record in Catch book and Trophy lodge.",
           "- Changed word values (mostly from rare to uncommon) of furs for almost every animal. Per cent values remained the same.",
         ],
       ),
@@ -191,7 +199,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.odd,
         version: "1.3.9",
         changes: const [
-          "- Improvement of the Catch book and Trophy lodge. They are loaded separately now.",
+          "- Improvement of the UI. Catch book and Trophy lodge features are loaded separately now.",
         ],
       ),
       WidgetPatchNote(
@@ -206,10 +214,11 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.even,
         version: "1.3.6",
         changes: const [
-          "- Improvement of the Catch book and Trophy lodge. Added Export / Import feature.",
+          "- Improvement of the UI. Added Export / Import feature for Catch book and Trophy lodge feature.",
           "- Catch book record can now be created from Need Zones feature and Reserve's animal list. You can create it by swiping the list item to the right.",
           "- Patch Notes feature. Only in English for now. Link on GitHub website with future plans and issues of the newest version of the app.",
-          "- Improvement of the UI. Overhauled have been map zones (some zones can overlap) and various icons. Animal's images have been added including their anatomy. Filter for animal's recommended weapons in the settings. It chooses the weapons based on the highest minimum class and the greatest penetration. If possible at least one weapon is chosen from the base game and at least one is chosen from DLC.",
+          "- Improvement of the UI. Overhauled have been map zones (some zones can overlap) and various icons. Animal's images have been added including their anatomy.",
+          "- Filter for animal's recommended weapons in the settings. It chooses the weapons based on the highest minimum class and the greatest penetration. If possible at least one weapon is chosen from the base game and at least one is chosen from DLC.",
         ],
       ),
       WidgetPatchNote(
@@ -220,7 +229,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.even,
         version: "1.3.4",
         changes: const [
-          "- Improvement of the Catch book and Trophy lodge.",
+          "- Improvement of the UI. Especially of the Catch book and Trophy lodge feature.",
           "- Great Ones added.",
         ],
       ),
@@ -261,7 +270,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.even,
         version: "1.2.8",
         changes: const [
-          "- Improvement of the landscape UI.",
+          "- Improvement of the UI. Mostly of landscape view.",
         ],
       ),
       WidgetPatchNote(
@@ -316,7 +325,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.even,
         version: "1.1.3",
         changes: const [
-          "- Improvement of the UI. Need zones are changing based on set time. Temporary dark mode.",
+          "- Improvement of the UI. Need zones will change when hour is set. Temporary dark mode.",
         ],
       ),
       WidgetPatchNote(

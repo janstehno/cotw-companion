@@ -2,6 +2,9 @@
 
 import 'dart:ui';
 
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/model/idtoid.dart';
+
 class Reserve {
   final int _id;
   final String _en, _ru, _cs, _pl, _de, _fr, _es, _pt, _ja;
@@ -72,6 +75,17 @@ class Reserve {
   bool get hasMountains => _mountains == 1;
 
   bool get hasForest => _forest == 1;
+
+  int get maxClass {
+    int max = 1;
+    for (IdtoId iti in HelperJSON.animalsReserves) {
+      if (iti.secondId == _id) {
+        int level = HelperJSON.getAnimal(iti.firstId).level;
+        if (level > max) max = level;
+      }
+    }
+    return max;
+  }
 
   String get en => _en;
 

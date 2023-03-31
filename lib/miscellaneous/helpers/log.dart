@@ -119,7 +119,7 @@ class HelperLog {
       if (content == "[]") return false;
       RegExp pathToDownloads = RegExp(r'.+0/');
       final path = '${pathToDownloads.stringMatch(output.path).toString()}Download';
-      final fileName = "${getDate(DateTime.now())}-saved-logbook-cotwcompanion.json";
+      final fileName = "${Log.dateToString(DateTime.now())}-saved-logbook-cotwcompanion.json";
       final file = File('$path/$fileName');
       file.writeAsString(content);
       return true;
@@ -222,23 +222,5 @@ class HelperLog {
     }
     parsed += "]";
     return parsed;
-  }
-
-  static String getDate(DateTime dateTime) {
-    String year = dateTime.year.toString();
-    String month = dateTime.month > 9 ? dateTime.month.toString() : "0${dateTime.month}";
-    String day = dateTime.day > 9 ? dateTime.day.toString() : "0${dateTime.day}";
-    String hour = dateTime.hour > 9 ? dateTime.hour.toString() : "0${dateTime.hour}";
-    String minute = dateTime.minute > 9 ? dateTime.minute.toString() : "0${dateTime.minute}";
-    return "$year-$month-$day-$hour-$minute";
-  }
-
-  static String getDateFormatted(DateTime dateTime) {
-    int year = dateTime.year;
-    int month = dateTime.month;
-    int day = dateTime.day;
-    int hour = dateTime.hour;
-    int minute = dateTime.minute;
-    return "$day.$month.$year  $hour:${minute / 10 < 1 ? "0$minute" : minute}";
   }
 }

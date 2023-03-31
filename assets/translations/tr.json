@@ -95,7 +95,6 @@
   "logbook_info_8_4": "*Depolama alanına erişime izin vermeniz* gerekir. Başka yolu yok. Buna izin vermezseniz, uygulama dosyayı oluşturamaz ve kaydedemez veya cihazınızın depolama alanından içe aktaramaz. Öte yandan, uygulama cihazınıza yüklendiği sürece kayıtlar uygulamanın depolama alanına kaydedilmeye devam eder. İzin verilen izni her zaman beğenmezseniz, cihazın ayarlarından bu izne her zaman manuel olarak izin vermeyebilirsiniz.",
   "map": "Harita",
   "map_zones_accuracy": "Hayvanların oluşumlarının doğruluğunu göster",
-  "map_zones_style": "Hayvanların oluşumlarını daireler olarak göster",
   "max": "Maksimum",
   "meters": "m",
   "metric_units": "Metrik",

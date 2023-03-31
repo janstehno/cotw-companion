@@ -11,6 +11,7 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/projection.dart';
 import 'package:cotwcompanion/activities/map_layers.dart';
 import 'package:cotwcompanion/model/animal.dart';
+import 'package:cotwcompanion/model/map_zone.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/widgets/button.dart';
 import 'package:cotwcompanion/widgets/switch.dart';
@@ -18,7 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_shadow/simple_shadow.dart';
+import 'package:cotwcompanion/model/zone.dart';
 
 class ActivityMap extends StatefulWidget {
   final int reserveId;
@@ -213,100 +214,114 @@ class ActivityMapState extends State<ActivityMap> {
                   return const SizedBox.shrink();
                 }),
                 Container(color: Interface.colorMapBackground.withOpacity(0.5)),
-                ..._buildObjectMarkers(transformer, HelperMap.getOutposts, Graphics.getMapObjectIcon(MapObjectType.outpost, _level), Interface.colorMapOLH, 15, 0),
-                ..._buildObjectMarkers(transformer, HelperMap.getLookouts, Graphics.getMapObjectIcon(MapObjectType.lookout, _level), Interface.colorMapOLH, 15, 1),
-                ..._buildObjectMarkers(transformer, HelperMap.getHides, Graphics.getMapObjectIcon(MapObjectType.hide, _level), Interface.colorMapOLH, 3, 2),
+                ..._buildObjectMarkers(transformer, HelperMap.getOutposts, Interface.colorMapOLH, 15, MapObjectType.outpost),
+                ..._buildObjectMarkers(transformer, HelperMap.getLookouts, Interface.colorMapOLH, 15, MapObjectType.lookout),
+                ..._buildObjectMarkers(transformer, HelperMap.getHides, Interface.colorMapOLH, 3, MapObjectType.hide),
                 for (int index = 0; index < HelperMap.getAnimals.length; index++) ..._buildZones(transformer, index)
               ]));
         });
   }
 
-  Iterable<Widget> _buildObjectMarkers(MapTransformer transformer, List<LatLng> list, String icon, Color color, int size, int type) {
-    if (HelperMap.isActiveE(type)) {
+  Iterable<Widget> _buildObjectMarkers(MapTransformer transformer, List<LatLng> list, Color color, double iconSize, MapObjectType objectType) {
+    String icon = Graphics.getMapObjectIcon(objectType, _level);
+    if (HelperMap.isActiveE(objectType.index)) {
       final positions = list.map(transformer.toOffset).toList();
       return positions.map(
-        (pos) => _buildMarkerWidget(pos, icon, color, size, false, false, type),
+        (offset) => _buildObjectMarker(offset, icon, color, iconSize, objectType),
       );
     }
     return [];
   }
 
-  Iterable<Widget> _buildZoneMarkers(MapTransformer transformer, List<LatLng> list, String icon, Color color, int size, int number) {
-    final positions = list.map(transformer.toOffset).toList();
-    return positions.map(
-      (pos) => _buildMarkerWidget(pos, icon, color, size, true, _settings.getMapZonesStyle, number),
-    );
+  Widget _buildObjectMarker(Offset offset, String icon, Color color, double markerSize, MapObjectType objectType) {
+    double size = markerSize + (_mapController.zoom * 5);
+    double left = offset.dx - (size / 2);
+    double right = offset.dx + (size / 2);
+    double top = offset.dy - (size / 2);
+    double bottom = offset.dy + (size / 2);
+    markerSize + (_mapController.zoom * 5);
+    if (_inView(left, top, right, bottom)) {
+      return Positioned(
+          width: size,
+          height: size,
+          left: left,
+          top: top,
+          child: objectType == MapObjectType.hide && _level == 1
+              ? const SizedBox.shrink()
+              : Image.asset(
+                  icon,
+                  fit: BoxFit.fitWidth,
+                  color: color,
+                ));
+    }
+    return const SizedBox.shrink();
   }
 
   Iterable<Widget> _buildZones(MapTransformer transformer, int index) {
     if (HelperMap.isActive(index)) {
-      Animal a = HelperMap.getAnimals[index];
-      String asset = Graphics.getAnimalMapIcon(a.id);
-      return _buildZoneMarkers(transformer, HelperMap.getAnimalZones(a.id, _level), asset, HelperMap.getColor(index), 30, index);
+      Animal animal = HelperMap.getAnimals[index];
+      return _buildZoneMarkers(transformer, HelperMap.getAnimalZones(animal.id, _level), index);
     } else {
       return [];
     }
   }
 
-  Widget _buildMarkerWidget(Offset pos, String icon, Color color, int markerSize, bool zoneMarker, bool circular, int number) {
-    double mx = 0, my = 0;
-    double size = circular
-        ? _circle
-        : zoneMarker
-            ? markerSize - (_mapController.zoom)
-            : markerSize + (_mapController.zoom * 5);
-    if (zoneMarker && _level == 3) {
-      mx = cos(((360 / HelperMap.getAnimals.length) / HelperMap.getAnimals.length) * number) * (7);
-      my = sin(((360 / HelperMap.getAnimals.length) / HelperMap.getAnimals.length) * number) * (7);
+  Iterable<Widget> _buildZoneMarkers(MapTransformer transformer, List<MapObject> objects, int index) {
+    return objects.map((object) {
+      Offset offset = transformer.toOffset(object.coord);
+      Color color = HelperMap.getColor(index);
+      if (_settings.getMapZonesType && object.zone != 3 && _level == 3) color = Zone.colorForZone(object.zone);
+      return _buildZoneMarker(offset, color, index);
+    });
+  }
+
+  Widget _buildZoneMarker(Offset offset, Color color, int index) {
+    double mx = 0;
+    double my = 0;
+    double size = _settings.getMapZonesStyle ? _circle : 10;
+    if (!_settings.getMapZonesType && _level == 3) {
+      mx = cos(((360 / HelperMap.getAnimals.length) / HelperMap.getAnimals.length) * index) * (7);
+      my = sin(((360 / HelperMap.getAnimals.length) / HelperMap.getAnimals.length) * index) * (7);
     }
-    double left = pos.dx - (size / 2) + mx;
-    double right = pos.dx + (size / 2) - mx;
-    double top = pos.dy - (size / 2) + my;
-    double bottom = pos.dy + (size / 2) - my;
-    return _inView(left, top, right, bottom)
-        ? zoneMarker && (circular || _level == 3)
-            ? Positioned(
-                width: _circle,
-                height: _circle,
-                left: left,
-                top: top,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: color, width: _circleBorder),
-                    borderRadius: BorderRadius.circular(_circle),
-                  ),
-                ))
-            : Positioned(
-                width: size,
-                height: size,
-                left: left,
-                top: top,
-                child: zoneMarker
-                    ? SimpleShadow(
-                        sigma: 5,
-                        opacity: 0.3,
-                        offset: const Offset(-0.1, -0.1),
-                        child: Image.asset(
-                          icon,
-                          width: size,
-                          height: size,
-                          color: color,
-                        ))
-                    : number == 2 && _level == 1
-                        ? const SizedBox.shrink()
-                        : Image.asset(
-                            icon,
-                            fit: BoxFit.fitWidth,
-                            color: color,
-                          ))
-        : const SizedBox.shrink();
+    double left = offset.dx - (size / 2) + mx;
+    double right = offset.dx + (size / 2) - mx;
+    double top = offset.dy - (size / 2) + my;
+    double bottom = offset.dy + (size / 2) - my;
+    if (_inView(left, top, right, bottom)) {
+      if (_settings.getMapZonesStyle) {
+        return Positioned(
+            width: _circle,
+            height: _circle,
+            left: left,
+            top: top,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: color, width: _circleBorder),
+                borderRadius: BorderRadius.circular(_circle),
+              ),
+            ));
+      } else {
+        return Positioned(
+            width: 10,
+            height: 10,
+            left: left,
+            top: top,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: color, width: 5),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ));
+      }
+    }
+    return const SizedBox.shrink();
   }
 
   Widget _buildMenu(Orientation orientation) {
     return Stack(children: [
       _showInterface
           ? Positioned(
-              right: 110,
+              right: 165,
               bottom: 0,
               child: AnimatedOpacity(
                   opacity: _opacity,
@@ -319,6 +334,29 @@ class ActivityMapState extends State<ActivityMap> {
                           background: Interface.primary,
                           onTap: () {
                             Navigator.pop(context);
+                          }))))
+          : Container(),
+      _showInterface
+          ? Positioned(
+              right: 110,
+              bottom: 0,
+              child: AnimatedOpacity(
+                  opacity: _opacity,
+                  duration: const Duration(milliseconds: 100),
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 20, bottom: 20),
+                      child: WidgetSwitch.withIcon(
+                          activeIcon: "assets/graphics/icons/zone_feed.svg",
+                          inactiveIcon: "assets/graphics/icons/zone_feed.svg",
+                          activeColor: Interface.accent,
+                          activeBackground: Interface.primary,
+                          inactiveColor: Interface.alwaysDark,
+                          inactiveBackground: Interface.alwaysLight,
+                          isActive: _settings.getMapZonesType,
+                          onTap: () {
+                            setState(() {
+                              _settings.changeMapZonesType();
+                            });
                           }))))
           : Container(),
       _showInterface

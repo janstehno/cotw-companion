@@ -11,13 +11,17 @@ import 'package:flutter/material.dart';
 class BuilderReserveNeedZones extends StatefulWidget {
   final int reserveId;
   final int hour;
-  final bool compact;
+  final int min, max;
+  final bool compact, classSlider;
 
   const BuilderReserveNeedZones({
     Key? key,
     required this.reserveId,
     required this.hour,
+    required this.min,
+    required this.max,
     required this.compact,
+    required this.classSlider,
   }) : super(key: key);
 
   @override
@@ -31,10 +35,12 @@ class BuilderReserveNeedZonesState extends State<BuilderReserveNeedZones> {
     _animals.clear();
     for (IdtoId iti in HelperJSON.animalsReserves) {
       if (iti.secondId == widget.reserveId) {
-        _animals.add(HelperJSON.getAnimal(iti.firstId));
+        Animal animal = HelperJSON.getAnimal(iti.firstId);
+        if (animal.level >= widget.min && animal.level <= widget.max) _animals.add(animal);
       }
     }
     _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserveId).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserveId)));
+    _animals.sort((a, b) => a.level.compareTo(b.level));
   }
 
   Widget _buildWidgets() {
@@ -52,6 +58,7 @@ class BuilderReserveNeedZonesState extends State<BuilderReserveNeedZones> {
             hour: widget.hour,
             count: _animals.length,
             compact: widget.compact,
+            classSlider: widget.classSlider,
             zones: zones,
           );
         });

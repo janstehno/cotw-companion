@@ -145,7 +145,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   Widget _buildFontSlider() {
     return WidgetSlider(
         values: [_fontSize.toDouble()],
-        text: _fontSize.toString(),
+        leftText: _fontSize.toString(),
         min: 0,
         max: 3,
         onDrag: (id, lower, upper) {
@@ -244,20 +244,6 @@ class ActivitySettingsState extends State<ActivitySettings> {
         text: tr('other'),
       ),
       WidgetTitleFunctional(
-          text: tr('map_zones_style'),
-          textColor: Interface.dark,
-          iconColor: Interface.title,
-          iconInactiveColor: Interface.accent,
-          buttonBackground: Interface.primary,
-          buttonInactiveBackground: Interface.disabled.withOpacity(0.3),
-          isActive: _settings.getMapZonesStyle,
-          onTap: () {
-            setState(() {
-              _settings.changeMapZonesStyle();
-              widget.callback();
-            });
-          }),
-      WidgetTitleFunctional(
           text: tr('map_zones_accuracy'),
           textColor: Interface.dark,
           iconColor: Interface.title,
@@ -285,34 +271,6 @@ class ActivitySettingsState extends State<ActivitySettings> {
               widget.callback();
             });
           }),
-      WidgetTitleFunctional(
-          text: tr('date_of_record'),
-          textColor: Interface.dark,
-          iconColor: Interface.title,
-          iconInactiveColor: Interface.accent,
-          buttonBackground: Interface.primary,
-          buttonInactiveBackground: Interface.disabled.withOpacity(0.3),
-          isActive: _settings.getDateOfRecord,
-          onTap: () {
-            setState(() {
-              _settings.changeDateOfRecord();
-              widget.callback();
-            });
-          }),
-      WidgetTitleFunctional(
-          text: tr('trophy_lodge_record'),
-          textColor: Interface.dark,
-          iconColor: Interface.title,
-          iconInactiveColor: Interface.accent,
-          buttonBackground: Interface.primary,
-          buttonInactiveBackground: Interface.disabled.withOpacity(0.3),
-          isActive: _settings.getTrophyLodgeRecord,
-          onTap: () {
-            setState(() {
-              _settings.changeTrophyLodgeRecord();
-              widget.callback();
-            });
-          })
     ]);
   }
 

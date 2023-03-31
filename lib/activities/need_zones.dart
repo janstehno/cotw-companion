@@ -33,10 +33,14 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   late final RestartableTimer _timer;
 
   bool _stopped = false;
-  bool _expanded = true;
+  bool _compact = false;
+  bool _classSlider = true;
   int _hour = 8;
   int _minute = 30;
   int _second = 0;
+  int _min = 1;
+  int _max = 9;
+  int _maxClass = 9;
   int _reserveId = 1;
 
   @override
@@ -80,11 +84,11 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     });
   }
 
-  Widget _buildSliders() {
+  Widget _buildTimeSliders() {
     return Column(children: [
       WidgetSlider(
           values: [_hour.toDouble()],
-          text: _hour.toString(),
+          leftText: _hour.toString(),
           min: 0,
           max: 23,
           onDrag: (id, lower, upper) {
@@ -94,7 +98,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           }),
       WidgetSlider(
           values: [_minute.toDouble()],
-          text: _minute.toString(),
+          leftText: _minute.toString(),
           min: 0,
           max: 59,
           handleSize: 35,
@@ -107,9 +111,29 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     ]);
   }
 
+  Widget _buildClassSlider() {
+    return SizedBox(
+        height: 50,
+        child: WidgetSlider(
+            values: [_min.toDouble(), _max.toDouble()],
+            leftText: _min.toString(),
+            rightText: _max.toString(),
+            min: 1,
+            max: _maxClass.toDouble(),
+            rangeSlider: true,
+            handleSize: 30,
+            onDrag: (id, lower, upper) {
+              setState(() {
+                _min = lower.toInt();
+                _max = upper.toInt();
+              });
+            }));
+  }
+
   Widget _buildReserves() {
-    return _expanded
-        ? Container(
+    return _compact
+        ? Container()
+        : Container(
             padding: const EdgeInsets.all(0),
             child: DropdownButton(
               dropdownColor: Interface.dropDownBody,
@@ -122,11 +146,11 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               onChanged: (dynamic value) {
                 setState(() {
                   _reserveId = value;
+                  _maxClass = _max = HelperJSON.getReserve(value).maxClass;
                 });
               },
               items: _buildDropDownReserves(),
-            ))
-        : Container();
+            ));
   }
 
   List<DropdownMenuItem> _buildDropDownReserves() {
@@ -148,24 +172,45 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return items;
   }
 
-  Widget _buildCompactSwitch(bool portrait, Color color) {
-    return portrait
-        ? WidgetSwitch.withIcon(
-            buttonSize: 50,
-            activeIcon: "assets/graphics/icons/view_compact.svg",
-            inactiveIcon: "assets/graphics/icons/view_expanded.svg",
-            activeColor: color,
-            inactiveColor: color,
-            activeBackground: Colors.transparent,
-            inactiveBackground: Colors.transparent,
-            isActive: _expanded,
-            onTap: () {
-              setState(() {
-                _expanded = !_expanded;
-              });
-            },
-          )
-        : Container();
+  Widget _buildSwitches(bool portrait, Color color) {
+    _classSlider = !portrait ? true : _classSlider;
+    return Row(children: [
+      _compact
+          ? WidgetSwitch.withIcon(
+              buttonSize: 50,
+              activeIcon: "assets/graphics/icons/min_max.svg",
+              inactiveIcon: "assets/graphics/icons/min_max.svg",
+              activeColor: color,
+              inactiveColor: color,
+              activeBackground: Colors.transparent,
+              inactiveBackground: Colors.transparent,
+              isActive: _classSlider,
+              onTap: () {
+                setState(() {
+                  _classSlider = !_classSlider;
+                });
+              },
+            )
+          : Container(),
+      portrait
+          ? WidgetSwitch.withIcon(
+              buttonSize: 50,
+              activeIcon: "assets/graphics/icons/view_expanded.svg",
+              inactiveIcon: "assets/graphics/icons/view_compact.svg",
+              activeColor: color,
+              inactiveColor: color,
+              activeBackground: Colors.transparent,
+              inactiveBackground: Colors.transparent,
+              isActive: _compact,
+              onTap: () {
+                setState(() {
+                  _compact = !_compact;
+                  _classSlider = !_compact;
+                });
+              },
+            )
+          : Container()
+    ]);
   }
 
   Widget _buildTime(Color color) {
@@ -267,12 +312,37 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Expanded(child: _buildTime(color)), _buildCompactSwitch(portrait, color)]));
+            children: [Expanded(child: _buildTime(color)), _buildSwitches(portrait, color)]));
+  }
+
+  Widget _buildClass() {
+    return _classSlider
+        ? AnimatedContainer(
+            height: 75,
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            duration: const Duration(microseconds: 200),
+            color: Interface.subTitleBackground,
+            child: Row(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Container(
+                  margin: const EdgeInsets.only(right: 30),
+                  child: AutoSizeText(tr('animal_class').toUpperCase(),
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Interface.title,
+                        fontSize: Interface.s24,
+                        fontWeight: FontWeight.w800,
+                        fontFamily: 'Title',
+                      ))),
+              Expanded(child: _buildClassSlider())
+            ]))
+        : Container();
   }
 
   Widget _buildTimeChangerAndReserve() {
-    return _expanded
-        ? Column(children: [
+    return _compact
+        ? Container()
+        : Column(children: [
             WidgetTitleFunctional.withSwitch(
               text: tr('time'),
               icon: "assets/graphics/icons/play.svg",
@@ -291,7 +361,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-              child: _buildSliders(),
+              child: _buildTimeSliders(),
             ),
             WidgetTitleFunctional.withButton(
                 text: tr('reserve'),
@@ -307,8 +377,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
                     MaterialPageRoute(builder: (context) => BuilderMap(reserveId: _reserveId)),
                   );
                 })
-          ])
-        : Container();
+          ]);
   }
 
   Widget _buildTimeAndSelectors(bool portrait) {
@@ -316,37 +385,41 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
       _buildActualTimeAndCompact(portrait),
       _buildTimeChangerAndReserve(),
       _buildReserves(),
+      _buildClass(),
     ]);
   }
 
   Widget _buildNeedZones() {
     return Column(children: [
-      _expanded
-          ? WidgetTitle(
+      _compact
+          ? Container()
+          : WidgetTitle(
               text: tr('animal_need_zones'),
-            )
-          : Container(),
+            ),
       BuilderReserveNeedZones(
         reserveId: _reserveId,
         hour: _hour,
-        compact: _expanded,
+        min: _min,
+        max: _max,
+        compact: _compact,
+        classSlider: _classSlider,
       )
     ]);
   }
 
   WidgetAppBar _buildAppBar() {
-    return _expanded
+    return _compact
         ? WidgetAppBar(
+            text: "",
+            height: 0,
+            fontSize: 0,
+            context: context,
+          )
+        : WidgetAppBar(
             text: tr('animal_need_zones'),
             color: Interface.accent,
             background: Interface.primary,
             fontSize: Interface.s30,
-            context: context,
-          )
-        : WidgetAppBar(
-            text: "",
-            height: 0,
-            fontSize: 0,
             context: context,
           );
   }
@@ -359,7 +432,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   }
 
   Widget _buildLandscapeView() {
-    _expanded = true;
+    _compact = false;
     return WidgetScaffold.withCustomBody(
         body: Column(mainAxisSize: MainAxisSize.max, children: [
       _buildAppBar(),

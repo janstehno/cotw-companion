@@ -6,6 +6,7 @@ import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
@@ -471,7 +472,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   Log _createLog() => Log(
         id: widget.log == null ? HelperLog.logs.length : widget.log!.id,
-        date: HelperLog.getDate(_dateTime),
+        date: Log.dateToString(_dateTime),
         reserveId: widget.fromTrophyLodge ? -1 : _selectedReserveId,
         animalId: _selectedAnimalId,
         furId: _selectedFurId,
@@ -535,7 +536,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                   fontFamily: 'Title',
                 ),
               ),
-              AutoSizeText(HelperLog.getDateFormatted(_dateTime),
+              AutoSizeText(Log.getDate(DateType.format, Log.dateToString(_dateTime)),
                   maxLines: 1,
                   textAlign: TextAlign.start,
                   style: TextStyle(

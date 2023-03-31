@@ -14,6 +14,7 @@ class Settings extends ChangeNotifier {
   late int _compactLogbook;
   late bool _darkMode;
   late bool _imperialUnits;
+  late bool _mapZonesType;
   late bool _mapZonesStyle;
   late bool _mapZonesAccuracy;
   late bool _bestWeaponsForAnimal;
@@ -29,9 +30,10 @@ class Settings extends ChangeNotifier {
       compactLogbook,
       bool darkMode = false,
       bool imperialUnits = false,
+      bool mapZonesType = false,
+      bool mapZonesStyle = false,
       bool mapZonesAccuracy = false,
       bool bestWeaponsForAnimal = false,
-      bool mapZonesStyle = false,
       bool dateOfRecord = false,
       bool trophyLodgeRecord = false,
       bool furRarityPerCent = false}) {
@@ -41,6 +43,7 @@ class Settings extends ChangeNotifier {
     _compactLogbook = compactLogbook;
     _darkMode = darkMode;
     _imperialUnits = imperialUnits;
+    _mapZonesType = mapZonesType;
     _mapZonesStyle = mapZonesStyle;
     _mapZonesAccuracy = mapZonesAccuracy;
     _bestWeaponsForAnimal = bestWeaponsForAnimal;
@@ -58,6 +61,8 @@ class Settings extends ChangeNotifier {
   bool get getDarkMode => _darkMode;
 
   bool get getImperialUnits => _imperialUnits;
+
+  bool get getMapZonesType => _mapZonesType;
 
   bool get getMapZonesStyle => _mapZonesStyle;
 
@@ -136,6 +141,18 @@ class Settings extends ChangeNotifier {
       await _sharedPreferences.setInt("compactLogbook", _compactLogbook);
     } else {
       await _sharedPreferences.setInt("compactLogbook", _compactLogbook);
+    }
+    notifyListeners();
+  }
+
+  Future<void> changeMapZonesType() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    if (_mapZonesType == true) {
+      _mapZonesType = false;
+      await _sharedPreferences.setBool("mapZonesType", false);
+    } else {
+      _mapZonesType = true;
+      await _sharedPreferences.setBool("mapZonesType", true);
     }
     notifyListeners();
   }

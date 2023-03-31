@@ -7,7 +7,9 @@ import 'package:flutter_svg/svg.dart';
 class WidgetIcon extends StatelessWidget {
   final String icon;
   final Color color, background;
-  final double size, inactiveOpacity;
+  final double size;
+  final double? iconSize;
+  final double inactiveOpacity;
   final bool isActive;
 
   const WidgetIcon({
@@ -16,6 +18,7 @@ class WidgetIcon extends StatelessWidget {
     required this.color,
     required this.background,
     this.size = 40,
+    this.iconSize,
     this.isActive = true,
     this.inactiveOpacity = 0.3,
   }) : super(key: key);
@@ -33,8 +36,8 @@ class WidgetIcon extends StatelessWidget {
         ),
         child: SvgPicture.asset(
           icon,
-          width: size / 2.3,
-          height: size / 2.3,
+          width: iconSize ?? size / 2.3,
+          height: iconSize ?? size / 2.3,
           color: clr,
         ));
   }

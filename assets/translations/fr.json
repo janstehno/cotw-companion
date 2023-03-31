@@ -95,7 +95,6 @@
   "logbook_info_8_4": "Vous devrez *autoriser l'accès au stockage*. Il n'y a pas d'autre moyen. Si vous ne l'autorisez pas, l'application ne pourra pas créer et enregistrer le fichier ou importer le fichier depuis le stockage de votre appareil. D'autre part, les enregistrements seront toujours enregistrés dans le stockage de l'application tant que l'application sera installée sur votre appareil. Si vous n'aimez pas l'autorisation accordée tout le temps, vous pouvez toujours désactiver manuellement cette autorisation dans les paramètres de l'appareil.",
   "map": "Carte",
   "map_zones_accuracy": "Afficher l'exactitude des occurrences d'animaux",
-  "map_zones_style": "Afficher les occurrences d'animaux sous forme de cercles",
   "max": "Maximum",
   "meters": "m",
   "metric_units": "Métriques",

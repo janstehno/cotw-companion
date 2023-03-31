@@ -1,7 +1,10 @@
 // Copyright (c) 2022 Jan Stehno
 
+import 'dart:developer';
+
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/animal.dart';
+import 'package:cotwcompanion/model/map_zone.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 
@@ -72,18 +75,15 @@ class HelperMap {
 
   static bool getOpacityE(int index) => isActiveE(index);
 
-  static List<LatLng> getAnimalZones(int animalId, int zoom) {
-    List<LatLng> result = [];
-    for (dynamic coord in _zones[animalId.toString()][zoom.toString()]) {
-      result.add(_toLatLng(coord));
+  static List<MapObject> getAnimalZones(int animalId, int zoom) {
+    List<MapObject> result = [];
+    for (List<dynamic> object in _zones[animalId.toString()][zoom.toString()].cast()) {
+      double x = object[0];
+      double y = object[1];
+      int zone = object.length > 2 ? object[2] : 3;
+      result.add(MapObject(x: x, y: y, zone: zone));
     }
     return result;
-  }
-
-  static LatLng _toLatLng(List<dynamic> coordinations) {
-    double lat = (coordinations[1] * 720) - 360;
-    double lng = (coordinations[0] * 720) - 360;
-    return LatLng(lat, lng);
   }
 
   static void activate(int index) {
@@ -141,13 +141,13 @@ class HelperMap {
     }
   }
 
-  static void addObjects(dynamic list) {
+  static void addObjects(dynamic objects) {
     for (int i = 0; i <= 3; i++) {
       String index = i.toString();
       if (i != 3) {
         List<LatLng> result = [];
-        for (dynamic item in list[index]) {
-          result.add(_toLatLng(item));
+        for (dynamic object in objects[index]) {
+          result.add(MapObject.toLatLng(object[0], object[1]));
         }
         switch (i) {
           case 0:
@@ -161,7 +161,7 @@ class HelperMap {
             break;
         }
       } else {
-        _zones.addAll(list[index]);
+        _zones.addAll(objects[index]);
       }
     }
   }

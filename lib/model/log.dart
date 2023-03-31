@@ -3,6 +3,7 @@
 import 'dart:core';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/reserve.dart';
@@ -61,9 +62,9 @@ class Log {
 
   String get date => _date;
 
-  String get dateForCompare => _getDateForCompare();
+  String get dateForCompare => getDate(DateType.compare, _date);
 
-  String get dateFormatted => _getDate(true);
+  String get dateFormatted => getDate(DateType.format, _date);
 
   int get animalId => _animalId;
 
@@ -101,32 +102,6 @@ class Log {
 
   bool get isCorrupted => _corrupted;
 
-  String toJson() =>
-      '{"ID":$id,"DATE":"${_getDate(false)}","ANIMAL_ID":$_animalId,"RESERVE_ID":$_reserveId,"FUR_ID":$_furId,"TROPHY":$_trophy,"WEIGHT":$_weight,"IMPERIALS":$_imperials,"LODGE":$_lodge,"GENDER":$_gender,"CORRECT_AMMUNITION":$_harvestCorrectAmmo,"MAX_TWO_SHOTS":$_harvestTwoShots,"VITAL_ORGAN":$_harvestVitalOrgan,"NO_TROPHY_ORGAN":$_harvestNoTrophyOrgan}';
-
-  String _getDate(bool formatted) {
-    int year = int.parse(date.split("-")[0]);
-    int month = int.parse(date.split("-")[1]);
-    int day = int.parse(date.split("-")[2]);
-    int hour = int.parse(date.split("-")[3]);
-    int minute = int.parse(date.split("-")[4]);
-    return formatted ? "$day.$month.$year  $hour:${minute / 10 < 1 ? "0$minute" : minute}" : "$year-$month-$day-$hour-$minute";
-  }
-
-  String _getDateForCompare() {
-    int y = int.parse(date.split("-")[0]);
-    int m = int.parse(date.split("-")[1]);
-    int d = int.parse(date.split("-")[2]);
-    int hh = int.parse(date.split("-")[3]);
-    int mm = int.parse(date.split("-")[4]);
-    String year = y.toString();
-    String month = m > 9 ? m.toString() : "0$m";
-    String day = d > 9 ? d.toString() : "0$d";
-    String hour = hh > 9 ? hh.toString() : "0$hh";
-    String minute = mm > 9 ? mm.toString() : "0$mm";
-    return year + month + day + hour + minute;
-  }
-
   set setId(int value) => _id = value;
 
   set setAnimalName(String value) => _animalName = value;
@@ -140,6 +115,9 @@ class Log {
   Animal get animal => HelperJSON.getAnimal(_animalId == -1 ? 1 : _animalId);
 
   AnimalFur get fur => HelperJSON.getAnimalFur(null, _animalId, _furId);
+
+  String toJson() =>
+      '{"ID":$id,"DATE":"${getDate(DateType.json, _date)}","ANIMAL_ID":$_animalId,"RESERVE_ID":$_reserveId,"FUR_ID":$_furId,"TROPHY":$_trophy,"WEIGHT":$_weight,"IMPERIALS":$_imperials,"LODGE":$_lodge,"GENDER":$_gender,"CORRECT_AMMUNITION":$_harvestCorrectAmmo,"MAX_TWO_SHOTS":$_harvestTwoShots,"VITAL_ORGAN":$_harvestVitalOrgan,"NO_TROPHY_ORGAN":$_harvestNoTrophyOrgan}';
 
   int getTrophyRating(Animal animal, bool harvestCheck) {
     int decrease = 0;
@@ -194,6 +172,31 @@ class Log {
         return Interface.dark;
       default:
         return Interface.disabled;
+    }
+  }
+
+  static String dateToString(DateTime dateTime) {
+    return "${dateTime.year}-${dateTime.month}-${dateTime.day}-${dateTime.hour}-${dateTime.minute}";
+  }
+
+  static String getDate(DateType type, String date) {
+    int year = int.parse(date.split("-")[0]);
+    int month = int.parse(date.split("-")[1]);
+    int day = int.parse(date.split("-")[2]);
+    int hour = int.parse(date.split("-")[3]);
+    int minute = int.parse(date.split("-")[4]);
+    String yy = "$year";
+    String mm = month < 9 ? "0$month" : "$month";
+    String dd = day < 9 ? "0$day" : "$day";
+    String h = hour < 9 ? "0$hour" : "$hour";
+    String m = minute < 9 ? "0$minute" : "$minute";
+    switch (type) {
+      case DateType.format:
+        return "$day. $month. $year  $hour:${minute < 9 ? "0$minute" : minute}";
+      case DateType.compare:
+        return "$yy$mm$dd$h$m";
+      default:
+        return "$yy-$mm-$dd-$h-$m";
     }
   }
 

@@ -220,8 +220,4 @@ class Graphics {
         return "";
     }
   }
-
-  static String getAnimalMapIcon(int id) {
-    return "$_directory/animals/pngs/${_animals[id - 1]}.png";
-  }
 }

@@ -95,7 +95,6 @@
   "logbook_info_8_4": "Tendrás que *permitir el acceso al almacenamiento*. No hay otra manera. Si no lo permite, la aplicación no podrá crear ni guardar el archivo ni importarlo desde el almacenamiento de su dispositivo. Por otro lado, los registros aún se guardarán en el almacenamiento de la aplicación siempre que la aplicación esté instalada en su dispositivo. Si no le gusta el permiso otorgado todo el tiempo, siempre puede rechazar manualmente este permiso en la configuración del dispositivo.",
   "map": "Mapa",
   "map_zones_accuracy": "Mostrar la precisión de las ocurrencias de animales",
-  "map_zones_style": "Mostrar ocurrencias de animales como círculos",
   "max": "Máxima",
   "meters": "m",
   "metric_units": "Metricas",

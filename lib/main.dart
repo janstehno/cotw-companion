@@ -20,6 +20,7 @@ void main() async {
   int compactLogbook = sharedPreferences.getInt("compactLogbook") ?? 3;
   bool darkMode = sharedPreferences.getBool("darkMode") ?? false;
   bool imperialUnits = sharedPreferences.getBool("imperialUnits") ?? false;
+  bool mapZonesType = sharedPreferences.getBool("mapZonesType") ?? false;
   bool mapZonesStyle = sharedPreferences.getBool("mapZonesStyle") ?? false;
   bool mapZonesAccuracy = sharedPreferences.getBool("mapZonesAccuracy") ?? false;
   bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
@@ -56,6 +57,7 @@ void main() async {
             compactLogbook: compactLogbook,
             darkMode: darkMode,
             imperialUnits: imperialUnits,
+            mapZonesType: mapZonesType,
             mapZonesStyle: mapZonesStyle,
             mapZonesAccuracy: mapZonesAccuracy,
             bestWeaponsForAnimal: bestWeaponsForAnimal,

@@ -95,7 +95,6 @@
   "logbook_info_8_4": "Budete muset *povolit přístup k souborovému systému*. Jinak to nejde. Pokud to nepovolíte, aplikace nebude schopna vytvořit a uložit nebo načíst soubor z uložiště zařízení. Nadruhou stranu, záznamy budou uloženy v uložišti aplikace tak dlouho, dokud aplikaci neodinstalujete. Pokud nebudete chtít mít povolený přístup k souborovému systému, vždy můžete toto povolení zrušit v nastavení zařízení.",
   "map": "Mapa",
   "map_zones_accuracy": "Zobrazit přesnost výskytů zvířat",
-  "map_zones_style": "Zobrazit výskyty zvířat jako kruhy",
   "max": "Maximum",
   "meters": "m",
   "metric_units": "Metrické",

@@ -16,7 +16,7 @@ class EntryNeedZone extends StatefulWidget {
   final Animal animal;
   final int reserveId, index, count, hour;
   final List<Zone> zones;
-  final bool compact;
+  final bool compact, classSlider;
 
   const EntryNeedZone({
     Key? key,
@@ -27,6 +27,7 @@ class EntryNeedZone extends StatefulWidget {
     required this.index,
     required this.count,
     required this.compact,
+    required this.classSlider,
   }) : super(key: key);
 
   @override
@@ -34,53 +35,84 @@ class EntryNeedZone extends StatefulWidget {
 }
 
 class EntryNeedZoneState extends State<EntryNeedZone> {
-  int _zoneNow = 4;
-  int _zoneNext = 4;
-  String _zoneTill = "-";
+  final List<int> _finalZones = [4, 4, 4];
 
   double _getSize() {
-    return !widget.compact ? (MediaQuery.of(context).size.height - 75) / (widget.count <= 10 ? widget.count : 10) : 75;
+    double top = widget.compact
+        ? widget.classSlider
+            ? 150
+            : 75
+        : 0;
+    double height = (MediaQuery.of(context).size.height - top) / (widget.count <= 10 ? widget.count : 10);
+    return widget.compact
+        ? height < 75
+            ? height
+            : 75
+        : 75;
   }
 
-  void _getZones() {
-    List<Zone> tmp = widget.zones;
-    int size = tmp.length;
-    for (int nowId = 0; nowId < size; nowId++) {
-      if (size == 1) {
-        _zoneNow = tmp[nowId].zone;
-        _zoneTill = "-";
-        _zoneNext = tmp[nowId].zone;
-        break;
-      }
-      int nextId = nowId + 1;
-      int nextNextId = nextId + 1;
-
-      if (nextId >= size) {
-        nextId = 0;
-        nextNextId = 1;
-      }
-      if (nextNextId >= size) {
-        nextNextId = 0;
-      }
-
-      int zoneFrom = tmp[nowId].from;
-      int zoneTo = tmp[nowId].to;
-
-      if (zoneFrom <= widget.hour && widget.hour < zoneTo) {
-        _zoneNow = tmp[nowId].zone;
-        _zoneTill = tmp[nowId].to.toString();
-        _zoneNext = tmp[nextId].zone;
-        if (_zoneNow == _zoneNext) {
-          _zoneTill = tmp[nextId].to.toString();
-          _zoneNext = tmp[nextNextId].zone;
+  void _getData() {
+    if (widget.zones.length != 1) {
+      _finalZones.clear();
+      for (Zone zone in widget.zones) {
+        int hourNow = widget.hour;
+        int hourAfter = hourNow + 1 == 24 ? 0 : hourNow + 1;
+        int hourAfterAfter = hourAfter + 1 == 24 ? 0 : hourAfter + 1;
+        if ((hourNow >= zone.from && hourNow <= zone.to) ||
+            (hourAfter >= zone.from && hourAfter <= zone.to) ||
+            (hourAfterAfter >= zone.from && hourAfterAfter <= zone.to)) {
+          for (int hour = zone.from; hour < zone.to; hour++) {
+            if (hour == hourNow || hour == hourAfter || hour == hourAfterAfter) {
+              _finalZones.add(zone.zone);
+            }
+          }
         }
-        break;
       }
     }
   }
 
+  Widget _getZones() {
+    int zoneNow = _finalZones[0];
+    int zoneAfter = _finalZones[1];
+    int zoneAfterAfter = _finalZones[2];
+    return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      WidgetIcon(
+        size: 35,
+        icon: Zone.iconForZone(zoneNow),
+        color: zoneNow == 4
+            ? Interface.dark
+            : zoneNow == 3
+                ? Interface.light
+                : Interface.alwaysDark,
+        background: Zone.colorForZone(zoneNow),
+      ),
+      WidgetIcon(
+        size: 30,
+        iconSize: 12,
+        icon: Zone.iconForZone(zoneAfter),
+        color: zoneAfter == 4
+            ? Interface.dark.withOpacity(0.75)
+            : zoneAfter == 3
+                ? Interface.light.withOpacity(0.75)
+                : Interface.alwaysDark.withOpacity(0.75),
+        background: Zone.colorForZone(zoneAfter).withOpacity(0.5),
+      ),
+      WidgetIcon(
+        size: 25,
+        iconSize: 10,
+        icon: Zone.iconForZone(zoneAfterAfter),
+        color: zoneAfter == 4
+            ? Interface.dark.withOpacity(0.5)
+            : zoneAfter == 3
+                ? Interface.light.withOpacity(0.5)
+                : Interface.alwaysDark.withOpacity(0.5),
+        background: Zone.colorForZone(zoneAfterAfter).withOpacity(0.25),
+      ),
+    ]);
+  }
+
   Widget _buildWidgets() {
-    _getZones();
+    _getData();
     return Dismissible(
         key: Key(widget.index.toString()),
         direction: DismissDirection.startToEnd,
@@ -121,16 +153,28 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                       child: Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(right: 15),
-                          child: AutoSizeText(
-                            widget.animal.getNameBasedOnReserve(context.locale, widget.reserveId),
-                            textAlign: TextAlign.start,
-                            maxLines: widget.animal.getNameBasedOnReserve(context.locale, widget.reserveId).split(" ").length == 1 ? 1 : 2,
-                            style: TextStyle(
-                              color: Interface.dark,
-                              fontSize: Interface.s20,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ))),
+                          child: Row(children: [
+                            AutoSizeText(widget.animal.level.toString(),
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Interface.dark,
+                                  fontSize: Interface.s24,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                            Expanded(
+                                child: Container(
+                                    padding: const EdgeInsets.only(left: 15, right: 30),
+                                    child: AutoSizeText(
+                                      widget.animal.getNameBasedOnReserve(context.locale, widget.reserveId),
+                                      textAlign: TextAlign.start,
+                                      maxLines: widget.animal.getNameBasedOnReserve(context.locale, widget.reserveId).split(" ").length == 1 ? 1 : 2,
+                                      style: TextStyle(
+                                        color: Interface.dark,
+                                        fontSize: Interface.s20,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )))
+                          ]))),
                   HelperLoadout.isLoadoutActivated
                       ? Container(
                           width: 10,
@@ -157,41 +201,12 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                                 : Container()
                           ]))
                       : Container(),
-                  Container(
-                      width: 165,
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, children: [
-                        WidgetIcon(
-                          size: 40,
-                          icon: Zone.iconForZone(_zoneNow),
-                          color: _zoneNow == 4
-                              ? Interface.dark
-                              : _zoneNow == 3
-                                  ? Interface.light
-                                  : Interface.alwaysDark,
-                          background: Zone.colorForZone(_zoneNow),
-                        ),
-                        Container(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            alignment: Alignment.center,
-                            height: 40,
-                            width: 45,
-                            child: AutoSizeText(
-                              _zoneTill,
-                              maxLines: 1,
-                              style: TextStyle(color: Interface.dark, fontSize: Interface.s18, fontWeight: FontWeight.w400),
-                            )),
-                        WidgetIcon(
-                          size: 40,
-                          icon: Zone.iconForZone(_zoneNext),
-                          color: _zoneNext == 4
-                              ? Interface.dark
-                              : _zoneNext == 3
-                                  ? Interface.light
-                                  : Interface.alwaysDark,
-                          background: Zone.colorForZone(_zoneNext),
-                        )
-                      ]))
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: 125,
+                    padding: const EdgeInsets.only(left: 15),
+                    child: _getZones(),
+                  )
                 ]))));
   }
 

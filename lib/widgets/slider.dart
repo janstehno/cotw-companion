@@ -7,19 +7,21 @@ import 'package:flutter/material.dart';
 
 class WidgetSlider extends StatelessWidget {
   final List<double> values;
-  final String text;
+  final String leftText, rightText;
   final double min, max, handleSize;
-  final bool smallerSlider;
+  final bool smallerSlider, rangeSlider;
   final Function onDrag;
 
   const WidgetSlider({
     Key? key,
     required this.values,
-    required this.text,
+    this.leftText = "",
+    this.rightText = "",
     required this.min,
     required this.max,
     this.handleSize = 40,
     this.smallerSlider = false,
+    this.rangeSlider = false,
     required this.onDrag,
   }) : super(key: key);
 
@@ -27,6 +29,7 @@ class WidgetSlider extends StatelessWidget {
     return FlutterSlider(
         min: min,
         max: max,
+        rangeSlider: rangeSlider,
         values: values,
         handlerWidth: handleSize,
         handlerHeight: handleSize,
@@ -49,7 +52,20 @@ class WidgetSlider extends StatelessWidget {
             ),
             child: Container(
                 alignment: Alignment.center,
-                child: AutoSizeText(text,
+                child: AutoSizeText(leftText,
+                    style: TextStyle(
+                      color: Interface.accent,
+                      fontSize: smallerSlider ? Interface.s18 : Interface.s24,
+                      fontWeight: FontWeight.w400,
+                    )))),
+        rightHandler: FlutterSliderHandler(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(handleSize / 4)),
+              color: Interface.primary,
+            ),
+            child: Container(
+                alignment: Alignment.center,
+                child: AutoSizeText(rightText,
                     style: TextStyle(
                       color: Interface.accent,
                       fontSize: smallerSlider ? Interface.s18 : Interface.s24,

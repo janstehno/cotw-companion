@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:another_xlider/another_xlider.dart';
 import 'package:auto_size_text/auto_size_text.dart';

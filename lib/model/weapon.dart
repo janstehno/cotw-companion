@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -11,7 +11,7 @@ class Weapon {
   String _name;
   final String _en, _ru, _cs, _pl, _de, _fr, _es, _pt, _ja;
   final WeaponType _type;
-  final int _mag;
+  final int _mag, _accuracy, _recoil, _reload, _hipshot, _price;
   int _min, _max;
   final List<dynamic> _ammo = [];
   final int _dlc;
@@ -30,6 +30,11 @@ class Weapon {
     required ja,
     required type,
     required mag,
+    required accuracy,
+    required recoil,
+    required reload,
+    required hipshot,
+    required price,
     required min,
     required max,
     required ammo,
@@ -47,6 +52,11 @@ class Weapon {
         _ja = ja,
         _type = type,
         _mag = mag,
+        _accuracy = accuracy,
+        _recoil = recoil,
+        _reload = reload,
+        _hipshot = hipshot,
+        _price = price,
         _min = min,
         _max = max,
         _dlc = dlc;
@@ -56,6 +66,16 @@ class Weapon {
   WeaponType get type => _type;
 
   int get mag => _mag;
+
+  int get accuracy => _accuracy;
+
+  int get recoil => _recoil;
+
+  int get reload => _reload;
+
+  int get hipshot => _hipshot;
+
+  int get price => _price;
 
   int get min => _min;
 
@@ -159,6 +179,11 @@ class Weapon {
       name: "",
       type: WeaponType.values.elementAt(json['TYPE']),
       mag: json['MAG'],
+      accuracy: json['ACCURACY'],
+      recoil: json['RECOIL'],
+      reload: json['RELOAD'],
+      hipshot: json['HIPSHOT'],
+      price: json['PRICE'],
       min: 0,
       max: 0,
       ammo: [],

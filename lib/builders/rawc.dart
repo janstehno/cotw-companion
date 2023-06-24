@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -98,7 +98,7 @@ class BuilderRAWCState extends State<BuilderRAWC> {
             case ObjectType.reserve:
               return EntryReserve(reserve: item, index: index, callback: _focus);
             case ObjectType.animal:
-              return ToastyEntryAnimal(animal: item, index: index, callback: _focus);
+              return EntryAnimal(animal: item, index: index, callback: _focus);
             case ObjectType.weapon:
               return EntryWeapon(weapon: item, index: index, callback: _focus);
             case ObjectType.caller:

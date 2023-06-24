@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -161,7 +161,7 @@ class BuilderAnimalZonesState extends State<BuilderAnimalZones> {
                           dotDecoration: DotDecoration(
                               width: 10 + Interface.accentBorderWidth,
                               height: 10 + Interface.accentBorderWidth,
-                              color: Interface.disabled,
+                              color: Interface.disabled.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(5)))))
               : Container()
         ]));

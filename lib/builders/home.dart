@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:async';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -67,16 +67,20 @@ class BuilderHome extends StatelessWidget {
             var mapObjects = snapshot.data![12] as Map<String, dynamic>;
             var logs = snapshot.data![13] as List<Log>;
             var widget = snapshot.data![14] as Widget;
-            HelperJSON.setLists(
-                ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, mapObjects);
+            HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves,
+                weapons, weaponsAmmo, mapObjects);
             HelperJSON.setWeaponAmmo();
             HelperLog.setLogs(logs, context);
             return widget;
           } else {
-            return Padding(
-              padding: const EdgeInsets.all(30),
-              child: SpinKitThreeBounce(size: 30, color: Interface.accent),
-            );
+            return OrientationBuilder(builder: (context, orientation) {
+              precacheImage(const AssetImage("assets/graphics/images/cotw.jpg"), context);
+              return Container(
+                color: Interface.mainBody,
+                padding: const EdgeInsets.all(30),
+                child: SpinKitThreeBounce(size: 30, color: Interface.dark),
+              );
+            });
           }
         });
   }

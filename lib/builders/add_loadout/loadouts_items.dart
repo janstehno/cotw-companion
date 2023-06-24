@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -111,7 +111,7 @@ class BuilderAddLoadoutItemsState extends State<BuilderAddLoadoutItems> {
         body: Column(children: [
       Column(children: [
         WidgetAppBar(
-            text: widget.type == ObjectType.weapon ? tr('weapon_ammo') : tr('callers'),
+            text: widget.type == ObjectType.ammo ? tr('weapons') : tr('callers'),
             color: Interface.accent,
             background: Interface.primary,
             fontSize: Interface.s30,

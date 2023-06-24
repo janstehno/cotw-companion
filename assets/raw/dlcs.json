@@ -1809,5 +1809,77 @@
             46,
             47
         ]
+    },
+    {
+        "ID": 40,
+        "NAME": "Layton Lake Cosmetic Pack",
+        "DATE": "2023-06-20",
+        "TYPE": -1
+    },
+    {
+        "ID": 41,
+        "NAME": "Emerald Coast Australia",
+        "DATE": "2023-06-20",
+        "TYPE": 1,
+        "DESCRIPTION": {
+            "EN": [
+                "Unlocks new reserve for you to hunt in."
+            ],
+            "RU": [
+                "Открывает новый резерв для охоты."
+            ],
+            "CS": [
+                "Odemyká novou rezervaci, kde můžete lovit."
+            ],
+            "PL": [
+                "Odblokowuje nową rezerwę, na którą możesz polować."
+            ],
+            "DE": [
+                "Schaltet neue Reserven frei, in denen du jagen kannst."
+            ],
+            "FR": [
+                "Déverrouille une nouvelle réserve dans laquelle vous pourrez chasser."
+            ],
+            "ES": [
+                "Desbloquea una nueva reserva para que puedas cazar."
+            ],
+            "PT": [
+                "Desbloqueia uma nova reserva para você caçar."
+            ],
+            "JA": [
+                "新しい保護区をアンロックする。"
+            ],
+            "HU": [
+                "Feloldja az új vad rezervátumokat."
+            ]
+        },
+        "MAP": {
+            "RESERVE": [
+                14
+            ],
+            "ANIMALS": [
+                1,
+                18,
+                35,
+                36,
+                54,
+                55,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89
+            ],
+            "WEAPONS": [
+                48
+            ],
+            "CALLERS": [
+                23,
+                24
+            ]
+        }
     }
 ]

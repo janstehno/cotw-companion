@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -38,8 +38,8 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
           style: TextStyle(
             color: Interface.dark,
             fontSize: 14,
-            fontWeight: FontWeight.w800,
-            fontFamily: 'Title',
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Condensed',
           )),
     );
   }
@@ -130,7 +130,7 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                             style: TextStyle(
                               color: Interface.dark,
                               fontSize: 16,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w700,
                             ))))
               ]),
             ])));

@@ -1,7 +1,8 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cotwcompanion/activities/map_information.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/map.dart';
@@ -318,115 +319,122 @@ class ActivityMapState extends State<ActivityMap> {
   }
 
   Widget _buildMenu(Orientation orientation) {
-    return Stack(children: [
-      _showInterface
-          ? Positioned(
-              right: 165,
-              bottom: 0,
-              child: AnimatedOpacity(
-                  opacity: _opacity,
-                  duration: const Duration(milliseconds: 100),
-                  child: Container(
-                      margin: const EdgeInsets.only(right: 20, bottom: 20),
-                      child: WidgetButton(
-                          icon: "assets/graphics/icons/back.svg",
-                          color: Interface.accent,
-                          background: Interface.primary,
-                          onTap: () {
-                            Navigator.pop(context);
-                          }))))
-          : Container(),
-      _showInterface
-          ? Positioned(
-              right: 110,
-              bottom: 0,
-              child: AnimatedOpacity(
-                  opacity: _opacity,
-                  duration: const Duration(milliseconds: 100),
-                  child: Container(
-                      margin: const EdgeInsets.only(right: 20, bottom: 20),
-                      child: WidgetSwitch.withIcon(
-                          activeIcon: "assets/graphics/icons/zone_feed.svg",
-                          inactiveIcon: "assets/graphics/icons/zone_feed.svg",
-                          activeColor: Interface.accent,
-                          activeBackground: Interface.primary,
-                          inactiveColor: Interface.alwaysDark,
-                          inactiveBackground: Interface.alwaysLight,
-                          isActive: _settings.getMapZonesType,
-                          onTap: () {
-                            setState(() {
-                              _settings.changeMapZonesType();
-                            });
-                          }))))
-          : Container(),
-      _showInterface
-          ? Positioned(
-              right: 55,
-              bottom: 0,
-              child: AnimatedOpacity(
-                  opacity: _opacity,
-                  duration: const Duration(milliseconds: 100),
-                  child: Container(
-                      margin: const EdgeInsets.only(right: 20, bottom: 20),
-                      child: WidgetSwitch.withIcon(
-                          activeIcon: "assets/graphics/icons/other.svg",
-                          inactiveIcon: "assets/graphics/icons/other.svg",
-                          activeColor: Interface.accent,
-                          activeBackground: Interface.primary,
-                          inactiveColor: Interface.alwaysDark,
-                          inactiveBackground: Interface.alwaysLight,
-                          isActive: _settings.getMapZonesStyle,
-                          onTap: () {
-                            setState(() {
-                              _settings.changeMapZonesStyle();
-                            });
-                          }))))
-          : Container(),
-      _showInterface
-          ? Positioned(
-              right: 0,
-              bottom: 0,
-              child: AnimatedOpacity(
-                  opacity: _opacity,
-                  duration: const Duration(milliseconds: 100),
-                  child: Container(
-                      margin: const EdgeInsets.only(right: 20, bottom: 20),
-                      child: WidgetButton.withIcon(
-                          icon: "assets/graphics/icons/menu_open.svg",
-                          color: Interface.accent,
-                          background: Interface.primary,
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMapLayers(name: _reserve.en, callback: _reload)));
-                          }))))
-          : Container(),
-      _showInterface
-          ? orientation == Orientation.portrait
-              ? Positioned(
-                  left: 0,
-                  top: 0,
-                  child: AnimatedOpacity(
-                      opacity: _opacity,
-                      duration: const Duration(milliseconds: 100),
-                      child: Container(
-                        width: _screenWidth,
-                        color: Interface.shadow.withOpacity(0.3),
-                        padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
-                        child: _buildAnimalList(),
-                      )))
-              : Positioned(
-                  left: 0,
-                  top: 0,
-                  child: AnimatedOpacity(
-                      opacity: _opacity,
-                      duration: const Duration(milliseconds: 100),
-                      child: Container(
-                        height: _screenHeight,
-                        color: Interface.shadow.withOpacity(0.3),
-                        padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
-                        child: _buildAnimalList(),
-                      )))
-          : Container()
-    ]);
+    return _showInterface
+        ? Stack(children: [
+            Positioned(
+                right: 200,
+                bottom: 0,
+                child: AnimatedOpacity(
+                    opacity: _opacity,
+                    duration: const Duration(milliseconds: 100),
+                    child: Container(
+                        margin: const EdgeInsets.only(right: 20, bottom: 20),
+                        child: WidgetButton(
+                            icon: "assets/graphics/icons/back.svg",
+                            color: Interface.accent,
+                            background: Interface.primary,
+                            onTap: () {
+                              Navigator.pop(context);
+                            })))),
+            Positioned(
+                right: 150,
+                bottom: 0,
+                child: AnimatedOpacity(
+                    opacity: _opacity,
+                    duration: const Duration(milliseconds: 100),
+                    child: Container(
+                        margin: const EdgeInsets.only(right: 20, bottom: 20),
+                        child: WidgetSwitch.withIcon(
+                            activeIcon: "assets/graphics/icons/zone_feed.svg",
+                            inactiveIcon: "assets/graphics/icons/zone_feed.svg",
+                            activeColor: Interface.accent,
+                            activeBackground: Interface.primary,
+                            inactiveColor: Interface.alwaysDark,
+                            inactiveBackground: Interface.alwaysLight,
+                            isActive: _settings.getMapZonesType,
+                            onTap: () {
+                              setState(() {
+                                _settings.changeMapZonesType();
+                              });
+                            })))),
+            Positioned(
+                right: 100,
+                bottom: 0,
+                child: AnimatedOpacity(
+                    opacity: _opacity,
+                    duration: const Duration(milliseconds: 100),
+                    child: Container(
+                        margin: const EdgeInsets.only(right: 20, bottom: 20),
+                        child: WidgetSwitch.withIcon(
+                            activeIcon: "assets/graphics/icons/other.svg",
+                            inactiveIcon: "assets/graphics/icons/other.svg",
+                            activeColor: Interface.accent,
+                            activeBackground: Interface.primary,
+                            inactiveColor: Interface.alwaysDark,
+                            inactiveBackground: Interface.alwaysLight,
+                            isActive: _settings.getMapZonesStyle,
+                            onTap: () {
+                              setState(() {
+                                _settings.changeMapZonesStyle();
+                              });
+                            })))),
+            Positioned(
+                right: 50,
+                bottom: 0,
+                child: AnimatedOpacity(
+                    opacity: _opacity,
+                    duration: const Duration(milliseconds: 100),
+                    child: Container(
+                        margin: const EdgeInsets.only(right: 20, bottom: 20),
+                        child: WidgetButton(
+                            icon: "assets/graphics/icons/about.svg",
+                            color: Interface.alwaysDark,
+                            background: Interface.alwaysLight,
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityMapInformation()));
+                            })))),
+            Positioned(
+                right: 0,
+                bottom: 0,
+                child: AnimatedOpacity(
+                    opacity: _opacity,
+                    duration: const Duration(milliseconds: 100),
+                    child: Container(
+                        margin: const EdgeInsets.only(right: 20, bottom: 20),
+                        child: WidgetButton.withIcon(
+                            icon: "assets/graphics/icons/menu_open.svg",
+                            color: Interface.alwaysDark,
+                            background: Interface.alwaysLight,
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMapLayers(name: _reserve.en, callback: _reload)));
+                            })))),
+            orientation == Orientation.portrait
+                ? Positioned(
+                    left: 0,
+                    top: 0,
+                    child: AnimatedOpacity(
+                        opacity: _opacity,
+                        duration: const Duration(milliseconds: 100),
+                        child: Container(
+                          width: _screenWidth,
+                          color: Interface.shadow.withOpacity(0.3),
+                          padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
+                          child: _buildAnimalList(),
+                        )))
+                : Positioned(
+                    left: 0,
+                    top: 0,
+                    child: AnimatedOpacity(
+                        opacity: _opacity,
+                        duration: const Duration(milliseconds: 100),
+                        child: Container(
+                          height: _screenHeight,
+                          color: Interface.shadow.withOpacity(0.3),
+                          padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
+                          child: _buildAnimalList(),
+                        )))
+          ])
+        : Container();
   }
 
   Widget _buildAnimalList() {

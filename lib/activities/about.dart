@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -8,12 +8,13 @@ import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ActivityAbout extends StatelessWidget {
   final EdgeInsets _padding = const EdgeInsets.all(30);
   final String _email = "toastovac@email.cz";
-  final String _discord = "Toastovac#0289";
+  final String _discord = "Toastovac";
 
   const ActivityAbout({
     Key? key,
@@ -26,40 +27,42 @@ class ActivityAbout extends StatelessWidget {
   }
 
   Widget _buildAbout() {
-    return Container(
-        padding: _padding,
-        child: Column(children: [
-          Container(
-              margin: const EdgeInsets.only(bottom: 15),
-              child: Text(tr("about_paragraph_1_1"),
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  ))),
-          Container(
-              margin: const EdgeInsets.only(bottom: 15),
-              child: Text(tr("about_paragraph_1_2"),
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  ))),
-          Container(
-              margin: const EdgeInsets.only(bottom: 15),
-              child: Text(tr("about_paragraph_1_3"),
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  ))),
-          Text(tr("about_paragraph_1_4"),
-              style: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s20,
-                fontWeight: FontWeight.w400,
-              )),
-        ]));
+    return Column(children: [
+      WidgetTitle(
+        text: tr("about_paragraph_1_4"),
+        textColor: Interface.light,
+        background: Interface.dark,
+        alignment: Alignment.center,
+        textAlignment: TextAlign.center,
+        maxLines: 2,
+      ),
+      Container(
+          padding: _padding,
+          child: Column(children: [
+            Container(
+                margin: const EdgeInsets.only(bottom: 15),
+                child: Text(tr("about_paragraph_1_1"),
+                    style: TextStyle(
+                      color: Interface.dark,
+                      fontSize: Interface.s20,
+                      fontWeight: FontWeight.w400,
+                    ))),
+            Container(
+                margin: const EdgeInsets.only(bottom: 15),
+                child: Text(tr("about_paragraph_1_2"),
+                    style: TextStyle(
+                      color: Interface.dark,
+                      fontSize: Interface.s20,
+                      fontWeight: FontWeight.w400,
+                    ))),
+            Text(tr("about_paragraph_1_3"),
+                style: TextStyle(
+                  color: Interface.dark,
+                  fontSize: Interface.s20,
+                  fontWeight: FontWeight.w400,
+                )),
+          ]))
+    ]);
   }
 
   Widget _buildLanguage() {
@@ -263,27 +266,40 @@ class ActivityAbout extends StatelessWidget {
               padding: _padding,
               color: Interface.subTitleBackground,
               child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                AutoSizeText("${tr('version')} ${Interface.version}",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Interface.dark,
-                      fontSize: Interface.s20,
-                      fontWeight: FontWeight.w400,
-                    )),
-                AutoSizeText("Email: $_email",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Interface.dark,
-                      fontSize: Interface.s20,
-                      fontWeight: FontWeight.w400,
-                    )),
-                AutoSizeText("Discord: $_discord",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Interface.dark,
-                      fontSize: Interface.s20,
-                      fontWeight: FontWeight.w400,
-                    ))
+                Container(
+                    margin: const EdgeInsets.only(bottom: 5),
+                    child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                          margin: const EdgeInsets.only(right: 7),
+                          child: SvgPicture.asset(
+                            "assets/graphics/icons/discord.svg",
+                            color: Interface.dark,
+                            width: 17,
+                          )),
+                      AutoSizeText(_discord,
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Interface.dark,
+                            fontSize: Interface.s20,
+                            fontWeight: FontWeight.w400,
+                          ))
+                    ])),
+                Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      margin: const EdgeInsets.only(right: 7),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/post.svg",
+                        color: Interface.dark,
+                        width: 17,
+                      )),
+                  AutoSizeText(_email,
+                      maxLines: 1,
+                      style: TextStyle(
+                        color: Interface.dark,
+                        fontSize: Interface.s20,
+                        fontWeight: FontWeight.w400,
+                      ))
+                ])
               ])))
     ]);
   }

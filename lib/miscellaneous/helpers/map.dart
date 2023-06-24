@@ -1,6 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
-
-import 'dart:developer';
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/animal.dart';

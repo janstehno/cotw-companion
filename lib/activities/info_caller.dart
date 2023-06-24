@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -11,6 +11,7 @@ import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class ActivityCallerInfo extends StatefulWidget {
@@ -63,7 +64,7 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                   ))
             ]),
             Container(
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                padding: const EdgeInsets.only(top: 10, bottom: 5),
                 child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Expanded(
                       child: Padding(
@@ -82,24 +83,64 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                         fontWeight: FontWeight.w600,
                       ))
                 ])),
+            Container(
+                padding: const EdgeInsets.only(top: 5, bottom: 10),
+                child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Expanded(
+                      child: Padding(
+                          padding: const EdgeInsets.only(right: 30),
+                          child: AutoSizeText(tr('caller_strength'),
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Interface.dark,
+                                fontSize: Interface.s20,
+                                fontWeight: FontWeight.w400,
+                              )))),
+                  Text(_caller.strength.toString(),
+                      style: TextStyle(
+                        color: Interface.dark,
+                        fontSize: Interface.s24,
+                        fontWeight: FontWeight.w600,
+                      ))
+                ])),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Expanded(
                   child: Padding(
                       padding: const EdgeInsets.only(right: 30),
-                      child: AutoSizeText(tr('caller_strength'),
+                      child: AutoSizeText(tr('price'),
                           maxLines: 1,
                           style: TextStyle(
                             color: Interface.dark,
                             fontSize: Interface.s20,
                             fontWeight: FontWeight.w400,
                           )))),
-              Text(_caller.strength.toString(),
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s24,
-                    fontWeight: FontWeight.w600,
-                  ))
-            ])
+              Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                _caller.price == 0 || _caller.price == -1
+                    ? Container()
+                    : Container(
+                        margin: const EdgeInsets.only(right: 2.5),
+                        padding: const EdgeInsets.only(top: 1.15),
+                        child: SvgPicture.asset(
+                          "assets/graphics/icons/money.svg",
+                          width: 14,
+                          height: 14,
+                          color: Interface.dark,
+                        )),
+                AutoSizeText(
+                    _caller.price == 0
+                        ? tr('free')
+                        : _caller.price == -1
+                            ? tr('none')
+                            : "${_caller.price}",
+                    maxLines: 1,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: Interface.dark,
+                      fontSize: Interface.s24,
+                      fontWeight: FontWeight.w600,
+                    ))
+              ])
+            ]),
           ]))
     ]);
   }

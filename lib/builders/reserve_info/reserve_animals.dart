@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -52,6 +52,7 @@ class BuilderReserveAnimalsState extends State<BuilderReserveAnimals> {
               background: index % 2 == 0 ? Interface.even : Interface.odd,
               color: Interface.dark,
               animalId: animalId,
+              reserveId: widget.reserveId,
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityAnimalInfo(animalId: animalId)));
               },

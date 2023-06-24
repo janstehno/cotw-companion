@@ -1,9 +1,9 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -57,8 +57,10 @@ class HelperLog {
       _corruptedLogs.add(log);
       if (!_dateReg.hasMatch(log.date)) continue;
       if (log.animalId <= 0 || log.animalId > HelperJSON.animals.length) continue;
-      if (log.reserveId == 0 || log.reserveId > HelperJSON.reserves.length) continue;
-      if (log.furId <= 0 || log.furId == 45 || log.furId == 46 || (log.furId >= 74 && log.furId <= 99) || log.furId > 100) continue;
+      if (log.reserveId == 0 || log.reserveId < -1 || log.reserveId > HelperJSON.reserves.length) continue;
+      if (log.furId <= 0 || (log.furId >= HelperJSON.furs.length && log.furId < Interface.greatOneId) || log.furId > Interface.greatOneId) {
+        continue;
+      }
       if (log.trophy < 0 || log.trophy > 9999.999) continue;
       if (log.weight < 0 || log.weight > 9999.999) continue;
       log.setCorrupted = false;

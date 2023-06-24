@@ -553,5 +553,15 @@
         "ID": 111,
         "WEAPON_ID": 47,
         "AMMO_ID": 66
+    },
+    {
+        "ID": 112,
+        "WEAPON_ID": 48,
+        "AMMO_ID": 73
+    },
+    {
+        "ID": 113,
+        "WEAPON_ID": 48,
+        "AMMO_ID": 74
     }
 ]

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -11,17 +11,16 @@ import 'package:flutter/material.dart';
 class BuilderReserveNeedZones extends StatefulWidget {
   final int reserveId;
   final int hour;
-  final int min, max;
-  final bool compact, classSlider;
+  final List<bool> classes;
+  final bool compact, classSwitches;
 
   const BuilderReserveNeedZones({
     Key? key,
     required this.reserveId,
     required this.hour,
-    required this.min,
-    required this.max,
+    required this.classes,
     required this.compact,
-    required this.classSlider,
+    required this.classSwitches,
   }) : super(key: key);
 
   @override
@@ -36,7 +35,7 @@ class BuilderReserveNeedZonesState extends State<BuilderReserveNeedZones> {
     for (IdtoId iti in HelperJSON.animalsReserves) {
       if (iti.secondId == widget.reserveId) {
         Animal animal = HelperJSON.getAnimal(iti.firstId);
-        if (animal.level >= widget.min && animal.level <= widget.max) _animals.add(animal);
+        if (widget.classes.elementAt(animal.level - 1)) _animals.add(animal);
       }
     }
     _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserveId).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserveId)));
@@ -58,7 +57,7 @@ class BuilderReserveNeedZonesState extends State<BuilderReserveNeedZones> {
             hour: widget.hour,
             count: _animals.length,
             compact: widget.compact,
-            classSlider: widget.classSlider,
+            classSlider: widget.classSwitches,
             zones: zones,
           );
         });

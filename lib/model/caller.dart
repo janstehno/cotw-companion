@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,7 +8,7 @@ class Caller {
   final String _en, _ru, _cs, _pl, _de, _fr, _es, _pt, _ja;
   final int _rangeM;
   final double _rangeYD;
-  final int _duration, _strength;
+  final int _duration, _strength, _price;
   final int _dlc;
 
   Caller(
@@ -26,6 +26,7 @@ class Caller {
       required rangeYD,
       required duration,
       required strength,
+      required price,
       required dlc})
       : _id = id,
         _en = en,
@@ -41,6 +42,7 @@ class Caller {
         _rangeYD = rangeYD,
         _duration = duration,
         _strength = strength,
+        _price = price,
         _dlc = dlc;
 
   int get id => _id;
@@ -48,6 +50,8 @@ class Caller {
   int get strength => _strength;
 
   int get duration => _duration;
+
+  int get price => _price;
 
   bool get isFromDlc => _dlc == 1;
 
@@ -94,6 +98,7 @@ class Caller {
         rangeYD: json['RANGE_YD'],
         duration: json['DURATION'],
         strength: json['STRENGTH'],
+        price: json['PRICE'],
         dlc: json['DLC']);
   }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -66,9 +66,7 @@ class AnimalFur {
   String getName(Locale locale) {
     return _furId == Interface.greatOneId
         ? HelperJSON.getFur(HelperJSON.furs.length).getName(locale)
-        : _furId > 44 //BECAUSE OF AN ERROR IN THE RAW FURS JSON
-            ? HelperJSON.getFur(_furId - 2).getName(locale)
-            : HelperJSON.getFur(_furId).getName(locale);
+        : HelperJSON.getFur(_furId).getName(locale);
   }
 
   factory AnimalFur.fromJson(Map<String, dynamic> json) {

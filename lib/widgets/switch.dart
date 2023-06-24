@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -9,7 +9,8 @@ class WidgetSwitch extends StatelessWidget {
   final String activeText, activeIcon, inactiveText, inactiveIcon;
   final Color activeColor, inactiveColor, activeBackground, inactiveBackground;
   final double buttonSize;
-  final bool isActive;
+  final bool squareButton, disabled, isActive;
+
   final Function onTap;
 
   const WidgetSwitch({
@@ -23,6 +24,8 @@ class WidgetSwitch extends StatelessWidget {
     this.inactiveColor = Colors.transparent,
     required this.activeBackground,
     required this.inactiveBackground,
+    this.squareButton = true,
+    this.disabled = false,
     required this.isActive,
     required this.onTap,
   }) : super(key: key);
@@ -38,6 +41,8 @@ class WidgetSwitch extends StatelessWidget {
     required this.inactiveColor,
     required this.activeBackground,
     required this.inactiveBackground,
+    this.squareButton = false,
+    this.disabled = false,
     required this.isActive,
     required this.onTap,
   }) : super(key: key);
@@ -53,21 +58,25 @@ class WidgetSwitch extends StatelessWidget {
     required this.inactiveColor,
     required this.activeBackground,
     required this.inactiveBackground,
+    this.squareButton = true,
+    this.disabled = false,
     required this.isActive,
     required this.onTap,
   }) : super(key: key);
 
   Widget _buildWidgets() {
     return GestureDetector(
-        onTap: () {
-          onTap();
-        },
+        onTap: disabled
+            ? () {}
+            : () {
+                onTap();
+              },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           height: buttonSize,
-          width: (activeIcon.isNotEmpty && activeText.isEmpty) || (activeIcon.isEmpty && activeText.isEmpty) ? buttonSize : null,
+          width: squareButton ? buttonSize : null,
           alignment: Alignment.center,
-          padding: activeIcon.isNotEmpty && activeText.isEmpty ? const EdgeInsets.all(0) : const EdgeInsets.all(10),
+          padding: squareButton ? const EdgeInsets.all(0) : const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(buttonSize / 4)),
             color: isActive ? activeBackground : inactiveBackground,

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,7 +11,7 @@ class Animal {
   final double _trophy, _weightKG, _weightLB;
   double _trophyGO, _weightGOKG, _weightGOLB;
   final int _sight, _hearing, _smell;
-  final int _dlc;
+  final int _diamondFemale, _grounded, _dlc;
 
   Animal({
     required id,
@@ -38,6 +38,8 @@ class Animal {
     required sight,
     required hearing,
     required smell,
+    required diamondFemale,
+    required grounded,
     required dlc,
   })  : _id = id,
         _en = en,
@@ -63,6 +65,8 @@ class Animal {
         _sight = sight,
         _hearing = hearing,
         _smell = smell,
+        _diamondFemale = diamondFemale,
+        _grounded = grounded,
         _dlc = dlc;
 
   int get id => _id;
@@ -95,9 +99,13 @@ class Animal {
 
   int get smell => _smell;
 
+  bool get femaleDiamond => _diamondFemale == 1;
+
+  bool get grounded => _grounded == 1;
+
   bool get isFromDlc => _dlc == 1;
 
-  bool get hasGO => _trophyGO != 0;
+  bool get hasGO => _trophyGO != -1;
 
   bool get hasSenses => _sight > 0 || _hearing > 0 || _smell > 0;
 
@@ -129,12 +137,14 @@ class Animal {
       trophy: json['TROPHY'],
       weightKG: json['WEIGHT_KG'],
       weightLB: json['WEIGHT_LB'],
-      trophyGO: json['TROPHY_GO'] ?? 0.0,
-      weightGOKG: json['WEIGHT_GO_KG'] ?? 0.0,
-      weightGOLB: json['WEIGHT_GO_LB'] ?? 0.0,
+      trophyGO: json['TROPHY_GO'] ?? -1.0,
+      weightGOKG: json['WEIGHT_GO_KG'] ?? -1.0,
+      weightGOLB: json['WEIGHT_GO_LB'] ?? -1.0,
       sight: json['SIGHT'],
       hearing: json['HEARING'],
       smell: json['SMELL'],
+      diamondFemale: json['DIAMOND_FEMALE'] ?? 0,
+      grounded: json['GROUNDED'] ?? 0,
       dlc: json['DLC'],
     );
     return animal;
@@ -152,13 +162,17 @@ class Animal {
 
   String getNameBasedOnReserve(Locale locale, int reserveId) {
     if (reserveId == -1) return getName(locale);
-    if ((locale.languageCode.toString() == "en" && _id == 34 && reserveId == 5 /*Puma in Parque Fernando*/) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && _id == 55 && reserveId == 9 /*Feral Pig in Te Awaroa National Park*/) ||
-        (locale.languageCode.toString() != "pl" && (_id == 60 && reserveId == 10) /*Mexican Bobcat in Rancho del Arroyo*/)) {
+    if ((locale.languageCode.toString() == "en" && _id == 34 && reserveId == 5 /*Puma in PF*/) ||
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") &&
+            _id == 55 &&
+            (reserveId == 9 || reserveId == 14) /*Feral Pig in TANP & ECA*/) ||
+        (locale.languageCode.toString() != "pl" && (_id == 60 && reserveId == 10) /*Mexican Bobcat in RDA*/)) {
       return getNameByLocale(locale).split("/")[0];
-    } else if ((locale.languageCode.toString() == "en" && _id == 34 && reserveId == 8 /*Mountain Lion in Silver Ridge Peaks*/) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && _id == 55 && reserveId == 11 /*Wild Hog in Mississippi Acres Preserve*/) ||
-        (locale.languageCode.toString() != "pl" && (_id == 60 && reserveId == 13) /*Bobcat in New England Mountains*/)) {
+    } else if ((locale.languageCode.toString() == "en" && _id == 34 && reserveId == 8 /*Mountain Lion in SRP*/) ||
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") &&
+            _id == 55 &&
+            reserveId == 11 /*Wild Hog in MAP*/) ||
+        (locale.languageCode.toString() != "pl" && (_id == 60 && reserveId == 13) /*Bobcat in NEM*/)) {
       return getNameByLocale(locale).split("/")[1];
     } else {
       return getName(locale);
@@ -206,13 +220,5 @@ class Animal {
       (split.length == 2 && split[1].isNotEmpty) ? text = tmp[0] + (" ${split[1]}") : text = tmp[0];
     }
     return text;
-  }
-
-  String getAnatomyAsset(String part) {
-    String asset = "assets/graphics/anatomy/";
-    asset += en.split("/")[0].replaceAll(" ", "").toLowerCase();
-    asset += "_$part";
-    asset += ".svg";
-    return asset;
   }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -22,7 +22,7 @@ class WidgetAppBar extends StatelessWidget {
     this.maxLines = 2,
     this.height = 90,
     this.fontSize = 30,
-    this.fontWeight = FontWeight.w800,
+    this.fontWeight = FontWeight.w600,
     this.alignment = Alignment.centerRight,
     this.color,
     this.background,
@@ -66,7 +66,7 @@ class WidgetAppBar extends StatelessWidget {
                       color: color ?? Interface.accent,
                       fontSize: fontSize,
                       fontWeight: fontWeight,
-                      fontFamily: 'Title',
+                      fontFamily: 'Condensed',
                     ),
                   )))
     ]);

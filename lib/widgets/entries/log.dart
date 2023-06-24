@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
@@ -124,8 +124,8 @@ class EntryLogState extends State<EntryLog> {
           style: TextStyle(
             color: Interface.dark,
             fontSize: 18,
-            fontWeight: FontWeight.w800,
-            fontFamily: 'Title',
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Condensed',
           )),
     );
   }
@@ -156,115 +156,127 @@ class EntryLogState extends State<EntryLog> {
   }
 
   Widget _buildReserve() {
-    return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-      Container(
-          width: 15,
-          height: 15,
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(right: 5),
-          child: SvgPicture.asset(
-            "assets/graphics/icons/reserve.svg",
-            width: 10,
-            height: 10,
-            color: Interface.dark,
-          )),
-      Expanded(
-          child: Container(
+    return Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              width: 15,
               height: 15,
-              alignment: Alignment.centerLeft,
-              child: AutoSizeText(_reserve.getName(context.locale),
-                  maxLines: 1,
-                  minFontSize: 10,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ))))
-    ]);
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(right: 5),
+              child: SvgPicture.asset(
+                "assets/graphics/icons/reserve.svg",
+                width: 10,
+                height: 10,
+                color: Interface.dark,
+              )),
+          Expanded(
+              child: Container(
+                  height: 15,
+                  alignment: Alignment.centerLeft,
+                  child: AutoSizeText(_reserve.getName(context.locale),
+                      maxLines: 1,
+                      minFontSize: 10,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Interface.dark,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ))))
+        ]);
   }
 
   Widget _buildFur() {
-    return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-      Container(
-          width: 15,
-          height: 15,
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(right: 5),
-          child: Container(
-              width: 10,
-              height: 10,
-              decoration: ShapeDecoration(
-                color: _fur.color,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-              ))),
-      Expanded(
-          child: Container(
+    return Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              width: 15,
               height: 15,
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(right: _style == 2 ? 30 : 0),
-              child: AutoSizeText(_fur.getName(context.locale),
-                  maxLines: 1,
-                  minFontSize: 10,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ))))
-    ]);
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(right: 5),
+              child: Container(
+                  width: 10,
+                  height: 10,
+                  decoration: ShapeDecoration(
+                    color: _fur.color,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                  ))),
+          Expanded(
+              child: Container(
+                  height: 15,
+                  alignment: Alignment.centerLeft,
+                  margin: EdgeInsets.only(right: _style == 2 ? 30 : 0),
+                  child: AutoSizeText(_fur.getName(context.locale),
+                      maxLines: 1,
+                      minFontSize: 10,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Interface.dark,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ))))
+        ]);
   }
 
   Widget _buildHarvestCheck() {
     return Container(
         height: 30,
         margin: const EdgeInsets.only(top: 15),
-        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Container(
-              height: 20,
-              width: 20,
-              margin: const EdgeInsets.only(right: 5),
-              alignment: Alignment.center,
-              child: SvgPicture.asset(
-                "assets/graphics/icons/harvest_correct_ammo.svg",
-                width: 15,
-                height: 15,
-                color: widget.log.correctAmmoUsed ? Interface.primary : Interface.disabled.withOpacity(0.3),
-              )),
-          Container(
-              height: 20,
-              width: 20,
-              margin: const EdgeInsets.only(right: 5, left: 5),
-              alignment: Alignment.center,
-              child: SvgPicture.asset(
-                "assets/graphics/icons/harvest_two_shots.svg",
-                width: 15,
-                height: 15,
-                color: widget.log.twoShotsFired ? Interface.primary : Interface.disabled.withOpacity(0.3),
-              )),
-          Container(
-              height: 20,
-              width: 20,
-              margin: const EdgeInsets.only(right: 5, left: 5),
-              alignment: Alignment.center,
-              child: SvgPicture.asset(
-                "assets/graphics/icons/harvest_no_trophy_organ.svg",
-                width: 15,
-                height: 15,
-                color: widget.log.trophyOrganUndamaged ? Interface.primary : Interface.disabled.withOpacity(0.3),
-              )),
-          Container(
-              height: 20,
-              width: 20,
-              margin: const EdgeInsets.only(left: 5),
-              alignment: Alignment.center,
-              child: SvgPicture.asset(
-                "assets/graphics/icons/harvest_vital_organ.svg",
-                width: 15,
-                height: 15,
-                color: widget.log.vitalOrganHit ? Interface.primary : Interface.disabled.withOpacity(0.3),
-              )),
-        ]));
+        child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  height: 20,
+                  width: 20,
+                  margin: const EdgeInsets.only(right: 5),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    "assets/graphics/icons/harvest_correct_ammo.svg",
+                    width: 15,
+                    height: 15,
+                    color: widget.log.correctAmmoUsed ? Interface.primary : Interface.disabled.withOpacity(0.3),
+                  )),
+              Container(
+                  height: 20,
+                  width: 20,
+                  margin: const EdgeInsets.only(right: 5, left: 5),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    "assets/graphics/icons/harvest_two_shots.svg",
+                    width: 15,
+                    height: 15,
+                    color: widget.log.twoShotsFired ? Interface.primary : Interface.disabled.withOpacity(0.3),
+                  )),
+              Container(
+                  height: 20,
+                  width: 20,
+                  margin: const EdgeInsets.only(right: 5, left: 5),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    "assets/graphics/icons/harvest_no_trophy_organ.svg",
+                    width: 15,
+                    height: 15,
+                    color: widget.log.trophyOrganUndamaged ? Interface.primary : Interface.disabled.withOpacity(0.3),
+                  )),
+              Container(
+                  height: 20,
+                  width: 20,
+                  margin: const EdgeInsets.only(left: 5),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    "assets/graphics/icons/harvest_vital_organ.svg",
+                    width: 15,
+                    height: 15,
+                    color: widget.log.vitalOrganHit ? Interface.primary : Interface.disabled.withOpacity(0.3),
+                  )),
+            ]));
   }
 
   Widget _buildTrophyWeight(bool buildWeight) {
@@ -278,101 +290,136 @@ class EntryLogState extends State<EntryLog> {
         child: Container(
             alignment: Alignment.centerRight,
             margin: EdgeInsets.only(top: (widget.log.weight > 0 && buildWeight) || (_style == 1 || _style == 2) ? 0 : 15),
-            child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end, children: [
-              widget.log.weight > 0 && buildWeight ? _buildWeight() : Container(),
-              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                Container(
-                    width: 20,
-                    height: 30,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 5),
-                    child: SvgPicture.asset(
-                      widget.log.getTrophyRatingIcon(_animal, true),
-                      color: widget.log.getTrophyColor(_animal, true),
-                      fit: BoxFit.fitWidth,
-                    )),
-                Container(
-                    width: 10,
-                    height: 30,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 10),
-                    child: SvgPicture.asset(
-                      widget.log.getTrophyRatingIcon(_animal, false),
-                      color: widget.log.getTrophyColor(_animal, false),
-                      fit: BoxFit.fitWidth,
-                    )),
-                Expanded(
-                    child: Container(
-                        alignment: Alignment.centerRight,
-                        child: AutoSizeText(widget.log.trophy.toString(),
-                            maxLines: 1,
-                            minFontSize: 10,
-                            style: TextStyle(
-                              color: Interface.dark,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                            ))))
-              ]),
-            ])));
+            child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  widget.log.weight > 0 && buildWeight ? _buildWeight() : Container(),
+                  Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                            width: 20,
+                            height: 30,
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(right: 5),
+                            child: SvgPicture.asset(
+                              widget.log.getTrophyRatingIcon(_animal, true),
+                              color: widget.log.getTrophyColor(_animal, true),
+                              fit: BoxFit.fitWidth,
+                            )),
+                        Container(
+                            width: 10,
+                            height: 30,
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(right: 10),
+                            child: SvgPicture.asset(
+                              widget.log.getTrophyRatingIcon(_animal, false),
+                              color: widget.log.getTrophyColor(_animal, false),
+                              fit: BoxFit.fitWidth,
+                            )),
+                        Expanded(
+                            child: Container(
+                                alignment: Alignment.centerRight,
+                                child: AutoSizeText(widget.log.removePointZero("${widget.log.trophy}"),
+                                    maxLines: 1,
+                                    minFontSize: 10,
+                                    style: TextStyle(
+                                      color: Interface.dark,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                    ))))
+                      ]),
+                ])));
   }
 
   Widget _buildWeight() {
     return SizedBox(
         height: 15,
-        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(left: 10),
-              child: AutoSizeText(widget.log.usesImperials ? ("${widget.log.weight} ${tr('pounds')}") : ("${widget.log.weight} ${tr('kilograms')}"),
-                  maxLines: 1,
-                  minFontSize: 10,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  )))
-        ]));
+        child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.only(left: 10),
+                  child: AutoSizeText(
+                      widget.log.usesImperials
+                          ? (widget.log.removePointZero("${widget.log.weight} ${tr('pounds')}"))
+                          : (widget.log.removePointZero("${widget.log.weight} ${tr('kilograms')}")),
+                      maxLines: 1,
+                      minFontSize: 10,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Interface.dark,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      )))
+            ]));
   }
 
   Widget _buildLogCompact() {
     return Column(children: [
       _dateOfRecord ? _buildDate() : Container(),
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
-        _buildTrophyWeight(false),
-      ])
+      Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
+            _buildTrophyWeight(false),
+          ])
     ]);
   }
 
   Widget _buildLogSemiCompact() {
     return Column(children: [
       _dateOfRecord ? _buildDate() : Container(),
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
-        _buildTrophyWeight(false),
-      ]),
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Expanded(child: widget.log.fur.furId == Interface.greatOneId ? Container() : _buildFur()),
-        _buildGender(),
-      ])
+      Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
+            _buildTrophyWeight(false),
+          ]),
+      Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(child: widget.log.fur.furId == Interface.greatOneId ? Container() : _buildFur()),
+            _buildGender(),
+          ])
     ]);
   }
 
   Widget _buildLogNonCompact() {
     return Column(children: [
       _dateOfRecord ? _buildDate() : Container(),
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-        _buildLodge(),
-        Expanded(child: _buildName()),
-        _buildGender(),
-      ]),
+      Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildLodge(),
+            Expanded(child: _buildName()),
+            _buildGender(),
+          ]),
       widget.log.reserveId > -1 ? _buildReserve() : Container(),
       widget.log.fur.furId == Interface.greatOneId ? Container() : _buildFur(),
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Expanded(child: widget.log.reserveId > -1 ? _buildHarvestCheck() : Container()),
-        _buildTrophyWeight(true),
-      ])
+      Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(child: widget.log.reserveId > -1 ? _buildHarvestCheck() : Container()),
+            _buildTrophyWeight(true),
+          ])
     ]);
   }
 
@@ -381,15 +428,19 @@ class EntryLogState extends State<EntryLog> {
         color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
         child: Padding(
             padding: EdgeInsets.fromLTRB(30, _style == 1 ? 20 : 25, 30, _style == 1 ? 20 : 25),
-            child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-              _style == 1
-                  ? _buildLogCompact()
-                  : _style == 2
-                      ? _buildLogSemiCompact()
-                      : _style == 3
-                          ? _buildLogNonCompact()
-                          : Container()
-            ])));
+            child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _style == 1
+                      ? _buildLogCompact()
+                      : _style == 2
+                          ? _buildLogSemiCompact()
+                          : _style == 3
+                              ? _buildLogNonCompact()
+                              : Container()
+                ])));
   }
 
   Widget _buildWidgets() {

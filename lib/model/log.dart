@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:core';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -138,6 +138,16 @@ class Log {
     }
   }
 
+  String removePointZero(String value) {
+    String text = value;
+    List<String> tmp = text.split(".");
+    List<String> split = tmp[1].split(" ");
+    if (int.parse(split[0]) == 0) {
+      (split.length == 2 && split[1].isNotEmpty) ? text = tmp[0] + (" ${split[1]}") : text = tmp[0];
+    }
+    return text;
+  }
+
   String getTrophyRatingIcon(Animal animal, bool harvestCheck) {
     switch (getTrophyRating(animal, harvestCheck)) {
       case 1:
@@ -174,6 +184,7 @@ class Log {
         return Interface.disabled;
     }
   }
+
 
   static String dateToString(DateTime dateTime) {
     return "${dateTime.year}-${dateTime.month}-${dateTime.day}-${dateTime.hour}-${dateTime.minute}";

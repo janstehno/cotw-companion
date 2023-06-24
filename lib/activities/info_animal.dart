@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
@@ -63,67 +63,55 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
     });
   }
 
-  /*
-  FlutterSlider _sliderOpacity() {
-    return FlutterSlider(
-        values: [_opacity.toDouble()],
-        min: 0,
-        max: 1,
-        step: const FlutterSliderStep(step: 0.1),
-        handlerWidth: 15,
-        handlerHeight: 15,
-        tooltip: FlutterSliderTooltip(disabled: true),
-        trackBar: FlutterSliderTrackBar(
-            activeTrackBarHeight: 2,
-            inactiveTrackBarHeight: 1,
-            activeTrackBar: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(100.0)), color: Color(Values.colorPrimary).withOpacity(0.4)),
-            inactiveTrackBar: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(100.0)), color: Color(Values.colorSliderTrack))),
-        handler: FlutterSliderHandler(decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(5.0)), color: Color(Values.colorPrimary)), child: Container()),
-        onDragging: (id, lower, upper) {
-          setState(() {
-            setState(() {
-              _opacity = lower;
-            });
-          });
-        });
-  }
-  */
-
   Widget _buildName() {
+    double width = MediaQuery.of(context).size.width - 90;
+    double size = width > 250 ? 250 : width;
     return Column(children: [
       SizedBox(
-          height: (MediaQuery.of(context).size.width / 16 * 9) + 60,
+          height: size,
           child: Stack(fit: StackFit.expand, children: [
-            //Image.asset(Graphics.getAnimalBackground(widget.animal.getId), fit: BoxFit.fitHeight),
+            /*OrientationBuilder(builder: (context, orientation) {
+              return LimitedBox(
+                maxHeight: size,
+                child: Image.asset(
+                  Graphics.getAnimalBackground(_animal.id),
+                  fit: orientation == Orientation.portrait ? BoxFit.contain : BoxFit.cover,
+                ),
+              );
+            }),*/
             Column(children: [
               Container(
-                  height: (MediaQuery.of(context).size.width / 16 * 9) + 60,
+                  height: size,
                   color: Interface.subSubTitleBackground,
-                  child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Expanded(
-                        child: Container(
+                  child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                            width: 90,
                             padding: const EdgeInsets.fromLTRB(30, 0, 0, 30),
-                            alignment: Alignment.bottomLeft,
                             child: SvgPicture.asset(
                               Graphics.getAnimalIcon(widget.animalId),
                               color: Interface.dark,
-                              width: 60,
-                            ))),
-                    Container(
-                        width: (MediaQuery.of(context).size.width / 16 * 9) + 60,
-                        padding: _padding,
-                        alignment: Alignment.bottomRight,
-                        child: SimpleShadow(
-                            color: Interface.shadowAnimalHead,
-                            opacity: 1,
-                            sigma: 2,
-                            offset: const Offset(-0.35, -0.35),
-                            child: SvgPicture.asset(
-                              Graphics.getAnimalHead(widget.animalId),
                               fit: BoxFit.fitWidth,
-                              alignment: Alignment.bottomRight,
-                            )))
-                  ]))
+                              alignment: Alignment.bottomLeft,
+                            )),
+                        Container(
+                            width: size,
+                            padding: _padding,
+                            alignment: Alignment.bottomRight,
+                            child: SimpleShadow(
+                                color: Interface.shadowAnimalHead,
+                                opacity: 1,
+                                sigma: 2,
+                                offset: const Offset(-0.35, -0.35),
+                                child: SvgPicture.asset(
+                                  Graphics.getAnimalHead(widget.animalId),
+                                  fit: BoxFit.fitWidth,
+                                  alignment: Alignment.bottomRight,
+                                )))
+                      ]))
             ])
           ])),
       Container(
@@ -189,70 +177,140 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
 
   Widget _buildTrophy() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('animal_trophy'),
-      ),
+      Row(children: [
+        Expanded(
+            child: WidgetTitle(
+          text: tr('animal_trophy'),
+        )),
+        _animal.grounded
+            ? Container(
+                height: 75,
+                color: Interface.subTitleBackground,
+                padding: const EdgeInsets.only(right: 25),
+                alignment: Alignment.center,
+                child: WidgetTag.medium(
+                  color: Interface.disabled,
+                  background: Colors.transparent,
+                  iconSize: 20,
+                  icon: "assets/graphics/icons/grounded.svg",
+                ))
+            : Container()
+      ]),
       Container(
           padding: _padding,
-          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-            WidgetTag.big(
-                margin: const EdgeInsets.only(right: 5),
-                text: _animal.removePointZero(_animal.silver.toString()),
-                color: Interface.alwaysDark,
-                background: Interface.trophySilver),
-            WidgetTag.big(
-                margin: const EdgeInsets.only(left: 5, right: 5),
-                text: _animal.removePointZero(_animal.gold.toString()),
-                color: Interface.alwaysDark,
-                background: Interface.trophyGold),
-            WidgetTag.big(
-                margin: const EdgeInsets.only(left: 5),
+          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+            WidgetTrophyScore(
+              text: _animal.removePointZero(_animal.silver.toString()),
+              icon: "assets/graphics/icons/trophy_silver.svg",
+              color: Interface.alwaysDark,
+              background: Interface.trophySilver,
+              iconSize: 18,
+              margin: const EdgeInsets.only(bottom: 10),
+            ),
+            WidgetTrophyScore(
+              text: _animal.removePointZero(_animal.gold.toString()),
+              icon: "assets/graphics/icons/trophy_gold.svg",
+              color: Interface.alwaysDark,
+              background: Interface.trophyGold,
+              iconSize: 18,
+              margin: const EdgeInsets.only(bottom: 10),
+            ),
+            Row(children: [
+              WidgetTrophyScore(
                 text: _animal.removePointZero(_animal.diamond.toString()),
+                icon: "assets/graphics/icons/trophy_diamond.svg",
                 color: Interface.alwaysDark,
-                background: Interface.trophyDiamond),
+                background: Interface.trophyDiamond,
+                iconSize: 18,
+                margin: const EdgeInsets.only(right: 3),
+              ),
+              _animal.femaleDiamond
+                  ? Container(
+                      margin: const EdgeInsets.only(bottom: 1.5),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/female.svg",
+                        color: Interface.disabled,
+                        width: 14,
+                      ))
+                  : Container()
+            ]),
           ])),
       WidgetTitle(
         text: tr('animal_maximum_trophy'),
+        subText: tr('subject_to_change'),
+        subTextColor: Interface.disabled,
       ),
       Container(
           padding: _padding,
           child: Column(children: [
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              WidgetTrophyScore.withUnknown(
-                isValueKnown: _animal.trophy == 0,
-                icon: "assets/graphics/icons/unknown.svg",
-                text: _animal.removePointZero(_animal.trophy.toString()),
-                alignIconLeft: true,
-              ),
-              _imperialUnits
-                  ? WidgetTrophyScore.withUnknown(
-                      isValueKnown: _animal.weightLB == 0, icon: "assets/graphics/icons/unknown.svg", text: _animal.removePointZero(_animal.getWeight(_imperialUnits)))
-                  : WidgetTrophyScore.withUnknown(
-                      isValueKnown: _animal.weightKG == 0, icon: "assets/graphics/icons/unknown.svg", text: _animal.removePointZero(_animal.getWeight(_imperialUnits))),
-            ]),
-            _animal.trophyGO != 0
-                ? Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      WidgetTrophyScore.withUnknown(
-                          isValueKnown: true,
-                          icon: _animal.trophyGO == 0 ? "assets/graphics/icons/unknown.svg" : "assets/graphics/icons/trophy_great_one.svg",
-                          iconSize: _animal.trophyGO == 0 ? 16 : 20,
+            Container(
+                margin: EdgeInsets.only(bottom: _animal.hasGO ? 10 : 0),
+                child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            WidgetTrophyScore(
+                              text: _animal.removePointZero(_animal.trophy.toString()),
+                              icon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
+                              color: Interface.accent,
+                              background: Interface.primary,
+                              valueKnown: _animal.trophy != 0,
+                              iconSize: 14,
+                              margin: const EdgeInsets.only(right: 3),
+                            ),
+                            (_animal.id > 80 && _animal.trophy > 0)
+                                ? Container(
+                                    margin: const EdgeInsets.only(bottom: 1.5),
+                                    child: Text("?",
+                                        style: TextStyle(
+                                          color: Interface.disabled,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        )))
+                                : Container()
+                          ]),
+                      WidgetTrophyScore(
+                        text: _animal.removePointZero(_animal.getWeight(_imperialUnits)),
+                        icon: "assets/graphics/icons/weight.svg",
+                        color: Interface.accent,
+                        background: Interface.primary,
+                        valueKnown: _imperialUnits ? _animal.weightLB != 0 : _animal.weightKG != 0,
+                        iconRight: true,
+                        iconSize: 15,
+                      )
+                    ])),
+            _animal.hasGO
+                ? Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                        WidgetTrophyScore(
                           text: _animal.removePointZero(_animal.trophyGO.toString()),
-                          alignIconLeft: true),
-                      _imperialUnits
-                          ? WidgetTrophyScore.withUnknown(
-                              isValueKnown: true,
-                              icon: _animal.weightGOLB == 0 ? "assets/graphics/icons/unknown.svg" : "assets/graphics/icons/trophy_great_one.svg",
-                              iconSize: _animal.weightGOLB == 0 ? 16 : 20,
-                              text: _animal.removePointZero(_animal.getWeightGO(_imperialUnits)))
-                          : WidgetTrophyScore.withUnknown(
-                              isValueKnown: true,
-                              icon: _animal.weightGOKG == 0 ? "assets/graphics/icons/unknown.svg" : "assets/graphics/icons/trophy_great_one.svg",
-                              iconSize: _animal.weightGOKG == 0 ? 16 : 20,
-                              text: _animal.removePointZero(_animal.getWeightGO(_imperialUnits))),
-                    ]))
-                : Container()
+                          icon: "assets/graphics/icons/trophy_great_one.svg",
+                          color: Interface.accent,
+                          background: Interface.primary,
+                          valueKnown: _animal.trophyGO != 0,
+                          iconSize: 17,
+                          margin: const EdgeInsets.only(right: 10),
+                        ),
+                        WidgetTrophyScore(
+                          text: _animal.removePointZero(_animal.getWeightGO(_imperialUnits)),
+                          icon: "assets/graphics/icons/weight.svg",
+                          color: Interface.accent,
+                          background: Interface.primary,
+                          valueKnown: _imperialUnits ? _animal.weightGOLB != 0 : _animal.weightGOKG != 0,
+                          iconRight: true,
+                          iconSize: 15,
+                        )
+                      ])
+                : Container(),
           ]))
     ]);
   }
@@ -261,6 +319,8 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
     return Column(children: [
       WidgetTitle(
         text: tr('animal_furs'),
+        subText: tr('subject_to_change'),
+        subTextColor: Interface.disabled,
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
@@ -337,12 +397,25 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              WidgetTag.small(text: tr('animal_other'), color: Interface.light, background: Interface.other, margin: const EdgeInsets.only(right: 2.5)),
-              WidgetTag.small(text: tr('animal_feed'), color: Interface.alwaysDark, background: Interface.feed, margin: const EdgeInsets.only(left: 2.5))
+              WidgetTag.small(
+                  text: tr('animal_other'), color: Interface.light, background: Interface.other, margin: const EdgeInsets.only(right: 2.5)),
+              WidgetTag.small(
+                  text: tr('animal_feed'),
+                  color: Interface.alwaysDark,
+                  background: Interface.feed,
+                  margin: const EdgeInsets.only(left: 2.5))
             ]),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              WidgetTag.small(text: tr('animal_drink'), color: Interface.alwaysDark, background: Interface.drink, margin: const EdgeInsets.only(right: 2.5, top: 5)),
-              WidgetTag.small(text: tr('animal_rest'), color: Interface.alwaysDark, background: Interface.rest, margin: const EdgeInsets.only(left: 2.5, top: 5))
+              WidgetTag.small(
+                  text: tr('animal_drink'),
+                  color: Interface.alwaysDark,
+                  background: Interface.drink,
+                  margin: const EdgeInsets.only(right: 2.5, top: 5)),
+              WidgetTag.small(
+                  text: tr('animal_rest'),
+                  color: Interface.alwaysDark,
+                  background: Interface.rest,
+                  margin: const EdgeInsets.only(left: 2.5, top: 5))
             ])
           ])),
       BuilderAnimalZones(animalId: widget.animalId)
@@ -357,18 +430,13 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             ),
             Stack(children: [
               SvgPicture.asset(
-                _animal.getAnatomyAsset("body"),
+                Graphics.getAnatomyAsset(_animal.id, AnatomyType.body),
                 fit: BoxFit.fitWidth,
                 color: Interface.anatomyBody,
               ),
               SvgPicture.asset(
-                _animal.getAnatomyAsset("organs"),
+                Graphics.getAnatomyAsset(_animal.id, AnatomyType.organs),
                 fit: BoxFit.fitWidth,
-              ),
-              SvgPicture.asset(
-                _animal.getAnatomyAsset("bones"),
-                fit: BoxFit.fitWidth,
-                color: Interface.anatomyBones.withOpacity(0 /*_opacity*/),
               )
             ])
           ])
@@ -384,23 +452,27 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             Container(
                 padding: _padding,
                 alignment: Alignment.centerLeft,
-                child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  WidgetSense(
-                    icon: "assets/graphics/icons/sense_sight.svg",
-                    sense: _animal.sight,
-                    isVisible: _animal.sight > 0,
-                  ),
-                  WidgetSense(
-                    icon: "assets/graphics/icons/sense_hearing.svg",
-                    sense: _animal.hearing,
-                    isVisible: _animal.hearing > 0,
-                  ),
-                  WidgetSense(
-                    icon: "assets/graphics/icons/sense_smell.svg",
-                    sense: _animal.smell,
-                    isVisible: _animal.smell > 0,
-                  ),
-                ]))
+                child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      WidgetSense(
+                        icon: "assets/graphics/icons/sense_sight.svg",
+                        sense: _animal.sight,
+                        isVisible: _animal.sight > 0,
+                      ),
+                      WidgetSense(
+                        icon: "assets/graphics/icons/sense_hearing.svg",
+                        sense: _animal.hearing,
+                        isVisible: _animal.hearing > 0,
+                      ),
+                      WidgetSense(
+                        icon: "assets/graphics/icons/sense_smell.svg",
+                        sense: _animal.smell,
+                        isVisible: _animal.smell > 0,
+                      ),
+                    ]))
           ])
         : Container();
   }

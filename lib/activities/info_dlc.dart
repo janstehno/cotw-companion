@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/builders/dlc_info/dlc_lists.dart';
@@ -52,7 +52,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
                                     style: TextStyle(
                                       color: Interface.primary,
                                       fontSize: Interface.s20,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                     ));
                               })
                         ],

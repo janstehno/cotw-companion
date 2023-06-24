@@ -16,6 +16,7 @@
         "RANGE_YD": 21.87,
         "PENETRATION": 10,
         "EXPANSION": 0,
+        "PRICE": 530,
         "DLC": 0
     },
     {
@@ -35,6 +36,7 @@
         "RANGE_YD": 21.87,
         "PENETRATION": 50,
         "EXPANSION": 0,
+        "PRICE": 700,
         "DLC": 0
     },
     {
@@ -54,6 +56,7 @@
         "RANGE_YD": 21.87,
         "PENETRATION": 90,
         "EXPANSION": 0,
+        "PRICE": 880,
         "DLC": 0
     },
     {
@@ -73,6 +76,7 @@
         "RANGE_YD": 21.87,
         "PENETRATION": 15,
         "EXPANSION": 0,
+        "PRICE": 500,
         "DLC": 1
     },
     {
@@ -92,6 +96,7 @@
         "RANGE_YD": 21.87,
         "PENETRATION": 75,
         "EXPANSION": 0,
+        "PRICE": 750,
         "DLC": 1
     },
     {
@@ -111,6 +116,7 @@
         "RANGE_YD": 21.87,
         "PENETRATION": 90,
         "EXPANSION": 0,
+        "PRICE": 900,
         "DLC": 1
     },
     {
@@ -130,6 +136,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
         "EXPANSION": 0,
+        "PRICE": 200,
         "DLC": 1
     },
     {
@@ -149,6 +156,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 10,
         "EXPANSION": 12,
+        "PRICE": 220,
         "DLC": 0
     },
     {
@@ -168,6 +176,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 20,
         "EXPANSION": 3,
+        "PRICE": 350,
         "DLC": 0
     },
     {
@@ -187,6 +196,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 15,
         "EXPANSION": 17,
+        "PRICE": 0,
         "DLC": 0
     },
     {
@@ -206,6 +216,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 30,
         "EXPANSION": 4,
+        "PRICE": 530,
         "DLC": 0
     },
     {
@@ -225,6 +236,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 17,
         "EXPANSION": 24,
+        "PRICE": 440,
         "DLC": 0
     },
     {
@@ -244,6 +256,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 35,
         "EXPANSION": 5,
+        "PRICE": 700,
         "DLC": 0
     },
     {
@@ -263,6 +276,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 20,
         "EXPANSION": 53,
+        "PRICE": 610,
         "DLC": 0
     },
     {
@@ -282,6 +296,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 40,
         "EXPANSION": 12,
+        "PRICE": 880,
         "DLC": 0
     },
     {
@@ -301,6 +316,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 21,
         "EXPANSION": 60,
+        "PRICE": 720,
         "DLC": 1
     },
     {
@@ -320,6 +336,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 42,
         "EXPANSION": 14,
+        "PRICE": 950,
         "DLC": 1
     },
     {
@@ -339,6 +356,7 @@
         "RANGE_YD": 82.02,
         "PENETRATION": 20,
         "EXPANSION": 27,
+        "PRICE": 660,
         "DLC": 0
     },
     {
@@ -358,6 +376,7 @@
         "RANGE_YD": 82.02,
         "PENETRATION": 40,
         "EXPANSION": 6,
+        "PRICE": 390,
         "DLC": 0
     },
     {
@@ -377,6 +396,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 20,
         "EXPANSION": 53,
+        "PRICE": 610,
         "DLC": 1
     },
     {
@@ -396,6 +416,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 40,
         "EXPANSION": 12,
+        "PRICE": 880,
         "DLC": 1
     },
     {
@@ -415,6 +436,7 @@
         "RANGE_YD": 82.02,
         "PENETRATION": 25,
         "EXPANSION": 100,
+        "PRICE": 2000,
         "DLC": 1
     },
     {
@@ -434,6 +456,7 @@
         "RANGE_YD": 82.02,
         "PENETRATION": 100,
         "EXPANSION": 23,
+        "PRICE": 2660,
         "DLC": 1
     },
     {
@@ -453,6 +476,7 @@
         "RANGE_YD": 218.72,
         "PENETRATION": 20,
         "EXPANSION": 20,
+        "PRICE": 400,
         "DLC": 1
     },
     {
@@ -472,6 +496,7 @@
         "RANGE_YD": 218.72,
         "PENETRATION": 40,
         "EXPANSION": 4,
+        "PRICE": 650,
         "DLC": 1
     },
     {
@@ -491,6 +516,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 22,
         "EXPANSION": 68,
+        "PRICE": 790,
         "DLC": 0
     },
     {
@@ -510,6 +536,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 45,
         "EXPANSION": 16,
+        "PRICE": 1050,
         "DLC": 0
     },
     {
@@ -529,6 +556,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 15,
         "EXPANSION": 17,
+        "PRICE": 380,
         "DLC": 1
     },
     {
@@ -548,6 +576,7 @@
         "RANGE_YD": 109.36,
         "PENETRATION": 5,
         "EXPANSION": 10,
+        "PRICE": 200,
         "DLC": 1
     },
     {
@@ -567,6 +596,7 @@
         "RANGE_YD": 82.02,
         "PENETRATION": 17,
         "EXPANSION": 17,
+        "PRICE": 480,
         "DLC": 0
     },
     {
@@ -586,6 +616,7 @@
         "RANGE_YD": 82.02,
         "PENETRATION": 35,
         "EXPANSION": 4,
+        "PRICE": 220,
         "DLC": 0
     },
     {
@@ -605,6 +636,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 17,
         "EXPANSION": 70,
+        "PRICE": 260,
         "DLC": 0
     },
     {
@@ -624,6 +656,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 70,
         "EXPANSION": 16,
+        "PRICE": 530,
         "DLC": 0
     },
     {
@@ -643,6 +676,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 12,
         "EXPANSION": 18,
+        "PRICE": 220,
         "DLC": 0
     },
     {
@@ -662,6 +696,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 50,
         "EXPANSION": 4,
+        "PRICE": 350,
         "DLC": 0
     },
     {
@@ -681,6 +716,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 17,
         "EXPANSION": 70,
+        "PRICE": 530,
         "DLC": 1
     },
     {
@@ -700,6 +736,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 25,
         "EXPANSION": 100,
+        "PRICE": 440,
         "DLC": 0
     },
     {
@@ -719,6 +756,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 100,
         "EXPANSION": 23,
+        "PRICE": 770,
         "DLC": 0
     },
     {
@@ -738,6 +776,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 15,
         "EXPANSION": 70,
+        "PRICE": 200,
         "DLC": 1
     },
     {
@@ -757,6 +796,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 27,
         "EXPANSION": 6,
+        "PRICE": 300,
         "DLC": 1
     },
     {
@@ -776,6 +816,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 19,
         "EXPANSION": 53,
+        "PRICE": 590,
         "DLC": 1
     },
     {
@@ -795,6 +836,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 45,
         "EXPANSION": 13,
+        "PRICE": 850,
         "DLC": 1
     },
     {
@@ -814,6 +856,7 @@
         "RANGE_YD": 109.36,
         "PENETRATION": 30,
         "EXPANSION": 30,
+        "PRICE": 300,
         "DLC": 1
     },
     {
@@ -833,6 +876,7 @@
         "RANGE_YD": 218.72,
         "PENETRATION": 40,
         "EXPANSION": 30,
+        "PRICE": 450,
         "DLC": 1
     },
     {
@@ -852,6 +896,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 20,
         "EXPANSION": 53,
+        "PRICE": 610,
         "DLC": 1
     },
     {
@@ -871,6 +916,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 40,
         "EXPANSION": 12,
+        "PRICE": 880,
         "DLC": 1
     },
     {
@@ -890,6 +936,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
         "EXPANSION": 0,
+        "PRICE": 180,
         "DLC": 1
     },
     {
@@ -909,6 +956,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 5,
         "EXPANSION": 0,
+        "PRICE": 530,
         "DLC": 1
     },
     {
@@ -928,6 +976,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 37,
         "EXPANSION": 16,
+        "PRICE": 880,
         "DLC": 1
     },
     {
@@ -947,6 +996,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
         "EXPANSION": 0,
+        "PRICE": 180,
         "DLC": 0
     },
     {
@@ -966,6 +1016,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 5,
         "EXPANSION": 0,
+        "PRICE": 530,
         "DLC": 0
     },
     {
@@ -985,6 +1036,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 40,
         "EXPANSION": 19,
+        "PRICE": 880,
         "DLC": 0
     },
     {
@@ -1004,6 +1056,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
         "EXPANSION": 0,
+        "PRICE": 150,
         "DLC": 1
     },
     {
@@ -1023,6 +1076,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
         "EXPANSION": 0,
+        "PRICE": 150,
         "DLC": 1
     },
     {
@@ -1042,6 +1096,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 4,
         "EXPANSION": 0,
+        "PRICE": 500,
         "DLC": 1
     },
     {
@@ -1061,6 +1116,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 33,
         "EXPANSION": 16,
+        "PRICE": 800,
         "DLC": 1
     },
     {
@@ -1080,6 +1136,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 0,
         "EXPANSION": 0,
+        "PRICE": 200,
         "DLC": 1
     },
     {
@@ -1099,6 +1156,7 @@
         "RANGE_YD": 27.34,
         "PENETRATION": 5,
         "EXPANSION": 0,
+        "PRICE": 600,
         "DLC": 1
     },
     {
@@ -1118,6 +1176,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 45,
         "EXPANSION": 22,
+        "PRICE": 950,
         "DLC": 1
     },
     {
@@ -1137,6 +1196,7 @@
         "RANGE_YD": 32.81,
         "PENETRATION": 10,
         "EXPANSION": 0,
+        "PRICE": 600,
         "DLC": 1
     },
     {
@@ -1156,6 +1216,7 @@
         "RANGE_YD": 32.81,
         "PENETRATION": 50,
         "EXPANSION": 0,
+        "PRICE": 770,
         "DLC": 1
     },
     {
@@ -1175,6 +1236,7 @@
         "RANGE_YD": 32.81,
         "PENETRATION": 90,
         "EXPANSION": 0,
+        "PRICE": 950,
         "DLC": 1
     },
     {
@@ -1194,6 +1256,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 15,
         "EXPANSION": 3,
+        "PRICE": 300,
         "DLC": 1
     },
     {
@@ -1213,6 +1276,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 7,
         "EXPANSION": 10,
+        "PRICE": 200,
         "DLC": 1
     },
     {
@@ -1232,6 +1296,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 19,
         "EXPANSION": 52,
+        "PRICE": 690,
         "DLC": 1
     },
     {
@@ -1251,6 +1316,7 @@
         "RANGE_YD": 164.04,
         "PENETRATION": 44,
         "EXPANSION": 13,
+        "PRICE": 850,
         "DLC": 1
     },
     {
@@ -1270,6 +1336,7 @@
         "RANGE_YD": 109.36,
         "PENETRATION": 17,
         "EXPANSION": 1,
+        "PRICE": 250,
         "DLC": 1
     },
     {
@@ -1289,6 +1356,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 55,
         "EXPANSION": 6,
+        "PRICE": 600,
         "DLC": 1
     },
     {
@@ -1308,6 +1376,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 50,
         "EXPANSION": 8,
+        "PRICE": 350,
         "DLC": 1
     },
     {
@@ -1327,6 +1396,7 @@
         "RANGE_YD": 54.68,
         "PENETRATION": 12,
         "EXPANSION": 36,
+        "PRICE": 280,
         "DLC": 1
     },
     {
@@ -1346,6 +1416,7 @@
         "RANGE_YD": 218.72,
         "PENETRATION": 42,
         "EXPANSION": 20,
+        "PRICE": 500,
         "DLC": 1
     },
     {
@@ -1365,6 +1436,47 @@
         "RANGE_YD": 218.72,
         "PENETRATION": 20,
         "EXPANSION": 60,
+        "PRICE": 450,
+        "DLC": 1
+    },
+    {
+        "ID": 73,
+        "EN": ".22-250 soft",
+        "RU": ".22-250 полчоболyечная",
+        "CS": ".22-250 s měkkým hrotem",
+        "PL": ".22-250 z miękkim stożkiem",
+        "DE": ".22-250 TMG",
+        "FR": ".22-250 molle",
+        "ES": ".22-250 blanda",
+        "PT": ".22-250 macia",
+        "JA": ".22-250ポリマーチップ弾",
+        "MIN_LEVEL": 2,
+        "MAX_LEVEL": 4,
+        "RANGE_M": 150,
+        "RANGE_YD": 164.04,
+        "PENETRATION": 12,
+        "EXPANSION": 15,
+        "PRICE": 230,
+        "DLC": 1
+    },
+    {
+        "ID": 74,
+        "EN": ".22-250 polymer",
+        "RU": ".22-250 полимерным",
+        "CS": ".22-250 s polymerovým hrotem",
+        "PL": ".22-250 z polimerowym stożkiem",
+        "DE": ".22-250 PSG",
+        "FR": ".22-250 polymère",
+        "ES": ".22-250 plástico",
+        "PT": ".22-250 polímero",
+        "JA": ".22-250ポリマーチップ弾",
+        "MIN_LEVEL": 2,
+        "MAX_LEVEL": 4,
+        "RANGE_M": 150,
+        "RANGE_YD": 164.04,
+        "PENETRATION": 25,
+        "EXPANSION": 3,
+        "PRICE": 375,
         "DLC": 1
     }
 ]

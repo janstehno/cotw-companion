@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -51,6 +51,12 @@ class EntryWeaponState extends State<EntryWeapon> {
                     background: Interface.primary,
                     margin: const EdgeInsets.only(right: 5),
                     isVisible: widget.weapon.isFromDlc,
+                  ),
+                  WidgetTag.medium(
+                    text: "${widget.weapon.min} - ${widget.weapon.max}",
+                    color: Interface.dark,
+                    background: Interface.tag,
+                    margin: const EdgeInsets.only(right: 5),
                   ),
                   WidgetTag.medium(
                     text: widget.weapon.id == 21 ? "1/2" : widget.weapon.mag.toString(),

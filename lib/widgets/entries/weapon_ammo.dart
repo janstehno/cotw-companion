@@ -1,5 +1,6 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -32,6 +33,47 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
     _ammo = HelperJSON.getAmmo(widget.ammoId);
     _imperialUnits = Provider.of<Settings>(context, listen: false).getImperialUnits;
     super.initState();
+  }
+
+  Widget _buildAmmoTitle() {
+    return Row(children: [
+      Expanded(
+          child: WidgetTitle.sub(
+        text: _ammo.getName(context.locale),
+        background: Interface.subSubTitleBackground,
+      )),
+      Container(
+          height: 75,
+          color: Interface.subSubTitleBackground,
+          padding: const EdgeInsets.only(right: 25),
+          alignment: Alignment.center,
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+            _ammo.price == 0 || _ammo.price == -1
+                ? Container()
+                : Container(
+                    margin: const EdgeInsets.only(right: 2.5),
+                    padding: const EdgeInsets.only(top: 1.35),
+                    child: SvgPicture.asset(
+                      "assets/graphics/icons/money.svg",
+                      width: 10,
+                      height: 10,
+                      color: Interface.disabled,
+                    )),
+            AutoSizeText(
+                _ammo.price == 0
+                    ? tr('free')
+                    : _ammo.price == -1
+                        ? tr('none')
+                        : "${_ammo.price}",
+                maxLines: 1,
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: Interface.disabled,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ))
+          ])),
+    ]);
   }
 
   Widget _buildAmmoDetail(bool leftToRight, String icon, String text) {
@@ -71,10 +113,7 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
 
   Widget _buildWidgets() {
     return Column(mainAxisSize: MainAxisSize.max, children: [
-      WidgetTitle.sub(
-        text: _ammo.getName(context.locale),
-        background: Interface.subSubTitleBackground,
-      ),
+      _buildAmmoTitle(),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [

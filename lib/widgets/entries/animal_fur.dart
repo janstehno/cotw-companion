@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -30,130 +30,106 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
     super.initState();
   }
 
+  Widget _buildText(String text) {
+    return AutoSizeText(text,
+        maxLines: 1,
+        style: TextStyle(
+          color: Interface.dark,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+        ));
+  }
+
   Widget _buildWidgetPerCent() {
     String left = widget.fur.perCent.toString().split(".")[0];
     String right = widget.fur.perCent.toString().split(".")[1];
     String point = ".";
     String percent = "%";
-    Alignment alignment = Alignment.centerLeft;
-    if (right.length == 1) {
-      right += "00";
-    } else if (right.length == 2) {
-      right += "0";
-    }
-    if (widget.fur.perCent == 0) {
-      left = "";
-      right = "...";
+    if (right == "0") {
+      right = "";
       point = "";
-      alignment = Alignment.centerRight;
     }
-    if (widget.fur.rarity == 0) {
+    if (widget.fur.perCent == 0 || widget.fur.rarity == 0) {
       left = "";
       right = "";
       point = "";
       percent = "";
-      alignment = Alignment.centerRight;
     }
     return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
       Container(
-          width: 15,
-          height: Interface.s26,
+          width: 57,
           alignment: Alignment.centerRight,
-          margin: const EdgeInsets.only(left: 10),
-          child: AutoSizeText(left,
-              maxLines: 1,
-              style: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s14,
-                fontWeight: FontWeight.w400,
-              ))),
-      Container(
-          width: 5,
-          height: Interface.s26,
-          alignment: Alignment.centerLeft,
-          child: AutoSizeText(point,
-              maxLines: 1,
-              style: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s14,
-                fontWeight: FontWeight.w400,
-              ))),
-      Container(
-          width: 25,
-          height: Interface.s26,
-          alignment: alignment,
-          child: AutoSizeText(right,
-              maxLines: 1,
-              style: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s14,
-                fontWeight: FontWeight.w400,
-              ))),
-      Container(
-          width: 15,
-          height: Interface.s26,
-          alignment: Alignment.centerLeft,
-          margin: const EdgeInsets.only(right: 10),
-          child: AutoSizeText(percent,
-              maxLines: 1,
-              style: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s14,
-                fontWeight: FontWeight.w400,
-              )))
+          margin: const EdgeInsets.only(left: 5, right: 10),
+          child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildText(left),
+                _buildText(point),
+                _buildText(right),
+                Padding(
+                  padding: const EdgeInsets.only(left: 2),
+                  child: _buildText(percent),
+                ),
+              ]))
     ]);
   }
 
   Widget _buildWidgets() {
     return widget.fur.furId == Interface.greatOneId
         ? Container()
-        : Row(mainAxisAlignment: MainAxisAlignment.spaceAround, mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Container(
-                width: 20,
-                height: 10,
-                alignment: Alignment.center,
-                child: AnimatedContainer(
-                    width: widget.fur.isChosen ? 20 : 10,
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+                Container(
+                    width: 20,
                     height: 10,
                     alignment: Alignment.center,
-                    duration: const Duration(milliseconds: 300),
-                    decoration: ShapeDecoration(
-                      color: widget.fur.color,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
-                    ))),
-            _showPerCent ? _buildWidgetPerCent() : Container(),
-            Expanded(
-              child: Container(
-                  alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.only(left: _showPerCent ? 0 : 20, right: 20),
-                  child: AutoSizeText(widget.fur.getName(context.locale),
-                      maxLines: 1,
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s20,
-                        fontWeight: FontWeight.w400,
-                      ))),
-            ),
-            Container(
-                child: widget.fur.male
-                    ? SvgPicture.asset(
-                        "assets/graphics/icons/male.svg",
-                        width: 15,
-                        height: 15,
-                        color: Interface.male,
-                      )
-                    : widget.fur.female
+                    child: AnimatedContainer(
+                        width: widget.fur.isChosen ? 20 : 10,
+                        height: 10,
+                        alignment: Alignment.center,
+                        duration: const Duration(milliseconds: 300),
+                        decoration: ShapeDecoration(
+                          color: widget.fur.color,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
+                        ))),
+                _showPerCent ? _buildWidgetPerCent() : Container(),
+                Expanded(
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(left: _showPerCent ? 0 : 20, right: 20),
+                      child: AutoSizeText(widget.fur.getName(context.locale),
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Interface.dark,
+                            fontSize: Interface.s20,
+                            fontWeight: FontWeight.w400,
+                          ))),
+                ),
+                Container(
+                    child: widget.fur.male
                         ? SvgPicture.asset(
-                            "assets/graphics/icons/female.svg",
+                            "assets/graphics/icons/male.svg",
                             width: 15,
                             height: 15,
-                            color: Interface.female,
+                            color: Interface.male,
                           )
-                        : const SizedBox(
-                            height: 15,
-                            width: 15,
-                          ))
-          ]);
+                        : widget.fur.female
+                            ? SvgPicture.asset(
+                                "assets/graphics/icons/female.svg",
+                                width: 15,
+                                height: 15,
+                                color: Interface.female,
+                              )
+                            : const SizedBox(
+                                height: 15,
+                                width: 15,
+                              ))
+              ]);
   }
 
   @override

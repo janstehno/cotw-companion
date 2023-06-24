@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,8 @@ class WidgetTag extends StatelessWidget {
     this.icon = "",
     this.height = 40,
     this.iconSize = 16,
-    this.fontSize = 24,
-    this.fontWeight = FontWeight.w600,
+    this.fontSize = 22,
+    this.fontWeight = FontWeight.w500,
     this.margin = const EdgeInsets.all(0),
     required this.color,
     required this.background,
@@ -33,7 +33,7 @@ class WidgetTag extends StatelessWidget {
     this.height = 30,
     this.iconSize = 16,
     this.fontSize = 18,
-    this.fontWeight = FontWeight.w500,
+    this.fontWeight = FontWeight.w400,
     this.margin = const EdgeInsets.all(0),
     required this.color,
     required this.background,
@@ -57,9 +57,10 @@ class WidgetTag extends StatelessWidget {
   Widget _buildWidgets() {
     return Container(
         height: height,
+        width: text.isEmpty ? height : null,
         margin: margin,
         alignment: Alignment.center,
-        padding: const EdgeInsets.only(left: 10, right: 10),
+        padding: text.isEmpty ? const EdgeInsets.all(0) : const EdgeInsets.only(left: 10, right: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(height / 4)),
           color: background,

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/types.dart';
 
@@ -17,7 +17,8 @@ class Graphics {
     "ranchodelarroyo",
     "mississippiacrespreserve",
     "revontulicoast",
-    "newenglandmountains"
+    "newenglandmountains",
+    "emeraldcoastaustralia"
   ];
 
   static const List<String> _callers = [
@@ -42,7 +43,9 @@ class Graphics {
     "beacondeluxeeurasianwigeoncaller",
     "beacondeluxebeangoosecaller",
     "beacondeluxegreylaggoosecaller",
-    "hazelgrousecaller"
+    "hazelgrousecaller",
+    "sambarmouthcaller",
+    "magpiegoosecaller"
   ];
 
   static const List<String> _weapons = [
@@ -92,7 +95,8 @@ class Graphics {
     "curman50inline",
     "tsurugilrr338",
     "malmer7mmmagnum",
-    "olssonmodel23308"
+    "olssonmodel23308",
+    "zaganvarminter22250"
   ];
 
   static const List<String> _animals = [
@@ -176,7 +180,15 @@ class Graphics {
     "willowptarmigan",
     "mountainhare",
     "raccoondog",
-    "greenwingedteal"
+    "greenwingedteal",
+    "stubblequail",
+    "magpiegoose",
+    "hogdeer",
+    "javanrusa",
+    "easterngraykangaroo",
+    "sambar",
+    "saltwatercrocodile",
+    "banteng"
   ];
 
   static String getReserveIcon(int id) {
@@ -200,7 +212,11 @@ class Graphics {
   }
 
   static String getAnimalBackground(int id) {
-    return "$_directory/backgrounds/${_animals[id - 1]}.jpg";
+    return "$_directory/images/${_animals[id - 1]}.jpg";
+  }
+
+  static String getAnatomyAsset(int id, AnatomyType part) {
+    return "assets/graphics/anatomy/${_animals[id - 1]}_${part.name}.svg";
   }
 
   static String getMapTile(int id, int x, int y, int z) {

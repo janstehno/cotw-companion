@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
@@ -90,26 +90,26 @@ class ActivitySettingsState extends State<ActivitySettings> {
           padding: const EdgeInsets.all(30),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+              _buildColorButton(Interface.darkpink),
               _buildColorButton(Interface.pink),
               _buildColorButton(Interface.red),
               _buildColorButton(Interface.redorange),
               _buildColorButton(Interface.orange),
               _buildColorButton(Interface.yellow),
-              _buildColorButton(Interface.lightyellow),
             ]),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              _buildColorButton(Interface.blue),
               _buildColorButton(Interface.lightblue),
               _buildColorButton(Interface.teal),
               _buildColorButton(Interface.green),
               _buildColorButton(Interface.lightgreen),
               _buildColorButton(Interface.grassgreen),
+              _buildColorButton(Interface.lightyellow),
             ]),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+              _buildColorButton(Interface.blue),
               _buildColorButton(Interface.darkblue),
               _buildColorButton(Interface.deepblue),
               _buildColorButton(Interface.purple),
-              _buildColorButton(Interface.darkpink),
               _buildColorButton(Interface.brown),
               _buildColorButton(Interface.grey),
             ])

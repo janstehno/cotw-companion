@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:async/async.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -28,25 +28,26 @@ class ActivityNeedZones extends StatefulWidget {
 }
 
 class ActivityNeedZonesState extends State<ActivityNeedZones> {
-  final int _inGameSecond = 993333;
+  final List<bool> _shownClasses = [false, false, false, false, false, false, false, false, false];
+  final List<bool> _disabledClasses = [true, true, true, true, true, true, true, true, true];
 
-  late final RestartableTimer _timer;
+  late List<int> _allClasses = [];
+  late RestartableTimer _timer;
 
   bool _stopped = false;
   bool _compact = false;
-  bool _classSlider = true;
+  bool _classSwitches = true;
   int _hour = 8;
   int _minute = 30;
   int _second = 0;
-  int _min = 1;
-  int _max = 9;
-  int _maxClass = 9;
   int _reserveId = 1;
 
   @override
   void initState() {
     Wakelock.enable();
-    _timer = RestartableTimer(Duration(microseconds: _inGameSecond), () => _changeTime());
+    _timer = RestartableTimer(const Duration(microseconds: 995572), () => _changeTime());
+    _allClasses = HelperJSON.getReserve(_reserveId).allClasses;
+    _resetSwtiches();
     super.initState();
   }
 
@@ -54,6 +55,19 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   void dispose() {
     Wakelock.disable();
     super.dispose();
+  }
+
+  void _adjustSecond() {
+    int inGameSecond = 995572;
+    setState(() {
+      _timer.cancel();
+      if (_hour < 4) {
+        inGameSecond = 1000717;
+      } else if (_hour > 15) {
+        inGameSecond = 1021850;
+      }
+      _timer = RestartableTimer(Duration(microseconds: inGameSecond), () => _changeTime());
+    });
   }
 
   void _resetTimer() {
@@ -74,14 +88,23 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           _minute += 1;
           if (_minute == 60) {
             _minute = 0;
-            _hour += 1;
-            if (_hour == 24) {
-              _hour = 0;
-            }
+            _hour == 24 ? _hour = 0 : _hour += 1;
+            _adjustSecond();
           }
         }
       }
     });
+  }
+
+  void _resetSwtiches() {
+    for (int index = 0; index < 9; index++) {
+      _shownClasses[index] = false;
+      _disabledClasses[index] = true;
+      if (_allClasses.contains(index + 1)) {
+        _shownClasses[index] = true;
+        _disabledClasses[index] = false;
+      }
+    }
   }
 
   Widget _buildTimeSliders() {
@@ -94,6 +117,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           onDrag: (id, lower, upper) {
             setState(() {
               _hour = lower.toInt();
+              _adjustSecond();
             });
           }),
       WidgetSlider(
@@ -109,25 +133,6 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             });
           })
     ]);
-  }
-
-  Widget _buildClassSlider() {
-    return SizedBox(
-        height: 50,
-        child: WidgetSlider(
-            values: [_min.toDouble(), _max.toDouble()],
-            leftText: _min.toString(),
-            rightText: _max.toString(),
-            min: 1,
-            max: _maxClass.toDouble(),
-            rangeSlider: true,
-            handleSize: 30,
-            onDrag: (id, lower, upper) {
-              setState(() {
-                _min = lower.toInt();
-                _max = upper.toInt();
-              });
-            }));
   }
 
   Widget _buildReserves() {
@@ -146,7 +151,8 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               onChanged: (dynamic value) {
                 setState(() {
                   _reserveId = value;
-                  _maxClass = _max = HelperJSON.getReserve(value).maxClass;
+                  _allClasses = HelperJSON.getReserve(value).allClasses;
+                  _resetSwtiches();
                 });
               },
               items: _buildDropDownReserves(),
@@ -173,7 +179,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   }
 
   Widget _buildSwitches(bool portrait, Color color) {
-    _classSlider = !portrait ? true : _classSlider;
+    _classSwitches = !portrait ? true : _classSwitches;
     return Row(children: [
       _compact
           ? WidgetSwitch.withIcon(
@@ -184,10 +190,10 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               inactiveColor: color,
               activeBackground: Colors.transparent,
               inactiveBackground: Colors.transparent,
-              isActive: _classSlider,
+              isActive: _classSwitches,
               onTap: () {
                 setState(() {
-                  _classSlider = !_classSlider;
+                  _classSwitches = !_classSwitches;
                 });
               },
             )
@@ -205,7 +211,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               onTap: () {
                 setState(() {
                   _compact = !_compact;
-                  _classSlider = !_compact;
+                  _classSwitches = !_compact;
                 });
               },
             )
@@ -214,90 +220,94 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   }
 
   Widget _buildTime(Color color) {
-    return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-      AnimatedContainer(
-          width: 40,
-          padding: const EdgeInsets.only(right: 3),
-          duration: const Duration(microseconds: 200),
-          child: AutoSizeText(_hour.toInt().toString(),
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: color,
-                fontSize: Interface.s26,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Title',
-              ))),
-      AnimatedContainer(
-          width: 15,
-          duration: const Duration(microseconds: 200),
-          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-                width: 3.5,
-                height: 3.5,
-                decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-                margin: const EdgeInsets.only(bottom: 2)),
-            Container(
-              width: 3.5,
-              height: 3.5,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(2),
-              ),
-              margin: const EdgeInsets.only(top: 2),
-            )
-          ])),
-      AnimatedContainer(
-          width: 40,
-          duration: const Duration(microseconds: 200),
-          child: AutoSizeText(_minute.toInt().toString(),
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: color,
-                fontSize: Interface.s26,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Title',
-              ))),
-      AnimatedContainer(
-          width: 15,
-          duration: const Duration(microseconds: 200),
-          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-                width: 3.5,
-                height: 3.5,
-                decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.only(bottom: 2)),
-            Container(
-              width: 3.5,
-              height: 3.5,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              margin: const EdgeInsets.only(top: 2),
-            )
-          ])),
-      AnimatedContainer(
-          width: 40,
-          padding: const EdgeInsets.only(left: 3),
-          duration: const Duration(microseconds: 200),
-          child: AutoSizeText(_second.toInt().toString(),
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: color,
-                fontSize: Interface.s26,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Title',
-              ))),
-    ]);
+    return Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          AnimatedContainer(
+              width: 40,
+              padding: const EdgeInsets.only(right: 3),
+              duration: const Duration(microseconds: 200),
+              child: AutoSizeText(_hour.toInt().toString(),
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: Interface.s26,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Condensed',
+                  ))),
+          AnimatedContainer(
+              width: 15,
+              duration: const Duration(microseconds: 200),
+              child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+                Container(
+                    width: 3.5,
+                    height: 3.5,
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 2)),
+                Container(
+                  width: 3.5,
+                  height: 3.5,
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  margin: const EdgeInsets.only(top: 2),
+                )
+              ])),
+          AnimatedContainer(
+              width: 40,
+              duration: const Duration(microseconds: 200),
+              child: AutoSizeText(_minute.toInt().toString(),
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: Interface.s26,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Condensed',
+                  ))),
+          AnimatedContainer(
+              width: 15,
+              duration: const Duration(microseconds: 200),
+              child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+                Container(
+                    width: 3.5,
+                    height: 3.5,
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 2)),
+                Container(
+                  width: 3.5,
+                  height: 3.5,
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  margin: const EdgeInsets.only(top: 2),
+                )
+              ])),
+          AnimatedContainer(
+              width: 40,
+              padding: const EdgeInsets.only(left: 3),
+              duration: const Duration(microseconds: 200),
+              child: AutoSizeText(_second.toInt().toString(),
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: Interface.s26,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Condensed',
+                  ))),
+        ]);
   }
 
   Widget _buildActualTimeAndCompact(bool portrait) {
@@ -312,30 +322,58 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Expanded(child: _buildTime(color)), _buildSwitches(portrait, color)]));
+            children: [
+              Expanded(child: _buildTime(color)),
+              _buildSwitches(portrait, color),
+            ]));
+  }
+
+  List<Widget> _buildClassSwitches() {
+    double width = MediaQuery.of(context).size.width - 60;
+    double size = width > 305 ? 25 : ((width - 56) / 9);
+    double margin = width > 305 ? 10 : 7;
+    List<Widget> switches = [];
+    for (int index = 0; index < 9; index++) {
+      switches.add(Container(
+          margin: EdgeInsets.only(right: index < 8 ? margin : 0),
+          child: WidgetSwitch.withText(
+            buttonSize: size,
+            activeText: "${index + 1}",
+            inactiveText: "${index + 1}",
+            activeColor: Interface.accent,
+            inactiveColor: Interface.disabled.withOpacity(_disabledClasses.elementAt(index) ? 0.3 : 1),
+            activeBackground: Interface.primary,
+            inactiveBackground: Interface.disabled.withOpacity(_disabledClasses.elementAt(index) ? 0.1 : 0.3),
+            squareButton: true,
+            isActive: _shownClasses.elementAt(index),
+            disabled: _disabledClasses.elementAt(index),
+            onTap: () {
+              setState(() {
+                _shownClasses[index] = !(_shownClasses.elementAt(index));
+              });
+            },
+          )));
+    }
+    return switches;
   }
 
   Widget _buildClass() {
-    return _classSlider
-        ? AnimatedContainer(
-            height: 75,
-            padding: const EdgeInsets.only(left: 30, right: 30),
-            duration: const Duration(microseconds: 200),
+    double width = MediaQuery.of(context).size.width - 60;
+    double size = width > 305 ? 305 : width;
+    return _classSwitches
+        ? Container(
+            width: width + 60,
             color: Interface.subTitleBackground,
-            child: Row(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Container(
-                  margin: const EdgeInsets.only(right: 30),
-                  child: AutoSizeText(tr('animal_class').toUpperCase(),
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Interface.title,
-                        fontSize: Interface.s24,
-                        fontWeight: FontWeight.w800,
-                        fontFamily: 'Title',
-                      ))),
-              Expanded(child: _buildClassSlider())
-            ]))
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.fromLTRB(30, _compact ? 20 : 0, 30, _compact ? 20 : 30),
+            child: SizedBox(
+                width: size,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: _buildClassSwitches(),
+                )))
         : Container();
   }
 
@@ -368,8 +406,8 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
                 icon: "assets/graphics/icons/map.svg",
                 textColor: Interface.title,
                 background: Interface.subTitleBackground,
-                iconColor: Interface.alwaysDark,
-                buttonBackground: Interface.play,
+                iconColor: Interface.accent,
+                buttonBackground: Interface.primary,
                 isTitle: true,
                 onTap: () {
                   Navigator.push(
@@ -385,7 +423,6 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
       _buildActualTimeAndCompact(portrait),
       _buildTimeChangerAndReserve(),
       _buildReserves(),
-      _buildClass(),
     ]);
   }
 
@@ -396,13 +433,13 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           : WidgetTitle(
               text: tr('animal_need_zones'),
             ),
+      _buildClass(),
       BuilderReserveNeedZones(
         reserveId: _reserveId,
         hour: _hour,
-        min: _min,
-        max: _max,
+        classes: _shownClasses,
         compact: _compact,
-        classSlider: _classSlider,
+        classSwitches: _classSwitches,
       )
     ]);
   }

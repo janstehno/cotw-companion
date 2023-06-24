@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -122,8 +122,8 @@ class WidgetTitleFunctionalDoubleSwitch extends StatelessWidget {
                     style: TextStyle(
                       color: color,
                       fontSize: Interface.s24,
-                      fontWeight: FontWeight.w800,
-                      fontFamily: 'Title',
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Condensed',
                     ),
                   ))),
           _buildFunctionalPart()

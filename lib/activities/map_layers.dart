@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/map.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -131,7 +131,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
           maxLines: 2,
           color: Interface.accent,
           background: Interface.primary,
-          fontSize: Interface.s24,
+          fontSize: Interface.s26,
           context: context,
         ),
         children: [

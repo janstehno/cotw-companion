@@ -1,7 +1,6 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
-
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 
@@ -76,15 +75,17 @@ class Reserve {
 
   bool get hasForest => _forest == 1;
 
-  int get maxClass {
-    int max = 1;
+  List<int> get allClasses {
+    List<int> classes = [];
     for (IdtoId iti in HelperJSON.animalsReserves) {
       if (iti.secondId == _id) {
         int level = HelperJSON.getAnimal(iti.firstId).level;
-        if (level > max) max = level;
+        if (!classes.contains(level)) {
+          classes.add(level);
+        }
       }
     }
-    return max;
+    return classes;
   }
 
   String get en => _en;

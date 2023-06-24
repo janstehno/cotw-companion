@@ -2,10 +2,10 @@ name: cotwcompanion
 description: Companion for the game theHunter Call of the Wild
 
 publish_to: 'none'
-version: 1.6.5+37
+version: 1.6.6+39
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.18.6 <3.0.0"
 
 dependencies:
   flutter:
@@ -58,6 +58,7 @@ flutter:
     - assets/graphics/icons/pngs/1/
     - assets/graphics/icons/pngs/2/
     - assets/graphics/icons/pngs/3/
+    - assets/graphics/images/
     - assets/graphics/animals/
     - assets/graphics/reserves/
     - assets/graphics/weapons/
@@ -103,36 +104,29 @@ flutter:
     - assets/graphics/maps/newenglandmountains/1/
     - assets/graphics/maps/newenglandmountains/2/
     - assets/graphics/maps/newenglandmountains/3/
+    - assets/graphics/maps/emeraldcoastaustralia/1/
+    - assets/graphics/maps/emeraldcoastaustralia/2/
+    - assets/graphics/maps/emeraldcoastaustralia/3/
   fonts:
-    - family: Text
+    - family: Normal
       fonts:
-        - asset: assets/fonts/Font200.ttf
+        - asset: assets/fonts/Normal200.ttf
           weight: 200
-        - asset: assets/fonts/Font300.ttf
+        - asset: assets/fonts/Normal300.ttf
           weight: 300
-        - asset: assets/fonts/Font400.ttf
+        - asset: assets/fonts/Normal400.ttf
           weight: 400
-        - asset: assets/fonts/Font500.ttf
+        - asset: assets/fonts/Normal500.ttf
           weight: 500
-        - asset: assets/fonts/Font600.ttf
+        - asset: assets/fonts/Normal600.ttf
           weight: 600
-        - asset: assets/fonts/Font700.ttf
+        - asset: assets/fonts/Normal700.ttf
           weight: 700
-        - asset: assets/fonts/Font800.ttf
-          weight: 800
-    - family: Title
+    - family: Condensed
       fonts:
-        - asset: assets/fonts/Title200.ttf
-          weight: 200
-        - asset: assets/fonts/Title300.ttf
+        - asset: assets/fonts/Condensed300.ttf
           weight: 300
-        - asset: assets/fonts/Title400.ttf
+        - asset: assets/fonts/Condensed400.ttf
           weight: 400
-        - asset: assets/fonts/Title500.ttf
-          weight: 500
-        - asset: assets/fonts/Title600.ttf
+        - asset: assets/fonts/Condensed600.ttf
           weight: 600
-        - asset: assets/fonts/Title700.ttf
-          weight: 700
-        - asset: assets/fonts/Title800.ttf
-          weight: 800

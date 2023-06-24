@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -9,12 +9,12 @@ import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ToastyEntryAnimal extends StatefulWidget {
+class EntryAnimal extends StatefulWidget {
   final Animal animal;
   final int index;
   final Function callback;
 
-  const ToastyEntryAnimal({
+  const EntryAnimal({
     Key? key,
     required this.animal,
     required this.index,
@@ -25,7 +25,7 @@ class ToastyEntryAnimal extends StatefulWidget {
   EntryAnimalState createState() => EntryAnimalState();
 }
 
-class EntryAnimalState extends State<ToastyEntryAnimal> {
+class EntryAnimalState extends State<EntryAnimal> {
   Widget _buildWidgets() {
     return GestureDetector(
         onTap: () {
@@ -60,6 +60,14 @@ class EntryAnimalState extends State<ToastyEntryAnimal> {
                     margin: const EdgeInsets.only(right: 5),
                   ),
                   WidgetTag.medium(
+                    iconSize: 17,
+                    icon: "assets/graphics/icons/grounded.svg",
+                    color: Interface.dark,
+                    background: Interface.tag,
+                    isVisible: widget.animal.grounded,
+                    margin: const EdgeInsets.only(right: 5),
+                  ),
+                  WidgetTag.medium(
                     iconSize: 18,
                     text: widget.animal.removePointZero(widget.animal.diamond.toString()),
                     icon: "assets/graphics/icons/trophy_diamond.svg",
@@ -73,7 +81,15 @@ class EntryAnimalState extends State<ToastyEntryAnimal> {
                     color: Interface.light,
                     background: Interface.dark,
                     isVisible: widget.animal.hasGO,
-                  )
+                  ),
+                  WidgetTag.medium(
+                    iconSize: 15,
+                    icon: "assets/graphics/icons/female.svg",
+                    color: Interface.dark,
+                    background: Interface.tag,
+                    isVisible: widget.animal.femaleDiamond,
+                    margin: const EdgeInsets.only(right: 5),
+                  ),
                 ])));
   }
 

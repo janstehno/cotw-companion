@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -77,7 +77,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   bool _recordsOpened = false;
   bool _correctTrophyNumber = true;
   bool _correctWeightNumber = true;
-  bool _manuallySetTrophyRating = false;
 
   bool _isInLodge = false;
   bool _isMale = true;
@@ -93,6 +92,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   double _weight = 0;
   double _maxTrophy = 0;
   double _maxWeight = 0;
+  double _tolerance = 0.0;
 
   int _trophyRating = 0;
   int _selectedReserve = 0;
@@ -195,12 +195,26 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       _genderChanged = false;
     }
     _getTrophyOf(_animals.elementAt(_selectedAnimal));
+    _getTrophyTolerance();
+  }
+
+  void _getTrophyTolerance() {
+    if (_maxTrophy / 10 < 1) {
+      _tolerance = 0.5;
+    } else if (_maxTrophy / 100 < 1) {
+      _tolerance = 1.0;
+    } else if (_maxTrophy / 1000 < 1) {
+      _tolerance = 10.0;
+    } else if (_maxTrophy / 10000 < 1) {
+      _tolerance = 100.0;
+    }
   }
 
   void _textTrophyAndWeightListener(int controller) {
     setState(() {
       if (controller == 0) {
-        if (_equalsDoubleTrophyNumber.hasMatch(_controllerTrophyNumber.text) && (double.parse(_controllerTrophyNumber.text) <= _maxTrophy || _maxTrophy == 0)) {
+        if (_equalsDoubleTrophyNumber.hasMatch(_controllerTrophyNumber.text) &&
+            (double.parse(_controllerTrophyNumber.text) <= (_maxTrophy + _tolerance) || _maxTrophy == 0)) {
           _correctTrophyNumber = true;
           _trophy = double.parse(_controllerTrophyNumber.text);
         } else {
@@ -212,9 +226,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             _trophy = 0;
           }
         }
-        if (!_manuallySetTrophyRating) _getTrophyRating();
       } else if (controller == 1) {
-        if (_equalsDoubleWeightNumber.hasMatch(_controllerWeightNumber.text) && (double.parse(_controllerWeightNumber.text) <= _maxWeight || _maxWeight == 0)) {
+        if (_equalsDoubleWeightNumber.hasMatch(_controllerWeightNumber.text) &&
+            (double.parse(_controllerWeightNumber.text) <= (_maxWeight + _tolerance) || _maxWeight == 0)) {
           _correctWeightNumber = true;
           _weight = double.parse(_controllerWeightNumber.text);
         } else {
@@ -243,7 +257,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         }
       }
     }
-    _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, _selectedReserveId).compareTo(b.getNameBasedOnReserve(context.locale, _selectedReserveId)));
+    _animals.sort((a, b) =>
+        a.getNameBasedOnReserve(context.locale, _selectedReserveId).compareTo(b.getNameBasedOnReserve(context.locale, _selectedReserveId)));
     _dropDownListAnimals.addAll(_listOfAnimals());
   }
 
@@ -423,45 +438,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       _twoShotsFired = true;
       _vitalOrganHit = true;
       _trophyOrganUndamaged = true;
-      if (_trophy >= _diamond) {
-        if (_trophyRating < 4) {
-          _trophyRating = 3;
-          _correctAmmoUsed = false;
-          _twoShotsFired = false;
-          _vitalOrganHit = false;
-          _trophyOrganUndamaged = false;
-        }
-      } else if (_trophy >= _gold) {
-        if (_trophyRating > 3) {
-          _trophyRating = 3;
-        } else if (_trophyRating < 3) {
-          _trophyRating = 2;
-          _correctAmmoUsed = false;
-          _twoShotsFired = false;
-          _vitalOrganHit = false;
-          _trophyOrganUndamaged = false;
-        }
-      } else if (_trophy >= _silver) {
-        if (_trophyRating > 2) {
-          _trophyRating = 2;
-        } else if (_trophyRating < 2) {
-          _trophyRating = 1;
-          _correctAmmoUsed = false;
-          _twoShotsFired = false;
-          _vitalOrganHit = false;
-          _trophyOrganUndamaged = false;
-        }
-      } else if (_trophy > 0) {
-        if (_trophyRating > 1) {
-          _trophyRating = 1;
-        } else if (_trophyRating < 1) {
-          _trophyRating = 0;
-          _correctAmmoUsed = false;
-          _twoShotsFired = false;
-          _vitalOrganHit = false;
-          _trophyOrganUndamaged = false;
-        }
-      } else {
+      if ((_trophy >= _diamond && _trophyRating < 4) ||
+          (_trophy >= _gold && _trophyRating < 3) ||
+          (_trophy >= _silver && _trophyRating < 2) ||
+          (_trophy > 0 && _trophyRating < 1)) {
         _correctAmmoUsed = false;
         _twoShotsFired = false;
         _vitalOrganHit = false;
@@ -524,27 +504,31 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             color: Interface.subTitleBackground,
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-              AutoSizeText(
-                tr('time').toUpperCase(),
-                maxLines: 1,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  color: Interface.title,
-                  fontSize: Interface.s24,
-                  fontWeight: FontWeight.w800,
-                  fontFamily: 'Title',
-                ),
-              ),
-              AutoSizeText(Log.getDate(DateType.format, Log.dateToString(_dateTime)),
-                  maxLines: 1,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: Interface.title,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  ))
-            ])));
+            child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AutoSizeText(
+                    tr('time').toUpperCase(),
+                    maxLines: 1,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: Interface.title,
+                      fontSize: Interface.s24,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Condensed',
+                    ),
+                  ),
+                  AutoSizeText(Log.getDate(DateType.format, Log.dateToString(_dateTime)),
+                      maxLines: 1,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: Interface.title,
+                        fontSize: Interface.s20,
+                        fontWeight: FontWeight.w400,
+                      ))
+                ])));
   }
 
   Widget _buildReserve() {
@@ -646,7 +630,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               text: tr('animal_trophy'),
               subText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
               textColor: Interface.title,
-              subTextColor: Interface.title,
+              subTextColor: Interface.disabled,
               background: Interface.subTitleBackground,
             )
           : WidgetTitleFunctional.withButton(
@@ -654,7 +638,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               subText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
               icon: "assets/graphics/icons/list.svg",
               textColor: Interface.title,
-              subTextColor: Interface.title,
+              subTextColor: Interface.disabled,
               background: Interface.subTitleBackground,
               iconColor: Interface.accent,
               buttonBackground: Interface.primary,
@@ -680,7 +664,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           text: tr('animal_weight'),
           subText: "${tr('max')}: ${_maxWeight == 0 ? "?" : _maxWeight.toString()}",
           textColor: Interface.title,
-          subTextColor: Interface.title,
+          subTextColor: Interface.disabled,
           background: Interface.subTitleBackground),
       WidgetTextField(
         correct: _correctWeightNumber,
@@ -698,65 +682,69 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            WidgetSwitch.withIcon(
-              activeIcon: "assets/graphics/icons/harvest_correct_ammo.svg",
-              inactiveIcon: "assets/graphics/icons/harvest_correct_ammo.svg",
-              activeColor: Interface.accent,
-              activeBackground: Interface.primary,
-              inactiveColor: Interface.disabled,
-              inactiveBackground: Interface.disabled.withOpacity(0.3),
-              isActive: _correctAmmoUsed,
-              onTap: () {
-                setState(() {
-                  _correctAmmoUsed = !_correctAmmoUsed;
-                  _focus();
-                });
-              },
-            ),
-            WidgetSwitch.withIcon(
-                activeIcon: "assets/graphics/icons/harvest_two_shots.svg",
-                inactiveIcon: "assets/graphics/icons/harvest_two_shots.svg",
-                activeColor: Interface.accent,
-                activeBackground: Interface.primary,
-                inactiveColor: Interface.disabled,
-                inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _twoShotsFired,
-                onTap: () {
-                  setState(() {
-                    _twoShotsFired = !_twoShotsFired;
-                    _focus();
-                  });
-                }),
-            WidgetSwitch.withIcon(
-                activeIcon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
-                inactiveIcon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
-                activeColor: Interface.accent,
-                activeBackground: Interface.primary,
-                inactiveColor: Interface.disabled,
-                inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _trophyOrganUndamaged,
-                onTap: () {
-                  setState(() {
-                    _trophyOrganUndamaged = !_trophyOrganUndamaged;
-                    _focus();
-                  });
-                }),
-            WidgetSwitch.withIcon(
-                activeIcon: "assets/graphics/icons/harvest_vital_organ.svg",
-                inactiveIcon: "assets/graphics/icons/harvest_vital_organ.svg",
-                activeColor: Interface.accent,
-                activeBackground: Interface.primary,
-                inactiveColor: Interface.disabled,
-                inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _vitalOrganHit,
-                onTap: () {
-                  setState(() {
-                    _vitalOrganHit = !_vitalOrganHit;
-                    _focus();
-                  });
-                })
-          ]))
+          child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                WidgetSwitch.withIcon(
+                  activeIcon: "assets/graphics/icons/harvest_correct_ammo.svg",
+                  inactiveIcon: "assets/graphics/icons/harvest_correct_ammo.svg",
+                  activeColor: Interface.accent,
+                  activeBackground: Interface.primary,
+                  inactiveColor: Interface.disabled,
+                  inactiveBackground: Interface.disabled.withOpacity(0.3),
+                  isActive: _correctAmmoUsed,
+                  onTap: () {
+                    setState(() {
+                      _correctAmmoUsed = !_correctAmmoUsed;
+                      _focus();
+                    });
+                  },
+                ),
+                WidgetSwitch.withIcon(
+                    activeIcon: "assets/graphics/icons/harvest_two_shots.svg",
+                    inactiveIcon: "assets/graphics/icons/harvest_two_shots.svg",
+                    activeColor: Interface.accent,
+                    activeBackground: Interface.primary,
+                    inactiveColor: Interface.disabled,
+                    inactiveBackground: Interface.disabled.withOpacity(0.3),
+                    isActive: _twoShotsFired,
+                    onTap: () {
+                      setState(() {
+                        _twoShotsFired = !_twoShotsFired;
+                        _focus();
+                      });
+                    }),
+                WidgetSwitch.withIcon(
+                    activeIcon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
+                    inactiveIcon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
+                    activeColor: Interface.accent,
+                    activeBackground: Interface.primary,
+                    inactiveColor: Interface.disabled,
+                    inactiveBackground: Interface.disabled.withOpacity(0.3),
+                    isActive: _trophyOrganUndamaged,
+                    onTap: () {
+                      setState(() {
+                        _trophyOrganUndamaged = !_trophyOrganUndamaged;
+                        _focus();
+                      });
+                    }),
+                WidgetSwitch.withIcon(
+                    activeIcon: "assets/graphics/icons/harvest_vital_organ.svg",
+                    inactiveIcon: "assets/graphics/icons/harvest_vital_organ.svg",
+                    activeColor: Interface.accent,
+                    activeBackground: Interface.primary,
+                    inactiveColor: Interface.disabled,
+                    inactiveBackground: Interface.disabled.withOpacity(0.3),
+                    isActive: _vitalOrganHit,
+                    onTap: () {
+                      setState(() {
+                        _vitalOrganHit = !_vitalOrganHit;
+                        _focus();
+                      });
+                    })
+              ]))
     ]);
   }
 
@@ -767,83 +755,86 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            WidgetSwitch.withIcon(
-                activeIcon: "assets/graphics/icons/trophy_none.svg",
-                inactiveIcon: "assets/graphics/icons/trophy_none.svg",
-                activeColor: Interface.light,
-                activeBackground: Interface.trophyNoneBackground,
-                inactiveColor: Interface.disabled,
-                inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _trophyRating == 0,
-                onTap: () {
-                  setState(() {
-                    _manuallySetTrophyRating = true;
-                    _trophyRating = 0;
-                    _focus();
-                  });
-                }),
-            WidgetSwitch.withIcon(
-                activeIcon: "assets/graphics/icons/trophy_bronze.svg",
-                inactiveIcon: "assets/graphics/icons/trophy_bronze.svg",
-                activeColor: Interface.alwaysDark,
-                activeBackground: Interface.trophyBronzeBackground,
-                inactiveColor: Interface.disabled,
-                inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _trophyRating == 1,
-                onTap: () {
-                  setState(() {
-                    _manuallySetTrophyRating = true;
-                    _trophyRating = 1;
-                    _focus();
-                  });
-                }),
-            WidgetSwitch.withIcon(
-                activeIcon: "assets/graphics/icons/trophy_silver.svg",
-                inactiveIcon: "assets/graphics/icons/trophy_silver.svg",
-                activeColor: Interface.alwaysDark,
-                activeBackground: Interface.trophySilverBackground,
-                inactiveColor: Interface.disabled,
-                inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _trophyRating == 2,
-                onTap: () {
-                  setState(() {
-                    _manuallySetTrophyRating = true;
-                    _trophyRating = 2;
-                    _focus();
-                  });
-                }),
-            WidgetSwitch.withIcon(
-                activeIcon: "assets/graphics/icons/trophy_gold.svg",
-                inactiveIcon: "assets/graphics/icons/trophy_gold.svg",
-                activeColor: Interface.alwaysDark,
-                activeBackground: Interface.trophyGoldBackground,
-                inactiveColor: Interface.disabled,
-                inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _trophyRating == 3,
-                onTap: () {
-                  setState(() {
-                    _manuallySetTrophyRating = true;
-                    _trophyRating = 3;
-                    _focus();
-                  });
-                }),
-            WidgetSwitch.withIcon(
-                activeIcon: _selectedFurId == Interface.greatOneId ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg",
-                inactiveIcon: _selectedFurId == Interface.greatOneId ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg",
-                activeColor: Interface.alwaysDark,
-                activeBackground: Interface.trophyDiamondBackground,
-                inactiveColor: Interface.disabled,
-                inactiveBackground: Interface.disabled.withOpacity(0.3),
-                isActive: _trophyRating == 4,
-                onTap: () {
-                  setState(() {
-                    _manuallySetTrophyRating = true;
-                    _trophyRating = 4;
-                    _focus();
-                  });
-                })
-          ]))
+          child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                WidgetSwitch.withIcon(
+                    activeIcon: "assets/graphics/icons/trophy_none.svg",
+                    inactiveIcon: "assets/graphics/icons/trophy_none.svg",
+                    activeColor: Interface.light,
+                    activeBackground: Interface.trophyNoneBackground,
+                    inactiveColor: Interface.disabled,
+                    inactiveBackground: Interface.disabled.withOpacity(0.3),
+                    isActive: _trophyRating == 0,
+                    onTap: () {
+                      setState(() {
+                        _trophyRating = 0;
+                        _focus();
+                      });
+                    }),
+                WidgetSwitch.withIcon(
+                    activeIcon: "assets/graphics/icons/trophy_bronze.svg",
+                    inactiveIcon: "assets/graphics/icons/trophy_bronze.svg",
+                    activeColor: Interface.alwaysDark,
+                    activeBackground: Interface.trophyBronzeBackground,
+                    inactiveColor: Interface.disabled,
+                    inactiveBackground: Interface.disabled.withOpacity(0.3),
+                    isActive: _trophyRating == 1,
+                    onTap: () {
+                      setState(() {
+                        _trophyRating = 1;
+                        _focus();
+                      });
+                    }),
+                WidgetSwitch.withIcon(
+                    activeIcon: "assets/graphics/icons/trophy_silver.svg",
+                    inactiveIcon: "assets/graphics/icons/trophy_silver.svg",
+                    activeColor: Interface.alwaysDark,
+                    activeBackground: Interface.trophySilverBackground,
+                    inactiveColor: Interface.disabled,
+                    inactiveBackground: Interface.disabled.withOpacity(0.3),
+                    isActive: _trophyRating == 2,
+                    onTap: () {
+                      setState(() {
+                        _trophyRating = 2;
+                        _focus();
+                      });
+                    }),
+                WidgetSwitch.withIcon(
+                    activeIcon: "assets/graphics/icons/trophy_gold.svg",
+                    inactiveIcon: "assets/graphics/icons/trophy_gold.svg",
+                    activeColor: Interface.alwaysDark,
+                    activeBackground: Interface.trophyGoldBackground,
+                    inactiveColor: Interface.disabled,
+                    inactiveBackground: Interface.disabled.withOpacity(0.3),
+                    isActive: _trophyRating == 3,
+                    onTap: () {
+                      setState(() {
+                        _trophyRating = 3;
+                        _focus();
+                      });
+                    }),
+                WidgetSwitch.withIcon(
+                    activeIcon: _selectedFurId == Interface.greatOneId
+                        ? "assets/graphics/icons/trophy_great_one.svg"
+                        : "assets/graphics/icons/trophy_diamond.svg",
+                    inactiveIcon: _selectedFurId == Interface.greatOneId
+                        ? "assets/graphics/icons/trophy_great_one.svg"
+                        : "assets/graphics/icons/trophy_diamond.svg",
+                    activeColor: Interface.alwaysDark,
+                    activeBackground: Interface.trophyDiamondBackground,
+                    inactiveColor: Interface.disabled,
+                    inactiveBackground: Interface.disabled.withOpacity(0.3),
+                    isActive: _trophyRating == 4,
+                    onTap: () {
+                      setState(() {
+                        _trophyRating = 4;
+                        _focus();
+                      });
+                    })
+              ]))
     ]);
   }
 

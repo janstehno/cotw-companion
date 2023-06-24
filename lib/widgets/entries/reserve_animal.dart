@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EntryReserveAnimal extends StatefulWidget {
-  final int animalId;
+  final int animalId, reserveId;
   final Color color, background;
   final Function onDismiss;
   final Function onTap;
@@ -19,6 +19,7 @@ class EntryReserveAnimal extends StatefulWidget {
   const EntryReserveAnimal({
     Key? key,
     required this.animalId,
+    required this.reserveId,
     required this.color,
     required this.background,
     required this.onDismiss,
@@ -77,7 +78,7 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                   Expanded(
                       child: Container(
                           padding: const EdgeInsets.only(left: 15, right: 30),
-                          child: AutoSizeText(_animal.getName(context.locale),
+                          child: AutoSizeText(_animal.getNameBasedOnReserve(context.locale, widget.reserveId),
                               maxLines: 1,
                               style: TextStyle(
                                 color: widget.color,

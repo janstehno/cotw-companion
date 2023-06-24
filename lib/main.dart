@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -94,7 +94,7 @@ class App extends StatelessWidget {
             brightness: Brightness.dark,
             scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Interface.ff42)),
             textSelectionTheme: TextSelectionThemeData(selectionColor: Interface.light, selectionHandleColor: Interface.dark),
-            fontFamily: 'Text'),
+            fontFamily: 'Normal'),
         home: Column(mainAxisSize: MainAxisSize.max, children: [Expanded(child: Container(color: Interface.primary, child: const BuilderHome()))]));
   }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -40,7 +40,7 @@ class ActivityPatchNotes extends StatelessWidget {
                           style: TextStyle(
                             color: Interface.search,
                             fontSize: Interface.s20,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                           )))),
               SvgPicture.asset(
                 "assets/graphics/icons/external_link.svg",
@@ -54,11 +54,20 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        color: Interface.even,
+        version: "1.6.6",
+        changes: const [
+          "- Emerald Coast Australia update.",
+          "- Improvement of the UI. Changed class filter in the Need zones feature. Changed time progression to better reflect the in-game one. Added bird tag for animals that should be downed while flying for full trophy rating. Added female tag for animals who make diamond as females only.",
+          "- Added help section for maps. Explains how the feature works and what can be shown on the map.",
+        ],
+      ),
+      WidgetPatchNote(
         color: Interface.odd,
         version: "1.6.5",
         changes: const [
           "- Improvement of the UI. Need zones feature now shows what zone animal has at, and will have after the current and next hour. There is now also a slider to filter animals based on their class.",
-          "- Added filter for the Weapons. You can now filter weapons by their type. E.g. If you type 'shotgun' in the search box, there will be only shotguns in the list."
+          "- Added filter for the Weapons. You can now filter weapons by their type. E.g. typing 'shotgun' in the search box will filter out everything but shotguns."
         ],
       ),
       WidgetPatchNote(
@@ -76,7 +85,7 @@ class ActivityPatchNotes extends StatelessWidget {
         color: Interface.even,
         version: "1.6.0",
         changes: const [
-          "- Improvement of the UI. Maps were reworked due to performance issues. There are now 3 zoom levels. First one shows the most general positions for animals, as well as outposts and lookouts. Second one shows more accurate positions for animals, as well as outposts, lookouts, and hides. Third level shows positions of need zones for animals, as well as everything before. Keep in mind that there could still appear some performance issues.",
+          "- Improvement of the UI. Maps were reworked due to performance issues. Keep in mind that there could still appear some even after the change.",
         ],
       ),
       WidgetPatchNote(

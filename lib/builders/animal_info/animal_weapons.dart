@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/ammo.dart';
@@ -73,17 +73,6 @@ class BuilderAnimalWeaponsState extends State<BuilderAnimalWeapons> {
         : _items.sort((a, b) {
             String nA = HelperJSON.getWeapon(a.firstId).getName(context.locale);
             String nB = HelperJSON.getWeapon(b.firstId).getName(context.locale);
-            return nA.compareTo(nB);
-          });
-    widget.weaponType == WeaponType.shotgun || widget.weaponType == WeaponType.bow
-        ? _items.sort((a, b) {
-            int nA = HelperJSON.getAmmo(a.secondId).dlc;
-            int nB = HelperJSON.getAmmo(b.secondId).dlc;
-            return nA.compareTo(nB);
-          })
-        : _items.sort((a, b) {
-            int nA = HelperJSON.getWeapon(a.firstId).dlc;
-            int nB = HelperJSON.getWeapon(b.firstId).dlc;
             return nA.compareTo(nB);
           });
   }

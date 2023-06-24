@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:convert';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';

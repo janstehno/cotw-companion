@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -82,62 +82,71 @@ class WidgetTitleFunctional extends StatelessWidget {
         height: 75,
         color: background,
         padding: const EdgeInsets.only(left: 30, right: 30),
-        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Expanded(
-              child: Container(
-                  padding: const EdgeInsets.only(right: 30),
-                  child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    AutoSizeText(isTitle ? text.toUpperCase() : text,
-                        maxLines: oneLine ? 1 : 2,
-                        textAlign: TextAlign.start,
-                        style: isTitle
-                            ? TextStyle(
-                                color: textColor,
-                                fontSize: Interface.s24,
-                                fontWeight: FontWeight.w800,
-                                fontFamily: 'Title',
-                              )
-                            : TextStyle(
-                                color: textColor,
-                                fontSize: Interface.s24,
-                                fontWeight: FontWeight.w600,
-                              )),
-                    subText.isNotEmpty
-                        ? Container(
-                            padding: const EdgeInsets.only(top: 3),
-                            child: Text(subText,
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                  color: subTextColor,
-                                  fontSize: Interface.s16,
-                                  fontWeight: FontWeight.w400,
-                                )))
-                        : Container()
-                  ]))),
-          withSwitch
-              ? WidgetSwitch.withIcon(
-                  activeIcon: icon,
-                  inactiveIcon: inactiveIcon,
-                  activeColor: iconColor,
-                  inactiveColor: iconInactiveColor,
-                  activeBackground: buttonBackground,
-                  inactiveBackground: buttonInactiveBackground,
-                  buttonSize: buttonSize,
-                  isActive: isActive,
-                  onTap: () {
-                    onTap();
-                  },
-                )
-              : WidgetButton.withIcon(
-                  icon: icon,
-                  color: iconColor,
-                  background: buttonBackground,
-                  buttonSize: buttonSize,
-                  onTap: () {
-                    onTap();
-                  },
-                )
-        ]));
+        child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: Container(
+                      padding: const EdgeInsets.only(right: 30),
+                      child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText(isTitle ? text.toUpperCase() : text,
+                                maxLines: oneLine ? 1 : 2,
+                                textAlign: TextAlign.start,
+                                style: isTitle
+                                    ? TextStyle(
+                                        color: textColor,
+                                        fontSize: Interface.s24,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Condensed',
+                                      )
+                                    : TextStyle(
+                                        color: textColor,
+                                        fontSize: Interface.s22,
+                                        fontWeight: FontWeight.w400,
+                                      )),
+                            subText.isNotEmpty
+                                ? Container(
+                                    margin: const EdgeInsets.only(top: 3),
+                                    child: AutoSizeText(subText,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(
+                                          color: subTextColor,
+                                          fontSize: Interface.s16,
+                                          fontWeight: FontWeight.w400,
+                                        )))
+                                : Container()
+                          ]))),
+              withSwitch
+                  ? WidgetSwitch.withIcon(
+                      activeIcon: icon,
+                      inactiveIcon: inactiveIcon,
+                      activeColor: iconColor,
+                      inactiveColor: iconInactiveColor,
+                      activeBackground: buttonBackground,
+                      inactiveBackground: buttonInactiveBackground,
+                      buttonSize: buttonSize,
+                      isActive: isActive,
+                      onTap: () {
+                        onTap();
+                      },
+                    )
+                  : WidgetButton.withIcon(
+                      icon: icon,
+                      color: iconColor,
+                      background: buttonBackground,
+                      buttonSize: buttonSize,
+                      onTap: () {
+                        onTap();
+                      },
+                    )
+            ]));
   }
 
   @override

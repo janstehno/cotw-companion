@@ -1,9 +1,9 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.6.5";
+  static const String version = "1.6.6";
   static const int greatOneId = 100;
 
   static bool _darkMode = false;
@@ -104,8 +104,7 @@ class Interface {
   static Color accent = Colors.transparent;
   static Color dark = Colors.transparent;
   static Color light = Colors.transparent;
-  static Color maximum = Colors.transparent;
-  static Color maximumIcon = Colors.transparent;
+  static Color trophyScore = Colors.transparent;
   static Color accentBorder = Colors.transparent;
   static Color mainBody = Colors.transparent;
   static Color dropDownBody = Colors.transparent;
@@ -209,16 +208,15 @@ class Interface {
 
   static void setPrimaryColor(Color primaryColor) {
     primary = primaryColor;
-    maximum = primary;
 
     accentBorder = Colors.transparent;
     accentBorderWidth = 0;
 
-    if (primaryColor == pink || primaryColor == deepblue || primaryColor == purple || primaryColor == darkpink || primaryColor == brown) {
+    if (primaryColor == deepblue || primaryColor == purple || primaryColor == brown) {
       accent = ffee;
       if (_darkMode) {
         accentBorder = ffee;
-        accentBorderWidth = 1;
+        accentBorderWidth = 0.5;
       }
     } else {
       accent = ff12;
@@ -244,7 +242,7 @@ class Interface {
       searchBackground = ff21;
 
       tag = ff23;
-      maximumIcon = ff23;
+      trophyScore = ff23;
       dropDownBody = ff17;
 
       nothing = ff17;
@@ -279,7 +277,7 @@ class Interface {
       dropDownBody = ffe0;
 
       tag = ffcc;
-      maximumIcon = ffcc;
+      trophyScore = ffcc;
 
       nothing = ffee;
       other = ff0d;

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -23,7 +23,6 @@ class BuilderAnimalFursState extends State<BuilderAnimalFurs> {
 
   @override
   void initState() {
-    _getFurs();
     super.initState();
   }
 
@@ -42,6 +41,7 @@ class BuilderAnimalFursState extends State<BuilderAnimalFurs> {
   }
 
   Widget _buildWidgets() {
+    _getFurs();
     return _furs.isEmpty
         ? Row(mainAxisSize: MainAxisSize.max, children: [
             Expanded(
@@ -59,9 +59,11 @@ class BuilderAnimalFursState extends State<BuilderAnimalFurs> {
             itemCount: _furs.length,
             itemBuilder: (context, index) {
               AnimalFur fur = _furs[index];
-              return EntryAnimalFur(
-                fur: fur,
-              );
+              return Container(
+                  margin: EdgeInsets.only(bottom: index != _furs.length - 1 ? 5 : 0),
+                  child: EntryAnimalFur(
+                    fur: fur,
+                  ));
             });
   }
 

@@ -1,2 +1,2 @@
-<!-- Copyright (c) 2022 Jan Stehno -->
+<!-- Copyright (c) 2022 - 2023 Jan Stehno -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>harvest_vital_organ</title><g id="harvest_check"><g id="vital_organ"><path d="M30,10.31c0-1.9-1.46-7.13-7-7.86a6.4,6.4,0,0,0-5.66,2.32L16.14,10l2.3-.22-3.18,7.58-.43-5.12-2.07.35.45-7.14c-1.32-1.71-3.37-3.4-6.24-3-5.51.73-7,6-7,7.86s-.33,5.15,7.5,12c7,6.1,7.48,6.33,7.5,6.31s.51-.21,7.5-6.31C30.33,15.46,30,12.2,30,10.31Z" fill="#212121"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>

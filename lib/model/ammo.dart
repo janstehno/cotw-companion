@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jan Stehno
+// Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,7 +9,7 @@ class Ammo {
   final int _min, _max;
   final int _rangeM;
   final double _rangeYD;
-  final int _penetration, _expansion;
+  final int _penetration, _expansion, _price;
   final int _dlc;
 
   Ammo({
@@ -29,6 +29,7 @@ class Ammo {
     required rangeYD,
     required penetration,
     required expansion,
+    required price,
     required dlc,
   })  : _id = id,
         _en = en,
@@ -46,6 +47,7 @@ class Ammo {
         _rangeYD = rangeYD,
         _penetration = penetration,
         _expansion = expansion,
+        _price = price,
         _dlc = dlc;
 
   int get id => _id;
@@ -57,6 +59,8 @@ class Ammo {
   int get penetration => _penetration;
 
   int get expansion => _expansion;
+
+  int get price => _price;
 
   int get dlc => _dlc;
 
@@ -109,6 +113,7 @@ class Ammo {
       rangeYD: json['RANGE_YD'],
       penetration: json['PENETRATION'],
       expansion: json['EXPANSION'],
+      price: json['PRICE'],
       dlc: json['DLC'],
     );
   }

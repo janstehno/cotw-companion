@@ -2,6 +2,7 @@
 
 import 'dart:core';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -15,7 +16,7 @@ class Log {
   String _animalName = "";
   int _animalId, _reserveId, _furId;
   double _trophy, _weight;
-  int _imperials, _lodge, _gender;
+  int _imperials, _trophyRating, _lodge, _gender;
   int _harvestCorrectAmmo, _harvestTwoShots, _harvestVitalOrgan, _harvestNoTrophyOrgan;
   bool _corrupted;
 
@@ -26,6 +27,7 @@ class Log {
     required animalId,
     required reserveId,
     required furId,
+    required trophyRating,
     required trophy,
     required weight,
     required imperials,
@@ -45,6 +47,7 @@ class Log {
         _trophy = trophy,
         _weight = weight,
         _imperials = imperials,
+        _trophyRating = trophyRating,
         _lodge = lodge,
         _gender = gender,
         _harvestCorrectAmmo = harvestCorrectAmmo,
@@ -77,6 +80,8 @@ class Log {
   double get weight => _weight;
 
   int get imperials => _imperials;
+
+  int get trophyRating => _trophyRating;
 
   int get lodge => _lodge;
 
@@ -117,26 +122,7 @@ class Log {
   AnimalFur get fur => HelperJSON.getAnimalFur(null, _animalId, _furId);
 
   String toJson() =>
-      '{"ID":$id,"DATE":"${getDate(DateType.json, _date)}","ANIMAL_ID":$_animalId,"RESERVE_ID":$_reserveId,"FUR_ID":$_furId,"TROPHY":$_trophy,"WEIGHT":$_weight,"IMPERIALS":$_imperials,"LODGE":$_lodge,"GENDER":$_gender,"CORRECT_AMMUNITION":$_harvestCorrectAmmo,"MAX_TWO_SHOTS":$_harvestTwoShots,"VITAL_ORGAN":$_harvestVitalOrgan,"NO_TROPHY_ORGAN":$_harvestNoTrophyOrgan}';
-
-  int getTrophyRating(Animal animal, bool harvestCheck) {
-    int decrease = 0;
-    if (harvestCheck) decrease = harvestCheckPassed ? 0 : 1;
-    if (furId == Interface.greatOneId) {
-      return 5 - (decrease * 2);
-    }
-    if (trophy >= animal.diamond) {
-      return 4 - decrease;
-    } else if (trophy >= animal.gold) {
-      return 3 - decrease;
-    } else if (trophy >= animal.silver) {
-      return 2 - decrease;
-    } else if (trophy > 0) {
-      return 1 - decrease;
-    } else {
-      return 0;
-    }
-  }
+      '{"ID":$id,"DATE":"${getDate(DateType.json, _date)}","ANIMAL_ID":$_animalId,"RESERVE_ID":$_reserveId,"FUR_ID":$_furId,"TROPHY_RATING":$_trophyRating,"TROPHY":$_trophy,"WEIGHT":$_weight,"IMPERIALS":$_imperials,"LODGE":$_lodge,"GENDER":$_gender,"CORRECT_AMMUNITION":$_harvestCorrectAmmo,"MAX_TWO_SHOTS":$_harvestTwoShots,"VITAL_ORGAN":$_harvestVitalOrgan,"NO_TROPHY_ORGAN":$_harvestNoTrophyOrgan}';
 
   String removePointZero(String value) {
     String text = value;
@@ -148,8 +134,8 @@ class Log {
     return text;
   }
 
-  String getTrophyRatingIcon(Animal animal, bool harvestCheck) {
-    switch (getTrophyRating(animal, harvestCheck)) {
+  String getTrophyRatingIcon() {
+    switch (_trophyRating) {
       case 1:
         return "assets/graphics/icons/trophy_bronze.svg";
       case 2:
@@ -165,11 +151,8 @@ class Log {
     }
   }
 
-  Color getTrophyColor(Animal animal, bool harvestCheck) {
-    if (!harvestCheck && getTrophyRating(animal, harvestCheck) == getTrophyRating(animal, !harvestCheck)) {
-      return Colors.transparent;
-    }
-    switch (getTrophyRating(animal, harvestCheck)) {
+  Color getTrophyColor() {
+    switch (_trophyRating) {
       case 1:
         return Interface.trophyBronze;
       case 2:
@@ -184,7 +167,6 @@ class Log {
         return Interface.disabled;
     }
   }
-
 
   static String dateToString(DateTime dateTime) {
     return "${dateTime.year}-${dateTime.month}-${dateTime.day}-${dateTime.hour}-${dateTime.minute}";
@@ -218,6 +200,13 @@ class Log {
       animalId: json['ANIMAL_ID'],
       reserveId: json['RESERVE_ID'],
       furId: json['FUR_ID'],
+      trophyRating: json['TROPHY_RATING'] ??
+          HelperLog.getTrophyRating(
+            json['TROPHY'],
+            json['ANIMAL_ID'],
+            json['FUR_ID'],
+            json['CORRECT_AMMUNITION'] == 1 && json['MAX_TWO_SHOTS'] == 1 && json['VITAL_ORGAN'] == 1 && json['NO_TROPHY_ORGAN'] == 1,
+          ),
       trophy: json['TROPHY'],
       weight: json['WEIGHT'],
       imperials: json['IMPERIALS'],

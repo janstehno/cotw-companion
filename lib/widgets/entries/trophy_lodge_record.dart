@@ -92,8 +92,8 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
   Widget _buildTrophy() {
     return ConstrainedBox(
         constraints: const BoxConstraints(
-          minWidth: 110,
-          maxWidth: 110,
+          minWidth: 100,
+          maxWidth: 100,
           minHeight: 30,
           maxHeight: 30,
         ),
@@ -107,18 +107,8 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(right: 5),
                     child: SvgPicture.asset(
-                      widget.log.getTrophyRatingIcon(_animal, true),
-                      color: widget.log.getTrophyColor(_animal, true),
-                      fit: BoxFit.fitWidth,
-                    )),
-                Container(
-                    width: 10,
-                    height: 30,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 10),
-                    child: SvgPicture.asset(
-                      widget.log.getTrophyRatingIcon(_animal, false),
-                      color: widget.log.getTrophyColor(_animal, false),
+                      widget.log.getTrophyRatingIcon(),
+                      color: widget.log.getTrophyColor(),
                       fit: BoxFit.fitWidth,
                     )),
                 Expanded(

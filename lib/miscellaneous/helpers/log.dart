@@ -225,4 +225,22 @@ class HelperLog {
     parsed += "]";
     return parsed;
   }
+
+  static int getTrophyRating(double trophy, int animalId, int furId, bool harvestCheckPassed) {
+    Animal animal = HelperJSON.getAnimal(animalId);
+    int decrease = harvestCheckPassed ? 0 : 1;
+    if (furId == Interface.greatOneId) {
+      return 5 - (decrease * 2);
+    }
+    if (trophy >= animal.diamond) {
+      return 4 - decrease;
+    } else if (trophy >= animal.gold) {
+      return 3 - decrease;
+    } else if (trophy >= animal.silver) {
+      return 2 - decrease;
+    } else if (trophy > 0) {
+      return 1 - decrease;
+    }
+    return 0;
+  }
 }

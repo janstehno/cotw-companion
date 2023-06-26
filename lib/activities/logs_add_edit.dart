@@ -85,9 +85,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   bool _twoShotsFired = true;
   bool _vitalOrganHit = true;
   bool _trophyOrganUndamaged = true;
-  double _silver = 0;
-  double _gold = 0;
-  double _diamond = 0;
   double _trophy = 0;
   double _weight = 0;
   double _maxTrophy = 0;
@@ -127,6 +124,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       _twoShotsFired = widget.log!.twoShotsFired;
       _vitalOrganHit = widget.log!.vitalOrganHit;
       _trophyOrganUndamaged = widget.log!.trophyOrganUndamaged;
+      _trophyRating = widget.log!.trophyRating;
       _trophy = widget.log!.trophy;
       _weight = widget.log!.weight;
       _selectedReserveId = widget.log!.reserveId;
@@ -151,6 +149,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   }
 
   void _reload() {
+    HelperLogger("INFO").i("Trophy rating is $_trophyRating");
     if (_init) {
       _initialize();
       _init = false;
@@ -168,7 +167,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       _getAnimal(false);
       _getFursData();
       _getFur(false);
-      _getTrophyRating();
       _editing = false;
     } else if (_reserveChanged) {
       _logger.i("Reserve changed");
@@ -306,31 +304,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     _logger.v("Selected fur NUM $_selectedFur with ID $_selectedFurId");
   }
 
-  void _getTrophyRating() {
-    if (_trophy >= _diamond) {
-      _trophyRating = 4;
-    } else if (_trophy >= _gold) {
-      _trophyRating = 3;
-    } else if (_trophy >= _silver) {
-      _trophyRating = 2;
-    } else if (_trophy > 0) {
-      _trophyRating = 1;
-    } else {
-      _trophyRating = 0;
-    }
-    if (_selectedFurId == Interface.greatOneId) {
-      _trophyRating = 4; //GREAT ONE ADJUSTMENT
-    }
-    if (widget.log != null) {
-      _trophyRating = widget.log!.getTrophyRating(HelperJSON.getAnimal(_selectedAnimalId), true);
-      if (_trophyRating == 5) _trophyRating = 4; //GREAT ONE
-    }
-  }
-
   void _getTrophyOf(Animal animal) {
-    _silver = animal.silver;
-    _gold = animal.gold;
-    _diamond = animal.diamond;
     if (_selectedFurId == Interface.greatOneId) {
       //GREAT ONE
       _maxTrophy = animal.trophyGO;
@@ -429,24 +403,12 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     }
   }
 
-  void _isTrophyCorrect() {
-    if (_trophy < _diamond && _selectedFurId == Interface.greatOneId) {
-      _trophy = _diamond;
-    }
+  void _getHarvestCheck() {
     if (widget.fromTrophyLodge) {
       _correctAmmoUsed = true;
       _twoShotsFired = true;
       _vitalOrganHit = true;
       _trophyOrganUndamaged = true;
-      if ((_trophy >= _diamond && _trophyRating < 4) ||
-          (_trophy >= _gold && _trophyRating < 3) ||
-          (_trophy >= _silver && _trophyRating < 2) ||
-          (_trophy > 0 && _trophyRating < 1)) {
-        _correctAmmoUsed = false;
-        _twoShotsFired = false;
-        _vitalOrganHit = false;
-        _trophyOrganUndamaged = false;
-      }
     }
   }
 
@@ -459,6 +421,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         trophy: _trophy,
         weight: _weight,
         imperials: _usesImperials ? 1 : 0,
+        trophyRating: _trophyRating,
         lodge: widget.fromTrophyLodge || _isInLodge ? 1 : 0,
         gender: _isMale ? 1 : 0,
         harvestCorrectAmmo: _correctAmmoUsed ? 1 : 0,
@@ -842,7 +805,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     return GestureDetector(
         onTap: () {
           _focus();
-          _isTrophyCorrect();
+          _getHarvestCheck();
           Log log = _createLog();
           widget.log != null ? HelperLog.editLog(log) : HelperLog.addLog(log);
           widget.callback();
@@ -916,7 +879,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         _buildFur(),
         _buildTrophy(),
         widget.fromTrophyLodge ? const SizedBox.shrink() : _buildWeight(),
-        widget.fromTrophyLodge ? _buildTrophyRating() : _buildHarvestCheck(),
+        _buildTrophyRating(),
+        widget.fromTrophyLodge ? const SizedBox.shrink() : _buildHarvestCheck(),
         _buildAdd(),
       ]))),
       widget.log != null ? const SizedBox.shrink() : _buildRecords(),

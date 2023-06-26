@@ -54,6 +54,13 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        color: Interface.odd,
+        version: "1.6.7",
+        changes: const [
+          "- Added option to set whatever trophy rating when creating logs. Already created logs will stay the same unless manually changed."
+        ],
+      ),
+      WidgetPatchNote(
         color: Interface.even,
         version: "1.6.6",
         changes: const [
@@ -421,8 +428,17 @@ class ActivityPatchNotes extends StatelessWidget {
 
   Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
-        appBar: WidgetAppBar(text: tr('patch_notes'), color: Interface.accent, background: Interface.primary, fontSize: Interface.s30, context: context),
-        children: [_buildLink(), _buildList()]);
+        appBar: WidgetAppBar(
+          text: tr('patch_notes'),
+          color: Interface.accent,
+          background: Interface.primary,
+          fontSize: Interface.s30,
+          context: context,
+        ),
+        children: [
+          _buildLink(),
+          _buildList(),
+        ]);
   }
 
   @override

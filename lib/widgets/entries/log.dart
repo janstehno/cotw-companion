@@ -282,8 +282,8 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildTrophyWeight(bool buildWeight) {
     return ConstrainedBox(
         constraints: BoxConstraints(
-          minWidth: 110,
-          maxWidth: 110,
+          minWidth: 100,
+          maxWidth: 100,
           minHeight: (widget.log.weight > 0 && buildWeight) || _style == 3 ? 45 : 30,
           maxHeight: (widget.log.weight > 0 && buildWeight) || _style == 3 ? 45 : 30,
         ),
@@ -307,18 +307,8 @@ class EntryLogState extends State<EntryLog> {
                             alignment: Alignment.center,
                             margin: const EdgeInsets.only(right: 5),
                             child: SvgPicture.asset(
-                              widget.log.getTrophyRatingIcon(_animal, true),
-                              color: widget.log.getTrophyColor(_animal, true),
-                              fit: BoxFit.fitWidth,
-                            )),
-                        Container(
-                            width: 10,
-                            height: 30,
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.only(right: 10),
-                            child: SvgPicture.asset(
-                              widget.log.getTrophyRatingIcon(_animal, false),
-                              color: widget.log.getTrophyColor(_animal, false),
+                              widget.log.getTrophyRatingIcon(),
+                              color: widget.log.getTrophyColor(),
                               fit: BoxFit.fitWidth,
                             )),
                         Expanded(

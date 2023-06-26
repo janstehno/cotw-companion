@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/activities/home.dart';
 import 'package:cotwcompanion/model/ammo.dart';
@@ -12,7 +11,6 @@ import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/dlc.dart';
 import 'package:cotwcompanion/model/fur.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/model/weapon.dart';
 import 'package:cotwcompanion/model/zone.dart';
@@ -45,7 +43,6 @@ class BuilderHome extends StatelessWidget {
           HelperJSON.readWeapons(),
           HelperJSON.readWeaponsAmmo(),
           HelperJSON.readMapObjects(),
-          HelperLog.readLogs(),
           _forcedDelay()
         ]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -65,12 +62,10 @@ class BuilderHome extends StatelessWidget {
             var weapons = snapshot.data![10] as List<Weapon>;
             var weaponsAmmo = snapshot.data![11] as List<IdtoId>;
             var mapObjects = snapshot.data![12] as Map<String, dynamic>;
-            var logs = snapshot.data![13] as List<Log>;
-            var widget = snapshot.data![14] as Widget;
+            var widget = snapshot.data![13] as Widget;
             HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves,
                 weapons, weaponsAmmo, mapObjects);
             HelperJSON.setWeaponAmmo();
-            HelperLog.setLogs(logs, context);
             return widget;
           } else {
             return OrientationBuilder(builder: (context, orientation) {

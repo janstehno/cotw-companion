@@ -5069,7 +5069,7 @@
     {
         "ID": 564,
         "ANIMAL_ID": 88,
-        "FUR_ID": 1,
+        "FUR_ID": 2,
         "PERCENT": 0.05,
         "RARITY": 1,
         "MALE": 0,
@@ -5077,6 +5077,15 @@
     },
     {
         "ID": 565,
+        "ANIMAL_ID": 88,
+        "FUR_ID": 1,
+        "PERCENT": 0.05,
+        "RARITY": 1,
+        "MALE": 0,
+        "FEMALE": 0
+    },
+    {
+        "ID": 566,
         "ANIMAL_ID": 89,
         "FUR_ID": 10,
         "PERCENT": 9.185,
@@ -5085,7 +5094,7 @@
         "FEMALE": 0
     },
     {
-        "ID": 566,
+        "ID": 567,
         "ANIMAL_ID": 89,
         "FUR_ID": 2,
         "PERCENT": 0.055,
@@ -5094,7 +5103,7 @@
         "FEMALE": 0
     },
     {
-        "ID": 567,
+        "ID": 568,
         "ANIMAL_ID": 89,
         "FUR_ID": 1,
         "PERCENT": 0.055,
@@ -5103,7 +5112,7 @@
         "FEMALE": 0
     },
     {
-        "ID": 568,
+        "ID": 569,
         "ANIMAL_ID": 89,
         "FUR_ID": 24,
         "PERCENT": 74.85,
@@ -5112,7 +5121,7 @@
         "FEMALE": 0
     },
     {
-        "ID": 569,
+        "ID": 570,
         "ANIMAL_ID": 89,
         "FUR_ID": 20,
         "PERCENT": 8.35,
@@ -5121,7 +5130,7 @@
         "FEMALE": 0
     },
     {
-        "ID": 570,
+        "ID": 571,
         "ANIMAL_ID": 89,
         "FUR_ID": 6,
         "PERCENT": 8.35,
@@ -5130,7 +5139,7 @@
         "FEMALE": 0
     },
     {
-        "ID": 571,
+        "ID": 572,
         "ANIMAL_ID": 89,
         "FUR_ID": 21,
         "PERCENT": 89.86,

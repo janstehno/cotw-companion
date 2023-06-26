@@ -3,14 +3,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/search_controller.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/activities/logs_add_edit.dart';
 import 'package:cotwcompanion/activities/logs_information.dart';
-import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/entries/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
@@ -160,8 +158,7 @@ class ActivityLogsState extends State<ActivityLogs> {
     _numberOfDiamondLogs = 0;
     _numberOfGreatOneLogs = 0;
     for (Log log in _filtered) {
-      Animal animal = HelperJSON.getAnimal(log.animalId);
-      int trophyRating = _getTrophyRating(animal, log);
+      int trophyRating = log.trophyRating;
       switch (trophyRating) {
         case 1:
           _numberOfBronzeLogs++;
@@ -182,28 +179,6 @@ class ActivityLogsState extends State<ActivityLogs> {
           _numberOfNoneLogs++;
           break;
       }
-    }
-  }
-
-  int _getTrophyRating(Animal animal, Log log) {
-    double trophy = log.trophy;
-    double silver = animal.silver;
-    double gold = animal.gold;
-    double diamond = animal.diamond;
-    int decrease = log.harvestCheckPassed ? 0 : 1;
-    if (log.furId == Interface.greatOneId) {
-      return 5 - (decrease * 2);
-    }
-    if (trophy >= diamond) {
-      return 4 - decrease;
-    } else if (trophy >= gold) {
-      return 3 - decrease;
-    } else if (trophy >= silver) {
-      return 2 - decrease;
-    } else if (trophy > 0) {
-      return 1 - decrease;
-    } else {
-      return 0;
     }
   }
 

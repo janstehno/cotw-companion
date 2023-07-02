@@ -29,7 +29,7 @@ class BuilderLogs extends StatelessWidget {
           } else if (snapshot.hasData) {
             var logs = snapshot.data![0] as List<Log>;
             var widget = snapshot.data![1] as Widget;
-            HelperLog.setLogs(logs, context);
+            HelperLog.setLogs(logs);
             return widget;
           } else {
             return Container(

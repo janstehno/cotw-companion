@@ -110,7 +110,6 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                         ? Container()
                         : Container(
                             margin: const EdgeInsets.only(right: 2.5),
-                            padding: const EdgeInsets.only(top: 1.15),
                             child: SvgPicture.asset(
                               "assets/graphics/icons/money.svg",
                               width: 14,

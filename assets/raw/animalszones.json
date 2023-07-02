@@ -6435,7 +6435,7 @@
         "ID": 805,
         "ANIMAL_ID": 85,
         "RESERVE_ID": 14,
-        "ZONE": 0,
+        "ZONE": 1,
         "TIME_FROM": 0,
         "TIME_TO": 3
     },
@@ -6443,72 +6443,72 @@
         "ID": 806,
         "ANIMAL_ID": 85,
         "RESERVE_ID": 14,
-        "ZONE": 2,
+        "ZONE": 0,
         "TIME_FROM": 3,
-        "TIME_TO": 6
+        "TIME_TO": 9
     },
     {
         "ID": 807,
         "ANIMAL_ID": 85,
-        "RESERVE_ID": 14,
-        "ZONE": 0,
-        "TIME_FROM": 6,
-        "TIME_TO": 9
-    },
-    {
-        "ID": 808,
-        "ANIMAL_ID": 85,
-        "RESERVE_ID": 14,
-        "ZONE": 2,
-        "TIME_FROM": 9,
-        "TIME_TO": 17
-    },
-    {
-        "ID": 809,
-        "ANIMAL_ID": 85,
-        "RESERVE_ID": 14,
-        "ZONE": 0,
-        "TIME_FROM": 17,
-        "TIME_TO": 20
-    },
-    {
-        "ID": 810,
-        "ANIMAL_ID": 85,
-        "RESERVE_ID": 14,
-        "ZONE": 1,
-        "TIME_FROM": 20,
-        "TIME_TO": 24
-    },
-    {
-        "ID": 811,
-        "ANIMAL_ID": 86,
-        "RESERVE_ID": 14,
-        "ZONE": 1,
-        "TIME_FROM": 0,
-        "TIME_TO": 3
-    },
-    {
-        "ID": 812,
-        "ANIMAL_ID": 86,
-        "RESERVE_ID": 14,
-        "ZONE": 0,
-        "TIME_FROM": 3,
-        "TIME_TO": 9
-    },
-    {
-        "ID": 813,
-        "ANIMAL_ID": 86,
         "RESERVE_ID": 14,
         "ZONE": 2,
         "TIME_FROM": 9,
         "TIME_TO": 18
     },
     {
-        "ID": 814,
-        "ANIMAL_ID": 86,
+        "ID": 808,
+        "ANIMAL_ID": 85,
         "RESERVE_ID": 14,
         "ZONE": 0,
         "TIME_FROM": 18,
+        "TIME_TO": 24
+    },
+    {
+        "ID": 809,
+        "ANIMAL_ID": 86,
+        "RESERVE_ID": 14,
+        "ZONE": 0,
+        "TIME_FROM": 0,
+        "TIME_TO": 3
+    },
+    {
+        "ID": 810,
+        "ANIMAL_ID": 86,
+        "RESERVE_ID": 14,
+        "ZONE": 2,
+        "TIME_FROM": 3,
+        "TIME_TO": 6
+    },
+    {
+        "ID": 811,
+        "ANIMAL_ID": 86,
+        "RESERVE_ID": 14,
+        "ZONE": 0,
+        "TIME_FROM": 6,
+        "TIME_TO": 9
+    },
+    {
+        "ID": 812,
+        "ANIMAL_ID": 86,
+        "RESERVE_ID": 14,
+        "ZONE": 2,
+        "TIME_FROM": 9,
+        "TIME_TO": 17
+    },
+    {
+        "ID": 813,
+        "ANIMAL_ID": 86,
+        "RESERVE_ID": 14,
+        "ZONE": 0,
+        "TIME_FROM": 17,
+        "TIME_TO": 20
+    },
+    {
+        "ID": 814,
+        "ANIMAL_ID": 86,
+        "RESERVE_ID": 14,
+        "ZONE": 1,
+        "TIME_FROM": 20,
         "TIME_TO": 24
     },
     {

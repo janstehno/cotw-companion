@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/activities/home.dart';
 import 'package:cotwcompanion/model/ammo.dart';
@@ -66,6 +67,7 @@ class BuilderHome extends StatelessWidget {
             HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves,
                 weapons, weaponsAmmo, mapObjects);
             HelperJSON.setWeaponAmmo();
+            HelperLog.context = context;
             return widget;
           } else {
             return OrientationBuilder(builder: (context, orientation) {

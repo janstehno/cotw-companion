@@ -38,16 +38,18 @@ class WidgetSearchBarState extends State<WidgetSearchBar> {
               child: Container(
                   alignment: Alignment.centerLeft,
                   child: TextField(
+                      maxLines: 1,
                       controller: widget.controller,
+                      textAlign: TextAlign.start,
                       textAlignVertical: TextAlignVertical.center,
                       cursorColor: Interface.primary,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(bottom: Interface.textFieldBottomPadding),
+                        constraints: BoxConstraints(maxHeight: 27),
                       ),
                       style: TextStyle(
                         color: widget.color ?? Interface.search,
-                        fontSize: Interface.s18,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400,
                       )))),
           GestureDetector(

@@ -21,6 +21,10 @@ class HelperLog {
       r'^(20(1[789]|2[0123456789])|2030)-((0?2-(0?[1-9]|[12][0-9]))|(0?[469]|11)-(0?[1-9]|[12][0-9]|30)|(0?[13578]|1[02])-(0?[1-9]|[12][0-9]|3[01]))-(0?0-|0?[1-9]-|1[0-9]-|2[0-3]-)(0?0|0?[1-9]|[1-5][0-9])(-0?0|-0?[1-9]|-[1-5][0-9])?$',
       unicode: true);
 
+  static set context(BuildContext context) {
+    _context = context;
+  }
+
   static List<Log> get logs => _logs;
 
   static List<Log> get corruptedLogs => _corruptedLogs;
@@ -57,7 +61,7 @@ class HelperLog {
       _corruptedLogs.add(log);
       if (!_dateReg.hasMatch(log.date)) continue;
       if (log.animalId <= 0 || log.animalId > HelperJSON.animals.length) continue;
-      if (log.reserveId == 0 || log.reserveId < -1 || log.reserveId > HelperJSON.reserves.length) continue;
+      if (log.reserveId <= -2 || log.reserveId == 0 || log.reserveId > HelperJSON.reserves.length) continue;
       if (log.furId <= 0 || (log.furId >= HelperJSON.furs.length && log.furId < Interface.greatOneId) || log.furId > Interface.greatOneId) {
         continue;
       }
@@ -69,8 +73,7 @@ class HelperLog {
     }
   }
 
-  static void setLogs(List<Log> logs, BuildContext context) {
-    _context = context;
+  static void setLogs(List<Log> logs) {
     _addLogs(logs);
     _reIndex();
     _reName();

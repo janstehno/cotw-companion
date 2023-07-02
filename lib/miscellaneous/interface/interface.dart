@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.6.7";
+  static const String version = "1.6.8";
   static const int greatOneId = 100;
 
   static bool _darkMode = false;
@@ -22,8 +22,6 @@ class Interface {
   static double s12 = 12.0;
   static double s10 = 10.0;
 
-  static double textFieldBottomPadding = 10.0;
-  static double textFieldNumberBottom = 8.0;
   static double accentBorderWidth = 0;
 
   static const Color pink = Color(0xFFC2185B);
@@ -145,8 +143,6 @@ class Interface {
           s14 = 8.0;
           s12 = 6.0;
           s10 = 4.0;
-          textFieldBottomPadding = 16.0;
-          textFieldNumberBottom = 13.0;
           break;
         }
       case 1:
@@ -163,8 +159,6 @@ class Interface {
           s14 = 10.0;
           s12 = 8.0;
           s10 = 6.0;
-          textFieldBottomPadding = 14.0;
-          textFieldNumberBottom = 12.0;
           break;
         }
       case 2:
@@ -181,8 +175,6 @@ class Interface {
           s14 = 12.0;
           s12 = 10.0;
           s10 = 8.0;
-          textFieldBottomPadding = 13.0;
-          textFieldNumberBottom = 11.0;
           break;
         }
       case 3:
@@ -199,8 +191,6 @@ class Interface {
           s14 = 14.0;
           s12 = 12.0;
           s10 = 10.0;
-          textFieldBottomPadding = 11.0;
-          textFieldNumberBottom = 8.0;
           break;
         }
     }

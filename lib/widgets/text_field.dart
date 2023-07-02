@@ -9,8 +9,6 @@ class WidgetTextField extends StatelessWidget {
   final bool correct, numberOnly;
   final TextEditingController controller;
 
-  final double height = 60;
-
   const WidgetTextField({
     Key? key,
     required this.color,
@@ -22,7 +20,7 @@ class WidgetTextField extends StatelessWidget {
 
   Widget _buildWidgets() {
     return Container(
-        height: height,
+        height: 60,
         alignment: Alignment.centerLeft,
         color: background,
         padding: const EdgeInsets.only(left: 30, right: 30),
@@ -36,21 +34,29 @@ class WidgetTextField extends StatelessWidget {
                 color: Interface.disabled,
               )),
           Expanded(
-              child: TextField(
-                  keyboardType: numberOnly ? const TextInputType.numberWithOptions(decimal: true, signed: false) : TextInputType.text,
-                  maxLines: 1,
-                  controller: controller,
-                  textAlignVertical: TextAlignVertical.center,
-                  cursorColor: Interface.primary,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(bottom: Interface.textFieldBottomPadding),
-                  ),
-                  style: TextStyle(
-                    color: color,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  ))),
+              child: Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(bottom: 3),
+                  child: TextField(
+                      keyboardType: numberOnly
+                          ? const TextInputType.numberWithOptions(
+                              decimal: true,
+                              signed: false,
+                            )
+                          : TextInputType.text,
+                      maxLines: 1,
+                      controller: controller,
+                      textAlign: TextAlign.start,
+                      textAlignVertical: TextAlignVertical.center,
+                      cursorColor: Interface.primary,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      )))),
           Expanded(
               flex: 0,
               child: AnimatedContainer(

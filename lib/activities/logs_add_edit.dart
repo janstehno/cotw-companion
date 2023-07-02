@@ -149,7 +149,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   }
 
   void _reload() {
-    HelperLogger("INFO").i("Trophy rating is $_trophyRating");
     if (_init) {
       _initialize();
       _init = false;

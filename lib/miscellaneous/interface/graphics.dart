@@ -184,8 +184,8 @@ class Graphics {
     "stubblequail",
     "magpiegoose",
     "hogdeer",
-    "javanrusa",
     "easterngraykangaroo",
+    "javanrusa",
     "sambar",
     "saltwatercrocodile",
     "banteng"

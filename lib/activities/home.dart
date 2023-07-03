@@ -41,29 +41,16 @@ class ActivityHomeState extends State<ActivityHome> {
     _screenPadding = MediaQuery.of(context).viewPadding.top;
   }
 
-  void _redirectToGitHub() async {
-    if (!await launchUrl(Uri(scheme: "https", host: "github.com", path: "/janstehno"),
-        mode: LaunchMode.externalApplication)) {
+  void _redirectTo(String host, String path) async {
+    if (!await launchUrl(Uri(scheme: "https", host: host, path: path), mode: LaunchMode.externalApplication)) {
       throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
     }
   }
 
-  void _redirectToReddit() async {
-    if (!await launchUrl(Uri(scheme: "https", host: "reddit.com", path: "/user/Toastovac"), mode: LaunchMode.externalApplication)) {
-      throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
-    }
-  }
-
-  void _redirectToPayPal() async {
-    if (!await launchUrl(Uri(scheme: "https", host: "paypal.me", path: "/toastovac"), mode: LaunchMode.externalApplication)) {
-      throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
-    }
-  }
-
-  Widget _buildLink(String icon, Function redirect) {
+  Widget _buildLink(String icon, String host, String path) {
     return GestureDetector(
         onTap: () {
-          redirect();
+          _redirectTo(host, path);
         },
         child: Container(
             padding: const EdgeInsets.only(right: 15),
@@ -205,9 +192,8 @@ class ActivityHomeState extends State<ActivityHome> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _buildLink("paypal", _redirectToPayPal),
-          _buildLink("reddit", _redirectToReddit),
-          _buildLink("github", _redirectToGitHub),
+          _buildLink("github", "github.com", "/janstehno"),
+          _buildLink("reddit", "reddit.com", "/user/Toastovac"),
         ]);
   }
 

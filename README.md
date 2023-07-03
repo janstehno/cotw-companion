@@ -6,8 +6,8 @@ Application also offers interactive maps and list of need zones changing over ti
 
 ### **Newest version**
 
-- [Android](https://play.google.com/store/apps/details?id=com.toastyapps.cotwcompanion)
-- [iOS](https://apps.apple.com/us/app/cotw-companion/id6443782494)
+- [**android**](https://play.google.com/store/apps/details?id=com.toastyapps.cotwcompanion)
+- [**ios**](https://apps.apple.com/us/app/cotw-companion/id6443782494)
 
 ### **Some history and staff**
 
@@ -46,14 +46,15 @@ does what. It will probably be stored here on GitHub so anyone can access it.
 
 For those who at least mentioned the app anywhere and especially for those who regularly use my app:
 Thank you very much for your support and reviews you gave me. I appreciate it a lot. To this day,
-the app was used at least once by almost **30K** users on Android and almost **20K** users on iOS.
+the app was used at least once by almost **35K** users on Android and almost **20K** users on iOS.
 Which is totally awesome and I did not think this could be possible. Without you I probably would
 not be able to release the app for iOS devices.
 
 ### **Support Me**
 
-You can support me through [PayPal](https://paypal.me./toastovac). It is the only way I use for now.
-If anybody is interested in supporting me through something else, please, send me an email or
-message me on discord or reddit. We can discuss other options than PayPal for sure. It will be
-appreciated a lot. It also encourages me to update the app. Thank you everyone who already did or
-will do.
+It will be appreciated a lot. It also encourages me to update the app. Thank you everyone who
+already did or will do.
+
+- [**paypal**](https://paypal.me/toastovac)
+- [**buymeacoffee**](https://www.buymeacoffee.com/toastovac)
+- [**patreon**](https://www.patreon.com/Toastovac)

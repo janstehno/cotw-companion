@@ -1,6 +1,5 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button.dart';
@@ -8,20 +7,18 @@ import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ActivityAbout extends StatelessWidget {
   final EdgeInsets _padding = const EdgeInsets.all(30);
   final String _email = "toastovac@email.cz";
-  final String _discord = "Toastovac";
 
   const ActivityAbout({
     Key? key,
   }) : super(key: key);
 
-  void _redirectToPayPal() async {
-    if (!await launchUrl(Uri(scheme: "https", host: "paypal.me", path: "/toastovac"))) {
+  void _redirectTo(String host, String path) async {
+    if (!await launchUrl(Uri(scheme: "https", host: host, path: path), mode: LaunchMode.externalApplication)) {
       throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
     }
   }
@@ -238,23 +235,42 @@ class ActivityAbout extends StatelessWidget {
       Container(
           padding: _padding,
           child: Column(children: [
-            Text(tr("about_paragraph_2"),
-                style: TextStyle(
-                  color: Interface.dark,
-                  fontSize: Interface.s20,
-                  fontWeight: FontWeight.w400,
-                )),
             Container(
-                width: 200,
-                margin: const EdgeInsets.only(top: 30),
-                child: WidgetButton(
-                  text: tr('support_me').toUpperCase(),
-                  color: Interface.accent,
-                  background: Interface.primary,
-                  onTap: () {
-                    _redirectToPayPal();
-                  },
-                ))
+                margin: const EdgeInsets.only(bottom: 30),
+                child: Text(tr("about_paragraph_2"),
+                    style: TextStyle(
+                      color: Interface.dark,
+                      fontSize: Interface.s20,
+                      fontWeight: FontWeight.w400,
+                    ))),
+            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+              WidgetButton(
+                icon: "assets/graphics/icons/paypal.svg",
+                color: Interface.alwaysLight,
+                background: Interface.deepblue,
+                onTap: () {
+                  _redirectTo("paypal.me", "/toastovac");
+                },
+              ),
+              Container(
+                  margin: const EdgeInsets.only(left: 10, right: 10),
+                  child: WidgetButton(
+                    icon: "assets/graphics/icons/coffee.svg",
+                    color: Interface.alwaysDark,
+                    background: Interface.yellow,
+                    onTap: () {
+                      _redirectTo("buymeacoffee.com", "/toastovac");
+                    },
+                  )),
+              WidgetButton(
+                icon: "assets/graphics/icons/patreon.svg",
+                color: Interface.alwaysDark,
+                background: Interface.red,
+                onTap: () {
+                  _redirectTo("patreon.com", "/Toastovac");
+                },
+              )
+            ])
           ]))
     ]);
   }
@@ -265,42 +281,14 @@ class ActivityAbout extends StatelessWidget {
           child: Container(
               padding: _padding,
               color: Interface.subTitleBackground,
-              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    margin: const EdgeInsets.only(bottom: 5),
-                    child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          margin: const EdgeInsets.only(right: 7),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/discord.svg",
-                            color: Interface.dark,
-                            width: 17,
-                          )),
-                      AutoSizeText(_discord,
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Interface.dark,
-                            fontSize: Interface.s20,
-                            fontWeight: FontWeight.w400,
-                          ))
-                    ])),
-                Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Container(
-                      margin: const EdgeInsets.only(right: 7),
-                      child: SvgPicture.asset(
-                        "assets/graphics/icons/post.svg",
-                        color: Interface.dark,
-                        width: 17,
-                      )),
-                  AutoSizeText(_email,
-                      maxLines: 1,
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s20,
-                        fontWeight: FontWeight.w400,
-                      ))
-                ])
-              ])))
+              child: SelectableText(_email,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Interface.dark,
+                    fontSize: Interface.s20,
+                    fontWeight: FontWeight.w400,
+                  ))))
     ]);
   }
 

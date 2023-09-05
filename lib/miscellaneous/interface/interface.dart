@@ -3,15 +3,16 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.7.0";
+  static const String version = "1.7.1";
   static const int greatOneId = 100;
+  static const Color alwaysDark = ff0d;
+  static const Color alwaysLight = fff5;
+  static const Color shadow = ff42;
 
   static bool _darkMode = false;
-  static int _fontSize = 2;
+  static double accentBorderWidth = 0;
 
-  static double s40 = 40.0;
-  static double s30 = 30.0;
-  static double s28 = 28.0;
+  static double s40 = 36.0;
   static double s26 = 26.0;
   static double s24 = 24.0;
   static double s22 = 22.0;
@@ -21,9 +22,32 @@ class Interface {
   static double s14 = 14.0;
   static double s12 = 12.0;
   static double s10 = 10.0;
+  static double s8 = 8.0;
+  static double s6 = 6.0;
 
-  static double accentBorderWidth = 0;
+  static Color primary = Colors.transparent;
+  static Color accent = Colors.transparent;
+  static Color dark = Colors.transparent;
+  static Color light = Colors.transparent;
+  static Color accentBorder = Colors.transparent;
+  static Color body = Colors.transparent;
+  static Color dropDown = Colors.transparent;
+  static Color odd = Colors.transparent;
+  static Color even = Colors.transparent;
+  static Color title = Colors.transparent;
+  static Color sectionTitle = Colors.transparent;
+  static Color search = Colors.transparent;
+  static Color tag = Colors.transparent;
+  static Color nothing = Colors.transparent;
+  static Color common = Colors.transparent;
+  static Color other = Colors.transparent;
+  static Color disabled = Colors.transparent;
+  static Color anatomyBody = Colors.transparent;
+  static Color anatomyBones = Colors.transparent;
 
+  static ColorScheme omniDatePickerScheme = const ColorScheme.dark();
+
+  static const Color grey = Color(0xFFBDBDBD);
   static const Color pink = Color(0xFFC2185B);
   static const Color red = Color(0xFFE53935);
   static const Color redorange = Color(0xFFFF5722);
@@ -42,53 +66,24 @@ class Interface {
   static const Color darkpink = Color(0xFF9C27B0);
   static const Color lightbrown = Color(0xFF8D6E63);
   static const Color brown = Color(0xFF4E342E);
-  static const Color grey = Color(0xFFBDBDBD);
 
-  static const Color ffff = Color(0xFFFFFFFF);
-  static const Color fffe = Color(0xFFFEFEFE);
-  static const Color fff5 = Color(0xFFF5F5F5);
-  static const Color ffef = Color(0xFFEFEFEF);
-  static const Color ffee = Color(0xFFEEEEEE);
-  static const Color ffe0 = Color(0xFFE0E0E0);
-  static const Color ffcc = Color(0xFFCCCCCC);
-  static const Color ffbd = Color(0xFFBDBDBD);
-  static const Color ff9e = Color(0xFF9E9E9E);
-  static const Color ff75 = Color(0xFF757575);
-  static const Color ff61 = Color(0xFF616161);
-  static const Color ff42 = Color(0xFF424242);
-  static const Color ff23 = Color(0xFF232323);
-  static const Color ff21 = Color(0xFF212121);
-  static const Color ff17 = Color(0xFF171717);
-  static const Color ff12 = Color(0xFF121212);
-  static const Color ff0d = Color(0xFF0D0D0D);
-  static const Color ff06 = Color(0xFF060606);
-  static const Color ff00 = Color(0xFF000000);
-
-  static const Color shadow = ff00;
-  static const Color shadowAnimalHead = ff42;
   static const Color stop = red;
   static const Color play = blue;
   static const Color selected = red;
   static const Color unselected = lightgreen;
   static const Color trophyBronze = lightbrown;
-  static const Color trophySilver = ffbd;
+  static const Color trophySilver = grey;
   static const Color trophyGold = orange;
   static const Color trophyDiamond = blue;
   static const Color uncommon = lightgreen;
   static const Color rare = blue;
   static const Color veryrare = orange;
-  static const Color extremelyRare = orange;
   static const Color mission = red;
   static const Color feed = lightgreen;
   static const Color drink = blue;
   static const Color rest = orange;
   static const Color male = blue;
   static const Color female = red;
-  static const Color alwaysDark = ff0d;
-  static const Color alwaysLight = fff5;
-  static const Color logsInfoBackground = ff17;
-  static const Color colorMapOLH = ffee;
-  static const Color colorMapBackground = ff0d;
   static const Color summer = yellow;
   static const Color winter = blue;
   static const Color field = orange;
@@ -97,102 +92,138 @@ class Interface {
   static const Color lowlands = lightgreen;
   static const Color hills = yellow;
   static const Color mountains = blue;
+  static const Color trophyNoneBackground = grey;
+  static const Color trophyBronzeBackground = trophyBronze;
+  static const Color trophySilverBackground = grey;
+  static const Color trophyGoldBackground = trophyGold;
+  static const Color trophyDiamondBackground = trophyDiamond;
 
-  static Color primary = Colors.transparent;
-  static Color accent = Colors.transparent;
-  static Color dark = Colors.transparent;
-  static Color light = Colors.transparent;
-  static Color trophyScore = Colors.transparent;
-  static Color accentBorder = Colors.transparent;
-  static Color mainBody = Colors.transparent;
-  static Color dropDownBody = Colors.transparent;
-  static Color odd = Colors.transparent;
-  static Color even = Colors.transparent;
-  static Color title = Colors.transparent;
-  static Color subTitleBackground = Colors.transparent;
-  static Color subSubTitleBackground = Colors.transparent;
-  static Color search = Colors.transparent;
-  static Color searchBackground = Colors.transparent;
-  static Color tag = Colors.transparent;
-  static Color nothing = Colors.transparent;
-  static Color common = Colors.transparent;
-  static Color other = Colors.transparent;
-  static Color disabled = Colors.transparent;
-  static Color anatomyBody = Colors.transparent;
-  static Color anatomyBones = Colors.transparent;
-  static Color trophyNoneBackground = Colors.transparent;
-  static Color trophyBronzeBackground = Colors.transparent;
-  static Color trophySilverBackground = Colors.transparent;
-  static Color trophyGoldBackground = Colors.transparent;
-  static Color trophyDiamondBackground = Colors.transparent;
+  static const Color ffff = Color(0xFFFFFFFF);
+  static const Color fffe = Color(0xFFFEFEFE); //odd, body
+  static const Color fff5 = Color(0xFFF5F5F5); //even, dark, light, accent, sectionTitle
+  static const Color ffef = Color(0xFFEFEFEF); //title
+  static const Color ffee = Color(0xFFEEEEEE); //dropDown, search, nothing, other, common
+  static const Color ffe0 = Color(0xFFE0E0E0);
+  static const Color ffcc = Color(0xFFCCCCCC); //tag
+  static const Color ffbd = Color(0xFFBDBDBD); //anatomy
+  static const Color ff9e = Color(0xFF9E9E9E); //disabled
+  static const Color ff75 = Color(0xFF757575);
+  static const Color ff61 = Color(0xFF616161); //disabled
+  static const Color ff42 = Color(0xFF424242); //shadow, anatomy
+  static const Color ff23 = Color(0xFF232323); //tag
+  static const Color ff21 = Color(0xFF212121);
+  static const Color ff17 = Color(0xFF171717); //dropDown, search, nothing, other, common
+  static const Color ff12 = Color(0xFF121212); //title
+  static const Color ff0d = Color(0xFF0D0D0D); //even, dark, light, accent, sectionTitle
+  static const Color ff06 = Color(0xFF060606); //odd, body
+  static const Color ff00 = Color(0xFF000000);
 
-  static void setFontSize(int size) {
-    _fontSize = size;
-    switch (_fontSize) {
-      case 0:
-        {
-          s40 = 34.0;
-          s30 = 24.0;
-          s28 = 22.0;
-          s26 = 20.0;
-          s24 = 18.0;
-          s22 = 16.0;
-          s20 = 14.0;
-          s18 = 12.0;
-          s16 = 10.0;
-          s14 = 8.0;
-          s12 = 6.0;
-          s10 = 4.0;
-          break;
-        }
-      case 1:
-        {
-          s40 = 36.0;
-          s30 = 26.0;
-          s28 = 24.0;
-          s26 = 22.0;
-          s24 = 20.0;
-          s22 = 18.0;
-          s20 = 16.0;
-          s18 = 14.0;
-          s16 = 12.0;
-          s14 = 10.0;
-          s12 = 8.0;
-          s10 = 6.0;
-          break;
-        }
-      case 2:
-        {
-          s40 = 38.0;
-          s30 = 28.0;
-          s28 = 26.0;
-          s26 = 24.0;
-          s24 = 22.0;
-          s22 = 20.0;
-          s20 = 18.0;
-          s18 = 16.0;
-          s16 = 14.0;
-          s14 = 12.0;
-          s12 = 10.0;
-          s10 = 8.0;
-          break;
-        }
-      case 3:
-        {
-          s40 = 40.0;
-          s30 = 30.0;
-          s28 = 28.0;
-          s26 = 26.0;
-          s24 = 24.0;
-          s22 = 22.0;
-          s20 = 20.0;
-          s18 = 18.0;
-          s16 = 16.0;
-          s14 = 14.0;
-          s12 = 12.0;
-          s10 = 10.0;
-          break;
-        }
+  //appbar
+  static TextStyle s28w600c(Color color) => TextStyle(color: color, fontSize: 28, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+
+  //homeTitle
+  static TextStyle s24w600c(Color color) => TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+
+  //bigTitle
+  static TextStyle s20w600c(Color color) => TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+
+  //homeText
+  static TextStyle s18w400c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Condensed');
+
+  //mediumTitle
+  static TextStyle s18w600c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+
+  //smallTitle
+  static TextStyle s16w600c(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+
+  //importantText, stats, buttons, sliders
+  static TextStyle s18w500n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w500, fontFamily: 'Normal');
+
+  //itemTitle
+  static TextStyle s18w300n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+
+  //bigTag, richText
+  static TextStyle s16w500n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500, fontFamily: 'Normal');
+
+  //generalText
+  static TextStyle s16w300n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+
+  //mediumTag
+  static TextStyle s14w500n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w500, fontFamily: 'Normal');
+
+  //snackBar, logText, loadoutText
+  static TextStyle s14w300n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+
+  //smallTag
+  static TextStyle s12w500n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w500, fontFamily: 'Normal');
+
+  //smallText, subTextTitle
+  static TextStyle s12w300n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+
+  static void setColors(bool darkMode) {
+    _darkMode = darkMode;
+    if (darkMode) {
+      //DARK MODE
+      body = ff06;
+      odd = ff06;
+      even = ff0d;
+      title = ff12;
+      sectionTitle = ff0d;
+      light = ff0d;
+      dark = fff5;
+      search = ff17;
+      tag = ff23;
+      dropDown = ff17;
+      nothing = ff17;
+      other = ffee;
+      common = ffee;
+      anatomyBones = ffbd;
+      anatomyBody = ff42;
+      disabled = ff61;
+      omniDatePickerScheme = ColorScheme(
+        brightness: Brightness.dark,
+        primary: Interface.primary,
+        onPrimary: Interface.accent,
+        secondary: Colors.transparent,
+        onSecondary: Colors.transparent,
+        error: Colors.transparent,
+        onError: Colors.transparent,
+        background: Colors.transparent,
+        onBackground: Colors.transparent,
+        surface: Colors.transparent,
+        onSurface: Interface.alwaysLight,
+      );
+    } else {
+      //LIGHT MODE
+      body = fffe;
+      odd = fffe;
+      even = fff5;
+      title = ffef;
+      sectionTitle = fff5;
+      light = fff5;
+      dark = ff0d;
+      search = ffee;
+      dropDown = ffee;
+      tag = ffcc;
+      nothing = ffee;
+      other = ff17;
+      common = ff17;
+      anatomyBones = ff42;
+      anatomyBody = ffbd;
+      disabled = ff9e;
+      omniDatePickerScheme = ColorScheme(
+        brightness: Brightness.light,
+        primary: Interface.primary,
+        onPrimary: Interface.accent,
+        secondary: Colors.transparent,
+        onSecondary: Colors.transparent,
+        error: Colors.transparent,
+        onError: Colors.transparent,
+        background: Colors.transparent,
+        onBackground: Colors.transparent,
+        surface: Colors.transparent,
+        onSurface: Interface.alwaysDark,
+      );
     }
   }
 
@@ -203,86 +234,13 @@ class Interface {
     accentBorderWidth = 0;
 
     if (primaryColor == deepblue || primaryColor == purple || primaryColor == brown) {
-      accent = ffee;
+      accent = alwaysLight;
       if (_darkMode) {
-        accentBorder = ffee;
+        accentBorder = alwaysLight;
         accentBorderWidth = 0.5;
       }
     } else {
-      accent = ff12;
-    }
-  }
-
-  static void setColors(bool darkMode) {
-    _darkMode = darkMode;
-    if (darkMode) {
-      //DARK MODE
-      mainBody = ff06;
-
-      odd = ff06;
-      even = ff0d;
-      title = fff5;
-      subTitleBackground = ff12;
-      subSubTitleBackground = ff0d;
-
-      light = ff0d;
-      dark = fff5;
-
-      search = fff5;
-      searchBackground = ff21;
-
-      tag = ff23;
-      trophyScore = ff23;
-      dropDownBody = ff17;
-
-      nothing = ff17;
-      other = fff5;
-      common = fff5;
-
-      anatomyBones = ffbd;
-      anatomyBody = ff42;
-
-      disabled = ff75;
-
-      trophyNoneBackground = ffee;
-      trophyBronzeBackground = trophyBronze;
-      trophySilverBackground = ffbd;
-      trophyGoldBackground = trophyGold;
-      trophyDiamondBackground = trophyDiamond;
-    } else {
-      //LIGHT MODE
-      mainBody = ffff;
-
-      odd = ffff;
-      even = fff5;
-      title = ff0d;
-      subTitleBackground = ffee;
-      subSubTitleBackground = fff5;
-
-      light = fff5;
-      dark = ff0d;
-
-      search = ff0d;
-      searchBackground = ffe0;
-      dropDownBody = ffe0;
-
-      tag = ffcc;
-      trophyScore = ffcc;
-
-      nothing = ffee;
-      other = ff0d;
-      common = ff0d;
-
-      anatomyBones = ff42;
-      anatomyBody = ffbd;
-
-      disabled = ff9e;
-
-      trophyNoneBackground = ff23;
-      trophyBronzeBackground = trophyBronze;
-      trophySilverBackground = ffbd;
-      trophyGoldBackground = trophyGold;
-      trophyDiamondBackground = trophyDiamond;
+      accent = alwaysDark;
     }
   }
 }

@@ -1,27 +1,25 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:another_xlider/another_xlider.dart';
+import 'package:another_xlider/models/handler.dart';
+import 'package:another_xlider/models/tooltip/tooltip.dart';
+import 'package:another_xlider/models/trackbar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:flutter/material.dart';
 
 class WidgetSlider extends StatelessWidget {
   final List<double> values;
-  final String leftText, rightText;
-  final double min, max, handleSize;
-  final bool smallerSlider, rangeSlider;
+  final String text;
+  final double min, max;
   final Function onDrag;
 
   const WidgetSlider({
     Key? key,
     required this.values,
-    this.leftText = "",
-    this.rightText = "",
+    this.text = "",
     required this.min,
     required this.max,
-    this.handleSize = 40,
-    this.smallerSlider = false,
-    this.rangeSlider = false,
     required this.onDrag,
   }) : super(key: key);
 
@@ -29,48 +27,32 @@ class WidgetSlider extends StatelessWidget {
     return FlutterSlider(
         min: min,
         max: max,
-        rangeSlider: rangeSlider,
         values: values,
-        handlerWidth: handleSize,
-        handlerHeight: handleSize,
+        handlerWidth: 35,
+        handlerHeight: 35,
         tooltip: FlutterSliderTooltip(disabled: true),
         trackBar: FlutterSliderTrackBar(
-            activeTrackBarHeight: smallerSlider ? 3 : 4,
-            inactiveTrackBarHeight: smallerSlider ? 3 : 4,
+            activeTrackBarHeight: 3,
+            inactiveTrackBarHeight: 3,
             activeTrackBar: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(smallerSlider ? (3 / 4) : (4 / 4))),
+              borderRadius: const BorderRadius.all(Radius.circular(1)),
               color: Interface.primary,
             ),
             inactiveTrackBar: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(smallerSlider ? (3 / 4) : (4 / 4))),
+              borderRadius: const BorderRadius.all(Radius.circular(1)),
               color: Interface.disabled.withOpacity(0.3),
             )),
         handler: FlutterSliderHandler(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(handleSize / 4)),
+              borderRadius: const BorderRadius.all(Radius.circular(35 / 4)),
               color: Interface.primary,
             ),
             child: Container(
                 alignment: Alignment.center,
-                child: AutoSizeText(leftText,
-                    style: TextStyle(
-                      color: Interface.accent,
-                      fontSize: smallerSlider ? Interface.s18 : Interface.s24,
-                      fontWeight: FontWeight.w400,
-                    )))),
-        rightHandler: FlutterSliderHandler(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(handleSize / 4)),
-              color: Interface.primary,
-            ),
-            child: Container(
-                alignment: Alignment.center,
-                child: AutoSizeText(rightText,
-                    style: TextStyle(
-                      color: Interface.accent,
-                      fontSize: smallerSlider ? Interface.s18 : Interface.s24,
-                      fontWeight: FontWeight.w400,
-                    )))),
+                child: AutoSizeText(
+                  text,
+                  style: Interface.s18w500n(Interface.accent),
+                ))),
         onDragging: (id, lower, upper) {
           onDrag(id, lower, upper);
         });

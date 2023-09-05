@@ -3,7 +3,6 @@
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/types.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/widgets/entries/animal.dart';
 import 'package:cotwcompanion/widgets/entries/caller.dart';
@@ -96,13 +95,13 @@ class BuilderRAWCState extends State<BuilderRAWC> {
           dynamic item = _filtered[index];
           switch (widget.type) {
             case ObjectType.reserve:
-              return EntryReserve(reserve: item, index: index, callback: _focus);
+              return EntryReserve(index: index, reserve: item, callback: _focus);
             case ObjectType.animal:
-              return EntryAnimal(animal: item, index: index, callback: _focus);
+              return EntryAnimal(index: index, animal: item, callback: _focus);
             case ObjectType.weapon:
-              return EntryWeapon(weapon: item, index: index, callback: _focus);
+              return EntryWeapon(index: index, weapon: item, callback: _focus);
             case ObjectType.caller:
-              return EntryCaller(caller: item, index: index, callback: _focus);
+              return EntryCaller(index: index, caller: item, callback: _focus);
             default:
               return Container();
           }
@@ -112,12 +111,15 @@ class BuilderRAWCState extends State<BuilderRAWC> {
   Widget _buildWidgets() {
     _getData();
     return WidgetScaffold(
-        appBar: WidgetAppBar(text: widget.text.tr(), color: Interface.accent, background: Interface.primary, fontSize: Interface.s30, context: context),
-        showSearchBar: true,
-        searchBarController: _controller,
-        children: [
-          Column(children: [_buildList()])
-        ]);
+      appBar: WidgetAppBar(
+        text: tr(widget.text),
+        context: context,
+      ),
+      withSearchBar: true,
+      appBarScroll: false,
+      searchBarController: _controller,
+      body: _buildList(),
+    );
   }
 
   @override

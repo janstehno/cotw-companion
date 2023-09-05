@@ -53,7 +53,10 @@ class WidgetSense extends StatelessWidget {
           SvgPicture.asset(
             icon,
             width: 15,
-            color: Interface.dark,
+            colorFilter: ColorFilter.mode(
+              Interface.dark,
+              BlendMode.srcIn,
+            ),
           ),
           Expanded(
               child: Padding(

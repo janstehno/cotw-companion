@@ -2,21 +2,23 @@
 
 import 'package:async/async.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/builders/map.dart';
 import 'package:cotwcompanion/builders/need_zones/reserve_need_zones.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/reserve.dart';
-import 'package:cotwcompanion/widgets/title_functional.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/slider.dart';
-import 'package:cotwcompanion/widgets/switch.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/switch_icon.dart';
+import 'package:cotwcompanion/widgets/switch_text.dart';
+import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/widgets/title_big_button.dart';
+import 'package:cotwcompanion/widgets/title_big_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:wakelock/wakelock.dart';
 
 class ActivityNeedZones extends StatefulWidget {
   const ActivityNeedZones({
@@ -44,17 +46,10 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
 
   @override
   void initState() {
-    Wakelock.enable();
     _timer = RestartableTimer(const Duration(microseconds: 995572), () => _changeTime());
     _allClasses = HelperJSON.getReserve(_reserveId).allClasses;
     _resetSwtiches();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    Wakelock.disable();
-    super.dispose();
   }
 
   void _adjustSecond() {
@@ -111,7 +106,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return Column(children: [
       WidgetSlider(
           values: [_hour.toDouble()],
-          leftText: _hour.toString(),
+          text: _hour.toString(),
           min: 0,
           max: 23,
           onDrag: (id, lower, upper) {
@@ -122,11 +117,9 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           }),
       WidgetSlider(
           values: [_minute.toDouble()],
-          leftText: _minute.toString(),
+          text: _minute.toString(),
           min: 0,
           max: 59,
-          handleSize: 35,
-          smallerSlider: true,
           onDrag: (id, lower, upper) {
             setState(() {
               _minute = lower.toInt();
@@ -141,11 +134,12 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
         : Container(
             padding: const EdgeInsets.all(0),
             child: DropdownButton(
-              dropdownColor: Interface.dropDownBody,
+              dropdownColor: Interface.dropDown,
               underline: Container(),
               icon: Container(),
               elevation: 0,
               itemHeight: 60,
+              menuMaxHeight: 300,
               isExpanded: true,
               value: _reserveId,
               onChanged: (dynamic value) {
@@ -167,13 +161,11 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           child: Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: 30, right: 30),
-              child: AutoSizeText(reserve.getName(context.locale),
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  )))));
+              child: AutoSizeText(
+                reserve.getName(context.locale),
+                maxLines: 1,
+                style: Interface.s16w300n(Interface.dark),
+              ))));
     }
     return items;
   }
@@ -182,15 +174,11 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     _classSwitches = !portrait ? true : _classSwitches;
     return Row(children: [
       _compact
-          ? WidgetSwitch.withIcon(
-              buttonSize: 50,
-              activeIcon: "assets/graphics/icons/min_max.svg",
-              inactiveIcon: "assets/graphics/icons/min_max.svg",
-              activeColor: color,
-              inactiveColor: color,
-              activeBackground: Colors.transparent,
-              inactiveBackground: Colors.transparent,
-              isActive: _classSwitches,
+          ? WidgetButtonIcon(
+              buttonSize: 45,
+              icon: "assets/graphics/icons/min_max.svg",
+              color: color,
+              background: Colors.transparent,
               onTap: () {
                 setState(() {
                   _classSwitches = !_classSwitches;
@@ -199,14 +187,14 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             )
           : Container(),
       portrait
-          ? WidgetSwitch.withIcon(
-              buttonSize: 50,
+          ? WidgetSwitchIcon(
+              buttonSize: 45,
+              icon: "assets/graphics/icons/view_compact.svg",
               activeIcon: "assets/graphics/icons/view_expanded.svg",
-              inactiveIcon: "assets/graphics/icons/view_compact.svg",
+              color: color,
+              background: Colors.transparent,
               activeColor: color,
-              inactiveColor: color,
               activeBackground: Colors.transparent,
-              inactiveBackground: Colors.transparent,
               isActive: _compact,
               onTap: () {
                 setState(() {
@@ -220,112 +208,95 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   }
 
   Widget _buildTime(Color color) {
-    return Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AnimatedContainer(
-              width: 40,
-              padding: const EdgeInsets.only(right: 3),
-              duration: const Duration(microseconds: 200),
-              child: AutoSizeText(_hour.toInt().toString(),
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: Interface.s26,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Condensed',
-                  ))),
-          AnimatedContainer(
-              width: 15,
-              duration: const Duration(microseconds: 200),
-              child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    width: 3.5,
-                    height: 3.5,
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                    margin: const EdgeInsets.only(bottom: 2)),
-                Container(
-                  width: 3.5,
-                  height: 3.5,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                  margin: const EdgeInsets.only(top: 2),
-                )
-              ])),
-          AnimatedContainer(
-              width: 40,
-              duration: const Duration(microseconds: 200),
-              child: AutoSizeText(_minute.toInt().toString(),
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: Interface.s26,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Condensed',
-                  ))),
-          AnimatedContainer(
-              width: 15,
-              duration: const Duration(microseconds: 200),
-              child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    width: 3.5,
-                    height: 3.5,
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    margin: const EdgeInsets.only(bottom: 2)),
-                Container(
-                  width: 3.5,
-                  height: 3.5,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  margin: const EdgeInsets.only(top: 2),
-                )
-              ])),
-          AnimatedContainer(
-              width: 40,
-              padding: const EdgeInsets.only(left: 3),
-              duration: const Duration(microseconds: 200),
-              child: AutoSizeText(_second.toInt().toString(),
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: Interface.s26,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Condensed',
-                  ))),
-        ]);
+    return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
+      AnimatedContainer(
+          width: 40,
+          padding: const EdgeInsets.only(right: 3),
+          duration: const Duration(microseconds: 200),
+          child: AutoSizeText(
+            _hour.toInt().toString(),
+            maxLines: 1,
+            textAlign: TextAlign.center,
+            style: Interface.s18w500n(Interface.dark),
+          )),
+      AnimatedContainer(
+          width: 15,
+          duration: const Duration(microseconds: 200),
+          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+                width: 3.5,
+                height: 3.5,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                margin: const EdgeInsets.only(bottom: 2)),
+            Container(
+              width: 3.5,
+              height: 3.5,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(2),
+              ),
+              margin: const EdgeInsets.only(top: 2),
+            )
+          ])),
+      AnimatedContainer(
+          width: 40,
+          duration: const Duration(microseconds: 200),
+          child: AutoSizeText(
+            _minute.toInt().toString(),
+            maxLines: 1,
+            textAlign: TextAlign.center,
+            style: Interface.s18w500n(Interface.dark),
+          )),
+      AnimatedContainer(
+          width: 15,
+          duration: const Duration(microseconds: 200),
+          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+                width: 3.5,
+                height: 3.5,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                margin: const EdgeInsets.only(bottom: 2)),
+            Container(
+              width: 3.5,
+              height: 3.5,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              margin: const EdgeInsets.only(top: 2),
+            )
+          ])),
+      AnimatedContainer(
+          width: 40,
+          padding: const EdgeInsets.only(left: 3),
+          duration: const Duration(microseconds: 200),
+          child: AutoSizeText(
+            _second.toInt().toString(),
+            maxLines: 1,
+            textAlign: TextAlign.center,
+            style: Interface.s18w500n(Interface.dark),
+          )),
+    ]);
   }
 
   Widget _buildActualTimeAndCompact(bool portrait) {
     Color color = Interface.dark;
     Color background = Interface.primary.withOpacity(0.5);
     return AnimatedContainer(
-        height: 50,
+        height: 45,
         padding: const EdgeInsets.only(left: 20, right: 20),
         duration: const Duration(microseconds: 200),
         color: background,
-        child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(child: _buildTime(color)),
-              _buildSwitches(portrait, color),
-            ]));
+        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Expanded(child: _buildTime(color)),
+          _buildSwitches(portrait, color),
+        ]));
   }
 
   List<Widget> _buildClassSwitches() {
@@ -336,15 +307,12 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     for (int index = 0; index < 9; index++) {
       switches.add(Container(
           margin: EdgeInsets.only(right: index < 8 ? margin : 0),
-          child: WidgetSwitch.withText(
-            buttonSize: size,
-            activeText: "${index + 1}",
-            inactiveText: "${index + 1}",
-            activeColor: Interface.accent,
-            inactiveColor: Interface.disabled.withOpacity(_disabledClasses.elementAt(index) ? 0.3 : 1),
-            activeBackground: Interface.primary,
-            inactiveBackground: Interface.disabled.withOpacity(_disabledClasses.elementAt(index) ? 0.1 : 0.3),
-            squareButton: true,
+          child: WidgetSwitchText(
+            buttonWidth: size,
+            buttonHeight: size,
+            text: "${index + 1}",
+            color: Interface.disabled.withOpacity(_disabledClasses.elementAt(index) ? 0.3 : 1),
+            background: Interface.disabled.withOpacity(_disabledClasses.elementAt(index) ? 0.1 : 0.3),
             isActive: _shownClasses.elementAt(index),
             disabled: _disabledClasses.elementAt(index),
             onTap: () {
@@ -363,9 +331,10 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return _classSwitches
         ? Container(
             width: width + 60,
-            color: Interface.subTitleBackground,
+            height: 70,
+            color: Interface.title,
             alignment: Alignment.centerLeft,
-            padding: EdgeInsets.fromLTRB(30, _compact ? 20 : 0, 30, _compact ? 20 : 30),
+            padding: const EdgeInsets.only(left: 30, right: 30),
             child: SizedBox(
                 width: size,
                 child: Row(
@@ -381,17 +350,14 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return _compact
         ? Container()
         : Column(children: [
-            WidgetTitleFunctional.withSwitch(
-              text: tr('time'),
-              icon: "assets/graphics/icons/play.svg",
-              inactiveIcon: "assets/graphics/icons/stop.svg",
-              textColor: Interface.title,
-              background: Interface.subTitleBackground,
-              iconColor: Interface.alwaysDark,
-              iconInactiveColor: Interface.alwaysDark,
-              buttonBackground: Interface.play,
-              buttonInactiveBackground: Interface.stop,
-              isTitle: true,
+            WidgetTitleBigSwitch(
+              primaryText: tr('time'),
+              icon: "assets/graphics/icons/stop.svg",
+              color: Interface.alwaysDark,
+              background: Interface.red,
+              activeIcon: "assets/graphics/icons/play.svg",
+              activeColor: Interface.alwaysDark,
+              activeBackground: Interface.blue,
               isActive: _stopped,
               onTap: () {
                 _resetTimer();
@@ -401,20 +367,16 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
               child: _buildTimeSliders(),
             ),
-            WidgetTitleFunctional.withButton(
-                text: tr('reserve'),
-                icon: "assets/graphics/icons/map.svg",
-                textColor: Interface.title,
-                background: Interface.subTitleBackground,
-                iconColor: Interface.accent,
-                buttonBackground: Interface.primary,
-                isTitle: true,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BuilderMap(reserveId: _reserveId)),
-                  );
-                })
+            WidgetTitleBigButton(
+              primaryText: tr('reserve'),
+              icon: "assets/graphics/icons/map.svg",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BuilderMap(reserveId: _reserveId)),
+                );
+              },
+            )
           ]);
   }
 
@@ -430,8 +392,8 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return Column(children: [
       _compact
           ? Container()
-          : WidgetTitle(
-              text: tr('animal_need_zones'),
+          : WidgetTitleBig(
+              primaryText: tr('animal_need_zones'),
             ),
       _buildClass(),
       BuilderReserveNeedZones(
@@ -449,46 +411,45 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
         ? WidgetAppBar(
             text: "",
             height: 0,
-            fontSize: 0,
             context: context,
           )
         : WidgetAppBar(
             text: tr('animal_need_zones'),
-            color: Interface.accent,
-            background: Interface.primary,
-            fontSize: Interface.s30,
             context: context,
           );
   }
 
   Widget _buildPortraitView() {
-    return WidgetScaffold(appBar: _buildAppBar(), children: [
-      _buildTimeAndSelectors(true),
-      _buildNeedZones(),
-    ]);
+    return WidgetScaffold(
+        appBar: _buildAppBar(),
+        body: Column(children: [
+          _buildTimeAndSelectors(true),
+          _buildNeedZones(),
+        ]));
   }
 
   Widget _buildLandscapeView() {
     _compact = false;
-    return WidgetScaffold.withCustomBody(
-        body: Column(mainAxisSize: MainAxisSize.max, children: [
-      _buildAppBar(),
-      Expanded(
-          child: Row(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Flexible(
-            flex: 2,
-            child: WidgetScrollbar(
-                child: SingleChildScrollView(
-              child: _buildTimeAndSelectors(false),
-            ))),
-        Flexible(
-            flex: 3,
-            child: WidgetScrollbar(
-                child: SingleChildScrollView(
-              child: _buildNeedZones(),
-            )))
-      ]))
-    ]));
+    return WidgetScaffold(
+        customBody: true,
+        body: Column(children: [
+          _buildAppBar(),
+          Expanded(
+              child: Row(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Flexible(
+                flex: 2,
+                child: WidgetScrollbar(
+                    child: SingleChildScrollView(
+                  child: _buildTimeAndSelectors(false),
+                ))),
+            Flexible(
+                flex: 3,
+                child: WidgetScrollbar(
+                    child: SingleChildScrollView(
+                  child: _buildNeedZones(),
+                )))
+          ]))
+        ]));
   }
 
   Widget _buildWidgets() {

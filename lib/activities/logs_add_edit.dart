@@ -4,26 +4,28 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/log.dart';
-import 'package:cotwcompanion/widgets/title_functional.dart';
+import 'package:cotwcompanion/widgets/appbar.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/entries/trophy_lodge_record.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/switch.dart';
+import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:cotwcompanion/widgets/text_field.dart';
-import 'package:cotwcompanion/widgets/title.dart';
-import 'package:cotwcompanion/widgets/entries/trophy_lodge_record.dart';
+import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/widgets/title_big_button.dart';
+import 'package:cotwcompanion/widgets/title_big_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 class ActivityLogsAddEdit extends StatefulWidget {
   final int animalId;
@@ -89,7 +91,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   double _weight = 0;
   double _maxTrophy = 0;
   double _maxWeight = 0;
-  double _tolerance = 0.0;
 
   int _trophyRating = 0;
   int _selectedReserve = 0;
@@ -192,26 +193,12 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       _genderChanged = false;
     }
     _getTrophyOf(_animals.elementAt(_selectedAnimal));
-    _getTrophyTolerance();
-  }
-
-  void _getTrophyTolerance() {
-    if (_maxTrophy / 10 < 1) {
-      _tolerance = 0.5;
-    } else if (_maxTrophy / 100 < 1) {
-      _tolerance = 1.0;
-    } else if (_maxTrophy / 1000 < 1) {
-      _tolerance = 10.0;
-    } else if (_maxTrophy / 10000 < 1) {
-      _tolerance = 100.0;
-    }
   }
 
   void _textTrophyAndWeightListener(int controller) {
     setState(() {
       if (controller == 0) {
-        if (_equalsDoubleTrophyNumber.hasMatch(_controllerTrophyNumber.text) &&
-            (double.parse(_controllerTrophyNumber.text) <= (_maxTrophy + _tolerance) || _maxTrophy == 0)) {
+        if (_equalsDoubleTrophyNumber.hasMatch(_controllerTrophyNumber.text)) {
           _correctTrophyNumber = true;
           _trophy = double.parse(_controllerTrophyNumber.text);
         } else {
@@ -224,8 +211,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           }
         }
       } else if (controller == 1) {
-        if (_equalsDoubleWeightNumber.hasMatch(_controllerWeightNumber.text) &&
-            (double.parse(_controllerWeightNumber.text) <= (_maxWeight + _tolerance) || _maxWeight == 0)) {
+        if (_equalsDoubleWeightNumber.hasMatch(_controllerWeightNumber.text)) {
           _correctWeightNumber = true;
           _weight = double.parse(_controllerWeightNumber.text);
         } else {
@@ -242,7 +228,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   }
 
   void _getAnimalsData() {
-    _logger.v("Getting animals");
+    _logger.t("Getting animals");
     _animals.clear();
     _dropDownListAnimals.clear();
     if (widget.fromTrophyLodge) {
@@ -254,8 +240,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         }
       }
     }
-    _animals.sort((a, b) =>
-        a.getNameBasedOnReserve(context.locale, _selectedReserveId).compareTo(b.getNameBasedOnReserve(context.locale, _selectedReserveId)));
+    _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, _selectedReserveId).compareTo(b.getNameBasedOnReserve(context.locale, _selectedReserveId)));
     _dropDownListAnimals.addAll(_listOfAnimals());
   }
 
@@ -270,12 +255,12 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     } else {
       _selectedAnimalId = _animals.elementAt(_selectedAnimal).id;
     }
-    _logger.v("Selected animal NUM $_selectedAnimal with ID $_selectedAnimalId");
+    _logger.t("Selected animal NUM $_selectedAnimal with ID $_selectedAnimalId");
     if (widget.log == null) _getTrophyLodgeRecords();
   }
 
   void _getFursData() {
-    _logger.v("Getting furs");
+    _logger.t("Getting furs");
     _furs.clear();
     _dropDownListAnimalFurs.clear();
     for (AnimalFur animalFur in HelperJSON.animalsFurs) {
@@ -300,7 +285,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     } else {
       _selectedFurId = _furs.elementAt(_selectedFur).furId;
     }
-    _logger.v("Selected fur NUM $_selectedFur with ID $_selectedFurId");
+    _logger.t("Selected fur NUM $_selectedFur with ID $_selectedFurId");
   }
 
   void _getTrophyOf(Animal animal) {
@@ -320,7 +305,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       if (log.animalId == _selectedAnimalId && log.isInLodge) _trophyLodgeRecords.add(log);
     }
     _trophyLodgeRecords.sort((a, b) => b.trophy.compareTo(a.trophy));
-    _logger.v("Found ${_trophyLodgeRecords.length} trophy lodge record/s with this animal");
+    _logger.t("Found ${_trophyLodgeRecords.length} trophy lodge record/s with this animal");
   }
 
   List<DropdownMenuItem> _listOfReserves() {
@@ -333,13 +318,11 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               height: 50,
               padding: const EdgeInsets.only(left: 30, right: 30),
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(HelperJSON.reserves[index].getName(context.locale),
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  )))));
+              child: AutoSizeText(
+                HelperJSON.reserves[index].getName(context.locale),
+                maxLines: 1,
+                style: Interface.s16w300n(Interface.dark),
+              ))));
     }
     return dropItems;
   }
@@ -354,13 +337,11 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               height: 50,
               padding: const EdgeInsets.only(left: 30, right: 30),
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(_animals[index].getNameBasedOnReserve(context.locale, _selectedReserveId),
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  )))));
+              child: AutoSizeText(
+                _animals[index].getNameBasedOnReserve(context.locale, _selectedReserveId),
+                maxLines: 1,
+                style: Interface.s16w300n(Interface.dark),
+              ))));
     }
     return dropItems;
   }
@@ -375,13 +356,11 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               height: 50,
               padding: const EdgeInsets.only(left: 30, right: 30),
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(_furs[index].getName(context.locale),
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  )))));
+              child: AutoSizeText(
+                _furs[index].getName(context.locale),
+                maxLines: 1,
+                style: Interface.s16w300n(Interface.dark),
+              ))));
     }
     return dropItems;
   }
@@ -437,33 +416,21 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           _focus();
           _dateTime = (await showOmniDateTimePicker(
                 context: context,
-                primaryColor: Interface.dark.withOpacity(.3),
-                backgroundColor: Interface.subTitleBackground,
-                calendarTextColor: Interface.dark,
-                buttonTextColor: Interface.dark,
-                timeSpinnerTextStyle: TextStyle(
-                  color: Interface.dark,
-                  fontSize: Interface.s18,
-                  fontWeight: FontWeight.w400,
-                ),
-                timeSpinnerHighlightedTextStyle: TextStyle(
-                  color: Interface.dark,
-                  fontSize: Interface.s22,
-                  fontWeight: FontWeight.w400,
+                theme: ThemeData(
+                  colorScheme: Interface.omniDatePickerScheme,
                 ),
                 is24HourMode: true,
                 isShowSeconds: false,
-                startInitialDate: _dateTime,
-                startFirstDate: DateTime(2017),
-                startLastDate: DateTime(2030, 12, 31),
-                borderRadius: const Radius.circular(10),
+                initialDate: _dateTime,
+                firstDate: DateTime(2017),
+                lastDate: DateTime(2030, 12, 31),
               )) ??
               _dateTime;
           setState(() {});
         },
         child: Container(
             height: 70,
-            color: Interface.subTitleBackground,
+            color: Interface.title,
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
             child: Row(
@@ -475,33 +442,29 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                     tr('time').toUpperCase(),
                     maxLines: 1,
                     textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: Interface.title,
-                      fontSize: Interface.s24,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Condensed',
-                    ),
+                    style: Interface.s20w600c(Interface.dark),
                   ),
-                  AutoSizeText(Log.getDate(DateType.format, Log.dateToString(_dateTime)),
-                      maxLines: 1,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        color: Interface.title,
-                        fontSize: Interface.s20,
-                        fontWeight: FontWeight.w400,
-                      ))
+                  AutoSizeText(
+                    Log.getDate(DateType.format, Log.dateToString(_dateTime)),
+                    maxLines: 1,
+                    textAlign: TextAlign.start,
+                    style: Interface.s16w300n(Interface.dark),
+                  )
                 ])));
   }
 
   Widget _buildReserve() {
     return Column(children: [
-      WidgetTitle(text: tr('reserve')),
+      WidgetTitleBig(
+        primaryText: tr('reserve'),
+      ),
       DropdownButton(
-        dropdownColor: Interface.dropDownBody,
+        dropdownColor: Interface.dropDown,
         underline: Container(),
         icon: Container(),
         elevation: 0,
         itemHeight: 60,
+        menuMaxHeight: 300,
         isExpanded: true,
         value: _selectedReserve,
         onChanged: (dynamic value) {
@@ -518,13 +481,16 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   Widget _buildAnimal() {
     return Column(children: [
-      WidgetTitle(text: tr('animal')),
+      WidgetTitleBig(
+        primaryText: tr('animal'),
+      ),
       DropdownButton(
-          dropdownColor: Interface.dropDownBody,
+          dropdownColor: Interface.dropDown,
           underline: Container(),
           icon: Container(),
           elevation: 0,
           itemHeight: 60,
+          menuMaxHeight: 300,
           isExpanded: true,
           value: _selectedAnimal,
           onChanged: (dynamic value) {
@@ -540,13 +506,16 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   Widget _buildFur() {
     return Column(children: [
-      WidgetTitle(text: tr('animal_fur')),
+      WidgetTitleBig(
+        primaryText: tr('animal_fur'),
+      ),
       DropdownButton(
-          dropdownColor: Interface.dropDownBody,
+          dropdownColor: Interface.dropDown,
           underline: Container(),
           icon: Container(),
           elevation: 0,
           itemHeight: 60,
+          menuMaxHeight: 300,
           isExpanded: true,
           value: _selectedFur,
           onChanged: (dynamic value) {
@@ -562,17 +531,14 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   Widget _buildGender() {
     return Column(children: [
-      WidgetTitleFunctional.withSwitch(
-          text: tr('animal_gender'),
-          icon: "assets/graphics/icons/male.svg",
-          inactiveIcon: "assets/graphics/icons/female.svg",
-          textColor: Interface.title,
-          background: Interface.subTitleBackground,
-          iconColor: Interface.alwaysDark,
-          buttonBackground: Interface.male,
-          iconInactiveColor: Interface.alwaysDark,
-          buttonInactiveBackground: Interface.female,
-          isTitle: true,
+      WidgetTitleBigSwitch(
+          primaryText: tr('animal_gender'),
+          icon: "assets/graphics/icons/female.svg",
+          color: Interface.alwaysDark,
+          background: Interface.red,
+          activeIcon: "assets/graphics/icons/male.svg",
+          activeColor: Interface.alwaysDark,
+          activeBackground: Interface.blue,
           isActive: _isMale,
           onTap: () {
             setState(() {
@@ -588,23 +554,14 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     _textTrophyAndWeightListener(0);
     return Column(children: [
       widget.log != null
-          ? WidgetTitle(
-              text: tr('animal_trophy'),
-              subText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
-              textColor: Interface.title,
-              subTextColor: Interface.disabled,
-              background: Interface.subTitleBackground,
+          ? WidgetTitleBig(
+              primaryText: tr('animal_trophy'),
+              secondaryText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
             )
-          : WidgetTitleFunctional.withButton(
-              text: tr('animal_trophy'),
-              subText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
-              icon: "assets/graphics/icons/list.svg",
-              textColor: Interface.title,
-              subTextColor: Interface.disabled,
-              background: Interface.subTitleBackground,
-              iconColor: Interface.accent,
-              buttonBackground: Interface.primary,
-              isTitle: true,
+          : WidgetTitleBigButton(
+              primaryText: tr('animal_trophy'),
+              secondaryText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
+              icon: "assets/graphics/icons/menu_open.svg",
               onTap: () {
                 setState(() {
                   _recordsOpened = true;
@@ -613,8 +570,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       WidgetTextField(
         correct: _correctTrophyNumber,
         controller: _controllerTrophyNumber,
-        color: Interface.title,
-        background: Interface.subSubTitleBackground,
       )
     ]);
   }
@@ -622,203 +577,153 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildWeight() {
     _textTrophyAndWeightListener(1);
     return Column(children: [
-      WidgetTitle(
-          text: tr('animal_weight'),
-          subText: "${tr('max')}: ${_maxWeight == 0 ? "?" : _maxWeight.toString()}",
-          textColor: Interface.title,
-          subTextColor: Interface.disabled,
-          background: Interface.subTitleBackground),
+      WidgetTitleBig(
+        primaryText: tr('animal_weight'),
+        secondaryText: "${tr('max')}: ${_maxWeight == 0 ? "?" : _maxWeight.toString()}",
+      ),
       WidgetTextField(
         correct: _correctWeightNumber,
         controller: _controllerWeightNumber,
-        color: Interface.title,
-        background: Interface.subSubTitleBackground,
       )
     ]);
   }
 
   Widget _buildHarvestCheck() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('harvest_check'),
+      WidgetTitleBig(
+        primaryText: tr('harvest_check'),
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                WidgetSwitch.withIcon(
-                  activeIcon: "assets/graphics/icons/harvest_correct_ammo.svg",
-                  inactiveIcon: "assets/graphics/icons/harvest_correct_ammo.svg",
-                  activeColor: Interface.accent,
-                  activeBackground: Interface.primary,
-                  inactiveColor: Interface.disabled,
-                  inactiveBackground: Interface.disabled.withOpacity(0.3),
-                  isActive: _correctAmmoUsed,
-                  onTap: () {
-                    setState(() {
-                      _correctAmmoUsed = !_correctAmmoUsed;
-                      _focus();
-                    });
-                  },
-                ),
-                WidgetSwitch.withIcon(
-                    activeIcon: "assets/graphics/icons/harvest_two_shots.svg",
-                    inactiveIcon: "assets/graphics/icons/harvest_two_shots.svg",
-                    activeColor: Interface.accent,
-                    activeBackground: Interface.primary,
-                    inactiveColor: Interface.disabled,
-                    inactiveBackground: Interface.disabled.withOpacity(0.3),
-                    isActive: _twoShotsFired,
-                    onTap: () {
-                      setState(() {
-                        _twoShotsFired = !_twoShotsFired;
-                        _focus();
-                      });
-                    }),
-                WidgetSwitch.withIcon(
-                    activeIcon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
-                    inactiveIcon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
-                    activeColor: Interface.accent,
-                    activeBackground: Interface.primary,
-                    inactiveColor: Interface.disabled,
-                    inactiveBackground: Interface.disabled.withOpacity(0.3),
-                    isActive: _trophyOrganUndamaged,
-                    onTap: () {
-                      setState(() {
-                        _trophyOrganUndamaged = !_trophyOrganUndamaged;
-                        _focus();
-                      });
-                    }),
-                WidgetSwitch.withIcon(
-                    activeIcon: "assets/graphics/icons/harvest_vital_organ.svg",
-                    inactiveIcon: "assets/graphics/icons/harvest_vital_organ.svg",
-                    activeColor: Interface.accent,
-                    activeBackground: Interface.primary,
-                    inactiveColor: Interface.disabled,
-                    inactiveBackground: Interface.disabled.withOpacity(0.3),
-                    isActive: _vitalOrganHit,
-                    onTap: () {
-                      setState(() {
-                        _vitalOrganHit = !_vitalOrganHit;
-                        _focus();
-                      });
-                    })
-              ]))
+          child:
+              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+            WidgetSwitchIcon(
+              activeIcon: "assets/graphics/icons/harvest_correct_ammo.svg",
+              isActive: _correctAmmoUsed,
+              onTap: () {
+                setState(() {
+                  _correctAmmoUsed = !_correctAmmoUsed;
+                  _focus();
+                });
+              },
+            ),
+            WidgetSwitchIcon(
+                activeIcon: "assets/graphics/icons/harvest_two_shots.svg",
+                isActive: _twoShotsFired,
+                onTap: () {
+                  setState(() {
+                    _twoShotsFired = !_twoShotsFired;
+                    _focus();
+                  });
+                }),
+            WidgetSwitchIcon(
+                activeIcon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
+                isActive: _trophyOrganUndamaged,
+                onTap: () {
+                  setState(() {
+                    _trophyOrganUndamaged = !_trophyOrganUndamaged;
+                    _focus();
+                  });
+                }),
+            WidgetSwitchIcon(
+                activeIcon: "assets/graphics/icons/harvest_vital_organ.svg",
+                isActive: _vitalOrganHit,
+                onTap: () {
+                  setState(() {
+                    _vitalOrganHit = !_vitalOrganHit;
+                    _focus();
+                  });
+                })
+          ]))
     ]);
   }
 
   Widget _buildTrophyRating() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('trophy_rating'),
+      WidgetTitleBig(
+        primaryText: tr('trophy_rating'),
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                WidgetSwitch.withIcon(
-                    activeIcon: "assets/graphics/icons/trophy_none.svg",
-                    inactiveIcon: "assets/graphics/icons/trophy_none.svg",
-                    activeColor: Interface.light,
-                    activeBackground: Interface.trophyNoneBackground,
-                    inactiveColor: Interface.disabled,
-                    inactiveBackground: Interface.disabled.withOpacity(0.3),
-                    isActive: _trophyRating == 0,
-                    onTap: () {
-                      setState(() {
-                        _trophyRating = 0;
-                        _focus();
-                      });
-                    }),
-                WidgetSwitch.withIcon(
-                    activeIcon: "assets/graphics/icons/trophy_bronze.svg",
-                    inactiveIcon: "assets/graphics/icons/trophy_bronze.svg",
-                    activeColor: Interface.alwaysDark,
-                    activeBackground: Interface.trophyBronzeBackground,
-                    inactiveColor: Interface.disabled,
-                    inactiveBackground: Interface.disabled.withOpacity(0.3),
-                    isActive: _trophyRating == 1,
-                    onTap: () {
-                      setState(() {
-                        _trophyRating = 1;
-                        _focus();
-                      });
-                    }),
-                WidgetSwitch.withIcon(
-                    activeIcon: "assets/graphics/icons/trophy_silver.svg",
-                    inactiveIcon: "assets/graphics/icons/trophy_silver.svg",
-                    activeColor: Interface.alwaysDark,
-                    activeBackground: Interface.trophySilverBackground,
-                    inactiveColor: Interface.disabled,
-                    inactiveBackground: Interface.disabled.withOpacity(0.3),
-                    isActive: _trophyRating == 2,
-                    onTap: () {
-                      setState(() {
-                        _trophyRating = 2;
-                        _focus();
-                      });
-                    }),
-                WidgetSwitch.withIcon(
-                    activeIcon: "assets/graphics/icons/trophy_gold.svg",
-                    inactiveIcon: "assets/graphics/icons/trophy_gold.svg",
-                    activeColor: Interface.alwaysDark,
-                    activeBackground: Interface.trophyGoldBackground,
-                    inactiveColor: Interface.disabled,
-                    inactiveBackground: Interface.disabled.withOpacity(0.3),
-                    isActive: _trophyRating == 3,
-                    onTap: () {
-                      setState(() {
-                        _trophyRating = 3;
-                        _focus();
-                      });
-                    }),
-                WidgetSwitch.withIcon(
-                    activeIcon: _selectedFurId == Interface.greatOneId
-                        ? "assets/graphics/icons/trophy_great_one.svg"
-                        : "assets/graphics/icons/trophy_diamond.svg",
-                    inactiveIcon: _selectedFurId == Interface.greatOneId
-                        ? "assets/graphics/icons/trophy_great_one.svg"
-                        : "assets/graphics/icons/trophy_diamond.svg",
-                    activeColor: Interface.alwaysDark,
-                    activeBackground: Interface.trophyDiamondBackground,
-                    inactiveColor: Interface.disabled,
-                    inactiveBackground: Interface.disabled.withOpacity(0.3),
-                    isActive: _trophyRating == 4,
-                    onTap: () {
-                      setState(() {
-                        _trophyRating = 4;
-                        _focus();
-                      });
-                    })
-              ]))
+          child:
+              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+            WidgetSwitchIcon(
+                activeIcon: "assets/graphics/icons/trophy_none.svg",
+                activeColor: Interface.light,
+                activeBackground: Interface.trophyNoneBackground,
+                isActive: _trophyRating == 0,
+                onTap: () {
+                  setState(() {
+                    _trophyRating = 0;
+                    _focus();
+                  });
+                }),
+            WidgetSwitchIcon(
+                activeIcon: "assets/graphics/icons/trophy_bronze.svg",
+                activeColor: Interface.alwaysDark,
+                activeBackground: Interface.trophyBronzeBackground,
+                isActive: _trophyRating == 1,
+                onTap: () {
+                  setState(() {
+                    _trophyRating = 1;
+                    _focus();
+                  });
+                }),
+            WidgetSwitchIcon(
+                activeIcon: "assets/graphics/icons/trophy_silver.svg",
+                activeColor: Interface.alwaysDark,
+                activeBackground: Interface.trophySilverBackground,
+                isActive: _trophyRating == 2,
+                onTap: () {
+                  setState(() {
+                    _trophyRating = 2;
+                    _focus();
+                  });
+                }),
+            WidgetSwitchIcon(
+                activeIcon: "assets/graphics/icons/trophy_gold.svg",
+                activeColor: Interface.alwaysDark,
+                activeBackground: Interface.trophyGoldBackground,
+                isActive: _trophyRating == 3,
+                onTap: () {
+                  setState(() {
+                    _trophyRating = 3;
+                    _focus();
+                  });
+                }),
+            WidgetSwitchIcon(
+                activeIcon: _selectedFurId == Interface.greatOneId ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg",
+                activeColor: Interface.alwaysDark,
+                activeBackground: Interface.trophyDiamondBackground,
+                isActive: _trophyRating == 4,
+                onTap: () {
+                  setState(() {
+                    _trophyRating = 4;
+                    _focus();
+                  });
+                })
+          ]))
     ]);
   }
 
   Widget _buildAdd() {
-    return GestureDetector(
-        onTap: () {
-          _focus();
-          _getHarvestCheck();
-          Log log = _createLog();
-          widget.log != null ? HelperLog.editLog(log) : HelperLog.addLog(log);
-          widget.callback();
-          Navigator.pop(context);
-        },
-        child: Container(
-            height: 90,
-            alignment: Alignment.center,
-            color: Interface.primary,
-            child: SvgPicture.asset(
-              widget.log != null ? "assets/graphics/icons/edit.svg" : "assets/graphics/icons/plus.svg",
-              height: 20,
-              width: 20,
-              color: Interface.accent,
+    return Positioned(
+        bottom: 30,
+        right: 30,
+        child: SimpleShadow(
+            sigma: 7,
+            color: Interface.alwaysDark,
+            child: WidgetButtonIcon(
+              buttonSize: 60,
+              icon: widget.log != null ? "assets/graphics/icons/edit.svg" : "assets/graphics/icons/plus.svg",
+              onTap: () {
+                _focus();
+                _getHarvestCheck();
+                Log log = _createLog();
+                widget.log != null ? HelperLog.editLog(log) : HelperLog.addLog(log);
+                widget.callback();
+                Navigator.pop(context);
+              },
             )));
   }
 
@@ -830,21 +735,17 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            color: Interface.mainBody,
+            color: Interface.body,
             child: Column(children: [
-              WidgetTitleFunctional.withButton(
-                  isTitle: true,
-                  text: tr('trophy_lodge'),
-                  icon: "assets/graphics/icons/menu_close.svg",
-                  textColor: Interface.title,
-                  background: Interface.subTitleBackground,
-                  iconColor: Interface.title,
-                  buttonBackground: Colors.transparent,
-                  onTap: () {
-                    setState(() {
-                      _recordsOpened = false;
-                    });
-                  }),
+              WidgetTitleBigButton(
+                primaryText: tr('trophy_lodge'),
+                icon: "assets/graphics/icons/menu_close.svg",
+                onTap: () {
+                  setState(() {
+                    _recordsOpened = false;
+                  });
+                },
+              ),
               Expanded(
                   child: WidgetScrollbar(
                       child: SingleChildScrollView(
@@ -854,21 +755,22 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: _trophyLodgeRecords.length,
                     itemBuilder: (context, index) {
-                      return EntryTrophyLodgeRecord(log: _trophyLodgeRecords[index], index: index);
+                      return EntryTrophyLodgeRecord(
+                        index: index,
+                        log: _trophyLodgeRecords[index],
+                      );
                     })
               ]))))
             ])));
   }
 
-  Widget _buildWidgets() {
-    return WidgetScaffold.withCustomBody(
-        body: Stack(fit: StackFit.expand, children: [
+  Widget _buildStack() {
+    return Stack(fit: StackFit.expand, children: [
       WidgetScrollbar(
           child: SingleChildScrollView(
               child: Column(children: [
         WidgetAppBar(
           text: widget.log != null ? tr('edit') : tr('add'),
-          fontSize: Interface.s30,
           context: context,
         ),
         _buildDate(),
@@ -880,10 +782,18 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         widget.fromTrophyLodge ? const SizedBox.shrink() : _buildWeight(),
         _buildTrophyRating(),
         widget.fromTrophyLodge ? const SizedBox.shrink() : _buildHarvestCheck(),
-        _buildAdd(),
+        const SizedBox(height: 100),
       ]))),
+      _buildAdd(),
       widget.log != null ? const SizedBox.shrink() : _buildRecords(),
-    ]));
+    ]);
+  }
+
+  Widget _buildWidgets() {
+    return WidgetScaffold(
+      customBody: true,
+      body: _buildStack(),
+    );
   }
 
   @override

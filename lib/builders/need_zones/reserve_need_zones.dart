@@ -57,7 +57,7 @@ class BuilderReserveNeedZonesState extends State<BuilderReserveNeedZones> {
             hour: widget.hour,
             count: _animals.length,
             compact: widget.compact,
-            classSlider: widget.classSwitches,
+            classSwitches: widget.classSwitches,
             zones: zones,
           );
         });

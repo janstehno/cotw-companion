@@ -5,19 +5,19 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/ammo.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/title_small.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class EntryWeaponAmmo extends StatefulWidget {
-  final int ammoId, index;
+  final int index, ammoId;
 
   const EntryWeaponAmmo({
     Key? key,
-    required this.ammoId,
     required this.index,
+    required this.ammoId,
   }) : super(key: key);
 
   @override
@@ -38,13 +38,12 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
   Widget _buildAmmoTitle() {
     return Row(children: [
       Expanded(
-          child: WidgetTitle.sub(
-        text: _ammo.getName(context.locale),
-        background: Interface.subSubTitleBackground,
+          child: WidgetTitleSmall(
+        primaryText: _ammo.getName(context.locale),
       )),
       Container(
-          height: 75,
-          color: Interface.subSubTitleBackground,
+          height: 50,
+          color: Interface.light,
           padding: const EdgeInsets.only(right: 25),
           alignment: Alignment.center,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -56,21 +55,21 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
                       "assets/graphics/icons/money.svg",
                       width: 10,
                       height: 10,
-                      color: Interface.disabled,
+                      colorFilter: ColorFilter.mode(
+                        Interface.disabled,
+                        BlendMode.srcIn,
+                      ),
                     )),
             AutoSizeText(
-                _ammo.price == 0
-                    ? tr('free')
-                    : _ammo.price == -1
-                        ? tr('none')
-                        : "${_ammo.price}",
-                maxLines: 1,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  color: Interface.disabled,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ))
+              _ammo.price == 0
+                  ? tr('free')
+                  : _ammo.price == -1
+                      ? tr('none')
+                      : "${_ammo.price}",
+              maxLines: 1,
+              textAlign: TextAlign.start,
+              style: Interface.s12w300n(Interface.disabled),
+            )
           ])),
     ]);
   }
@@ -85,27 +84,26 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
               ? Container()
               : Container(
                   margin: const EdgeInsets.only(right: 10),
-                  child: Text(text,
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w400,
-                      ))),
+                  child: Text(
+                    text,
+                    style: Interface.s16w300n(Interface.dark),
+                  )),
           SvgPicture.asset(
-            icon,
+            "assets/graphics/icons/$icon.svg",
             width: 15,
             height: 15,
-            color: Interface.dark,
+            colorFilter: ColorFilter.mode(
+              Interface.dark,
+              BlendMode.srcIn,
+            ),
           ),
           leftToRight
               ? Container(
                   margin: const EdgeInsets.only(left: 10),
-                  child: Text(text,
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w400,
-                      )))
+                  child: Text(
+                    text,
+                    style: Interface.s16w300n(Interface.dark),
+                  ))
               : Container()
         ]));
   }
@@ -117,12 +115,12 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              _buildAmmoDetail(true, "assets/graphics/icons/min_max.svg", _ammo.classRange),
-              _buildAmmoDetail(false, "assets/graphics/icons/weapon_penetration.svg", _ammo.penetration.toString())
+              _buildAmmoDetail(true, "min_max", _ammo.classRange),
+              _buildAmmoDetail(false, "weapon_penetration", _ammo.penetration.toString())
             ]),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              _buildAmmoDetail(true, "assets/graphics/icons/range.svg", _ammo.getRange(_imperialUnits)),
-              _buildAmmoDetail(false, "assets/graphics/icons/weapon_expansion.svg", _ammo.expansion.toString())
+              _buildAmmoDetail(true, "range", _ammo.getRange(_imperialUnits)),
+              _buildAmmoDetail(false, "weapon_expansion", _ammo.expansion.toString())
             ])
           ]))
     ]);

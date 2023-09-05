@@ -135,7 +135,11 @@ class BuilderAnimalWeaponsState extends State<BuilderAnimalWeapons> {
               subText = weapon.getName(context.locale);
             }
           }
-          return WidgetTextDlc(text: text, subText: _bestOnly ? subText : "", dlc: dlc);
+          return WidgetTextDlc(
+            text: text,
+            subText: _bestOnly ? subText : "",
+            dlc: dlc,
+          );
         });
   }
 

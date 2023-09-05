@@ -9,8 +9,8 @@ class HelperLogger {
 
   HelperLogger(this._identifier);
 
-  void v(String message) {
-    _logger.v("[Developer] $_identifier $message");
+  void t(String message) {
+    _logger.d("[Developer] $_identifier $message");
   }
 
   void d(String message) {

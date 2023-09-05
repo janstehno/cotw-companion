@@ -1,23 +1,23 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/miscellaneous/search_controller.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/activities/logs_add_edit.dart';
 import 'package:cotwcompanion/activities/logs_information.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
+import 'package:cotwcompanion/miscellaneous/search_controller.dart';
 import 'package:cotwcompanion/model/log.dart';
-import 'package:cotwcompanion/widgets/entries/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/button.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/entries/log.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/searchbar.dart';
 import 'package:cotwcompanion/widgets/snackbar.dart';
-import 'package:cotwcompanion/widgets/switch.dart';
+import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:cotwcompanion/widgets/switch_sort.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -158,8 +158,7 @@ class ActivityLogsState extends State<ActivityLogs> {
     _numberOfDiamondLogs = 0;
     _numberOfGreatOneLogs = 0;
     for (Log log in _filtered) {
-      int trophyRating = log.trophyRating;
-      switch (trophyRating) {
+      switch (log.trophyRating) {
         case 1:
           _numberOfBronzeLogs++;
           break;
@@ -170,10 +169,7 @@ class ActivityLogsState extends State<ActivityLogs> {
           _numberOfGoldLogs++;
           break;
         case 4:
-          _numberOfDiamondLogs++;
-          break;
-        case 5:
-          _numberOfGreatOneLogs++;
+          log.isGreatOne() ? _numberOfGreatOneLogs++ : _numberOfDiamondLogs++;
           break;
         default:
           _numberOfNoneLogs++;
@@ -280,14 +276,16 @@ class ActivityLogsState extends State<ActivityLogs> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(milliseconds: 1000),
         padding: const EdgeInsets.all(0),
-        backgroundColor: Interface.searchBackground,
+        backgroundColor: Interface.search,
         content: GestureDetector(
             onTap: () {
               setState(() {
                 _scaffoldMessengerState.hideCurrentSnackBar();
               });
             },
-            child: WidgetSnackBar(text: message))));
+            child: WidgetSnackBar(
+              text: message,
+            ))));
   }
 
   void loadFile() async {
@@ -317,21 +315,6 @@ class ActivityLogsState extends State<ActivityLogs> {
     }
   }
 
-  Widget _buildStack() {
-    return Stack(children: [
-      _buildLogs(),
-      Positioned(
-          right: 0,
-          bottom: 0,
-          child: Container(
-            color: Interface.searchBackground,
-            height: 75,
-            width: MediaQuery.of(context).size.width,
-          )),
-      _buildMenu()
-    ]);
-  }
-
   Widget _buildYesNo() {
     return Center(
         child: AnimatedOpacity(
@@ -339,22 +322,20 @@ class ActivityLogsState extends State<ActivityLogs> {
             opacity: _yesNoOpened ? 1 : 0,
             child: _yesNoOpened
                 ? Container(
-                    color: Interface.shadow.withOpacity(0.8),
+                    color: Interface.alwaysDark.withOpacity(0.8),
                     child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
                       Container(
                           padding: const EdgeInsets.all(30),
                           alignment: Alignment.center,
-                          child: AutoSizeText(tr('remove_all_items'),
-                              maxLines: 2,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Interface.alwaysLight,
-                                fontSize: Interface.s20,
-                                fontWeight: FontWeight.w600,
-                              ))),
+                          child: AutoSizeText(
+                            tr('remove_all_items'),
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: Interface.s18w500n(Interface.alwaysLight),
+                          )),
                       Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                        WidgetButton(
-                            buttonSize: 80,
+                        WidgetButtonIcon(
+                            buttonSize: 60,
                             icon: "assets/graphics/icons/remove_bin.svg",
                             color: Interface.alwaysDark,
                             background: Interface.red,
@@ -365,8 +346,8 @@ class ActivityLogsState extends State<ActivityLogs> {
                                 _focus();
                               });
                             }),
-                        WidgetButton(
-                            buttonSize: 80,
+                        WidgetButtonIcon(
+                            buttonSize: 60,
                             icon: "assets/graphics/icons/menu_close.svg",
                             color: Interface.light,
                             background: Interface.dark,
@@ -392,16 +373,16 @@ class ActivityLogsState extends State<ActivityLogs> {
               return last
                   ? Column(children: [
                       EntryLog(
-                        log: log,
                         index: index,
+                        log: log,
                         callback: _reload,
                         context: context,
                       ),
                       const SizedBox(height: 75)
                     ])
                   : EntryLog(
-                      log: log,
                       index: index,
+                      log: log,
                       callback: _reload,
                       context: context,
                     );
@@ -427,7 +408,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                 //ABOUT
                 Container(
                     padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 330 ? 0 : 20, right: 10, bottom: 17.5),
-                    child: WidgetButton(
+                    child: WidgetButtonIcon(
                         icon: "assets/graphics/icons/about.svg",
                         color: Interface.light,
                         background: Interface.dark,
@@ -448,9 +429,9 @@ class ActivityLogsState extends State<ActivityLogs> {
                           right: 0,
                           bottom: _fileOptionsOpened ? 175 : 0,
                           child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               opacity: _fileOptionsOpened ? 1 : 0,
-                              child: WidgetButton(
+                              child: WidgetButtonIcon(
                                   icon: "assets/graphics/icons/remove_bin.svg",
                                   color: Interface.alwaysDark,
                                   background: Interface.red,
@@ -466,9 +447,9 @@ class ActivityLogsState extends State<ActivityLogs> {
                           right: 0,
                           bottom: _fileOptionsOpened ? 125 : 0,
                           child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               opacity: _fileOptionsOpened ? 1 : 0,
-                              child: WidgetButton(
+                              child: WidgetButtonIcon(
                                   icon: "assets/graphics/icons/import.svg",
                                   color: Interface.light,
                                   background: Interface.dark,
@@ -484,9 +465,9 @@ class ActivityLogsState extends State<ActivityLogs> {
                           right: 0,
                           bottom: _fileOptionsOpened ? 75 : 0,
                           child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               opacity: _fileOptionsOpened ? 1 : 0,
-                              child: WidgetButton(
+                              child: WidgetButtonIcon(
                                   icon: "assets/graphics/icons/export.svg",
                                   color: Interface.light,
                                   background: Interface.dark,
@@ -500,7 +481,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                       Positioned(
                           right: 0,
                           bottom: 0,
-                          child: WidgetButton(
+                          child: WidgetButtonIcon(
                               icon: "assets/graphics/icons/file.svg",
                               color: Interface.light,
                               background: Interface.dark,
@@ -522,12 +503,10 @@ class ActivityLogsState extends State<ActivityLogs> {
                           right: 0,
                           bottom: _sortOptionsOpened ? 225 : 0,
                           child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               opacity: _sortOptionsOpened ? 1 : 0,
-                              child: WidgetButton(
+                              child: WidgetButtonIcon(
                                   icon: "assets/graphics/icons/reload.svg",
-                                  color: Interface.accent,
-                                  background: Interface.primary,
                                   onTap: () {
                                     setState(() {
                                       _resetPreferencesAndCriteria();
@@ -539,17 +518,14 @@ class ActivityLogsState extends State<ActivityLogs> {
                           right: 0,
                           bottom: _sortOptionsOpened ? 175 : 0,
                           child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               opacity: _sortOptionsOpened ? 1 : 0,
                               child: WidgetSwitchSort(
                                   icon: "assets/graphics/icons/sort_date.svg",
                                   orderNumber: _datePreferenceSet + 1,
                                   isAscended: !_dateCriteria,
-                                  activeColor: Interface.accent,
-                                  activeBackground: Interface.primary,
-                                  inactiveColor: Interface.light,
-                                  inactiveBackground: Interface.dark,
-                                  inactiveOpacity: 1,
+                                  color: Interface.light,
+                                  background: Interface.dark,
                                   isActive: _preferences.contains(_criteriaNames[2]),
                                   onTap: () {
                                     setState(() {
@@ -562,17 +538,14 @@ class ActivityLogsState extends State<ActivityLogs> {
                           right: 0,
                           bottom: _sortOptionsOpened ? 125 : 0,
                           child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               opacity: _sortOptionsOpened ? 1 : 0,
                               child: WidgetSwitchSort(
                                   icon: "assets/graphics/icons/trophy_gold.svg",
                                   orderNumber: _trophyPreferenceSet + 1,
                                   isAscended: !_trophyCriteria,
-                                  activeColor: Interface.accent,
-                                  activeBackground: Interface.primary,
-                                  inactiveColor: Interface.light,
-                                  inactiveBackground: Interface.dark,
-                                  inactiveOpacity: 1,
+                                  color: Interface.light,
+                                  background: Interface.dark,
                                   isActive: _preferences.contains(_criteriaNames[1]),
                                   onTap: () {
                                     setState(() {
@@ -588,11 +561,8 @@ class ActivityLogsState extends State<ActivityLogs> {
                               icon: "assets/graphics/icons/sort_az.svg",
                               orderNumber: _namePreferenceSet + 1,
                               isAscended: _nameCriteria,
-                              activeColor: Interface.accent,
-                              activeBackground: Interface.primary,
-                              inactiveColor: Interface.light,
-                              inactiveBackground: Interface.dark,
-                              inactiveOpacity: 1,
+                              color: Interface.light,
+                              background: Interface.dark,
                               isActive: _preferences.contains(_criteriaNames[0]),
                               onTap: () {
                                 setState(() {
@@ -603,7 +573,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                       Positioned(
                           right: 0,
                           bottom: 0,
-                          child: WidgetButton(
+                          child: WidgetButtonIcon(
                               icon: "assets/graphics/icons/sort.svg",
                               color: Interface.light,
                               background: Interface.dark,
@@ -627,15 +597,12 @@ class ActivityLogsState extends State<ActivityLogs> {
                               right: 0,
                               bottom: _viewOptionsOpened ? 175 : 0,
                               child: AnimatedOpacity(
-                                  duration: const Duration(milliseconds: 300),
+                                  duration: const Duration(milliseconds: 200),
                                   opacity: _viewOptionsOpened ? 1 : 0,
-                                  child: WidgetSwitch(
+                                  child: WidgetSwitchIcon(
                                       activeIcon: "assets/graphics/icons/trophy_lodge.svg",
-                                      inactiveIcon: "assets/graphics/icons/trophy_lodge.svg",
-                                      activeColor: Interface.accent,
-                                      activeBackground: Interface.primary,
-                                      inactiveColor: Interface.light,
-                                      inactiveBackground: Interface.dark,
+                                      color: Interface.light,
+                                      background: Interface.dark,
                                       isActive: _settings.getTrophyLodgeRecord,
                                       onTap: () {
                                         setState(() {
@@ -649,15 +616,12 @@ class ActivityLogsState extends State<ActivityLogs> {
                           right: 0,
                           bottom: _viewOptionsOpened ? 125 : 0,
                           child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               opacity: _viewOptionsOpened ? 1 : 0,
-                              child: WidgetSwitch(
+                              child: WidgetSwitchIcon(
                                   activeIcon: "assets/graphics/icons/sort_date.svg",
-                                  inactiveIcon: "assets/graphics/icons/sort_date.svg",
-                                  activeColor: Interface.accent,
-                                  activeBackground: Interface.primary,
-                                  inactiveColor: Interface.light,
-                                  inactiveBackground: Interface.dark,
+                                  color: Interface.light,
+                                  background: Interface.dark,
                                   isActive: _settings.getDateOfRecord,
                                   onTap: () {
                                     setState(() {
@@ -670,9 +634,9 @@ class ActivityLogsState extends State<ActivityLogs> {
                           right: 0,
                           bottom: _viewOptionsOpened ? 75 : 0,
                           child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 200),
                               opacity: _viewOptionsOpened ? 1 : 0,
-                              child: WidgetButton(
+                              child: WidgetButtonIcon(
                                   icon: _settings.getCompactLogbook == 3
                                       ? "assets/graphics/icons/view_semi_compact.svg"
                                       : _settings.getCompactLogbook == 2
@@ -689,7 +653,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                       Positioned(
                           right: 0,
                           bottom: 0,
-                          child: WidgetButton(
+                          child: WidgetButtonIcon(
                               icon: "assets/graphics/icons/fullscreen.svg",
                               color: Interface.light,
                               background: Interface.dark,
@@ -703,7 +667,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                 //SEPARATOR
                 Container(
                     margin: const EdgeInsets.only(right: 10, bottom: 17.5),
-                    child: WidgetButton(
+                    child: WidgetButtonIcon(
                         icon: "assets/graphics/icons/separator.svg",
                         color: Interface.light,
                         background: Interface.dark,
@@ -713,260 +677,291 @@ class ActivityLogsState extends State<ActivityLogs> {
                 //ADD
                 Container(
                     margin: const EdgeInsets.only(right: 20, bottom: 17.5),
-                    child: WidgetButton(
+                    child: WidgetButtonIcon(
                         icon: "assets/graphics/icons/plus.svg",
-                        color: Interface.accent,
-                        background: Interface.primary,
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLogsAddEdit(fromTrophyLodge: widget.trophyLodge, callback: _reload)));
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (context) => ActivityLogsAddEdit(fromTrophyLodge: widget.trophyLodge, callback: _reload)));
                           _focus();
                         }))
               ]))),
     );
   }
 
-  Widget _buildWidgets() {
-    _scaffoldMessengerState = ScaffoldMessenger.of(context);
-    return WidgetScaffold.withCustomBody(
-        body: Stack(children: [
+  Widget _buildStats() {
+    return Container(
+        height: 60,
+        color: Interface.sectionTitle,
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.only(left: 30, right: 30),
+        child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+          Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Expanded(
+                flex: 1,
+                child:
+                    Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      width: 20,
+                      height: 25,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 3),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/menu_open.svg",
+                        height: 12,
+                        width: 12,
+                        colorFilter: ColorFilter.mode(
+                          Interface.dark,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        _numberOfLogs.toString(),
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Interface.s14w500n(Interface.dark),
+                      ))
+                ])),
+            Expanded(
+                flex: 1,
+                child:
+                    Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      width: 20,
+                      height: 25,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 3),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/menu_open.svg",
+                        height: 12,
+                        width: 12,
+                        colorFilter: const ColorFilter.mode(
+                          Interface.red,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        _numberOfCorruptedLogs.toString(),
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Interface.s14w500n(Interface.red),
+                      ))
+                ])),
+            Expanded(
+                flex: 1,
+                child:
+                    Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      width: 20,
+                      height: 25,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 3),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/trophy_none.svg",
+                        height: 17,
+                        width: 17,
+                        colorFilter: ColorFilter.mode(
+                          Interface.disabled,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        _numberOfNoneLogs.toString(),
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Interface.s14w500n(Interface.disabled),
+                      ))
+                ])),
+            Expanded(
+                flex: 1,
+                child:
+                    Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      width: 20,
+                      height: 25,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 3),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/trophy_great_one.svg",
+                        height: 16,
+                        width: 16,
+                        colorFilter: ColorFilter.mode(
+                          Interface.dark,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        _numberOfGreatOneLogs.toString(),
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Interface.s14w500n(Interface.dark),
+                      ))
+                ]))
+          ]),
+          Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Expanded(
+                flex: 1,
+                child:
+                    Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      width: 20,
+                      height: 25,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 3),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/trophy_bronze.svg",
+                        height: 17,
+                        width: 17,
+                        colorFilter: const ColorFilter.mode(
+                          Interface.trophyBronze,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        _numberOfBronzeLogs.toString(),
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Interface.s14w500n(Interface.trophyBronze),
+                      ))
+                ])),
+            Expanded(
+                flex: 1,
+                child:
+                    Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      width: 20,
+                      height: 25,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 3),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/trophy_silver.svg",
+                        height: 17,
+                        width: 17,
+                        colorFilter: const ColorFilter.mode(
+                          Interface.trophySilver,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        _numberOfSilverLogs.toString(),
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Interface.s14w500n(Interface.trophySilver),
+                      ))
+                ])),
+            Expanded(
+                flex: 1,
+                child:
+                    Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      width: 20,
+                      height: 25,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 3),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/trophy_gold.svg",
+                        height: 17,
+                        width: 17,
+                        colorFilter: const ColorFilter.mode(
+                          Interface.trophyGold,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        _numberOfGoldLogs.toString(),
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Interface.s14w500n(Interface.trophyGold),
+                      ))
+                ])),
+            Expanded(
+                flex: 1,
+                child:
+                    Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      width: 20,
+                      height: 25,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 3),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/trophy_diamond.svg",
+                        height: 17,
+                        width: 17,
+                        colorFilter: const ColorFilter.mode(
+                          Interface.trophyDiamond,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        _numberOfDiamondLogs.toString(),
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Interface.s14w500n(Interface.trophyDiamond),
+                      ))
+                ]))
+          ])
+        ]));
+  }
+
+  Widget _buildBody() {
+    return Stack(children: [
       Column(mainAxisSize: MainAxisSize.max, children: [
         WidgetAppBar(
           text: widget.trophyLodge ? tr('trophy_lodge') : tr('logbook'),
-          fontSize: Interface.s30,
           context: context,
         ),
-        Container(
-            height: 60,
-            color: Interface.logsInfoBackground,
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.only(left: 30, right: 30),
-            child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                Expanded(
-                    flex: 1,
-                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          width: 20,
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 3),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/list.svg",
-                            height: 14,
-                            width: 14,
-                            color: Interface.alwaysLight,
-                          )),
-                      Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          child: AutoSizeText(_numberOfLogs.toString(),
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Interface.alwaysLight,
-                                fontSize: Interface.s18,
-                                fontWeight: FontWeight.w600,
-                              )))
-                    ])),
-                Expanded(
-                    flex: 1,
-                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          width: 20,
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 3),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/list.svg",
-                            height: 14,
-                            width: 14,
-                            color: Interface.red,
-                          )),
-                      Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          child: AutoSizeText(_numberOfCorruptedLogs.toString(),
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Interface.red,
-                                fontSize: Interface.s18,
-                                fontWeight: FontWeight.w600,
-                              )))
-                    ])),
-                Expanded(
-                    flex: 1,
-                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          width: 20,
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 3),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/trophy_none.svg",
-                            height: 17,
-                            width: 17,
-                            color: Interface.disabled,
-                          )),
-                      Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          child: AutoSizeText(_numberOfNoneLogs.toString(),
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Interface.disabled,
-                                fontSize: Interface.s18,
-                                fontWeight: FontWeight.w600,
-                              )))
-                    ])),
-                Expanded(
-                    flex: 1,
-                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          width: 20,
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 3),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/trophy_great_one.svg",
-                            height: 16,
-                            width: 16,
-                            color: Interface.alwaysLight,
-                          )),
-                      Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          child: AutoSizeText(_numberOfGreatOneLogs.toString(),
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Interface.alwaysLight,
-                                fontSize: Interface.s18,
-                                fontWeight: FontWeight.w600,
-                              )))
-                    ]))
-              ]),
-              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                Expanded(
-                    flex: 1,
-                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          width: 20,
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 3),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/trophy_bronze.svg",
-                            height: 17,
-                            width: 17,
-                            color: Interface.trophyBronze,
-                          )),
-                      Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          child: AutoSizeText(_numberOfBronzeLogs.toString(),
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Interface.trophyBronze,
-                                fontSize: Interface.s18,
-                                fontWeight: FontWeight.w600,
-                              )))
-                    ])),
-                Expanded(
-                    flex: 1,
-                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          width: 20,
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 3),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/trophy_silver.svg",
-                            height: 17,
-                            width: 17,
-                            color: Interface.trophySilver,
-                          )),
-                      Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          child: AutoSizeText(_numberOfSilverLogs.toString(),
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Interface.trophySilver,
-                                fontSize: Interface.s18,
-                                fontWeight: FontWeight.w600,
-                              )))
-                    ])),
-                Expanded(
-                    flex: 1,
-                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          width: 20,
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 3),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/trophy_gold.svg",
-                            height: 17,
-                            width: 17,
-                            color: Interface.trophyGold,
-                          )),
-                      Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          child: AutoSizeText(_numberOfGoldLogs.toString(),
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Interface.trophyGold,
-                                fontSize: Interface.s18,
-                                fontWeight: FontWeight.w600,
-                              )))
-                    ])),
-                Expanded(
-                    flex: 1,
-                    child: Row(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          width: 20,
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(right: 3),
-                          child: SvgPicture.asset(
-                            "assets/graphics/icons/trophy_diamond.svg",
-                            height: 17,
-                            width: 17,
-                            color: Interface.trophyDiamond,
-                          )),
-                      Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          child: AutoSizeText(_numberOfDiamondLogs.toString(),
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Interface.trophyDiamond,
-                                fontSize: Interface.s18,
-                                fontWeight: FontWeight.w600,
-                              )))
-                    ]))
-              ])
-            ])),
+        _buildStats(),
+        WidgetSearchBar(
+          controller: _controller,
+        ),
         Expanded(
-            flex: 0,
-            child: WidgetSearchBar(
-              background: Interface.searchBackground,
-              color: Interface.search,
-              controller: _controller,
-            )),
-        Expanded(
-          child: _buildStack(),
+          child: Stack(children: [
+            _buildLogs(),
+            Positioned(
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  color: Interface.search,
+                  height: 75,
+                  width: MediaQuery.of(context).size.width,
+                )),
+            _buildMenu()
+          ]),
         )
       ]),
       _buildYesNo()
-    ]));
+    ]);
+  }
+
+  Widget _buildWidgets() {
+    _scaffoldMessengerState = ScaffoldMessenger.of(context);
+    return WidgetScaffold(
+      customBody: true,
+      body: _buildBody(),
+    );
   }
 
   @override

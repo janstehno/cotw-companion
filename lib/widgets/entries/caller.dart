@@ -5,21 +5,21 @@ import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/activities/info_caller.dart';
 import 'package:cotwcompanion/model/caller.dart';
-import 'package:cotwcompanion/widgets/item.dart';
+import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EntryCaller extends StatefulWidget {
-  final Caller caller;
   final int index;
+  final Caller caller;
   final Function callback;
 
   const EntryCaller({
     Key? key,
-    required this.caller,
     required this.index,
+    required this.caller,
     required this.callback,
   }) : super(key: key);
 
@@ -48,15 +48,12 @@ class EntryCallerState extends State<EntryCaller> {
         child: Container(
             padding: const EdgeInsets.all(30),
             color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
-            child: WidgetItem(
+            child: EntryItem(
                 text: widget.caller.getName(context.locale),
-                textColor: Interface.dark,
                 itemIcon: Graphics.getCallerIcon(widget.caller.id),
-                iconColor: Interface.dark,
                 tags: [
                   WidgetTag.medium(
                     icon: "assets/graphics/icons/dlc.svg",
-                    iconSize: 20,
                     color: Interface.accent,
                     background: Interface.primary,
                     margin: const EdgeInsets.only(right: 5),

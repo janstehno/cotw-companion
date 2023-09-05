@@ -1,14 +1,14 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/builders/weapon_info/weapon_ammo.dart';
 import 'package:cotwcompanion/builders/weapon_info/weapon_animals.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/weapon.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,27 +44,26 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
               ? Container()
               : Container(
                   margin: const EdgeInsets.only(right: 10),
-                  child: Text(text,
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w600,
-                      ))),
+                  child: Text(
+                    text,
+                    style: Interface.s16w300n(Interface.dark),
+                  )),
           SvgPicture.asset(
             icon,
             width: 18,
             height: 18,
-            color: Interface.dark,
+            colorFilter: ColorFilter.mode(
+              Interface.dark,
+              BlendMode.srcIn,
+            ),
           ),
           leftToRight
               ? Container(
                   margin: const EdgeInsets.only(left: 10),
-                  child: Text(text,
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w600,
-                      )))
+                  child: Text(
+                    text,
+                    style: Interface.s16w300n(Interface.dark),
+                  ))
               : Container()
         ]));
   }
@@ -78,19 +77,15 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
               Expanded(
                   child: Padding(
                       padding: const EdgeInsets.only(right: 30),
-                      child: AutoSizeText(tr('weapon_type'),
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Interface.dark,
-                            fontSize: Interface.s20,
-                            fontWeight: FontWeight.w400,
-                          )))),
-              Text(_weapon.getTypeAsString(),
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s24,
-                    fontWeight: FontWeight.w600,
-                  ))
+                      child: AutoSizeText(
+                        tr('weapon_type'),
+                        maxLines: 1,
+                        style: Interface.s16w300n(Interface.dark),
+                      ))),
+              Text(
+                _weapon.getTypeAsString(),
+                style: Interface.s18w500n(Interface.dark),
+              )
             ]),
             Container(
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -98,13 +93,11 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                   Expanded(
                       child: Padding(
                           padding: const EdgeInsets.only(right: 30),
-                          child: AutoSizeText(tr('price'),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Interface.dark,
-                                fontSize: Interface.s20,
-                                fontWeight: FontWeight.w400,
-                              )))),
+                          child: AutoSizeText(
+                            tr('price'),
+                            maxLines: 1,
+                            style: Interface.s16w300n(Interface.dark),
+                          ))),
                   Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                     _weapon.price == 0 || _weapon.price == -1
                         ? Container()
@@ -112,42 +105,38 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                             margin: const EdgeInsets.only(right: 2.5),
                             child: SvgPicture.asset(
                               "assets/graphics/icons/money.svg",
-                              width: 14,
-                              height: 14,
-                              color: Interface.dark,
+                              width: 13,
+                              height: 13,
+                              colorFilter: ColorFilter.mode(
+                                Interface.dark,
+                                BlendMode.srcIn,
+                              ),
                             )),
                     AutoSizeText(
-                        _weapon.price == 0
-                            ? tr('free')
-                            : _weapon.price == -1
-                                ? tr('none')
-                                : "${_weapon.price}",
-                        maxLines: 1,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Interface.dark,
-                          fontSize: Interface.s24,
-                          fontWeight: FontWeight.w600,
-                        ))
+                      _weapon.price == 0
+                          ? tr('free')
+                          : _weapon.price == -1
+                              ? tr('none')
+                              : "${_weapon.price}",
+                      maxLines: 1,
+                      textAlign: TextAlign.start,
+                      style: Interface.s18w500n(Interface.dark),
+                    )
                   ])
                 ])),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Expanded(
                   child: Padding(
                       padding: const EdgeInsets.only(right: 30),
-                      child: AutoSizeText(tr('weapon_magazine'),
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Interface.dark,
-                            fontSize: Interface.s20,
-                            fontWeight: FontWeight.w400,
-                          )))),
-              Text(_weapon.id == 21 ? "1/2" : _weapon.mag.toString(),
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s24,
-                    fontWeight: FontWeight.w600,
-                  ))
+                      child: AutoSizeText(
+                        tr('weapon_magazine'),
+                        maxLines: 1,
+                        style: Interface.s16w300n(Interface.dark),
+                      ))),
+              Text(
+                _weapon.id == 21 ? "1/2" : _weapon.mag.toString(),
+                style: Interface.s18w500n(Interface.dark),
+              )
             ]),
             Container(
                 padding: const EdgeInsets.only(top: 30),
@@ -167,8 +156,8 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
 
   Widget _buildAmmo() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('weapon_ammo'),
+      WidgetTitleBig(
+        primaryText: tr('weapon_ammo'),
       ),
       BuilderWeaponAmmo(weaponId: _weapon.id),
     ]);
@@ -176,8 +165,8 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
 
   Widget _buildAnimals() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('recommended_animals'),
+      WidgetTitleBig(
+        primaryText: tr('recommended_animals'),
       ),
       BuilderWeaponAnimals(weaponId: _weapon.id),
     ]);
@@ -186,18 +175,15 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-            height: 150,
-            text: _weapon.getName(context.locale),
-            maxLines: _weapon.getName(context.locale).split(" ").length == 1 ? 1 : 2,
-            color: Interface.accent,
-            background: Interface.primary,
-            fontSize: Interface.s40,
-            context: context),
-        children: [
+          text: _weapon.getName(context.locale),
+          maxLines: _weapon.getName(context.locale).split(" ").length > 2 ? 2 : 1,
+          context: context,
+        ),
+        body: Column(children: [
           _buildStatistics(),
           _buildAmmo(),
           _buildAnimals(),
-        ]);
+        ]));
   }
 
   @override

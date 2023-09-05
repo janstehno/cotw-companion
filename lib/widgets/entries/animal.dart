@@ -4,20 +4,20 @@ import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/activities/info_animal.dart';
 import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/widgets/item.dart';
+import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class EntryAnimal extends StatefulWidget {
-  final Animal animal;
   final int index;
+  final Animal animal;
   final Function callback;
 
   const EntryAnimal({
     Key? key,
-    required this.animal,
     required this.index,
+    required this.animal,
     required this.callback,
   }) : super(key: key);
 
@@ -38,14 +38,11 @@ class EntryAnimalState extends State<EntryAnimal> {
         child: Container(
             padding: const EdgeInsets.all(30),
             color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
-            child: WidgetItem(
+            child: EntryItem(
                 text: widget.animal.getName(context.locale),
-                textColor: Interface.dark,
                 itemIcon: Graphics.getAnimalIcon(widget.animal.id),
-                iconColor: Interface.dark,
                 tags: [
                   WidgetTag.medium(
-                    iconSize: 20,
                     icon: "assets/graphics/icons/dlc.svg",
                     color: Interface.accent,
                     background: Interface.primary,

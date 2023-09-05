@@ -2,9 +2,9 @@
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/button.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,226 +25,183 @@ class ActivityAbout extends StatelessWidget {
 
   Widget _buildAbout() {
     return Column(children: [
-      WidgetTitle(
-        text: tr("about_paragraph_1_4"),
-        textColor: Interface.light,
-        background: Interface.dark,
-        alignment: Alignment.center,
-        textAlignment: TextAlign.center,
-        maxLines: 2,
+      WidgetTitleBig(
+        primaryText: tr("about_paragraph_1_4"),
       ),
       Container(
           padding: _padding,
           child: Column(children: [
             Container(
                 margin: const EdgeInsets.only(bottom: 15),
-                child: Text(tr("about_paragraph_1_1"),
-                    style: TextStyle(
-                      color: Interface.dark,
-                      fontSize: Interface.s20,
-                      fontWeight: FontWeight.w400,
-                    ))),
+                child: Text(
+                  tr("about_paragraph_1_1"),
+                  style: Interface.s16w300n(Interface.dark),
+                )),
             Container(
                 margin: const EdgeInsets.only(bottom: 15),
-                child: Text(tr("about_paragraph_1_2"),
-                    style: TextStyle(
-                      color: Interface.dark,
-                      fontSize: Interface.s20,
-                      fontWeight: FontWeight.w400,
-                    ))),
-            Text(tr("about_paragraph_1_3"),
-                style: TextStyle(
-                  color: Interface.dark,
-                  fontSize: Interface.s20,
-                  fontWeight: FontWeight.w400,
+                child: Text(
+                  tr("about_paragraph_1_2"),
+                  style: Interface.s16w300n(Interface.dark),
                 )),
+            Text(
+              tr("about_paragraph_1_3"),
+              style: Interface.s16w300n(Interface.dark),
+            ),
           ]))
     ]);
   }
 
   Widget _buildLanguage() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('language'),
+      WidgetTitleBig(
+        primaryText: tr('language'),
       ),
       Container(
           padding: _padding,
-          child: Text(tr("about_paragraph_3"),
-              style: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s20,
-                fontWeight: FontWeight.w400,
-              )))
+          child: Text(
+            tr("about_paragraph_3"),
+            style: Interface.s16w300n(Interface.dark),
+          ))
     ]);
   }
 
   Widget _buildSupport() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('support'),
+      WidgetTitleBig(
+        primaryText: tr('support'),
       ),
       Container(
-        padding: _padding,
-        child: Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.only(bottom: 5),
-                child: Column(children: [
-                  Text(tr("translation_ru"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Text(tr("translation_ru_1"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      ))
-                ])),
-            Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(children: [
-                  Text(tr("translation_ja"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Text(tr("translation_ja_1"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      ))
-                ])),
-            Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(children: [
-                  Text(tr("translation_de"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Text(tr("translation_de_1"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      ))
-                ])),
-            Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(children: [
-                  Text(tr("translation_pl"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Text(tr("translation_pl_1"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      ))
-                ])),
-            Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(children: [
-                  Text(tr("translation_fr"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Text(tr("translation_fr_1"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      ))
-                ])),
-            Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(children: [
-                  Text(tr("translation_pt"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Text(tr("translation_pt_1"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      )),
-                  Text(tr("translation_pt_2"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      ))
-                ])),
-            Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(children: [
-                  Text(tr("translation_hu"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Text(tr("translation_hu_1"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      ))
-                ])),
-            Container(
-                margin: const EdgeInsets.only(top: 5),
-                child: Column(children: [
-                  Text(tr("translation_tr"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s22,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  Text(tr("translation_tr_1"),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s18,
-                        fontWeight: FontWeight.w200,
-                      ))
-                ])),
-          ],
-        ),
-      )
+          padding: _padding,
+          child: Column(children: [
+            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(
+                      tr("translation_ru"),
+                      style: Interface.s16w300n(Interface.disabled),
+                    ),
+                    Text(
+                      tr("translation_ru_1"),
+                      style: Interface.s16w300n(Interface.dark),
+                    )
+                  ])),
+              Container(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(
+                      tr("translation_ja"),
+                      style: Interface.s16w300n(Interface.disabled),
+                    ),
+                    Text(
+                      tr("translation_ja_1"),
+                      style: Interface.s16w300n(Interface.dark),
+                    )
+                  ]))
+            ]),
+            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Container(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(
+                      tr("translation_de"),
+                      style: Interface.s16w300n(Interface.disabled),
+                    ),
+                    Text(
+                      tr("translation_de_1"),
+                      style: Interface.s16w300n(Interface.dark),
+                    )
+                  ])),
+              Container(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(
+                      tr("translation_pl"),
+                      style: Interface.s16w300n(Interface.disabled),
+                    ),
+                    Text(
+                      tr("translation_pl_1"),
+                      style: Interface.s16w300n(Interface.dark),
+                    )
+                  ])),
+            ]),
+            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Container(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(
+                      tr("translation_fr"),
+                      style: Interface.s16w300n(Interface.disabled),
+                    ),
+                    Text(
+                      tr("translation_fr_1"),
+                      style: Interface.s16w300n(Interface.dark),
+                    )
+                  ])),
+              Container(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(
+                      tr("translation_hu"),
+                      style: Interface.s16w300n(Interface.disabled),
+                    ),
+                    Text(
+                      tr("translation_hu_1"),
+                      style: Interface.s16w300n(Interface.dark),
+                    )
+                  ])),
+            ]),
+            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(
+                      tr("translation_tr"),
+                      style: Interface.s16w300n(Interface.disabled),
+                    ),
+                    Text(
+                      tr("translation_tr_1"),
+                      style: Interface.s16w300n(Interface.dark),
+                    )
+                  ])),
+              Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(
+                      tr("translation_pt"),
+                      style: Interface.s16w300n(Interface.disabled),
+                    ),
+                    Text(
+                      tr("translation_pt_1"),
+                      style: Interface.s16w300n(Interface.dark),
+                    ),
+                    Text(
+                      tr("translation_pt_2"),
+                      style: Interface.s16w300n(Interface.dark),
+                    )
+                  ])),
+            ])
+          ]))
     ]);
   }
 
   Widget _buildDonate() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('support_me'),
+      WidgetTitleBig(
+        primaryText: tr('support_me'),
       ),
       Container(
           padding: _padding,
           child: Column(children: [
             Container(
                 margin: const EdgeInsets.only(bottom: 30),
-                child: Text(tr("about_paragraph_2"),
-                    style: TextStyle(
-                      color: Interface.dark,
-                      fontSize: Interface.s20,
-                      fontWeight: FontWeight.w400,
-                    ))),
+                child: Text(
+                  tr("about_paragraph_2"),
+                  style: Interface.s16w300n(Interface.dark),
+                )),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              WidgetButton(
+              WidgetButtonIcon(
+                buttonSize: 40,
                 icon: "assets/graphics/icons/paypal.svg",
                 color: Interface.alwaysLight,
                 background: Interface.deepblue,
@@ -254,7 +211,8 @@ class ActivityAbout extends StatelessWidget {
               ),
               Container(
                   margin: const EdgeInsets.only(left: 10, right: 10),
-                  child: WidgetButton(
+                  child: WidgetButtonIcon(
+                    buttonSize: 40,
                     icon: "assets/graphics/icons/coffee.svg",
                     color: Interface.alwaysDark,
                     background: Interface.yellow,
@@ -262,7 +220,8 @@ class ActivityAbout extends StatelessWidget {
                       _redirectTo("buymeacoffee.com", "/toastovac");
                     },
                   )),
-              WidgetButton(
+              WidgetButtonIcon(
+                buttonSize: 40,
                 icon: "assets/graphics/icons/patreon.svg",
                 color: Interface.alwaysDark,
                 background: Interface.red,
@@ -279,16 +238,15 @@ class ActivityAbout extends StatelessWidget {
     return Row(children: [
       Expanded(
           child: Container(
-              padding: _padding,
-              color: Interface.subTitleBackground,
-              child: SelectableText(_email,
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  ))))
+              height: 70,
+              alignment: Alignment.center,
+              color: Interface.title,
+              child: SelectableText(
+                _email,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: Interface.s16w300n(Interface.dark),
+              )))
     ]);
   }
 
@@ -296,18 +254,15 @@ class ActivityAbout extends StatelessWidget {
     return WidgetScaffold(
         appBar: WidgetAppBar(
           text: tr('about'),
-          color: Interface.accent,
-          background: Interface.primary,
-          fontSize: Interface.s30,
           context: context,
         ),
-        children: [
+        body: Column(children: [
           _buildAbout(),
           _buildLanguage(),
           _buildSupport(),
           _buildDonate(),
           _buildFooter(),
-        ]);
+        ]));
   }
 
   @override

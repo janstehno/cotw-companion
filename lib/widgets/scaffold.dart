@@ -8,70 +8,90 @@ import 'package:flutter/material.dart';
 
 class WidgetScaffold extends StatelessWidget {
   final WidgetAppBar? appBar;
-  final List<Widget>? children;
+  final Widget body;
   final TextEditingController? searchBarController;
-  final bool showSearchBar, hasCustomBody;
-  final Widget? body;
+  final bool withSearchBar, appBarScroll, customBody;
 
   const WidgetScaffold({
     Key? key,
-    required this.appBar,
-    required this.children,
-    this.searchBarController,
-    this.showSearchBar = false,
-    this.hasCustomBody = false,
-    this.body,
-  }) : super(key: key);
-
-  const WidgetScaffold.withSearch({
-    Key? key,
-    required this.appBar,
-    required this.children,
-    required this.searchBarController,
-    this.showSearchBar = true,
-    this.hasCustomBody = false,
-    this.body,
-  }) : super(key: key);
-
-  const WidgetScaffold.withCustomBody({
-    Key? key,
     this.appBar,
-    this.children,
-    this.searchBarController,
-    this.showSearchBar = false,
-    this.hasCustomBody = true,
     required this.body,
+    this.searchBarController,
+    this.withSearchBar = false,
+    this.appBarScroll = true,
+    this.customBody = false,
   }) : super(key: key);
 
   Widget _buildAppBar() {
     return appBar ?? Container();
   }
 
+  Widget _buildSearchBar() {
+    return WidgetSearchBar(
+      controller: searchBarController ?? TextEditingController(),
+    );
+  }
+
+  Widget _buildAppBarScroll() {
+    return Column(children: [
+      Expanded(
+          child: Container(
+        color: Interface.body,
+        child: WidgetScrollbar(
+            child: SingleChildScrollView(
+          child: Column(children: [
+            _buildAppBar(),
+            withSearchBar ? _buildSearchBar() : Container(),
+            body,
+          ]),
+        )),
+      ))
+    ]);
+  }
+
+  Widget _buildAppBarNotScroll() {
+    return Column(children: [
+      Expanded(
+          child: Container(
+        color: Interface.body,
+        child: Column(children: [
+          _buildAppBar(),
+          withSearchBar ? _buildSearchBar() : Container(),
+          Expanded(
+              child: WidgetScrollbar(
+                  child: SingleChildScrollView(
+            child: Column(children: [
+              body,
+            ]),
+          ))),
+        ]),
+      ))
+    ]);
+  }
+
+  Widget _buildCustom() {
+    return Column(children: [
+      Expanded(
+          child: Container(
+        color: Interface.body,
+        child: body,
+      ))
+    ]);
+  }
+
   Widget _buildWidgets() {
     return Scaffold(
-        backgroundColor: Interface.mainBody,
-        appBar: AppBar(toolbarHeight: 0, backgroundColor: Interface.primary),
-        body: hasCustomBody
-            ? body ?? Container()
-            : Column(mainAxisSize: MainAxisSize.max, children: [
-                showSearchBar ? _buildAppBar() : Container(),
-                showSearchBar
-                    ? WidgetSearchBar(
-                        background: Interface.searchBackground,
-                        color: Interface.search,
-                        controller: searchBarController ?? TextEditingController(),
-                      )
-                    : Container(),
-                Expanded(
-                    child: Container(
-                        color: Interface.mainBody,
-                        child: WidgetScrollbar(
-                            child: SingleChildScrollView(
-                                child: Column(children: [
-                          showSearchBar ? Container() : _buildAppBar(),
-                          Column(children: children ?? []),
-                        ])))))
-              ]));
+      backgroundColor: Interface.body,
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Interface.primary,
+      ),
+      body: customBody
+          ? _buildCustom()
+          : appBarScroll
+              ? _buildAppBarScroll()
+              : _buildAppBarNotScroll(),
+    );
   }
 
   @override

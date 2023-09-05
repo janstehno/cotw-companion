@@ -47,13 +47,11 @@ class EntryReserveCallerState extends State<EntryReserveCaller> {
               Expanded(
                   child: Container(
                       padding: const EdgeInsets.only(right: 30),
-                      child: AutoSizeText(_caller.getName(context.locale),
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: widget.color,
-                            fontSize: Interface.s20,
-                            fontWeight: FontWeight.w400,
-                          )))),
+                      child: AutoSizeText(
+                        _caller.getName(context.locale),
+                        maxLines: 1,
+                        style: Interface.s16w300n(Interface.dark),
+                      ))),
               Container(
                   padding: const EdgeInsets.only(left: 15),
                   child: _caller.isFromDlc

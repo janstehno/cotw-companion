@@ -10,7 +10,6 @@ class Settings extends ChangeNotifier {
 
   late int _language;
   late int _color;
-  late int _fontSize;
   late int _compactLogbook;
   late bool _darkMode;
   late bool _imperialUnits;
@@ -39,7 +38,6 @@ class Settings extends ChangeNotifier {
       bool furRarityPerCent = false}) {
     _language = language;
     _color = color;
-    _fontSize = fontSize;
     _compactLogbook = compactLogbook;
     _darkMode = darkMode;
     _imperialUnits = imperialUnits;
@@ -53,8 +51,6 @@ class Settings extends ChangeNotifier {
   }
 
   int get getColor => _color;
-
-  int get getFontSize => _fontSize;
 
   int get getCompactLogbook => _compactLogbook;
 
@@ -84,29 +80,18 @@ class Settings extends ChangeNotifier {
 
   String getLocaleName(int index) => _languages[index];
 
-  Future<void> changeTheme() async {
+  Future<void> changeTheme(bool darkMode) async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    if (_darkMode == true) {
-      _darkMode = false;
-      Interface.setColors(_darkMode);
-      await _sharedPreferences.setBool("darkMode", false);
-    } else {
-      _darkMode = true;
-      Interface.setColors(_darkMode);
-      await _sharedPreferences.setBool("darkMode", true);
-    }
+    _darkMode = darkMode;
+    Interface.setColors(darkMode);
+    await _sharedPreferences.setBool("darkMode", darkMode);
     notifyListeners();
   }
 
-  Future<void> changeUnits() async {
+  Future<void> changeUnits(bool imperialUnits) async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    if (_imperialUnits == true) {
-      _imperialUnits = false;
-      await _sharedPreferences.setBool("imperialUnits", false);
-    } else {
-      _imperialUnits = true;
-      await _sharedPreferences.setBool("imperialUnits", true);
-    }
+    _imperialUnits = imperialUnits;
+    await _sharedPreferences.setBool("imperialUnits", imperialUnits);
     notifyListeners();
   }
 
@@ -122,14 +107,6 @@ class Settings extends ChangeNotifier {
     final int hex = color.value;
     Interface.setPrimaryColor(color);
     await _sharedPreferences.setInt("color", hex);
-    notifyListeners();
-  }
-
-  Future<void> changeFontSize(int size) async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    _fontSize = size;
-    Interface.setFontSize(_fontSize);
-    await _sharedPreferences.setInt("fontSize", size);
     notifyListeners();
   }
 

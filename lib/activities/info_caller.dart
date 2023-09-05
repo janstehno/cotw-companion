@@ -1,14 +1,14 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/builders/caller_info/caller_animals.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,19 +49,15 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
               Expanded(
                   child: Padding(
                       padding: const EdgeInsets.only(right: 30),
-                      child: AutoSizeText(tr('caller_range'),
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Interface.dark,
-                            fontSize: Interface.s20,
-                            fontWeight: FontWeight.w400,
-                          )))),
-              Text(_caller.getRange(_imperialUnits),
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s24,
-                    fontWeight: FontWeight.w600,
-                  ))
+                      child: AutoSizeText(
+                        tr('caller_range'),
+                        maxLines: 1,
+                        style: Interface.s16w300n(Interface.dark),
+                      ))),
+              Text(
+                _caller.getRange(_imperialUnits),
+                style: Interface.s18w500n(Interface.dark),
+              )
             ]),
             Container(
                 padding: const EdgeInsets.only(top: 10, bottom: 5),
@@ -69,19 +65,15 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                   Expanded(
                       child: Padding(
                           padding: const EdgeInsets.only(right: 30),
-                          child: AutoSizeText(tr('caller_duration'),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Interface.dark,
-                                fontSize: Interface.s20,
-                                fontWeight: FontWeight.w400,
-                              )))),
-                  Text("${_caller.duration} ${tr('seconds')}",
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s24,
-                        fontWeight: FontWeight.w600,
-                      ))
+                          child: AutoSizeText(
+                            tr('caller_duration'),
+                            maxLines: 1,
+                            style: Interface.s16w300n(Interface.dark),
+                          ))),
+                  Text(
+                    "${_caller.duration} ${tr('seconds')}",
+                    style: Interface.s18w500n(Interface.dark),
+                  )
                 ])),
             Container(
                 padding: const EdgeInsets.only(top: 5, bottom: 10),
@@ -89,31 +81,25 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                   Expanded(
                       child: Padding(
                           padding: const EdgeInsets.only(right: 30),
-                          child: AutoSizeText(tr('caller_strength'),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Interface.dark,
-                                fontSize: Interface.s20,
-                                fontWeight: FontWeight.w400,
-                              )))),
-                  Text(_caller.strength.toString(),
-                      style: TextStyle(
-                        color: Interface.dark,
-                        fontSize: Interface.s24,
-                        fontWeight: FontWeight.w600,
-                      ))
+                          child: AutoSizeText(
+                            tr('caller_strength'),
+                            maxLines: 1,
+                            style: Interface.s16w300n(Interface.dark),
+                          ))),
+                  Text(
+                    _caller.strength.toString(),
+                    style: Interface.s18w500n(Interface.dark),
+                  )
                 ])),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Expanded(
                   child: Padding(
                       padding: const EdgeInsets.only(right: 30),
-                      child: AutoSizeText(tr('price'),
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Interface.dark,
-                            fontSize: Interface.s20,
-                            fontWeight: FontWeight.w400,
-                          )))),
+                      child: AutoSizeText(
+                        tr('price'),
+                        maxLines: 1,
+                        style: Interface.s16w300n(Interface.dark),
+                      ))),
               Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 _caller.price == 0 || _caller.price == -1
                     ? Container()
@@ -122,23 +108,23 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                         padding: const EdgeInsets.only(top: 1.15),
                         child: SvgPicture.asset(
                           "assets/graphics/icons/money.svg",
-                          width: 14,
-                          height: 14,
-                          color: Interface.dark,
+                          width: 13,
+                          height: 13,
+                          colorFilter: ColorFilter.mode(
+                            Interface.dark,
+                            BlendMode.srcIn,
+                          ),
                         )),
                 AutoSizeText(
-                    _caller.price == 0
-                        ? tr('free')
-                        : _caller.price == -1
-                            ? tr('none')
-                            : "${_caller.price}",
-                    maxLines: 1,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: Interface.dark,
-                      fontSize: Interface.s24,
-                      fontWeight: FontWeight.w600,
-                    ))
+                  _caller.price == 0
+                      ? tr('free')
+                      : _caller.price == -1
+                          ? tr('none')
+                          : "${_caller.price}",
+                  maxLines: 1,
+                  textAlign: TextAlign.start,
+                  style: Interface.s18w500n(Interface.dark),
+                )
               ])
             ]),
           ]))
@@ -147,8 +133,8 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
 
   Widget _buildAnimals() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('recommended_animals'),
+      WidgetTitleBig(
+        primaryText: tr('recommended_animals'),
       ),
       Container(
           padding: _padding,
@@ -161,17 +147,14 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-            height: 150,
-            text: _caller.getName(context.locale),
-            maxLines: _caller.getName(context.locale).split(" ").length == 1 ? 1 : 2,
-            color: Interface.accent,
-            background: Interface.primary,
-            fontSize: Interface.s40,
-            context: context),
-        children: [
+          text: _caller.getName(context.locale),
+          maxLines: _caller.getName(context.locale).split(" ").length > 2 ? 2 : 1,
+          context: context,
+        ),
+        body: Column(children: [
           _buildStatistics(),
           _buildAnimals(),
-        ]);
+        ]));
   }
 
   @override

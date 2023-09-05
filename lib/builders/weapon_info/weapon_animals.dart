@@ -1,10 +1,9 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/widgets/text_dlc.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/title_small.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -56,9 +55,8 @@ class BuilderWeaponAnimalsState extends State<BuilderWeaponAnimals> {
   Widget _buildAnimals(List<Animal> animals) {
     animals.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      WidgetTitle.sub(
-        text: "${tr('animal_class')} ${animals[0].level}",
-        background: Interface.subSubTitleBackground,
+      WidgetTitleSmall(
+        primaryText: "${tr('animal_class')} ${animals[0].level}",
       ),
       Container(
           padding: const EdgeInsets.all(30),

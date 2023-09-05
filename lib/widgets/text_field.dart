@@ -5,14 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WidgetTextField extends StatelessWidget {
-  final Color? color, background;
   final bool correct, numberOnly;
   final TextEditingController controller;
 
   const WidgetTextField({
     Key? key,
-    required this.color,
-    required this.background,
     required this.controller,
     required this.correct,
     this.numberOnly = true,
@@ -21,8 +18,8 @@ class WidgetTextField extends StatelessWidget {
   Widget _buildWidgets() {
     return Container(
         height: 60,
+        color: Colors.transparent,
         alignment: Alignment.centerLeft,
-        color: background,
         padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, children: [
           Container(
@@ -31,32 +28,32 @@ class WidgetTextField extends StatelessWidget {
                 "assets/graphics/icons/edit.svg",
                 width: 15,
                 height: 15,
-                color: Interface.disabled,
+                colorFilter: ColorFilter.mode(
+                  Interface.disabled,
+                  BlendMode.srcIn,
+                ),
               )),
           Expanded(
               child: Container(
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(bottom: 3),
                   child: TextField(
-                      keyboardType: numberOnly
-                          ? const TextInputType.numberWithOptions(
-                              decimal: true,
-                              signed: false,
-                            )
-                          : TextInputType.text,
-                      maxLines: 1,
-                      controller: controller,
-                      textAlign: TextAlign.start,
-                      textAlignVertical: TextAlignVertical.center,
-                      cursorColor: Interface.primary,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      style: TextStyle(
-                        color: color,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                      )))),
+                    keyboardType: numberOnly
+                        ? const TextInputType.numberWithOptions(
+                            decimal: true,
+                            signed: false,
+                          )
+                        : TextInputType.text,
+                    maxLines: 1,
+                    controller: controller,
+                    textAlign: TextAlign.start,
+                    textAlignVertical: TextAlignVertical.center,
+                    cursorColor: Interface.dark,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                    ),
+                    style: Interface.s16w300n(Interface.dark),
+                  ))),
           Expanded(
               flex: 0,
               child: AnimatedContainer(

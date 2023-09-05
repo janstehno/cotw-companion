@@ -1,8 +1,8 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +47,8 @@ class WidgetDlcListsState extends State<WidgetDlcLists> {
     }
     _items.addAll(result);
     widget.type == 1 && widget.reserves.isNotEmpty
-        ? _items.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserves[0]).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserves[0])))
+        ? _items
+            .sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserves[0]).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserves[0])))
         : _items.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
   }
 
@@ -58,13 +59,14 @@ class WidgetDlcListsState extends State<WidgetDlcLists> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _items.length,
         itemBuilder: (context, index) {
-          return WidgetText(
-            height: 20,
-            text: widget.type == 1 && widget.reserves.isNotEmpty
-                ? _items[index].getNameBasedOnReserve(context.locale, widget.reserves[0])
-                : _items[index].getName(context.locale),
-            color: Interface.dark,
-          );
+          return Container(
+              padding: const EdgeInsets.only(left: 30, right: 30),
+              child: AutoSizeText(
+                widget.type == 1 && widget.reserves.isNotEmpty
+                    ? _items[index].getNameBasedOnReserve(context.locale, widget.reserves[0])
+                    : _items[index].getName(context.locale),
+                style: Interface.s16w300n(Interface.dark),
+              ));
         });
   }
 

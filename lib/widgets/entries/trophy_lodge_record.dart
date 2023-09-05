@@ -10,13 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EntryTrophyLodgeRecord extends StatefulWidget {
-  final Log log;
   final int index;
+  final Log log;
 
   const EntryTrophyLodgeRecord({
     Key? key,
-    required this.log,
     required this.index,
+    required this.log,
   }) : super(key: key);
 
   @override
@@ -28,20 +28,16 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
 
   Widget _buildName() {
     return Container(
-      height: 30,
-      alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.only(right: 10),
-      child: AutoSizeText(_animal.getNameBasedOnReserve(context.locale, widget.log.reserveId).toUpperCase(),
+        height: 30,
+        alignment: Alignment.centerLeft,
+        margin: const EdgeInsets.only(right: 10),
+        child: AutoSizeText(
+          _animal.getNameBasedOnReserve(context.locale, widget.log.reserveId),
           maxLines: 2,
           minFontSize: 10,
           textAlign: TextAlign.left,
-          style: TextStyle(
-            color: Interface.dark,
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            fontFamily: 'Condensed',
-          )),
-    );
+          style: Interface.s18w300n(Interface.dark),
+        ));
   }
 
   Widget _buildGender() {
@@ -52,9 +48,12 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
         margin: const EdgeInsets.only(right: 5),
         child: SvgPicture.asset(
           widget.log.isMale ? "assets/graphics/icons/male.svg" : "assets/graphics/icons/female.svg",
-          width: 13,
-          height: 13,
-          color: widget.log.isMale ? Interface.male : Interface.female,
+          width: 14,
+          height: 14,
+          colorFilter: ColorFilter.mode(
+            widget.log.isMale ? Interface.male : Interface.female,
+            BlendMode.srcIn,
+          ),
         ));
   }
 
@@ -67,25 +66,23 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
           alignment: Alignment.center,
           margin: const EdgeInsets.only(right: 5),
           child: Container(
-              width: 10,
-              height: 10,
+              width: 9,
+              height: 9,
               decoration: ShapeDecoration(
                 color: widget.log.fur.color,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
               ))),
       Expanded(
           child: Container(
               height: 15,
               alignment: Alignment.centerLeft,
-              child: AutoSizeText(furName,
-                  maxLines: 1,
-                  minFontSize: 10,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ))))
+              child: AutoSizeText(
+                furName,
+                maxLines: 1,
+                minFontSize: 10,
+                textAlign: TextAlign.left,
+                style: Interface.s14w300n(Interface.dark),
+              )))
     ]);
   }
 
@@ -108,20 +105,21 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                     margin: const EdgeInsets.only(right: 5),
                     child: SvgPicture.asset(
                       widget.log.getTrophyRatingIcon(),
-                      color: widget.log.getTrophyColor(),
                       fit: BoxFit.fitWidth,
+                      colorFilter: ColorFilter.mode(
+                        widget.log.getTrophyColor(),
+                        BlendMode.srcIn,
+                      ),
                     )),
                 Expanded(
                     child: Container(
                         alignment: Alignment.centerRight,
-                        child: AutoSizeText(widget.log.trophy.toString(),
-                            maxLines: 1,
-                            minFontSize: 10,
-                            style: TextStyle(
-                              color: Interface.dark,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ))))
+                        child: AutoSizeText(
+                          widget.log.trophy.toString(),
+                          maxLines: 1,
+                          minFontSize: 10,
+                          style: Interface.s18w500n(Interface.dark),
+                        )))
               ]),
             ])));
   }
@@ -134,15 +132,13 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
           Container(
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.only(left: 10),
-              child: AutoSizeText(widget.log.usesImperials ? ("${widget.log.weight} ${tr('pounds')}") : ("${widget.log.weight} ${tr('kilograms')}"),
-                  maxLines: 1,
-                  minFontSize: 10,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  )))
+              child: AutoSizeText(
+                widget.log.usesImperials ? ("${widget.log.weight} ${tr('pounds')}") : ("${widget.log.weight} ${tr('kilograms')}"),
+                maxLines: 1,
+                minFontSize: 10,
+                textAlign: TextAlign.left,
+                style: Interface.s14w300n(Interface.dark),
+              ))
         ]));
   }
 
@@ -159,7 +155,7 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                 _buildTrophy(),
               ]),
               Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Expanded(child: widget.log.fur.furId == Interface.greatOneId ? Container() : _buildFur()),
+                Expanded(child: widget.log.isGreatOne() ? Container() : _buildFur()),
                 widget.log.weight > 0 ? _buildWeight() : Container(),
               ])
             ])));

@@ -1,13 +1,12 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/builders/dlc_info/dlc_lists.dart';
 import 'package:cotwcompanion/model/dlc.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
+import 'package:cotwcompanion/widgets/rich_text.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/material.dart';
 
 class ActivityDlcInfo extends StatefulWidget {
@@ -25,9 +24,8 @@ class ActivityDlcInfo extends StatefulWidget {
 class ActivityDlcInfoState extends State<ActivityDlcInfo> {
   Widget _buildName() {
     return Column(children: [
-      WidgetTitle.sub(
-        text: widget.dlc.date,
-        alignment: Alignment.center,
+      WidgetTitleBig(
+        primaryText: widget.dlc.date,
       ),
     ]);
   }
@@ -41,26 +39,11 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
               itemCount: widget.dlc.getDescription(context.locale).length,
               itemBuilder: (context, index) {
                 return Container(
-                    padding: index == widget.dlc.getDescription(context.locale).length - 1 ? const EdgeInsets.only(bottom: 30) : const EdgeInsets.only(bottom: 15),
-                    child: EasyRichText(widget.dlc.getDescription(context.locale)[index],
-                        patternList: [
-                          EasyRichTextPattern(
-                              targetString: '(\\*)(.*?)(\\*)',
-                              matchBuilder: (BuildContext context, RegExpMatch? match) {
-                                return TextSpan(
-                                    text: match![0]?.replaceAll('*', ''),
-                                    style: TextStyle(
-                                      color: Interface.primary,
-                                      fontSize: Interface.s20,
-                                      fontWeight: FontWeight.w700,
-                                    ));
-                              })
-                        ],
-                        defaultStyle: TextStyle(
-                          color: Interface.dark,
-                          fontSize: Interface.s20,
-                          fontWeight: FontWeight.w400,
-                        )));
+                    padding:
+                        index == widget.dlc.getDescription(context.locale).length - 1 ? const EdgeInsets.only(bottom: 30) : const EdgeInsets.only(bottom: 15),
+                    child: WidgetRichText(
+                      text: widget.dlc.getDescription(context.locale)[index],
+                    ));
               }))
     ]);
   }
@@ -69,8 +52,8 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
     List<Widget> reserves = [Container()];
     if (widget.dlc.reserve.isNotEmpty) {
       reserves = [
-        WidgetTitle(
-          text: tr('reserves'),
+        WidgetTitleBig(
+          primaryText: tr('reserves'),
         ),
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
@@ -85,8 +68,8 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
     List<Widget> animals = [Container()];
     if (widget.dlc.animals.isNotEmpty) {
       animals = [
-        WidgetTitle(
-          text: tr('wildlife'),
+        WidgetTitleBig(
+          primaryText: tr('wildlife'),
         ),
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
@@ -102,8 +85,8 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
     List<Widget> weapons = [Container()];
     if (widget.dlc.weapons.isNotEmpty) {
       weapons = [
-        WidgetTitle(
-          text: tr('weapons'),
+        WidgetTitleBig(
+          primaryText: tr('weapons'),
         ),
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
@@ -118,8 +101,8 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
     List<Widget> callers = [Container()];
     if (widget.dlc.callers.isNotEmpty) {
       callers = [
-        WidgetTitle(
-          text: tr('callers'),
+        WidgetTitleBig(
+          primaryText: tr('callers'),
         ),
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
@@ -156,18 +139,15 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-            height: 150,
-            text: widget.dlc.name,
-            maxLines: widget.dlc.name.split(" ").length == 1 ? 1 : 2,
-            color: Interface.accent,
-            background: Interface.primary,
-            fontSize: Interface.s40,
-            context: context),
-        children: [
+          text: widget.dlc.name,
+          maxLines: widget.dlc.name.split(" ").length > 2 ? 2 : 1,
+          context: context,
+        ),
+        body: Column(children: [
           _buildName(),
           _buildDescription(),
           _buildRAWC(),
-        ]);
+        ]));
   }
 
   @override

@@ -90,7 +90,6 @@ class HelperLoadout {
   }
 
   static bool containsCallerForAnimal(int animalId) {
-    if (_activeLoadout.ammo.isEmpty) return false;
     for (IdtoId iti in HelperJSON.animalsCallers) {
       if (iti.firstId == animalId) {
         for (int index in _activeLoadout.callers) {

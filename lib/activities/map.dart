@@ -1,26 +1,27 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/map_information.dart';
-import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
+import 'package:cotwcompanion/activities/map_layers.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/map.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
+import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/projection.dart';
-import 'package:cotwcompanion/activities/map_layers.dart';
+import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/map_zone.dart';
 import 'package:cotwcompanion/model/reserve.dart';
-import 'package:cotwcompanion/widgets/button.dart';
-import 'package:cotwcompanion/widgets/switch.dart';
+import 'package:cotwcompanion/model/zone.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
 import 'package:provider/provider.dart';
-import 'package:cotwcompanion/model/zone.dart';
 
 class ActivityMap extends StatefulWidget {
   final int reserveId;
@@ -168,18 +169,18 @@ class ActivityMapState extends State<ActivityMap> {
     return OrientationBuilder(builder: (context, orientation) {
       _getTileSize(orientation);
       return Container(
-          color: Interface.colorMapBackground,
+          color: Interface.alwaysDark,
           child: GestureDetector(
               onLongPress: () {
                 if (_opacity == 1) {
                   _opacity = 0;
-                  Future.delayed(const Duration(milliseconds: 100), () {
+                  Future.delayed(const Duration(milliseconds: 200), () {
                     _showInterface = false;
                     setState(() {});
                   });
                 } else if (_opacity == 0) {
                   _showInterface = true;
-                  Future.delayed(const Duration(milliseconds: 100), () {
+                  Future.delayed(const Duration(milliseconds: 200), () {
                     _opacity = 1;
                     setState(() {});
                   });
@@ -214,10 +215,10 @@ class ActivityMapState extends State<ActivityMap> {
                   }
                   return const SizedBox.shrink();
                 }),
-                Container(color: Interface.colorMapBackground.withOpacity(0.5)),
-                ..._buildObjectMarkers(transformer, HelperMap.getOutposts, Interface.colorMapOLH, 15, MapObjectType.outpost),
-                ..._buildObjectMarkers(transformer, HelperMap.getLookouts, Interface.colorMapOLH, 15, MapObjectType.lookout),
-                ..._buildObjectMarkers(transformer, HelperMap.getHides, Interface.colorMapOLH, 3, MapObjectType.hide),
+                Container(color: Interface.alwaysDark.withOpacity(0.5)),
+                ..._buildObjectMarkers(transformer, HelperMap.getOutposts, Interface.alwaysLight, 15, MapObjectType.outpost),
+                ..._buildObjectMarkers(transformer, HelperMap.getLookouts, Interface.alwaysLight, 15, MapObjectType.lookout),
+                ..._buildObjectMarkers(transformer, HelperMap.getHides, Interface.alwaysLight, 3, MapObjectType.hide),
                 for (int index = 0; index < HelperMap.getAnimals.length; index++) ..._buildZones(transformer, index)
               ]));
         });
@@ -326,13 +327,11 @@ class ActivityMapState extends State<ActivityMap> {
                 bottom: 0,
                 child: AnimatedOpacity(
                     opacity: _opacity,
-                    duration: const Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 200),
                     child: Container(
                         margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetButton(
+                        child: WidgetButtonIcon(
                             icon: "assets/graphics/icons/back.svg",
-                            color: Interface.accent,
-                            background: Interface.primary,
                             onTap: () {
                               Navigator.pop(context);
                             })))),
@@ -341,16 +340,13 @@ class ActivityMapState extends State<ActivityMap> {
                 bottom: 0,
                 child: AnimatedOpacity(
                     opacity: _opacity,
-                    duration: const Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 200),
                     child: Container(
                         margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetSwitch.withIcon(
+                        child: WidgetSwitchIcon(
                             activeIcon: "assets/graphics/icons/zone_feed.svg",
-                            inactiveIcon: "assets/graphics/icons/zone_feed.svg",
-                            activeColor: Interface.accent,
-                            activeBackground: Interface.primary,
-                            inactiveColor: Interface.alwaysDark,
-                            inactiveBackground: Interface.alwaysLight,
+                            color: Interface.alwaysDark,
+                            background: Interface.alwaysLight,
                             isActive: _settings.getMapZonesType,
                             onTap: () {
                               setState(() {
@@ -362,16 +358,13 @@ class ActivityMapState extends State<ActivityMap> {
                 bottom: 0,
                 child: AnimatedOpacity(
                     opacity: _opacity,
-                    duration: const Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 200),
                     child: Container(
                         margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetSwitch.withIcon(
+                        child: WidgetSwitchIcon(
                             activeIcon: "assets/graphics/icons/other.svg",
-                            inactiveIcon: "assets/graphics/icons/other.svg",
-                            activeColor: Interface.accent,
-                            activeBackground: Interface.primary,
-                            inactiveColor: Interface.alwaysDark,
-                            inactiveBackground: Interface.alwaysLight,
+                            color: Interface.alwaysDark,
+                            background: Interface.alwaysLight,
                             isActive: _settings.getMapZonesStyle,
                             onTap: () {
                               setState(() {
@@ -383,10 +376,10 @@ class ActivityMapState extends State<ActivityMap> {
                 bottom: 0,
                 child: AnimatedOpacity(
                     opacity: _opacity,
-                    duration: const Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 200),
                     child: Container(
                         margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetButton(
+                        child: WidgetButtonIcon(
                             icon: "assets/graphics/icons/about.svg",
                             color: Interface.alwaysDark,
                             background: Interface.alwaysLight,
@@ -398,10 +391,10 @@ class ActivityMapState extends State<ActivityMap> {
                 bottom: 0,
                 child: AnimatedOpacity(
                     opacity: _opacity,
-                    duration: const Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 200),
                     child: Container(
                         margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetButton.withIcon(
+                        child: WidgetButtonIcon(
                             icon: "assets/graphics/icons/menu_open.svg",
                             color: Interface.alwaysDark,
                             background: Interface.alwaysLight,
@@ -414,10 +407,10 @@ class ActivityMapState extends State<ActivityMap> {
                     top: 0,
                     child: AnimatedOpacity(
                         opacity: _opacity,
-                        duration: const Duration(milliseconds: 100),
+                        duration: const Duration(milliseconds: 200),
                         child: Container(
                           width: _screenWidth,
-                          color: Interface.shadow.withOpacity(0.3),
+                          color: Interface.alwaysDark.withOpacity(0.3),
                           padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
                           child: _buildAnimalList(),
                         )))
@@ -426,10 +419,10 @@ class ActivityMapState extends State<ActivityMap> {
                     top: 0,
                     child: AnimatedOpacity(
                         opacity: _opacity,
-                        duration: const Duration(milliseconds: 100),
+                        duration: const Duration(milliseconds: 200),
                         child: Container(
                           height: _screenHeight,
-                          color: Interface.shadow.withOpacity(0.3),
+                          color: Interface.alwaysDark.withOpacity(0.3),
                           padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
                           child: _buildAnimalList(),
                         )))
@@ -451,24 +444,20 @@ class ActivityMapState extends State<ActivityMap> {
                   width: 35,
                   alignment: Alignment.center,
                   margin: const EdgeInsets.only(right: 5),
-                  child: AutoSizeText("$p%",
-                      maxLines: 1,
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                        color: HelperMap.getColor(i),
-                        fontSize: Interface.s14,
-                        fontWeight: FontWeight.w400,
-                      )))
+                  child: AutoSizeText(
+                    "$p%",
+                    maxLines: 1,
+                    textAlign: TextAlign.end,
+                    style: Interface.s12w300n(HelperMap.getColor(i)),
+                  ))
               : Container(),
           Expanded(
-              child: AutoSizeText(name,
-                  maxLines: 1,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: HelperMap.getColor(i),
-                    fontSize: Interface.s14,
-                    fontWeight: FontWeight.w400,
-                  )))
+              child: AutoSizeText(
+            name,
+            maxLines: 1,
+            textAlign: TextAlign.start,
+            style: Interface.s12w300n(HelperMap.getColor(i)),
+          ))
         ]));
       }
     }
@@ -482,7 +471,7 @@ class ActivityMapState extends State<ActivityMap> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
-        backgroundColor: Interface.colorMapBackground,
+        backgroundColor: Interface.alwaysDark,
       ),
       body: _buildStack(),
     );

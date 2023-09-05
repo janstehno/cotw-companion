@@ -56,8 +56,11 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                   "assets/graphics/icons/edit.svg",
                   height: 20,
                   width: 20,
-                  color: Interface.light,
                   alignment: Alignment.centerLeft,
+                  colorFilter: ColorFilter.mode(
+                    Interface.light,
+                    BlendMode.srcIn,
+                  ),
                 ))),
         child: GestureDetector(
             onTap: () {
@@ -68,32 +71,31 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                 color: widget.background,
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: Row(children: [
-                  AutoSizeText(_animal.level.toString(),
-                      maxLines: 1,
-                      style: TextStyle(
-                        color: widget.color,
-                        fontSize: Interface.s24,
-                        fontWeight: FontWeight.w600,
-                      )),
+                  AutoSizeText(
+                    _animal.level.toString(),
+                    maxLines: 1,
+                    style: Interface.s18w500n(Interface.dark),
+                  ),
                   Expanded(
                       child: Container(
                           padding: const EdgeInsets.only(left: 15, right: 30),
-                          child: AutoSizeText(_animal.getNameBasedOnReserve(context.locale, widget.reserveId),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: widget.color,
-                                fontSize: Interface.s20,
-                                fontWeight: FontWeight.w400,
-                              )))),
+                          child: AutoSizeText(
+                            _animal.getNameBasedOnReserve(context.locale, widget.reserveId),
+                            maxLines: 1,
+                            style: Interface.s16w300n(Interface.dark),
+                          ))),
                   if (HelperLoadout.isLoadoutActivated)
                     Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
                       (HelperLoadout.loadoutMin <= _animal.level && _animal.level <= HelperLoadout.loadoutMax)
                           ? Container(
-                              padding: EdgeInsets.only(bottom: (HelperLoadout.containsCallerForAnimal(_animal.id)) ? 3 : 0),
+                              padding: EdgeInsets.only(bottom: HelperLoadout.containsCallerForAnimal(_animal.id) ? 3 : 0),
                               child: SvgPicture.asset(
                                 "assets/graphics/icons/loadout.svg",
                                 width: 11,
-                                color: Interface.dark,
+                                colorFilter: ColorFilter.mode(
+                                  Interface.dark,
+                                  BlendMode.srcIn,
+                                ),
                               ))
                           : Container(),
                       HelperLoadout.containsCallerForAnimal(_animal.id)
@@ -102,7 +104,10 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                               child: SvgPicture.asset(
                                 "assets/graphics/icons/sense_hearing.svg",
                                 width: 11,
-                                color: Interface.dark,
+                                colorFilter: ColorFilter.mode(
+                                  Interface.dark,
+                                  BlendMode.srcIn,
+                                ),
                               ))
                           : Container()
                     ]),

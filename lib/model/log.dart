@@ -1,6 +1,7 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:core';
+
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -134,6 +135,10 @@ class Log {
     return text;
   }
 
+  bool isGreatOne() {
+    return _furId == Interface.greatOneId;
+  }
+
   String getTrophyRatingIcon() {
     switch (_trophyRating) {
       case 1:
@@ -143,9 +148,7 @@ class Log {
       case 3:
         return "assets/graphics/icons/trophy_gold.svg";
       case 4:
-        return "assets/graphics/icons/trophy_diamond.svg";
-      case 5:
-        return "assets/graphics/icons/trophy_great_one.svg";
+        return isGreatOne() ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg";
       default:
         return "assets/graphics/icons/trophy_none.svg";
     }
@@ -160,9 +163,7 @@ class Log {
       case 3:
         return Interface.trophyGold;
       case 4:
-        return Interface.trophyDiamond;
-      case 5:
-        return Interface.dark;
+        return isGreatOne() ? Interface.dark : Interface.trophyDiamond;
       default:
         return Interface.disabled;
     }

@@ -45,15 +45,12 @@ class BuilderAnimalZonesState extends State<BuilderAnimalZones> {
         for (int hour = zone.from; hour < zone.to; hour++) {
           _data.add(PieChartSectionData(color: zone.color, radius: radius));
           _numberData.add(PieChartSectionData(
-              color: Colors.transparent,
-              radius: 50.0,
-              title: hour.toString(),
-              showTitle: true,
-              titleStyle: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s18,
-                fontWeight: FontWeight.w400,
-              )));
+            color: Colors.transparent,
+            radius: 50.0,
+            title: hour.toString(),
+            showTitle: true,
+            titleStyle: Interface.s16w300n(Interface.dark),
+          ));
         }
       } else {
         for (int hour = zone.from; hour < zone.to; hour++) {
@@ -68,26 +65,25 @@ class BuilderAnimalZonesState extends State<BuilderAnimalZones> {
                     zone.icon,
                     height: 12,
                     width: 12,
-                    color: zone.zone == 4
-                        ? Interface.dark
-                        : zone.zone == 3
-                            ? Interface.light
-                            : Interface.alwaysDark,
+                    colorFilter: ColorFilter.mode(
+                        zone.zone == 4
+                            ? Interface.dark
+                            : zone.zone == 3
+                                ? Interface.light
+                                : Interface.alwaysDark,
+                        BlendMode.srcIn),
                   )));
             }
           } else {
             _data.add(PieChartSectionData(color: zone.color, radius: radius));
           }
           _numberData.add(PieChartSectionData(
-              color: Colors.transparent,
-              radius: 50.0,
-              title: hour.toString(),
-              showTitle: true,
-              titleStyle: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s18,
-                fontWeight: FontWeight.w400,
-              )));
+            color: Colors.transparent,
+            radius: 50.0,
+            title: hour.toString(),
+            showTitle: true,
+            titleStyle: Interface.s16w300n(Interface.dark),
+          ));
         }
       }
     }
@@ -122,13 +118,11 @@ class BuilderAnimalZonesState extends State<BuilderAnimalZones> {
           child: Container(
               alignment: Alignment.bottomCenter,
               padding: const EdgeInsets.only(left: 30, right: 30),
-              child: AutoSizeText(reserveName,
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Interface.dark,
-                    fontSize: Interface.s20,
-                    fontWeight: FontWeight.w400,
-                  ))))
+              child: AutoSizeText(
+                reserveName,
+                maxLines: 1,
+                style: Interface.s16w300n(Interface.dark),
+              )))
     ]);
   }
 
@@ -159,10 +153,11 @@ class BuilderAnimalZonesState extends State<BuilderAnimalZones> {
                                 color: Interface.accentBorder,
                               )),
                           dotDecoration: DotDecoration(
-                              width: 10 + Interface.accentBorderWidth,
-                              height: 10 + Interface.accentBorderWidth,
-                              color: Interface.disabled.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(5)))))
+                            width: 10 + Interface.accentBorderWidth,
+                            height: 10 + Interface.accentBorderWidth,
+                            color: Interface.disabled.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(5),
+                          ))))
               : Container()
         ]));
   }

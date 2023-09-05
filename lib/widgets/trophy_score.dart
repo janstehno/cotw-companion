@@ -9,8 +9,7 @@ class WidgetTrophyScore extends StatelessWidget {
   final String text, icon;
   final Color color, background;
   final EdgeInsets margin;
-  final bool valueKnown, iconRight;
-  final double iconSize, fontSize;
+  final bool valueKnown, alignRight;
 
   const WidgetTrophyScore({
     Key? key,
@@ -19,14 +18,12 @@ class WidgetTrophyScore extends StatelessWidget {
     required this.color,
     required this.background,
     this.valueKnown = true,
-    this.iconRight = false,
-    this.iconSize = 20,
-    this.fontSize = 22,
+    this.alignRight = false,
     this.margin = const EdgeInsets.all(0),
   }) : super(key: key);
 
   Widget _buildTrophyScore() {
-    if (iconRight) {
+    if (alignRight) {
       return Row(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
         _buildText(5, 15),
         _buildIcon(),
@@ -42,12 +39,10 @@ class WidgetTrophyScore extends StatelessWidget {
   Widget _buildText(double left, double right) {
     return Padding(
         padding: EdgeInsets.only(left: left, right: right),
-        child: AutoSizeText(valueKnown ? text : "?",
-            style: TextStyle(
-              color: Interface.dark,
-              fontSize: fontSize,
-              fontWeight: FontWeight.w600,
-            )));
+        child: AutoSizeText(
+          valueKnown ? text : "?",
+          style: Interface.s18w500n(Interface.dark),
+        ));
   }
 
   Widget _buildIcon() {
@@ -55,8 +50,8 @@ class WidgetTrophyScore extends StatelessWidget {
       icon: icon,
       color: color,
       background: background,
+      iconSize: 15,
       size: 30,
-      iconSize: iconSize,
     );
   }
 

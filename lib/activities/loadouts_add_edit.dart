@@ -1,24 +1,25 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cotwcompanion/builders/add_loadout/loadouts_items.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/builders/add_loadout/loadouts_items.dart';
+import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/loadout.dart';
-import 'package:cotwcompanion/widgets/text.dart';
-import 'package:cotwcompanion/widgets/title_functional.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:cotwcompanion/widgets/text_field.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/widgets/title_big_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 class ActivityLoadoutsAddEdit extends StatefulWidget {
   final Function callback;
@@ -122,12 +123,14 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
         itemBuilder: (context, index) {
           ammo = HelperJSON.getAmmo(_selectedAmmo[index]);
           return Container(
-              padding: EdgeInsets.only(top: index == 0 ? 25 : 2, bottom: index == _selectedAmmo.length - 1 ? 25 : 2),
-              child: WidgetText(
-                height: 25,
-                text: ammo.getName(context.locale),
-                color: Interface.dark,
-              ));
+            padding: EdgeInsets.only(top: index == 0 ? 25 : 2, bottom: index == _selectedAmmo.length - 1 ? 25 : 2),
+            child: Container(
+                padding: const EdgeInsets.only(left: 30, right: 30),
+                child: AutoSizeText(
+                  ammo.getName(context.locale),
+                  style: Interface.s16w300n(Interface.dark),
+                )),
+          );
         });
   }
 
@@ -145,12 +148,14 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
         itemBuilder: (context, index) {
           caller = HelperJSON.getCaller(_selectedCallers[index]);
           return Container(
-              padding: EdgeInsets.only(top: index == 0 ? 25 : 2, bottom: index == _selectedCallers.length - 1 ? 25 : 2),
-              child: WidgetText(
-                height: 25,
-                text: caller.getName(context.locale),
-                color: Interface.dark,
-              ));
+            padding: EdgeInsets.only(top: index == 0 ? 25 : 2, bottom: index == _selectedCallers.length - 1 ? 25 : 2),
+            child: Container(
+                padding: const EdgeInsets.only(left: 30, right: 30),
+                child: AutoSizeText(
+                  caller.getName(context.locale),
+                  style: Interface.s16w300n(Interface.dark),
+                )),
+          );
         });
   }
 
@@ -164,9 +169,9 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
 
   void _buildSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(milliseconds: 3000),
+        duration: const Duration(milliseconds: 5000),
         padding: const EdgeInsets.all(0),
-        backgroundColor: Interface.searchBackground,
+        backgroundColor: Interface.search,
         content: GestureDetector(
             onTap: () {
               setState(() {
@@ -180,92 +185,93 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
 
   Widget _buildName() {
     return Column(children: [
-      WidgetTitle(text: tr('name')),
+      WidgetTitleBig(
+        primaryText: tr('name'),
+      ),
       WidgetTextField(
         numberOnly: false,
         correct: _correctName,
         controller: _controller,
-        color: Interface.title,
-        background: Interface.subSubTitleBackground,
       )
     ]);
   }
 
   Widget _buildWeaponsCallers() {
     return Column(children: [
-      WidgetTitleFunctional.withButton(
-          text: tr('weapons'),
-          icon: "assets/graphics/icons/list.svg",
-          textColor: Interface.title,
-          background: Interface.subTitleBackground,
-          iconColor: Interface.accent,
-          buttonBackground: Interface.primary,
-          isTitle: true,
-          onTap: () {
-            _focus();
-            Navigator.push(context, MaterialPageRoute(builder: (context) => BuilderAddLoadoutItems(selected: _selectedAmmo, type: ObjectType.ammo, set: _setItems)));
-          }),
+      WidgetTitleBigButton(
+        primaryText: tr('weapons'),
+        icon: "assets/graphics/icons/menu_open.svg",
+        onTap: () {
+          _focus();
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => BuilderAddLoadoutItems(selected: _selectedAmmo, type: ObjectType.ammo, set: _setItems)));
+        },
+      ),
       _listOfAmmo(),
-      WidgetTitleFunctional.withButton(
-          text: tr('callers'),
-          icon: "assets/graphics/icons/list.svg",
-          textColor: Interface.title,
-          background: Interface.subTitleBackground,
-          iconColor: Interface.accent,
-          buttonBackground: Interface.primary,
-          isTitle: true,
-          onTap: () {
-            _focus();
-            Navigator.push(context, MaterialPageRoute(builder: (context) => BuilderAddLoadoutItems(selected: _selectedCallers, type: ObjectType.caller, set: _setItems)));
-          }),
+      WidgetTitleBigButton(
+        primaryText: tr('callers'),
+        icon: "assets/graphics/icons/menu_open.svg",
+        onTap: () {
+          _focus();
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => BuilderAddLoadoutItems(selected: _selectedCallers, type: ObjectType.caller, set: _setItems)));
+        },
+      ),
       _listOfCallers(),
     ]);
   }
 
   Widget _buildAdd() {
-    return GestureDetector(
-        onTap: () {
-          _focus();
-          _isNameCorrect();
-          if (_errorMessage.isNotEmpty) {
-            _buildSnackBar(_errorMessage);
-          } else {
-            setState(() {
-              _scaffoldMessengerState.hideCurrentSnackBar();
-            });
-            Loadout loadout = _createLoadout();
-            _editing ? HelperLoadout.editLoadout(loadout) : HelperLoadout.addLoadout(loadout);
-            widget.callback();
-            Navigator.pop(context);
-          }
-        },
-        child: Container(
-            height: 90,
-            alignment: Alignment.center,
-            color: Interface.primary,
-            child: SvgPicture.asset(
-              _editing ? "assets/graphics/icons/edit.svg" : "assets/graphics/icons/plus.svg",
-              height: 20,
-              width: 20,
-              color: Interface.accent,
+    return Positioned(
+        bottom: 30,
+        right: 30,
+        child: SimpleShadow(
+            sigma: 7,
+            color: Interface.alwaysDark,
+            child: WidgetButtonIcon(
+              buttonSize: 60,
+              icon: _editing ? "assets/graphics/icons/edit.svg" : "assets/graphics/icons/plus.svg",
+              onTap: () {
+                _focus();
+                _isNameCorrect();
+                if (_errorMessage.isNotEmpty) {
+                  _buildSnackBar(_errorMessage);
+                } else {
+                  setState(() {
+                    _scaffoldMessengerState.hideCurrentSnackBar();
+                  });
+                  Loadout loadout = _createLoadout();
+                  _editing ? HelperLoadout.editLoadout(loadout) : HelperLoadout.addLoadout(loadout);
+                  widget.callback();
+                  Navigator.pop(context);
+                }
+              },
             )));
+  }
+
+  Widget _buildStack() {
+    return Stack(fit: StackFit.expand, children: [
+      WidgetScrollbar(
+          child: SingleChildScrollView(
+              child: Column(children: [
+        WidgetAppBar(
+          text: _editing ? tr('edit') : tr('add'),
+          context: context,
+        ),
+        _buildName(),
+        _buildWeaponsCallers(),
+        const SizedBox(height: 90),
+      ]))),
+      _buildAdd(),
+    ]);
   }
 
   Widget _buildWidgets() {
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
-    return WidgetScaffold.withCustomBody(
-        body: WidgetScrollbar(
-            child: SingleChildScrollView(
-                child: Column(mainAxisSize: MainAxisSize.max, children: [
-      WidgetAppBar(
-        text: _editing ? tr('edit') : tr('add'),
-        fontSize: Interface.s30,
-        context: context,
-      ),
-      _buildName(),
-      _buildWeaponsCallers(),
-      _buildAdd(),
-    ]))));
+    return WidgetScaffold(
+      customBody: true,
+      body: _buildStack(),
+    );
   }
 
   @override

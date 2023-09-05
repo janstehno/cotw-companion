@@ -1,14 +1,14 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WidgetTag extends StatelessWidget {
   final String text, icon;
-  final double height, iconSize, fontSize;
+  final double height, iconSize;
   final Color color, background;
-  final FontWeight fontWeight;
   final EdgeInsets margin;
   final bool isVisible;
 
@@ -18,8 +18,6 @@ class WidgetTag extends StatelessWidget {
     this.icon = "",
     this.height = 40,
     this.iconSize = 16,
-    this.fontSize = 22,
-    this.fontWeight = FontWeight.w500,
     this.margin = const EdgeInsets.all(0),
     required this.color,
     required this.background,
@@ -32,8 +30,6 @@ class WidgetTag extends StatelessWidget {
     this.icon = "",
     this.height = 30,
     this.iconSize = 16,
-    this.fontSize = 18,
-    this.fontWeight = FontWeight.w400,
     this.margin = const EdgeInsets.all(0),
     required this.color,
     required this.background,
@@ -46,8 +42,6 @@ class WidgetTag extends StatelessWidget {
     this.icon = "",
     this.height = 25,
     this.iconSize = 16,
-    this.fontSize = 12,
-    this.fontWeight = FontWeight.w400,
     this.margin = const EdgeInsets.all(0),
     required this.color,
     required this.background,
@@ -73,17 +67,22 @@ class WidgetTag extends StatelessWidget {
                     icon,
                     width: iconSize,
                     height: iconSize,
-                    color: color,
+                    colorFilter: ColorFilter.mode(
+                      color,
+                      BlendMode.srcIn,
+                    ),
                   ))
               : Container(),
           text.isNotEmpty
-              ? AutoSizeText(text,
+              ? AutoSizeText(
+                  text,
                   maxLines: 1,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: fontSize,
-                    fontWeight: fontWeight,
-                  ))
+                  style: height <= 25
+                      ? Interface.s12w500n(color)
+                      : height <= 30
+                          ? Interface.s14w500n(color)
+                          : Interface.s16w500n(color),
+                )
               : Container()
         ]));
   }

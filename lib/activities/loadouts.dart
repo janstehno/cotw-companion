@@ -1,13 +1,13 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
 import 'package:cotwcompanion/model/loadout.dart';
-import 'package:cotwcompanion/widgets/entries/loadout.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/button.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/entries/loadout.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/searchbar.dart';
@@ -64,14 +64,16 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(milliseconds: 1000),
         padding: const EdgeInsets.all(0),
-        backgroundColor: Interface.searchBackground,
+        backgroundColor: Interface.search,
         content: GestureDetector(
             onTap: () {
               setState(() {
                 _scaffoldMessengerState.hideCurrentSnackBar();
               });
             },
-            child: WidgetSnackBar(text: message))));
+            child: WidgetSnackBar(
+              text: message,
+            ))));
   }
 
   void loadFile() async {
@@ -101,21 +103,6 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     }
   }
 
-  Widget _buildStack() {
-    return Stack(children: [
-      _buildLoadouts(),
-      Positioned(
-          right: 0,
-          bottom: 0,
-          child: Container(
-            color: Interface.searchBackground,
-            height: 75,
-            width: MediaQuery.of(context).size.width,
-          )),
-      _buildMenu()
-    ]);
-  }
-
   Widget _buildLoadouts() {
     bool last = false;
     return WidgetScrollbar(
@@ -126,16 +113,16 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
               return last
                   ? Column(children: [
                       EntryLoadout(
-                        loadout: _filtered[index],
                         index: index,
+                        loadout: _filtered[index],
                         callback: _filter,
                         context: context,
                       ),
                       const SizedBox(height: 75),
                     ])
                   : EntryLoadout(
-                      loadout: _filtered[index],
                       index: index,
+                      loadout: _filtered[index],
                       callback: _filter,
                       context: context,
                     );
@@ -164,9 +151,9 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
                             right: 0,
                             bottom: _fileOptionsOpened ? 125 : 0,
                             child: AnimatedOpacity(
-                                duration: const Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 200),
                                 opacity: _fileOptionsOpened ? 1 : 0,
-                                child: WidgetButton(
+                                child: WidgetButtonIcon(
                                     icon: "assets/graphics/icons/import.svg",
                                     color: Interface.light,
                                     background: Interface.dark,
@@ -182,9 +169,9 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
                             right: 0,
                             bottom: _fileOptionsOpened ? 75 : 0,
                             child: AnimatedOpacity(
-                                duration: const Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 200),
                                 opacity: _fileOptionsOpened ? 1 : 0,
-                                child: WidgetButton(
+                                child: WidgetButtonIcon(
                                     icon: "assets/graphics/icons/export.svg",
                                     color: Interface.light,
                                     background: Interface.dark,
@@ -198,7 +185,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
                         Positioned(
                             right: 0,
                             bottom: 0,
-                            child: WidgetButton(
+                            child: WidgetButtonIcon(
                                 icon: "assets/graphics/icons/file.svg",
                                 color: Interface.light,
                                 background: Interface.dark,
@@ -211,10 +198,8 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
                       ])),
                   Container(
                       margin: const EdgeInsets.only(right: 20, bottom: 17.5),
-                      child: WidgetButton(
+                      child: WidgetButtonIcon(
                           icon: "assets/graphics/icons/plus.svg",
-                          color: Interface.accent,
-                          background: Interface.primary,
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLoadoutsAddEdit(callback: _filter)));
                             _focus();
@@ -222,26 +207,37 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
                 ]))));
   }
 
-  Widget _buildWidgets() {
-    _scaffoldMessengerState = ScaffoldMessenger.of(context);
-    return WidgetScaffold.withCustomBody(
-        body: Column(mainAxisSize: MainAxisSize.max, children: [
+  Widget _buildBody() {
+    return Column(mainAxisSize: MainAxisSize.max, children: [
       WidgetAppBar(
         text: tr('loadouts'),
-        fontSize: Interface.s30,
         context: context,
       ),
+      WidgetSearchBar(
+        controller: _controller,
+      ),
       Expanded(
-          flex: 0,
-          child: WidgetSearchBar(
-            background: Interface.searchBackground,
-            color: Interface.search,
-            controller: _controller,
-          )),
-      Expanded(
-        child: _buildStack(),
-      )
-    ]));
+          child: Stack(children: [
+        _buildLoadouts(),
+        Positioned(
+            right: 0,
+            bottom: 0,
+            child: Container(
+              color: Interface.search,
+              height: 75,
+              width: MediaQuery.of(context).size.width,
+            )),
+        _buildMenu(),
+      ]))
+    ]);
+  }
+
+  Widget _buildWidgets() {
+    _scaffoldMessengerState = ScaffoldMessenger.of(context);
+    return WidgetScaffold(
+      customBody: true,
+      body: _buildBody(),
+    );
   }
 
   @override

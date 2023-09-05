@@ -71,9 +71,9 @@ class BuilderReserveCallersState extends State<BuilderReserveCallers> {
         itemBuilder: (context, index) {
           int callerId = _callers[index].id;
           return EntryReserveCaller(
-              background: index % 2 == 0 ? Interface.even : Interface.odd,
-              color: Interface.dark,
               callerId: callerId,
+              color: Interface.dark,
+              background: index % 2 == 0 ? Interface.even : Interface.odd,
               onTap: () {
                 Navigator.push(
                     context,

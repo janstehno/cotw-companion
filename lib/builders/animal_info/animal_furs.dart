@@ -45,13 +45,11 @@ class BuilderAnimalFursState extends State<BuilderAnimalFurs> {
     return _furs.isEmpty
         ? Row(mainAxisSize: MainAxisSize.max, children: [
             Expanded(
-                child: AutoSizeText(tr('none'),
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Interface.dark,
-                      fontSize: Interface.s20,
-                      fontWeight: FontWeight.w400,
-                    )))
+                child: AutoSizeText(
+              tr('none'),
+              maxLines: 1,
+              style: Interface.s16w300n(Interface.dark),
+            ))
           ])
         : ListView.builder(
             shrinkWrap: true,
@@ -59,11 +57,7 @@ class BuilderAnimalFursState extends State<BuilderAnimalFurs> {
             itemCount: _furs.length,
             itemBuilder: (context, index) {
               AnimalFur fur = _furs[index];
-              return Container(
-                  margin: EdgeInsets.only(bottom: index != _furs.length - 1 ? 5 : 0),
-                  child: EntryAnimalFur(
-                    fur: fur,
-                  ));
+              return EntryAnimalFur(fur: fur);
             });
   }
 

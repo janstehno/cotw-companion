@@ -4,9 +4,9 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/activities/info_dlc.dart';
 import 'package:cotwcompanion/model/dlc.dart';
-import 'package:cotwcompanion/widgets/text.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
+import 'package:cotwcompanion/widgets/tap_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -33,34 +33,37 @@ class BuilderOtherDlcsState extends State<BuilderOtherDlcs> {
     _dlcs.sort((a, b) => b.date.compareTo(a.date));
   }
 
+  Widget _buildList() {
+    return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: _dlcs.length,
+        itemBuilder: (context, index) {
+          Dlc dlc = _dlcs[index];
+          return WidgetTapText(
+            text: dlc.name,
+            color: dlc.type == -1 ? Interface.disabled : Interface.dark,
+            background: index % 2 == 0 ? Interface.even : Interface.odd,
+            onTap: () {
+              if (dlc.type != -1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ActivityDlcInfo(dlc: dlc)),
+                );
+              }
+            },
+          );
+        });
+  }
+
   Widget _buildWidgets() {
     return WidgetScaffold(
-        appBar: WidgetAppBar(
-            text: tr('content_downloadable_content'), maxLines: 1, color: Interface.accent, background: Interface.primary, fontSize: Interface.s30, context: context),
-        children: [
-          Column(children: [
-            ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: _dlcs.length,
-                itemBuilder: (context, index) {
-                  Dlc dlc = _dlcs[index];
-                  return WidgetText(
-                      height: 75,
-                      text: dlc.name,
-                      color: dlc.type == -1 ? Interface.disabled : Interface.dark,
-                      background: index % 2 == 0 ? Interface.even : Interface.odd,
-                      onTap: () {
-                        if (dlc.type != -1) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ActivityDlcInfo(dlc: dlc)),
-                          );
-                        }
-                      });
-                })
-          ])
-        ]);
+      appBar: WidgetAppBar(
+        text: tr('content_downloadable_content'),
+        context: context,
+      ),
+      body: _buildList(),
+    );
   }
 
   @override

@@ -2,13 +2,11 @@
 
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/title_functional.dart';
+import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/scrollbar.dart';
-import 'package:cotwcompanion/widgets/searchbar.dart';
+import 'package:cotwcompanion/widgets/title_big_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -83,52 +81,37 @@ class BuilderAddLoadoutItemsState extends State<BuilderAddLoadoutItems> {
               ? HelperJSON.getAmmo(HelperJSON.getWeaponsAmmo(itemId).secondId).getName(context.locale)
               : HelperJSON.getCaller(itemId).getName(context.locale);
           String subText = widget.type == ObjectType.ammo ? HelperJSON.getWeapon(HelperJSON.getWeaponsAmmo(itemId).firstId).getName(context.locale) : "";
-          return WidgetTitleFunctional.withSwitch(
-              text: text,
-              subText: subText,
-              icon: "assets/graphics/icons/minus.svg",
-              inactiveIcon: "assets/graphics/icons/plus.svg",
-              textColor: Interface.dark,
-              subTextColor: Interface.disabled,
-              background: index % 2 == 0 ? Interface.even : Interface.odd,
-              iconColor: Interface.alwaysDark,
-              iconInactiveColor: Interface.alwaysDark,
-              buttonBackground: Interface.selected,
-              buttonInactiveBackground: Interface.unselected,
-              oneLine: true,
-              isActive: widget.type == ObjectType.ammo ? _contains(HelperJSON.getWeaponsAmmo(itemId).secondId) : _contains(itemId),
-              onTap: () {
-                setState(() {
-                  _addOrRemove(widget.type == ObjectType.ammo ? HelperJSON.getWeaponsAmmo(itemId).secondId : itemId);
-                  widget.set(widget.type, _selectedList);
-                });
+          return WidgetTitleBigSwitch(
+            primaryText: text,
+            secondaryText: subText,
+            icon: "assets/graphics/icons/plus.svg",
+            color: Interface.alwaysDark,
+            background: Interface.green,
+            activeIcon: "assets/graphics/icons/minus.svg",
+            activeColor: Interface.alwaysDark,
+            activeBackground: Interface.red,
+            isActive: widget.type == ObjectType.ammo ? _contains(HelperJSON.getWeaponsAmmo(itemId).secondId) : _contains(itemId),
+            onTap: () {
+              setState(() {
+                _addOrRemove(widget.type == ObjectType.ammo ? HelperJSON.getWeaponsAmmo(itemId).secondId : itemId);
+                widget.set(widget.type, _selectedList);
               });
+            },
+          );
         });
   }
 
   Widget _buildWidgets() {
-    return WidgetScaffold.withCustomBody(
-        body: Column(children: [
-      Column(children: [
-        WidgetAppBar(
-            text: widget.type == ObjectType.ammo ? tr('weapons') : tr('callers'),
-            color: Interface.accent,
-            background: Interface.primary,
-            fontSize: Interface.s30,
-            context: context),
-        WidgetSearchBar(
-          background: Interface.searchBackground,
-          color: Interface.search,
-          controller: _controller,
-        )
-      ]),
-      Expanded(
-          child: WidgetScrollbar(
-              child: SingleChildScrollView(
-                  child: Column(children: [
-        _buildItems(),
-      ]))))
-    ]));
+    return WidgetScaffold(
+      appBar: WidgetAppBar(
+        text: widget.type == ObjectType.ammo ? tr('weapons') : tr('callers'),
+        context: context,
+      ),
+      withSearchBar: true,
+      appBarScroll: false,
+      searchBarController: _controller,
+      body: _buildItems(),
+    );
   }
 
   @override

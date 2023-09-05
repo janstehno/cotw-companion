@@ -36,8 +36,8 @@ class BuilderWeaponAmmoState extends State<BuilderWeaponAmmo> {
         itemCount: _ammo.length,
         itemBuilder: (context, index) {
           return EntryWeaponAmmo(
-            ammoId: _ammo[index],
             index: index,
+            ammoId: _ammo[index],
           );
         });
   }

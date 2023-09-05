@@ -2,30 +2,24 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/button.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:flutter/material.dart';
 
 class WidgetSnackBar extends StatelessWidget {
   final String text, icon;
-  final Color? color, background, iconColor;
   final Function? onTap;
-
-  final double buttonSize = 50;
 
   const WidgetSnackBar({
     Key? key,
     required this.text,
     this.icon = "",
-    this.color,
-    this.background = Colors.transparent,
-    this.iconColor,
     this.onTap,
   }) : super(key: key);
 
   Widget _buildWidgets() {
     return Container(
         height: 75,
-        color: background,
+        color: Interface.search,
         padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
           Expanded(
@@ -35,19 +29,12 @@ class WidgetSnackBar extends StatelessWidget {
                     text,
                     maxLines: 2,
                     textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: color ?? Interface.dark,
-                      fontSize: Interface.s14,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: Interface.s14w300n(Interface.dark),
                   ))),
           icon.isEmpty
               ? Container()
-              : WidgetButton.withIcon(
+              : WidgetButtonIcon(
                   icon: icon,
-                  color: iconColor ?? Interface.dark,
-                  background: Colors.transparent,
-                  buttonSize: buttonSize,
                   onTap: () {
                     onTap!();
                   },

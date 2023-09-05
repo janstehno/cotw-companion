@@ -1,14 +1,14 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/builders/reserve_info/reserve_animals.dart';
 import 'package:cotwcompanion/builders/reserve_info/reserve_callers.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/reserve.dart';
-import 'package:cotwcompanion/widgets/icon.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
+import 'package:cotwcompanion/widgets/icon.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/title.dart';
+import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -95,14 +95,14 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
 
   Widget _buildAnimalsCallers() {
     return Column(children: [
-      WidgetTitle(
-        text: tr('wildlife'),
+      WidgetTitleBig(
+        primaryText: tr('wildlife'),
       ),
       BuilderReserveAnimals(
         reserveId: widget.reserveId,
       ),
-      WidgetTitle(
-        text: tr('callers'),
+      WidgetTitleBig(
+        primaryText: tr('callers'),
       ),
       BuilderReserveCallers(
         reserveId: widget.reserveId,
@@ -113,17 +113,14 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-            height: 150,
-            text: _reserve.getName(context.locale),
-            maxLines: _reserve.getName(context.locale).split(" ").length == 1 ? 1 : 2,
-            color: Interface.accent,
-            background: Interface.primary,
-            fontSize: Interface.s40,
-            context: context),
-        children: [
+          text: _reserve.getName(context.locale),
+          maxLines: _reserve.getName(context.locale).split(" ").length > 2 ? 2 : 1,
+          context: context,
+        ),
+        body: Column(children: [
           _getEnvironment(),
           _buildAnimalsCallers(),
-        ]);
+        ]));
   }
 
   @override

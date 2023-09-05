@@ -49,10 +49,10 @@ class BuilderReserveAnimalsState extends State<BuilderReserveAnimals> {
         itemBuilder: (context, index) {
           int animalId = _animals[index].id;
           return EntryReserveAnimal(
-              background: index % 2 == 0 ? Interface.even : Interface.odd,
-              color: Interface.dark,
               animalId: animalId,
               reserveId: widget.reserveId,
+              color: Interface.dark,
+              background: index % 2 == 0 ? Interface.even : Interface.odd,
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityAnimalInfo(animalId: animalId)));
               },

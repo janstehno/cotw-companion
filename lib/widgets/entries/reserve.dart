@@ -5,20 +5,20 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/activities/info_reserve.dart';
 import 'package:cotwcompanion/builders/map.dart';
 import 'package:cotwcompanion/model/reserve.dart';
-import 'package:cotwcompanion/widgets/item.dart';
+import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class EntryReserve extends StatefulWidget {
-  final Reserve reserve;
   final int index;
+  final Reserve reserve;
   final Function callback;
 
   const EntryReserve({
     Key? key,
-    required this.reserve,
     required this.index,
+    required this.reserve,
     required this.callback,
   }) : super(key: key);
 
@@ -39,18 +39,13 @@ class EntryReserveState extends State<EntryReserve> {
         child: Container(
             padding: const EdgeInsets.all(30),
             color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
-            child: WidgetItem(
+            child: EntryItem(
               text: widget.reserve.getName(context.locale),
-              textColor: Interface.dark,
               itemIcon: Graphics.getReserveIcon(widget.reserve.id),
-              iconColor: Interface.dark,
               buttonIcon: "assets/graphics/icons/map.svg",
-              buttonColor: Interface.accent,
-              buttonBackground: Interface.primary,
               tags: [
                 WidgetTag.medium(
                   icon: "assets/graphics/icons/dlc.svg",
-                  iconSize: 20,
                   color: Interface.accent,
                   background: Interface.primary,
                   margin: const EdgeInsets.only(right: 5),

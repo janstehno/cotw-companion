@@ -1,27 +1,27 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/widgets/switch.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WidgetSwitchSort extends StatelessWidget {
   final String icon;
-  final Color activeColor, inactiveColor, activeBackground, inactiveBackground;
-  final double size, inactiveOpacity;
+  final Color? color, background, activeColor, activeBackground;
   final bool isAscended, isActive;
   final int orderNumber;
   final Function onTap;
 
+  final double size = 35;
+
   const WidgetSwitchSort({
     Key? key,
     required this.icon,
-    required this.activeColor,
-    required this.inactiveColor,
-    required this.activeBackground,
-    required this.inactiveBackground,
-    this.size = 40,
-    this.inactiveOpacity = 0.3,
+    this.color,
+    this.background,
+    this.activeColor,
+    this.activeBackground,
     required this.orderNumber,
     required this.isAscended,
     required this.isActive,
@@ -29,8 +29,8 @@ class WidgetSwitchSort extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
-    Color clr = isActive ? activeColor : inactiveColor.withOpacity(inactiveOpacity);
-    Color bcg = isActive ? activeBackground : inactiveBackground.withOpacity(inactiveOpacity);
+    Color widgetColor = isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled;
+    Color widgetBackground = isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3);
     String orderArrow = isAscended ? "assets/graphics/icons/sort_ascended.svg" : "assets/graphics/icons/sort_descended.svg";
     return Stack(children: [
       AnimatedOpacity(
@@ -43,43 +43,46 @@ class WidgetSwitchSort extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(size / 4)),
-                color: bcg,
+                color: widgetBackground,
               ),
-              child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+              child:
+                  Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 SvgPicture.asset(
                   icon,
                   width: 10,
                   height: 10,
-                  color: clr,
+                  colorFilter: ColorFilter.mode(
+                    widgetColor,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                   SvgPicture.asset(
                     orderArrow,
                     width: 12,
                     height: 12,
-                    color: clr,
+                    colorFilter: ColorFilter.mode(
+                      widgetColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
-                  AutoSizeText(orderNumber.toString(),
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: activeColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      )),
+                  AutoSizeText(
+                    orderNumber.toString(),
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: Interface.s16w500n(Interface.accent),
+                  ),
                 ])
               ]))),
       AnimatedOpacity(
           opacity: isActive ? 0 : 1,
           duration: const Duration(milliseconds: 200),
-          child: WidgetSwitch.withIcon(
+          child: WidgetSwitchIcon(
               activeIcon: icon,
-              inactiveIcon: icon,
-              buttonSize: size,
+              color: color,
+              background: background,
               activeColor: activeColor,
               activeBackground: activeBackground,
-              inactiveColor: inactiveColor,
-              inactiveBackground: inactiveBackground,
               isActive: isActive,
               onTap: () {
                 onTap();

@@ -1,56 +1,51 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/button.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_svg/svg.dart';
 
-class WidgetItem extends StatelessWidget {
+class EntryItem extends StatelessWidget {
   final String text, itemIcon, buttonIcon;
-  final Color textColor, iconColor, buttonColor, buttonBackground;
-  final double buttonSize;
   final List<WidgetTag> tags;
   final Function? onTap;
 
-  const WidgetItem({
+  const EntryItem({
     Key? key,
     required this.text,
     required this.itemIcon,
-    required this.textColor,
-    required this.iconColor,
     this.buttonIcon = "",
-    this.buttonColor = Colors.transparent,
-    this.buttonBackground = Colors.transparent,
-    this.buttonSize = 40,
     this.tags = const [],
     this.onTap,
   }) : super(key: key);
 
   Widget _buildWidgets() {
     return Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
         Expanded(
             child: Container(
-                padding: const EdgeInsets.only(right: 30),
-                child: AutoSizeText(text,
-                    maxLines: 3,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: Interface.s24,
-                      fontWeight: FontWeight.w600,
-                    )))),
+                margin: const EdgeInsets.only(right: 30),
+                alignment: Alignment.topLeft,
+                child: AutoSizeText(
+                  text,
+                  maxLines: 3,
+                  textAlign: TextAlign.left,
+                  style: Interface.s18w300n(Interface.dark),
+                ))),
         Container(
             width: 100,
-            height: 100,
+            height: 70,
             alignment: Alignment.center,
+            padding: const EdgeInsets.only(left: 17.5, right: 17.5),
             child: SvgPicture.asset(
               itemIcon,
-              color: iconColor,
-              width: 70,
-              height: 70,
+              fit: BoxFit.fitWidth,
+              colorFilter: ColorFilter.mode(
+                Interface.dark,
+                BlendMode.srcIn,
+              ),
             ))
       ]),
       Container(
@@ -71,11 +66,10 @@ class WidgetItem extends StatelessWidget {
                     ? Container(
                         width: 100,
                         alignment: Alignment.bottomCenter,
-                        child: WidgetButton.withIcon(
+                        child: WidgetButtonIcon(
                           icon: buttonIcon,
-                          buttonSize: buttonSize,
-                          color: buttonColor,
-                          background: buttonBackground,
+                          color: Interface.accent,
+                          background: Interface.primary,
                           onTap: () {
                             onTap!();
                           },

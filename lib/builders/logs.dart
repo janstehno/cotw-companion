@@ -25,7 +25,9 @@ class BuilderLogs extends StatelessWidget {
         future: Future.wait([HelperLog.readLogs(), _forcedDelay()]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError) {
-            return WidgetError(text: snapshot.error.toString());
+            return WidgetError(
+              text: snapshot.error.toString(),
+            );
           } else if (snapshot.hasData) {
             var logs = snapshot.data![0] as List<Log>;
             var widget = snapshot.data![1] as Widget;
@@ -34,7 +36,7 @@ class BuilderLogs extends StatelessWidget {
           } else {
             return Container(
               padding: const EdgeInsets.all(30),
-              color: Interface.mainBody,
+              color: Interface.body,
               child: SpinKitThreeBounce(size: 30, color: Interface.dark),
             );
           }

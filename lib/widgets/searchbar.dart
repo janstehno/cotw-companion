@@ -5,13 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WidgetSearchBar extends StatefulWidget {
-  final Color? color, background;
   final TextEditingController controller;
 
   const WidgetSearchBar({
     Key? key,
-    this.color,
-    this.background,
     required this.controller,
   }) : super(key: key);
 
@@ -23,7 +20,7 @@ class WidgetSearchBarState extends State<WidgetSearchBar> {
   Widget _buildWidgets() {
     return Container(
         height: 40,
-        color: widget.background ?? Interface.searchBackground,
+        color: Interface.search,
         child: Row(children: [
           Container(
               alignment: Alignment.center,
@@ -32,26 +29,25 @@ class WidgetSearchBarState extends State<WidgetSearchBar> {
                 "assets/graphics/icons/search.svg",
                 height: 15,
                 width: 15,
-                color: widget.color ?? Interface.search,
+                colorFilter: ColorFilter.mode(
+                  Interface.dark,
+                  BlendMode.srcIn,
+                ),
               )),
           Expanded(
               child: Container(
                   alignment: Alignment.centerLeft,
                   child: TextField(
-                      maxLines: 1,
-                      controller: widget.controller,
-                      textAlign: TextAlign.start,
-                      textAlignVertical: TextAlignVertical.center,
-                      cursorColor: Interface.primary,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        constraints: BoxConstraints(maxHeight: 27),
-                      ),
-                      style: TextStyle(
-                        color: widget.color ?? Interface.search,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      )))),
+                    controller: widget.controller,
+                    textAlign: TextAlign.start,
+                    textAlignVertical: TextAlignVertical.center,
+                    cursorColor: Interface.dark,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.only(top: -33),
+                    ),
+                    style: Interface.s16w300n(Interface.dark),
+                  ))),
           GestureDetector(
               child: Container(
                   alignment: Alignment.center,
@@ -60,7 +56,10 @@ class WidgetSearchBarState extends State<WidgetSearchBar> {
                     "assets/graphics/icons/menu_close.svg",
                     width: 15,
                     height: 15,
-                    color: Interface.disabled,
+                    colorFilter: ColorFilter.mode(
+                      Interface.dark,
+                      BlendMode.srcIn,
+                    ),
                   )),
               onTap: () {
                 setState(() {

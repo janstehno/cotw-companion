@@ -11,9 +11,9 @@ import 'package:cotwcompanion/builders/logs.dart';
 import 'package:cotwcompanion/builders/rawc.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/types.dart';
-import 'package:cotwcompanion/widgets/button.dart';
+import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/entries/menu.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
-import 'package:cotwcompanion/widgets/text_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,7 +27,7 @@ class ActivityHome extends StatefulWidget {
 }
 
 class ActivityHomeState extends State<ActivityHome> {
-  late double _screenWidth, _screenHeight, _screenPadding;
+  late double _screenWidth, _screenHeight;
 
   bool _menuOpened = false;
 
@@ -38,7 +38,6 @@ class ActivityHomeState extends State<ActivityHome> {
   void _getScreenSizes() {
     _screenWidth = MediaQuery.of(context).size.width;
     _screenHeight = MediaQuery.of(context).size.height - 1;
-    _screenPadding = MediaQuery.of(context).viewPadding.top;
   }
 
   void _redirectTo(String host, String path) async {
@@ -56,9 +55,12 @@ class ActivityHomeState extends State<ActivityHome> {
             padding: const EdgeInsets.only(right: 15),
             child: SvgPicture.asset(
               "assets/graphics/icons/$icon.svg",
-              color: Interface.alwaysLight,
               width: 20,
               height: 20,
+              colorFilter: const ColorFilter.mode(
+                Interface.alwaysLight,
+                BlendMode.srcIn,
+              ),
             )));
   }
 
@@ -67,71 +69,53 @@ class ActivityHomeState extends State<ActivityHome> {
         padding: const EdgeInsets.all(30),
         alignment: Alignment.center,
         child: Column(children: [
-          Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                    child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  height: 35,
-                                  alignment: Alignment.centerLeft,
-                                  child: const AutoSizeText("COTW COMPANION",
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                        color: Interface.alwaysLight,
-                                        fontFamily: 'Condensed',
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600,
-                                      ))),
-                              AutoSizeText(Interface.version,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Interface.alwaysLight.withOpacity(0.7),
-                                    fontFamily: 'Condensed',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                  )),
-                            ]))),
-                Column(children: [
-                  WidgetButton.withIcon(
-                      buttonSize: 35,
-                      icon: "assets/graphics/icons/menu_open.svg",
-                      color: Interface.accent,
-                      background: Interface.primary,
+          Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Expanded(
+                child: Container(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              height: 35,
+                              alignment: Alignment.centerLeft,
+                              child: AutoSizeText(
+                                "COTW COMPANION",
+                                maxLines: 1,
+                                style: Interface.s24w600c(Interface.alwaysLight),
+                              )),
+                          AutoSizeText(Interface.version,
+                              maxLines: 1,
+                              style: Interface.s18w400c(
+                                Interface.alwaysLight.withOpacity(0.5),
+                              )),
+                        ]))),
+            Column(children: [
+              WidgetButtonIcon(
+                  icon: "assets/graphics/icons/menu_open.svg",
+                  onTap: () {
+                    setState(() {
+                      _menuOpened = true;
+                    });
+                  }),
+              Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: WidgetButtonIcon(
+                      icon: "assets/graphics/icons/settings.svg",
                       onTap: () {
-                        setState(() {
-                          _menuOpened = true;
-                        });
-                      }),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: WidgetButton.withIcon(
-                          buttonSize: 35,
-                          icon: "assets/graphics/icons/settings.svg",
-                          color: Interface.accent,
-                          background: Interface.primary,
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ActivitySettings(callback: _callback)));
-                          }))
-                ])
-              ]),
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ActivitySettings(callback: _callback)));
+                      }))
+            ])
+          ]),
         ]));
   }
 
   Widget _buildMenuItem(String text, String icon, Widget activity) {
-    return WidgetTextIcon.withTap(
-      height: 60,
+    return EntryMenu(
       text: tr(text),
       icon: "assets/graphics/icons/$icon.svg",
-      color: Interface.dark,
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => activity));
       },
@@ -142,10 +126,10 @@ class ActivityHomeState extends State<ActivityHome> {
     return AnimatedPositioned(
         duration: const Duration(milliseconds: 200),
         left: _menuOpened ? _screenWidth / (orientation == Orientation.portrait ? 5 : 1.75) : _screenWidth,
-        height: _screenHeight - _screenPadding,
         width: _screenWidth - _screenWidth / (orientation == Orientation.portrait ? 5 : 1.75),
+        height: _screenHeight,
         child: Container(
-            color: Interface.light,
+            color: Interface.body,
             child: Stack(children: [
               WidgetScrollbar(
                   child: SingleChildScrollView(
@@ -170,14 +154,11 @@ class ActivityHomeState extends State<ActivityHome> {
                               ])))),
               Container(
                   height: 95,
-                  color: Interface.nothing,
+                  color: Interface.sectionTitle,
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   alignment: Alignment.centerRight,
-                  child: WidgetButton.withIcon(
-                      buttonSize: 35,
+                  child: WidgetButtonIcon(
                       icon: "assets/graphics/icons/menu_close.svg",
-                      color: Interface.accent,
-                      background: Interface.primary,
                       onTap: () {
                         setState(() {
                           _menuOpened = false;
@@ -187,73 +168,55 @@ class ActivityHomeState extends State<ActivityHome> {
   }
 
   Widget _buildLinks() {
-    return Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildLink("github", "github.com", "/janstehno"),
-          _buildLink("reddit", "reddit.com", "/user/Toastovac"),
-        ]);
+    return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
+      _buildLink("github", "github.com", "/janstehno"),
+      _buildLink("reddit", "reddit.com", "/user/Toastovac"),
+    ]);
   }
 
   Widget _buildAbout() {
-    return Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityAbout()));
-              },
-              child: AutoSizeText(tr('about'),
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Interface.primary,
-                    fontFamily: 'Condensed',
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                  ))),
-          Container(
-            margin: const EdgeInsets.only(top: 5),
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
-                },
-                child: AutoSizeText(tr('patch_notes'),
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Interface.primary,
-                      fontFamily: 'Condensed',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                    ))),
-          )
-        ]);
+    return Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.end, children: [
+      GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityAbout()));
+          },
+          child: AutoSizeText(
+            tr('about'),
+            maxLines: 1,
+            style: Interface.s18w400c(Interface.primary),
+          )),
+      Container(
+        margin: const EdgeInsets.only(top: 5),
+        child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
+            },
+            child: AutoSizeText(
+              tr('patch_notes'),
+              maxLines: 1,
+              style: Interface.s18w400c(Interface.primary),
+            )),
+      )
+    ]);
   }
 
   Widget _buildFooter() {
     return Container(
       padding: const EdgeInsets.all(30),
-      child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            _buildLinks(),
-            Expanded(child: _buildAbout()),
-          ]),
+      child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
+        _buildLinks(),
+        Expanded(child: _buildAbout()),
+      ]),
     );
   }
 
   Widget _buildWidgets() {
     return Scaffold(
-        appBar: AppBar(elevation: 0, backgroundColor: Interface.primary, toolbarHeight: 1),
+        appBar: AppBar(elevation: 0, backgroundColor: Interface.primary, toolbarHeight: 0.1),
         body: OrientationBuilder(builder: (context, orientation) {
           return Stack(children: [
             SizedBox(
-                height: _screenHeight - _screenPadding - 1,
+                height: _screenHeight - 0.1,
                 width: _screenWidth,
                 child: Image.asset(
                   "assets/graphics/images/cotw.jpg",
@@ -261,7 +224,7 @@ class ActivityHomeState extends State<ActivityHome> {
                   alignment: Alignment.center,
                 )),
             Container(
-              height: _screenHeight - _screenPadding - 1,
+              height: _screenHeight - 0.1,
               width: _screenWidth,
               color: Interface.alwaysDark.withOpacity(0.5),
             ),

@@ -1,9 +1,9 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/scroll_behavior.dart';
 import 'package:cotwcompanion/builders/home.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/scroll_behavior.dart';
 import 'package:cotwcompanion/widgets/error.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,6 @@ void main() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   int language = sharedPreferences.getInt("language") ?? 0;
   int color = sharedPreferences.getInt("color") ?? Interface.orange.value;
-  int fontSize = sharedPreferences.getInt("fontSize") ?? 3;
   int compactLogbook = sharedPreferences.getInt("compactLogbook") ?? 3;
   bool darkMode = sharedPreferences.getBool("darkMode") ?? false;
   bool imperialUnits = sharedPreferences.getBool("imperialUnits") ?? false;
@@ -29,7 +28,6 @@ void main() async {
   bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
   Interface.setPrimaryColor(Color(color));
   Interface.setColors(darkMode);
-  Interface.setFontSize(fontSize);
   runApp(EasyLocalization(
       path: 'assets/translations',
       startLocale: const Locale('en'),
@@ -53,7 +51,6 @@ void main() async {
         create: (BuildContext context) => Settings(
             language: language,
             color: color,
-            fontSize: fontSize,
             compactLogbook: compactLogbook,
             darkMode: darkMode,
             imperialUnits: imperialUnits,

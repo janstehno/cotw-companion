@@ -60,13 +60,11 @@ class BuilderAnimalCallersState extends State<BuilderAnimalCallers> {
                 );
               })
           //EMPTY
-          : AutoSizeText(tr('none'),
+          : AutoSizeText(
+              tr('none'),
               maxLines: 1,
-              style: TextStyle(
-                color: Interface.dark,
-                fontSize: Interface.s20,
-                fontWeight: FontWeight.w400,
-              ))
+              style: Interface.s16w300n(Interface.dark),
+            )
     ]);
   }
 

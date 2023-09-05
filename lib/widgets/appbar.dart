@@ -2,73 +2,62 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 class WidgetAppBar extends StatelessWidget {
   final String text;
+  final double height;
   final int maxLines;
-  final double? height, fontSize;
-  final FontWeight? fontWeight;
-  final Alignment? alignment;
-  final Color? color, background;
-  final Widget? child;
-  final EdgeInsets padding;
   final BuildContext context;
 
   const WidgetAppBar({
     Key? key,
     required this.text,
-    this.maxLines = 2,
     this.height = 90,
-    this.fontSize = 30,
-    this.fontWeight = FontWeight.w600,
-    this.alignment = Alignment.centerRight,
-    this.color,
-    this.background,
-    this.child,
-    this.padding = const EdgeInsets.only(right: 30),
+    this.maxLines = 1,
     required this.context,
   }) : super(key: key);
 
   Widget _buildBackButton() {
-    return AnimatedContainer(
+    return GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Container(
+            width: 80,
+            height: height,
+            color: Interface.primary,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: SvgPicture.asset(
+              "assets/graphics/icons/back.svg",
+              fit: BoxFit.fitWidth,
+              colorFilter: ColorFilter.mode(
+                Interface.accent,
+                BlendMode.srcIn,
+              ),
+            )));
+  }
+
+  Widget _buildText() {
+    return Container(
         height: height,
-        width: 70,
-        duration: const Duration(milliseconds: 200),
-        color: background ?? Interface.primary,
-        child: WidgetButton.withIcon(
-          icon: "assets/graphics/icons/back.svg",
-          color: color ?? Interface.accent,
-          background: Colors.transparent,
-          onTap: () {
-            Navigator.pop(context);
-          },
+        alignment: Alignment.centerRight,
+        color: Interface.primary,
+        padding: const EdgeInsets.only(right: 30),
+        child: AutoSizeText(
+          text.toUpperCase(),
+          maxLines: maxLines,
+          textAlign: TextAlign.right,
+          style: Interface.s28w600c(Interface.accent),
         ));
   }
 
   Widget _buildWidgets() {
     return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
       _buildBackButton(),
-      Expanded(
-          child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              height: height,
-              color: background ?? Interface.primary,
-              alignment: alignment,
-              padding: padding,
-              child: child ??
-                  AutoSizeText(
-                    text.toUpperCase(),
-                    maxLines: maxLines,
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: color ?? Interface.accent,
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                      fontFamily: 'Condensed',
-                    ),
-                  )))
+      Expanded(child: _buildText()),
     ]);
   }
 

@@ -2,10 +2,11 @@
 
 import 'package:cotwcompanion/miscellaneous/helpers/map.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/title_functional.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/switch.dart';
+import 'package:cotwcompanion/widgets/switch_icon.dart';
+import 'package:cotwcompanion/widgets/tap_text_indicator.dart';
+import 'package:cotwcompanion/widgets/title_big_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -29,14 +30,11 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
         alignment: Alignment.center,
         child: Wrap(alignment: WrapAlignment.center, spacing: 15, runSpacing: 15, children: [
-          WidgetSwitch.withIcon(
+          WidgetSwitchIcon(
             buttonSize: 50,
             activeIcon: "assets/graphics/icons/outpost.svg",
-            inactiveIcon: "assets/graphics/icons/outpost.svg",
             activeColor: Interface.light,
-            inactiveColor: Interface.disabled,
-            activeBackground: HelperMap.getColorE(0),
-            inactiveBackground: Interface.disabled.withOpacity(0.3),
+            activeBackground: Interface.dark,
             isActive: HelperMap.isActiveE(0),
             onTap: () {
               setState(() {
@@ -45,14 +43,11 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
               });
             },
           ),
-          WidgetSwitch.withIcon(
+          WidgetSwitchIcon(
             buttonSize: 50,
             activeIcon: "assets/graphics/icons/lookout.svg",
-            inactiveIcon: "assets/graphics/icons/lookout.svg",
             activeColor: Interface.light,
-            inactiveColor: Interface.disabled,
-            activeBackground: HelperMap.getColorE(1),
-            inactiveBackground: Interface.disabled.withOpacity(0.3),
+            activeBackground: Interface.dark,
             isActive: HelperMap.isActiveE(1),
             onTap: () {
               setState(() {
@@ -61,14 +56,11 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
               });
             },
           ),
-          WidgetSwitch.withIcon(
+          WidgetSwitchIcon(
             buttonSize: 50,
             activeIcon: "assets/graphics/icons/hide.svg",
-            inactiveIcon: "assets/graphics/icons/hide.svg",
             activeColor: Interface.light,
-            inactiveColor: Interface.disabled,
-            activeBackground: HelperMap.getColorE(2),
-            inactiveBackground: Interface.disabled.withOpacity(0.3),
+            activeBackground: Interface.dark,
             isActive: HelperMap.isActiveE(2),
             onTap: () {
               setState(() {
@@ -82,17 +74,12 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
 
   Widget _buildList() {
     return Column(children: [
-      WidgetTitleFunctional.withSwitch(
-        text: tr('wildlife'),
+      WidgetTitleBigSwitch(
+        primaryText: tr('wildlife'),
         icon: "assets/graphics/icons/empty.svg",
-        inactiveIcon: "assets/graphics/icons/full.svg",
-        textColor: Interface.title,
-        background: Interface.subTitleBackground,
-        iconColor: Interface.light,
-        iconInactiveColor: Interface.disabled,
-        buttonBackground: Interface.dark,
-        buttonInactiveBackground: Interface.disabled.withOpacity(0.3),
-        isTitle: true,
+        activeIcon: "assets/graphics/icons/full.svg",
+        activeColor: Interface.light,
+        activeBackground: Interface.dark,
         isActive: HelperMap.isEverythingActive(),
         onTap: () {
           setState(() {
@@ -106,12 +93,10 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: HelperMap.getNames.length,
           itemBuilder: (context, index) {
-            return WidgetTitleFunctional(
+            return WidgetTapTextIndicator(
               text: HelperMap.getName(index),
-              textColor: Interface.dark,
+              color: HelperMap.getColor(index),
               background: index % 2 == 0 ? Interface.even : Interface.odd,
-              buttonBackground: HelperMap.getColor(index),
-              buttonInactiveBackground: Interface.disabled.withOpacity(0.3),
               isActive: HelperMap.isActive(index),
               onTap: () {
                 setState(() {
@@ -128,16 +113,13 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
     return WidgetScaffold(
         appBar: WidgetAppBar(
           text: widget.name,
-          maxLines: 2,
-          color: Interface.accent,
-          background: Interface.primary,
-          fontSize: Interface.s26,
+          maxLines: widget.name.split(" ").length > 2 ? 2 : 1,
           context: context,
         ),
-        children: [
+        body: Column(children: [
           _buildEnvironment(),
           _buildList(),
-        ]);
+        ]));
   }
 
   @override

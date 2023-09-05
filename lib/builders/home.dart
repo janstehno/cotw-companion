@@ -48,7 +48,9 @@ class BuilderHome extends StatelessWidget {
         ]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError) {
-            return WidgetError(text: snapshot.error.toString());
+            return WidgetError(
+              text: snapshot.error.toString(),
+            );
           } else if (snapshot.hasData) {
             var ammo = snapshot.data![0] as List<Ammo>;
             var animals = snapshot.data![1] as List<Animal>;
@@ -64,8 +66,8 @@ class BuilderHome extends StatelessWidget {
             var weaponsAmmo = snapshot.data![11] as List<IdtoId>;
             var mapObjects = snapshot.data![12] as Map<String, dynamic>;
             var widget = snapshot.data![13] as Widget;
-            HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves,
-                weapons, weaponsAmmo, mapObjects);
+            HelperJSON.setLists(
+                ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, mapObjects);
             HelperJSON.setWeaponAmmo();
             HelperLog.context = context;
             return widget;
@@ -73,7 +75,7 @@ class BuilderHome extends StatelessWidget {
             return OrientationBuilder(builder: (context, orientation) {
               precacheImage(const AssetImage("assets/graphics/images/cotw.jpg"), context);
               return Container(
-                color: Interface.mainBody,
+                color: Interface.body,
                 padding: const EdgeInsets.all(30),
                 child: SpinKitThreeBounce(size: 30, color: Interface.dark),
               );

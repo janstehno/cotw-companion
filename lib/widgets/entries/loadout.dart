@@ -1,29 +1,29 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/loadout.dart';
+import 'package:cotwcompanion/widgets/entries/loadout_switch.dart';
 import 'package:cotwcompanion/widgets/snackbar.dart';
-import 'package:cotwcompanion/widgets/title_functional.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EntryLoadout extends StatefulWidget {
-  final Loadout loadout;
   final int index;
+  final Loadout loadout;
   final Function callback;
   final BuildContext context;
 
   const EntryLoadout({
     Key? key,
-    required this.loadout,
     required this.index,
+    required this.loadout,
     required this.callback,
     required this.context,
   }) : super(key: key);
@@ -33,7 +33,7 @@ class EntryLoadout extends StatefulWidget {
 }
 
 class EntryLoadoutState extends State<EntryLoadout> {
-  final Duration _duration = const Duration(milliseconds: 100);
+  final Duration _duration = const Duration(milliseconds: 200);
 
   List<Ammo> _ammo = [];
   List<Caller> _callers = [];
@@ -66,26 +66,17 @@ class EntryLoadoutState extends State<EntryLoadout> {
   }
 
   Widget _buildName() {
-    return Container(
-        height: 90,
-        color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
-        child: WidgetTitleFunctional(
-            text: widget.loadout.name,
-            textColor: Interface.dark,
-            background: Colors.transparent,
-            subText: "${tr("weapon_ammo")}: ${widget.loadout.ammo.length}   ${tr("callers")}: ${widget.loadout.callers.length}",
-            subTextColor: Interface.disabled,
-            buttonBackground: Interface.primary,
-            buttonInactiveBackground: Interface.disabled.withOpacity(0.3),
-            isActive: HelperLoadout.isActive(widget.loadout.id),
-            onTap: () {
-              setState(() {
-                HelperLoadout.activeLoadout.id == widget.loadout.id
-                    ? HelperLoadout.useLoadout(-1)
-                    : HelperLoadout.useLoadout(widget.loadout.id);
-                widget.callback();
-              });
-            }));
+    return WidgetLoadoutSwitch(
+      index: widget.index,
+      primaryText: widget.loadout.name,
+      isActive: HelperLoadout.isActive(widget.loadout.id),
+      onTap: () {
+        setState(() {
+          HelperLoadout.activeLoadout.id == widget.loadout.id ? HelperLoadout.useLoadout(-1) : HelperLoadout.useLoadout(widget.loadout.id);
+          widget.callback();
+        });
+      },
+    );
   }
 
   Widget _buildDetail() {
@@ -93,9 +84,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
     return AnimatedContainer(
         color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 15),
-        height: _detailContainer
-            ? ((20 * _ammo.length) + (20 * _callers.length) + (_ammo.isNotEmpty ? 40 : 0) + (_callers.isNotEmpty ? 40 : 0))
-            : 0,
+        height: _detailContainer ? ((20 * _ammo.length) + (20 * _callers.length) + (_ammo.isNotEmpty ? 40 : 0) + (_callers.isNotEmpty ? 40 : 0)) : 0,
         duration: _duration,
         child: AnimatedOpacity(
             opacity: _detailText ? 1 : 0,
@@ -106,13 +95,10 @@ class EntryLoadoutState extends State<EntryLoadout> {
                   : Container(
                       height: 20,
                       alignment: Alignment.centerLeft,
-                      child: AutoSizeText(tr("weapon_ammo").toUpperCase(),
-                          style: TextStyle(
-                            color: Interface.primary,
-                            fontSize: Interface.s20,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Condensed',
-                          ))),
+                      child: AutoSizeText(
+                        tr("weapon_ammo"),
+                        style: Interface.s14w300n(Interface.dark),
+                      )),
               _ammo.isEmpty
                   ? Container()
                   : ListView.builder(
@@ -123,12 +109,10 @@ class EntryLoadoutState extends State<EntryLoadout> {
                         return Container(
                             height: 20,
                             alignment: Alignment.centerLeft,
-                            child: AutoSizeText(_ammo[index].getName(context.locale),
-                                style: TextStyle(
-                                  color: Interface.dark,
-                                  fontSize: Interface.s14,
-                                  fontWeight: FontWeight.w300,
-                                )));
+                            child: AutoSizeText(
+                              _ammo[index].getName(context.locale),
+                              style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
+                            ));
                       }),
               _callers.isNotEmpty && _ammo.isNotEmpty ? const SizedBox(height: 10) : Container(),
               _callers.isEmpty
@@ -136,13 +120,10 @@ class EntryLoadoutState extends State<EntryLoadout> {
                   : Container(
                       height: 20,
                       alignment: Alignment.centerLeft,
-                      child: AutoSizeText(tr("callers").toUpperCase(),
-                          style: TextStyle(
-                            color: Interface.primary,
-                            fontSize: Interface.s20,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Condensed',
-                          ))),
+                      child: AutoSizeText(
+                        tr("callers"),
+                        style: Interface.s14w300n(Interface.dark),
+                      )),
               _callers.isEmpty
                   ? Container()
                   : ListView.builder(
@@ -153,12 +134,10 @@ class EntryLoadoutState extends State<EntryLoadout> {
                         return Container(
                             height: 20,
                             alignment: Alignment.centerLeft,
-                            child: AutoSizeText(_callers[index].getName(context.locale),
-                                style: TextStyle(
-                                  color: Interface.dark,
-                                  fontSize: Interface.s14,
-                                  fontWeight: FontWeight.w200,
-                                )));
+                            child: AutoSizeText(
+                              _callers[index].getName(context.locale),
+                              style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
+                            ));
                       }),
             ])));
   }
@@ -195,7 +174,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
           ScaffoldMessenger.of(widget.context).showSnackBar(SnackBar(
               duration: const Duration(milliseconds: 5000),
               padding: const EdgeInsets.all(0),
-              backgroundColor: Interface.searchBackground,
+              backgroundColor: Interface.search,
               content: GestureDetector(
                   onTap: () {
                     _hideSnackBar();
@@ -203,7 +182,6 @@ class EntryLoadoutState extends State<EntryLoadout> {
                   child: WidgetSnackBar(
                     text: tr('item_removed'),
                     icon: "assets/graphics/icons/reload.svg",
-                    iconColor: Interface.primary,
                     onTap: () {
                       _undo();
                     },
@@ -231,8 +209,11 @@ class EntryLoadoutState extends State<EntryLoadout> {
                       "assets/graphics/icons/edit.svg",
                       height: 20,
                       width: 20,
-                      color: Interface.alwaysDark,
                       alignment: Alignment.centerLeft,
+                      colorFilter: const ColorFilter.mode(
+                        Interface.alwaysDark,
+                        BlendMode.srcIn,
+                      ),
                     ))),
             child: Column(children: [
               _buildName(),

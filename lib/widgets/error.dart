@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -21,11 +21,7 @@ class WidgetError extends StatelessWidget {
             child: AutoSizeText(
               text ?? "Error. Please restart the application.",
               textAlign: TextAlign.start,
-              style: TextStyle(
-                color: Interface.accent,
-                fontSize: Interface.s22,
-                fontWeight: FontWeight.w400,
-              ),
+              style: Interface.s16w300n(Interface.accent),
             )));
   }
 

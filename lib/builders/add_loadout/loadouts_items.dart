@@ -5,8 +5,8 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
+import 'package:cotwcompanion/widgets/entries/loadout_switch.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/title_big_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -81,7 +81,8 @@ class BuilderAddLoadoutItemsState extends State<BuilderAddLoadoutItems> {
               ? HelperJSON.getAmmo(HelperJSON.getWeaponsAmmo(itemId).secondId).getName(context.locale)
               : HelperJSON.getCaller(itemId).getName(context.locale);
           String subText = widget.type == ObjectType.ammo ? HelperJSON.getWeapon(HelperJSON.getWeaponsAmmo(itemId).firstId).getName(context.locale) : "";
-          return WidgetTitleBigSwitch(
+          return WidgetLoadoutSwitch(
+            index: index,
             primaryText: text,
             secondaryText: subText,
             icon: "assets/graphics/icons/plus.svg",

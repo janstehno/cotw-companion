@@ -8,8 +8,8 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/loadout.dart';
-import 'package:cotwcompanion/widgets/entries/loadout_switch.dart';
 import 'package:cotwcompanion/widgets/snackbar.dart';
+import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -66,17 +66,31 @@ class EntryLoadoutState extends State<EntryLoadout> {
   }
 
   Widget _buildName() {
-    return WidgetLoadoutSwitch(
-      index: widget.index,
-      primaryText: widget.loadout.name,
-      isActive: HelperLoadout.isActive(widget.loadout.id),
-      onTap: () {
-        setState(() {
-          HelperLoadout.activeLoadout.id == widget.loadout.id ? HelperLoadout.useLoadout(-1) : HelperLoadout.useLoadout(widget.loadout.id);
-          widget.callback();
-        });
-      },
-    );
+    return Container(
+        height: 70,
+        color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        child: Row(children: [
+          Expanded(
+              child: Container(
+                  margin: const EdgeInsets.only(right: 30),
+                  child: AutoSizeText(
+                    widget.loadout.name,
+                    maxLines: 1,
+                    textAlign: TextAlign.start,
+                    style: Interface.s18w300n(Interface.dark),
+                  ))),
+          WidgetSwitchIcon(
+            isActive: HelperLoadout.isActive(widget.loadout.id),
+            onTap: () {
+              setState(() {
+                HelperLoadout.activeLoadout.id == widget.loadout.id ? HelperLoadout.useLoadout(-1) : HelperLoadout.useLoadout(widget.loadout.id);
+                widget.callback();
+              });
+            },
+          )
+        ]));
   }
 
   Widget _buildDetail() {

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.7.1";
+  static const String version = "1.7.2";
   static const int greatOneId = 100;
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;
@@ -11,19 +11,6 @@ class Interface {
 
   static bool _darkMode = false;
   static double accentBorderWidth = 0;
-
-  static double s40 = 36.0;
-  static double s26 = 26.0;
-  static double s24 = 24.0;
-  static double s22 = 22.0;
-  static double s20 = 20.0;
-  static double s18 = 18.0;
-  static double s16 = 16.0;
-  static double s14 = 14.0;
-  static double s12 = 12.0;
-  static double s10 = 10.0;
-  static double s8 = 8.0;
-  static double s6 = 6.0;
 
   static Color primary = Colors.transparent;
   static Color accent = Colors.transparent;

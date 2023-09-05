@@ -15,10 +15,13 @@ class WidgetRichText extends StatelessWidget {
   Widget _buildWidgets() {
     return EasyRichText(
       text,
+      selectable: false,
       textAlign: TextAlign.start,
+      defaultStyle: Interface.s16w300n(Interface.dark),
       patternList: [
         EasyRichTextPattern(
             targetString: '(\\*)(.*?)(\\*)',
+            style: Interface.s16w500n(Interface.primary),
             matchBuilder: (BuildContext context, RegExpMatch? match) {
               return TextSpan(
                 text: match![0]?.replaceAll('*', ''),
@@ -26,7 +29,6 @@ class WidgetRichText extends StatelessWidget {
               );
             })
       ],
-      defaultStyle: Interface.s16w300n(Interface.dark),
     );
   }
 

@@ -40,7 +40,7 @@ class WidgetTapTextIcon extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   alignRight
-                      ? Container()
+                      ? const SizedBox.shrink()
                       : SvgPicture.asset(
                           icon,
                           width: iconSize,
@@ -68,7 +68,7 @@ class WidgetTapTextIcon extends StatelessWidget {
                             BlendMode.srcIn,
                           ),
                         )
-                      : Container(),
+                      : const SizedBox.shrink(),
                 ])));
   }
 

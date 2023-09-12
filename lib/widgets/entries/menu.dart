@@ -7,46 +7,48 @@ import 'package:flutter_svg/svg.dart';
 
 class EntryMenu extends StatelessWidget {
   final String icon, text;
-  final Function? onTap;
+  final Function? onMenuTap;
 
   const EntryMenu({
     Key? key,
     required this.text,
     required this.icon,
-    required this.onTap,
+    required this.onMenuTap,
   }) : super(key: key);
 
   Widget _buildWidgets() {
     return GestureDetector(
-        onTap: () {
-          onTap!();
-        },
-        child: Container(
-            height: 60,
-            padding: const EdgeInsets.only(left: 30, right: 30),
-            child: Row(children: [
-              Container(
-                  width: 35,
-                  height: 35,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(right: 15),
-                  child: SvgPicture.asset(
-                    icon,
-                    width: 22,
-                    height: 22,
-                    fit: BoxFit.fitWidth,
-                    colorFilter: ColorFilter.mode(
-                      Interface.dark,
-                      BlendMode.srcIn,
-                    ),
-                  )),
-              Expanded(
-                  child: AutoSizeText(
-                text,
-                maxLines: 1,
-                style: Interface.s18w300n(Interface.dark),
-              ))
-            ])));
+      child: Container(
+          height: 60,
+          color: Colors.transparent,
+          padding: const EdgeInsets.only(left: 30, right: 30),
+          child: Row(children: [
+            Container(
+                width: 35,
+                height: 35,
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(right: 15),
+                child: SvgPicture.asset(
+                  icon,
+                  width: 22,
+                  height: 22,
+                  fit: BoxFit.fitWidth,
+                  colorFilter: ColorFilter.mode(
+                    Interface.dark,
+                    BlendMode.srcIn,
+                  ),
+                )),
+            Expanded(
+                child: AutoSizeText(
+              text,
+              maxLines: 1,
+              style: Interface.s18w300n(Interface.dark),
+            ))
+          ])),
+      onTap: () {
+        if (onMenuTap != null) onMenuTap!();
+      },
+    );
   }
 
   @override

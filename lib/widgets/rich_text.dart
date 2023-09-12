@@ -21,10 +21,9 @@ class WidgetRichText extends StatelessWidget {
       patternList: [
         EasyRichTextPattern(
             targetString: '(\\*)(.*?)(\\*)',
-            style: Interface.s16w500n(Interface.primary),
             matchBuilder: (BuildContext context, RegExpMatch? match) {
               return TextSpan(
-                text: match![0]?.replaceAll('*', ''),
+                text: match?[0]?.replaceAll('*', ''),
                 style: Interface.s16w500n(Interface.primary),
               );
             })

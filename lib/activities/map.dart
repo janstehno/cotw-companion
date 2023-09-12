@@ -5,19 +5,23 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/map_information.dart';
 import 'package:cotwcompanion/activities/map_layers.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/map.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/projection.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
+import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/map_zone.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/model/zone.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
+import 'package:cotwcompanion/widgets/menubar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
@@ -42,6 +46,7 @@ class ActivityMapState extends State<ActivityMap> {
   final double _maxZoom = 3;
   final int _minRowTiles = 4;
   final int _recommendedNumber = 100;
+  final double _menuHeight = 75;
 
   late final Reserve _reserve;
   late final Settings _settings;
@@ -73,11 +78,31 @@ class ActivityMapState extends State<ActivityMap> {
 
   void _getScreenSize() {
     _screenWidth = MediaQuery.of(context).size.width;
-    _screenHeight = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom;
+    _screenHeight = MediaQuery.of(context).size.height;
   }
 
   void _getTileSize(Orientation orientation) {
     _tileSize = (orientation == Orientation.portrait ? _screenHeight : _screenWidth) / _minRowTiles;
+  }
+
+  void _getAnimals() {
+    _getMapObjects();
+    for (IdtoId iti in HelperJSON.animalsReserves) {
+      if (iti.secondId == widget.reserveId) {
+        for (Animal animal in HelperJSON.animals) {
+          if (animal.id == iti.firstId) {
+            HelperMap.addAnimal(animal);
+            break;
+          }
+        }
+      }
+    }
+    HelperMap.addNames(context.locale, widget.reserveId);
+  }
+
+  void _getMapObjects() {
+    HelperMap.clearMap();
+    HelperMap.addObjects(HelperJSON.getMapObjects(widget.reserveId));
   }
 
   double _clamp(double x, double min, double max) {
@@ -165,38 +190,9 @@ class ActivityMapState extends State<ActivityMap> {
     _centerLngEnd = _mapController.center.longitude;
   }
 
-  Widget _buildStack() {
-    return OrientationBuilder(builder: (context, orientation) {
-      _getTileSize(orientation);
-      return Container(
-          color: Interface.alwaysDark,
-          child: GestureDetector(
-              onLongPress: () {
-                if (_opacity == 1) {
-                  _opacity = 0;
-                  Future.delayed(const Duration(milliseconds: 200), () {
-                    _showInterface = false;
-                    setState(() {});
-                  });
-                } else if (_opacity == 0) {
-                  _showInterface = true;
-                  Future.delayed(const Duration(milliseconds: 200), () {
-                    _opacity = 1;
-                    setState(() {});
-                  });
-                }
-                setState(() {});
-              },
-              child: Stack(children: [
-                _buildMap(orientation),
-                _buildMenu(orientation),
-              ])));
-    });
-  }
-
   Widget _buildMap(Orientation orientation) {
     return MapLayout(
-        tileSize: _tileSize.toInt(),
+        tileSize: _tileSize.toInt() + 1,
         controller: _mapController,
         builder: (context, transformer) {
           return GestureDetector(
@@ -216,15 +212,15 @@ class ActivityMapState extends State<ActivityMap> {
                   return const SizedBox.shrink();
                 }),
                 Container(color: Interface.alwaysDark.withOpacity(0.5)),
-                ..._buildObjectMarkers(transformer, HelperMap.getOutposts, Interface.alwaysLight, 15, MapObjectType.outpost),
-                ..._buildObjectMarkers(transformer, HelperMap.getLookouts, Interface.alwaysLight, 15, MapObjectType.lookout),
-                ..._buildObjectMarkers(transformer, HelperMap.getHides, Interface.alwaysLight, 3, MapObjectType.hide),
+                ..._buildObjectMarkers(transformer, HelperMap.getOutposts, Interface.alwaysLight, 15, MapItem.outpost),
+                ..._buildObjectMarkers(transformer, HelperMap.getLookouts, Interface.alwaysLight, 15, MapItem.lookout),
+                ..._buildObjectMarkers(transformer, HelperMap.getHides, Interface.alwaysLight, 3, MapItem.hide),
                 for (int index = 0; index < HelperMap.getAnimals.length; index++) ..._buildZones(transformer, index)
               ]));
         });
   }
 
-  Iterable<Widget> _buildObjectMarkers(MapTransformer transformer, List<LatLng> list, Color color, double iconSize, MapObjectType objectType) {
+  Iterable<Widget> _buildObjectMarkers(MapTransformer transformer, List<LatLng> list, Color color, double iconSize, MapItem objectType) {
     String icon = Graphics.getMapObjectIcon(objectType, _level);
     if (HelperMap.isActiveE(objectType.index)) {
       final positions = list.map(transformer.toOffset).toList();
@@ -235,7 +231,7 @@ class ActivityMapState extends State<ActivityMap> {
     return [];
   }
 
-  Widget _buildObjectMarker(Offset offset, String icon, Color color, double markerSize, MapObjectType objectType) {
+  Widget _buildObjectMarker(Offset offset, String icon, Color color, double markerSize, MapItem objectType) {
     double size = markerSize + (_mapController.zoom * 5);
     double left = offset.dx - (size / 2);
     double right = offset.dx + (size / 2);
@@ -248,7 +244,7 @@ class ActivityMapState extends State<ActivityMap> {
           height: size,
           left: left,
           top: top,
-          child: objectType == MapObjectType.hide && _level == 1
+          child: objectType == MapItem.hide && _level == 1
               ? const SizedBox.shrink()
               : Image.asset(
                   icon,
@@ -319,117 +315,6 @@ class ActivityMapState extends State<ActivityMap> {
     return const SizedBox.shrink();
   }
 
-  Widget _buildMenu(Orientation orientation) {
-    return _showInterface
-        ? Stack(children: [
-            Positioned(
-                right: 200,
-                bottom: 0,
-                child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 200),
-                    child: Container(
-                        margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetButtonIcon(
-                            icon: "assets/graphics/icons/back.svg",
-                            onTap: () {
-                              Navigator.pop(context);
-                            })))),
-            Positioned(
-                right: 150,
-                bottom: 0,
-                child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 200),
-                    child: Container(
-                        margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetSwitchIcon(
-                            activeIcon: "assets/graphics/icons/zone_feed.svg",
-                            color: Interface.alwaysDark,
-                            background: Interface.alwaysLight,
-                            isActive: _settings.getMapZonesType,
-                            onTap: () {
-                              setState(() {
-                                _settings.changeMapZonesType();
-                              });
-                            })))),
-            Positioned(
-                right: 100,
-                bottom: 0,
-                child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 200),
-                    child: Container(
-                        margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetSwitchIcon(
-                            activeIcon: "assets/graphics/icons/other.svg",
-                            color: Interface.alwaysDark,
-                            background: Interface.alwaysLight,
-                            isActive: _settings.getMapZonesStyle,
-                            onTap: () {
-                              setState(() {
-                                _settings.changeMapZonesStyle();
-                              });
-                            })))),
-            Positioned(
-                right: 50,
-                bottom: 0,
-                child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 200),
-                    child: Container(
-                        margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetButtonIcon(
-                            icon: "assets/graphics/icons/about.svg",
-                            color: Interface.alwaysDark,
-                            background: Interface.alwaysLight,
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityMapInformation()));
-                            })))),
-            Positioned(
-                right: 0,
-                bottom: 0,
-                child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 200),
-                    child: Container(
-                        margin: const EdgeInsets.only(right: 20, bottom: 20),
-                        child: WidgetButtonIcon(
-                            icon: "assets/graphics/icons/menu_open.svg",
-                            color: Interface.alwaysDark,
-                            background: Interface.alwaysLight,
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMapLayers(name: _reserve.en, callback: _reload)));
-                            })))),
-            orientation == Orientation.portrait
-                ? Positioned(
-                    left: 0,
-                    top: 0,
-                    child: AnimatedOpacity(
-                        opacity: _opacity,
-                        duration: const Duration(milliseconds: 200),
-                        child: Container(
-                          width: _screenWidth,
-                          color: Interface.alwaysDark.withOpacity(0.3),
-                          padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
-                          child: _buildAnimalList(),
-                        )))
-                : Positioned(
-                    left: 0,
-                    top: 0,
-                    child: AnimatedOpacity(
-                        opacity: _opacity,
-                        duration: const Duration(milliseconds: 200),
-                        child: Container(
-                          height: _screenHeight,
-                          color: Interface.alwaysDark.withOpacity(0.3),
-                          padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
-                          child: _buildAnimalList(),
-                        )))
-          ])
-        : Container();
-  }
-
   Widget _buildAnimalList() {
     List<Widget> widgets = [];
     for (int i = 0; i < HelperMap.getNames.length; i++) {
@@ -450,7 +335,7 @@ class ActivityMapState extends State<ActivityMap> {
                     textAlign: TextAlign.end,
                     style: Interface.s12w300n(HelperMap.getColor(i)),
                   ))
-              : Container(),
+              : const SizedBox.shrink(),
           Expanded(
               child: AutoSizeText(
             name,
@@ -467,7 +352,137 @@ class ActivityMapState extends State<ActivityMap> {
     );
   }
 
+  Widget _buildList(Orientation orientation) {
+    return _showInterface
+        ? orientation == Orientation.portrait
+            ? Positioned(
+                left: 0,
+                top: 0,
+                child: AnimatedOpacity(
+                    opacity: _opacity,
+                    duration: const Duration(milliseconds: 200),
+                    child: Container(
+                      width: _screenWidth,
+                      color: Interface.alwaysDark.withOpacity(0.3),
+                      padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
+                      child: _buildAnimalList(),
+                    )))
+            : Positioned(
+                left: 0,
+                top: 0,
+                child: AnimatedOpacity(
+                    opacity: _opacity,
+                    duration: const Duration(milliseconds: 200),
+                    child: Container(
+                      height: _screenHeight,
+                      color: Interface.alwaysDark.withOpacity(0.3),
+                      padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
+                      child: _buildAnimalList(),
+                    )))
+        : const SizedBox.shrink();
+  }
+
+  Widget _buildMenu(Orientation orientation) {
+    return _showInterface
+        ? AnimatedOpacity(
+            opacity: _opacity,
+            duration: const Duration(milliseconds: 200),
+            child: WidgetMenuBar(
+              width: orientation == Orientation.portrait ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height,
+              height: _menuHeight,
+              items: [
+                EntryMenuBarItem(
+                  barButton: WidgetButtonIcon(
+                      icon: "assets/graphics/icons/back.svg",
+                      onTap: () {
+                        Navigator.pop(context);
+                      }),
+                ),
+                EntryMenuBarItem(
+                  barButton: WidgetButtonIcon(
+                      icon: "assets/graphics/icons/about.svg",
+                      iconSize: 16,
+                      color: Interface.alwaysDark,
+                      background: Interface.alwaysLight,
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityMapInformation()));
+                      }),
+                ),
+                EntryMenuBarItem(
+                  barButton: WidgetSwitchIcon(
+                      icon: "assets/graphics/icons/zone_feed.svg",
+                      color: Interface.alwaysDark,
+                      background: Interface.alwaysLight,
+                      isActive: _settings.getMapZonesType,
+                      onTap: () {
+                        setState(() {
+                          _settings.changeMapZonesType();
+                        });
+                      }),
+                ),
+                EntryMenuBarItem(
+                  barButton: WidgetSwitchIcon(
+                      icon: "assets/graphics/icons/other.svg",
+                      color: Interface.alwaysDark,
+                      background: Interface.alwaysLight,
+                      isActive: _settings.getMapZonesStyle,
+                      onTap: () {
+                        setState(() {
+                          _settings.changeMapZonesStyle();
+                        });
+                      }),
+                ),
+                EntryMenuBarItem(
+                  barButton: WidgetButtonIcon(
+                      icon: "assets/graphics/icons/menu_open.svg",
+                      color: Interface.alwaysDark,
+                      background: Interface.alwaysLight,
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMapLayers(name: _reserve.en, callback: _reload)));
+                      }),
+                )
+              ],
+            ))
+        : const SizedBox.shrink();
+  }
+
+  Widget _buildStack() {
+    return OrientationBuilder(builder: (context, orientation) {
+      _getTileSize(orientation);
+      return Container(
+        color: Interface.alwaysDark,
+        child: GestureDetector(
+            onLongPress: () {
+              if (_opacity == 1) {
+                _opacity = 0;
+                Future.delayed(const Duration(milliseconds: 200), () {
+                  _showInterface = false;
+                  setState(() {});
+                });
+              } else if (_opacity == 0) {
+                _showInterface = true;
+                Future.delayed(const Duration(milliseconds: 200), () {
+                  _opacity = 1;
+                  setState(() {});
+                });
+              }
+              setState(() {});
+            },
+            child: Stack(children: [
+              _buildMap(orientation),
+              _buildList(orientation),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: _buildMenu(orientation),
+              )
+            ])),
+      );
+    });
+  }
+
   Widget _buildWidgets() {
+    _getAnimals();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,

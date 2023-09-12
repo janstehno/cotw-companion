@@ -1,8 +1,8 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:cotwcompanion/activities/info_weapon.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/activities/info_weapon.dart';
 import 'package:cotwcompanion/model/weapon.dart';
 import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
@@ -26,6 +26,31 @@ class EntryWeapon extends StatefulWidget {
 }
 
 class EntryWeaponState extends State<EntryWeapon> {
+  List<WidgetTag> _buildTags() {
+    List<WidgetTag> tags = [];
+    if (widget.weapon.isFromDlc) {
+      tags.add(WidgetTag.big(
+        icon: "assets/graphics/icons/dlc.svg",
+        color: Interface.accent,
+        background: Interface.primary,
+      ));
+    }
+    tags.addAll([
+      WidgetTag.big(
+        text: widget.weapon.min == widget.weapon.max ? "${widget.weapon.min}" : "${widget.weapon.min} - ${widget.weapon.max}",
+        color: Interface.dark,
+        background: Interface.tag,
+      ),
+      WidgetTag.big(
+        text: widget.weapon.id == 21 ? "1/2" : widget.weapon.mag.toString(),
+        icon: "assets/graphics/icons/weapon_mag.svg",
+        color: Interface.dark,
+        background: Interface.tag,
+      )
+    ]);
+    return tags;
+  }
+
   Widget _buildWidgets() {
     return GestureDetector(
         onTap: () {
@@ -39,29 +64,10 @@ class EntryWeaponState extends State<EntryWeapon> {
             padding: const EdgeInsets.all(30),
             color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
             child: EntryItem(
-                text: widget.weapon.getName(context.locale),
-                itemIcon: Graphics.getWeaponIcon(widget.weapon.id),
-                tags: [
-                  WidgetTag.medium(
-                    icon: "assets/graphics/icons/dlc.svg",
-                    color: Interface.accent,
-                    background: Interface.primary,
-                    margin: const EdgeInsets.only(right: 5),
-                    isVisible: widget.weapon.isFromDlc,
-                  ),
-                  WidgetTag.medium(
-                    text: "${widget.weapon.min} - ${widget.weapon.max}",
-                    color: Interface.dark,
-                    background: Interface.tag,
-                    margin: const EdgeInsets.only(right: 5),
-                  ),
-                  WidgetTag.medium(
-                    text: widget.weapon.id == 21 ? "1/2" : widget.weapon.mag.toString(),
-                    icon: "assets/graphics/icons/weapon_mag.svg",
-                    color: Interface.dark,
-                    background: Interface.tag,
-                  )
-                ])));
+              text: widget.weapon.getName(context.locale),
+              itemIcon: Graphics.getWeaponIcon(widget.weapon.id),
+              tags: _buildTags(),
+            )));
   }
 
   @override

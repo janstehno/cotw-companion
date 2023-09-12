@@ -2,8 +2,8 @@
 
 import 'package:async/async.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/builders/map.dart';
-import 'package:cotwcompanion/builders/need_zones/reserve_need_zones.dart';
+import 'package:cotwcompanion/activities/map.dart';
+import 'package:cotwcompanion/lists/need_zones/need_zones.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/reserve.dart';
@@ -48,7 +48,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   void initState() {
     _timer = RestartableTimer(const Duration(microseconds: 995572), () => _changeTime());
     _allClasses = HelperJSON.getReserve(_reserveId).allClasses;
-    _resetSwtiches();
+    _resetSwitches();
     super.initState();
   }
 
@@ -91,7 +91,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     });
   }
 
-  void _resetSwtiches() {
+  void _resetSwitches() {
     for (int index = 0; index < 9; index++) {
       _shownClasses[index] = false;
       _disabledClasses[index] = true;
@@ -106,7 +106,6 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return Column(children: [
       WidgetSlider(
           values: [_hour.toDouble()],
-          text: _hour.toString(),
           min: 0,
           max: 23,
           onDrag: (id, lower, upper) {
@@ -117,7 +116,6 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           }),
       WidgetSlider(
           values: [_minute.toDouble()],
-          text: _minute.toString(),
           min: 0,
           max: 59,
           onDrag: (id, lower, upper) {
@@ -130,13 +128,13 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
 
   Widget _buildReserves() {
     return _compact
-        ? Container()
+        ? const SizedBox.shrink()
         : Container(
             padding: const EdgeInsets.all(0),
             child: DropdownButton(
               dropdownColor: Interface.dropDown,
-              underline: Container(),
-              icon: Container(),
+              underline: const SizedBox.shrink(),
+              icon: const SizedBox.shrink(),
               elevation: 0,
               itemHeight: 60,
               menuMaxHeight: 300,
@@ -146,7 +144,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
                 setState(() {
                   _reserveId = value;
                   _allClasses = HelperJSON.getReserve(value).allClasses;
-                  _resetSwtiches();
+                  _resetSwitches();
                 });
               },
               items: _buildDropDownReserves(),
@@ -185,7 +183,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
                 });
               },
             )
-          : Container(),
+          : const SizedBox.shrink(),
       portrait
           ? WidgetSwitchIcon(
               buttonSize: 45,
@@ -203,7 +201,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
                 });
               },
             )
-          : Container()
+          : const SizedBox.shrink()
     ]);
   }
 
@@ -299,17 +297,24 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
         ]));
   }
 
+  double _getSwitchSize() {
+    double itemWidth = 30;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double itemsBetween = 8 * 10 + 60;
+    double availableWidth = screenWidth - itemsBetween;
+    double itemsWidth = 9 * itemWidth;
+    double calcWidth = availableWidth / 9;
+    return availableWidth > itemsWidth ? itemWidth : calcWidth;
+  }
+
   List<Widget> _buildClassSwitches() {
-    double width = MediaQuery.of(context).size.width - 60;
-    double size = width > 305 ? 25 : ((width - 56) / 9);
-    double margin = width > 305 ? 10 : 7;
     List<Widget> switches = [];
     for (int index = 0; index < 9; index++) {
       switches.add(Container(
-          margin: EdgeInsets.only(right: index < 8 ? margin : 0),
+          margin: EdgeInsets.only(right: index < 8 ? 10 : 0),
           child: WidgetSwitchText(
-            buttonWidth: size,
-            buttonHeight: size,
+            buttonWidth: _getSwitchSize(),
+            buttonHeight: _getSwitchSize(),
             text: "${index + 1}",
             color: Interface.disabled.withOpacity(_disabledClasses.elementAt(index) ? 0.3 : 1),
             background: Interface.disabled.withOpacity(_disabledClasses.elementAt(index) ? 0.1 : 0.3),
@@ -326,29 +331,25 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   }
 
   Widget _buildClass() {
-    double width = MediaQuery.of(context).size.width - 60;
-    double size = width > 305 ? 305 : width;
     return _classSwitches
         ? Container(
-            width: width + 60,
-            height: 70,
             color: Interface.title,
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.only(left: 30, right: 30),
+            padding: EdgeInsets.fromLTRB(30, _compact ? 20 : 0, 30, _compact ? 20 : 30),
             child: SizedBox(
-                width: size,
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: _buildClassSwitches(),
                 )))
-        : Container();
+        : const SizedBox.shrink();
   }
 
   Widget _buildTimeChangerAndReserve() {
     return _compact
-        ? Container()
+        ? const SizedBox.shrink()
         : Column(children: [
             WidgetTitleBigSwitch(
               primaryText: tr('time'),
@@ -373,7 +374,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BuilderMap(reserveId: _reserveId)),
+                  MaterialPageRoute(builder: (context) => ActivityMap(reserveId: _reserveId)),
                 );
               },
             )
@@ -391,12 +392,12 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   Widget _buildNeedZones() {
     return Column(children: [
       _compact
-          ? Container()
+          ? const SizedBox.shrink()
           : WidgetTitleBig(
               primaryText: tr('animal_need_zones'),
             ),
       _buildClass(),
-      BuilderReserveNeedZones(
+      ListNeedZones(
         reserveId: _reserveId,
         hour: _hour,
         classes: _shownClasses,

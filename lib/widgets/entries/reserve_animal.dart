@@ -97,7 +97,7 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                                   BlendMode.srcIn,
                                 ),
                               ))
-                          : Container(),
+                          : const SizedBox.shrink(),
                       HelperLoadout.containsCallerForAnimal(_animal.id)
                           ? Container(
                               padding: EdgeInsets.only(top: (HelperLoadout.loadoutMin <= _animal.level && _animal.level <= HelperLoadout.loadoutMax) ? 3 : 0),
@@ -109,7 +109,7 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                                   BlendMode.srcIn,
                                 ),
                               ))
-                          : Container()
+                          : const SizedBox.shrink()
                     ]),
                   Container(
                       padding: const EdgeInsets.only(left: 15),

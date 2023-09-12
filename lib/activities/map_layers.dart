@@ -32,7 +32,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
         child: Wrap(alignment: WrapAlignment.center, spacing: 15, runSpacing: 15, children: [
           WidgetSwitchIcon(
             buttonSize: 50,
-            activeIcon: "assets/graphics/icons/outpost.svg",
+            icon: "assets/graphics/icons/outpost.svg",
             activeColor: Interface.light,
             activeBackground: Interface.dark,
             isActive: HelperMap.isActiveE(0),
@@ -45,7 +45,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
           ),
           WidgetSwitchIcon(
             buttonSize: 50,
-            activeIcon: "assets/graphics/icons/lookout.svg",
+            icon: "assets/graphics/icons/lookout.svg",
             activeColor: Interface.light,
             activeBackground: Interface.dark,
             isActive: HelperMap.isActiveE(1),
@@ -58,7 +58,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
           ),
           WidgetSwitchIcon(
             buttonSize: 50,
-            activeIcon: "assets/graphics/icons/hide.svg",
+            icon: "assets/graphics/icons/hide.svg",
             activeColor: Interface.light,
             activeBackground: Interface.dark,
             isActive: HelperMap.isActiveE(2),

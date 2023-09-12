@@ -46,7 +46,7 @@ does what. It will probably be stored here on GitHub so anyone can access it.
 
 For those who at least mentioned the app anywhere and especially for those who regularly use my app:
 Thank you very much for your support and reviews you gave me. I appreciate it a lot. To this day,
-the app was used at least once by almost **35K** users on Android and almost **20K** users on iOS.
+the app was used at least once by almost **40K** users on Android and almost **25K** users on iOS.
 Which is totally awesome and I did not think this could be possible. Without you I probably would
 not be able to release the app for iOS devices.
 

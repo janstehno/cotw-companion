@@ -1,8 +1,8 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/builders/weapon_info/weapon_ammo.dart';
-import 'package:cotwcompanion/builders/weapon_info/weapon_animals.dart';
+import 'package:cotwcompanion/lists/weapon_info/weapon_ammo.dart';
+import 'package:cotwcompanion/lists/weapon_info/weapon_animals.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/weapon.dart';
@@ -10,7 +10,6 @@ import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -41,7 +40,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
         height: 32.5,
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           leftToRight
-              ? Container()
+              ? const SizedBox.shrink()
               : Container(
                   margin: const EdgeInsets.only(right: 10),
                   child: Text(
@@ -64,7 +63,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                     text,
                     style: Interface.s16w300n(Interface.dark),
                   ))
-              : Container()
+              : const SizedBox.shrink()
         ]));
   }
 
@@ -75,8 +74,8 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
           child: Column(mainAxisSize: MainAxisSize.max, children: [
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.only(right: 30),
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 30),
                       child: AutoSizeText(
                         tr('weapon_type'),
                         maxLines: 1,
@@ -88,7 +87,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
               )
             ]),
             Container(
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                margin: const EdgeInsets.only(top: 10, bottom: 10),
                 child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Expanded(
                       child: Padding(
@@ -100,13 +99,13 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                           ))),
                   Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                     _weapon.price == 0 || _weapon.price == -1
-                        ? Container()
+                        ? const SizedBox.shrink()
                         : Container(
                             margin: const EdgeInsets.only(right: 2.5),
                             child: SvgPicture.asset(
                               "assets/graphics/icons/money.svg",
-                              width: 13,
-                              height: 13,
+                              width: 15,
+                              height: 15,
                               colorFilter: ColorFilter.mode(
                                 Interface.dark,
                                 BlendMode.srcIn,
@@ -126,8 +125,8 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                 ])),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.only(right: 30),
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 30),
                       child: AutoSizeText(
                         tr('weapon_magazine'),
                         maxLines: 1,
@@ -159,7 +158,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
       WidgetTitleBig(
         primaryText: tr('weapon_ammo'),
       ),
-      BuilderWeaponAmmo(weaponId: _weapon.id),
+      ListWeaponAmmo(weaponId: _weapon.id),
     ]);
   }
 
@@ -168,7 +167,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
       WidgetTitleBig(
         primaryText: tr('recommended_animals'),
       ),
-      BuilderWeaponAnimals(weaponId: _weapon.id),
+      ListWeaponAnimals(weaponId: _weapon.id),
     ]);
   }
 

@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 
 class WidgetSnackBar extends StatelessWidget {
   final String text, icon;
-  final Function? onTap;
+  final Function? onSnackBarTap;
 
   const WidgetSnackBar({
     Key? key,
     required this.text,
     this.icon = "",
-    this.onTap,
+    this.onSnackBarTap,
   }) : super(key: key);
 
   Widget _buildWidgets() {
@@ -32,11 +32,11 @@ class WidgetSnackBar extends StatelessWidget {
                     style: Interface.s14w300n(Interface.dark),
                   ))),
           icon.isEmpty
-              ? Container()
+              ? const SizedBox.shrink()
               : WidgetButtonIcon(
                   icon: icon,
                   onTap: () {
-                    onTap!();
+                    if (onSnackBarTap != null) onSnackBarTap!();
                   },
                 )
         ]));

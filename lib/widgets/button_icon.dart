@@ -37,14 +37,14 @@ class WidgetButtonIcon extends StatelessWidget {
             child: icon.isNotEmpty
                 ? SvgPicture.asset(
                     icon,
-                    width: iconSize ?? buttonSize / 2.5,
-                    height: iconSize ?? buttonSize / 2.5,
+                    width: iconSize ?? buttonSize / 2.2,
+                    height: iconSize ?? buttonSize / 2.2,
                     colorFilter: ColorFilter.mode(
                       color ?? Interface.accent,
                       BlendMode.srcIn,
                     ),
                   )
-                : Container()));
+                : const SizedBox.shrink()));
   }
 
   @override

@@ -19,31 +19,27 @@ class WidgetTextDlc extends StatelessWidget {
     return Container(
         child: dlc
             ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.only(right: 30),
-                              child: AutoSizeText(
-                                text,
-                                maxLines: 1,
-                                style: Interface.s16w300n(Interface.dark),
-                              ))),
-                      Container(
-                          width: 5,
-                          height: 5,
-                          decoration: BoxDecoration(
-                            color: Interface.primary,
-                            border: Border.all(
-                              color: Interface.accentBorder,
-                              width: Interface.accentBorderWidth,
-                            ),
-                            borderRadius: BorderRadius.circular(5),
-                          ))
-                    ]),
+                Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.only(right: 30),
+                          child: AutoSizeText(
+                            text,
+                            maxLines: 1,
+                            style: Interface.s16w300n(Interface.dark),
+                          ))),
+                  Container(
+                      width: 5,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: Interface.primary,
+                        border: Border.all(
+                          color: Interface.accentBorder,
+                          width: Interface.accentBorderWidth,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ))
+                ]),
                 subText.isNotEmpty
                     ? SizedBox(
                         height: 20,
@@ -52,7 +48,7 @@ class WidgetTextDlc extends StatelessWidget {
                           maxLines: 1,
                           style: Interface.s12w300n(Interface.disabled),
                         ))
-                    : Container()
+                    : const SizedBox.shrink()
               ])
             : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 AutoSizeText(
@@ -68,7 +64,7 @@ class WidgetTextDlc extends StatelessWidget {
                           maxLines: 1,
                           style: Interface.s12w300n(Interface.disabled),
                         ))
-                    : Container(),
+                    : const SizedBox.shrink(),
               ]));
   }
 

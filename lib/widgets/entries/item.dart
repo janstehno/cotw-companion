@@ -10,7 +10,7 @@ import 'package:flutter_svg/svg.dart';
 class EntryItem extends StatelessWidget {
   final String text, itemIcon, buttonIcon;
   final List<WidgetTag> tags;
-  final Function? onTap;
+  final Function? onButtonTap;
 
   const EntryItem({
     Key? key,
@@ -18,7 +18,7 @@ class EntryItem extends StatelessWidget {
     required this.itemIcon,
     this.buttonIcon = "",
     this.tags = const [],
-    this.onTap,
+    this.onButtonTap,
   }) : super(key: key);
 
   Widget _buildWidgets() {
@@ -35,10 +35,9 @@ class EntryItem extends StatelessWidget {
                   style: Interface.s18w300n(Interface.dark),
                 ))),
         Container(
-            width: 100,
+            width: 70,
             height: 70,
             alignment: Alignment.center,
-            padding: const EdgeInsets.only(left: 17.5, right: 17.5),
             child: SvgPicture.asset(
               itemIcon,
               fit: BoxFit.fitWidth,
@@ -49,32 +48,36 @@ class EntryItem extends StatelessWidget {
             ))
       ]),
       Container(
-          height: 40,
           margin: const EdgeInsets.only(top: 30),
           child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: buttonIcon.isNotEmpty ? CrossAxisAlignment.center : CrossAxisAlignment.end,
+              crossAxisAlignment: buttonIcon.isNotEmpty ? CrossAxisAlignment.center : CrossAxisAlignment.start,
               children: [
                 Expanded(
                     child: Container(
                   padding: EdgeInsets.only(right: buttonIcon.isNotEmpty ? 30 : 0),
                   alignment: Alignment.centerLeft,
-                  child: Row(children: tags),
+                  child: Wrap(
+                    spacing: 5,
+                    runSpacing: 5,
+                    alignment: WrapAlignment.start,
+                    children: tags,
+                  ),
                 )),
                 buttonIcon.isNotEmpty
                     ? Container(
-                        width: 100,
+                        width: 70,
                         alignment: Alignment.bottomCenter,
                         child: WidgetButtonIcon(
                           icon: buttonIcon,
                           color: Interface.accent,
                           background: Interface.primary,
                           onTap: () {
-                            onTap!();
+                            if (onButtonTap != null) onButtonTap!();
                           },
                         ))
-                    : Container()
+                    : const SizedBox.shrink()
               ]))
     ]);
   }

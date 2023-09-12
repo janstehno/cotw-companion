@@ -26,26 +26,29 @@ class WidgetSwitchText extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
-    return GestureDetector(
-        onTap: disabled
-            ? () {}
-            : () {
-                onTap();
-              },
-        child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            height: buttonHeight,
-            width: buttonWidth,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(left: buttonHeight == buttonWidth ? 0 : 10, right: buttonHeight == buttonWidth ? 0 : 10),
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(7)),
-              color: isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3),
-            ),
-            child: AutoSizeText(
-              text,
-              style: Interface.s18w500n(isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled),
-            )));
+    return Row(mainAxisSize: MainAxisSize.min, children: [
+      GestureDetector(
+          onTap: disabled
+              ? () {}
+              : () {
+                  onTap();
+                },
+          child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              height: buttonHeight,
+              width: buttonWidth,
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(left: buttonHeight == buttonWidth ? 0 : 10, right: buttonHeight == buttonWidth ? 0 : 10),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(7)),
+                color: isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3),
+              ),
+              child: AutoSizeText(
+                text,
+                maxLines: 1,
+                style: Interface.s18w500n(isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled),
+              )))
+    ]);
   }
 
   @override

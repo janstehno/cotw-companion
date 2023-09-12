@@ -1,9 +1,9 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/activities/info_caller.dart';
+import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
@@ -36,6 +36,26 @@ class EntryCallerState extends State<EntryCaller> {
     super.initState();
   }
 
+  List<WidgetTag> _buildTags() {
+    List<WidgetTag> tags = [];
+    if (widget.caller.isFromDlc) {
+      tags.add(WidgetTag.big(
+        icon: "assets/graphics/icons/dlc.svg",
+        color: Interface.accent,
+        background: Interface.primary,
+      ));
+    }
+    tags.addAll([
+      WidgetTag.big(
+        text: widget.caller.getRange(_imperialUnits),
+        icon: "assets/graphics/icons/range.svg",
+        color: Interface.dark,
+        background: Interface.tag,
+      )
+    ]);
+    return tags;
+  }
+
   Widget _buildWidgets() {
     return GestureDetector(
         onTap: () {
@@ -49,23 +69,10 @@ class EntryCallerState extends State<EntryCaller> {
             padding: const EdgeInsets.all(30),
             color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
             child: EntryItem(
-                text: widget.caller.getName(context.locale),
-                itemIcon: Graphics.getCallerIcon(widget.caller.id),
-                tags: [
-                  WidgetTag.medium(
-                    icon: "assets/graphics/icons/dlc.svg",
-                    color: Interface.accent,
-                    background: Interface.primary,
-                    margin: const EdgeInsets.only(right: 5),
-                    isVisible: widget.caller.isFromDlc,
-                  ),
-                  WidgetTag.medium(
-                    text: widget.caller.getRange(_imperialUnits),
-                    icon: "assets/graphics/icons/range.svg",
-                    color: Interface.dark,
-                    background: Interface.tag,
-                  )
-                ])));
+              text: widget.caller.getName(context.locale),
+              itemIcon: Graphics.getCallerIcon(widget.caller.id),
+              tags: _buildTags(),
+            )));
   }
 
   @override

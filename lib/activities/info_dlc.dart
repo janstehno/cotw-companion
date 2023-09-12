@@ -1,6 +1,6 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/builders/dlc_info/dlc_lists.dart';
+import 'package:cotwcompanion/lists/dlc_info/dlc_content.dart';
 import 'package:cotwcompanion/model/dlc.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/rich_text.dart';
@@ -39,8 +39,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
               itemCount: widget.dlc.getDescription(context.locale).length,
               itemBuilder: (context, index) {
                 return Container(
-                    padding:
-                        index == widget.dlc.getDescription(context.locale).length - 1 ? const EdgeInsets.only(bottom: 30) : const EdgeInsets.only(bottom: 15),
+                    padding: index == widget.dlc.getDescription(context.locale).length - 1 ? const EdgeInsets.only(bottom: 30) : const EdgeInsets.only(bottom: 15),
                     child: WidgetRichText(
                       text: widget.dlc.getDescription(context.locale)[index],
                     ));
@@ -49,7 +48,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
   }
 
   Widget _buildRAWC() {
-    List<Widget> reserves = [Container()];
+    List<Widget> reserves = [const SizedBox.shrink()];
     if (widget.dlc.reserve.isNotEmpty) {
       reserves = [
         WidgetTitleBig(
@@ -58,14 +57,14 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
             child: Column(children: [
-              WidgetDlcLists(
+              ListDlcContent(
                 list: widget.dlc.reserve,
                 type: 0,
               ),
             ]))
       ];
     }
-    List<Widget> animals = [Container()];
+    List<Widget> animals = [const SizedBox.shrink()];
     if (widget.dlc.animals.isNotEmpty) {
       animals = [
         WidgetTitleBig(
@@ -74,7 +73,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
             child: Column(children: [
-              WidgetDlcLists(
+              ListDlcContent(
                 list: widget.dlc.animals,
                 type: 1,
                 reserves: widget.dlc.reserve,
@@ -82,7 +81,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
             ]))
       ];
     }
-    List<Widget> weapons = [Container()];
+    List<Widget> weapons = [const SizedBox.shrink()];
     if (widget.dlc.weapons.isNotEmpty) {
       weapons = [
         WidgetTitleBig(
@@ -91,14 +90,14 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
             child: Column(children: [
-              WidgetDlcLists(
+              ListDlcContent(
                 list: widget.dlc.weapons,
                 type: 2,
               ),
             ]))
       ];
     }
-    List<Widget> callers = [Container()];
+    List<Widget> callers = [const SizedBox.shrink()];
     if (widget.dlc.callers.isNotEmpty) {
       callers = [
         WidgetTitleBig(
@@ -107,7 +106,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
             child: Column(children: [
-              WidgetDlcLists(
+              ListDlcContent(
                 list: widget.dlc.callers,
                 type: 3,
               ),
@@ -132,7 +131,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
           Column(children: callers),
         ]);
       default:
-        return Container();
+        return const SizedBox.shrink();
     }
   }
 

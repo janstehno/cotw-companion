@@ -1,0 +1,10 @@
+<!-- Copyright (c) 2022 - 2023 Jan Stehno -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <line x1="25" y1="5" x2="25" y2="25" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <line x1="15" y1="12" x2="15" y2="25" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <line x1="5" y1="17" x2="5" y2="25" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <rect width="30" height="30" fill="none" />
+</svg>

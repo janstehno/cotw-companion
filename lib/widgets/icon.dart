@@ -32,8 +32,8 @@ class WidgetIcon extends StatelessWidget {
         ),
         child: SvgPicture.asset(
           icon,
-          width: iconSize ?? size / 2.5,
-          height: iconSize ?? size / 2.5,
+          width: iconSize ?? size / 2.2,
+          height: iconSize ?? size / 2.2,
           colorFilter: ColorFilter.mode(
             isActive ? color : Interface.dark.withOpacity(0.3),
             BlendMode.srcIn,

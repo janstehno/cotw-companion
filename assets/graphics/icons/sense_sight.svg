@@ -1,2 +1,15 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>sense_sight</title><g id="other_icons"><g id="sense_sight"><polyline points="28.26 28.5 1.74 15 28.26 1.5" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><path d="M20.31,5.55a15.36,15.36,0,0,1,0,18.9" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <title>sense_sight</title>
+    <g id="other_icons">
+        <g id="sense_sight">
+            <polyline points="28.26 28.5 1.74 15 28.26 1.5" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+            <path d="M20.31,5.55a15.36,15.36,0,0,1,0,18.9" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+        </g>
+    </g>
+    <g id="frame">
+        <rect width="30" height="30" fill="none" />
+    </g>
+</svg>

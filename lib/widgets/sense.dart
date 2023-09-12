@@ -69,6 +69,6 @@ class WidgetSense extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isVisible ? _buildWidgets() : Container();
+    return isVisible ? _buildWidgets() : const SizedBox.shrink();
   }
 }

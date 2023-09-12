@@ -50,23 +50,23 @@ class AnimalFur {
 
   Color get color {
     switch (_rarity) {
+      case 0:
+        return Interface.common;
       case 1:
-        return Interface.veryrare;
+        return Interface.uncommon;
       case 2:
         return Interface.rare;
       case 3:
-        return Interface.uncommon;
+        return Interface.veryrare;
       case 4:
-        return Interface.common;
-      default:
         return Interface.mission;
+      default:
+        return Interface.disabled.withOpacity(0.3);
     }
   }
 
   String getName(Locale locale) {
-    return _furId == Interface.greatOneId
-        ? HelperJSON.getFur(HelperJSON.furs.length).getName(locale)
-        : HelperJSON.getFur(_furId).getName(locale);
+    return _furId == Interface.greatOneId ? HelperJSON.getFur(HelperJSON.furs.length).getName(locale) : HelperJSON.getFur(_furId).getName(locale);
   }
 
   factory AnimalFur.fromJson(Map<String, dynamic> json) {

@@ -10,14 +10,12 @@ import 'package:flutter/material.dart';
 
 class WidgetSlider extends StatelessWidget {
   final List<double> values;
-  final String text;
   final double min, max;
   final Function onDrag;
 
   const WidgetSlider({
     Key? key,
     required this.values,
-    this.text = "",
     required this.min,
     required this.max,
     required this.onDrag,
@@ -36,11 +34,11 @@ class WidgetSlider extends StatelessWidget {
             inactiveTrackBarHeight: 3,
             activeTrackBar: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(1)),
-              color: Interface.primary,
+              color: Interface.primary.withOpacity(0.65),
             ),
             inactiveTrackBar: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(1)),
-              color: Interface.disabled.withOpacity(0.3),
+              color: Interface.disabled.withOpacity(0.35),
             )),
         handler: FlutterSliderHandler(
             decoration: BoxDecoration(
@@ -50,7 +48,7 @@ class WidgetSlider extends StatelessWidget {
             child: Container(
                 alignment: Alignment.center,
                 child: AutoSizeText(
-                  text,
+                  values[0].toInt().toString(),
                   style: Interface.s18w500n(Interface.accent),
                 ))),
         onDragging: (id, lower, upper) {

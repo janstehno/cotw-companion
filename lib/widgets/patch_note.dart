@@ -24,8 +24,7 @@ class WidgetPatchNote extends StatelessWidget {
           Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(bottom: changes.isNotEmpty ? 15 : 0),
-              child:
-                  Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
+              child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
                 AutoSizeText(
                   version,
                   maxLines: 1,
@@ -56,7 +55,7 @@ class WidgetPatchNote extends StatelessWidget {
                           style: Interface.s16w300n(Interface.dark),
                         ));
                   })
-              : Container()
+              : const SizedBox.shrink()
         ]));
   }
 

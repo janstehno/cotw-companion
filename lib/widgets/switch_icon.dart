@@ -40,15 +40,15 @@ class WidgetSwitchIcon extends StatelessWidget {
               color: isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3),
             ),
             child: icon.isEmpty && activeIcon.isEmpty
-                ? Container()
+                ? const SizedBox.shrink()
                 : SvgPicture.asset(
                     isActive
-                        ? activeIcon
-                        : icon.isEmpty
-                            ? activeIcon
-                            : icon,
-                    width: buttonSize / 2.5,
-                    height: buttonSize / 2.5,
+                        ? activeIcon.isEmpty
+                            ? icon
+                            : activeIcon
+                        : icon,
+                    width: buttonSize / 2.2,
+                    height: buttonSize / 2.2,
                     colorFilter: ColorFilter.mode(
                       isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled,
                       BlendMode.srcIn,

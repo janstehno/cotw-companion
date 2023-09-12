@@ -58,9 +58,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
       int hourAfter = hourNow + 1 == 24 ? 0 : hourNow + 1;
       int hourAfterAfter = hourAfter + 1 == 24 ? 0 : hourAfter + 1;
       for (Zone zone in widget.zones) {
-        if ((hourNow >= zone.from && hourNow < zone.to) ||
-            (hourAfter >= zone.from && hourAfter < zone.to) ||
-            (hourAfterAfter >= zone.from && hourAfterAfter < zone.to)) {
+        if ((hourNow >= zone.from && hourNow < zone.to) || (hourAfter >= zone.from && hourAfter < zone.to) || (hourAfterAfter >= zone.from && hourAfterAfter < zone.to)) {
           for (int hour = zone.from; hour < zone.to; hour++) {
             if (hour == hourNow || hour == hourAfter || hour == hourAfterAfter) {
               _finalZones.add(zone.zone);
@@ -187,7 +185,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                                         BlendMode.srcIn,
                                       ),
                                     ))
-                                : Container(),
+                                : const SizedBox.shrink(),
                             HelperLoadout.containsCallerForAnimal(widget.animal.id)
                                 ? Container(
                                     padding: EdgeInsets.only(
@@ -200,9 +198,9 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                                         BlendMode.srcIn,
                                       ),
                                     ))
-                                : Container()
+                                : const SizedBox.shrink()
                           ]))
-                      : Container(),
+                      : const SizedBox.shrink(),
                   AnimatedContainer(
                     width: 125,
                     duration: const Duration(milliseconds: 200),

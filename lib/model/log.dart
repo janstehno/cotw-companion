@@ -2,10 +2,10 @@
 
 import 'dart:core';
 
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/reserve.dart';
@@ -66,9 +66,11 @@ class Log {
 
   String get date => _date;
 
-  String get dateForCompare => getDate(DateType.compare, _date);
+  String get dateForCompare => getDate(DateStructure.compare, _date);
 
-  String get dateFormatted => getDate(DateType.format, _date);
+  String get dateFormatted => getDate(DateStructure.format, _date);
+
+  String get animalName => _animalName;
 
   int get animalId => _animalId;
 
@@ -120,10 +122,10 @@ class Log {
 
   Animal get animal => HelperJSON.getAnimal(_animalId == -1 ? 1 : _animalId);
 
-  AnimalFur get fur => HelperJSON.getAnimalFur(null, _animalId, _furId);
+  AnimalFur get fur => HelperJSON.getAnimalFur(_animalId, _furId);
 
   String toJson() =>
-      '{"ID":$id,"DATE":"${getDate(DateType.json, _date)}","ANIMAL_ID":$_animalId,"RESERVE_ID":$_reserveId,"FUR_ID":$_furId,"TROPHY_RATING":$_trophyRating,"TROPHY":$_trophy,"WEIGHT":$_weight,"IMPERIALS":$_imperials,"LODGE":$_lodge,"GENDER":$_gender,"CORRECT_AMMUNITION":$_harvestCorrectAmmo,"MAX_TWO_SHOTS":$_harvestTwoShots,"VITAL_ORGAN":$_harvestVitalOrgan,"NO_TROPHY_ORGAN":$_harvestNoTrophyOrgan}';
+      '{"ID":$id,"DATE":"${getDate(DateStructure.json, _date)}","ANIMAL_ID":$_animalId,"RESERVE_ID":$_reserveId,"FUR_ID":$_furId,"TROPHY_RATING":$_trophyRating,"TROPHY":$_trophy,"WEIGHT":$_weight,"IMPERIALS":$_imperials,"LODGE":$_lodge,"GENDER":$_gender,"CORRECT_AMMUNITION":$_harvestCorrectAmmo,"MAX_TWO_SHOTS":$_harvestTwoShots,"VITAL_ORGAN":$_harvestVitalOrgan,"NO_TROPHY_ORGAN":$_harvestNoTrophyOrgan}';
 
   String removePointZero(String value) {
     String text = value;
@@ -173,7 +175,7 @@ class Log {
     return "${dateTime.year}-${dateTime.month}-${dateTime.day}-${dateTime.hour}-${dateTime.minute}";
   }
 
-  static String getDate(DateType type, String date) {
+  static String getDate(DateStructure type, String date) {
     int year = int.parse(date.split("-")[0]);
     int month = int.parse(date.split("-")[1]);
     int day = int.parse(date.split("-")[2]);
@@ -185,9 +187,9 @@ class Log {
     String h = hour < 9 ? "0$hour" : "$hour";
     String m = minute < 9 ? "0$minute" : "$minute";
     switch (type) {
-      case DateType.format:
+      case DateStructure.format:
         return "$day. $month. $year  $hour:${minute < 9 ? "0$minute" : minute}";
-      case DateType.compare:
+      case DateStructure.compare:
         return "$yy$mm$dd$h$m";
       default:
         return "$yy-$mm-$dd-$h-$m";
@@ -223,11 +225,18 @@ class Log {
   }
 
   Map<String, dynamic> _toMap() {
-    return {'DATE': dateForCompare, 'NAME': _animalName, 'TROPHY': _trophy};
+    return {
+      "DATE": dateForCompare,
+      "NAME": _animalName,
+      "TROPHY": _trophy,
+      "TROPHY_RATING": isGreatOne() ? 5 : _trophyRating,
+      "FUR_RARITY": fur.rarity,
+      "GENDER": _gender,
+    };
   }
 
   dynamic get(String propertyName) {
-    var mapRep = _toMap();
+    Map<String, dynamic> mapRep = _toMap();
     if (mapRep.containsKey(propertyName)) {
       return mapRep[propertyName];
     }

@@ -3,14 +3,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/about.dart';
 import 'package:cotwcompanion/activities/need_zones.dart';
-import 'package:cotwcompanion/activities/other.dart';
 import 'package:cotwcompanion/activities/patch_notes.dart';
 import 'package:cotwcompanion/activities/settings.dart';
 import 'package:cotwcompanion/builders/loadouts.dart';
 import 'package:cotwcompanion/builders/logs.dart';
-import 'package:cotwcompanion/builders/rawc.dart';
+import 'package:cotwcompanion/lists/callers.dart';
+import 'package:cotwcompanion/lists/other.dart';
+import 'package:cotwcompanion/lists/reserves.dart';
+import 'package:cotwcompanion/lists/weapons.dart';
+import 'package:cotwcompanion/lists/wildlife.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/entries/menu.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
@@ -73,25 +75,21 @@ class ActivityHomeState extends State<ActivityHome> {
             Expanded(
                 child: Container(
                     alignment: Alignment.topLeft,
-                    child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              height: 35,
-                              alignment: Alignment.centerLeft,
-                              child: AutoSizeText(
-                                "COTW COMPANION",
-                                maxLines: 1,
-                                style: Interface.s24w600c(Interface.alwaysLight),
-                              )),
-                          AutoSizeText(Interface.version,
-                              maxLines: 1,
-                              style: Interface.s18w400c(
-                                Interface.alwaysLight.withOpacity(0.5),
-                              )),
-                        ]))),
+                    child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Container(
+                          height: 35,
+                          alignment: Alignment.centerLeft,
+                          child: AutoSizeText(
+                            "COTW COMPANION",
+                            maxLines: 1,
+                            style: Interface.s24w600c(Interface.alwaysLight),
+                          )),
+                      AutoSizeText(Interface.version,
+                          maxLines: 1,
+                          style: Interface.s18w400c(
+                            Interface.alwaysLight.withOpacity(0.5),
+                          )),
+                    ]))),
             Column(children: [
               WidgetButtonIcon(
                   icon: "assets/graphics/icons/menu_open.svg",
@@ -116,7 +114,7 @@ class ActivityHomeState extends State<ActivityHome> {
     return EntryMenu(
       text: tr(text),
       icon: "assets/graphics/icons/$icon.svg",
-      onTap: () {
+      onMenuTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => activity));
       },
     );
@@ -135,23 +133,20 @@ class ActivityHomeState extends State<ActivityHome> {
                   child: SingleChildScrollView(
                       child: Padding(
                           padding: const EdgeInsets.only(top: 105, bottom: 40),
-                          child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _buildMenuItem("reserves", "reserve", const BuilderRAWC(text: "reserves", type: ObjectType.reserve)),
-                                _buildMenuItem("wildlife", "stag", const BuilderRAWC(text: "wildlife", type: ObjectType.animal)),
-                                _buildMenuItem("weapons", "weapon", const BuilderRAWC(text: "weapons", type: ObjectType.weapon)),
-                                _buildMenuItem("callers", "caller", const BuilderRAWC(text: "callers", type: ObjectType.caller)),
-                                const Padding(padding: EdgeInsets.all(15)),
-                                _buildMenuItem("animal_need_zones", "need_zones", const ActivityNeedZones()),
-                                _buildMenuItem("trophy_lodge", "trophy_lodge", const BuilderLogs(trophyLodge: true)),
-                                _buildMenuItem("logbook", "catch_book", const BuilderLogs(trophyLodge: false)),
-                                _buildMenuItem("loadouts", "loadout", const BuilderLoadouts()),
-                                const Padding(padding: EdgeInsets.all(15)),
-                                _buildMenuItem("other", "other", const ActivityOther()),
-                              ])))),
+                          child:
+                              Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                            _buildMenuItem("reserves", "reserve", const ListReserves()),
+                            _buildMenuItem("wildlife", "stag", const ListWildlife()),
+                            _buildMenuItem("weapons", "weapon", const ListWeapons()),
+                            _buildMenuItem("callers", "caller", const ListCallers()),
+                            const Padding(padding: EdgeInsets.all(15)),
+                            _buildMenuItem("animal_need_zones", "need_zones", const ActivityNeedZones()),
+                            _buildMenuItem("trophy_lodge", "trophy_lodge", const BuilderLogs(trophyLodge: true)),
+                            _buildMenuItem("logbook", "catch_book", const BuilderLogs(trophyLodge: false)),
+                            _buildMenuItem("loadouts", "loadout", const BuilderLoadouts()),
+                            const Padding(padding: EdgeInsets.all(15)),
+                            _buildMenuItem("other", "other", const ListOther()),
+                          ])))),
               Container(
                   height: 95,
                   color: Interface.sectionTitle,

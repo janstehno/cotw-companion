@@ -1,16 +1,16 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/builders/animal_info/animal_callers.dart';
-import 'package:cotwcompanion/builders/animal_info/animal_furs.dart';
-import 'package:cotwcompanion/builders/animal_info/animal_reserves.dart';
-import 'package:cotwcompanion/builders/animal_info/animal_weapons.dart';
-import 'package:cotwcompanion/builders/animal_info/animal_zones.dart';
+import 'package:cotwcompanion/lists/animal_info/animal_callers.dart';
+import 'package:cotwcompanion/lists/animal_info/animal_furs.dart';
+import 'package:cotwcompanion/lists/animal_info/animal_reserves.dart';
+import 'package:cotwcompanion/lists/animal_info/animal_weapons.dart';
+import 'package:cotwcompanion/lists/animal_info/animal_zones.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
@@ -84,38 +84,34 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
               Container(
                   height: size,
                   color: Interface.sectionTitle,
-                  child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                            width: 90,
-                            padding: const EdgeInsets.fromLTRB(30, 0, 0, 30),
+                  child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Container(
+                        width: 90,
+                        padding: const EdgeInsets.fromLTRB(30, 0, 0, 30),
+                        child: SvgPicture.asset(
+                          Graphics.getAnimalIcon(widget.animalId),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.bottomLeft,
+                          colorFilter: ColorFilter.mode(
+                            Interface.dark,
+                            BlendMode.srcIn,
+                          ),
+                        )),
+                    Container(
+                        width: size,
+                        padding: _padding,
+                        alignment: Alignment.bottomRight,
+                        child: SimpleShadow(
+                            color: Interface.shadow,
+                            opacity: 1,
+                            sigma: 2,
+                            offset: const Offset(-0.35, -0.35),
                             child: SvgPicture.asset(
-                              Graphics.getAnimalIcon(widget.animalId),
+                              Graphics.getAnimalHead(widget.animalId),
                               fit: BoxFit.fitWidth,
-                              alignment: Alignment.bottomLeft,
-                              colorFilter: ColorFilter.mode(
-                                Interface.dark,
-                                BlendMode.srcIn,
-                              ),
-                            )),
-                        Container(
-                            width: size,
-                            padding: _padding,
-                            alignment: Alignment.bottomRight,
-                            child: SimpleShadow(
-                                color: Interface.shadow,
-                                opacity: 1,
-                                sigma: 2,
-                                offset: const Offset(-0.35, -0.35),
-                                child: SvgPicture.asset(
-                                  Graphics.getAnimalHead(widget.animalId),
-                                  fit: BoxFit.fitWidth,
-                                  alignment: Alignment.bottomRight,
-                                )))
-                      ]))
+                              alignment: Alignment.bottomRight,
+                            )))
+                  ]))
             ])
           ])),
       Container(
@@ -166,7 +162,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
       Container(
           padding: _padding,
           child: Column(children: [
-            BuilderAnimalReserves(animalId: widget.animalId),
+            ListAnimalReserves(animalId: widget.animalId),
           ]))
     ]);
   }
@@ -184,13 +180,13 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                 color: Interface.title,
                 padding: const EdgeInsets.only(right: 25),
                 alignment: Alignment.center,
-                child: WidgetTag.medium(
+                child: WidgetTag.big(
                   iconSize: 20,
                   icon: "assets/graphics/icons/grounded.svg",
                   color: Interface.disabled,
                   background: Colors.transparent,
                 ))
-            : Container()
+            : const SizedBox.shrink()
       ]),
       Container(
           padding: _padding,
@@ -221,14 +217,14 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                   ? Container(
                       margin: const EdgeInsets.only(bottom: 1.5),
                       child: SvgPicture.asset(
-                        "assets/graphics/icons/female.svg",
+                        "assets/graphics/icons/gender_female.svg",
                         width: 14,
                         colorFilter: ColorFilter.mode(
                           Interface.disabled,
                           BlendMode.srcIn,
                         ),
                       ))
-                  : Container()
+                  : const SizedBox.shrink()
             ]),
           ])),
       WidgetTitleBig(
@@ -240,62 +236,54 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
           child: Column(children: [
             Container(
                 margin: EdgeInsets.only(bottom: _animal.hasGO ? 10 : 0),
-                child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                        WidgetTrophyScore(
-                          text: _animal.removePointZero(_animal.trophy.toString()),
-                          icon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
-                          color: Interface.accent,
-                          background: Interface.primary,
-                          valueKnown: _animal.trophy != 0,
-                          margin: const EdgeInsets.only(right: 3),
-                        ),
-                        (_animal.id > 80 && _animal.trophy > 0)
-                            ? Container(
-                                margin: const EdgeInsets.only(bottom: 1.5),
-                                child: Text(
-                                  "?",
-                                  style: Interface.s18w500n(Interface.disabled),
-                                ))
-                            : Container()
-                      ]),
-                      WidgetTrophyScore(
-                        text: _animal.removePointZero(_animal.getWeight(_imperialUnits)),
-                        icon: "assets/graphics/icons/weight.svg",
-                        color: Interface.accent,
-                        background: Interface.primary,
-                        valueKnown: _imperialUnits ? _animal.weightLB != 0 : _animal.weightKG != 0,
-                        alignRight: true,
-                      )
-                    ])),
+                child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                  Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                    WidgetTrophyScore(
+                      text: _animal.removePointZero(_animal.trophy.toString()),
+                      icon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
+                      color: Interface.accent,
+                      background: Interface.primary,
+                      valueKnown: _animal.trophy != 0,
+                      margin: const EdgeInsets.only(right: 3),
+                    ),
+                    (_animal.id > 80 && _animal.trophy > 0)
+                        ? Container(
+                            margin: const EdgeInsets.only(bottom: 1.5),
+                            child: Text(
+                              "?",
+                              style: Interface.s18w500n(Interface.disabled),
+                            ))
+                        : const SizedBox.shrink()
+                  ]),
+                  WidgetTrophyScore(
+                    text: _animal.removePointZero(_animal.getWeight(_imperialUnits)),
+                    icon: "assets/graphics/icons/weight.svg",
+                    color: Interface.accent,
+                    background: Interface.primary,
+                    valueKnown: _imperialUnits ? _animal.weightLB != 0 : _animal.weightKG != 0,
+                    alignRight: true,
+                  )
+                ])),
             _animal.hasGO
-                ? Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                        WidgetTrophyScore(
-                          text: _animal.removePointZero(_animal.trophyGO.toString()),
-                          icon: "assets/graphics/icons/trophy_great_one.svg",
-                          color: Interface.accent,
-                          background: Interface.primary,
-                          valueKnown: _animal.trophyGO != 0,
-                          margin: const EdgeInsets.only(right: 10),
-                        ),
-                        WidgetTrophyScore(
-                          text: _animal.removePointZero(_animal.getWeightGO(_imperialUnits)),
-                          icon: "assets/graphics/icons/weight.svg",
-                          color: Interface.accent,
-                          background: Interface.primary,
-                          valueKnown: _imperialUnits ? _animal.weightGOLB != 0 : _animal.weightGOKG != 0,
-                          alignRight: true,
-                        )
-                      ])
-                : Container(),
+                ? Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                    WidgetTrophyScore(
+                      text: _animal.removePointZero(_animal.trophyGO.toString()),
+                      icon: "assets/graphics/icons/trophy_great_one.svg",
+                      color: Interface.accent,
+                      background: Interface.primary,
+                      valueKnown: _animal.trophyGO != 0,
+                      margin: const EdgeInsets.only(right: 10),
+                    ),
+                    WidgetTrophyScore(
+                      text: _animal.removePointZero(_animal.getWeightGO(_imperialUnits)),
+                      icon: "assets/graphics/icons/weight.svg",
+                      color: Interface.accent,
+                      background: Interface.primary,
+                      valueKnown: _imperialUnits ? _animal.weightGOLB != 0 : _animal.weightGOKG != 0,
+                      alignRight: true,
+                    )
+                  ])
+                : const SizedBox.shrink(),
           ]))
     ]);
   }
@@ -307,65 +295,68 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
         secondaryText: tr('subject_to_change'),
       ),
       Container(
-          padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
-          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              GestureDetector(
-                  onTap: () {
-                    _toggleRarity(4);
-                  },
-                  child: WidgetTag.small(
-                    text: tr('rarity_common'),
-                    color: Interface.light,
-                    background: Interface.common,
-                    margin: const EdgeInsets.only(right: 5),
-                  )),
-              GestureDetector(
-                  onTap: () {
-                    _toggleRarity(3);
-                  },
-                  child: WidgetTag.small(
-                    text: tr('rarity_uncommon'),
-                    color: Interface.alwaysDark,
-                    background: Interface.uncommon,
-                    margin: const EdgeInsets.only(right: 5),
-                  )),
-              GestureDetector(
-                  onTap: () {
-                    _toggleRarity(2);
-                  },
-                  child: WidgetTag.small(
-                    text: tr('rarity_rare'),
-                    color: Interface.alwaysDark,
-                    background: Interface.rare,
-                  )),
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              GestureDetector(
-                  onTap: () {
-                    _toggleRarity(1);
-                  },
-                  child: WidgetTag.small(
-                    text: tr('rarity_very_rare'),
-                    color: Interface.alwaysDark,
-                    background: Interface.veryrare,
-                    margin: const EdgeInsets.only(right: 2.5, top: 5),
-                  )),
-              GestureDetector(
-                  onTap: () {
-                    _toggleRarity(0);
-                  },
-                  child: WidgetTag.small(
-                    text: tr('rarity_mission'),
-                    color: Interface.alwaysDark,
-                    background: Interface.mission,
-                    margin: const EdgeInsets.only(left: 2.5, top: 5),
-                  ))
-            ])
-          ])),
+          padding: const EdgeInsets.fromLTRB(60, 30, 60, 0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Wrap(
+                spacing: 5,
+                runSpacing: 5,
+                alignment: WrapAlignment.center,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        _toggleRarity(0);
+                      },
+                      child: WidgetTag.small(
+                        text: tr('rarity_common'),
+                        color: Interface.light,
+                        background: Interface.common,
+                      )),
+                  GestureDetector(
+                      onTap: () {
+                        _toggleRarity(1);
+                      },
+                      child: WidgetTag.small(
+                        text: tr('rarity_uncommon'),
+                        color: Interface.alwaysDark,
+                        background: Interface.uncommon,
+                      )),
+                  GestureDetector(
+                      onTap: () {
+                        _toggleRarity(2);
+                      },
+                      child: WidgetTag.small(
+                        text: tr('rarity_rare'),
+                        color: Interface.alwaysDark,
+                        background: Interface.rare,
+                      )),
+                  GestureDetector(
+                      onTap: () {
+                        _toggleRarity(3);
+                      },
+                      child: WidgetTag.small(
+                        text: tr('rarity_very_rare'),
+                        color: Interface.alwaysDark,
+                        background: Interface.veryrare,
+                      )),
+                  GestureDetector(
+                      onTap: () {
+                        _toggleRarity(4);
+                      },
+                      child: WidgetTag.small(
+                        text: tr('rarity_mission'),
+                        color: Interface.alwaysDark,
+                        background: Interface.mission,
+                      )),
+                ],
+              ),
+            ],
+          )),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 27),
-          child: BuilderAnimalFurs(
+          child: ListAnimalFurs(
             animalId: widget.animalId,
             chosenRarity: _toggledRarity,
           ))
@@ -378,38 +369,41 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
         primaryText: tr('animal_need_zones'),
       ),
       Container(
-          padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
-          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              WidgetTag.small(
-                text: tr('animal_other'),
-                color: Interface.light,
-                background: Interface.other,
-                margin: const EdgeInsets.only(right: 2.5),
-              ),
-              WidgetTag.small(
-                text: tr('animal_feed'),
-                color: Interface.alwaysDark,
-                background: Interface.feed,
-                margin: const EdgeInsets.only(left: 2.5),
+          padding: const EdgeInsets.fromLTRB(60, 30, 60, 0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Wrap(
+                spacing: 5,
+                runSpacing: 5,
+                alignment: WrapAlignment.center,
+                children: [
+                  WidgetTag.small(
+                    text: tr('animal_other'),
+                    color: Interface.light,
+                    background: Interface.other,
+                  ),
+                  WidgetTag.small(
+                    text: tr('animal_feed'),
+                    color: Interface.alwaysDark,
+                    background: Interface.feed,
+                  ),
+                  WidgetTag.small(
+                    text: tr('animal_drink'),
+                    color: Interface.alwaysDark,
+                    background: Interface.drink,
+                  ),
+                  WidgetTag.small(
+                    text: tr('animal_rest'),
+                    color: Interface.alwaysDark,
+                    background: Interface.rest,
+                  )
+                ],
               )
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              WidgetTag.small(
-                text: tr('animal_drink'),
-                color: Interface.alwaysDark,
-                background: Interface.drink,
-                margin: const EdgeInsets.only(right: 2.5, top: 5),
-              ),
-              WidgetTag.small(
-                text: tr('animal_rest'),
-                color: Interface.alwaysDark,
-                background: Interface.rest,
-                margin: const EdgeInsets.only(left: 2.5, top: 5),
-              )
-            ])
-          ])),
-      BuilderAnimalZones(animalId: widget.animalId)
+            ],
+          )),
+      ListAnimalZones(animalId: widget.animalId)
     ]);
   }
 
@@ -421,7 +415,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             ),
             Stack(children: [
               SvgPicture.asset(
-                Graphics.getAnatomyAsset(_animal.id, AnatomyType.body),
+                Graphics.getAnatomyAsset(_animal.id, AnatomyPart.body),
                 fit: BoxFit.fitWidth,
                 colorFilter: ColorFilter.mode(
                   Interface.anatomyBody,
@@ -429,12 +423,12 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                 ),
               ),
               SvgPicture.asset(
-                Graphics.getAnatomyAsset(_animal.id, AnatomyType.organs),
+                Graphics.getAnatomyAsset(_animal.id, AnatomyPart.organs),
                 fit: BoxFit.fitWidth,
               )
             ])
           ])
-        : Container();
+        : const SizedBox.shrink();
   }
 
   Widget _buildSenses() {
@@ -446,8 +440,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             Container(
                 padding: _padding,
                 alignment: Alignment.centerLeft,
-                child:
-                    Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
                   WidgetSense(
                     icon: "assets/graphics/icons/sense_sight.svg",
                     sense: _animal.sight,
@@ -465,7 +458,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                   ),
                 ]))
           ])
-        : Container();
+        : const SizedBox.shrink();
   }
 
   Widget _buildCallers() {
@@ -476,7 +469,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
       Container(
         padding: _padding,
         alignment: Alignment.centerLeft,
-        child: BuilderAnimalCallers(animalId: widget.animalId),
+        child: ListAnimalCallers(animalId: widget.animalId),
       )
     ]);
   }
@@ -492,7 +485,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
       Container(
         padding: _padding,
         alignment: Alignment.centerLeft,
-        child: BuilderAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.rifle),
+        child: ListAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.rifle),
       ),
       WidgetTitleSmall(
         primaryText: tr('weapons_shotguns'),
@@ -500,7 +493,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
       Container(
         padding: _padding,
         alignment: Alignment.centerLeft,
-        child: BuilderAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.shotgun),
+        child: ListAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.shotgun),
       ),
       WidgetTitleSmall(
         primaryText: tr('weapons_handguns'),
@@ -508,7 +501,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
       Container(
         padding: _padding,
         alignment: Alignment.centerLeft,
-        child: BuilderAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.handgun),
+        child: ListAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.handgun),
       ),
       WidgetTitleSmall(
         primaryText: tr('weapons_bows_crossbows'),
@@ -516,7 +509,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
       Container(
         padding: _padding,
         alignment: Alignment.centerLeft,
-        child: BuilderAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.bow),
+        child: ListAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.bow),
       )
     ]);
   }

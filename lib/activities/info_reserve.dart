@@ -1,7 +1,7 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/builders/reserve_info/reserve_animals.dart';
-import 'package:cotwcompanion/builders/reserve_info/reserve_callers.dart';
+import 'package:cotwcompanion/lists/reserve_info/reserve_animals.dart';
+import 'package:cotwcompanion/lists/reserve_info/reserve_callers.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/reserve.dart';
@@ -98,13 +98,13 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
       WidgetTitleBig(
         primaryText: tr('wildlife'),
       ),
-      BuilderReserveAnimals(
+      ListReserveAnimals(
         reserveId: widget.reserveId,
       ),
       WidgetTitleBig(
         primaryText: tr('callers'),
       ),
-      BuilderReserveCallers(
+      ListReserveCallers(
         reserveId: widget.reserveId,
       )
     ]);

@@ -3,22 +3,22 @@
 library multi_sort;
 
 extension MultiSort on List {
-  multiSort(List<bool> criteria, dynamic preference) {
-    if (preference.length == 0 || criteria.isEmpty || isEmpty) {
+  multiSort(List<bool> criteria, List<String> preferences) {
+    if (criteria.isEmpty || preferences.isEmpty || isEmpty) {
       return this;
     }
-    if (preference.length != criteria.length) {
+    if (preferences.length != criteria.length) {
       return this;
     }
 
     int compare(int index, dynamic a, dynamic b) {
-      return criteria[index] ? a.get(preference[index]).compareTo(b.get(preference[index])) : b.get(preference[index]).compareTo(a.get(preference[index]));
+      return criteria[index] ? a.get(preferences[index]).compareTo(b.get(preferences[index])) : b.get(preferences[index]).compareTo(a.get(preferences[index]));
     }
 
     int sortAll(a, b) {
       int index = 0;
       int result = 0;
-      while (index < preference.length) {
+      while (index < preferences.length) {
         result = compare(index, a, b);
         if (result != 0) break;
         index++;

@@ -1,2 +1,21 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>environment_mountains</title><g id="environment"><g id="mountains"><polyline points="2.98 18.41 6.95 12.07 10.49 14.58" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><polyline points="5.84 21.45 14.57 8.55 21.93 19.27" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><path d="M26.61,19.16c-.23-.33-5-6.68-5-6.68L19.16,14.4" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><line x1="4.66" y1="15.24" x2="1.5" y2="15.24" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><line x1="23.83" y1="15.24" x2="28.5" y2="15.24" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <title>environment_mountains</title>
+    <g id="environment">
+        <g id="mountains">
+            <polyline points="2.98 18.41 6.95 12.07 10.49 14.58" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+            <polyline points="5.84 21.45 14.57 8.55 21.93 19.27" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+            <path d="M26.61,19.16c-.23-.33-5-6.68-5-6.68L19.16,14.4" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+            <line x1="4.66" y1="15.24" x2="1.5" y2="15.24" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+            <line x1="23.83" y1="15.24" x2="28.5" y2="15.24" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+        </g>
+    </g>
+    <g id="frame">
+        <rect width="30" height="30" fill="none" />
+    </g>
+</svg>

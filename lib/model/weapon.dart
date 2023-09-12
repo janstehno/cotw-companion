@@ -1,8 +1,9 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
+
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -94,6 +95,19 @@ class Weapon {
       if (max < pen) max = pen;
     }
     return max;
+  }
+
+  FilterKey typeToFilterKey() {
+    switch (type) {
+      case WeaponType.rifle:
+        return FilterKey.weaponsRifles;
+      case WeaponType.shotgun:
+        return FilterKey.weaponsShotguns;
+      case WeaponType.handgun:
+        return FilterKey.weaponsHandguns;
+      case WeaponType.bow:
+        return FilterKey.weaponsBows;
+    }
   }
 
   set setAmmo(List<dynamic> list) {
@@ -192,11 +206,14 @@ class Weapon {
   }
 
   Map<String, dynamic> _toMap() {
-    return {'NAME': _name, 'TYPE': _type.index};
+    return {
+      "NAME": _name,
+      "TYPE": _type.index,
+    };
   }
 
   dynamic get(String propertyName) {
-    var mapRep = _toMap();
+    Map<String, dynamic> mapRep = _toMap();
     if (mapRep.containsKey(propertyName)) {
       return mapRep[propertyName];
     }

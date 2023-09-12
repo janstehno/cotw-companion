@@ -105,7 +105,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
             duration: _duration,
             child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, children: [
               _ammo.isEmpty
-                  ? Container()
+                  ? const SizedBox.shrink()
                   : Container(
                       height: 20,
                       alignment: Alignment.centerLeft,
@@ -114,7 +114,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                         style: Interface.s14w300n(Interface.dark),
                       )),
               _ammo.isEmpty
-                  ? Container()
+                  ? const SizedBox.shrink()
                   : ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -128,9 +128,9 @@ class EntryLoadoutState extends State<EntryLoadout> {
                               style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
                             ));
                       }),
-              _callers.isNotEmpty && _ammo.isNotEmpty ? const SizedBox(height: 10) : Container(),
+              _callers.isNotEmpty && _ammo.isNotEmpty ? const SizedBox(height: 10) : const SizedBox.shrink(),
               _callers.isEmpty
-                  ? Container()
+                  ? const SizedBox.shrink()
                   : Container(
                       height: 20,
                       alignment: Alignment.centerLeft,
@@ -139,7 +139,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                         style: Interface.s14w300n(Interface.dark),
                       )),
               _callers.isEmpty
-                  ? Container()
+                  ? const SizedBox.shrink()
                   : ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -196,7 +196,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                   child: WidgetSnackBar(
                     text: tr('item_removed'),
                     icon: "assets/graphics/icons/reload.svg",
-                    onTap: () {
+                    onSnackBarTap: () {
                       _undo();
                     },
                   ))));

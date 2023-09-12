@@ -1,2 +1,7 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>level</title><g id="other_icons"><g id="level"><polyline points="15 1.5 27.44 1.5 27.44 7.99 15 13.66" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><line x1="18.57" y1="11.95" x2="18.57" y2="2.13" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><polyline points="15 1.5 2.56 1.5 2.56 7.99 15 13.66" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><line x1="11.43" y1="11.95" x2="11.43" y2="2.13" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><polygon points="15 26.34 10.7 28.5 11.52 23.92 8.04 20.67 12.85 20 15 15.83 17.15 20 21.96 20.67 18.48 23.92 19.3 28.5 15 26.34" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <path d="M15,2.3,4.5,6.86v9.48C4.5,20.87,11,25.58,15,27.7c4-2.12,10.5-6.83,10.5-11.36V6.86Z"
+        fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"
+        stroke-width="3" />
+    <rect width="30" height="30" fill="none" />
+</svg>

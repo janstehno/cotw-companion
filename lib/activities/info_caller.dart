@@ -1,7 +1,7 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/builders/caller_info/caller_animals.dart';
+import 'package:cotwcompanion/lists/caller_info/caller_animals.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
@@ -102,7 +102,7 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                       ))),
               Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 _caller.price == 0 || _caller.price == -1
-                    ? Container()
+                    ? const SizedBox.shrink()
                     : Container(
                         margin: const EdgeInsets.only(right: 2.5),
                         padding: const EdgeInsets.only(top: 1.15),
@@ -139,7 +139,7 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
       Container(
           padding: _padding,
           child: Column(children: [
-            BuilderCallerAnimals(callerId: widget.callerId),
+            ListCallerAnimals(callerId: widget.callerId),
           ]))
     ]);
   }

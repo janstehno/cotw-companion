@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WidgetTextField extends StatelessWidget {
+  final String? icon;
   final bool correct, numberOnly;
   final TextEditingController controller;
 
   const WidgetTextField({
     Key? key,
+    this.icon,
     required this.controller,
     required this.correct,
     this.numberOnly = true,
@@ -25,7 +27,7 @@ class WidgetTextField extends StatelessWidget {
           Container(
               margin: const EdgeInsets.only(right: 15),
               child: SvgPicture.asset(
-                "assets/graphics/icons/edit.svg",
+                icon ?? "assets/graphics/icons/edit.svg",
                 width: 15,
                 height: 15,
                 colorFilter: ColorFilter.mode(

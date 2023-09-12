@@ -84,63 +84,6 @@ class ActivityLogsInformation extends StatelessWidget {
         text: tr('logbook_info_0'),
         icon: "assets/graphics/icons/separator.svg",
       ),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
-        child: WidgetRichText(text: tr('logbook_info_2_1')),
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        child: WidgetRichText(text: tr('logbook_info_2_2')),
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        child: WidgetRichText(text: tr('logbook_info_2_3')),
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        child: WidgetRichText(text: tr('logbook_info_2_4')),
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        child: WidgetRichText(text: tr('logbook_info_2_5')),
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        child: WidgetRichText(text: tr('logbook_info_2_6')),
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
-        child: WidgetRichText(text: tr('logbook_info_2_7')),
-      ),
-    ]);
-  }
-
-  Widget _buildSort() {
-    return Column(children: [
-      WidgetTitleInfoIcon(
-        text: tr('logbook_info_3'),
-        icon: "assets/graphics/icons/sort_date.svg",
-      ),
-      WidgetTitleInfoIcon(
-        text: tr('logbook_info_3_1'),
-        icon: "assets/graphics/icons/trophy_gold.svg",
-      ),
-      WidgetTitleInfoIcon(
-        text: tr('logbook_info_3_2'),
-        icon: "assets/graphics/icons/sort_az.svg",
-      ),
-      Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-        child: WidgetRichText(text: tr('logbook_info_3_3')),
-      ),
     ]);
   }
 
@@ -179,12 +122,11 @@ class ActivityLogsInformation extends StatelessWidget {
           context: context,
         ),
         body: Column(children: [
+          _buildSearch(),
           _buildInterfaceFunctions(),
           _buildTrophyLodge(),
           _buildEdit(),
           _buildDelete(),
-          _buildSearch(),
-          _buildSort(),
           _buildImportExport(),
         ]));
   }

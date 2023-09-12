@@ -1,2 +1,21 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>hide</title><g id="icons"><g id="hide"><path d="M8.42,0V11.31H21.58V0ZM18.87,5.76H11.2a.59.59,0,0,1-.6-.59V2.67a.6.6,0,0,1,.6-.6h7.67a.6.6,0,0,1,.6.6v2.5A.59.59,0,0,1,18.87,5.76Z" fill="#212121"/><rect x="7.93" width="1" height="30" rx="0.28" ry="0.28" fill="#212121"/><rect x="21.07" width="1" height="30" rx="0.28" ry="0.28" fill="#212121"/><rect x="8.33" y="24" width="13.33" height="0.67" rx="0.19" ry="0.19" fill="#212121"/><rect x="8.33" y="19.33" width="13.33" height="0.67" rx="0.19" ry="0.19" fill="#212121"/><rect x="8.33" y="14.67" width="13.33" height="0.67" rx="0.19" ry="0.19" fill="#212121"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <title>hide</title>
+    <g id="icons">
+        <g id="hide">
+            <path
+                d="M8.42,0V11.31H21.58V0ZM18.87,5.76H11.2a.59.59,0,0,1-.6-.59V2.67a.6.6,0,0,1,.6-.6h7.67a.6.6,0,0,1,.6.6v2.5A.59.59,0,0,1,18.87,5.76Z"
+                fill="#212121" />
+            <rect x="7.93" width="1" height="30" rx="0.28" ry="0.28" fill="#212121" />
+            <rect x="21.07" width="1" height="30" rx="0.28" ry="0.28" fill="#212121" />
+            <rect x="8.33" y="24" width="13.33" height="0.67" rx="0.19" ry="0.19" fill="#212121" />
+            <rect x="8.33" y="19.33" width="13.33" height="0.67" rx="0.19" ry="0.19"
+                fill="#212121" />
+            <rect x="8.33" y="14.67" width="13.33" height="0.67" rx="0.19" ry="0.19"
+                fill="#212121" />
+        </g>
+    </g>
+    <g id="frame">
+        <rect width="30" height="30" fill="none" />
+    </g>
+</svg>

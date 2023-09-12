@@ -1,6 +1,7 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 
 class Caller {
@@ -52,6 +53,10 @@ class Caller {
   int get duration => _duration;
 
   int get price => _price;
+
+  int get rangeM => _rangeM;
+
+  double get rangeYD => _rangeYD;
 
   bool get isFromDlc => _dlc == 1;
 

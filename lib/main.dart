@@ -92,6 +92,12 @@ class App extends StatelessWidget {
             scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Interface.ff42)),
             textSelectionTheme: TextSelectionThemeData(selectionColor: Interface.light, selectionHandleColor: Interface.dark),
             fontFamily: 'Normal'),
-        home: Column(mainAxisSize: MainAxisSize.max, children: [Expanded(child: Container(color: Interface.primary, child: const BuilderHome()))]));
+        home: Column(mainAxisSize: MainAxisSize.max, children: [
+          Expanded(
+              child: Container(
+            color: Interface.primary,
+            child: const BuilderHome(),
+          ))
+        ]));
   }
 }

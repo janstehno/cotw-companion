@@ -1,2 +1,16 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>zone_feed</title><g id="zones"><g id="feed"><path d="M14.51,26.43a8.59,8.59,0,0,0,4,.69c2.76,0,5.75-1.38,7.77-7.27S25.49,6.06,21.46,1.54c0,0-5.1-.66-10.93,3.17S3.09,11,3.09,15.63s2.31,6.21,6,8.73c0,0-.37.85-5.23,4.14" fill="none" stroke="#212121" stroke-linecap="round" stroke-width="3"/><path d="M17.65,11s-1.12,6.51-8.59,13.32" fill="none" stroke="#212121" stroke-linecap="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <title>zone_feed</title>
+    <g id="zones">
+        <g id="feed">
+            <path
+                d="M14.51,26.43a8.59,8.59,0,0,0,4,.69c2.76,0,5.75-1.38,7.77-7.27S25.49,6.06,21.46,1.54c0,0-5.1-.66-10.93,3.17S3.09,11,3.09,15.63s2.31,6.21,6,8.73c0,0-.37.85-5.23,4.14"
+                fill="none" stroke="#212121" stroke-linecap="round" stroke-width="3" />
+            <path d="M17.65,11s-1.12,6.51-8.59,13.32" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-width="3" />
+        </g>
+    </g>
+    <g id="frame">
+        <rect width="30" height="30" fill="none" />
+    </g>
+</svg>

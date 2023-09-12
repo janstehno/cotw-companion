@@ -2,8 +2,8 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/widgets/title_small.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -48,7 +48,7 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
           alignment: Alignment.center,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
             _ammo.price == 0 || _ammo.price == -1
-                ? Container()
+                ? const SizedBox.shrink()
                 : Container(
                     margin: const EdgeInsets.only(right: 2.5),
                     child: SvgPicture.asset(
@@ -81,7 +81,7 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
         height: 32.5,
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           leftToRight
-              ? Container()
+              ? const SizedBox.shrink()
               : Container(
                   margin: const EdgeInsets.only(right: 10),
                   child: Text(
@@ -104,7 +104,7 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
                     text,
                     style: Interface.s16w300n(Interface.dark),
                   ))
-              : Container()
+              : const SizedBox.shrink()
         ]));
   }
 
@@ -114,14 +114,14 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              _buildAmmoDetail(true, "min_max", _ammo.classRange),
-              _buildAmmoDetail(false, "weapon_penetration", _ammo.penetration.toString())
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              _buildAmmoDetail(true, "range", _ammo.getRange(_imperialUnits)),
-              _buildAmmoDetail(false, "weapon_expansion", _ammo.expansion.toString())
-            ])
+            Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [_buildAmmoDetail(true, "min_max", _ammo.classRange), _buildAmmoDetail(false, "weapon_penetration", _ammo.penetration.toString())]),
+            Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [_buildAmmoDetail(true, "range", _ammo.getRange(_imperialUnits)), _buildAmmoDetail(false, "weapon_expansion", _ammo.expansion.toString())])
           ]))
     ]);
   }

@@ -41,7 +41,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
   Widget _buildWidgetPerCent() {
     String left, right, point, percent;
     left = right = point = percent = "";
-    if (widget.fur.perCent != 0 && widget.fur.rarity != 0) {
+    if (widget.fur.perCent != 0 && widget.fur.rarity != 4) {
       left = widget.fur.perCent.toString().split(".")[0];
       right = widget.fur.perCent.toString().split(".")[1];
       point = ".";
@@ -79,7 +79,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
                 color: widget.fur.color,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.3)),
               ))),
-      _showPerCent ? _buildWidgetPerCent() : Container(),
+      _showPerCent ? _buildWidgetPerCent() : const SizedBox.shrink(),
       Expanded(
         child: Container(
             alignment: Alignment.centerLeft,
@@ -93,7 +93,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
       Container(
           child: widget.fur.male
               ? SvgPicture.asset(
-                  "assets/graphics/icons/male.svg",
+                  "assets/graphics/icons/gender_male.svg",
                   width: 15,
                   height: 15,
                   colorFilter: const ColorFilter.mode(
@@ -103,7 +103,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
                 )
               : widget.fur.female
                   ? SvgPicture.asset(
-                      "assets/graphics/icons/female.svg",
+                      "assets/graphics/icons/gender_female.svg",
                       width: 15,
                       height: 15,
                       colorFilter: const ColorFilter.mode(
@@ -124,7 +124,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
             margin: const EdgeInsets.only(bottom: 3),
             child: _buildAnimalFur(),
           )
-        : Container();
+        : const SizedBox.shrink();
   }
 
   @override

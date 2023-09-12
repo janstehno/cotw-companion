@@ -1,8 +1,8 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:cotwcompanion/activities/logs.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/activities/logs.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/error.dart';
 import 'package:flutter/material.dart';

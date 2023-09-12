@@ -1,0 +1,9 @@
+<!-- Copyright (c) 2022 - 2023 Jan Stehno -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.45 30">
+    <line x1="8.72" y1="28.5" x2="8.72" y2="16.26" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <circle cx="8.72" cy="8.72" r="7.22" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <line x1="3.02" y1="23.17" x2="14.43" y2="23.17" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+</svg>

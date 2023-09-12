@@ -1,11 +1,11 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/builders/add_loadout/loadouts_items.dart';
+import 'package:cotwcompanion/lists/add_edit_loadout/loadouts_items.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/loadout.dart';
@@ -97,9 +97,9 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
     }
   }
 
-  void _setItems(ObjectType type, List<int> list) {
+  void _setItems(Item type, List<int> list) {
     setState(() {
-      if (type == ObjectType.ammo) {
+      if (type == Item.ammo) {
         _selectedAmmo.clear();
         _selectedAmmo.addAll(list);
       } else {
@@ -203,8 +203,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
         icon: "assets/graphics/icons/menu_open.svg",
         onTap: () {
           _focus();
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => BuilderAddLoadoutItems(selected: _selectedAmmo, type: ObjectType.ammo, set: _setItems)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ListLoadoutItems(selected: _selectedAmmo, type: Item.ammo, set: _setItems)));
         },
       ),
       _listOfAmmo(),
@@ -213,8 +212,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
         icon: "assets/graphics/icons/menu_open.svg",
         onTap: () {
           _focus();
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => BuilderAddLoadoutItems(selected: _selectedCallers, type: ObjectType.caller, set: _setItems)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ListLoadoutItems(selected: _selectedCallers, type: Item.caller, set: _setItems)));
         },
       ),
       _listOfCallers(),

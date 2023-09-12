@@ -1,9 +1,9 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:cotwcompanion/activities/info_reserve.dart';
+import 'package:cotwcompanion/activities/map.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/activities/info_reserve.dart';
-import 'package:cotwcompanion/builders/map.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
@@ -27,6 +27,26 @@ class EntryReserve extends StatefulWidget {
 }
 
 class EntryReserveState extends State<EntryReserve> {
+  List<WidgetTag> _buildTags() {
+    List<WidgetTag> tags = [];
+    if (widget.reserve.isFromDlc) {
+      tags.add(WidgetTag.big(
+        icon: "assets/graphics/icons/dlc.svg",
+        color: Interface.accent,
+        background: Interface.primary,
+      ));
+    }
+    tags.addAll([
+      WidgetTag.big(
+        text: widget.reserve.count.toString(),
+        icon: "assets/graphics/icons/target.svg",
+        color: Interface.dark,
+        background: Interface.tag,
+      )
+    ]);
+    return tags;
+  }
+
   Widget _buildWidgets() {
     return GestureDetector(
         onTap: () {
@@ -43,23 +63,9 @@ class EntryReserveState extends State<EntryReserve> {
               text: widget.reserve.getName(context.locale),
               itemIcon: Graphics.getReserveIcon(widget.reserve.id),
               buttonIcon: "assets/graphics/icons/map.svg",
-              tags: [
-                WidgetTag.medium(
-                  icon: "assets/graphics/icons/dlc.svg",
-                  color: Interface.accent,
-                  background: Interface.primary,
-                  margin: const EdgeInsets.only(right: 5),
-                  isVisible: widget.reserve.isFromDlc,
-                ),
-                WidgetTag.medium(
-                  text: widget.reserve.count.toString(),
-                  icon: "assets/graphics/icons/target.svg",
-                  color: Interface.dark,
-                  background: Interface.tag,
-                ),
-              ],
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => BuilderMap(reserveId: widget.reserve.id)));
+              tags: _buildTags(),
+              onButtonTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMap(reserveId: widget.reserve.id)));
               },
             )));
   }

@@ -1,2 +1,13 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>zone_other</title><g id="zones"><g id="other"><circle cx="15" cy="15" r="12.75" fill="none" stroke="#212121" stroke-linecap="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <title>zone_other</title>
+    <g id="zones">
+        <g id="other">
+            <circle cx="15" cy="15" r="12.75" fill="none" stroke="#212121" stroke-linecap="round"
+                stroke-width="3" />
+        </g>
+    </g>
+    <g id="frame">
+        <rect width="30" height="30" fill="none" />
+    </g>
+</svg>

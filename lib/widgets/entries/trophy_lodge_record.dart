@@ -47,7 +47,7 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
         alignment: Alignment.center,
         margin: const EdgeInsets.only(right: 5),
         child: SvgPicture.asset(
-          widget.log.isMale ? "assets/graphics/icons/male.svg" : "assets/graphics/icons/female.svg",
+          widget.log.isMale ? "assets/graphics/icons/gender_male.svg" : "assets/graphics/icons/gender_female.svg",
           width: 14,
           height: 14,
           colorFilter: ColorFilter.mode(
@@ -155,8 +155,8 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                 _buildTrophy(),
               ]),
               Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Expanded(child: widget.log.isGreatOne() ? Container() : _buildFur()),
-                widget.log.weight > 0 ? _buildWeight() : Container(),
+                Expanded(child: widget.log.isGreatOne() ? const SizedBox.shrink() : _buildFur()),
+                widget.log.weight > 0 ? _buildWeight() : const SizedBox.shrink(),
               ])
             ])));
   }

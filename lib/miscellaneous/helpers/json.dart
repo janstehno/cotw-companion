@@ -1,6 +1,7 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:convert';
+
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -107,13 +108,9 @@ class HelperJSON {
     return zones;
   }
 
-  static AnimalFur getAnimalFur(int? id, int? animalId, int? furId) {
-    if (id != null) {
-      return _animalsFurs.elementAt(id - 1);
-    } else if (animalId != null && furId != null) {
-      for (AnimalFur animalFur in _animalsFurs) {
-        if (animalId == animalFur.animalId && furId == animalFur.furId) return animalFur;
-      }
+  static AnimalFur getAnimalFur(int animalId, int furId) {
+    for (AnimalFur animalFur in _animalsFurs) {
+      if (animalId == animalFur.animalId && furId == animalFur.furId) return animalFur;
     }
     return _animalsFurs.elementAt(1);
   }

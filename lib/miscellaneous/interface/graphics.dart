@@ -1,6 +1,6 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/types.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 
 class Graphics {
   static const String _directory = "assets/graphics";
@@ -215,7 +215,7 @@ class Graphics {
     return "$_directory/images/${_animals[id - 1]}.jpg";
   }
 
-  static String getAnatomyAsset(int id, AnatomyType part) {
+  static String getAnatomyAsset(int id, AnatomyPart part) {
     return "assets/graphics/anatomy/${_animals[id - 1]}_${part.name}.svg";
   }
 
@@ -223,7 +223,7 @@ class Graphics {
     return "$_directory/maps/${_reserves[id - 1]}/$z/[$x][$y].png";
   }
 
-  static String getMapObjectIcon(MapObjectType type, int z) {
+  static String getMapObjectIcon(MapItem type, int z) {
     String asset = "$_directory/icons/pngs/$z";
     switch (type.index) {
       case 0:

@@ -1,2 +1,8 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>sort_descended</title><g id="icons"><g id="sort_descended"><polyline points="5.55 10.45 14.88 1.5 24.45 10.68" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><line x1="15" y1="28.5" x2="15" y2="3.6" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <polyline points="5.5 10 15 1.5 24.5 10" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <line x1="15" y1="28.5" x2="15" y2="3.6" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <rect width="30" height="30" fill="none" />
+</svg>

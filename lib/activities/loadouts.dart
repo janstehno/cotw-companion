@@ -1,13 +1,19 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:cotwcompanion/activities/filter.dart';
 import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/entries/loadout.dart';
+import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
+import 'package:cotwcompanion/widgets/filters/range_set.dart';
+import 'package:cotwcompanion/widgets/menubar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/searchbar.dart';
@@ -27,7 +33,8 @@ class ActivityLoadouts extends StatefulWidget {
 
 class ActivityLoadoutsState extends State<ActivityLoadouts> {
   final TextEditingController _controller = TextEditingController();
-  final List<Loadout> _filtered = [];
+  final List<Loadout> _loadouts = [];
+  final double _menuHeight = 75;
 
   late ScaffoldMessengerState _scaffoldMessengerState;
 
@@ -35,7 +42,6 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
 
   @override
   void initState() {
-    _filtered.addAll(HelperLoadout.loadouts);
     _controller.addListener(() => _filter());
     super.initState();
   }
@@ -46,18 +52,22 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     super.dispose();
   }
 
-  void _filter() {
-    setState(() {
-      _filtered.clear();
-      _filtered.addAll(HelperFilter.filterLoadoutsByName(_controller.text, context));
-    });
-  }
-
   void _focus() {
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
     }
+  }
+
+  void _filter() {
+    setState(() {
+      _loadouts.clear();
+      _loadouts.addAll(HelperFilter.filterLoadouts(_controller.text, context));
+    });
+  }
+
+  void _callback() {
+    setState(() {});
   }
 
   void _buildSnackBar(String message) {
@@ -107,132 +117,147 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     bool last = false;
     return WidgetScrollbar(
         child: ListView.builder(
-            itemCount: _filtered.length,
+            itemCount: _loadouts.length,
             itemBuilder: (context, index) {
-              index == _filtered.length - 1 ? last = true : last = false;
+              index == _loadouts.length - 1 ? last = true : last = false;
               return last
                   ? Column(children: [
                       EntryLoadout(
                         index: index,
-                        loadout: _filtered[index],
-                        callback: _filter,
+                        loadout: _loadouts[index],
+                        callback: _callback,
                         context: context,
                       ),
                       const SizedBox(height: 75),
                     ])
                   : EntryLoadout(
                       index: index,
-                      loadout: _filtered[index],
-                      callback: _filter,
+                      loadout: _loadouts[index],
+                      callback: _callback,
                       context: context,
                     );
             }));
   }
 
+  EntryMenuBarItem _buildFileOptions() {
+    return EntryMenuBarItem(
+      barButton: WidgetButtonIcon(
+          icon: "assets/graphics/icons/file.svg",
+          color: Interface.light,
+          background: Interface.dark,
+          onTap: () {
+            setState(() {
+              _fileOptionsOpened = !_fileOptionsOpened;
+              _focus();
+            });
+          }),
+      menuButtons: [
+        WidgetButtonIcon(
+            icon: "assets/graphics/icons/export.svg",
+            color: Interface.light,
+            background: Interface.dark,
+            onTap: () {
+              setState(() {
+                _fileOptionsOpened = !_fileOptionsOpened;
+                _focus();
+                saveFile();
+              });
+            }),
+        WidgetButtonIcon(
+            icon: "assets/graphics/icons/import.svg",
+            color: Interface.light,
+            background: Interface.dark,
+            onTap: () {
+              setState(() {
+                _fileOptionsOpened = !_fileOptionsOpened;
+                _focus();
+                loadFile();
+              });
+            }),
+      ],
+      menuHeight: _menuHeight,
+      menuOpened: _fileOptionsOpened,
+    );
+  }
+
   Widget _buildMenu() {
-    return Positioned(
-        right: 0,
-        bottom: 0,
-        child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: MediaQuery.of(context).size.width,
-            height: _fileOptionsOpened ? 200 : 75,
-            child: SingleChildScrollView(
-                reverse: true,
-                scrollDirection: Axis.horizontal,
-                child: Row(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.end, children: [
-                  AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      width: 40,
-                      margin: const EdgeInsets.only(right: 10, bottom: 17.5),
-                      child: Stack(children: [
-                        AnimatedPositioned(
-                            duration: const Duration(milliseconds: 200),
-                            right: 0,
-                            bottom: _fileOptionsOpened ? 125 : 0,
-                            child: AnimatedOpacity(
-                                duration: const Duration(milliseconds: 200),
-                                opacity: _fileOptionsOpened ? 1 : 0,
-                                child: WidgetButtonIcon(
-                                    icon: "assets/graphics/icons/import.svg",
-                                    color: Interface.light,
-                                    background: Interface.dark,
-                                    onTap: () {
-                                      setState(() {
-                                        _fileOptionsOpened = !_fileOptionsOpened;
-                                        _focus();
-                                        loadFile();
-                                      });
-                                    }))),
-                        AnimatedPositioned(
-                            duration: const Duration(milliseconds: 200),
-                            right: 0,
-                            bottom: _fileOptionsOpened ? 75 : 0,
-                            child: AnimatedOpacity(
-                                duration: const Duration(milliseconds: 200),
-                                opacity: _fileOptionsOpened ? 1 : 0,
-                                child: WidgetButtonIcon(
-                                    icon: "assets/graphics/icons/export.svg",
-                                    color: Interface.light,
-                                    background: Interface.dark,
-                                    onTap: () {
-                                      setState(() {
-                                        _fileOptionsOpened = !_fileOptionsOpened;
-                                        _focus();
-                                        saveFile();
-                                      });
-                                    }))),
-                        Positioned(
-                            right: 0,
-                            bottom: 0,
-                            child: WidgetButtonIcon(
-                                icon: "assets/graphics/icons/file.svg",
-                                color: Interface.light,
-                                background: Interface.dark,
-                                onTap: () {
-                                  setState(() {
-                                    _fileOptionsOpened = !_fileOptionsOpened;
-                                    _focus();
-                                  });
-                                }))
-                      ])),
-                  Container(
-                      margin: const EdgeInsets.only(right: 20, bottom: 17.5),
-                      child: WidgetButtonIcon(
-                          icon: "assets/graphics/icons/plus.svg",
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLoadoutsAddEdit(callback: _filter)));
-                            _focus();
-                          }))
-                ]))));
+    return WidgetMenuBar(
+      width: MediaQuery.of(context).size.width,
+      height: _menuHeight,
+      items: [
+        _buildFileOptions(),
+        EntryMenuBarItem(
+          barButton: WidgetButtonIcon(
+              icon: "assets/graphics/icons/plus.svg",
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLoadoutsAddEdit(callback: _filter)));
+                _focus();
+              }),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> _buildFilters() {
+    return [
+      FilterRangeSet(
+        icon: "assets/graphics/icons/loadout.svg",
+        text: tr('weapon_ammo'),
+        filterKeyLower: FilterKey.loadoutsAmmoMin,
+        filterKeyUpper: FilterKey.loadoutsAmmoMax,
+        min: 1,
+        max: HelperJSON.weaponsAmmo.length.toDouble(),
+      ),
+      FilterRangeSet(
+        icon: "assets/graphics/icons/caller.svg",
+        text: tr('callers'),
+        filterKeyLower: FilterKey.loadoutsCallersMin,
+        filterKeyUpper: FilterKey.loadoutsCallersMax,
+        min: 1,
+        max: HelperJSON.callers.length.toDouble(),
+      ),
+    ];
+  }
+
+  void _buildFilter() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityFilter(filters: _buildFilters(), filter: _filter)));
   }
 
   Widget _buildBody() {
-    return Column(mainAxisSize: MainAxisSize.max, children: [
-      WidgetAppBar(
-        text: tr('loadouts'),
-        context: context,
-      ),
-      WidgetSearchBar(
-        controller: _controller,
-      ),
-      Expanded(
-          child: Stack(children: [
-        _buildLoadouts(),
-        Positioned(
+    return Stack(children: [
+      Column(mainAxisSize: MainAxisSize.max, children: [
+        WidgetAppBar(
+          text: tr('loadouts'),
+          context: context,
+        ),
+        WidgetSearchBar(
+          controller: _controller,
+          onFilter: _buildFilter,
+        ),
+        Expanded(
+            child: Stack(children: [
+          _buildLoadouts(),
+          Positioned(
             right: 0,
             bottom: 0,
             child: Container(
-              color: Interface.search,
-              height: 75,
+              height: _menuHeight,
               width: MediaQuery.of(context).size.width,
-            )),
-        _buildMenu(),
-      ]))
+              color: Interface.search,
+            ),
+          ),
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: _buildMenu(),
+          ),
+        ])),
+      ]),
     ]);
   }
 
   Widget _buildWidgets() {
+    _filter();
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
     return WidgetScaffold(
       customBody: true,

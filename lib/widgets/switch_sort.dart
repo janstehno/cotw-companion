@@ -7,16 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WidgetSwitchSort extends StatelessWidget {
+  final double size;
   final String icon;
   final Color? color, background, activeColor, activeBackground;
   final bool isAscended, isActive;
   final int orderNumber;
   final Function onTap;
 
-  final double size = 35;
-
   const WidgetSwitchSort({
     Key? key,
+    this.size = 35,
     required this.icon,
     this.color,
     this.background,
@@ -45,22 +45,21 @@ class WidgetSwitchSort extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(size / 4)),
                 color: widgetBackground,
               ),
-              child:
-                  Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+              child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 SvgPicture.asset(
                   icon,
-                  width: 10,
-                  height: 10,
+                  width: (size / 5) * 2 - 2,
+                  height: (size / 5) * 2 - 2,
                   colorFilter: ColorFilter.mode(
                     widgetColor,
                     BlendMode.srcIn,
                   ),
                 ),
-                Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
                   SvgPicture.asset(
                     orderArrow,
-                    width: 12,
-                    height: 12,
+                    width: (size / 5) * 2 - 2,
+                    height: (size / 5) * 2 - 2,
                     colorFilter: ColorFilter.mode(
                       widgetColor,
                       BlendMode.srcIn,
@@ -69,8 +68,9 @@ class WidgetSwitchSort extends StatelessWidget {
                   AutoSizeText(
                     orderNumber.toString(),
                     maxLines: 1,
+                    minFontSize: 8,
                     textAlign: TextAlign.center,
-                    style: Interface.s16w500n(Interface.accent),
+                    style: Interface.s14w500n(Interface.accent),
                   ),
                 ])
               ]))),
@@ -78,7 +78,8 @@ class WidgetSwitchSort extends StatelessWidget {
           opacity: isActive ? 0 : 1,
           duration: const Duration(milliseconds: 200),
           child: WidgetSwitchIcon(
-              activeIcon: icon,
+              buttonSize: size,
+              icon: icon,
               color: color,
               background: background,
               activeColor: activeColor,

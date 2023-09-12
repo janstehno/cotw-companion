@@ -1,0 +1,16 @@
+<!-- Copyright (c) 2022 - 2023 Jan Stehno -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <line x1="22.54" y1="3.41" x2="15.38" y2="10.57" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <circle cx="11.85" cy="14.1" r="4.79" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <polyline points="15.66 3 22.94 3 22.94 10.28" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <line x1="11.85" y1="27" x2="11.85" y2="18.98" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <circle cx="11.85" cy="14.04" r="4.73" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <line x1="8.11" y1="23.51" x2="15.58" y2="23.51" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <rect width="30" height="30" fill="none" />
+</svg>

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.7.2";
+  static const String version = "1.7.3";
   static const int greatOneId = 100;
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;
@@ -79,7 +79,7 @@ class Interface {
   static const Color lowlands = lightgreen;
   static const Color hills = yellow;
   static const Color mountains = blue;
-  static const Color trophyNoneBackground = grey;
+  static const Color trophyNoneBackground = ff75;
   static const Color trophyBronzeBackground = trophyBronze;
   static const Color trophySilverBackground = grey;
   static const Color trophyGoldBackground = trophyGold;

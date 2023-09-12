@@ -58,8 +58,8 @@ class ActivitySettingsState extends State<ActivitySettings> {
       ),
       DropdownButton(
           dropdownColor: Interface.dropDown,
-          underline: Container(),
-          icon: Container(),
+          underline: const SizedBox.shrink(),
+          icon: const SizedBox.shrink(),
           elevation: 0,
           itemHeight: 60,
           menuMaxHeight: 300,
@@ -133,8 +133,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-          child:
-              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
             Expanded(
                 child: GestureDetector(
                     onTap: () {
@@ -180,28 +179,24 @@ class ActivitySettingsState extends State<ActivitySettings> {
                     child: Container(
                         height: 60,
                         color: Colors.transparent,
-                        child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                  child: AutoSizeText(
-                                tr('dark_mode'),
-                                textAlign: TextAlign.end,
-                                style: Interface.s16w300n(Interface.dark),
-                              )),
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                width: 20,
-                                height: 20,
-                                margin: const EdgeInsets.only(left: 15),
-                                decoration: BoxDecoration(
-                                  color: _settings.getDarkMode ? Interface.primary : Interface.disabled,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                              )
-                            ]))))
+                        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                          Expanded(
+                              child: AutoSizeText(
+                            tr('dark_mode'),
+                            textAlign: TextAlign.end,
+                            style: Interface.s16w300n(Interface.dark),
+                          )),
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            width: 20,
+                            height: 20,
+                            margin: const EdgeInsets.only(left: 15),
+                            decoration: BoxDecoration(
+                              color: _settings.getDarkMode ? Interface.primary : Interface.disabled,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          )
+                        ]))))
           ]))
     ]);
   }
@@ -213,8 +208,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-          child:
-              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
             Expanded(
                 child: GestureDetector(
                     onTap: () {
@@ -260,28 +254,24 @@ class ActivitySettingsState extends State<ActivitySettings> {
                     child: Container(
                         height: 60,
                         color: Colors.transparent,
-                        child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                  child: AutoSizeText(
-                                tr('imperial_units'),
-                                textAlign: TextAlign.end,
-                                style: Interface.s16w300n(Interface.dark),
-                              )),
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                width: 20,
-                                height: 20,
-                                margin: const EdgeInsets.only(left: 15),
-                                decoration: BoxDecoration(
-                                  color: _settings.getImperialUnits ? Interface.primary : Interface.disabled,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                              )
-                            ]))))
+                        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                          Expanded(
+                              child: AutoSizeText(
+                            tr('imperial_units'),
+                            textAlign: TextAlign.end,
+                            style: Interface.s16w300n(Interface.dark),
+                          )),
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            width: 20,
+                            height: 20,
+                            margin: const EdgeInsets.only(left: 15),
+                            decoration: BoxDecoration(
+                              color: _settings.getImperialUnits ? Interface.primary : Interface.disabled,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          )
+                        ]))))
           ]))
     ]);
   }

@@ -1,2 +1,18 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>caller</title><g id="thehunter"><g id="caller"><path d="M16.28,6s-1.48,8.15-5.12,11.79C8,21,1.5,23.91,1.5,25.26s8.35,1,13.78-1.15c9.28-3.74,13.09-13.4,13.09-13.4" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><ellipse cx="22.33" cy="8.34" rx="3.91" ry="6.5" transform="translate(5.88 25.59) rotate(-66.85)" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <title>caller</title>
+    <g id="thehunter">
+        <g id="caller">
+            <path
+                d="M16.28,6s-1.48,8.15-5.12,11.79C8,21,1.5,23.91,1.5,25.26s8.35,1,13.78-1.15c9.28-3.74,13.09-13.4,13.09-13.4"
+                fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="3" />
+            <ellipse cx="22.33" cy="8.34" rx="3.91" ry="6.5"
+                transform="translate(5.88 25.59) rotate(-66.85)" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+        </g>
+    </g>
+    <g id="frame">
+        <rect width="30" height="30" fill="none" />
+    </g>
+</svg>

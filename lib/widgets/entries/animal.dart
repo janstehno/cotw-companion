@@ -1,8 +1,8 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:cotwcompanion/activities/info_animal.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/activities/info_animal.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
@@ -26,6 +26,60 @@ class EntryAnimal extends StatefulWidget {
 }
 
 class EntryAnimalState extends State<EntryAnimal> {
+  List<WidgetTag> _buildTags() {
+    List<WidgetTag> tags = [];
+    if (widget.animal.isFromDlc) {
+      tags.add(WidgetTag.big(
+        icon: "assets/graphics/icons/dlc.svg",
+        color: Interface.accent,
+        background: Interface.primary,
+      ));
+    }
+    if (widget.animal.hasGO) {
+      tags.add(WidgetTag.big(
+        icon: "assets/graphics/icons/trophy_great_one.svg",
+        color: Interface.light,
+        background: Interface.dark,
+      ));
+    }
+    tags.addAll([
+      WidgetTag.big(
+        text: widget.animal.level.toString(),
+        icon: "assets/graphics/icons/level.svg",
+        color: Interface.dark,
+        background: Interface.tag,
+      ),
+      WidgetTag.big(
+        text: widget.animal.difficulty.toString(),
+        icon: "assets/graphics/icons/difficulty.svg",
+        color: Interface.dark,
+        background: Interface.tag,
+      ),
+      WidgetTag.big(
+        text: widget.animal.removePointZero(widget.animal.diamond.toString()),
+        icon: "assets/graphics/icons/trophy_diamond.svg",
+        color: Interface.alwaysDark,
+        background: Interface.trophyDiamond,
+      ),
+    ]);
+
+    if (widget.animal.grounded) {
+      tags.add(WidgetTag.big(
+        icon: "assets/graphics/icons/grounded.svg",
+        color: Interface.dark,
+        background: Interface.tag,
+      ));
+    }
+    if (widget.animal.femaleDiamond) {
+      tags.add(WidgetTag.big(
+        icon: "assets/graphics/icons/gender_female.svg",
+        color: Interface.dark,
+        background: Interface.tag,
+      ));
+    }
+    return tags;
+  }
+
   Widget _buildWidgets() {
     return GestureDetector(
         onTap: () {
@@ -39,55 +93,10 @@ class EntryAnimalState extends State<EntryAnimal> {
             padding: const EdgeInsets.all(30),
             color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
             child: EntryItem(
-                text: widget.animal.getName(context.locale),
-                itemIcon: Graphics.getAnimalIcon(widget.animal.id),
-                tags: [
-                  WidgetTag.medium(
-                    icon: "assets/graphics/icons/dlc.svg",
-                    color: Interface.accent,
-                    background: Interface.primary,
-                    margin: const EdgeInsets.only(right: 5),
-                    isVisible: widget.animal.isFromDlc,
-                  ),
-                  WidgetTag.medium(
-                    text: widget.animal.level.toString(),
-                    icon: "assets/graphics/icons/level.svg",
-                    color: Interface.dark,
-                    background: Interface.tag,
-                    margin: const EdgeInsets.only(right: 5),
-                  ),
-                  WidgetTag.medium(
-                    iconSize: 17,
-                    icon: "assets/graphics/icons/grounded.svg",
-                    color: Interface.dark,
-                    background: Interface.tag,
-                    isVisible: widget.animal.grounded,
-                    margin: const EdgeInsets.only(right: 5),
-                  ),
-                  WidgetTag.medium(
-                    iconSize: 18,
-                    text: widget.animal.removePointZero(widget.animal.diamond.toString()),
-                    icon: "assets/graphics/icons/trophy_diamond.svg",
-                    color: Interface.alwaysDark,
-                    background: Interface.trophyDiamond,
-                    margin: const EdgeInsets.only(right: 5),
-                  ),
-                  WidgetTag.medium(
-                    iconSize: 20,
-                    icon: "assets/graphics/icons/trophy_great_one.svg",
-                    color: Interface.light,
-                    background: Interface.dark,
-                    isVisible: widget.animal.hasGO,
-                  ),
-                  WidgetTag.medium(
-                    iconSize: 15,
-                    icon: "assets/graphics/icons/female.svg",
-                    color: Interface.dark,
-                    background: Interface.tag,
-                    isVisible: widget.animal.femaleDiamond,
-                    margin: const EdgeInsets.only(right: 5),
-                  ),
-                ])));
+              text: widget.animal.getName(context.locale),
+              itemIcon: Graphics.getAnimalIcon(widget.animal.id),
+              tags: _buildTags(),
+            )));
   }
 
   @override

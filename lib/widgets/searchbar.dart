@@ -6,10 +6,12 @@ import 'package:flutter_svg/svg.dart';
 
 class WidgetSearchBar extends StatefulWidget {
   final TextEditingController controller;
+  final Function? onFilter;
 
   const WidgetSearchBar({
     Key? key,
     required this.controller,
+    required this.onFilter,
   }) : super(key: key);
 
   @override
@@ -44,20 +46,21 @@ class WidgetSearchBarState extends State<WidgetSearchBar> {
                     cursorColor: Interface.dark,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(top: -33),
+                      constraints: BoxConstraints(minHeight: 25, maxHeight: 25),
                     ),
                     style: Interface.s16w300n(Interface.dark),
                   ))),
           GestureDetector(
               child: Container(
+                  color: Colors.transparent,
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  padding: EdgeInsets.only(left: 30, right: widget.onFilter != null ? 10 : 30),
                   child: SvgPicture.asset(
                     "assets/graphics/icons/menu_close.svg",
                     width: 15,
                     height: 15,
                     colorFilter: ColorFilter.mode(
-                      Interface.dark,
+                      Interface.dark.withOpacity(0.5),
                       BlendMode.srcIn,
                     ),
                   )),
@@ -65,7 +68,26 @@ class WidgetSearchBarState extends State<WidgetSearchBar> {
                 setState(() {
                   widget.controller.text = "";
                 });
-              })
+              }),
+          widget.onFilter != null
+              ? GestureDetector(
+                  child: Container(
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(left: 10, right: 30),
+                      child: SvgPicture.asset(
+                        "assets/graphics/icons/filter.svg",
+                        width: 15,
+                        height: 15,
+                        colorFilter: ColorFilter.mode(
+                          Interface.dark,
+                          BlendMode.srcIn,
+                        ),
+                      )),
+                  onTap: () {
+                    widget.onFilter!();
+                  })
+              : const SizedBox.shrink()
         ]));
   }
 

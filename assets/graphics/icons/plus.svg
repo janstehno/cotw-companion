@@ -1,2 +1,15 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>plus</title><g id="icons"><g id="plus"><line x1="15.03" y1="1.5" x2="15.03" y2="28.5" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><line x1="1.5" y1="14.73" x2="28.5" y2="14.73" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <title>plus</title>
+    <g id="icons">
+        <g id="plus">
+            <line x1="15.03" y1="1.5" x2="15.03" y2="28.5" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+            <line x1="1.5" y1="14.73" x2="28.5" y2="14.73" fill="none" stroke="#212121"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+        </g>
+    </g>
+    <g id="frame">
+        <rect width="30" height="30" fill="none" />
+    </g>
+</svg>

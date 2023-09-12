@@ -9,7 +9,7 @@ class WidgetTitleInfoIcon extends StatelessWidget {
   final String text, icon;
   final Color? color, background;
   final double height = 60;
-  final double iconSize = 15;
+  final double iconSize = 17;
   final bool alignRight;
 
   const WidgetTitleInfoIcon({
@@ -33,7 +33,7 @@ class WidgetTitleInfoIcon extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               alignRight
-                  ? Container()
+                  ? const SizedBox.shrink()
                   : SvgPicture.asset(
                       icon,
                       width: iconSize,
@@ -60,7 +60,7 @@ class WidgetTitleInfoIcon extends StatelessWidget {
                         BlendMode.srcIn,
                       ),
                     )
-                  : Container(),
+                  : const SizedBox.shrink(),
             ]));
   }
 

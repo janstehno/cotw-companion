@@ -1,2 +1,21 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><title>weight</title><g id="other_icons"><g id="weight"><path d="M15,27.5h9.79c2.11,0,1.57-1.41,1.23-3s-1.9-11.32-2.24-12.86-1.1-1.28-3.18-1.28H15" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><path d="M15,27.5H5.21c-2.11,0-1.57-1.41-1.23-3S5.88,13.2,6.22,11.66s1.1-1.28,3.18-1.28H15" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><circle cx="15" cy="5.78" r="3.28" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/></g></g><g id="frame"><rect width="30" height="30" fill="none"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <title>weight</title>
+    <g id="other_icons">
+        <g id="weight">
+            <path
+                d="M15,27.5h9.79c2.11,0,1.57-1.41,1.23-3s-1.9-11.32-2.24-12.86-1.1-1.28-3.18-1.28H15"
+                fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="3" />
+            <path
+                d="M15,27.5H5.21c-2.11,0-1.57-1.41-1.23-3S5.88,13.2,6.22,11.66s1.1-1.28,3.18-1.28H15"
+                fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="3" />
+            <circle cx="15" cy="5.78" r="3.28" fill="none" stroke="#231f20" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="3" />
+        </g>
+    </g>
+    <g id="frame">
+        <rect width="30" height="30" fill="none" />
+    </g>
+</svg>

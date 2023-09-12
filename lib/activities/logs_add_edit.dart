@@ -1,12 +1,12 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/miscellaneous/types.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
@@ -433,24 +433,20 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             color: Interface.title,
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AutoSizeText(
-                    tr('time').toUpperCase(),
-                    maxLines: 1,
-                    textAlign: TextAlign.start,
-                    style: Interface.s20w600c(Interface.dark),
-                  ),
-                  AutoSizeText(
-                    Log.getDate(DateType.format, Log.dateToString(_dateTime)),
-                    maxLines: 1,
-                    textAlign: TextAlign.start,
-                    style: Interface.s16w300n(Interface.dark),
-                  )
-                ])));
+            child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+              AutoSizeText(
+                tr('time').toUpperCase(),
+                maxLines: 1,
+                textAlign: TextAlign.start,
+                style: Interface.s20w600c(Interface.dark),
+              ),
+              AutoSizeText(
+                Log.getDate(DateStructure.format, Log.dateToString(_dateTime)),
+                maxLines: 1,
+                textAlign: TextAlign.start,
+                style: Interface.s16w300n(Interface.dark),
+              )
+            ])));
   }
 
   Widget _buildReserve() {
@@ -460,8 +456,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       ),
       DropdownButton(
         dropdownColor: Interface.dropDown,
-        underline: Container(),
-        icon: Container(),
+        underline: const SizedBox.shrink(),
+        icon: const SizedBox.shrink(),
         elevation: 0,
         itemHeight: 60,
         menuMaxHeight: 300,
@@ -486,8 +482,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       ),
       DropdownButton(
           dropdownColor: Interface.dropDown,
-          underline: Container(),
-          icon: Container(),
+          underline: const SizedBox.shrink(),
+          icon: const SizedBox.shrink(),
           elevation: 0,
           itemHeight: 60,
           menuMaxHeight: 300,
@@ -511,8 +507,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       ),
       DropdownButton(
           dropdownColor: Interface.dropDown,
-          underline: Container(),
-          icon: Container(),
+          underline: const SizedBox.shrink(),
+          icon: const SizedBox.shrink(),
           elevation: 0,
           itemHeight: 60,
           menuMaxHeight: 300,
@@ -533,10 +529,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     return Column(children: [
       WidgetTitleBigSwitch(
           primaryText: tr('animal_gender'),
-          icon: "assets/graphics/icons/female.svg",
+          icon: "assets/graphics/icons/gender_female.svg",
           color: Interface.alwaysDark,
           background: Interface.red,
-          activeIcon: "assets/graphics/icons/male.svg",
+          activeIcon: "assets/graphics/icons/gender_male.svg",
           activeColor: Interface.alwaysDark,
           activeBackground: Interface.blue,
           isActive: _isMale,
@@ -595,10 +591,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          child:
-              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
             WidgetSwitchIcon(
-              activeIcon: "assets/graphics/icons/harvest_correct_ammo.svg",
+              icon: "assets/graphics/icons/harvest_correct_ammo.svg",
               isActive: _correctAmmoUsed,
               onTap: () {
                 setState(() {
@@ -608,7 +603,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               },
             ),
             WidgetSwitchIcon(
-                activeIcon: "assets/graphics/icons/harvest_two_shots.svg",
+                icon: "assets/graphics/icons/harvest_two_shots.svg",
                 isActive: _twoShotsFired,
                 onTap: () {
                   setState(() {
@@ -617,7 +612,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                   });
                 }),
             WidgetSwitchIcon(
-                activeIcon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
+                icon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
                 isActive: _trophyOrganUndamaged,
                 onTap: () {
                   setState(() {
@@ -626,7 +621,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                   });
                 }),
             WidgetSwitchIcon(
-                activeIcon: "assets/graphics/icons/harvest_vital_organ.svg",
+                icon: "assets/graphics/icons/harvest_vital_organ.svg",
                 isActive: _vitalOrganHit,
                 onTap: () {
                   setState(() {
@@ -645,10 +640,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          child:
-              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
+          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
             WidgetSwitchIcon(
-                activeIcon: "assets/graphics/icons/trophy_none.svg",
+                icon: "assets/graphics/icons/trophy_none.svg",
                 activeColor: Interface.light,
                 activeBackground: Interface.trophyNoneBackground,
                 isActive: _trophyRating == 0,
@@ -659,7 +653,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                   });
                 }),
             WidgetSwitchIcon(
-                activeIcon: "assets/graphics/icons/trophy_bronze.svg",
+                icon: "assets/graphics/icons/trophy_bronze.svg",
                 activeColor: Interface.alwaysDark,
                 activeBackground: Interface.trophyBronzeBackground,
                 isActive: _trophyRating == 1,
@@ -670,7 +664,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                   });
                 }),
             WidgetSwitchIcon(
-                activeIcon: "assets/graphics/icons/trophy_silver.svg",
+                icon: "assets/graphics/icons/trophy_silver.svg",
                 activeColor: Interface.alwaysDark,
                 activeBackground: Interface.trophySilverBackground,
                 isActive: _trophyRating == 2,
@@ -681,7 +675,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                   });
                 }),
             WidgetSwitchIcon(
-                activeIcon: "assets/graphics/icons/trophy_gold.svg",
+                icon: "assets/graphics/icons/trophy_gold.svg",
                 activeColor: Interface.alwaysDark,
                 activeBackground: Interface.trophyGoldBackground,
                 isActive: _trophyRating == 3,
@@ -692,7 +686,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                   });
                 }),
             WidgetSwitchIcon(
-                activeIcon: _selectedFurId == Interface.greatOneId ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg",
+                icon: _selectedFurId == Interface.greatOneId ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg",
                 activeColor: Interface.alwaysDark,
                 activeBackground: Interface.trophyDiamondBackground,
                 isActive: _trophyRating == 4,

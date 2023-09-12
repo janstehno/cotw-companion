@@ -156,14 +156,14 @@ class EntryLogState extends State<EntryLog> {
                 BlendMode.srcIn,
               ),
             ))
-        : Container();
+        : const SizedBox.shrink();
   }
 
   Widget _buildGender() {
     return Container(
         alignment: Alignment.centerRight,
         child: SvgPicture.asset(
-          widget.log.isMale ? "assets/graphics/icons/male.svg" : "assets/graphics/icons/female.svg",
+          widget.log.isMale ? "assets/graphics/icons/gender_male.svg" : "assets/graphics/icons/gender_female.svg",
           width: 15,
           height: 15,
           colorFilter: ColorFilter.mode(
@@ -232,7 +232,7 @@ class EntryLogState extends State<EntryLog> {
     ]);
   }
 
-  Widget _buildHarvestCheckIcon(String icon) {
+  Widget _buildHarvestCheckIcon(String icon, bool checked) {
     return Container(
         height: 20,
         width: 20,
@@ -243,7 +243,7 @@ class EntryLogState extends State<EntryLog> {
           width: 15,
           height: 15,
           colorFilter: ColorFilter.mode(
-            widget.log.correctAmmoUsed ? Interface.primary : Interface.disabled.withOpacity(0.3),
+            checked ? Interface.primary : Interface.disabled.withOpacity(0.3),
             BlendMode.srcIn,
           ),
         ));
@@ -253,12 +253,17 @@ class EntryLogState extends State<EntryLog> {
     return Container(
         height: 30,
         margin: const EdgeInsets.only(top: 15),
-        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          _buildHarvestCheckIcon("harvest_correct_ammo"),
-          _buildHarvestCheckIcon("harvest_two_shots"),
-          _buildHarvestCheckIcon("harvest_no_trophy_organ"),
-          _buildHarvestCheckIcon("harvest_vital_organ"),
-        ]));
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildHarvestCheckIcon("harvest_correct_ammo", widget.log.correctAmmoUsed),
+            _buildHarvestCheckIcon("harvest_two_shots", widget.log.twoShotsFired),
+            _buildHarvestCheckIcon("harvest_no_trophy_organ", widget.log.trophyOrganUndamaged),
+            _buildHarvestCheckIcon("harvest_vital_organ", widget.log.vitalOrganHit),
+          ],
+        ));
   }
 
   Widget _buildTrophyWeight(bool buildWeight) {
@@ -273,7 +278,7 @@ class EntryLogState extends State<EntryLog> {
             alignment: Alignment.centerRight,
             margin: EdgeInsets.only(top: (widget.log.weight > 0 && buildWeight) || (_style == 1 || _style == 2) ? 0 : 15),
             child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end, children: [
-              widget.log.weight > 0 && buildWeight ? _buildWeight() : Container(),
+              widget.log.weight > 0 && buildWeight ? _buildWeight() : const SizedBox.shrink(),
               Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
                     width: 20,
@@ -324,7 +329,7 @@ class EntryLogState extends State<EntryLog> {
         Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
         _buildTrophyWeight(false),
       ]),
-      _dateOfRecord ? _buildDate() : Container(),
+      _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
     ]);
   }
 
@@ -337,8 +342,8 @@ class EntryLogState extends State<EntryLog> {
       Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
         Expanded(
             child: Column(children: [
-          _dateOfRecord ? _buildDate() : Container(),
-          widget.log.isGreatOne() ? Container() : _buildFur(),
+          _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
+          widget.log.isGreatOne() ? const SizedBox.shrink() : _buildFur(),
         ])),
         _buildGender(),
       ])
@@ -352,11 +357,11 @@ class EntryLogState extends State<EntryLog> {
         Expanded(child: _buildName()),
         _buildGender(),
       ]),
-      _dateOfRecord ? _buildDate() : Container(),
-      widget.log.reserveId > -1 ? _buildReserve() : Container(),
-      widget.log.isGreatOne() ? Container() : _buildFur(),
+      _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
+      widget.log.reserveId > -1 ? _buildReserve() : const SizedBox.shrink(),
+      widget.log.isGreatOne() ? const SizedBox.shrink() : _buildFur(),
       Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Expanded(child: widget.log.reserveId > -1 ? _buildHarvestCheck() : Container()),
+        Expanded(child: widget.log.reserveId > -1 ? _buildHarvestCheck() : const SizedBox.shrink()),
         _buildTrophyWeight(true),
       ])
     ]);
@@ -374,7 +379,7 @@ class EntryLogState extends State<EntryLog> {
                       ? _buildLogSemiCompact()
                       : _style == 3
                           ? _buildLogNonCompact()
-                          : Container()
+                          : const SizedBox.shrink()
             ])));
   }
 
@@ -404,7 +409,7 @@ class EntryLogState extends State<EntryLog> {
                   child: WidgetSnackBar(
                     text: tr('item_removed'),
                     icon: "assets/graphics/icons/reload.svg",
-                    onTap: () {
+                    onSnackBarTap: () {
                       _undo();
                     },
                   ))));

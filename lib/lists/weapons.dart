@@ -80,10 +80,11 @@ class ListWeaponsState extends State<ListWeapons> {
       FilterValueSet(
         text: tr('animal_class'),
         icon: "assets/graphics/icons/level.svg",
-        filterKey: FilterKey.weaponsAnimalClass,
+        decimal: false,
         min: 1,
         max: 9,
         defaultValue: 0,
+        filterKey: FilterKey.weaponsAnimalClass,
       ),
       FilterRangeAuto(
         text: tr('animal_class'),

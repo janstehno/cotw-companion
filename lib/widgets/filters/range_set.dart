@@ -8,17 +8,19 @@ import 'package:flutter/material.dart';
 
 class FilterRangeSet extends StatefulWidget {
   final String icon, text;
+  final bool decimal;
+  final num min, max;
   final FilterKey filterKeyLower, filterKeyUpper;
-  final double min, max;
 
   const FilterRangeSet({
     Key? key,
     required this.icon,
     required this.text,
-    required this.filterKeyLower,
-    required this.filterKeyUpper,
+    required this.decimal,
     required this.min,
     required this.max,
+    required this.filterKeyLower,
+    required this.filterKeyUpper,
   }) : super(key: key);
 
   @override
@@ -31,18 +33,40 @@ class FilterRangeSetState extends State<FilterRangeSet> {
 
   @override
   void initState() {
-    _controllerMin.addListener(() => _setValues());
-    _controllerMax.addListener(() => _setValues());
+    _setupControllers();
     super.initState();
   }
 
+  void _setupControllers() {
+    if (widget.decimal) {
+      _controllerMin.text =
+          HelperFilter.getDoubleValue(widget.filterKeyLower) == widget.min ? "" : HelperFilter.getDoubleValue(widget.filterKeyLower).toString().replaceFirst(".0", "");
+      _controllerMax.text =
+          HelperFilter.getDoubleValue(widget.filterKeyUpper) == widget.max ? "" : HelperFilter.getDoubleValue(widget.filterKeyUpper).toString().replaceFirst(".0", "");
+    } else {
+      _controllerMin.text = HelperFilter.getIntValue(widget.filterKeyLower) == widget.min ? "" : HelperFilter.getIntValue(widget.filterKeyLower).toString();
+      _controllerMax.text = HelperFilter.getIntValue(widget.filterKeyUpper) == widget.max ? "" : HelperFilter.getIntValue(widget.filterKeyUpper).toString();
+    }
+    _controllerMin.addListener(() => _setValues());
+    _controllerMax.addListener(() => _setValues());
+  }
+
   void _setValues() {
-    double min = _controllerMin.text.isEmpty ? widget.min : double.tryParse(_controllerMin.text) ?? widget.min;
-    double max = _controllerMax.text.isEmpty ? widget.max : double.tryParse(_controllerMax.text) ?? widget.max;
-    setState(() {
-      HelperFilter.changeValue(widget.filterKeyLower, min);
-      HelperFilter.changeValue(widget.filterKeyUpper, max);
-    });
+    if (widget.decimal) {
+      double min = _controllerMin.text.isEmpty ? widget.min.toDouble() : double.tryParse(_controllerMin.text) ?? widget.min.toDouble();
+      double max = _controllerMax.text.isEmpty ? widget.max.toDouble() : double.tryParse(_controllerMax.text) ?? widget.max.toDouble();
+      setState(() {
+        HelperFilter.changeDoubleValue(widget.filterKeyLower, min);
+        HelperFilter.changeDoubleValue(widget.filterKeyUpper, max);
+      });
+    } else {
+      int min = _controllerMin.text.isEmpty ? widget.min.toInt() : int.tryParse(_controllerMin.text) ?? widget.min.toInt();
+      int max = _controllerMax.text.isEmpty ? widget.max.toInt() : int.tryParse(_controllerMax.text) ?? widget.max.toInt();
+      setState(() {
+        HelperFilter.changeIntValue(widget.filterKeyLower, min);
+        HelperFilter.changeIntValue(widget.filterKeyUpper, max);
+      });
+    }
   }
 
   Widget _buildWidgets() {

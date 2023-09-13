@@ -395,6 +395,7 @@ class ActivityLogsState extends State<ActivityLogs> {
       FilterRangeSet(
         icon: "${assets}difficulty.svg",
         text: tr('animal_trophy'),
+        decimal: true,
         min: 0,
         max: 1000,
         filterKeyLower: FilterKey.logsTrophyScoreMin,

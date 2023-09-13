@@ -34,8 +34,8 @@ class HelperFilter {
     FilterKey.callersEffectiveRange: {150: true, 200: true, 250: true, 500: true},
     FilterKey.logsGender: {0: true, 1: true},
     FilterKey.logsTrophyRating: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
-    FilterKey.logsTrophyScoreMin: 0,
-    FilterKey.logsTrophyScoreMax: 1000,
+    FilterKey.logsTrophyScoreMin: 0.0,
+    FilterKey.logsTrophyScoreMax: 1000.0,
     FilterKey.logsSort: {
       1: {"order": 0, "active": false, "ascended": true, "key": ""},
       2: {"order": 0, "active": false, "ascended": true, "key": ""},
@@ -54,11 +54,19 @@ class HelperFilter {
     return _filters[filterKey][listKey][key];
   }
 
-  static dynamic getListValue(FilterKey filterKey, int listKey) {
+  static bool getBoolValueList(FilterKey filterKey, int listKey) {
     return _filters[filterKey][listKey];
   }
 
-  static dynamic getValue(FilterKey filterKey) {
+  static bool getBoolValue(FilterKey filterKey) {
+    return _filters[filterKey];
+  }
+
+  static int getIntValue(FilterKey filterKey) {
+    return _filters[filterKey];
+  }
+
+  static double getDoubleValue(FilterKey filterKey) {
     return _filters[filterKey];
   }
 
@@ -116,7 +124,15 @@ class HelperFilter {
     _filters.update(filterKey, (v) => !_filters[filterKey]);
   }
 
-  static void changeValue(FilterKey filterKey, dynamic value) {
+  static void changeBoolValue(FilterKey filterKey, bool value) {
+    _filters.update(filterKey, (v) => value);
+  }
+
+  static void changeIntValue(FilterKey filterKey, int value) {
+    _filters.update(filterKey, (v) => value);
+  }
+
+  static void changeDoubleValue(FilterKey filterKey, double value) {
     _filters.update(filterKey, (v) => value);
   }
 
@@ -126,8 +142,8 @@ class HelperFilter {
     reserves = reserves
         .where((reserve) =>
             (searchText.isNotEmpty ? reserve.getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) : true) &&
-            reserve.count >= getValue(FilterKey.reservesCountMin) &&
-            reserve.count <= getValue(FilterKey.reservesCountMax))
+            reserve.count >= getIntValue(FilterKey.reservesCountMin) &&
+            reserve.count <= getIntValue(FilterKey.reservesCountMax))
         .toList();
     reserves.sort((a, b) => a.id.compareTo(b.id));
     return reserves;
@@ -139,8 +155,8 @@ class HelperFilter {
     animals = animals
         .where((animal) =>
             (searchText.isNotEmpty ? animal.getName(context.locale).toLowerCase().replaceFirst("&", "").contains(searchText.toLowerCase()) : true) &&
-            getListValue(FilterKey.animalsClass, animal.level) &&
-            getListValue(FilterKey.animalsDifficulty, animal.difficulty))
+            getBoolValueList(FilterKey.animalsClass, animal.level) &&
+            getBoolValueList(FilterKey.animalsDifficulty, animal.difficulty))
         .toList();
     animals.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
     return animals;
@@ -150,15 +166,16 @@ class HelperFilter {
     List<Weapon> weapons = [];
     weapons.addAll(HelperJSON.weapons);
     weapons = weapons
-        .where((weapon) => (searchText.isNotEmpty ? weapon.getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) : true) &&
-                getValue(FilterKey.weaponsAnimalClass) != 0
-            ? (weapon.min <= getValue(FilterKey.weaponsAnimalClass) && weapon.max >= getValue(FilterKey.weaponsAnimalClass))
-            : true &&
-                weapon.min >= getValue(FilterKey.weaponsClassMin) &&
-                weapon.max <= getValue(FilterKey.weaponsClassMax) &&
-                weapon.mag >= getValue(FilterKey.weaponsMagMin) &&
-                weapon.mag <= getValue(FilterKey.weaponsMagMax) &&
-                getValue(weapon.typeToFilterKey()))
+        .where((weapon) =>
+            (searchText.isNotEmpty ? weapon.getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) : true) &&
+            (getIntValue(FilterKey.weaponsAnimalClass) != 0
+                ? (weapon.min <= getIntValue(FilterKey.weaponsAnimalClass) && weapon.max >= getIntValue(FilterKey.weaponsAnimalClass))
+                : true) &&
+            weapon.min >= getIntValue(FilterKey.weaponsClassMin) &&
+            weapon.max <= getIntValue(FilterKey.weaponsClassMax) &&
+            weapon.mag >= getIntValue(FilterKey.weaponsMagMin) &&
+            weapon.mag <= getIntValue(FilterKey.weaponsMagMax) &&
+            getBoolValue(weapon.typeToFilterKey()))
         .toList();
     for (Weapon weapon in weapons) {
       weapon.setName(context.locale);
@@ -174,7 +191,7 @@ class HelperFilter {
     callers = callers
         .where((caller) =>
             (searchText.isNotEmpty ? caller.getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) : true) &&
-            getListValue(FilterKey.callersEffectiveRange, caller.rangeM))
+            getBoolValueList(FilterKey.callersEffectiveRange, caller.rangeM))
         .toList();
     callers.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
     return callers;
@@ -197,10 +214,10 @@ class HelperFilter {
     }
     logs = logs
         .where((log) =>
-            getListValue(FilterKey.logsGender, log.gender) &&
-            getListValue(FilterKey.logsTrophyRating, log.furId == Interface.greatOneId ? 5 : log.trophyRating) &&
-            log.trophy >= getValue(FilterKey.logsTrophyScoreMin) &&
-            log.trophy <= getValue(FilterKey.logsTrophyScoreMax))
+            getBoolValueList(FilterKey.logsGender, log.gender) &&
+            getBoolValueList(FilterKey.logsTrophyRating, log.furId == Interface.greatOneId ? 5 : log.trophyRating) &&
+            log.trophy >= getDoubleValue(FilterKey.logsTrophyScoreMin) &&
+            log.trophy <= getDoubleValue(FilterKey.logsTrophyScoreMax))
         .toList();
     logs.sort((a, b) => b.dateForCompare.compareTo(a.dateForCompare));
     logs.multiSort(getSortCriteria(FilterKey.logsSort), getSortPreferences(FilterKey.logsSort));
@@ -214,10 +231,10 @@ class HelperFilter {
         .where((loadout) =>
             (searchText.isNotEmpty ? loadout.name.toLowerCase().contains(searchText.toLowerCase()) : true) &&
             (loadout.ammo.isNotEmpty
-                ? (loadout.ammo.length >= getValue(FilterKey.loadoutsAmmoMin) && loadout.ammo.length <= getValue(FilterKey.loadoutsAmmoMax))
+                ? (loadout.ammo.length >= getIntValue(FilterKey.loadoutsAmmoMin) && loadout.ammo.length <= getIntValue(FilterKey.loadoutsAmmoMax))
                 : true) &&
             (loadout.callers.isNotEmpty
-                ? (loadout.callers.length >= getValue(FilterKey.loadoutsCallersMin) && loadout.callers.length <= getValue(FilterKey.loadoutsCallersMax))
+                ? (loadout.callers.length >= getIntValue(FilterKey.loadoutsCallersMin) && loadout.callers.length <= getIntValue(FilterKey.loadoutsCallersMax))
                 : true))
         .toList();
     return loadouts;

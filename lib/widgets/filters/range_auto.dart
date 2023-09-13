@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 class FilterRangeAuto extends StatefulWidget {
   final String icon, text;
   final FilterKey filterKeyLower, filterKeyUpper;
-  final double min, max;
+  final int min, max;
   final double handleSize = 30;
 
   const FilterRangeAuto({
@@ -42,11 +42,11 @@ class FilterRangeAutoState extends State<FilterRangeAuto> {
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
         child: FlutterSlider(
             rangeSlider: true,
-            min: widget.min,
-            max: widget.max,
+            min: widget.min.toDouble(),
+            max: widget.max.toDouble(),
             values: [
-              HelperFilter.getValue(widget.filterKeyLower).toDouble(),
-              HelperFilter.getValue(widget.filterKeyUpper).toDouble(),
+              HelperFilter.getIntValue(widget.filterKeyLower).toDouble(),
+              HelperFilter.getIntValue(widget.filterKeyUpper).toDouble(),
             ],
             handlerWidth: widget.handleSize,
             handlerHeight: widget.handleSize,
@@ -70,7 +70,7 @@ class FilterRangeAutoState extends State<FilterRangeAuto> {
                 child: Container(
                     alignment: Alignment.center,
                     child: AutoSizeText(
-                      HelperFilter.getValue(widget.filterKeyLower).toString(),
+                      HelperFilter.getIntValue(widget.filterKeyLower).toString(),
                       style: Interface.s18w500n(Interface.accent),
                     ))),
             rightHandler: FlutterSliderHandler(
@@ -81,13 +81,13 @@ class FilterRangeAutoState extends State<FilterRangeAuto> {
                 child: Container(
                     alignment: Alignment.center,
                     child: AutoSizeText(
-                      HelperFilter.getValue(widget.filterKeyUpper).toString(),
+                      HelperFilter.getIntValue(widget.filterKeyUpper).toString(),
                       style: Interface.s18w500n(Interface.accent),
                     ))),
             onDragging: (id, lower, upper) {
               setState(() {
-                HelperFilter.changeValue(widget.filterKeyLower, lower.toInt());
-                HelperFilter.changeValue(widget.filterKeyUpper, upper.toInt());
+                HelperFilter.changeIntValue(widget.filterKeyLower, lower.toInt());
+                HelperFilter.changeIntValue(widget.filterKeyUpper, upper.toInt());
               });
             }),
       )

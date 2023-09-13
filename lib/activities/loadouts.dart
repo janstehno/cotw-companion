@@ -204,18 +204,20 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
       FilterRangeSet(
         icon: "assets/graphics/icons/loadout.svg",
         text: tr('weapon_ammo'),
-        filterKeyLower: FilterKey.loadoutsAmmoMin,
-        filterKeyUpper: FilterKey.loadoutsAmmoMax,
+        decimal: false,
         min: 1,
         max: HelperJSON.weaponsAmmo.length.toDouble(),
+        filterKeyLower: FilterKey.loadoutsAmmoMin,
+        filterKeyUpper: FilterKey.loadoutsAmmoMax,
       ),
       FilterRangeSet(
         icon: "assets/graphics/icons/caller.svg",
         text: tr('callers'),
-        filterKeyLower: FilterKey.loadoutsCallersMin,
-        filterKeyUpper: FilterKey.loadoutsCallersMax,
+        decimal: false,
         min: 1,
         max: HelperJSON.callers.length.toDouble(),
+        filterKeyLower: FilterKey.loadoutsCallersMin,
+        filterKeyUpper: FilterKey.loadoutsCallersMax,
       ),
     ];
   }

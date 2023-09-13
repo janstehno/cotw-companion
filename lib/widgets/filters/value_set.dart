@@ -9,14 +9,16 @@ import 'package:flutter/material.dart';
 class FilterValueSet extends StatefulWidget {
   final String icon, text;
   final FilterKey filterKey;
-  final double min, max;
-  final double defaultValue;
+  final bool decimal;
+  final num min, max;
+  final num defaultValue;
 
   const FilterValueSet({
     Key? key,
     required this.icon,
     required this.text,
     required this.filterKey,
+    required this.decimal,
     required this.min,
     required this.max,
     required this.defaultValue,
@@ -31,19 +33,36 @@ class FilterValueSetState extends State<FilterValueSet> {
 
   @override
   void initState() {
-    _controller.addListener(() => _setValue());
+    _setupControllers();
     super.initState();
   }
 
+  void _setupControllers() {
+    if (widget.decimal) {
+      _controller.text =
+          HelperFilter.getDoubleValue(widget.filterKey) == widget.defaultValue ? "" : HelperFilter.getDoubleValue(widget.filterKey).toString().replaceFirst(".0", "");
+    } else {
+      _controller.text = HelperFilter.getIntValue(widget.filterKey) == widget.defaultValue ? "" : HelperFilter.getIntValue(widget.filterKey).toString();
+    }
+    _controller.addListener(() => _setValue());
+  }
+
   void _setValue() {
-    double value = _controller.text.isEmpty ? widget.defaultValue : double.tryParse(_controller.text) ?? widget.defaultValue;
-    setState(() {
-      HelperFilter.changeValue(widget.filterKey, value);
-    });
+    if (widget.decimal) {
+      double value = _controller.text.isEmpty ? widget.defaultValue.toDouble() : double.tryParse(_controller.text) ?? widget.defaultValue.toDouble();
+      setState(() {
+        HelperFilter.changeDoubleValue(widget.filterKey, value);
+      });
+    } else {
+      int value = _controller.text.isEmpty ? widget.defaultValue.toInt() : int.tryParse(_controller.text) ?? widget.defaultValue.toInt();
+      setState(() {
+        HelperFilter.changeIntValue(widget.filterKey, value.toInt());
+      });
+    }
   }
 
   Widget _buildWidgets() {
-    double value = double.tryParse(_controller.text) ?? widget.defaultValue;
+    double value = double.tryParse(_controller.text) ?? widget.defaultValue.toDouble();
     return Column(children: [
       WidgetTitleInfoIcon(
         icon: widget.icon,

@@ -23,7 +23,7 @@ class FilterSwitchState extends State<FilterSwitch> {
   Widget _buildWidgets() {
     return WidgetTapTextIndicator(
         text: widget.text,
-        isActive: HelperFilter.getValue(widget.filterKey),
+        isActive: HelperFilter.getBoolValue(widget.filterKey),
         onTap: () {
           setState(() {
             HelperFilter.switchValue(widget.filterKey);

@@ -32,7 +32,7 @@ class FilterPickerAutoState extends State<FilterPickerAuto> {
         WidgetSwitchText(
             buttonHeight: 30,
             text: "${widget.values[index]}",
-            isActive: HelperFilter.getListValue(widget.filterKey, key),
+            isActive: HelperFilter.getBoolValueList(widget.filterKey, key),
             onTap: () {
               setState(() {
                 HelperFilter.switchListValue(widget.filterKey, key);

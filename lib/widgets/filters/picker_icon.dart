@@ -39,7 +39,7 @@ class FilterPickerIconState extends State<FilterPickerIcon> {
             icon: widget.icons[index],
             activeColor: widget.colors[index],
             activeBackground: widget.backgrounds[index],
-            isActive: HelperFilter.getListValue(widget.filterKey, key),
+            isActive: HelperFilter.getBoolValueList(widget.filterKey, key),
             onTap: () {
               setState(() {
                 HelperFilter.switchListValue(widget.filterKey, key);

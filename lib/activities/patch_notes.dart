@@ -55,6 +55,10 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        background: Interface.even,
+        version: "1.7.4",
+      ),
+      WidgetPatchNote(
         background: Interface.odd,
         version: "1.7.3",
         changes: const ["- Improvement of the UI. Added filter option for general lists. Suggestions for other filters are more then welcome."],

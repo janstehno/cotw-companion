@@ -66,6 +66,7 @@ class ListWildlifeState extends State<ListWildlife> {
   }
 
   Widget _buildList() {
+    _filter();
     return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

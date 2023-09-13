@@ -211,6 +211,7 @@ class ActivityLogsState extends State<ActivityLogs> {
   }
 
   Widget _buildLogs() {
+    _filter();
     return WidgetScrollbar(
         child: ListView.builder(
             itemCount: _logs.length,
@@ -519,7 +520,6 @@ class ActivityLogsState extends State<ActivityLogs> {
   }
 
   Widget _buildWidgets() {
-    _filter();
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
     return WidgetScaffold(
       customBody: true,

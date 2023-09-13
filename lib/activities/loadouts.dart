@@ -114,6 +114,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   Widget _buildLoadouts() {
+    _filter();
     bool last = false;
     return WidgetScrollbar(
         child: ListView.builder(
@@ -257,7 +258,6 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   Widget _buildWidgets() {
-    _filter();
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
     return WidgetScaffold(
       customBody: true,

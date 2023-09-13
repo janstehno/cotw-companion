@@ -109,6 +109,7 @@ class ListWeaponsState extends State<ListWeapons> {
   }
 
   Widget _buildList() {
+    _filter();
     return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

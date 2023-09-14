@@ -68,8 +68,7 @@ void main() async {
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+  MaterialApp _buildApp(BuildContext context) {
     return MaterialApp(
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
@@ -100,4 +99,7 @@ class App extends StatelessWidget {
           ))
         ]));
   }
+
+  @override
+  Widget build(BuildContext context) => _buildApp(context);
 }

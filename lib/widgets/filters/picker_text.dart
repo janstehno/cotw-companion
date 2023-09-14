@@ -65,7 +65,5 @@ class FilterPickerTextState extends State<FilterPickerText> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

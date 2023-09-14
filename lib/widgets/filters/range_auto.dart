@@ -95,7 +95,5 @@ class FilterRangeAutoState extends State<FilterRangeAuto> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

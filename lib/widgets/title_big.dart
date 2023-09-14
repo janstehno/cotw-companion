@@ -9,6 +9,8 @@ class WidgetTitleBig extends StatelessWidget {
   final String secondaryText;
   final int maxLines;
 
+  static const double height = 70;
+
   const WidgetTitleBig({
     Key? key,
     required this.primaryText,
@@ -18,7 +20,7 @@ class WidgetTitleBig extends StatelessWidget {
 
   Widget _buildWidgets() {
     return Container(
-        height: 70,
+        height: height,
         color: Interface.title,
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),

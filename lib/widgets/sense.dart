@@ -46,7 +46,7 @@ class WidgetSense extends StatelessWidget {
     return result;
   }
 
-  Widget _buildWidgets() {
+  Widget _buildSense() {
     return SizedBox(
         height: 25,
         child: Row(children: [
@@ -67,8 +67,10 @@ class WidgetSense extends StatelessWidget {
         ]));
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return isVisible ? _buildWidgets() : const SizedBox.shrink();
+  Widget _buildWidgets() {
+    return isVisible ? _buildSense() : const SizedBox.shrink();
   }
+
+  @override
+  Widget build(BuildContext context) => _buildWidgets();
 }

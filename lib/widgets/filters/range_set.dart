@@ -97,7 +97,5 @@ class FilterRangeSetState extends State<FilterRangeSet> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

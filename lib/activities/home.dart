@@ -206,6 +206,7 @@ class ActivityHomeState extends State<ActivityHome> {
   }
 
   Widget _buildWidgets() {
+    _getScreenSizes();
     return Scaffold(
         appBar: AppBar(elevation: 0, backgroundColor: Interface.primary, toolbarHeight: 0.1),
         body: OrientationBuilder(builder: (context, orientation) {
@@ -233,8 +234,5 @@ class ActivityHomeState extends State<ActivityHome> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    _getScreenSizes();
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

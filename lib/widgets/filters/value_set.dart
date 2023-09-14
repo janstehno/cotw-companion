@@ -82,7 +82,5 @@ class FilterValueSetState extends State<FilterValueSet> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

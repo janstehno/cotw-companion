@@ -94,8 +94,8 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
           child: widget.fur.male
               ? SvgPicture.asset(
                   "assets/graphics/icons/gender_male.svg",
-                  width: 15,
-                  height: 15,
+                  width: 13,
+                  height: 13,
                   colorFilter: const ColorFilter.mode(
                     Interface.male,
                     BlendMode.srcIn,
@@ -104,8 +104,8 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
               : widget.fur.female
                   ? SvgPicture.asset(
                       "assets/graphics/icons/gender_female.svg",
-                      width: 15,
-                      height: 15,
+                      width: 14,
+                      height: 14,
                       colorFilter: const ColorFilter.mode(
                         Interface.female,
                         BlendMode.srcIn,

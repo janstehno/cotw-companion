@@ -33,7 +33,7 @@ class WidgetTag extends StatelessWidget {
     this.isVisible = true,
   }) : super(key: key);
 
-  Widget _buildWidgets() {
+  Widget _buildTag() {
     return Row(mainAxisSize: MainAxisSize.min, children: [
       Container(
           width: text.isEmpty ? height : null,
@@ -78,8 +78,10 @@ class WidgetTag extends StatelessWidget {
     ]);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return isVisible && (icon.isNotEmpty || text.isNotEmpty) ? _buildWidgets() : const SizedBox.shrink();
+  Widget _buildWidgets() {
+    return isVisible && (icon.isNotEmpty || text.isNotEmpty) ? _buildTag() : const SizedBox.shrink();
   }
+
+  @override
+  Widget build(BuildContext context) => _buildWidgets();
 }

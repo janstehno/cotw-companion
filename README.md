@@ -26,8 +26,8 @@ everything.
 
 I would like to appeal to everyone that not everything would be correct and mistakes can happen.
 There is also an info that is missing. In these cases feel free to contact me about it through the
-email or message me on discord or reddit provided in the app. Everything about planned features or
-current issues can be found here.
+email or message me on reddit provided in the app. Everything about planned features or current
+issues can be found here.
 
 ### **What about updates?**
 

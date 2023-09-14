@@ -101,7 +101,5 @@ class ListCallersState extends State<ListCallers> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

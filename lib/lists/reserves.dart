@@ -85,7 +85,5 @@ class ListReservesState extends State<ListReserves> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

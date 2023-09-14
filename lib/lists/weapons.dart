@@ -133,7 +133,5 @@ class ListWeaponsState extends State<ListWeapons> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

@@ -176,7 +176,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
         )),
         _animal.grounded
             ? Container(
-                height: 75,
+                height: WidgetTitleBig.height,
                 color: Interface.title,
                 padding: const EdgeInsets.only(right: 25),
                 alignment: Alignment.center,

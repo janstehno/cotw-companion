@@ -4,7 +4,6 @@ import 'package:cotwcompanion/activities/filter.dart';
 import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/loadout.dart';
@@ -206,7 +205,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
         text: tr('weapon_ammo'),
         decimal: false,
         min: 1,
-        max: HelperJSON.weaponsAmmo.length.toDouble(),
+        max: 200,
         filterKeyLower: FilterKey.loadoutsAmmoMin,
         filterKeyUpper: FilterKey.loadoutsAmmoMax,
       ),
@@ -215,7 +214,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
         text: tr('callers'),
         decimal: false,
         min: 1,
-        max: HelperJSON.callers.length.toDouble(),
+        max: 50,
         filterKeyLower: FilterKey.loadoutsCallersMin,
         filterKeyUpper: FilterKey.loadoutsCallersMax,
       ),

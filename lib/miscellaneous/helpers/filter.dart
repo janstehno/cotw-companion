@@ -45,9 +45,9 @@ class HelperFilter {
       6: {"order": 0, "active": false, "ascended": true, "key": ""},
     },
     FilterKey.loadoutsAmmoMin: 1,
-    FilterKey.loadoutsAmmoMax: 999,
+    FilterKey.loadoutsAmmoMax: 200,
     FilterKey.loadoutsCallersMin: 1,
-    FilterKey.loadoutsCallersMax: 999,
+    FilterKey.loadoutsCallersMax: 50,
   };
 
   static dynamic getSortValue(FilterKey filterKey, int listKey, String key) {
@@ -180,7 +180,6 @@ class HelperFilter {
     for (Weapon weapon in weapons) {
       weapon.setName(context.locale);
     }
-    //TODO
     weapons.multiSort([true, true], ["TYPE", "NAME"]);
     return weapons;
   }

@@ -265,6 +265,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   }
 
   Widget _buildWidgets() {
+    _reload();
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
     return WidgetScaffold(
       customBody: true,
@@ -273,8 +274,5 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    _reload();
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

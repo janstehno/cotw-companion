@@ -4,12 +4,12 @@
     <g id="other_icons">
         <g id="money">
             <polyline points="2.5 1.93 11.59 1.93 11.59 28.07 2.5 28.07" fill="none"
-                stroke="#231f20" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
             <polyline points="27.5 1.93 18.41 1.93 18.41 28.07 27.5 28.07" fill="none"
-                stroke="#231f20" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-            <line x1="2.5" y1="13.05" x2="27.5" y2="13.05" fill="none" stroke="#231f20"
+                stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+            <line x1="2.5" y1="13.05" x2="27.5" y2="13.05" fill="none" stroke="#212121"
                 stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
-            <line x1="2.5" y1="16.95" x2="27.5" y2="16.95" fill="none" stroke="#231f20"
+            <line x1="2.5" y1="16.95" x2="27.5" y2="16.95" fill="none" stroke="#212121"
                 stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
         </g>
     </g>

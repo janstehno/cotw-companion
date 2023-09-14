@@ -1,6 +1,7 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cotwcompanion/lists/add_edit_log/trophy_lodge_logs.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
@@ -13,7 +14,6 @@ import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
-import 'package:cotwcompanion/widgets/entries/trophy_lodge_record.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
@@ -58,7 +58,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   final List<DropdownMenuItem> _dropDownListReserves = [];
   final List<DropdownMenuItem> _dropDownListAnimals = [];
   final List<DropdownMenuItem> _dropDownListAnimalFurs = [];
-  final List<Log> _trophyLodgeRecords = [];
+  final List<Log> _trophyLodgeLogs = [];
 
   DateTime _dateTime = DateTime.now();
   int _minute = DateTime.now().minute;
@@ -76,7 +76,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   bool _genderChanged = false;
   bool _furChanged = false;
 
-  bool _recordsOpened = false;
   bool _correctTrophyNumber = true;
   bool _correctWeightNumber = true;
 
@@ -300,12 +299,12 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   }
 
   void _getTrophyLodgeRecords() {
-    _trophyLodgeRecords.clear();
+    _trophyLodgeLogs.clear();
     for (Log log in HelperLog.logs) {
-      if (log.animalId == _selectedAnimalId && log.isInLodge) _trophyLodgeRecords.add(log);
+      if (log.animalId == _selectedAnimalId && log.isInLodge) _trophyLodgeLogs.add(log);
     }
-    _trophyLodgeRecords.sort((a, b) => b.trophy.compareTo(a.trophy));
-    _logger.t("Found ${_trophyLodgeRecords.length} trophy lodge record/s with this animal");
+    _trophyLodgeLogs.sort((a, b) => b.trophy.compareTo(a.trophy));
+    _logger.t("Found ${_trophyLodgeLogs.length} trophy lodge record/s with this animal");
   }
 
   List<DropdownMenuItem> _listOfReserves() {
@@ -559,9 +558,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               secondaryText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
               icon: "assets/graphics/icons/menu_open.svg",
               onTap: () {
-                setState(() {
-                  _recordsOpened = true;
-                });
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ListTrophyLodgeLogs(trophyLodgeLogs: _trophyLodgeLogs)));
               }),
       WidgetTextField(
         correct: _correctTrophyNumber,
@@ -721,43 +718,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             )));
   }
 
-  Widget _buildRecords() {
-    return AnimatedPositioned(
-        top: 0,
-        left: _recordsOpened ? 0 : MediaQuery.of(context).size.width,
-        duration: const Duration(milliseconds: 200),
-        child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Interface.body,
-            child: Column(children: [
-              WidgetTitleBigButton(
-                primaryText: tr('trophy_lodge'),
-                icon: "assets/graphics/icons/menu_close.svg",
-                onTap: () {
-                  setState(() {
-                    _recordsOpened = false;
-                  });
-                },
-              ),
-              Expanded(
-                  child: WidgetScrollbar(
-                      child: SingleChildScrollView(
-                          child: Column(children: [
-                ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: _trophyLodgeRecords.length,
-                    itemBuilder: (context, index) {
-                      return EntryTrophyLodgeRecord(
-                        index: index,
-                        log: _trophyLodgeRecords[index],
-                      );
-                    })
-              ]))))
-            ])));
-  }
-
   Widget _buildStack() {
     return Stack(fit: StackFit.expand, children: [
       WidgetScrollbar(
@@ -779,11 +739,11 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         const SizedBox(height: 100),
       ]))),
       _buildAdd(),
-      widget.log != null ? const SizedBox.shrink() : _buildRecords(),
     ]);
   }
 
   Widget _buildWidgets() {
+    _reload();
     return WidgetScaffold(
       customBody: true,
       body: _buildStack(),
@@ -791,8 +751,5 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    _reload();
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

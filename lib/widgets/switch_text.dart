@@ -52,7 +52,5 @@ class WidgetSwitchText extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

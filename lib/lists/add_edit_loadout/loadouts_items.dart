@@ -103,6 +103,7 @@ class ListLoadoutItemsState extends State<ListLoadoutItems> {
   }
 
   Widget _buildWidgets() {
+    _filter();
     return WidgetScaffold(
       appBar: WidgetAppBar(
         text: widget.type == Item.ammo ? tr('weapons') : tr('callers'),
@@ -114,8 +115,5 @@ class ListLoadoutItemsState extends State<ListLoadoutItems> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    _filter();
-    return _buildWidgets();
-  }
+  Widget build(BuildContext context) => _buildWidgets();
 }

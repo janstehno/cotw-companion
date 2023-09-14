@@ -11,7 +11,7 @@ class WidgetScaffold extends StatefulWidget {
   final Widget body;
   final Function? filter;
   final TextEditingController? searchController;
-  final bool customBody;
+  final bool customBody, appBarFixed;
 
   const WidgetScaffold({
     Key? key,
@@ -20,6 +20,7 @@ class WidgetScaffold extends StatefulWidget {
     this.filter,
     this.searchController,
     this.customBody = false,
+    this.appBarFixed = false,
   }) : super(key: key);
 
   @override
@@ -40,13 +41,14 @@ class WidgetScaffoldState extends State<WidgetScaffold> {
 
   Widget _buildWithoutSearch() {
     return Column(children: [
+      widget.appBarFixed ? _buildAppBar() : const SizedBox.shrink(),
       Expanded(
           child: Container(
         color: Interface.body,
         child: WidgetScrollbar(
             child: SingleChildScrollView(
           child: Column(children: [
-            _buildAppBar(),
+            widget.appBarFixed ? const SizedBox.shrink() : _buildAppBar(),
             widget.body,
           ]),
         )),

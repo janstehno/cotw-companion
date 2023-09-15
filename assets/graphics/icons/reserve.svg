@@ -1,21 +1,14 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <title>reserve</title>
-    <g id="thehunter">
-        <g id="reserve">
-            <line x1="2.1" y1="28.5" x2="27.9" y2="28.5" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-            <line x1="19.84" y1="28.1" x2="19.84" y2="21.65" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-            <line x1="13.39" y1="20.84" x2="26.28" y2="20.84" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-            <line x1="19.84" y1="1.5" x2="13.39" y2="20.84" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-            <line x1="26.28" y1="20.84" x2="19.84" y2="1.5" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-        </g>
-    </g>
-    <g id="frame">
-        <rect width="30" height="30" fill="none" />
-    </g>
+    <line x1="2.1" y1="28.5" x2="27.9" y2="28.5" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <line x1="13.39" y1="20.84" x2="26.28" y2="20.84" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <line x1="19.84" y1="28.1" x2="19.84" y2="21.65" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <line x1="19.84" y1="1.5" x2="13.39" y2="20.84" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <line x1="26.28" y1="20.84" x2="19.84" y2="1.5" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <rect width="30" height="30" fill="none" />
 </svg>

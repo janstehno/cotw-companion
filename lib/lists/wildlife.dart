@@ -54,7 +54,7 @@ class ListWildlifeState extends State<ListWildlife> {
       ),
       FilterPickerAuto(
         text: tr('animal_difficulty'),
-        icon: "assets/graphics/icons/difficulty.svg",
+        icon: "assets/graphics/icons/stats.svg",
         values: const [3, 5, 9],
         filterKey: FilterKey.animalsDifficulty,
       ),

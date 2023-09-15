@@ -27,49 +27,54 @@ class ActivityMapLayers extends StatefulWidget {
 class ActivityMapLayersState extends State<ActivityMapLayers> {
   Widget _buildEnvironment() {
     return Container(
+        alignment: Alignment.topCenter,
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-        alignment: Alignment.center,
-        child: Wrap(alignment: WrapAlignment.center, spacing: 15, runSpacing: 15, children: [
-          WidgetSwitchIcon(
-            buttonSize: 50,
-            icon: "assets/graphics/icons/outpost.svg",
-            activeColor: Interface.light,
-            activeBackground: Interface.dark,
-            isActive: HelperMap.isActiveE(0),
-            onTap: () {
-              setState(() {
-                HelperMap.activateE(0);
-                widget.callback();
-              });
-            },
-          ),
-          WidgetSwitchIcon(
-            buttonSize: 50,
-            icon: "assets/graphics/icons/lookout.svg",
-            activeColor: Interface.light,
-            activeBackground: Interface.dark,
-            isActive: HelperMap.isActiveE(1),
-            onTap: () {
-              setState(() {
-                HelperMap.activateE(1);
-                widget.callback();
-              });
-            },
-          ),
-          WidgetSwitchIcon(
-            buttonSize: 50,
-            icon: "assets/graphics/icons/hide.svg",
-            activeColor: Interface.light,
-            activeBackground: Interface.dark,
-            isActive: HelperMap.isActiveE(2),
-            onTap: () {
-              setState(() {
-                HelperMap.activateE(2);
-                widget.callback();
-              });
-            },
-          )
-        ]));
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            WidgetSwitchIcon(
+              buttonSize: 50,
+              icon: "assets/graphics/icons/outpost.svg",
+              activeColor: Interface.light,
+              activeBackground: Interface.dark,
+              isActive: HelperMap.isActiveE(0),
+              onTap: () {
+                setState(() {
+                  HelperMap.activateE(0);
+                  widget.callback();
+                });
+              },
+            ),
+            WidgetSwitchIcon(
+              buttonSize: 50,
+              icon: "assets/graphics/icons/lookout.svg",
+              activeColor: Interface.light,
+              activeBackground: Interface.dark,
+              isActive: HelperMap.isActiveE(1),
+              onTap: () {
+                setState(() {
+                  HelperMap.activateE(1);
+                  widget.callback();
+                });
+              },
+            ),
+            WidgetSwitchIcon(
+              buttonSize: 50,
+              icon: "assets/graphics/icons/hide.svg",
+              activeColor: Interface.light,
+              activeBackground: Interface.dark,
+              isActive: HelperMap.isActiveE(2),
+              onTap: () {
+                setState(() {
+                  HelperMap.activateE(2);
+                  widget.callback();
+                });
+              },
+            )
+          ],
+        ));
   }
 
   Widget _buildList() {

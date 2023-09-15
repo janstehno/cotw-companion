@@ -11,10 +11,12 @@ import 'package:provider/provider.dart';
 
 class EntryAnimalFur extends StatefulWidget {
   final AnimalFur fur;
+  final bool isChosen;
 
   const EntryAnimalFur({
     Key? key,
     required this.fur,
+    required this.isChosen,
   }) : super(key: key);
 
   @override
@@ -71,7 +73,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
           height: 10,
           alignment: Alignment.center,
           child: AnimatedContainer(
-              width: widget.fur.isChosen ? 20 : 10,
+              width: widget.isChosen ? 20 : 10,
               height: 10,
               alignment: Alignment.center,
               duration: const Duration(milliseconds: 200),
@@ -97,7 +99,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
                   width: 13,
                   height: 13,
                   colorFilter: const ColorFilter.mode(
-                    Interface.male,
+                    Interface.genderMale,
                     BlendMode.srcIn,
                   ),
                 )
@@ -107,7 +109,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
                       width: 14,
                       height: 14,
                       colorFilter: const ColorFilter.mode(
-                        Interface.female,
+                        Interface.genderFemale,
                         BlendMode.srcIn,
                       ),
                     )

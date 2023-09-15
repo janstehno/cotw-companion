@@ -86,6 +86,8 @@ class Log {
 
   int get trophyRating => _trophyRating;
 
+  int get trophyRatingWithGO => isGreatOne() ? 5 : trophyRating;
+
   int get lodge => _lodge;
 
   int get gender => _gender;
@@ -165,9 +167,9 @@ class Log {
       case 3:
         return Interface.trophyGold;
       case 4:
-        return isGreatOne() ? Interface.dark : Interface.trophyDiamond;
+        return isGreatOne() ? Interface.trophyGreatOne : Interface.trophyDiamond;
       default:
-        return Interface.disabled;
+        return Interface.trophyNone;
     }
   }
 

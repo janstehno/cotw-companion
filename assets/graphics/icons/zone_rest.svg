@@ -1,13 +1,6 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <title>zone_rest</title>
-    <g id="zones">
-        <g id="rest">
-            <polyline points="4 4 26 4 4 26 26 26" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-        </g>
-    </g>
-    <g id="frame">
-        <rect width="30" height="30" fill="none" />
-    </g>
+    <polyline points="4 4 26 4 4 26 26 26" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <rect width="30" height="30" fill="none" />
 </svg>

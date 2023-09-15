@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.7.6";
+  static const String version = "1.7.7";
   static const int greatOneId = 100;
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;
@@ -25,65 +25,64 @@ class Interface {
   static Color sectionTitle = Colors.transparent;
   static Color search = Colors.transparent;
   static Color tag = Colors.transparent;
-  static Color nothing = Colors.transparent;
-  static Color common = Colors.transparent;
-  static Color other = Colors.transparent;
   static Color disabled = Colors.transparent;
+
   static Color anatomyBody = Colors.transparent;
   static Color anatomyBones = Colors.transparent;
+  static Color zoneOther = Colors.transparent;
+  static Color zoneNothing = Colors.transparent;
+  static Color trophyNone = Colors.transparent;
+  static Color trophyGreatOne = Colors.transparent;
+  static Color rarityCommon = Colors.transparent;
 
   static ColorScheme omniDatePickerScheme = const ColorScheme.dark();
 
   static const Color grey = Color(0xFFBDBDBD);
   static const Color pink = Color(0xFFC2185B);
   static const Color red = Color(0xFFE53935);
-  static const Color redorange = Color(0xFFFF5722);
+  static const Color redOrange = Color(0xFFFF5722);
   static const Color orange = Color(0xFFFF9800);
   static const Color yellow = Color(0xFFFFC107);
-  static const Color lightyellow = Color(0xFFFDD835);
-  static const Color grassgreen = Color(0xFFCDDC39);
-  static const Color lightgreen = Color(0xFF8BC34A);
+  static const Color lightYellow = Color(0xFFFDD835);
+  static const Color grassGreen = Color(0xFFCDDC39);
+  static const Color lightGreen = Color(0xFF8BC34A);
   static const Color green = Color(0xFF4CAF50);
   static const Color teal = Color(0xFF009688);
-  static const Color lightblue = Color(0xFF00ACC1);
+  static const Color lightBlue = Color(0xFF00ACC1);
   static const Color blue = Color(0xFF2196F3);
-  static const Color darkblue = Color(0xFF1976D2);
-  static const Color deepblue = Color(0xFF0D47A1);
-  static const Color purple = Color(0xFF4527A0);
-  static const Color darkpink = Color(0xFF9C27B0);
-  static const Color lightbrown = Color(0xFF8D6E63);
+  static const Color oceanBlue = Color(0xFF1976D2);
+  static const Color darkBlue = Color(0xFF3F51B5);
+  static const Color purple = Color(0xFF7E57C2);
+  static const Color darkPink = Color(0xFFAB47BC);
+  static const Color lightBrown = Color(0xFF8D6E63);
   static const Color brown = Color(0xFF4E342E);
 
-  static const Color stop = red;
-  static const Color play = blue;
-  static const Color selected = red;
-  static const Color unselected = lightgreen;
-  static const Color trophyBronze = lightbrown;
+  static const Color timerStop = red;
+  static const Color timerPlay = blue;
+  static const Color itemSelected = red;
+  static const Color itemUnselected = lightGreen;
+  static const Color trophyBronze = lightBrown;
   static const Color trophySilver = grey;
   static const Color trophyGold = orange;
   static const Color trophyDiamond = blue;
-  static const Color uncommon = lightgreen;
-  static const Color rare = blue;
-  static const Color veryrare = orange;
-  static const Color mission = red;
-  static const Color feed = lightgreen;
-  static const Color drink = blue;
-  static const Color rest = orange;
-  static const Color male = blue;
-  static const Color female = red;
-  static const Color summer = yellow;
-  static const Color winter = blue;
-  static const Color field = orange;
-  static const Color forest = lightgreen;
-  static const Color plains = orange;
-  static const Color lowlands = lightgreen;
-  static const Color hills = yellow;
-  static const Color mountains = blue;
-  static const Color trophyNoneBackground = ff75;
-  static const Color trophyBronzeBackground = trophyBronze;
-  static const Color trophySilverBackground = grey;
-  static const Color trophyGoldBackground = trophyGold;
-  static const Color trophyDiamondBackground = trophyDiamond;
+  static const Color rarityUncommon = lightGreen;
+  static const Color rarityRare = blue;
+  static const Color rarityVeryRare = purple;
+  static const Color rarityMission = red;
+  static const Color rarityGreatOne = orange;
+  static const Color zoneFeed = lightGreen;
+  static const Color zoneDrink = blue;
+  static const Color zoneRest = orange;
+  static const Color genderMale = blue;
+  static const Color genderFemale = red;
+  static const Color environmentSummer = yellow;
+  static const Color environmentWinter = blue;
+  static const Color environmentField = orange;
+  static const Color environmentForest = lightGreen;
+  static const Color environmentPlains = orange;
+  static const Color environmentLowlands = lightGreen;
+  static const Color environmentHills = yellow;
+  static const Color environmentMountains = blue;
 
   static const Color ffff = Color(0xFFFFFFFF);
   static const Color fffe = Color(0xFFFEFEFE); //odd, body
@@ -161,12 +160,14 @@ class Interface {
       search = ff17;
       tag = ff23;
       dropDown = ff17;
-      nothing = ff17;
-      other = ffee;
-      common = ffee;
+      disabled = ff61;
       anatomyBones = ffbd;
       anatomyBody = ff42;
-      disabled = ff61;
+      zoneOther = ffee;
+      zoneNothing = ff17;
+      trophyNone = ffee;
+      trophyGreatOne = ffee;
+      rarityCommon = ffee;
       omniDatePickerScheme = ColorScheme(
         brightness: Brightness.dark,
         primary: Interface.primary,
@@ -192,12 +193,14 @@ class Interface {
       search = ffee;
       dropDown = ffee;
       tag = ffcc;
-      nothing = ffee;
-      other = ff17;
-      common = ff17;
+      disabled = ff9e;
       anatomyBones = ff42;
       anatomyBody = ffbd;
-      disabled = ff9e;
+      zoneOther = ff17;
+      zoneNothing = ffee;
+      trophyNone = ff17;
+      trophyGreatOne = ff17;
+      rarityCommon = ff17;
       omniDatePickerScheme = ColorScheme(
         brightness: Brightness.light,
         primary: Interface.primary,
@@ -220,7 +223,7 @@ class Interface {
     accentBorder = Colors.transparent;
     accentBorderWidth = 0;
 
-    if (primaryColor == deepblue || primaryColor == purple || primaryColor == brown) {
+    if (primaryColor == darkBlue || primaryColor == brown) {
       accent = alwaysLight;
       if (_darkMode) {
         accentBorder = alwaysLight;

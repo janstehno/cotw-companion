@@ -30,11 +30,6 @@ class ListAnimalFursState extends State<ListAnimalFurs> {
     _furs.clear();
     for (AnimalFur af in HelperJSON.animalsFurs) {
       if (af.animalId == widget.animalId) {
-        if (af.rarity == widget.chosenRarity) {
-          af.chosen = true;
-        } else {
-          af.chosen = false;
-        }
         _furs.add(af);
       }
     }
@@ -57,7 +52,10 @@ class ListAnimalFursState extends State<ListAnimalFurs> {
             itemCount: _furs.length,
             itemBuilder: (context, index) {
               AnimalFur fur = _furs[index];
-              return EntryAnimalFur(fur: fur);
+              return EntryAnimalFur(
+                fur: fur,
+                isChosen: fur.rarity == widget.chosenRarity,
+              );
             });
   }
 

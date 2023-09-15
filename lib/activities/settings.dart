@@ -85,28 +85,28 @@ class ActivitySettingsState extends State<ActivitySettings> {
           padding: const EdgeInsets.all(30),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              _buildColorButton(Interface.darkpink),
+              _buildColorButton(Interface.purple),
+              _buildColorButton(Interface.darkPink),
               _buildColorButton(Interface.pink),
               _buildColorButton(Interface.red),
-              _buildColorButton(Interface.redorange),
+              _buildColorButton(Interface.redOrange),
               _buildColorButton(Interface.orange),
+            ]),
+            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+              _buildColorButton(Interface.teal),
+              _buildColorButton(Interface.green),
+              _buildColorButton(Interface.lightGreen),
+              _buildColorButton(Interface.grassGreen),
+              _buildColorButton(Interface.lightYellow),
               _buildColorButton(Interface.yellow),
             ]),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              _buildColorButton(Interface.lightblue),
-              _buildColorButton(Interface.teal),
-              _buildColorButton(Interface.green),
-              _buildColorButton(Interface.lightgreen),
-              _buildColorButton(Interface.grassgreen),
-              _buildColorButton(Interface.lightyellow),
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
+              _buildColorButton(Interface.lightBlue),
               _buildColorButton(Interface.blue),
-              _buildColorButton(Interface.darkblue),
-              _buildColorButton(Interface.deepblue),
-              _buildColorButton(Interface.purple),
-              _buildColorButton(Interface.brown),
+              _buildColorButton(Interface.oceanBlue),
+              _buildColorButton(Interface.darkBlue),
               _buildColorButton(Interface.grey),
+              _buildColorButton(Interface.brown),
             ])
           ])),
     ]);

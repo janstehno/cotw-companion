@@ -1,11 +1,12 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 30">
-    <polyline points="13.5 23.13 7.5 28.5 1.5 23.13" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-    <line x1="7.5" y1="11.45" x2="7.5" y2="27.17" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-    <polyline points="13.5 6.87 19.5 1.5 25.5 6.87" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-    <line x1="19.5" y1="18.55" x2="19.5" y2="2.83" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <polyline points="15 23.13 9 28.5 3 23.13" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <line x1="9" y1="11.45" x2="9" y2="27.17" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <polyline points="15 6.87 21 1.5 27 6.87" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <line x1="21" y1="18.55" x2="21" y2="2.83" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="3" />
+    <rect width="30" height="30" fill="none" />
 </svg>

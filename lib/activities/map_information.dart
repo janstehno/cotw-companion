@@ -15,8 +15,8 @@ class ActivityMapInformation extends StatelessWidget {
   Widget _buildFullscreen() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('interface'),
         icon: "assets/graphics/icons/fullscreen.svg",
+        text: tr('interface'),
       ),
       Container(
           alignment: Alignment.centerLeft,
@@ -30,8 +30,8 @@ class ActivityMapInformation extends StatelessWidget {
   Widget _buildZoom() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('zoom'),
         icon: "assets/graphics/icons/weapon_expansion.svg",
+        text: tr('zoom'),
       ),
       Container(
           alignment: Alignment.centerLeft,
@@ -57,8 +57,8 @@ class ActivityMapInformation extends StatelessWidget {
   Widget _buildShowCircles() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('map_info_3'),
         icon: "assets/graphics/icons/other.svg",
+        text: tr('map_info_3'),
       ),
     ]);
   }
@@ -66,8 +66,8 @@ class ActivityMapInformation extends StatelessWidget {
   Widget _buildShowZoneType() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('map_info_2'),
         icon: "assets/graphics/icons/zone_feed.svg",
+        text: tr('map_info_2'),
       ),
       Container(
           alignment: Alignment.centerLeft,
@@ -81,8 +81,8 @@ class ActivityMapInformation extends StatelessWidget {
   Widget _buildMinMax() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('map_info_4'),
         icon: "assets/graphics/icons/min_max.svg",
+        text: tr('map_info_4'),
       ),
       Container(
           alignment: Alignment.centerLeft,

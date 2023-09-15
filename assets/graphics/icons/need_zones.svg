@@ -1,25 +1,17 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <title>need_zones</title>
-    <g id="thehunter">
-        <g id="need_zones">
-            <polyline points="1.67 1.5 11.15 1.5 1.5 10.71 11.43 10.71" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-            <path
-                d="M23.33,15a3.78,3.78,0,0,0,1.65.27c1.15,0,2.4-.53,3.24-2.82s-.31-5.35-2-7.11a8.93,8.93,0,0,0-4.49,1.43c-2.42,1.48-3.17,2.26-3.17,4s1,2.41,2.49,3.39c0,0-.16.33-2.18,1.61"
-                transform="translate(0)" fill="none" stroke="#212121" stroke-linecap="round"
-                stroke-width="3" />
-            <path d="M24.21,9.8a8.46,8.46,0,0,1-3.15,4.38" transform="translate(0)" fill="none"
-                stroke="#212121" stroke-linecap="round" stroke-width="3" />
-            <path d="M11.43,16.91s-5,4.27-5,7.29,1.8,4.3,5,4.3" transform="translate(0)" fill="none"
-                stroke="#212121" stroke-linecap="round" stroke-width="3" />
-            <path d="M11.43,16.91s5,4.27,5,7.29-1.81,4.3-5,4.3" transform="translate(0)" fill="none"
-                stroke="#212121" stroke-linecap="round" stroke-width="3" />
-            <path d="M9.43,24.32s-.24.43.3.87.78.32.78.32" transform="translate(0)" fill="none"
-                stroke="#212121" stroke-linecap="round" stroke-width="2" />
-        </g>
-    </g>
-    <g id="frame">
-        <rect width="30" height="30" fill="none" />
-    </g>
+    <polyline points="3.65 3.5 11.72 3.5 3.5 11.35 11.96 11.35" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+    <path
+        d="M22.1,15a3.29,3.29,0,0,0,1.4.22c1,0,2-.45,2.76-2.4S26,8.25,24.56,6.76A7.52,7.52,0,0,0,20.74,8C18.68,9.24,18,9.9,18,11.42s.82,2.05,2.12,2.88c0,0-.13.28-1.85,1.37"
+        fill="none" stroke="#212121" stroke-linecap="round" stroke-width="2" />
+    <path d="M22.85,10.57a7.21,7.21,0,0,1-2.69,3.73" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-width="2" />
+    <path d="M12,16.63s-4.23,3.64-4.23,6.21S9.27,26.5,12,26.5" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-width="2" />
+    <path d="M12,16.63s4.23,3.64,4.23,6.21S14.65,26.5,12,26.5" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-width="2" />
+    <path d="M10.26,22.94s-.21.36.25.74.67.28.67.28" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-width="2" />
+    <rect width="30" height="30" fill="none" />
 </svg>

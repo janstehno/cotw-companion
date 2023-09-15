@@ -55,6 +55,11 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        background: Interface.odd,
+        version: "1.7.7",
+        changes: const ["- Improvement of the UI. Added new statistics for recorded harvests. Suggestions for other stats are more then welcome."],
+      ),
+      WidgetPatchNote(
         background: Interface.even,
         version: "1.7.4 - 1.7.6",
       ),

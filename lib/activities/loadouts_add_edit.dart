@@ -180,6 +180,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
             },
             child: WidgetSnackBar(
               text: _errorMessage,
+              process: Process.error,
             ))));
   }
 

@@ -39,25 +39,25 @@ class EntryAnimalState extends State<EntryAnimal> {
       tags.add(WidgetTag.big(
         icon: "assets/graphics/icons/trophy_great_one.svg",
         color: Interface.light,
-        background: Interface.dark,
+        background: Interface.trophyGreatOne,
       ));
     }
     tags.addAll([
       WidgetTag.big(
-        text: widget.animal.level.toString(),
         icon: "assets/graphics/icons/level.svg",
+        value: widget.animal.level.toString(),
         color: Interface.dark,
         background: Interface.tag,
       ),
       WidgetTag.big(
-        text: widget.animal.difficulty.toString(),
-        icon: "assets/graphics/icons/difficulty.svg",
+        icon: "assets/graphics/icons/stats.svg",
+        value: widget.animal.difficulty.toString(),
         color: Interface.dark,
         background: Interface.tag,
       ),
       WidgetTag.big(
-        text: widget.animal.removePointZero(widget.animal.diamond.toString()),
         icon: "assets/graphics/icons/trophy_diamond.svg",
+        value: widget.animal.removePointZero(widget.animal.diamond.toString()),
         color: Interface.alwaysDark,
         background: Interface.trophyDiamond,
       ),

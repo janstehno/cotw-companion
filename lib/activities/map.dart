@@ -379,7 +379,6 @@ class ActivityMapState extends State<ActivityMap> {
                 EntryMenuBarItem(
                   barButton: WidgetButtonIcon(
                       icon: "assets/graphics/icons/about.svg",
-                      iconSize: 16,
                       color: Interface.alwaysDark,
                       background: Interface.alwaysLight,
                       onTap: () {

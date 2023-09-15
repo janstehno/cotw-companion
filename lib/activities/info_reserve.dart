@@ -37,59 +37,60 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
     return Container(
         padding: const EdgeInsets.all(30),
         child: Column(children: [
-          Wrap(spacing: 10, children: [
-            WidgetIcon(
-              icon: "assets/graphics/icons/environment_summer.svg",
-              color: Interface.alwaysDark,
-              background: Interface.summer,
-              isActive: _reserve.hasSummer,
-            ),
-            WidgetIcon(
-              icon: "assets/graphics/icons/environment_winter.svg",
-              color: Interface.alwaysDark,
-              background: Interface.winter,
-              isActive: _reserve.hasWinter,
-            ),
-            WidgetIcon(
-              icon: "assets/graphics/icons/environment_fields.svg",
-              color: Interface.alwaysDark,
-              background: Interface.field,
-              isActive: _reserve.hasFields,
-            ),
-            WidgetIcon(
-              icon: "assets/graphics/icons/environment_forest.svg",
-              color: Interface.alwaysDark,
-              background: Interface.forest,
-              isActive: _reserve.hasForest,
-            ),
-          ]),
-          const SizedBox(height: 10),
-          Wrap(spacing: 10, children: [
-            WidgetIcon(
-              icon: "assets/graphics/icons/environment_plains.svg",
-              color: Interface.alwaysDark,
-              background: Interface.plains,
-              isActive: _reserve.hasPlains,
-            ),
-            WidgetIcon(
-              icon: "assets/graphics/icons/environment_lowlands.svg",
-              color: Interface.alwaysDark,
-              background: Interface.lowlands,
-              isActive: _reserve.hasLowlands,
-            ),
-            WidgetIcon(
-              icon: "assets/graphics/icons/environment_hills.svg",
-              color: Interface.alwaysDark,
-              background: Interface.hills,
-              isActive: _reserve.hasHills,
-            ),
-            WidgetIcon(
-              icon: "assets/graphics/icons/environment_mountains.svg",
-              color: Interface.alwaysDark,
-              background: Interface.mountains,
-              isActive: _reserve.hasMountains,
-            ),
-          ])
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              WidgetIcon(
+                icon: "assets/graphics/icons/environment_summer.svg",
+                color: Interface.alwaysDark,
+                background: Interface.environmentSummer,
+                isActive: _reserve.hasSummer,
+              ),
+              WidgetIcon(
+                icon: "assets/graphics/icons/environment_winter.svg",
+                color: Interface.alwaysDark,
+                background: Interface.environmentWinter,
+                isActive: _reserve.hasWinter,
+              ),
+              WidgetIcon(
+                icon: "assets/graphics/icons/environment_fields.svg",
+                color: Interface.alwaysDark,
+                background: Interface.environmentField,
+                isActive: _reserve.hasFields,
+              ),
+              WidgetIcon(
+                icon: "assets/graphics/icons/environment_forest.svg",
+                color: Interface.alwaysDark,
+                background: Interface.environmentForest,
+                isActive: _reserve.hasForest,
+              ),
+              WidgetIcon(
+                icon: "assets/graphics/icons/environment_plains.svg",
+                color: Interface.alwaysDark,
+                background: Interface.environmentPlains,
+                isActive: _reserve.hasPlains,
+              ),
+              WidgetIcon(
+                icon: "assets/graphics/icons/environment_lowlands.svg",
+                color: Interface.alwaysDark,
+                background: Interface.environmentLowlands,
+                isActive: _reserve.hasLowlands,
+              ),
+              WidgetIcon(
+                icon: "assets/graphics/icons/environment_hills.svg",
+                color: Interface.alwaysDark,
+                background: Interface.environmentHills,
+                isActive: _reserve.hasHills,
+              ),
+              WidgetIcon(
+                icon: "assets/graphics/icons/environment_mountains.svg",
+                color: Interface.alwaysDark,
+                background: Interface.environmentMountains,
+                isActive: _reserve.hasMountains,
+              ),
+            ],
+          ),
         ]));
   }
 

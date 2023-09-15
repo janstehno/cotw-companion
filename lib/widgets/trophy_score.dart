@@ -50,7 +50,6 @@ class WidgetTrophyScore extends StatelessWidget {
       icon: icon,
       color: color,
       background: background,
-      iconSize: 15,
       size: 30,
     );
   }

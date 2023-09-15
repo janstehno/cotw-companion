@@ -51,7 +51,7 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
           width: 14,
           height: 14,
           colorFilter: ColorFilter.mode(
-            widget.log.isMale ? Interface.male : Interface.female,
+            widget.log.isMale ? Interface.genderMale : Interface.genderFemale,
             BlendMode.srcIn,
           ),
         ));
@@ -155,7 +155,9 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                 _buildTrophy(),
               ]),
               Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Expanded(child: widget.log.isGreatOne() ? const SizedBox.shrink() : _buildFur()),
+                Expanded(
+                  child: _buildFur(),
+                ),
                 widget.log.weight > 0 ? _buildWeight() : const SizedBox.shrink(),
               ])
             ])));

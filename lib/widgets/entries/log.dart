@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/info_animal.dart';
 import 'package:cotwcompanion/activities/logs_add_edit.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
@@ -94,6 +95,7 @@ class EntryLogState extends State<EntryLog> {
           },
           child: WidgetSnackBar(
             text: widget.log.isInLodge ? tr('item_moved_to_lodge') : tr('item_removed_from_lodge'),
+            process: Process.info,
           )),
     ));
   }
@@ -167,7 +169,7 @@ class EntryLogState extends State<EntryLog> {
           width: 15,
           height: 15,
           colorFilter: ColorFilter.mode(
-            widget.log.isMale ? Interface.male : Interface.female,
+            widget.log.isMale ? Interface.genderMale : Interface.genderFemale,
             BlendMode.srcIn,
           ),
         ));
@@ -343,7 +345,7 @@ class EntryLogState extends State<EntryLog> {
         Expanded(
             child: Column(children: [
           _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
-          widget.log.isGreatOne() ? const SizedBox.shrink() : _buildFur(),
+          _buildFur(),
         ])),
         _buildGender(),
       ])
@@ -359,7 +361,7 @@ class EntryLogState extends State<EntryLog> {
       ]),
       _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
       widget.log.reserveId > -1 ? _buildReserve() : const SizedBox.shrink(),
-      widget.log.isGreatOne() ? const SizedBox.shrink() : _buildFur(),
+      _buildFur(),
       Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
         Expanded(child: widget.log.reserveId > -1 ? _buildHarvestCheck() : const SizedBox.shrink()),
         _buildTrophyWeight(true),
@@ -409,6 +411,7 @@ class EntryLogState extends State<EntryLog> {
                   child: WidgetSnackBar(
                     text: tr('item_removed'),
                     icon: "assets/graphics/icons/reload.svg",
+                    process: Process.info,
                     onSnackBarTap: () {
                       _undo();
                     },

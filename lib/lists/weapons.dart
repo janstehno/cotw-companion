@@ -50,8 +50,8 @@ class ListWeaponsState extends State<ListWeapons> {
   List<Widget> _buildFilters() {
     return [
       WidgetTitleInfoIcon(
-        text: tr('weapon_type'),
         icon: "assets/graphics/icons/other.svg",
+        text: tr('weapon_type'),
       ),
       SizedBox(
           height: 60,

@@ -1,7 +1,7 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/lists/add_edit_log/trophy_lodge_logs.dart';
+import 'package:cotwcompanion/lists/logs/add_edit_log/trophy_lodge_logs.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
@@ -464,9 +464,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         value: _selectedReserve,
         onChanged: (dynamic value) {
           setState(() {
+            _focus();
             _selectedReserve = value;
             _reserveChanged = true;
-            _focus();
           });
         },
         items: _listOfReserves(),
@@ -490,9 +490,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           value: _selectedAnimal,
           onChanged: (dynamic value) {
             setState(() {
+              _focus();
               _selectedAnimal = value;
               _animalChanged = true;
-              _focus();
             });
           },
           items: _listOfAnimals())
@@ -515,9 +515,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           value: _selectedFur,
           onChanged: (dynamic value) {
             setState(() {
+              _focus();
               _selectedFur = value;
               _furChanged = true;
-              _focus();
             });
           },
           items: _listOfFurs())
@@ -537,9 +537,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           isActive: _isMale,
           onTap: () {
             setState(() {
+              _focus();
               _isMale = !_isMale;
               _genderChanged = true;
-              _focus();
             });
           })
     ]);
@@ -594,8 +594,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               isActive: _correctAmmoUsed,
               onTap: () {
                 setState(() {
-                  _correctAmmoUsed = !_correctAmmoUsed;
                   _focus();
+                  _correctAmmoUsed = !_correctAmmoUsed;
                 });
               },
             ),
@@ -604,8 +604,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 isActive: _twoShotsFired,
                 onTap: () {
                   setState(() {
-                    _twoShotsFired = !_twoShotsFired;
                     _focus();
+                    _twoShotsFired = !_twoShotsFired;
                   });
                 }),
             WidgetSwitchIcon(
@@ -613,8 +613,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 isActive: _trophyOrganUndamaged,
                 onTap: () {
                   setState(() {
-                    _trophyOrganUndamaged = !_trophyOrganUndamaged;
                     _focus();
+                    _trophyOrganUndamaged = !_trophyOrganUndamaged;
                   });
                 }),
             WidgetSwitchIcon(
@@ -622,8 +622,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 isActive: _vitalOrganHit,
                 onTap: () {
                   setState(() {
-                    _vitalOrganHit = !_vitalOrganHit;
                     _focus();
+                    _vitalOrganHit = !_vitalOrganHit;
                   });
                 })
           ]))
@@ -641,56 +641,56 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             WidgetSwitchIcon(
                 icon: "assets/graphics/icons/trophy_none.svg",
                 activeColor: Interface.light,
-                activeBackground: Interface.trophyNoneBackground,
+                activeBackground: Interface.trophyNone,
                 isActive: _trophyRating == 0,
                 onTap: () {
                   setState(() {
-                    _trophyRating = 0;
                     _focus();
+                    _trophyRating = 0;
                   });
                 }),
             WidgetSwitchIcon(
                 icon: "assets/graphics/icons/trophy_bronze.svg",
                 activeColor: Interface.alwaysDark,
-                activeBackground: Interface.trophyBronzeBackground,
+                activeBackground: Interface.trophyBronze,
                 isActive: _trophyRating == 1,
                 onTap: () {
                   setState(() {
-                    _trophyRating = 1;
                     _focus();
+                    _trophyRating = 1;
                   });
                 }),
             WidgetSwitchIcon(
                 icon: "assets/graphics/icons/trophy_silver.svg",
                 activeColor: Interface.alwaysDark,
-                activeBackground: Interface.trophySilverBackground,
+                activeBackground: Interface.trophySilver,
                 isActive: _trophyRating == 2,
                 onTap: () {
                   setState(() {
-                    _trophyRating = 2;
                     _focus();
+                    _trophyRating = 2;
                   });
                 }),
             WidgetSwitchIcon(
                 icon: "assets/graphics/icons/trophy_gold.svg",
                 activeColor: Interface.alwaysDark,
-                activeBackground: Interface.trophyGoldBackground,
+                activeBackground: Interface.trophyGold,
                 isActive: _trophyRating == 3,
                 onTap: () {
                   setState(() {
-                    _trophyRating = 3;
                     _focus();
+                    _trophyRating = 3;
                   });
                 }),
             WidgetSwitchIcon(
                 icon: _selectedFurId == Interface.greatOneId ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg",
-                activeColor: Interface.alwaysDark,
-                activeBackground: Interface.trophyDiamondBackground,
+                activeColor: _selectedFurId == Interface.greatOneId ? Interface.light : Interface.alwaysDark,
+                activeBackground: _selectedFurId == Interface.greatOneId ? Interface.trophyGreatOne : Interface.trophyDiamond,
                 isActive: _trophyRating == 4,
                 onTap: () {
                   setState(() {
-                    _trophyRating = 4;
                     _focus();
+                    _trophyRating = 4;
                   });
                 })
           ]))

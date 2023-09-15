@@ -6,17 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WidgetTag extends StatelessWidget {
-  final String text, icon;
-  final double height, iconSize;
+  final String icon, value;
+  final double height;
   final Color color, background;
   final bool isVisible;
 
   const WidgetTag.big({
     Key? key,
-    this.text = "",
     this.icon = "",
+    this.value = "",
     this.height = 30,
-    this.iconSize = 14,
     required this.color,
     required this.background,
     this.isVisible = true,
@@ -24,10 +23,9 @@ class WidgetTag extends StatelessWidget {
 
   const WidgetTag.small({
     Key? key,
-    this.text = "",
     this.icon = "",
+    this.value = "",
     this.height = 25,
-    this.iconSize = 13,
     required this.color,
     required this.background,
     this.isVisible = true,
@@ -36,14 +34,14 @@ class WidgetTag extends StatelessWidget {
   Widget _buildTag() {
     return Row(mainAxisSize: MainAxisSize.min, children: [
       Container(
-          width: text.isEmpty ? height : null,
+          width: value.isEmpty ? height : null,
           constraints: BoxConstraints(
             minHeight: height,
             maxHeight: height,
             minWidth: height,
           ),
           alignment: Alignment.center,
-          padding: text.isEmpty ? const EdgeInsets.all(0) : const EdgeInsets.only(left: 10, right: 10),
+          padding: value.isEmpty ? const EdgeInsets.all(0) : const EdgeInsets.only(left: 10, right: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(height / 4)),
             color: background,
@@ -51,25 +49,25 @@ class WidgetTag extends StatelessWidget {
           child: Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
             icon.isNotEmpty
                 ? Container(
-                    margin: EdgeInsets.only(right: text.isNotEmpty ? 7 : 0),
+                    margin: EdgeInsets.only(right: value.isNotEmpty ? 7 : 0),
                     child: SvgPicture.asset(
                       icon,
-                      width: iconSize,
-                      height: iconSize,
+                      width: height / 2,
+                      height: height / 2,
                       colorFilter: ColorFilter.mode(
                         color,
                         BlendMode.srcIn,
                       ),
                     ))
                 : const SizedBox.shrink(),
-            text.isNotEmpty
+            value.isNotEmpty
                 ? AutoSizeText(
-                    text,
+                    value,
                     maxLines: 1,
                     textAlign: TextAlign.center,
                     style: height <= 25
                         ? Interface.s12w500n(color)
-                        : height <= 30
+                        : height <= 35
                             ? Interface.s14w500n(color)
                             : Interface.s16w500n(color),
                   )
@@ -79,7 +77,7 @@ class WidgetTag extends StatelessWidget {
   }
 
   Widget _buildWidgets() {
-    return isVisible && (icon.isNotEmpty || text.isNotEmpty) ? _buildTag() : const SizedBox.shrink();
+    return isVisible && (icon.isNotEmpty || value.isNotEmpty) ? _buildTag() : const SizedBox.shrink();
   }
 
   @override

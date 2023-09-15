@@ -8,14 +8,12 @@ class WidgetButtonIcon extends StatelessWidget {
   final String icon;
   final Color? color, background;
   final double buttonSize;
-  final double? iconSize;
   final Function onTap;
 
   const WidgetButtonIcon({
     Key? key,
     this.icon = "",
     this.buttonSize = 35,
-    this.iconSize,
     this.color,
     this.background,
     required this.onTap,
@@ -37,8 +35,8 @@ class WidgetButtonIcon extends StatelessWidget {
             child: icon.isNotEmpty
                 ? SvgPicture.asset(
                     icon,
-                    width: iconSize ?? buttonSize / 2.2,
-                    height: iconSize ?? buttonSize / 2.2,
+                    width: buttonSize / 2,
+                    height: buttonSize / 2,
                     colorFilter: ColorFilter.mode(
                       color ?? Interface.accent,
                       BlendMode.srcIn,

@@ -10,7 +10,6 @@ class AnimalFur {
   final int _rarity;
   final double _perCent;
   final int _male, _female;
-  bool _chosen;
 
   AnimalFur({
     required id,
@@ -27,8 +26,7 @@ class AnimalFur {
         _rarity = rarity,
         _perCent = perCent,
         _male = male,
-        _female = female,
-        _chosen = chosen;
+        _female = female;
 
   int get id => _id;
 
@@ -44,29 +42,27 @@ class AnimalFur {
 
   bool get female => _female == 1;
 
-  bool get isChosen => _chosen;
-
-  set chosen(bool chosen) => _chosen = chosen;
-
   Color get color {
     switch (_rarity) {
       case 0:
-        return Interface.common;
+        return Interface.rarityCommon;
       case 1:
-        return Interface.uncommon;
+        return Interface.rarityUncommon;
       case 2:
-        return Interface.rare;
+        return Interface.rarityRare;
       case 3:
-        return Interface.veryrare;
+        return Interface.rarityVeryRare;
       case 4:
-        return Interface.mission;
+        return Interface.rarityMission;
+      case 5:
+        return Interface.rarityGreatOne;
       default:
         return Interface.disabled.withOpacity(0.3);
     }
   }
 
   String getName(Locale locale) {
-    return _furId == Interface.greatOneId ? HelperJSON.getFur(HelperJSON.furs.length).getName(locale) : HelperJSON.getFur(_furId).getName(locale);
+    return _rarity == 5 ? HelperJSON.getFur(Interface.greatOneId).getName(locale) : HelperJSON.getFur(_furId).getName(locale);
   }
 
   factory AnimalFur.fromJson(Map<String, dynamic> json) {

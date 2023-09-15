@@ -6,16 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WidgetTitleInfoIcon extends StatelessWidget {
-  final String text, icon;
+  final String icon, text;
   final Color? color, background;
-  final double height = 60;
-  final double iconSize = 17;
   final bool alignRight;
+
+  final double height = 60;
+  final double iconSize = 17.5;
 
   const WidgetTitleInfoIcon({
     Key? key,
-    required this.text,
     required this.icon,
+    required this.text,
     this.color,
     this.background,
     this.alignRight = false,

@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 class WidgetButtonText extends StatelessWidget {
   final String text;
   final Color color, background;
-  final double? buttonHeight, buttonWidth;
+  final double buttonHeight;
+  final double? buttonWidth;
   final Function onTap;
 
   const WidgetButtonText({
     Key? key,
     required this.text,
-    this.buttonHeight,
+    required this.buttonHeight,
     this.buttonWidth,
     required this.color,
     required this.background,
@@ -36,7 +37,11 @@ class WidgetButtonText extends StatelessWidget {
             ),
             child: AutoSizeText(
               text,
-              style: Interface.s18w500n(color),
+              style: buttonHeight <= 25
+                  ? Interface.s14w500n(color)
+                  : buttonHeight <= 35
+                      ? Interface.s16w500n(color)
+                      : Interface.s18w500n(color),
             )));
   }
 

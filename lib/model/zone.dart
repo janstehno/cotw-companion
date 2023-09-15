@@ -45,15 +45,15 @@ class Zone {
   static Color colorForZone(int zone) {
     switch (zone) {
       case 0:
-        return Interface.feed;
+        return Interface.zoneFeed;
       case 1:
-        return Interface.drink;
+        return Interface.zoneDrink;
       case 2:
-        return Interface.rest;
+        return Interface.zoneRest;
       case 3:
-        return Interface.other;
+        return Interface.zoneOther;
       default:
-        return Interface.nothing;
+        return Interface.zoneNothing;
     }
   }
 

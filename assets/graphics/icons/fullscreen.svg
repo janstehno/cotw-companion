@@ -1,19 +1,12 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.5 30.5">
-    <title>fullscreen</title>
-    <g id="other_icons">
-        <g id="fullscreen">
-            <polyline points="28.75 9.63 28.75 1.75 20.88 1.75" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" />
-            <polyline points="1.75 9.63 1.75 1.75 9.63 1.75" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" />
-            <polyline points="20.88 28.75 28.75 28.75 28.75 20.88" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" />
-            <polyline points="1.75 20.88 1.75 28.75 9.63 28.75" fill="none" stroke="#212121"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" />
-        </g>
-    </g>
-    <g id="frame">
-        <rect x="0.25" y="0.25" width="30" height="30" fill="none" />
-    </g>
+    <polyline points="28.75 9.63 28.75 1.75 20.88 1.75" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" />
+    <polyline points="1.75 9.63 1.75 1.75 9.63 1.75" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" />
+    <polyline points="20.88 28.75 28.75 28.75 28.75 20.88" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" />
+    <polyline points="1.75 20.88 1.75 28.75 9.63 28.75" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" />
+    <rect x="0.25" y="0.25" width="30" height="30" fill="none" />
 </svg>

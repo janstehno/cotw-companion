@@ -8,7 +8,7 @@ import 'package:flutter_svg/svg.dart';
 class WidgetTapTextIcon extends StatelessWidget {
   final String text, icon;
   final Color? color, background;
-  final double height, iconSize;
+  final double height;
   final bool alignRight;
   final Function onTap;
 
@@ -19,7 +19,6 @@ class WidgetTapTextIcon extends StatelessWidget {
     this.color,
     this.background,
     this.height = 80,
-    this.iconSize = 35,
     this.alignRight = false,
     required this.onTap,
   }) : super(key: key);
@@ -43,8 +42,8 @@ class WidgetTapTextIcon extends StatelessWidget {
                       ? const SizedBox.shrink()
                       : SvgPicture.asset(
                           icon,
-                          width: iconSize,
-                          height: iconSize,
+                          width: 35,
+                          height: 35,
                           colorFilter: ColorFilter.mode(
                             color ?? Interface.dark,
                             BlendMode.srcIn,
@@ -61,8 +60,8 @@ class WidgetTapTextIcon extends StatelessWidget {
                   alignRight
                       ? SvgPicture.asset(
                           icon,
-                          width: iconSize,
-                          height: iconSize,
+                          width: 35,
+                          height: 35,
                           colorFilter: ColorFilter.mode(
                             color ?? Interface.dark,
                             BlendMode.srcIn,

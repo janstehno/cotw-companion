@@ -69,7 +69,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     setState(() {});
   }
 
-  void _buildSnackBar(String message) {
+  void _buildSnackBar(String message, Process process) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(milliseconds: 1000),
         padding: const EdgeInsets.all(0),
@@ -82,6 +82,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
             },
             child: WidgetSnackBar(
               text: message,
+              process: process,
             ))));
   }
 
@@ -93,9 +94,15 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     final bool fileLoaded = await HelperLoadout.loadFile();
     if (fileLoaded) {
       _filter();
-      _buildSnackBar(tr('file_imported'));
+      _buildSnackBar(
+        tr('file_imported'),
+        Process.success,
+      );
     } else {
-      _buildSnackBar(tr('file_not_imported'));
+      _buildSnackBar(
+        tr('file_not_imported'),
+        Process.error,
+      );
     }
   }
 
@@ -106,9 +113,15 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     }
     final bool fileSaved = await HelperLoadout.saveFile();
     if (fileSaved) {
-      _buildSnackBar(tr('file_exported'));
+      _buildSnackBar(
+        tr('file_exported'),
+        Process.success,
+      );
     } else {
-      _buildSnackBar(tr('file_not_exported'));
+      _buildSnackBar(
+        tr('file_not_exported'),
+        Process.error,
+      );
     }
   }
 
@@ -147,8 +160,8 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
           background: Interface.dark,
           onTap: () {
             setState(() {
-              _fileOptionsOpened = !_fileOptionsOpened;
               _focus();
+              _fileOptionsOpened = !_fileOptionsOpened;
             });
           }),
       menuButtons: [
@@ -158,9 +171,9 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
             background: Interface.dark,
             onTap: () {
               setState(() {
-                _fileOptionsOpened = !_fileOptionsOpened;
                 _focus();
                 saveFile();
+                _fileOptionsOpened = !_fileOptionsOpened;
               });
             }),
         WidgetButtonIcon(
@@ -169,9 +182,9 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
             background: Interface.dark,
             onTap: () {
               setState(() {
-                _fileOptionsOpened = !_fileOptionsOpened;
                 _focus();
                 loadFile();
+                _fileOptionsOpened = !_fileOptionsOpened;
               });
             }),
       ],
@@ -190,8 +203,8 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
           barButton: WidgetButtonIcon(
               icon: "assets/graphics/icons/plus.svg",
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLoadoutsAddEdit(callback: _filter)));
                 _focus();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLoadoutsAddEdit(callback: _filter)));
               }),
         ),
       ],

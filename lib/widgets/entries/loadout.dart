@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -196,6 +197,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                   child: WidgetSnackBar(
                     text: tr('item_removed'),
                     icon: "assets/graphics/icons/reload.svg",
+                    process: Process.info,
                     onSnackBarTap: () {
                       _undo();
                     },

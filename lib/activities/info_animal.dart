@@ -181,7 +181,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                 padding: const EdgeInsets.only(right: 25),
                 alignment: Alignment.center,
                 child: WidgetTag.big(
-                  iconSize: 20,
+                  height: WidgetTitleBig.height / 1.75,
                   icon: "assets/graphics/icons/grounded.svg",
                   color: Interface.disabled,
                   background: Colors.transparent,
@@ -310,45 +310,45 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                         _toggleRarity(0);
                       },
                       child: WidgetTag.small(
-                        text: tr('rarity_common'),
+                        value: tr('rarity_common'),
                         color: Interface.light,
-                        background: Interface.common,
+                        background: Interface.rarityCommon,
                       )),
                   GestureDetector(
                       onTap: () {
                         _toggleRarity(1);
                       },
                       child: WidgetTag.small(
-                        text: tr('rarity_uncommon'),
+                        value: tr('rarity_uncommon'),
                         color: Interface.alwaysDark,
-                        background: Interface.uncommon,
+                        background: Interface.rarityUncommon,
                       )),
                   GestureDetector(
                       onTap: () {
                         _toggleRarity(2);
                       },
                       child: WidgetTag.small(
-                        text: tr('rarity_rare'),
+                        value: tr('rarity_rare'),
                         color: Interface.alwaysDark,
-                        background: Interface.rare,
+                        background: Interface.rarityRare,
                       )),
                   GestureDetector(
                       onTap: () {
                         _toggleRarity(3);
                       },
                       child: WidgetTag.small(
-                        text: tr('rarity_very_rare'),
+                        value: tr('rarity_very_rare'),
                         color: Interface.alwaysDark,
-                        background: Interface.veryrare,
+                        background: Interface.rarityVeryRare,
                       )),
                   GestureDetector(
                       onTap: () {
                         _toggleRarity(4);
                       },
                       child: WidgetTag.small(
-                        text: tr('rarity_mission'),
+                        value: tr('rarity_mission'),
                         color: Interface.alwaysDark,
-                        background: Interface.mission,
+                        background: Interface.rarityMission,
                       )),
                 ],
               ),
@@ -380,24 +380,24 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                 alignment: WrapAlignment.center,
                 children: [
                   WidgetTag.small(
-                    text: tr('animal_other'),
+                    value: tr('animal_other'),
                     color: Interface.light,
-                    background: Interface.other,
+                    background: Interface.zoneOther,
                   ),
                   WidgetTag.small(
-                    text: tr('animal_feed'),
+                    value: tr('animal_feed'),
                     color: Interface.alwaysDark,
-                    background: Interface.feed,
+                    background: Interface.zoneFeed,
                   ),
                   WidgetTag.small(
-                    text: tr('animal_drink'),
+                    value: tr('animal_drink'),
                     color: Interface.alwaysDark,
-                    background: Interface.drink,
+                    background: Interface.zoneDrink,
                   ),
                   WidgetTag.small(
-                    text: tr('animal_rest'),
+                    value: tr('animal_rest'),
                     color: Interface.alwaysDark,
-                    background: Interface.rest,
+                    background: Interface.zoneRest,
                   )
                 ],
               )
@@ -440,23 +440,28 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             Container(
                 padding: _padding,
                 alignment: Alignment.centerLeft,
-                child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  WidgetSense(
-                    icon: "assets/graphics/icons/sense_sight.svg",
-                    sense: _animal.sight,
-                    isVisible: _animal.sight > 0,
-                  ),
-                  WidgetSense(
-                    icon: "assets/graphics/icons/sense_hearing.svg",
-                    sense: _animal.hearing,
-                    isVisible: _animal.hearing > 0,
-                  ),
-                  WidgetSense(
-                    icon: "assets/graphics/icons/sense_smell.svg",
-                    sense: _animal.smell,
-                    isVisible: _animal.smell > 0,
-                  ),
-                ]))
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    WidgetSense(
+                      icon: "assets/graphics/icons/sense_sight.svg",
+                      sense: _animal.sight,
+                      isVisible: _animal.sight > 0,
+                    ),
+                    WidgetSense(
+                      icon: "assets/graphics/icons/sense_hearing.svg",
+                      sense: _animal.hearing,
+                      isVisible: _animal.hearing > 0,
+                    ),
+                    WidgetSense(
+                      icon: "assets/graphics/icons/sense_smell.svg",
+                      sense: _animal.smell,
+                      isVisible: _animal.smell > 0,
+                    ),
+                  ],
+                ))
           ])
         : const SizedBox.shrink();
   }

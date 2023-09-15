@@ -38,8 +38,8 @@ class EntryReserveState extends State<EntryReserve> {
     }
     tags.addAll([
       WidgetTag.big(
-        text: widget.reserve.count.toString(),
         icon: "assets/graphics/icons/target.svg",
+        value: widget.reserve.count.toString(),
         color: Interface.dark,
         background: Interface.tag,
       )

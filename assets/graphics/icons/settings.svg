@@ -1,33 +1,24 @@
 <!-- Copyright (c) 2022 - 2023 Jan Stehno -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <title>settings</title>
-    <g id="other_icons">
-        <g id="_home">
-            <g id="settings">
-                <ellipse cx="15" cy="15" rx="10.42" ry="10.65" fill="none" stroke="#212121"
-                    stroke-linecap="round" stroke-width="3" />
-                <path
-                    d="M11.4,0h7.2a0,0,0,0,1,0,0V3A.59.59,0,0,1,18,3.6H12A.59.59,0,0,1,11.4,3V0A0,0,0,0,1,11.4,0Z"
-                    transform="translate(30 3.6) rotate(-180)" fill="#212121" />
-                <path
-                    d="M12,26.4h6a.59.59,0,0,1,.59.59v3a0,0,0,0,1,0,0H11.4a0,0,0,0,1,0,0V27A.59.59,0,0,1,12,26.4Z"
-                    transform="translate(30 56.4) rotate(180)" fill="#212121" />
-                <path
-                    d="M0,19.8h7.2a0,0,0,0,1,0,0v3a.59.59,0,0,1-.59.59h-6A.59.59,0,0,1,0,22.81v-3a0,0,0,0,1,0,0Z"
-                    transform="translate(20.49 7.71) rotate(60)" fill="#212121" />
-                <path
-                    d="M23.42,6.6h6a.59.59,0,0,1,.59.59v3a0,0,0,0,1,0,0h-7.2a0,0,0,0,1,0,0v-3A.59.59,0,0,1,23.42,6.6Z"
-                    transform="translate(20.49 -18.69) rotate(60)" fill="#212121" />
-                <path
-                    d="M0,6.6h7.2a0,0,0,0,1,0,0v3a.59.59,0,0,1-.59.59h-6A.59.59,0,0,1,0,9.61v-3a0,0,0,0,1,0,0Z"
-                    transform="translate(12.63 9.51) rotate(120)" fill="#212121" />
-                <path
-                    d="M23.42,19.8h6a.59.59,0,0,1,.59.59v3a0,0,0,0,1,0,0h-7.2a0,0,0,0,1,0,0v-3A.59.59,0,0,1,23.42,19.8Z"
-                    transform="translate(58.35 9.51) rotate(120)" fill="#212121" />
-            </g>
-        </g>
-    </g>
-    <g id="frame">
-        <rect width="30" height="30" fill="none" />
-    </g>
+    <ellipse cx="15" cy="15" rx="10.42" ry="10.65" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-width="3" />
+    <path
+        d="M11.4,0h7.2a0,0,0,0,1,0,0V3A.59.59,0,0,1,18,3.6H12A.59.59,0,0,1,11.4,3V0A0,0,0,0,1,11.4,0Z"
+        transform="translate(30 3.6) rotate(-180)" fill="#212121" />
+    <path
+        d="M12,26.4h6a.59.59,0,0,1,.59.59v3a0,0,0,0,1,0,0H11.4a0,0,0,0,1,0,0V27A.59.59,0,0,1,12,26.4Z"
+        transform="translate(30 56.4) rotate(180)" fill="#212121" />
+    <path
+        d="M0,19.8h7.2a0,0,0,0,1,0,0v3a.59.59,0,0,1-.59.59h-6A.59.59,0,0,1,0,22.81v-3a0,0,0,0,1,0,0Z"
+        transform="translate(20.49 7.71) rotate(60)" fill="#212121" />
+    <path
+        d="M23.42,6.6h6a.59.59,0,0,1,.59.59v3a0,0,0,0,1,0,0h-7.2a0,0,0,0,1,0,0v-3A.59.59,0,0,1,23.42,6.6Z"
+        transform="translate(20.49 -18.69) rotate(60)" fill="#212121" />
+    <path
+        d="M0,6.6h7.2a0,0,0,0,1,0,0v3a.59.59,0,0,1-.59.59h-6A.59.59,0,0,1,0,9.61v-3a0,0,0,0,1,0,0Z"
+        transform="translate(12.63 9.51) rotate(120)" fill="#212121" />
+    <path
+        d="M23.42,19.8h6a.59.59,0,0,1,.59.59v3a0,0,0,0,1,0,0h-7.2a0,0,0,0,1,0,0v-3A.59.59,0,0,1,23.42,19.8Z"
+        transform="translate(58.35 9.51) rotate(120)" fill="#212121" />
+    <rect width="30" height="30" fill="none" />
 </svg>

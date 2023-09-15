@@ -4,8 +4,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/filter.dart';
 import 'package:cotwcompanion/activities/logs_add_edit.dart';
 import 'package:cotwcompanion/activities/logs_information.dart';
+import 'package:cotwcompanion/lists/logs/stats.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
@@ -16,6 +18,7 @@ import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/entries/log.dart';
 import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
 import 'package:cotwcompanion/widgets/filters/picker_icon.dart';
+import 'package:cotwcompanion/widgets/filters/picker_text.dart';
 import 'package:cotwcompanion/widgets/filters/range_set.dart';
 import 'package:cotwcompanion/widgets/filters/sorter_icon.dart';
 import 'package:cotwcompanion/widgets/menubar.dart';
@@ -101,17 +104,17 @@ class ActivityLogsState extends State<ActivityLogs> {
 
   void _showFileOptions() {
     setState(() {
+      _focus();
       _fileOptionsOpened = !_fileOptionsOpened;
       _viewOptionsOpened = false;
-      _focus();
     });
   }
 
   void _showViewOptions() {
     setState(() {
+      _focus();
       _viewOptionsOpened = !_viewOptionsOpened;
       _fileOptionsOpened = false;
-      _focus();
     });
   }
 
@@ -120,7 +123,7 @@ class ActivityLogsState extends State<ActivityLogs> {
     _controller.setTextAndPosition(searchText);
   }
 
-  void _buildSnackBar(String message) {
+  void _buildSnackBar(String message, Process process) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(milliseconds: 1000),
         padding: const EdgeInsets.all(0),
@@ -133,6 +136,7 @@ class ActivityLogsState extends State<ActivityLogs> {
             },
             child: WidgetSnackBar(
               text: message,
+              process: process,
             ))));
   }
 
@@ -144,9 +148,15 @@ class ActivityLogsState extends State<ActivityLogs> {
     final bool fileLoaded = await HelperLog.loadFile();
     if (fileLoaded) {
       _filter();
-      _buildSnackBar(tr('file_imported'));
+      _buildSnackBar(
+        tr('file_imported'),
+        Process.success,
+      );
     } else {
-      _buildSnackBar(tr('file_not_imported'));
+      _buildSnackBar(
+        tr('file_not_imported'),
+        Process.error,
+      );
     }
   }
 
@@ -157,9 +167,15 @@ class ActivityLogsState extends State<ActivityLogs> {
     }
     final bool fileSaved = await HelperLog.saveFile();
     if (fileSaved) {
-      _buildSnackBar(tr('file_exported'));
+      _buildSnackBar(
+        tr('file_exported'),
+        Process.success,
+      );
     } else {
-      _buildSnackBar(tr('file_not_exported'));
+      _buildSnackBar(
+        tr('file_not_exported'),
+        Process.error,
+      );
     }
   }
 
@@ -189,9 +205,9 @@ class ActivityLogsState extends State<ActivityLogs> {
                             background: Interface.red,
                             onTap: () {
                               setState(() {
+                                _focus();
                                 _removeLogs();
                                 _yesNoOpened = false;
-                                _focus();
                               });
                             }),
                         WidgetButtonIcon(
@@ -201,8 +217,8 @@ class ActivityLogsState extends State<ActivityLogs> {
                             background: Interface.dark,
                             onTap: () {
                               setState(() {
-                                _yesNoOpened = false;
                                 _focus();
+                                _yesNoOpened = false;
                               });
                             })
                       ])
@@ -246,8 +262,8 @@ class ActivityLogsState extends State<ActivityLogs> {
           background: Interface.dark,
           onTap: () {
             setState(() {
-              _showFileOptions();
               _focus();
+              _showFileOptions();
             });
           }),
       menuButtons: [
@@ -257,9 +273,9 @@ class ActivityLogsState extends State<ActivityLogs> {
             background: Interface.dark,
             onTap: () {
               setState(() {
-                _fileOptionsOpened = !_fileOptionsOpened;
                 _focus();
                 saveFile();
+                _fileOptionsOpened = !_fileOptionsOpened;
               });
             }),
         WidgetButtonIcon(
@@ -268,9 +284,9 @@ class ActivityLogsState extends State<ActivityLogs> {
             background: Interface.dark,
             onTap: () {
               setState(() {
-                _fileOptionsOpened = !_fileOptionsOpened;
                 _focus();
                 loadFile();
+                _fileOptionsOpened = !_fileOptionsOpened;
               });
             }),
         WidgetButtonIcon(
@@ -279,9 +295,9 @@ class ActivityLogsState extends State<ActivityLogs> {
             background: Interface.red,
             onTap: () {
               setState(() {
-                _yesNoOpened = true;
-                _showFileOptions();
                 _focus();
+                _showFileOptions();
+                _yesNoOpened = true;
               });
             }),
       ],
@@ -298,8 +314,8 @@ class ActivityLogsState extends State<ActivityLogs> {
           background: Interface.dark,
           onTap: () {
             setState(() {
-              _showViewOptions();
               _focus();
+              _showViewOptions();
             });
           }),
       menuButtons: [
@@ -313,8 +329,8 @@ class ActivityLogsState extends State<ActivityLogs> {
             background: Interface.dark,
             onTap: () {
               setState(() {
-                _settings.changeCompactLogbook();
                 _focus();
+                _settings.changeCompactLogbook();
               });
             }),
         WidgetSwitchIcon(
@@ -324,8 +340,8 @@ class ActivityLogsState extends State<ActivityLogs> {
             isActive: _settings.getDateOfRecord,
             onTap: () {
               setState(() {
-                _settings.changeDateOfRecord();
                 _focus();
+                _settings.changeDateOfRecord();
               });
             }),
         widget.trophyLodge
@@ -337,9 +353,9 @@ class ActivityLogsState extends State<ActivityLogs> {
                 isActive: _settings.getTrophyLodgeRecord,
                 onTap: () {
                   setState(() {
+                    _focus();
                     _settings.changeTrophyLodgeRecord();
                     _filter();
-                    _focus();
                   });
                 })
       ],
@@ -356,13 +372,24 @@ class ActivityLogsState extends State<ActivityLogs> {
         EntryMenuBarItem(
           barButton: WidgetButtonIcon(
               icon: "assets/graphics/icons/about.svg",
-              iconSize: 16,
               color: Interface.light,
               background: Interface.dark,
               onTap: () {
                 setState(() {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityLogsInformation()));
                   _focus();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityLogsInformation()));
+                });
+              }),
+        ),
+        EntryMenuBarItem(
+          barButton: WidgetButtonIcon(
+              icon: "assets/graphics/icons/stats.svg",
+              color: Interface.light,
+              background: Interface.dark,
+              onTap: () {
+                setState(() {
+                  _focus();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ListLogsStats(logs: _logs, trophyLodge: widget.trophyLodge)));
                 });
               }),
         ),
@@ -381,8 +408,8 @@ class ActivityLogsState extends State<ActivityLogs> {
           barButton: WidgetButtonIcon(
               icon: "assets/graphics/icons/plus.svg",
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLogsAddEdit(fromTrophyLodge: widget.trophyLodge, callback: _filter)));
                 _focus();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLogsAddEdit(fromTrophyLodge: widget.trophyLodge, callback: _filter)));
               }),
         ),
       ],
@@ -393,7 +420,7 @@ class ActivityLogsState extends State<ActivityLogs> {
     String assets = "assets/graphics/icons/";
     return [
       FilterRangeSet(
-        icon: "${assets}difficulty.svg",
+        icon: "${assets}stats.svg",
         text: tr('animal_trophy'),
         decimal: true,
         min: 0,
@@ -415,7 +442,7 @@ class ActivityLogsState extends State<ActivityLogs> {
           "${assets}trophy_great_one.svg",
         ],
         colors: [
-          Interface.alwaysDark,
+          Interface.light,
           Interface.alwaysDark,
           Interface.alwaysDark,
           Interface.alwaysDark,
@@ -423,13 +450,43 @@ class ActivityLogsState extends State<ActivityLogs> {
           Interface.light,
         ],
         backgrounds: [
-          Interface.trophyNoneBackground,
-          Interface.trophyBronzeBackground,
-          Interface.trophySilverBackground,
-          Interface.trophyGoldBackground,
-          Interface.trophyDiamondBackground,
-          Interface.dark,
+          Interface.trophyNone,
+          Interface.trophyBronze,
+          Interface.trophySilver,
+          Interface.trophyGold,
+          Interface.trophyDiamond,
+          Interface.trophyGreatOne,
         ],
+      ),
+      FilterPickerText(
+        icon: "${assets}fur.svg",
+        text: tr('fur_rarity'),
+        values: const [0, 1, 2, 3, 4, 5],
+        keys: [
+          tr('rarity_common'),
+          tr('rarity_uncommon'),
+          tr('rarity_rare'),
+          tr('rarity_very_rare'),
+          tr('rarity_mission'),
+          HelperJSON.getFur(Interface.greatOneId).getName(context.locale),
+        ],
+        colors: [
+          Interface.light,
+          Interface.alwaysDark,
+          Interface.alwaysDark,
+          Interface.alwaysDark,
+          Interface.alwaysDark,
+          Interface.light,
+        ],
+        backgrounds: [
+          Interface.rarityCommon,
+          Interface.rarityUncommon,
+          Interface.rarityRare,
+          Interface.rarityVeryRare,
+          Interface.rarityMission,
+          Interface.rarityGreatOne,
+        ],
+        filterKey: FilterKey.logsFurRarity,
       ),
       FilterPickerIcon(
         icon: "${assets}gender.svg",
@@ -445,8 +502,8 @@ class ActivityLogsState extends State<ActivityLogs> {
           Interface.alwaysDark,
         ],
         backgrounds: const [
-          Interface.male,
-          Interface.female,
+          Interface.genderMale,
+          Interface.genderFemale,
         ],
       ),
       FilterSorterIcon(
@@ -459,7 +516,7 @@ class ActivityLogsState extends State<ActivityLogs> {
           "${assets}sort_date.svg",
           "${assets}sort_trophy_score.svg",
           "${assets}trophy_diamond.svg",
-          "${assets}sort_fur_rarity.svg",
+          "${assets}fur.svg",
           "${assets}gender.svg",
         ],
         criteria: const [

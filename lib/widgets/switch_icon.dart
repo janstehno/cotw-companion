@@ -6,8 +6,7 @@ import 'package:flutter_svg/svg.dart';
 
 class WidgetSwitchIcon extends StatelessWidget {
   final String icon, activeIcon;
-  final Color? color, background;
-  final Color? activeColor, activeBackground;
+  final Color? color, background, activeColor, activeBackground;
   final double buttonSize;
   final Function onTap;
   final bool isActive;
@@ -47,8 +46,8 @@ class WidgetSwitchIcon extends StatelessWidget {
                             ? icon
                             : activeIcon
                         : icon,
-                    width: buttonSize / 2.2,
-                    height: buttonSize / 2.2,
+                    width: buttonSize / 2,
+                    height: buttonSize / 2,
                     colorFilter: ColorFilter.mode(
                       isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled,
                       BlendMode.srcIn,

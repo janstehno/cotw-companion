@@ -15,16 +15,20 @@ class ActivityLogsInformation extends StatelessWidget {
   Widget _buildInterfaceFunctions() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_1'),
         icon: "assets/graphics/icons/plus.svg",
+        text: tr('logbook_info_1'),
       ),
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_4'),
+        icon: "assets/graphics/icons/stats.svg",
+        text: tr('stats'),
+      ),
+      WidgetTitleInfoIcon(
         icon: "assets/graphics/icons/view_semi_compact.svg",
+        text: tr('logbook_info_4'),
       ),
       WidgetTitleInfoIcon(
-        text: tr('date_of_record'),
         icon: "assets/graphics/icons/sort_date.svg",
+        text: tr('date_of_record'),
       ),
     ]);
   }
@@ -32,8 +36,8 @@ class ActivityLogsInformation extends StatelessWidget {
   Widget _buildTrophyLodge() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_6'),
         icon: "assets/graphics/icons/trophy_lodge.svg",
+        text: tr('logbook_info_6'),
       ),
       Container(
           alignment: Alignment.centerLeft,
@@ -47,8 +51,8 @@ class ActivityLogsInformation extends StatelessWidget {
   Widget _buildEdit() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_7'),
         icon: "assets/graphics/icons/edit.svg",
+        text: tr('logbook_info_7'),
       ),
       Container(
           alignment: Alignment.centerLeft,
@@ -62,8 +66,8 @@ class ActivityLogsInformation extends StatelessWidget {
   Widget _buildDelete() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_5'),
         icon: "assets/graphics/icons/remove_bin.svg",
+        text: tr('logbook_info_5'),
       ),
       Container(
           alignment: Alignment.centerLeft,
@@ -77,12 +81,12 @@ class ActivityLogsInformation extends StatelessWidget {
   Widget _buildSearch() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_2'),
         icon: "assets/graphics/icons/search.svg",
+        text: tr('logbook_info_2'),
       ),
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_0'),
         icon: "assets/graphics/icons/separator.svg",
+        text: tr('logbook_info_0'),
       ),
     ]);
   }
@@ -90,27 +94,33 @@ class ActivityLogsInformation extends StatelessWidget {
   Widget _buildImportExport() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_8'),
         icon: "assets/graphics/icons/export.svg",
+        text: tr('logbook_info_8'),
       ),
       WidgetTitleInfoIcon(
-        text: tr('logbook_info_8_1'),
         icon: "assets/graphics/icons/import.svg",
+        text: tr('logbook_info_8_1'),
       ),
       Container(
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
-        child: WidgetRichText(text: tr('logbook_info_8_2')),
+        child: WidgetRichText(
+          text: tr('logbook_info_8_2'),
+        ),
       ),
       Container(
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        child: WidgetRichText(text: tr('logbook_info_8_3')),
+        child: WidgetRichText(
+          text: tr('logbook_info_8_3'),
+        ),
       ),
       Container(
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
-        child: WidgetRichText(text: tr('logbook_info_8_4')),
+        child: WidgetRichText(
+          text: tr('logbook_info_8_4'),
+        ),
       ),
     ]);
   }

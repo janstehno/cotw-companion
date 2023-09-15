@@ -37,13 +37,13 @@ class EntryWeaponState extends State<EntryWeapon> {
     }
     tags.addAll([
       WidgetTag.big(
-        text: widget.weapon.min == widget.weapon.max ? "${widget.weapon.min}" : "${widget.weapon.min} - ${widget.weapon.max}",
+        value: widget.weapon.min == widget.weapon.max ? "${widget.weapon.min}" : "${widget.weapon.min} - ${widget.weapon.max}",
         color: Interface.dark,
         background: Interface.tag,
       ),
       WidgetTag.big(
-        text: widget.weapon.id == 21 ? "1/2" : widget.weapon.mag.toString(),
         icon: "assets/graphics/icons/weapon_mag.svg",
+        value: widget.weapon.id == 21 ? "1/2" : widget.weapon.mag.toString(),
         color: Interface.dark,
         background: Interface.tag,
       )

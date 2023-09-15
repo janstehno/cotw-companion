@@ -7,14 +7,15 @@ import 'package:flutter/material.dart';
 class WidgetSwitchText extends StatelessWidget {
   final String text;
   final Color? color, background, activeColor, activeBackground;
-  final double? buttonHeight, buttonWidth;
+  final double buttonHeight;
+  final double? buttonWidth;
   final Function onTap;
   final bool isActive, disabled;
 
   const WidgetSwitchText({
     Key? key,
     required this.text,
-    this.buttonHeight,
+    required this.buttonHeight,
     this.buttonWidth,
     this.color,
     this.background,
@@ -26,6 +27,8 @@ class WidgetSwitchText extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
+    Color actualColor = isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled;
+    Color actualBackground = isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3);
     return Row(mainAxisSize: MainAxisSize.min, children: [
       GestureDetector(
           onTap: disabled
@@ -41,12 +44,16 @@ class WidgetSwitchText extends StatelessWidget {
               padding: EdgeInsets.only(left: buttonHeight == buttonWidth ? 0 : 10, right: buttonHeight == buttonWidth ? 0 : 10),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(7)),
-                color: isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3),
+                color: actualBackground,
               ),
               child: AutoSizeText(
                 text,
                 maxLines: 1,
-                style: Interface.s18w500n(isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled),
+                style: buttonHeight <= 25
+                    ? Interface.s14w500n(actualColor)
+                    : buttonHeight <= 35
+                        ? Interface.s16w500n(actualColor)
+                        : Interface.s18w500n(actualColor),
               )))
     ]);
   }

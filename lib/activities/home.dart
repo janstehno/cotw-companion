@@ -136,7 +136,7 @@ class ActivityHomeState extends State<ActivityHome> {
                           child:
                               Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
                             _buildMenuItem("reserves", "reserve", const ListReserves()),
-                            _buildMenuItem("wildlife", "stag", const ListWildlife()),
+                            _buildMenuItem("wildlife", "wildlife", const ListWildlife()),
                             _buildMenuItem("weapons", "weapon", const ListWeapons()),
                             _buildMenuItem("callers", "caller", const ListCallers()),
                             const Padding(padding: EdgeInsets.all(15)),

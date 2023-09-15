@@ -4,7 +4,6 @@ import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/caller.dart';
@@ -34,6 +33,7 @@ class HelperFilter {
     FilterKey.callersEffectiveRange: {150: true, 200: true, 250: true, 500: true},
     FilterKey.logsGender: {0: true, 1: true},
     FilterKey.logsTrophyRating: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
+    FilterKey.logsFurRarity: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
     FilterKey.logsTrophyScoreMin: 0.0,
     FilterKey.logsTrophyScoreMax: 1000.0,
     FilterKey.logsSort: {
@@ -82,7 +82,7 @@ class HelperFilter {
 
   static void useSort(FilterKey filterKey, int listKey, bool ascended, String key) {
     if (_filters[filterKey][listKey]["active"]) {
-      _filters[filterKey][listKey].update("ascended", (v) => !getSortValue(filterKey, listKey, "ascended"));
+      _filters[filterKey][listKey].update("ascended", (v) => !v);
     } else {
       _filters[filterKey][listKey].update("order", (v) => anySortActive(filterKey) + 1);
       _filters[filterKey][listKey].update("active", (v) => true);
@@ -117,11 +117,11 @@ class HelperFilter {
   }
 
   static void switchListValue(FilterKey filterKey, int listKey) {
-    _filters[filterKey].update(listKey, (v) => !_filters[filterKey][listKey]);
+    _filters[filterKey].update(listKey, (v) => !v);
   }
 
   static void switchValue(FilterKey filterKey) {
-    _filters.update(filterKey, (v) => !_filters[filterKey]);
+    _filters.update(filterKey, (v) => !v);
   }
 
   static void changeBoolValue(FilterKey filterKey, bool value) {
@@ -214,7 +214,8 @@ class HelperFilter {
     logs = logs
         .where((log) =>
             getBoolValueList(FilterKey.logsGender, log.gender) &&
-            getBoolValueList(FilterKey.logsTrophyRating, log.furId == Interface.greatOneId ? 5 : log.trophyRating) &&
+            getBoolValueList(FilterKey.logsTrophyRating, log.trophyRatingWithGO) &&
+            getBoolValueList(FilterKey.logsFurRarity, log.fur.rarity) &&
             log.trophy >= getDoubleValue(FilterKey.logsTrophyScoreMin) &&
             log.trophy <= getDoubleValue(FilterKey.logsTrophyScoreMax))
         .toList();

@@ -8,7 +8,6 @@ class WidgetIcon extends StatelessWidget {
   final String icon;
   final Color color, background;
   final double size;
-  final double? iconSize;
   final bool isActive;
 
   const WidgetIcon({
@@ -17,7 +16,6 @@ class WidgetIcon extends StatelessWidget {
     required this.color,
     required this.background,
     this.size = 35,
-    this.iconSize,
     this.isActive = true,
   }) : super(key: key);
 
@@ -32,8 +30,8 @@ class WidgetIcon extends StatelessWidget {
         ),
         child: SvgPicture.asset(
           icon,
-          width: iconSize ?? size / 2.2,
-          height: iconSize ?? size / 2.2,
+          width: size / 2,
+          height: size / 2,
           colorFilter: ColorFilter.mode(
             isActive ? color : Interface.dark.withOpacity(0.3),
             BlendMode.srcIn,

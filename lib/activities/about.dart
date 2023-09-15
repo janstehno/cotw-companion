@@ -204,7 +204,7 @@ class ActivityAbout extends StatelessWidget {
                 buttonSize: 40,
                 icon: "assets/graphics/icons/paypal.svg",
                 color: Interface.alwaysLight,
-                background: Interface.deepblue,
+                background: Interface.darkBlue,
                 onTap: () {
                   _redirectTo("paypal.me", "/toastovac");
                 },

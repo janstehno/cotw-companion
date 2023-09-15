@@ -2,6 +2,7 @@
 
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
+import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/switch_text.dart';
 import 'package:cotwcompanion/widgets/title_info_icon.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ class FilterPickerText extends StatefulWidget {
   final FilterKey filterKey;
   final List<int> values;
   final List<String> keys;
+  final List<Color> colors;
+  final List<Color> backgrounds;
 
   const FilterPickerText({
     Key? key,
@@ -19,6 +22,8 @@ class FilterPickerText extends StatefulWidget {
     required this.filterKey,
     required this.values,
     required this.keys,
+    this.colors = const [],
+    this.backgrounds = const [],
   }) : super(key: key);
 
   @override
@@ -34,6 +39,8 @@ class FilterPickerTextState extends State<FilterPickerText> {
         WidgetSwitchText(
             buttonHeight: 30,
             text: widget.keys[index],
+            activeColor: widget.colors.isEmpty ? Interface.accent : widget.colors[index],
+            activeBackground: widget.backgrounds.isEmpty ? Interface.primary : widget.backgrounds[index],
             isActive: HelperFilter.getBoolValueList(widget.filterKey, key),
             onTap: () {
               setState(() {

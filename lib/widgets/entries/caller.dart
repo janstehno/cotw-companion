@@ -47,8 +47,8 @@ class EntryCallerState extends State<EntryCaller> {
     }
     tags.addAll([
       WidgetTag.big(
-        text: widget.caller.getRange(_imperialUnits),
         icon: "assets/graphics/icons/range.svg",
+        value: widget.caller.getRange(_imperialUnits),
         color: Interface.dark,
         background: Interface.tag,
       )

@@ -34,6 +34,12 @@ enum DateStructure {
   compare,
 }
 
+enum Process {
+  success,
+  error,
+  info,
+}
+
 enum FilterKey {
   reservesCountMin,
   reservesCountMax,
@@ -51,6 +57,7 @@ enum FilterKey {
   callersEffectiveRange,
   logsGender,
   logsTrophyRating,
+  logsFurRarity,
   logsTrophyScoreMin,
   logsTrophyScoreMax,
   logsSort,

@@ -56,8 +56,8 @@ class EntryItem extends StatelessWidget {
               children: [
                 Expanded(
                     child: Container(
+                  alignment: Alignment.topLeft,
                   padding: EdgeInsets.only(right: buttonIcon.isNotEmpty ? 30 : 0),
-                  alignment: Alignment.centerLeft,
                   child: Wrap(
                     spacing: 5,
                     runSpacing: 5,

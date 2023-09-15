@@ -50,7 +50,7 @@ class ListReservesState extends State<ListReserves> {
         text: tr('wildlife'),
         icon: "assets/graphics/icons/target.svg",
         min: 8,
-        max: 15,
+        max: 19,
         filterKeyLower: FilterKey.reservesCountMin,
         filterKeyUpper: FilterKey.reservesCountMax,
       )

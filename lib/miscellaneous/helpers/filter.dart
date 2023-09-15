@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 class HelperFilter {
   static final Map<FilterKey, dynamic> _filters = {
     FilterKey.reservesCountMin: 8,
-    FilterKey.reservesCountMax: 15,
+    FilterKey.reservesCountMax: 19,
     FilterKey.animalsClass: {1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true},
     FilterKey.animalsDifficulty: {3: true, 5: true, 9: true},
     FilterKey.weaponsAnimalClass: 0,

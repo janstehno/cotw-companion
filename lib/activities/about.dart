@@ -78,11 +78,11 @@ class ActivityAbout extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 5),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Text(
-                      tr("translation_ru"),
+                      "Русский",
                       style: Interface.s16w300n(Interface.disabled),
                     ),
                     Text(
-                      tr("translation_ru_1"),
+                      "Vełeş",
                       style: Interface.s16w300n(Interface.dark),
                     )
                   ])),
@@ -90,11 +90,11 @@ class ActivityAbout extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 5, bottom: 5),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Text(
-                      tr("translation_ja"),
+                      "日本語",
                       style: Interface.s16w300n(Interface.disabled),
                     ),
                     Text(
-                      tr("translation_ja_1"),
+                      "kuyokuyo",
                       style: Interface.s16w300n(Interface.dark),
                     )
                   ]))
@@ -104,11 +104,11 @@ class ActivityAbout extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 5, bottom: 5),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Text(
-                      tr("translation_de"),
+                      "Deutch",
                       style: Interface.s16w300n(Interface.disabled),
                     ),
                     Text(
-                      tr("translation_de_1"),
+                      "MorbusGon",
                       style: Interface.s16w300n(Interface.dark),
                     )
                   ])),
@@ -116,11 +116,11 @@ class ActivityAbout extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 5, bottom: 5),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Text(
-                      tr("translation_pl"),
+                      "Polski",
                       style: Interface.s16w300n(Interface.disabled),
                     ),
                     Text(
-                      tr("translation_pl_1"),
+                      "KorneliooS",
                       style: Interface.s16w300n(Interface.dark),
                     )
                   ])),
@@ -130,11 +130,11 @@ class ActivityAbout extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 5, bottom: 5),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Text(
-                      tr("translation_fr"),
+                      "Français",
                       style: Interface.s16w300n(Interface.disabled),
                     ),
                     Text(
-                      tr("translation_fr_1"),
+                      "BlocusEnergy",
                       style: Interface.s16w300n(Interface.dark),
                     )
                   ])),
@@ -142,11 +142,11 @@ class ActivityAbout extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 5, bottom: 5),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Text(
-                      tr("translation_hu"),
+                      "Magyar",
                       style: Interface.s16w300n(Interface.disabled),
                     ),
                     Text(
-                      tr("translation_hu_1"),
+                      "Marcopolo",
                       style: Interface.s16w300n(Interface.dark),
                     )
                   ])),
@@ -156,11 +156,11 @@ class ActivityAbout extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 5),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Text(
-                      tr("translation_tr"),
+                      "Türkçe",
                       style: Interface.s16w300n(Interface.disabled),
                     ),
                     Text(
-                      tr("translation_tr_1"),
+                      "Ali Yahya Say",
                       style: Interface.s16w300n(Interface.dark),
                     )
                   ])),
@@ -168,15 +168,15 @@ class ActivityAbout extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 5),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Text(
-                      tr("translation_pt"),
+                      "Português (Brasil)",
                       style: Interface.s16w300n(Interface.disabled),
                     ),
                     Text(
-                      tr("translation_pt_1"),
+                      "RECRUTA",
                       style: Interface.s16w300n(Interface.dark),
                     ),
                     Text(
-                      tr("translation_pt_2"),
+                      "DI ÂNGELO",
                       style: Interface.s16w300n(Interface.dark),
                     )
                   ])),

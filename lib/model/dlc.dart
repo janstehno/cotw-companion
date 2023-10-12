@@ -6,7 +6,7 @@ class Dlc {
   final int _id;
   final int _type;
   final String _name, _date;
-  List<dynamic> _en, _ru, _cs, _pl, _de, _fr, _es, _pt, _ja, _hu;
+  List<dynamic> _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja, _hu;
   List<dynamic> _reserve, _animals, _weapons, _callers;
 
   Dlc({
@@ -21,7 +21,7 @@ class Dlc {
     required de,
     required fr,
     required es,
-    required pt,
+    required br,
     required ja,
     required hu,
     required reserve,
@@ -39,7 +39,7 @@ class Dlc {
         _de = de,
         _fr = fr,
         _es = es,
-        _pt = pt,
+        _br = br,
         _ja = ja,
         _hu = hu,
         _reserve = reserve,
@@ -77,7 +77,7 @@ class Dlc {
 
   set setEs(List<dynamic> es) => _es = es;
 
-  set setPt(List<dynamic> pt) => _pt = pt;
+  set setBr(List<dynamic> br) => _br = br;
 
   set setJa(List<dynamic> ja) => _ja = ja;
 
@@ -105,8 +105,10 @@ class Dlc {
         return _fr.isEmpty ? _en : _fr;
       case "es":
         return _es.isEmpty ? _en : _es;
+      case "br":
+        return _br.isEmpty ? _en : _br;
       case "pt":
-        return _pt.isEmpty ? _en : _pt;
+        return _br.isEmpty ? _en : _br;
       case "ja":
         return _ja.isEmpty ? _en : _ja;
       case "hu":
@@ -131,7 +133,7 @@ class Dlc {
       de: [],
       fr: [],
       es: [],
-      pt: [],
+      br: [],
       ja: [],
       hu: [],
       reserve: [],
@@ -148,7 +150,7 @@ class Dlc {
       dlc.setDe = json['DESCRIPTION']['DE'];
       dlc.setFr = json['DESCRIPTION']['FR'];
       dlc.setEs = json['DESCRIPTION']['ES'];
-      dlc.setPt = json['DESCRIPTION']['PT'];
+      dlc.setBr = json['DESCRIPTION']['BR'];
       dlc.setJa = json['DESCRIPTION']['JA'];
       dlc.setHu = json['DESCRIPTION']['HU'];
     }

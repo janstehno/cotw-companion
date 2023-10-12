@@ -1,11 +1,12 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 
 class Ammo {
   final int _id;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _pt, _ja;
+  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
   final int _min, _max;
   final int _rangeM;
   final double _rangeYD;
@@ -21,7 +22,7 @@ class Ammo {
     required de,
     required fr,
     required es,
-    required pt,
+    required br,
     required ja,
     required min,
     required max,
@@ -39,7 +40,7 @@ class Ammo {
         _de = de,
         _fr = fr,
         _es = es,
-        _pt = pt,
+        _br = br,
         _ja = ja,
         _min = min,
         _max = max,
@@ -84,8 +85,10 @@ class Ammo {
         return _fr.isEmpty ? _en : _fr;
       case "es":
         return _es.isEmpty ? _en : _es;
+      case "br":
+        return _br.isEmpty ? _en : _br;
       case "pt":
-        return _pt.isEmpty ? _en : _pt;
+        return _br.isEmpty ? _en : _br;
       case "ja":
         return _ja.isEmpty ? _en : _ja;
       case "sk":
@@ -105,7 +108,7 @@ class Ammo {
       de: json['DE'],
       fr: json['FR'],
       es: json['ES'],
-      pt: json['PT'],
+      br: json['BR'],
       ja: json['JA'],
       min: json['MIN_LEVEL'],
       max: json['MAX_LEVEL'],

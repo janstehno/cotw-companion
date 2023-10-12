@@ -10,7 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 class Weapon {
   final int _id;
   String _name;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _pt, _ja;
+  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
   final WeaponType _type;
   final int _mag, _accuracy, _recoil, _reload, _hipshot, _price;
   int _min, _max;
@@ -27,7 +27,7 @@ class Weapon {
     required de,
     required fr,
     required es,
-    required pt,
+    required br,
     required ja,
     required type,
     required mag,
@@ -49,7 +49,7 @@ class Weapon {
         _de = de,
         _fr = fr,
         _es = es,
-        _pt = pt,
+        _br = br,
         _ja = ja,
         _type = type,
         _mag = mag,
@@ -167,8 +167,10 @@ class Weapon {
         return _fr.isEmpty ? _en : _fr;
       case "es":
         return _es.isEmpty ? _en : _es;
+      case "br":
+        return _br.isEmpty ? _en : _br;
       case "pt":
-        return _pt.isEmpty ? _en : _pt;
+        return _br.isEmpty ? _en : _br;
       case "ja":
         return _ja.isEmpty ? _en : _ja;
       case "sk":
@@ -188,7 +190,7 @@ class Weapon {
       de: json['DE'],
       fr: json['FR'],
       es: json['ES'],
-      pt: json['PT'],
+      br: json['BR'],
       ja: json['JA'],
       name: "",
       type: WeaponType.values.elementAt(json['TYPE']),

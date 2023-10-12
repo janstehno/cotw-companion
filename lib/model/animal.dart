@@ -1,11 +1,12 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 
 class Animal {
   final int _id;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _pt, _ja;
+  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
   final int _level, _difficulty;
   final double _silver, _gold, _diamond;
   final double _trophy, _weightKG, _weightLB;
@@ -22,7 +23,7 @@ class Animal {
     required de,
     required fr,
     required es,
-    required pt,
+    required br,
     required ja,
     required level,
     required difficulty,
@@ -49,7 +50,7 @@ class Animal {
         _de = de,
         _fr = fr,
         _es = es,
-        _pt = pt,
+        _br = br,
         _ja = ja,
         _level = level,
         _difficulty = difficulty,
@@ -127,7 +128,7 @@ class Animal {
       de: json['DE'],
       fr: json['FR'],
       es: json['ES'],
-      pt: json['PT'],
+      br: json['BR'],
       ja: json['JA'],
       level: json['LEVEL'],
       difficulty: json['DIFFICULTY'],
@@ -161,9 +162,7 @@ class Animal {
         (locale.languageCode.toString() != "pl" && (_id == 60 && reserveId == 10) /*Mexican Bobcat in RDA*/)) {
       return getNameByLocale(locale).split("/")[0];
     } else if ((locale.languageCode.toString() == "en" && _id == 34 && reserveId == 8 /*Mountain Lion in SRP*/) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") &&
-            _id == 55 &&
-            reserveId == 11 /*Wild Hog in MAP*/) ||
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && _id == 55 && reserveId == 11 /*Wild Hog in MAP*/) ||
         (locale.languageCode.toString() != "pl" && (_id == 60 && reserveId == 13) /*Bobcat in NEM*/)) {
       return getNameByLocale(locale).split("/")[1];
     } else {
@@ -193,8 +192,10 @@ class Animal {
         return _fr.isEmpty ? _en : _fr;
       case "es":
         return _es.isEmpty ? _en : _es;
+      case "br":
+        return _br.isEmpty ? _en : _br;
       case "pt":
-        return _pt.isEmpty ? _en : _pt;
+        return _br.isEmpty ? _en : _br;
       case "ja":
         return _ja.isEmpty ? _en : _ja;
       case "sk":

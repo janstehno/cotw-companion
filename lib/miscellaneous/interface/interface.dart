@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.7.8";
+  static const String version = "1.7.9";
   static const int greatOneId = 100;
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;
@@ -149,7 +149,6 @@ class Interface {
   static void setColors(bool darkMode) {
     _darkMode = darkMode;
     if (darkMode) {
-      //DARK MODE
       body = ff06;
       odd = ff06;
       even = ff0d;
@@ -182,7 +181,6 @@ class Interface {
         onSurface: Interface.alwaysLight,
       );
     } else {
-      //LIGHT MODE
       body = fffe;
       odd = fffe;
       even = fff5;

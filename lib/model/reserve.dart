@@ -1,12 +1,13 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:ui';
+
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 
 class Reserve {
   final int _id;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _pt, _ja;
+  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
   final int _count;
   final int _summer, _winter, _plains, _fields, _lowlands, _hills, _mountains, _forest;
   final int _dlc;
@@ -20,7 +21,7 @@ class Reserve {
     required de,
     required fr,
     required es,
-    required pt,
+    required br,
     required ja,
     required count,
     required dlc,
@@ -40,7 +41,7 @@ class Reserve {
         _de = de,
         _fr = fr,
         _es = es,
-        _pt = pt,
+        _br = br,
         _ja = ja,
         _count = count,
         _summer = summer,
@@ -104,8 +105,10 @@ class Reserve {
         return _fr.isEmpty ? _en : _fr;
       case "es":
         return _es.isEmpty ? _en : _es;
+      case "br":
+        return _br.isEmpty ? _en : _br;
       case "pt":
-        return _pt.isEmpty ? _en : _pt;
+        return _br.isEmpty ? _en : _br;
       case "ja":
         return _ja.isEmpty ? _en : _ja;
       case "sk":
@@ -125,7 +128,7 @@ class Reserve {
       de: json["DE"],
       fr: json["FR"],
       es: json["ES"],
-      pt: json["PT"],
+      br: json["BR"],
       ja: json['JA'],
       count: json["COUNT"],
       summer: json["ENVIRONMENT"]["SUMMER"],

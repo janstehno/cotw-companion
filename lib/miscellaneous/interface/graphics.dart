@@ -96,7 +96,9 @@ class Graphics {
     "tsurugilrr338",
     "malmer7mmmagnum",
     "olssonmodel23308",
-    "zaganvarminter22250"
+    "zaganvarminter22250",
+    "moradimodel1894",
+    "stenbergtakedownrecurvebow"
   ];
 
   static const List<String> _animals = [

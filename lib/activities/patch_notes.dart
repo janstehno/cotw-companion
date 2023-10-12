@@ -55,6 +55,11 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        background: Interface.odd,
+        version: "1.7.9",
+        changes: const ["- Ambusher Pack update."],
+      ),
+      WidgetPatchNote(
         background: Interface.even,
         version: "1.7.8",
       ),

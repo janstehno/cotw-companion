@@ -1,0 +1,19 @@
+<!-- Copyright (c) 2022 - 2023 Jan Stehno -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <path d="M21.59,14.51A6.68,6.68,0,1,0,12.4,20.7v3.52h5V20.7A6.68,6.68,0,0,0,21.59,14.51Z"
+        fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"
+        stroke-width="3" />
+    <line x1="12.37" y1="28.5" x2="17.4" y2="28.5" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+    <line x1="24.34" y1="9.12" x2="26.69" y2="7.76" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+    <line x1="20.4" y1="5.17" x2="21.75" y2="2.81" fill="none" stroke="#212121"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+    <line x1="15" y1="3.71" x2="15" y2="1" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="2" />
+    <line x1="9.61" y1="5.15" x2="8.25" y2="2.8" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="2" />
+    <line x1="5.66" y1="9.1" x2="3.31" y2="7.74" fill="none" stroke="#212121" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="2" />
+    <rect width="30" height="30" fill="none" />
+</svg>

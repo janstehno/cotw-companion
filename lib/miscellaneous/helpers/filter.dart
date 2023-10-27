@@ -5,8 +5,10 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
+import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/caller.dart';
+import 'package:cotwcompanion/model/fur.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 import 'package:cotwcompanion/model/log.dart';
@@ -35,7 +37,7 @@ class HelperFilter {
     FilterKey.logsTrophyRating: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
     FilterKey.logsFurRarity: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
     FilterKey.logsTrophyScoreMin: 0.0,
-    FilterKey.logsTrophyScoreMax: 1000.0,
+    FilterKey.logsTrophyScoreMax: 9999.999,
     FilterKey.logsSort: {
       1: {"order": 0, "active": false, "ascended": true, "key": ""},
       2: {"order": 0, "active": false, "ascended": true, "key": ""},
@@ -162,6 +164,13 @@ class HelperFilter {
     return animals;
   }
 
+  static List<Fur> filterFurs(String searchText, BuildContext context) {
+    List<Fur> animalFurs = [];
+    animalFurs.addAll(HelperJSON.furs);
+    animalFurs = animalFurs.where((fur) => (searchText.isNotEmpty ? fur.getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) : true)).toList();
+    return animalFurs;
+  }
+
   static List<Weapon> filterWeapons(String searchText, BuildContext context) {
     List<Weapon> weapons = [];
     weapons.addAll(HelperJSON.weapons);
@@ -182,6 +191,13 @@ class HelperFilter {
     }
     weapons.multiSort([true, true], ["TYPE", "NAME"]);
     return weapons;
+  }
+
+  static List<Ammo> filterAmmo(String searchText, BuildContext context) {
+    List<Ammo> ammo = [];
+    ammo.addAll(HelperJSON.ammo);
+    ammo = ammo.where((ammo) => (searchText.isNotEmpty ? ammo.getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) : true)).toList();
+    return ammo;
   }
 
   static List<Caller> filterCallers(String searchText, BuildContext context) {

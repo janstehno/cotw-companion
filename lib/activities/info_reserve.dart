@@ -1,5 +1,6 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:cotwcompanion/builders/map.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_animals.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_callers.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -9,6 +10,7 @@ import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/icon.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/widgets/title_big_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +33,19 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
   void initState() {
     _reserve = HelperJSON.getReserve(widget.reserveId);
     super.initState();
+  }
+
+  Widget _buildMap() {
+    return WidgetTitleBigButton(
+      primaryText: tr('map'),
+      icon: "assets/graphics/icons/map.svg",
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BuilderMap(reserveId: widget.reserveId)),
+        );
+      },
+    );
   }
 
   Widget _getEnvironment() {
@@ -119,6 +134,7 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
           context: context,
         ),
         body: Column(children: [
+          _buildMap(),
           _getEnvironment(),
           _buildAnimalsCallers(),
         ]));

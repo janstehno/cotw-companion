@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/about.dart';
 import 'package:cotwcompanion/activities/need_zones.dart';
 import 'package:cotwcompanion/activities/patch_notes.dart';
+import 'package:cotwcompanion/activities/search.dart';
 import 'package:cotwcompanion/activities/settings.dart';
 import 'package:cotwcompanion/builders/loadouts.dart';
 import 'package:cotwcompanion/builders/logs.dart';
@@ -14,6 +15,7 @@ import 'package:cotwcompanion/lists/weapons.dart';
 import 'package:cotwcompanion/lists/wildlife.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/button_icon_text.dart';
 import 'package:cotwcompanion/widgets/entries/menu.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -101,6 +103,13 @@ class ActivityHomeState extends State<ActivityHome> {
               Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: WidgetButtonIcon(
+                      icon: "assets/graphics/icons/search.svg",
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivitySearch()));
+                      })),
+              Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: WidgetButtonIcon(
                       icon: "assets/graphics/icons/settings.svg",
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => ActivitySettings(callback: _callback)));
@@ -169,39 +178,76 @@ class ActivityHomeState extends State<ActivityHome> {
     ]);
   }
 
-  Widget _buildAbout() {
-    return Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.end, children: [
-      GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityAbout()));
-          },
-          child: AutoSizeText(
-            tr('about'),
-            maxLines: 1,
-            style: Interface.s18w400c(Interface.primary),
-          )),
-      Container(
-        margin: const EdgeInsets.only(top: 5),
-        child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
-            },
-            child: AutoSizeText(
-              tr('patch_notes'),
-              maxLines: 1,
-              style: Interface.s18w400c(Interface.primary),
+  Widget _buildButtons() {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Container(
+            margin: const EdgeInsets.only(bottom: 7),
+            child: WidgetButtonIconText(
+              icon: "assets/graphics/icons/about.svg",
+              text: tr('about'),
+              color: Interface.alwaysDark,
+              background: Interface.alwaysLight,
+              buttonHeight: 30,
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityAbout()));
+              },
             )),
-      )
-    ]);
+        Container(
+            margin: const EdgeInsets.only(bottom: 7),
+            child: WidgetButtonIconText(
+              icon: "assets/graphics/icons/issue.svg",
+              text: tr('issues'),
+              color: Interface.alwaysDark,
+              background: Interface.red,
+              buttonHeight: 30,
+              isExternalLink: true,
+              onTap: () {
+                _redirectTo("github.com", "/janstehno/cotwcompanion/issues");
+              },
+            )),
+        Container(
+            margin: const EdgeInsets.only(bottom: 7),
+            child: WidgetButtonIconText(
+              icon: "assets/graphics/icons/idea.svg",
+              text: tr('ideas'),
+              color: Interface.alwaysDark,
+              background: Interface.yellow,
+              buttonHeight: 30,
+              isExternalLink: true,
+              onTap: () {
+                _redirectTo("github.com", "/janstehno/cotwcompanion/discussions");
+              },
+            )),
+        WidgetButtonIconText(
+          icon: "assets/graphics/icons/repair.svg",
+          text: tr('patch_notes'),
+          color: Interface.alwaysDark,
+          background: Interface.blue,
+          buttonHeight: 30,
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
+          },
+        ),
+      ],
+    );
   }
 
   Widget _buildFooter() {
     return Container(
       padding: const EdgeInsets.all(30),
-      child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-        _buildLinks(),
-        Expanded(child: _buildAbout()),
-      ]),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          _buildLinks(),
+          _buildButtons(),
+        ],
+      ),
     );
   }
 

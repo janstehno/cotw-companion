@@ -1452,7 +1452,7 @@
     "ID": 162,
     "ANIMAL_ID": 25,
     "FUR_ID": 31,
-    "PERCENT": 0.0,
+    "PERCENT": 100.0,
     "RARITY": 4,
     "MALE": 1,
     "FEMALE": 0
@@ -1461,7 +1461,7 @@
     "ID": 163,
     "ANIMAL_ID": 25,
     "FUR_ID": 29,
-    "PERCENT": 0.0,
+    "PERCENT": 100.0,
     "RARITY": 4,
     "MALE": 1,
     "FEMALE": 0
@@ -1470,7 +1470,7 @@
     "ID": 164,
     "ANIMAL_ID": 25,
     "FUR_ID": 28,
-    "PERCENT": 0.0,
+    "PERCENT": 100.0,
     "RARITY": 4,
     "MALE": 1,
     "FEMALE": 0
@@ -1695,7 +1695,7 @@
     "ID": 189,
     "ANIMAL_ID": 29,
     "FUR_ID": 10,
-    "PERCENT": 0.0,
+    "PERCENT": 100.0,
     "RARITY": 4,
     "MALE": 1,
     "FEMALE": 0

@@ -1,59 +1,24 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/patch_note.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ActivityPatchNotes extends StatelessWidget {
   const ActivityPatchNotes({
     Key? key,
   }) : super(key: key);
 
-  void _redirectToGitHub() async {
-    if (!await launchUrl(Uri(scheme: "https", host: "github.com", path: "/janstehno/cotwcompanion/issues"))) {
-      throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
-    }
-  }
-
-  Widget _buildLink() {
-    return GestureDetector(
-        onTap: () {
-          _redirectToGitHub();
-        },
-        child: Container(
-            padding: const EdgeInsets.fromLTRB(35, 10, 35, 10),
-            color: Interface.search,
-            alignment: Alignment.centerRight,
-            child: Row(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Expanded(
-                  child: Container(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: AutoSizeText(
-                        tr('issues_and_plans'),
-                        maxLines: 1,
-                        textAlign: TextAlign.end,
-                        style: Interface.s18w500n(Interface.dark),
-                      ))),
-              SvgPicture.asset(
-                "assets/graphics/icons/external_link.svg",
-                width: 15,
-                height: 15,
-                colorFilter: ColorFilter.mode(
-                  Interface.dark,
-                  BlendMode.srcIn,
-                ),
-              )
-            ])));
-  }
-
   Widget _buildList() {
     return Column(children: [
+      WidgetPatchNote(
+        background: Interface.even,
+        version: "1.8.0",
+        changes: const ["- Improvement of the UI. Minor changes to the home screen. Added fast search. Contains reserves, animals, furs, weapons, ammo, and callers."],
+      ),
       WidgetPatchNote(
         background: Interface.odd,
         version: "1.7.9",
@@ -463,14 +428,12 @@ class ActivityPatchNotes extends StatelessWidget {
 
   Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
-        appBar: WidgetAppBar(
-          text: tr('patch_notes'),
-          context: context,
-        ),
-        body: Column(children: [
-          _buildLink(),
-          _buildList(),
-        ]));
+      appBar: WidgetAppBar(
+        text: tr('patch_notes'),
+        context: context,
+      ),
+      body: _buildList(),
+    );
   }
 
   @override

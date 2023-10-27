@@ -46,10 +46,6 @@ class ActivityLogs extends StatefulWidget {
 
 class ActivityLogsState extends State<ActivityLogs> {
   final TextEditingControllerWorkaround _controller = TextEditingControllerWorkaround(text: "");
-  final RegExp equalsNumber = RegExp(r'^(\d){1,5}(\.\d{1,3})?$');
-  final RegExp greaterNumber = RegExp(r'^>(\d){1,5}(\.\d{1,3})?$');
-  final RegExp lesserNumber = RegExp(r'^<(\d){1,5}(\.\d{1,3})?$');
-  final RegExp equalsString = RegExp(r'^[\D ]+$');
   final List<Log> _logs = [];
   final double _menuHeight = 75;
 
@@ -424,7 +420,7 @@ class ActivityLogsState extends State<ActivityLogs> {
         text: tr('animal_trophy'),
         decimal: true,
         min: 0,
-        max: 1000,
+        max: 9999.999,
         filterKeyLower: FilterKey.logsTrophyScoreMin,
         filterKeyUpper: FilterKey.logsTrophyScoreMax,
       ),

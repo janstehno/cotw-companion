@@ -10,6 +10,8 @@ class WidgetTitleSmall extends StatelessWidget {
   final int maxLines;
   final Alignment alignment;
 
+  static const double height = 50;
+
   const WidgetTitleSmall({
     Key? key,
     required this.primaryText,
@@ -20,7 +22,7 @@ class WidgetTitleSmall extends StatelessWidget {
 
   Widget _buildWidgets() {
     return Container(
-        height: 50,
+        height: height,
         color: Interface.sectionTitle,
         alignment: alignment,
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),

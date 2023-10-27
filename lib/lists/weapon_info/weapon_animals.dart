@@ -8,11 +8,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ListWeaponAnimals extends StatefulWidget {
-  final int weaponId;
+  final int min, max;
 
   const ListWeaponAnimals({
     Key? key,
-    required this.weaponId,
+    required this.min,
+    required this.max,
   }) : super(key: key);
 
   @override
@@ -23,12 +24,9 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
   final List<List<Animal>> _splitAnimals = [[], [], [], [], [], [], [], [], []];
 
   late final List<Animal> _animals = [];
-  late final int _min, _max;
 
   @override
   void initState() {
-    _min = HelperJSON.getWeapon(widget.weaponId).min;
-    _max = HelperJSON.getWeapon(widget.weaponId).max;
     _getAnimals();
     super.initState();
   }
@@ -36,7 +34,7 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
   void _getAnimals() {
     _animals.clear();
     for (Animal animal in HelperJSON.animals) {
-      if (animal.level >= _min && animal.level <= _max) {
+      if (animal.level >= widget.min && animal.level <= widget.max) {
         _animals.add(animal);
       }
     }

@@ -5,6 +5,7 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/model/ammo.dart';
+import 'package:cotwcompanion/widgets/entries/ammo_statistics.dart';
 import 'package:cotwcompanion/widgets/title_small.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class EntryWeaponAmmo extends StatefulWidget {
 
   const EntryWeaponAmmo({
     Key? key,
-    required this.index,
+    this.index = 0,
     required this.ammoId,
   }) : super(key: key);
 
@@ -74,55 +75,13 @@ class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
     ]);
   }
 
-  Widget _buildAmmoDetail(bool leftToRight, String icon, String text) {
-    return Container(
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        alignment: Alignment.center,
-        height: 32.5,
-        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          leftToRight
-              ? const SizedBox.shrink()
-              : Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Text(
-                    text,
-                    style: Interface.s16w300n(Interface.dark),
-                  )),
-          SvgPicture.asset(
-            "assets/graphics/icons/$icon.svg",
-            width: 15,
-            height: 15,
-            colorFilter: ColorFilter.mode(
-              Interface.dark,
-              BlendMode.srcIn,
-            ),
-          ),
-          leftToRight
-              ? Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    text,
-                    style: Interface.s16w300n(Interface.dark),
-                  ))
-              : const SizedBox.shrink()
-        ]));
-  }
-
   Widget _buildWidgets() {
     return Column(mainAxisSize: MainAxisSize.max, children: [
       _buildAmmoTitle(),
-      Container(
-          padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [_buildAmmoDetail(true, "min_max", _ammo.classRange), _buildAmmoDetail(false, "weapon_penetration", _ammo.penetration.toString())]),
-            Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [_buildAmmoDetail(true, "range", _ammo.getRange(_imperialUnits)), _buildAmmoDetail(false, "weapon_expansion", _ammo.expansion.toString())])
-          ]))
+      EntryAmmoStatistics(
+        ammo: _ammo,
+        imperialUnits: _imperialUnits,
+      ),
     ]);
   }
 

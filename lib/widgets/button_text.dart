@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class WidgetButtonText extends StatelessWidget {
   final String text;
-  final Color color, background;
+  final Color? color, background;
   final double buttonHeight;
   final double? buttonWidth;
   final Function onTap;
@@ -16,8 +16,8 @@ class WidgetButtonText extends StatelessWidget {
     required this.text,
     required this.buttonHeight,
     this.buttonWidth,
-    required this.color,
-    required this.background,
+    this.color,
+    this.background,
     required this.onTap,
   }) : super(key: key);
 
@@ -33,15 +33,15 @@ class WidgetButtonText extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(7)),
-              color: background,
+              color: background ?? Interface.primary,
             ),
             child: AutoSizeText(
               text,
               style: buttonHeight <= 25
-                  ? Interface.s14w500n(color)
+                  ? Interface.s14w500n(color ?? Interface.accent)
                   : buttonHeight <= 35
-                      ? Interface.s16w500n(color)
-                      : Interface.s18w500n(color),
+                      ? Interface.s16w500n(color ?? Interface.accent)
+                      : Interface.s18w500n(color ?? Interface.accent),
             )));
   }
 

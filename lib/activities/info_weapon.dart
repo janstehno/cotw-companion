@@ -11,7 +11,7 @@ import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ActivityWeaponInfo extends StatefulWidget {
   final int weaponId;
@@ -167,7 +167,10 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
       WidgetTitleBig(
         primaryText: tr('recommended_animals'),
       ),
-      ListWeaponAnimals(weaponId: _weapon.id),
+      ListWeaponAnimals(
+        min: _weapon.min,
+        max: _weapon.max,
+      ),
     ]);
   }
 

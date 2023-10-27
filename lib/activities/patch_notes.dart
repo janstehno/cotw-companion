@@ -15,6 +15,10 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        background: Interface.odd,
+        version: "1.8.1",
+      ),
+      WidgetPatchNote(
         background: Interface.even,
         version: "1.8.0",
         changes: const ["- Improvement of the UI. Minor changes to the home screen. Added fast search. Contains reserves, animals, furs, weapons, ammo, and callers."],

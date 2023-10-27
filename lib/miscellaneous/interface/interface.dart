@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.8.0";
+  static const String version = "1.8.1";
   static const int greatOneId = 100;
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;

@@ -73,7 +73,7 @@ class EntryFurState extends State<EntryFur> {
       Expanded(
         child: Container(
             alignment: Alignment.centerLeft,
-            margin: EdgeInsets.only(left: _showPerCent ? 0 : 20, right: 20),
+            margin: const EdgeInsets.only(right: 10),
             child: AutoSizeText(
               _animal.getName(context.locale),
               maxLines: 1,
@@ -105,7 +105,7 @@ class EntryFurState extends State<EntryFur> {
                       height: 15,
                       width: 15,
                     )),
-      _buildWidgetPerCent(),
+      _showPerCent ? _buildWidgetPerCent() : const SizedBox.shrink(),
     ]);
   }
 

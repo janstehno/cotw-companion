@@ -12,6 +12,9 @@ class EntryItem extends StatelessWidget {
   final List<WidgetTag> tags;
   final Function? onButtonTap;
 
+  final double _iconSize = 70;
+  final double _wrapSpace = 5;
+
   const EntryItem({
     Key? key,
     required this.text,
@@ -35,8 +38,8 @@ class EntryItem extends StatelessWidget {
                   style: Interface.s18w300n(Interface.dark),
                 ))),
         Container(
-            width: 70,
-            height: 70,
+            width: _iconSize,
+            height: _iconSize,
             alignment: Alignment.center,
             child: SvgPicture.asset(
               itemIcon,
@@ -56,27 +59,27 @@ class EntryItem extends StatelessWidget {
               children: [
                 Expanded(
                     child: Container(
-                  alignment: Alignment.topLeft,
-                  padding: EdgeInsets.only(right: buttonIcon.isNotEmpty ? 30 : 0),
-                  child: Wrap(
-                    spacing: 5,
-                    runSpacing: 5,
-                    alignment: WrapAlignment.start,
-                    children: tags,
-                  ),
-                )),
+                      alignment: Alignment.topLeft,
+                      padding: EdgeInsets.only(right: buttonIcon.isNotEmpty ? 30 : 0),
+                      child: Wrap(
+                        spacing: _wrapSpace,
+                        runSpacing: _wrapSpace,
+                        alignment: WrapAlignment.start,
+                        children: tags,
+                      ),
+                    )),
                 buttonIcon.isNotEmpty
                     ? Container(
-                        width: 70,
-                        alignment: Alignment.bottomCenter,
-                        child: WidgetButtonIcon(
-                          icon: buttonIcon,
-                          color: Interface.accent,
-                          background: Interface.primary,
-                          onTap: () {
-                            if (onButtonTap != null) onButtonTap!();
-                          },
-                        ))
+                    width: _iconSize,
+                    alignment: Alignment.bottomCenter,
+                    child: WidgetButtonIcon(
+                      icon: buttonIcon,
+                      color: Interface.accent,
+                      background: Interface.primary,
+                      onTap: () {
+                        if (onButtonTap != null) onButtonTap!();
+                      },
+                    ))
                     : const SizedBox.shrink()
               ]))
     ]);

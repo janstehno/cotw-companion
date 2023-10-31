@@ -1,25 +1,24 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/model/ammo.dart';
+import 'package:cotwcompanion/model/weapon.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class EntryAmmoStatistics extends StatelessWidget {
-  final Ammo ammo;
-  final bool imperialUnits;
+class EntryWeaponStatistics extends StatelessWidget {
+  final Weapon weapon;
 
   final double height = 65;
 
   final double _iconSize = 15;
 
-  const EntryAmmoStatistics({
+  const EntryWeaponStatistics({
     Key? key,
-    required this.ammo,
-    required this.imperialUnits,
+    required this.weapon,
   }) : super(key: key);
 
-  Widget _buildAmmoDetail(bool leftToRight, String icon, String text) {
+  Widget _buildWeaponDetail(bool leftToRight, String icon, String text) {
     return Container(
         alignment: Alignment.center,
         height: height / 2,
@@ -63,16 +62,16 @@ class EntryAmmoStatistics extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildAmmoDetail(true, "min_max", ammo.classRange),
-                _buildAmmoDetail(false, "weapon_penetration", ammo.penetration.toString()),
+                _buildWeaponDetail(true, "weapon_accuracy", weapon.accuracy == -1 ? tr('none') : weapon.accuracy.toString()),
+                _buildWeaponDetail(false, "weapon_recoil", weapon.recoil == -1 ? tr('none') : weapon.recoil.toString())
               ],
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildAmmoDetail(true, "range", ammo.getRange(imperialUnits)),
-                _buildAmmoDetail(false, "weapon_expansion", ammo.expansion.toString()),
+                _buildWeaponDetail(true, "weapon_reload", weapon.reload == -1 ? tr('none') : weapon.reload.toString()),
+                _buildWeaponDetail(false, "weapon_hipshot", weapon.hipshot == -1 ? tr('none') : weapon.hipshot.toString())
               ],
             )
           ],

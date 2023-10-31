@@ -2,24 +2,24 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/widgets/tap_text.dart';
 import 'package:flutter/material.dart';
 
-class WidgetTapTextIndicator extends StatelessWidget {
-  final String text;
-  final Color? color, background;
+class WidgetTapTextIndicator extends WidgetTapText {
   final int maxLines;
   final bool isActive;
-  final Function onTap;
+
+  final double _indicatorSize = 20;
 
   const WidgetTapTextIndicator({
-    Key? key,
-    required this.text,
-    this.color,
-    this.background,
+    super.key,
+    required super.text,
+    super.color,
+    super.background,
     this.maxLines = 1,
     this.isActive = false,
-    required this.onTap,
-  }) : super(key: key);
+    required super.onTap,
+  });
 
   Widget _buildWidgets() {
     return GestureDetector(
@@ -27,10 +27,10 @@ class WidgetTapTextIndicator extends StatelessWidget {
           onTap();
         },
         child: Container(
-            height: 70,
+            height: super.height,
             color: background ?? Colors.transparent,
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+            padding: const EdgeInsets.only(left: 30, right: 30),
             child: Row(mainAxisSize: MainAxisSize.max, children: [
               Expanded(
                   child: Container(
@@ -43,8 +43,8 @@ class WidgetTapTextIndicator extends StatelessWidget {
                       ))),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                width: 20,
-                height: 20,
+                width: _indicatorSize,
+                height: _indicatorSize,
                 decoration: BoxDecoration(
                   color: isActive ? color ?? Interface.primary : Interface.disabled,
                   borderRadius: BorderRadius.circular(5),

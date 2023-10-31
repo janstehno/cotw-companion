@@ -10,7 +10,7 @@ class WidgetTitleSmall extends StatelessWidget {
   final int maxLines;
   final Alignment alignment;
 
-  static const double height = 50;
+  final double height = 50;
 
   const WidgetTitleSmall({
     Key? key,
@@ -25,7 +25,7 @@ class WidgetTitleSmall extends StatelessWidget {
         height: height,
         color: Interface.sectionTitle,
         alignment: alignment,
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        padding: const EdgeInsets.only(left: 30, right: 30),
         child: secondaryText.isEmpty
             ? AutoSizeText(
                 primaryText.toUpperCase(),

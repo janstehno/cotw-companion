@@ -17,6 +17,7 @@ import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/sense.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/widgets/title_big_icon.dart';
 import 'package:cotwcompanion/widgets/title_small.dart';
 import 'package:cotwcompanion/widgets/trophy_score.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -39,6 +40,10 @@ class ActivityAnimalInfo extends StatefulWidget {
 
 class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   final EdgeInsets _padding = const EdgeInsets.all(30);
+  final double _maxHeaderSize = 250;
+  final double _headerLeftSize = 90;
+  final double _femaleIconSize = 14;
+  final double _wrapSpace = 5;
 
   late final Animal _animal;
   late final bool _imperialUnits;
@@ -50,7 +55,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   @override
   void initState() {
     _animal = HelperJSON.getAnimal(widget.animalId);
-    _imperialUnits = Provider.of<Settings>(context, listen: false).getImperialUnits;
+    _imperialUnits = Provider.of<Settings>(context, listen: false).imperialUnits;
     super.initState();
   }
 
@@ -65,11 +70,11 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   }
 
   Widget _buildName() {
-    double width = MediaQuery.of(context).size.width - 90;
-    double size = width > 250 ? 250 : width;
+    double headerWidth = MediaQuery.of(context).size.width - 90;
+    double headerHeight = headerWidth > _maxHeaderSize ? _maxHeaderSize : headerWidth;
     return Column(children: [
       SizedBox(
-          height: size,
+          height: headerHeight,
           child: Stack(fit: StackFit.expand, children: [
             /*OrientationBuilder(builder: (context, orientation) {
               return LimitedBox(
@@ -82,12 +87,12 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             }),*/
             Column(children: [
               Container(
-                  height: size,
+                  height: headerHeight,
                   color: Interface.sectionTitle,
                   child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Container(
-                        width: 90,
-                        padding: const EdgeInsets.fromLTRB(30, 0, 0, 30),
+                        width: _headerLeftSize,
+                        padding: const EdgeInsets.only(left: 30, bottom: 30),
                         child: SvgPicture.asset(
                           Graphics.getAnimalIcon(widget.animalId),
                           fit: BoxFit.fitWidth,
@@ -98,7 +103,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                           ),
                         )),
                     Container(
-                        width: size,
+                        width: headerHeight,
                         padding: _padding,
                         alignment: Alignment.bottomRight,
                         child: SimpleShadow(
@@ -171,22 +176,15 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
     return Column(children: [
       Row(children: [
         Expanded(
-            child: WidgetTitleBig(
-          primaryText: tr('animal_trophy'),
-        )),
-        _animal.grounded
-            ? Container(
-                height: WidgetTitleBig.height,
-                color: Interface.title,
-                padding: const EdgeInsets.only(right: 25),
-                alignment: Alignment.center,
-                child: WidgetTag.big(
-                  height: WidgetTitleBig.height / 1.75,
+          child: _animal.grounded
+              ? WidgetTitleBigIcon(
+                  primaryText: tr('animal_trophy'),
                   icon: "assets/graphics/icons/grounded.svg",
-                  color: Interface.disabled,
-                  background: Colors.transparent,
-                ))
-            : const SizedBox.shrink()
+                )
+              : WidgetTitleBig(
+                  primaryText: tr('animal_trophy'),
+                ),
+        ),
       ]),
       Container(
           padding: _padding,
@@ -218,7 +216,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                       margin: const EdgeInsets.only(bottom: 1.5),
                       child: SvgPicture.asset(
                         "assets/graphics/icons/gender_female.svg",
-                        width: 14,
+                        width: _femaleIconSize,
                         colorFilter: ColorFilter.mode(
                           Interface.disabled,
                           BlendMode.srcIn,
@@ -246,6 +244,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                       valueKnown: _animal.trophy != 0,
                       margin: const EdgeInsets.only(right: 3),
                     ),
+                    //UNKNOWN MAXIMUM TROPHY FOR NEWEST ANIMALS
                     (_animal.id > 80 && _animal.trophy > 0)
                         ? Container(
                             margin: const EdgeInsets.only(bottom: 1.5),
@@ -301,8 +300,8 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Wrap(
-                spacing: 5,
-                runSpacing: 5,
+                spacing: _wrapSpace,
+                runSpacing: _wrapSpace,
                 alignment: WrapAlignment.center,
                 children: [
                   GestureDetector(
@@ -355,7 +354,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             ],
           )),
       Container(
-          padding: const EdgeInsets.fromLTRB(30, 30, 30, 27),
+          padding: const EdgeInsets.all(30),
           child: ListAnimalFurs(
             animalId: widget.animalId,
             chosenRarity: _toggledRarity,
@@ -375,8 +374,8 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Wrap(
-                spacing: 5,
-                runSpacing: 5,
+                spacing: _wrapSpace,
+                runSpacing: _wrapSpace,
                 alignment: WrapAlignment.center,
                 children: [
                   WidgetTag.small(

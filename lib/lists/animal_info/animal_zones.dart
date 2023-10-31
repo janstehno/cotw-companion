@@ -13,6 +13,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class ListAnimalZones extends StatefulWidget {
   final int animalId;
 
+  final double height = 350;
+  final double reserveHeight = 30;
+  final double indicatorHeight = 40;
+
   const ListAnimalZones({
     Key? key,
     required this.animalId,
@@ -24,6 +28,15 @@ class ListAnimalZones extends StatefulWidget {
 
 class ListAnimalZonesState extends State<ListAnimalZones> {
   final PageController controller = PageController(viewportFraction: 1, keepPage: true);
+  final double _iconSize = 12;
+  final double _pieInnerRadius = 23;
+  final double _pieOuterRadius = 50;
+  final double _pieSectionSpace = 3;
+  final double _pieInnerCenterSpaceRadius = 80;
+  final double _pieOuterCenterSpaceRadius = 100;
+  final double _pieInnerDegree = -90;
+  final double _pieOuterDegree = -97.5;
+  final double _dotSize = 10;
 
   late final Map<int, List<Zone>> _zones = {};
   late final List<PieChartSectionData> _data = [];
@@ -40,13 +53,15 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
     String reserveName = HelperJSON.getReserve(zoneList[0].reserveId).getName(context.locale);
     for (int index = 0; index < zoneList.length; index++) {
       Zone zone = zoneList[index];
-      const radius = 23.0;
       if (zoneList.length == 1) {
         for (int hour = zone.from; hour < zone.to; hour++) {
-          _data.add(PieChartSectionData(color: zone.color, radius: radius));
+          _data.add(PieChartSectionData(
+            color: zone.color,
+            radius: _pieInnerRadius,
+          ));
           _numberData.add(PieChartSectionData(
             color: Colors.transparent,
-            radius: 50.0,
+            radius: _pieOuterRadius,
             title: hour.toString(),
             showTitle: true,
             titleStyle: Interface.s16w300n(Interface.dark),
@@ -56,15 +71,18 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
         for (int hour = zone.from; hour < zone.to; hour++) {
           if (hour == zone.from) {
             if (index == 0 && zone.zone == zoneList[zoneList.length - 1].zone) {
-              _data.add(PieChartSectionData(color: zone.color, radius: radius));
+              _data.add(PieChartSectionData(
+                color: zone.color,
+                radius: _pieInnerRadius,
+              ));
             } else {
               _data.add(PieChartSectionData(
                   color: zone.color,
-                  radius: radius,
+                  radius: _pieInnerRadius,
                   badgeWidget: SvgPicture.asset(
                     zone.icon,
-                    height: 12,
-                    width: 12,
+                    height: _iconSize,
+                    width: _iconSize,
                     colorFilter: ColorFilter.mode(
                         zone.zone == 4
                             ? Interface.dark
@@ -75,11 +93,14 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
                   )));
             }
           } else {
-            _data.add(PieChartSectionData(color: zone.color, radius: radius));
+            _data.add(PieChartSectionData(
+              color: zone.color,
+              radius: _pieInnerRadius,
+            ));
           }
           _numberData.add(PieChartSectionData(
             color: Colors.transparent,
-            radius: 50.0,
+            radius: _pieOuterRadius,
             title: hour.toString(),
             showTitle: true,
             titleStyle: Interface.s16w300n(Interface.dark),
@@ -93,28 +114,28 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
   Widget _buildPieChart(String reserveName) {
     return Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, children: [
       SizedBox(
-          height: 350,
+          height: widget.height,
           child: Stack(children: [
             PieChart(PieChartData(
-              startDegreeOffset: -90,
+              startDegreeOffset: _pieInnerDegree,
               borderData: FlBorderData(
                 show: false,
               ),
-              sectionsSpace: 3,
-              centerSpaceRadius: 80,
+              sectionsSpace: _pieSectionSpace,
+              centerSpaceRadius: _pieInnerCenterSpaceRadius,
               sections: _data,
             )),
             PieChart(PieChartData(
-              startDegreeOffset: -97.5,
+              startDegreeOffset: _pieOuterDegree,
               borderData: FlBorderData(
                 show: false,
               ),
-              centerSpaceRadius: 100,
+              centerSpaceRadius: _pieOuterCenterSpaceRadius,
               sections: _numberData,
             ))
           ])),
       SizedBox(
-          height: 30,
+          height: widget.reserveHeight,
           child: Container(
               alignment: Alignment.bottomCenter,
               padding: const EdgeInsets.only(left: 30, right: 30),
@@ -132,20 +153,22 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
         height: (_zones.length > 1) ? 450 : 410,
         child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, children: [
           SizedBox(
-              height: 380,
+              height: widget.height + widget.reserveHeight,
               child: PageView(controller: controller, pageSnapping: true, scrollDirection: Axis.horizontal, children: [
                 for (int key in _zones.keys) _buildZoneChart(_zones[key]!),
               ])),
           _zones.length > 1
               ? Container(
-                  padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                  height: widget.indicatorHeight,
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  alignment: Alignment.center,
                   child: SmoothPageIndicator(
                       controller: controller,
                       count: _zones.length,
                       effect: CustomizableEffect(
                           activeDotDecoration: DotDecoration(
-                              width: 10,
-                              height: 10,
+                              width: _dotSize,
+                              height: _dotSize,
                               color: Interface.primary,
                               borderRadius: BorderRadius.circular(5),
                               dotBorder: DotBorder(
@@ -153,8 +176,8 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
                                 color: Interface.accentBorder,
                               )),
                           dotDecoration: DotDecoration(
-                            width: 10 + Interface.accentBorderWidth,
-                            height: 10 + Interface.accentBorderWidth,
+                            width: _dotSize + Interface.accentBorderWidth,
+                            height: _dotSize + Interface.accentBorderWidth,
                             color: Interface.disabled.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(5),
                           ))))

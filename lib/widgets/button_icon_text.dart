@@ -43,8 +43,8 @@ class WidgetButtonIconText extends StatelessWidget {
                 child: Row(children: [
                   SvgPicture.asset(
                     icon,
-                    height: buttonHeight / 1.6,
-                    width: buttonHeight / 1.6,
+                    height: buttonHeight / 1.75,
+                    width: buttonHeight / 1.75,
                     colorFilter: ColorFilter.mode(
                       color ?? Interface.accent,
                       BlendMode.srcIn,

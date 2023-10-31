@@ -11,7 +11,8 @@ class WidgetTitleInfoIcon extends StatelessWidget {
   final bool alignRight;
 
   final double height = 60;
-  final double iconSize = 17.5;
+
+  final double _iconSize = 17.5;
 
   const WidgetTitleInfoIcon({
     Key? key,
@@ -36,14 +37,14 @@ class WidgetTitleInfoIcon extends StatelessWidget {
               alignRight
                   ? const SizedBox.shrink()
                   : SvgPicture.asset(
-                      icon,
-                      width: iconSize,
-                      height: iconSize,
-                      colorFilter: ColorFilter.mode(
-                        color ?? Interface.dark,
-                        BlendMode.srcIn,
-                      ),
-                    ),
+                icon,
+                width: _iconSize,
+                height: _iconSize,
+                colorFilter: ColorFilter.mode(
+                  color ?? Interface.dark,
+                  BlendMode.srcIn,
+                ),
+              ),
               Expanded(
                   child: Container(
                       margin: EdgeInsets.only(left: alignRight ? 0 : 15, right: alignRight ? 15 : 0),
@@ -53,14 +54,14 @@ class WidgetTitleInfoIcon extends StatelessWidget {
                       ))),
               alignRight
                   ? SvgPicture.asset(
-                      icon,
-                      width: iconSize,
-                      height: iconSize,
-                      colorFilter: ColorFilter.mode(
-                        color ?? Interface.dark,
-                        BlendMode.srcIn,
-                      ),
-                    )
+                icon,
+                width: _iconSize,
+                height: _iconSize,
+                colorFilter: ColorFilter.mode(
+                  color ?? Interface.dark,
+                  BlendMode.srcIn,
+                ),
+              )
                   : const SizedBox.shrink(),
             ]));
   }

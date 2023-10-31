@@ -47,7 +47,6 @@ class ListAnimalCallersState extends State<ListAnimalCallers> {
   Widget _buildWidgets() {
     return Column(children: [
       _callers.isNotEmpty
-          //NOT EMPTY
           ? ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -59,7 +58,6 @@ class ListAnimalCallersState extends State<ListAnimalCallers> {
                   dlc: caller.isFromDlc,
                 );
               })
-          //EMPTY
           : AutoSizeText(
               tr('none'),
               maxLines: 1,

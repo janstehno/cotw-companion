@@ -9,6 +9,10 @@ class EntryMenu extends StatelessWidget {
   final String icon, text;
   final Function? onMenuTap;
 
+  final double height = 60;
+
+  final double _iconSize = 30;
+
   const EntryMenu({
     Key? key,
     required this.text,
@@ -19,19 +23,18 @@ class EntryMenu extends StatelessWidget {
   Widget _buildWidgets() {
     return GestureDetector(
       child: Container(
-          height: 60,
+          height: height,
           color: Colors.transparent,
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: Row(children: [
             Container(
-                width: 35,
-                height: 35,
+                width: _iconSize,
+                height: _iconSize,
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 15),
+                padding: const EdgeInsets.all(5),
                 child: SvgPicture.asset(
                   icon,
-                  width: 22,
-                  height: 22,
                   fit: BoxFit.fitWidth,
                   colorFilter: ColorFilter.mode(
                     Interface.dark,

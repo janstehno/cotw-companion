@@ -33,7 +33,7 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
 
   @override
   void initState() {
-    _bestOnly = Provider.of<Settings>(context, listen: false).getBestWeaponsForAnimal;
+    _bestOnly = Provider.of<Settings>(context, listen: false).bestWeaponsForAnimal;
     super.initState();
   }
 

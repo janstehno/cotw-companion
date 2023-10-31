@@ -12,6 +12,10 @@ class WidgetSnackBar extends StatelessWidget {
   final Process process;
   final Function? onSnackBarTap;
 
+  final double height = 75;
+
+  final double _iconSize = 10;
+
   const WidgetSnackBar({
     Key? key,
     required this.text,
@@ -44,14 +48,14 @@ class WidgetSnackBar extends StatelessWidget {
 
   Widget _buildWidgets() {
     return Container(
-        height: 75,
+        height: height,
         color: Interface.search,
         padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
           SvgPicture.asset(
             _getIcon(),
-            width: 10,
-            height: 10,
+            width: _iconSize,
+            height: _iconSize,
             colorFilter: ColorFilter.mode(
               _getColor(),
               BlendMode.srcIn,
@@ -69,11 +73,11 @@ class WidgetSnackBar extends StatelessWidget {
           icon.isEmpty
               ? const SizedBox.shrink()
               : WidgetButtonIcon(
-                  icon: icon,
-                  onTap: () {
-                    if (onSnackBarTap != null) onSnackBarTap!();
-                  },
-                )
+            icon: icon,
+            onTap: () {
+              if (onSnackBarTap != null) onSnackBarTap!();
+            },
+          )
         ]));
   }
 

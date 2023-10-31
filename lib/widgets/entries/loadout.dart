@@ -21,6 +21,8 @@ class EntryLoadout extends StatefulWidget {
   final Function callback;
   final BuildContext context;
 
+  final double height = 70;
+
   const EntryLoadout({
     Key? key,
     required this.index,
@@ -35,6 +37,9 @@ class EntryLoadout extends StatefulWidget {
 
 class EntryLoadoutState extends State<EntryLoadout> {
   final Duration _duration = const Duration(milliseconds: 200);
+  final double _ammoHeight = 20;
+  final double _callerHeight = 20;
+  final double _editIconSize = 20;
 
   List<Ammo> _ammo = [];
   List<Caller> _callers = [];
@@ -68,10 +73,10 @@ class EntryLoadoutState extends State<EntryLoadout> {
 
   Widget _buildName() {
     return Container(
-        height: 70,
+        height: widget.height,
         color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
         alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(children: [
           Expanded(
               child: Container(
@@ -108,52 +113,52 @@ class EntryLoadoutState extends State<EntryLoadout> {
               _ammo.isEmpty
                   ? const SizedBox.shrink()
                   : Container(
-                      height: 20,
-                      alignment: Alignment.centerLeft,
-                      child: AutoSizeText(
-                        tr("weapon_ammo"),
-                        style: Interface.s14w300n(Interface.dark),
-                      )),
+                  height: _ammoHeight,
+                  alignment: Alignment.centerLeft,
+                  child: AutoSizeText(
+                    tr("weapon_ammo"),
+                    style: Interface.s14w300n(Interface.dark),
+                  )),
               _ammo.isEmpty
                   ? const SizedBox.shrink()
                   : ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _ammo.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                            height: 20,
-                            alignment: Alignment.centerLeft,
-                            child: AutoSizeText(
-                              _ammo[index].getName(context.locale),
-                              style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
-                            ));
-                      }),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: _ammo.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                        height: _ammoHeight,
+                        alignment: Alignment.centerLeft,
+                        child: AutoSizeText(
+                          _ammo[index].getName(context.locale),
+                          style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
+                        ));
+                  }),
               _callers.isNotEmpty && _ammo.isNotEmpty ? const SizedBox(height: 10) : const SizedBox.shrink(),
               _callers.isEmpty
                   ? const SizedBox.shrink()
                   : Container(
-                      height: 20,
-                      alignment: Alignment.centerLeft,
-                      child: AutoSizeText(
-                        tr("callers"),
-                        style: Interface.s14w300n(Interface.dark),
-                      )),
+                  height: _callerHeight,
+                  alignment: Alignment.centerLeft,
+                  child: AutoSizeText(
+                    tr("callers"),
+                    style: Interface.s14w300n(Interface.dark),
+                  )),
               _callers.isEmpty
                   ? const SizedBox.shrink()
                   : ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _callers.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                            height: 20,
-                            alignment: Alignment.centerLeft,
-                            child: AutoSizeText(
-                              _callers[index].getName(context.locale),
-                              style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
-                            ));
-                      }),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: _callers.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                        height: _callerHeight,
+                        alignment: Alignment.centerLeft,
+                        child: AutoSizeText(
+                          _callers[index].getName(context.locale),
+                          style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
+                        ));
+                  }),
             ])));
   }
 
@@ -210,7 +215,8 @@ class EntryLoadoutState extends State<EntryLoadout> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ActivityLoadoutsAddEdit(
+                      builder: (context) =>
+                          ActivityLoadoutsAddEdit(
                             loadout: widget.loadout,
                             callback: widget.callback,
                           )));
@@ -223,8 +229,8 @@ class EntryLoadoutState extends State<EntryLoadout> {
                     padding: const EdgeInsets.only(left: 30, right: 30),
                     child: SvgPicture.asset(
                       "assets/graphics/icons/edit.svg",
-                      height: 20,
-                      width: 20,
+                      width: _editIconSize,
+                      height: _editIconSize,
                       alignment: Alignment.centerLeft,
                       colorFilter: const ColorFilter.mode(
                         Interface.alwaysDark,

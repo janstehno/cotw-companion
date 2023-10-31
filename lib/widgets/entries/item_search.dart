@@ -26,14 +26,13 @@ class EntryFastSearch extends StatefulWidget {
 }
 
 class EntryFastSearchState extends State<EntryFastSearch> {
+  final double _iconSize = 20;
+
   Widget _buildWidgets() {
     return GestureDetector(
         onTap: () {
           widget.callback();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => widget.activity),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => widget.activity));
         },
         child: Container(
             padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
@@ -42,8 +41,8 @@ class EntryFastSearchState extends State<EntryFastSearch> {
               children: [
                 SvgPicture.asset(
                   widget.icon,
-                  width: 20,
-                  height: 20,
+                  width: _iconSize,
+                  height: _iconSize,
                   colorFilter: ColorFilter.mode(
                     Interface.disabled,
                     BlendMode.srcIn,

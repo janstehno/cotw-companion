@@ -29,13 +29,16 @@ class FilterPickerIcon extends StatefulWidget {
 }
 
 class FilterPickerIconState extends State<FilterPickerIcon> {
+  final double _buttonSize = 30;
+  final double _wrapSpace = 10;
+
   List<Widget> _buildSwitches() {
     List<Widget> switches = [];
     for (int index = 0; index < widget.values.length; index++) {
       int key = widget.values[index];
       switches.add(
         WidgetSwitchIcon(
-            buttonSize: 30,
+            buttonSize: _buttonSize,
             icon: widget.icons[index],
             activeColor: widget.colors[index],
             activeBackground: widget.backgrounds[index],
@@ -60,8 +63,8 @@ class FilterPickerIconState extends State<FilterPickerIcon> {
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
         child: Wrap(
-          spacing: 10,
-          runSpacing: 10,
+          spacing: _wrapSpace,
+          runSpacing: _wrapSpace,
           alignment: WrapAlignment.start,
           children: _buildSwitches(),
         ),

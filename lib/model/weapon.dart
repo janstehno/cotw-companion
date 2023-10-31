@@ -88,7 +88,7 @@ class Weapon {
 
   bool get isFromDlc => _dlc == 1;
 
-  int get getMaxPenetration {
+  int get maxPenetration {
     int max = 0;
     for (int index in _ammo) {
       int pen = HelperJSON.getAmmo(index).penetration;

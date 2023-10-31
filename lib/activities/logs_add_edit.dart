@@ -14,10 +14,11 @@ import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/drop_down.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
-import 'package:cotwcompanion/widgets/text_field.dart';
+import 'package:cotwcompanion/widgets/text_field_indicator.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:cotwcompanion/widgets/title_big_button.dart';
 import 'package:cotwcompanion/widgets/title_big_switch.dart';
@@ -55,10 +56,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   final HelperLogger _logger = HelperLogger("[LOGS] [ADD & EDIT]");
   final List<Animal> _animals = [];
   final List<AnimalFur> _furs = [];
-  final List<DropdownMenuItem> _dropDownListReserves = [];
-  final List<DropdownMenuItem> _dropDownListAnimals = [];
-  final List<DropdownMenuItem> _dropDownListAnimalFurs = [];
   final List<Log> _trophyLodgeLogs = [];
+  final double _dateHeight = 70;
+  final double _addButtonSize = 60;
+  final double _safeSpaceHeight = 100;
 
   DateTime _dateTime = DateTime.now();
   int _minute = DateTime.now().minute;
@@ -101,7 +102,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   @override
   void initState() {
-    _usesImperials = Provider.of<Settings>(context, listen: false).getImperialUnits;
+    _usesImperials = Provider.of<Settings>(context, listen: false).imperialUnits;
     _controllerTrophyNumber.addListener(() => _textTrophyAndWeightListener(0));
     _controllerWeightNumber.addListener(() => _textTrophyAndWeightListener(1));
     super.initState();
@@ -137,8 +138,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     } else {
       //OTHERWISE
       _logger.i("Creating log");
-      _dropDownListReserves.clear();
-      _dropDownListReserves.addAll(_listOfReserves());
       _selectedReserve = 0;
       _selectedReserveId = 1;
       _getAnimalsData();
@@ -229,7 +228,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   void _getAnimalsData() {
     _logger.t("Getting animals");
     _animals.clear();
-    _dropDownListAnimals.clear();
     if (widget.fromTrophyLodge) {
       _animals.addAll(HelperJSON.animals);
     } else {
@@ -240,7 +238,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       }
     }
     _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, _selectedReserveId).compareTo(b.getNameBasedOnReserve(context.locale, _selectedReserveId)));
-    _dropDownListAnimals.addAll(_listOfAnimals());
   }
 
   void _getAnimal(bool init) {
@@ -261,7 +258,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   void _getFursData() {
     _logger.t("Getting furs");
     _furs.clear();
-    _dropDownListAnimalFurs.clear();
     for (AnimalFur animalFur in HelperJSON.animalsFurs) {
       if (animalFur.animalId == _selectedAnimalId) {
         if ((!animalFur.male && !animalFur.female) || (animalFur.male && _isMale) || (animalFur.female && !_isMale)) {
@@ -270,7 +266,6 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       }
     }
     _furs.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
-    _dropDownListAnimalFurs.addAll(_listOfFurs());
   }
 
   void _getFur(bool init) {
@@ -428,10 +423,10 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           setState(() {});
         },
         child: Container(
-            height: 70,
+            height: _dateHeight,
             color: Interface.title,
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+            padding: const EdgeInsets.only(left: 30, right: 30),
             child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
               AutoSizeText(
                 tr('time').toUpperCase(),
@@ -453,24 +448,16 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       WidgetTitleBig(
         primaryText: tr('reserve'),
       ),
-      DropdownButton(
-        dropdownColor: Interface.dropDown,
-        underline: const SizedBox.shrink(),
-        icon: const SizedBox.shrink(),
-        elevation: 0,
-        itemHeight: 60,
-        menuMaxHeight: 300,
-        isExpanded: true,
-        value: _selectedReserve,
-        onChanged: (dynamic value) {
-          setState(() {
-            _focus();
-            _selectedReserve = value;
-            _reserveChanged = true;
-          });
-        },
-        items: _listOfReserves(),
-      )
+      WidgetDropDown(
+          value: _selectedReserve,
+          items: _listOfReserves(),
+          onTap: (dynamic value) {
+            setState(() {
+              _focus();
+              _selectedReserve = value;
+              _reserveChanged = true;
+            });
+          })
     ]);
   }
 
@@ -479,23 +466,16 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       WidgetTitleBig(
         primaryText: tr('animal'),
       ),
-      DropdownButton(
-          dropdownColor: Interface.dropDown,
-          underline: const SizedBox.shrink(),
-          icon: const SizedBox.shrink(),
-          elevation: 0,
-          itemHeight: 60,
-          menuMaxHeight: 300,
-          isExpanded: true,
+      WidgetDropDown(
           value: _selectedAnimal,
-          onChanged: (dynamic value) {
+          items: _listOfAnimals(),
+          onTap: (dynamic value) {
             setState(() {
               _focus();
               _selectedAnimal = value;
               _animalChanged = true;
             });
-          },
-          items: _listOfAnimals())
+          })
     ]);
   }
 
@@ -504,23 +484,16 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
       WidgetTitleBig(
         primaryText: tr('animal_fur'),
       ),
-      DropdownButton(
-          dropdownColor: Interface.dropDown,
-          underline: const SizedBox.shrink(),
-          icon: const SizedBox.shrink(),
-          elevation: 0,
-          itemHeight: 60,
-          menuMaxHeight: 300,
-          isExpanded: true,
+      WidgetDropDown(
           value: _selectedFur,
-          onChanged: (dynamic value) {
+          items: _listOfFurs(),
+          onTap: (dynamic value) {
             setState(() {
               _focus();
               _selectedFur = value;
               _furChanged = true;
             });
-          },
-          items: _listOfFurs())
+          })
     ]);
   }
 
@@ -560,7 +533,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ListTrophyLodgeLogs(trophyLodgeLogs: _trophyLodgeLogs)));
               }),
-      WidgetTextField(
+      WidgetTextFieldIndicator(
         correct: _correctTrophyNumber,
         controller: _controllerTrophyNumber,
       )
@@ -574,7 +547,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
         primaryText: tr('animal_weight'),
         secondaryText: "${tr('max')}: ${_maxWeight == 0 ? "?" : _maxWeight.toString()}",
       ),
-      WidgetTextField(
+      WidgetTextFieldIndicator(
         correct: _correctWeightNumber,
         controller: _controllerWeightNumber,
       )
@@ -699,13 +672,13 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   Widget _buildAdd() {
     return Positioned(
-        bottom: 30,
         right: 30,
+        bottom: 30,
         child: SimpleShadow(
             sigma: 7,
             color: Interface.alwaysDark,
             child: WidgetButtonIcon(
-              buttonSize: 60,
+              buttonSize: _addButtonSize,
               icon: widget.log != null ? "assets/graphics/icons/edit.svg" : "assets/graphics/icons/plus.svg",
               onTap: () {
                 _focus();
@@ -721,23 +694,29 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildStack() {
     return Stack(fit: StackFit.expand, children: [
       WidgetScrollbar(
-          child: SingleChildScrollView(
-              child: Column(children: [
-        WidgetAppBar(
-          text: widget.log != null ? tr('edit') : tr('add'),
-          context: context,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              WidgetAppBar(
+                text: widget.log != null ? tr('edit') : tr('add'),
+                context: context,
+              ),
+              _buildDate(),
+              widget.fromTrophyLodge ? const SizedBox.shrink() : _buildReserve(),
+              _buildAnimal(),
+              _buildGender(),
+              _buildFur(),
+              _buildTrophy(),
+              widget.fromTrophyLodge ? const SizedBox.shrink() : _buildWeight(),
+              _buildTrophyRating(),
+              widget.fromTrophyLodge ? const SizedBox.shrink() : _buildHarvestCheck(),
+              SizedBox(
+                height: _safeSpaceHeight,
+              )
+            ],
+          ),
         ),
-        _buildDate(),
-        widget.fromTrophyLodge ? const SizedBox.shrink() : _buildReserve(),
-        _buildAnimal(),
-        _buildGender(),
-        _buildFur(),
-        _buildTrophy(),
-        widget.fromTrophyLodge ? const SizedBox.shrink() : _buildWeight(),
-        _buildTrophyRating(),
-        widget.fromTrophyLodge ? const SizedBox.shrink() : _buildHarvestCheck(),
-        const SizedBox(height: 100),
-      ]))),
+      ),
       _buildAdd(),
     ]);
   }

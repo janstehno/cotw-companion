@@ -22,6 +22,7 @@ void main() async {
   bool mapZonesType = sharedPreferences.getBool("mapZonesType") ?? false;
   bool mapZonesStyle = sharedPreferences.getBool("mapZonesStyle") ?? false;
   bool mapZonesAccuracy = sharedPreferences.getBool("mapZonesAccuracy") ?? false;
+  bool mapPerformanceMode = sharedPreferences.getBool("mapPerformanceMode") ?? false;
   bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
   bool dateOfRecord = sharedPreferences.getBool("dateOfRecord") ?? false;
   bool trophyLodgeRecord = sharedPreferences.getBool("trophyLodgeRecord") ?? false;
@@ -29,42 +30,44 @@ void main() async {
   Interface.setPrimaryColor(Color(color));
   Interface.setColors(darkMode);
   runApp(EasyLocalization(
-      path: 'assets/translations',
-      startLocale: const Locale('en'),
-      fallbackLocale: const Locale('en'),
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ru'),
-        Locale('cs'),
-        Locale('pl'),
-        Locale('de'),
-        Locale('fr'),
-        Locale('es'),
-        Locale('pt', 'BR'),
-        Locale('pt', 'PT'),
-        Locale('ja'),
-        Locale('hu'),
-        Locale('tr')
-      ],
-      saveLocale: true,
-      useFallbackTranslations: true,
-      child: ChangeNotifierProvider(
-        create: (BuildContext context) => Settings(
-          language: language,
-          color: color,
-          compactLogbook: compactLogbook,
-          darkMode: darkMode,
-          imperialUnits: imperialUnits,
-          mapZonesType: mapZonesType,
-          mapZonesStyle: mapZonesStyle,
-          mapZonesAccuracy: mapZonesAccuracy,
-          bestWeaponsForAnimal: bestWeaponsForAnimal,
-          dateOfRecord: dateOfRecord,
-          trophyLodgeRecord: trophyLodgeRecord,
-          furRarityPerCent: furRarityPerCent,
-        ),
-        child: const App(),
-      )));
+    path: 'assets/translations',
+    startLocale: const Locale('en'),
+    fallbackLocale: const Locale('en'),
+    supportedLocales: const [
+      Locale('en'),
+      Locale('ru'),
+      Locale('cs'),
+      Locale('pl'),
+      Locale('de'),
+      Locale('fr'),
+      Locale('es'),
+      Locale('pt', 'BR'),
+      Locale('pt', 'PT'),
+      Locale('ja'),
+      Locale('hu'),
+      Locale('tr')
+    ],
+    saveLocale: true,
+    useFallbackTranslations: true,
+    child: ChangeNotifierProvider(
+      create: (BuildContext context) => Settings(
+        language: language,
+        color: color,
+        compactLogbook: compactLogbook,
+        darkMode: darkMode,
+        imperialUnits: imperialUnits,
+        mapZonesType: mapZonesType,
+        mapZonesStyle: mapZonesStyle,
+        mapZonesAccuracy: mapZonesAccuracy,
+        mapPerformanceMode: mapPerformanceMode,
+        bestWeaponsForAnimal: bestWeaponsForAnimal,
+        dateOfRecord: dateOfRecord,
+        trophyLodgeRecord: trophyLodgeRecord,
+        furRarityPerCent: furRarityPerCent,
+      ),
+      child: const App(),
+    ),
+  ));
 }
 
 class App extends StatelessWidget {

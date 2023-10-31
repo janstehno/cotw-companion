@@ -139,8 +139,7 @@ class HelperLoadout {
       RegExp pathToDownloads = RegExp(r'.+0/');
       final path = '${pathToDownloads.stringMatch(output.path).toString()}Download';
       final fileName = "${dateTime(DateTime.now())}-saved-loadouts-cotwcompanion.json";
-      final file = File('$path/$fileName');
-      file.writeAsString(content);
+      File('$path/$fileName').writeAsString(content);
       return true;
     }
     return false;

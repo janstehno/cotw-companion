@@ -4,18 +4,19 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
+import 'package:cotwcompanion/widgets/fur_per_cent.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class EntryAnimalFur extends StatefulWidget {
-  final AnimalFur fur;
+  final AnimalFur animalFur;
   final bool isChosen;
 
   const EntryAnimalFur({
     Key? key,
-    required this.fur,
+    required this.animalFur,
     required this.isChosen,
   }) : super(key: key);
 
@@ -24,76 +25,49 @@ class EntryAnimalFur extends StatefulWidget {
 }
 
 class EntryAnimalFurState extends State<EntryAnimalFur> {
+  final double _rarityWidth = 20;
+  final double _rarityHeight = 10;
+
   late final bool _showPerCent;
 
   @override
   void initState() {
-    _showPerCent = Provider.of<Settings>(context, listen: false).getFurRarityPerCent;
+    _showPerCent = Provider.of<Settings>(context, listen: false).furRarityPerCent;
     super.initState();
-  }
-
-  Widget _buildPerCentText(String text) {
-    return AutoSizeText(
-      text,
-      maxLines: 1,
-      style: Interface.s12w300n(Interface.dark),
-    );
-  }
-
-  Widget _buildWidgetPerCent() {
-    String left, right, point, percent;
-    left = right = point = percent = "";
-    if (widget.fur.furId != Interface.greatOneId) {
-      left = widget.fur.perCent.toString().split(".")[0];
-      right = widget.fur.perCent.toString().split(".")[1];
-      point = ".";
-      percent = "%";
-    }
-    return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      Container(
-          width: 60,
-          alignment: Alignment.centerRight,
-          margin: const EdgeInsets.only(left: 5, right: 10),
-          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            _buildPerCentText(left),
-            _buildPerCentText(point),
-            _buildPerCentText(right),
-            Padding(
-              padding: const EdgeInsets.only(left: 2),
-              child: _buildPerCentText(percent),
-            ),
-          ]))
-    ]);
   }
 
   Widget _buildAnimalFur() {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.center, children: [
       Container(
-          width: 20,
-          height: 10,
+          width: _rarityWidth,
+          height: _rarityHeight,
           alignment: Alignment.center,
           child: AnimatedContainer(
-              width: widget.isChosen ? 20 : 10,
-              height: 10,
+              width: widget.isChosen ? _rarityWidth : _rarityHeight,
+              height: _rarityHeight,
               alignment: Alignment.center,
               duration: const Duration(milliseconds: 200),
               decoration: ShapeDecoration(
-                color: widget.fur.color,
+                color: widget.animalFur.color,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.3)),
               ))),
-      _showPerCent ? _buildWidgetPerCent() : const SizedBox.shrink(),
+      _showPerCent
+          ? WidgetFurPerCent(
+              animalFur: widget.animalFur,
+            )
+          : const SizedBox.shrink(),
       Expanded(
         child: Container(
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: _showPerCent ? 0 : 20, right: 20),
             child: AutoSizeText(
-              widget.fur.getName(context.locale),
+              widget.animalFur.getName(context.locale),
               maxLines: 1,
               style: Interface.s16w300n(Interface.dark),
             )),
       ),
       Container(
-          child: widget.fur.male
+          child: widget.animalFur.male
               ? SvgPicture.asset(
                   "assets/graphics/icons/gender_male.svg",
                   width: 13,
@@ -103,7 +77,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
                     BlendMode.srcIn,
                   ),
                 )
-              : widget.fur.female
+              : widget.animalFur.female
                   ? SvgPicture.asset(
                       "assets/graphics/icons/gender_female.svg",
                       width: 14,
@@ -121,7 +95,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
   }
 
   Widget _buildWidgets() {
-    return widget.fur.furId != Interface.greatOneId
+    return widget.animalFur.furId != Interface.greatOneId
         ? Container(
             margin: const EdgeInsets.only(bottom: 3),
             child: _buildAnimalFur(),

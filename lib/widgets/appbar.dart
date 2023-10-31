@@ -11,6 +11,8 @@ class WidgetAppBar extends StatelessWidget {
   final int maxLines;
   final BuildContext context;
 
+  final double _backWidth = 80;
+
   const WidgetAppBar({
     Key? key,
     required this.text,
@@ -25,7 +27,7 @@ class WidgetAppBar extends StatelessWidget {
           Navigator.pop(context);
         },
         child: Container(
-            width: 80,
+            width: _backWidth,
             height: height,
             color: Interface.primary,
             alignment: Alignment.center,

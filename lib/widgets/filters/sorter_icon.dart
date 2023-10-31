@@ -31,14 +31,15 @@ class FilterSorterIcon extends StatefulWidget {
 }
 
 class FilterSorterIconState extends State<FilterSorterIcon> {
+  final double _itemWidth = 30;
+
   double _getSwitchSize() {
-    double itemWidth = 30;
     double screenWidth = MediaQuery.of(context).size.width;
     double itemsBetween = (widget.values.length - 1) * 10 + 60;
     double availableWidth = screenWidth - itemsBetween;
-    double itemsWidth = widget.values.length * itemWidth;
+    double itemsWidth = widget.values.length * _itemWidth;
     double calcWidth = availableWidth / widget.values.length;
-    return availableWidth > itemsWidth ? itemWidth : calcWidth;
+    return availableWidth > itemsWidth ? _itemWidth : calcWidth;
   }
 
   List<Widget> _buildSwitches() {

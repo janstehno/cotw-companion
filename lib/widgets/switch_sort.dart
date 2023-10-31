@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WidgetSwitchSort extends StatelessWidget {
-  final double size;
   final String icon;
+  final double size;
   final Color? color, background, activeColor, activeBackground;
   final bool isAscended, isActive;
   final int orderNumber;
@@ -16,8 +16,8 @@ class WidgetSwitchSort extends StatelessWidget {
 
   const WidgetSwitchSort({
     Key? key,
-    this.size = 35,
     required this.icon,
+    this.size = 35,
     this.color,
     this.background,
     this.activeColor,
@@ -29,7 +29,7 @@ class WidgetSwitchSort extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
-    Color widgetColor = isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled;
+    Color widgetColor = isActive ? activeColor ?? Interface.accent : color ?? Interface.alwaysDark.withOpacity(0.75);
     Color widgetBackground = isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3);
     String orderArrow = isAscended ? "assets/graphics/icons/sort_ascended.svg" : "assets/graphics/icons/sort_descended.svg";
     return Stack(children: [

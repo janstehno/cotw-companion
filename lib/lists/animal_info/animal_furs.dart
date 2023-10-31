@@ -28,9 +28,9 @@ class ListAnimalFursState extends State<ListAnimalFurs> {
 
   void _getFurs() {
     _furs.clear();
-    for (AnimalFur af in HelperJSON.animalsFurs) {
-      if (af.animalId == widget.animalId) {
-        _furs.add(af);
+    for (AnimalFur animalFur in HelperJSON.animalsFurs) {
+      if (animalFur.animalId == widget.animalId) {
+        _furs.add(animalFur);
       }
     }
   }
@@ -51,10 +51,10 @@ class ListAnimalFursState extends State<ListAnimalFurs> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: _furs.length,
             itemBuilder: (context, index) {
-              AnimalFur fur = _furs[index];
+              AnimalFur animalFur = _furs[index];
               return EntryAnimalFur(
-                fur: fur,
-                isChosen: fur.rarity == widget.chosenRarity,
+                animalFur: animalFur,
+                isChosen: animalFur.rarity == widget.chosenRarity,
               );
             });
   }

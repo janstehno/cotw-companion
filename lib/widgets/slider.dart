@@ -13,6 +13,9 @@ class WidgetSlider extends StatelessWidget {
   final double min, max;
   final Function onDrag;
 
+  final double _handlerSize = 35;
+  final double _trackSize = 3;
+
   const WidgetSlider({
     Key? key,
     required this.values,
@@ -26,12 +29,12 @@ class WidgetSlider extends StatelessWidget {
         min: min,
         max: max,
         values: values,
-        handlerWidth: 35,
-        handlerHeight: 35,
+        handlerWidth: _handlerSize,
+        handlerHeight: _handlerSize,
         tooltip: FlutterSliderTooltip(disabled: true),
         trackBar: FlutterSliderTrackBar(
-            activeTrackBarHeight: 3,
-            inactiveTrackBarHeight: 3,
+            activeTrackBarHeight: _trackSize,
+            inactiveTrackBarHeight: _trackSize,
             activeTrackBar: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(1)),
               color: Interface.primary.withOpacity(0.65),
@@ -42,7 +45,7 @@ class WidgetSlider extends StatelessWidget {
             )),
         handler: FlutterSliderHandler(
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(35 / 4)),
+              borderRadius: BorderRadius.all(Radius.circular(_handlerSize / 4)),
               color: Interface.primary,
             ),
             child: Container(

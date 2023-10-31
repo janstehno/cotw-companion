@@ -15,6 +15,13 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        background: Interface.even,
+        version: "1.8.2",
+        changes: const [
+          "- Improvement of the UI. Introduced map performance mode. Should let users to choose between estimated and exact positions of need zones. More on this in the map info section. I would appreciate some feedback for sure."
+        ],
+      ),
+      WidgetPatchNote(
         background: Interface.odd,
         version: "1.8.1",
       ),

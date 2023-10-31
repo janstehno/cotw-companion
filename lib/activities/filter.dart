@@ -23,13 +23,16 @@ class ActivityFilter extends StatefulWidget {
 }
 
 class ActivityFilterState extends State<ActivityFilter> {
+  final double _topBarHeight = 90;
+  final double _buttonSize = 50;
+
   Widget _buildFilters() {
     return Column(children: [
       Container(
-          height: 90,
+          height: _topBarHeight,
           color: Interface.primary,
           alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.fromLTRB(30, 0, 20, 0),
+          padding: const EdgeInsets.only(left: 30, right: 20),
           child: Row(children: [
             Expanded(
                 child: Container(
@@ -41,7 +44,7 @@ class ActivityFilterState extends State<ActivityFilter> {
                       style: Interface.s24w600c(Interface.accent),
                     ))),
             WidgetButtonIcon(
-              buttonSize: 50,
+              buttonSize: _buttonSize,
               icon: "assets/graphics/icons/accept.svg",
               onTap: () {
                 widget.filter();
@@ -51,10 +54,10 @@ class ActivityFilterState extends State<ActivityFilter> {
           ])),
       Expanded(
           child: WidgetScrollbar(
-        child: SingleChildScrollView(
-          child: Column(children: widget.filters),
-        ),
-      )),
+            child: SingleChildScrollView(
+              child: Column(children: widget.filters),
+            ),
+          )),
     ]);
   }
 

@@ -36,7 +36,7 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
   @override
   void initState() {
     _caller = HelperJSON.getCaller(widget.callerId);
-    _imperialUnits = Provider.of<Settings>(context, listen: false).getImperialUnits;
+    _imperialUnits = Provider.of<Settings>(context, listen: false).imperialUnits;
     super.initState();
   }
 

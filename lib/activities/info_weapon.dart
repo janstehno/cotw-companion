@@ -7,6 +7,7 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/weapon.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
+import 'package:cotwcompanion/widgets/entries/weapon_statistics.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -34,123 +35,86 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
     super.initState();
   }
 
-  Widget _buildWeaponDetail(bool leftToRight, String icon, String text) {
-    return Container(
-        alignment: Alignment.center,
-        height: 32.5,
-        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          leftToRight
-              ? const SizedBox.shrink()
-              : Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Text(
-                    text,
-                    style: Interface.s16w300n(Interface.dark),
-                  )),
-          SvgPicture.asset(
-            icon,
-            width: 18,
-            height: 18,
-            colorFilter: ColorFilter.mode(
-              Interface.dark,
-              BlendMode.srcIn,
-            ),
-          ),
-          leftToRight
-              ? Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    text,
-                    style: Interface.s16w300n(Interface.dark),
-                  ))
-              : const SizedBox.shrink()
-        ]));
-  }
-
   Widget _buildStatistics() {
-    return Column(children: [
-      Container(
-          padding: const EdgeInsets.all(30),
-          child: Column(mainAxisSize: MainAxisSize.max, children: [
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Expanded(
-                  child: Container(
-                      margin: const EdgeInsets.only(right: 30),
-                      child: AutoSizeText(
-                        tr('weapon_type'),
-                        maxLines: 1,
-                        style: Interface.s16w300n(Interface.dark),
-                      ))),
-              Text(
-                _weapon.getTypeAsString(),
-                style: Interface.s18w500n(Interface.dark),
-              )
-            ]),
-            Container(
-                margin: const EdgeInsets.only(top: 10, bottom: 10),
-                child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+    return Column(
+      children: [
+        Container(
+            padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Expanded(
-                      child: Padding(
-                          padding: const EdgeInsets.only(right: 30),
+                      child: Container(
+                          margin: const EdgeInsets.only(right: 30),
                           child: AutoSizeText(
-                            tr('price'),
+                            tr('weapon_type'),
                             maxLines: 1,
                             style: Interface.s16w300n(Interface.dark),
                           ))),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                    _weapon.price == 0 || _weapon.price == -1
-                        ? const SizedBox.shrink()
-                        : Container(
-                            margin: const EdgeInsets.only(right: 2.5),
-                            child: SvgPicture.asset(
-                              "assets/graphics/icons/money.svg",
-                              width: 15,
-                              height: 15,
-                              colorFilter: ColorFilter.mode(
-                                Interface.dark,
-                                BlendMode.srcIn,
-                              ),
-                            )),
-                    AutoSizeText(
-                      _weapon.price == 0
-                          ? tr('free')
-                          : _weapon.price == -1
-                              ? tr('none')
-                              : "${_weapon.price}",
-                      maxLines: 1,
-                      textAlign: TextAlign.start,
-                      style: Interface.s18w500n(Interface.dark),
-                    )
-                  ])
-                ])),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Expanded(
-                  child: Container(
-                      margin: const EdgeInsets.only(right: 30),
-                      child: AutoSizeText(
-                        tr('weapon_magazine'),
-                        maxLines: 1,
-                        style: Interface.s16w300n(Interface.dark),
-                      ))),
-              Text(
-                _weapon.id == 21 ? "1/2" : _weapon.mag.toString(),
-                style: Interface.s18w500n(Interface.dark),
-              )
-            ]),
-            Container(
-                padding: const EdgeInsets.only(top: 30),
-                child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                  Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    _buildWeaponDetail(true, "assets/graphics/icons/weapon_accuracy.svg", _weapon.accuracy == -1 ? tr('none') : _weapon.accuracy.toString()),
-                    _buildWeaponDetail(false, "assets/graphics/icons/weapon_recoil.svg", _weapon.recoil == -1 ? tr('none') : _weapon.recoil.toString())
-                  ]),
-                  Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    _buildWeaponDetail(true, "assets/graphics/icons/weapon_reload.svg", _weapon.reload == -1 ? tr('none') : _weapon.reload.toString()),
-                    _buildWeaponDetail(false, "assets/graphics/icons/weapon_hipshot.svg", _weapon.hipshot == -1 ? tr('none') : _weapon.hipshot.toString())
-                  ])
-                ]))
-          ]))
-    ]);
+                  Text(
+                    _weapon.getTypeAsString(),
+                    style: Interface.s18w500n(Interface.dark),
+                  )
+                ]),
+                Container(
+                    margin: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                      Expanded(
+                          child: Padding(
+                              padding: const EdgeInsets.only(right: 30),
+                              child: AutoSizeText(
+                                tr('price'),
+                                maxLines: 1,
+                                style: Interface.s16w300n(Interface.dark),
+                              ))),
+                      Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                        _weapon.price == 0 || _weapon.price == -1
+                            ? const SizedBox.shrink()
+                            : Container(
+                                margin: const EdgeInsets.only(right: 2.5),
+                                child: SvgPicture.asset(
+                                  "assets/graphics/icons/money.svg",
+                                  width: 15,
+                                  height: 15,
+                                  colorFilter: ColorFilter.mode(
+                                    Interface.dark,
+                                    BlendMode.srcIn,
+                                  ),
+                                )),
+                        AutoSizeText(
+                          _weapon.price == 0
+                              ? tr('free')
+                              : _weapon.price == -1
+                                  ? tr('none')
+                                  : "${_weapon.price}",
+                          maxLines: 1,
+                          textAlign: TextAlign.start,
+                          style: Interface.s18w500n(Interface.dark),
+                        )
+                      ])
+                    ])),
+                Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.only(right: 30),
+                          child: AutoSizeText(
+                            tr('weapon_magazine'),
+                            maxLines: 1,
+                            style: Interface.s16w300n(Interface.dark),
+                          ))),
+                  Text(
+                    _weapon.id == 21 ? "1/2" : _weapon.mag.toString(),
+                    style: Interface.s18w500n(Interface.dark),
+                  )
+                ]),
+              ],
+            )),
+        EntryWeaponStatistics(
+          weapon: _weapon,
+        ),
+      ],
+    );
   }
 
   Widget _buildAmmo() {
@@ -158,7 +122,9 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
       WidgetTitleBig(
         primaryText: tr('weapon_ammo'),
       ),
-      ListWeaponAmmo(weaponId: _weapon.id),
+      ListWeaponAmmo(
+        weaponId: _weapon.id,
+      ),
     ]);
   }
 

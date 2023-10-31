@@ -27,6 +27,8 @@ class ActivityReserveInfo extends StatefulWidget {
 }
 
 class ActivityReserveInfoState extends State<ActivityReserveInfo> {
+  final double _wrapSpace = 10;
+
   late final Reserve _reserve;
 
   @override
@@ -40,10 +42,7 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
       primaryText: tr('map'),
       icon: "assets/graphics/icons/map.svg",
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => BuilderMap(reserveId: widget.reserveId)),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => BuilderMap(reserveId: widget.reserveId)));
       },
     );
   }
@@ -53,8 +52,8 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
         padding: const EdgeInsets.all(30),
         child: Column(children: [
           Wrap(
-            spacing: 10,
-            runSpacing: 10,
+            spacing: _wrapSpace,
+            runSpacing: _wrapSpace,
             children: [
               WidgetIcon(
                 icon: "assets/graphics/icons/environment_summer.svg",

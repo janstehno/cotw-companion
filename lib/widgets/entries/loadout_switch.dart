@@ -13,6 +13,8 @@ class WidgetLoadoutSwitch extends StatelessWidget {
   final bool isActive;
   final Function onTap;
 
+  final double height = 70;
+
   const WidgetLoadoutSwitch({
     Key? key,
     required this.primaryText,
@@ -31,39 +33,35 @@ class WidgetLoadoutSwitch extends StatelessWidget {
 
   Widget _buildWidgets() {
     return Container(
-        height: 70,
+        height: height,
         color: index % 2 == 0 ? Interface.even : Interface.odd,
         alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(children: [
           Expanded(
               child: Container(
                   margin: const EdgeInsets.only(right: 30),
                   child: secondaryText.isEmpty
                       ? AutoSizeText(
-                          primaryText,
-                          maxLines: maxLines,
-                          textAlign: TextAlign.start,
-                          style: Interface.s18w300n(Interface.dark),
-                        )
-                      : Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                              AutoSizeText(
-                                primaryText,
-                                maxLines: 1,
-                                textAlign: TextAlign.start,
-                                style: Interface.s18w300n(Interface.dark),
-                              ),
-                              AutoSizeText(
-                                secondaryText,
-                                maxLines: 1,
-                                textAlign: TextAlign.start,
-                                style: Interface.s12w300n(Interface.disabled),
-                              )
-                            ]))),
+                    primaryText,
+                    maxLines: maxLines,
+                    textAlign: TextAlign.start,
+                    style: Interface.s18w300n(Interface.dark),
+                  )
+                      : Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    AutoSizeText(
+                      primaryText,
+                      maxLines: 1,
+                      textAlign: TextAlign.start,
+                      style: Interface.s18w300n(Interface.dark),
+                    ),
+                    AutoSizeText(
+                      secondaryText,
+                      maxLines: 1,
+                      textAlign: TextAlign.start,
+                      style: Interface.s12w300n(Interface.disabled),
+                    )
+                  ]))),
           WidgetSwitchIcon(
             icon: icon,
             activeIcon: activeIcon,

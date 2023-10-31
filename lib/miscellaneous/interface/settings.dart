@@ -42,26 +42,28 @@ class Settings extends ChangeNotifier {
   late bool _mapZonesType;
   late bool _mapZonesStyle;
   late bool _mapZonesAccuracy;
+  late bool _mapPerformanceMode;
   late bool _bestWeaponsForAnimal;
   late bool _dateOfRecord;
   late bool _trophyLodgeRecord;
   late bool _furRarityPerCent;
   late SharedPreferences _sharedPreferences;
 
-  Settings(
-      {language,
-      color,
-      fontSize,
-      compactLogbook,
-      bool darkMode = false,
-      bool imperialUnits = false,
-      bool mapZonesType = false,
-      bool mapZonesStyle = false,
-      bool mapZonesAccuracy = false,
-      bool bestWeaponsForAnimal = false,
-      bool dateOfRecord = false,
-      bool trophyLodgeRecord = false,
-      bool furRarityPerCent = false}) {
+  Settings({
+    required language,
+    required color,
+    required compactLogbook,
+    required bool darkMode,
+    required imperialUnits,
+    required mapZonesType,
+    required mapZonesStyle,
+    required mapZonesAccuracy,
+    required mapPerformanceMode,
+    required bestWeaponsForAnimal,
+    required dateOfRecord,
+    required trophyLodgeRecord,
+    required furRarityPerCent,
+  }) {
     _language = language;
     _color = color;
     _compactLogbook = compactLogbook;
@@ -70,37 +72,40 @@ class Settings extends ChangeNotifier {
     _mapZonesType = mapZonesType;
     _mapZonesStyle = mapZonesStyle;
     _mapZonesAccuracy = mapZonesAccuracy;
+    _mapPerformanceMode = mapPerformanceMode;
     _bestWeaponsForAnimal = bestWeaponsForAnimal;
     _dateOfRecord = dateOfRecord;
     _trophyLodgeRecord = trophyLodgeRecord;
     _furRarityPerCent = furRarityPerCent;
   }
 
-  int get getColor => _color;
+  int get color => _color;
 
-  int get getCompactLogbook => _compactLogbook;
+  int get compactLogbook => _compactLogbook;
 
-  bool get getDarkMode => _darkMode;
+  bool get darkMode => _darkMode;
 
-  bool get getImperialUnits => _imperialUnits;
+  bool get imperialUnits => _imperialUnits;
 
-  bool get getMapZonesType => _mapZonesType;
+  bool get mapZonesType => _mapZonesType;
 
-  bool get getMapZonesStyle => _mapZonesStyle;
+  bool get mapZonesStyle => _mapZonesStyle;
 
-  bool get getMapZonesAccuracy => _mapZonesAccuracy;
+  bool get mapZonesAccuracy => _mapZonesAccuracy;
 
-  bool get getBestWeaponsForAnimal => _bestWeaponsForAnimal;
+  bool get mapPerformanceMode => _mapPerformanceMode;
 
-  bool get getDateOfRecord => _dateOfRecord;
+  bool get bestWeaponsForAnimal => _bestWeaponsForAnimal;
 
-  bool get getTrophyLodgeRecord => _trophyLodgeRecord;
+  bool get dateOfRecord => _dateOfRecord;
 
-  bool get getFurRarityPerCent => _furRarityPerCent;
+  bool get trophyLodgeRecord => _trophyLodgeRecord;
 
-  int get getLanguage => _language;
+  bool get furRarityPerCent => _furRarityPerCent;
 
-  List<String> get getLanguages => _languages;
+  int get language => _language;
+
+  List<String> get languages => _languages;
 
   Locale getLocale(int index) => _languageCodes[index];
 
@@ -180,6 +185,18 @@ class Settings extends ChangeNotifier {
     } else {
       _mapZonesAccuracy = true;
       await _sharedPreferences.setBool("mapZonesAccuracy", true);
+    }
+    notifyListeners();
+  }
+
+  Future<void> changeMapPerformanceMode() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    if (_mapPerformanceMode == true) {
+      _mapPerformanceMode = false;
+      await _sharedPreferences.setBool("mapPerformanceMode", false);
+    } else {
+      _mapPerformanceMode = true;
+      await _sharedPreferences.setBool("mapPerformanceMode", true);
     }
     notifyListeners();
   }

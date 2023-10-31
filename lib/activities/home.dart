@@ -31,6 +31,11 @@ class ActivityHome extends StatefulWidget {
 }
 
 class ActivityHomeState extends State<ActivityHome> {
+  final double _titleHeight = 35;
+  final double _footerLeftButtonSize = 20;
+  final double _footerRightButtonHeight = 30;
+  final double _menuTopBarHeight = 95;
+
   late double _screenWidth, _screenHeight;
 
   bool _menuOpened = false;
@@ -50,24 +55,6 @@ class ActivityHomeState extends State<ActivityHome> {
     }
   }
 
-  Widget _buildLink(String icon, String host, String path) {
-    return GestureDetector(
-        onTap: () {
-          _redirectTo(host, path);
-        },
-        child: Container(
-            padding: const EdgeInsets.only(right: 15),
-            child: SvgPicture.asset(
-              "assets/graphics/icons/$icon.svg",
-              width: 20,
-              height: 20,
-              colorFilter: const ColorFilter.mode(
-                Interface.alwaysLight,
-                BlendMode.srcIn,
-              ),
-            )));
-  }
-
   Widget _buildName() {
     return Container(
         padding: const EdgeInsets.all(30),
@@ -79,7 +66,7 @@ class ActivityHomeState extends State<ActivityHome> {
                     alignment: Alignment.topLeft,
                     child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Container(
-                          height: 35,
+                          height: _titleHeight,
                           alignment: Alignment.centerLeft,
                           child: AutoSizeText(
                             "COTW COMPANION",
@@ -157,7 +144,7 @@ class ActivityHomeState extends State<ActivityHome> {
                             _buildMenuItem("other", "other", const ListOther()),
                           ])))),
               Container(
-                  height: 95,
+                  height: _menuTopBarHeight,
                   color: Interface.sectionTitle,
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   alignment: Alignment.centerRight,
@@ -169,6 +156,24 @@ class ActivityHomeState extends State<ActivityHome> {
                         });
                       }))
             ])));
+  }
+
+  Widget _buildLink(String icon, String host, String path) {
+    return GestureDetector(
+        onTap: () {
+          _redirectTo(host, path);
+        },
+        child: Container(
+            padding: const EdgeInsets.only(right: 15),
+            child: SvgPicture.asset(
+              "assets/graphics/icons/$icon.svg",
+              width: _footerLeftButtonSize,
+              height: _footerLeftButtonSize,
+              colorFilter: const ColorFilter.mode(
+                Interface.alwaysLight,
+                BlendMode.srcIn,
+              ),
+            )));
   }
 
   Widget _buildLinks() {
@@ -191,7 +196,7 @@ class ActivityHomeState extends State<ActivityHome> {
               text: tr('about'),
               color: Interface.alwaysDark,
               background: Interface.alwaysLight,
-              buttonHeight: 30,
+              buttonHeight: _footerRightButtonHeight,
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityAbout()));
               },
@@ -203,7 +208,7 @@ class ActivityHomeState extends State<ActivityHome> {
               text: tr('issues'),
               color: Interface.alwaysDark,
               background: Interface.red,
-              buttonHeight: 30,
+              buttonHeight: _footerRightButtonHeight,
               isExternalLink: true,
               onTap: () {
                 _redirectTo("github.com", "/janstehno/cotwcompanion/issues");
@@ -216,7 +221,7 @@ class ActivityHomeState extends State<ActivityHome> {
               text: tr('ideas'),
               color: Interface.alwaysDark,
               background: Interface.yellow,
-              buttonHeight: 30,
+              buttonHeight: _footerRightButtonHeight,
               isExternalLink: true,
               onTap: () {
                 _redirectTo("github.com", "/janstehno/cotwcompanion/discussions");
@@ -227,7 +232,7 @@ class ActivityHomeState extends State<ActivityHome> {
           text: tr('patch_notes'),
           color: Interface.alwaysDark,
           background: Interface.blue,
-          buttonHeight: 30,
+          buttonHeight: _footerRightButtonHeight,
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
           },
@@ -254,7 +259,11 @@ class ActivityHomeState extends State<ActivityHome> {
   Widget _buildWidgets() {
     _getScreenSizes();
     return Scaffold(
-        appBar: AppBar(elevation: 0, backgroundColor: Interface.primary, toolbarHeight: 0.1),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Interface.primary,
+          toolbarHeight: 0.1,
+        ),
         body: OrientationBuilder(builder: (context, orientation) {
           return Stack(children: [
             SizedBox(

@@ -9,6 +9,11 @@ class WidgetSense extends StatelessWidget {
   final int sense;
   final bool isVisible;
 
+  final double height = 25;
+
+  final double _iconSize = 15;
+  final double _levelSize = 7;
+
   const WidgetSense({
     Key? key,
     required this.icon,
@@ -35,8 +40,8 @@ class WidgetSense extends StatelessWidget {
     List<Widget> result = [];
     for (int count = 0; count < sense; count++) {
       result.add(Container(
-          width: 7,
-          height: 7,
+          width: _levelSize,
+          height: _levelSize,
           margin: const EdgeInsets.only(right: 5),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10.0)),
@@ -48,11 +53,12 @@ class WidgetSense extends StatelessWidget {
 
   Widget _buildSense() {
     return SizedBox(
-        height: 25,
+        height: height,
         child: Row(children: [
           SvgPicture.asset(
             icon,
-            width: 15,
+            width: _iconSize,
+            height: _iconSize,
             colorFilter: ColorFilter.mode(
               Interface.dark,
               BlendMode.srcIn,

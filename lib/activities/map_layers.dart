@@ -25,17 +25,20 @@ class ActivityMapLayers extends StatefulWidget {
 }
 
 class ActivityMapLayersState extends State<ActivityMapLayers> {
+  final double _wrapSpace = 10;
+  final double _structureButtonSize = 50;
+
   Widget _buildEnvironment() {
     return Container(
         alignment: Alignment.topCenter,
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
         child: Wrap(
           alignment: WrapAlignment.center,
-          spacing: 10,
-          runSpacing: 10,
+          spacing: _wrapSpace,
+          runSpacing: _wrapSpace,
           children: [
             WidgetSwitchIcon(
-              buttonSize: 50,
+              buttonSize: _structureButtonSize,
               icon: "assets/graphics/icons/outpost.svg",
               activeColor: Interface.light,
               activeBackground: Interface.dark,
@@ -48,7 +51,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
               },
             ),
             WidgetSwitchIcon(
-              buttonSize: 50,
+              buttonSize: _structureButtonSize,
               icon: "assets/graphics/icons/lookout.svg",
               activeColor: Interface.light,
               activeBackground: Interface.dark,
@@ -61,7 +64,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
               },
             ),
             WidgetSwitchIcon(
-              buttonSize: 50,
+              buttonSize: _structureButtonSize,
               icon: "assets/graphics/icons/hide.svg",
               activeColor: Interface.light,
               activeBackground: Interface.dark,
@@ -96,7 +99,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
       ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: HelperMap.getNames.length,
+          itemCount: HelperMap.names.length,
           itemBuilder: (context, index) {
             return WidgetTapTextIndicator(
               text: HelperMap.getName(index),

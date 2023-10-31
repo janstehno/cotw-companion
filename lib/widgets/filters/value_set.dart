@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/widgets/text_field.dart';
+import 'package:cotwcompanion/widgets/text_field_indicator.dart';
 import 'package:cotwcompanion/widgets/title_info_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +71,7 @@ class FilterValueSetState extends State<FilterValueSet> {
       Row(
         children: [
           Expanded(
-            child: WidgetTextField(
+            child: WidgetTextFieldIndicator(
               controller: _controller,
               correct: _controller.text.isNotEmpty ? ((value >= widget.min) && (value <= widget.max)) || (value == 0) : true,
             ),

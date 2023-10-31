@@ -9,7 +9,7 @@ class WidgetTitleBig extends StatelessWidget {
   final String secondaryText;
   final int maxLines;
 
-  static const double height = 70;
+  final double height = 70;
 
   const WidgetTitleBig({
     Key? key,
@@ -23,7 +23,7 @@ class WidgetTitleBig extends StatelessWidget {
         height: height,
         color: Interface.title,
         alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        padding: const EdgeInsets.only(left: 30, right: 30),
         child: secondaryText.isEmpty
             ? AutoSizeText(
                 primaryText.toUpperCase(),

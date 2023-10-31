@@ -141,7 +141,9 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
                         callback: _callback,
                         context: context,
                       ),
-                      const SizedBox(height: 75),
+                      SizedBox(
+                        height: _menuHeight,
+                      ),
                     ])
                   : EntryLoadout(
                       index: index,

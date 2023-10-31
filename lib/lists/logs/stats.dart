@@ -30,6 +30,8 @@ class ListLogsStats extends StatefulWidget {
 class ListLogsStatsState extends State<ListLogsStats> {
   final Map<int, int> _trophy = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
   final Map<int, int> _fur = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+  final double _wrapSpace = 5;
+
   int _trophyLodge = 0;
 
   @override
@@ -201,8 +203,8 @@ class ListLogsStatsState extends State<ListLogsStats> {
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
         child: Wrap(
           alignment: WrapAlignment.start,
-          spacing: 5,
-          runSpacing: 5,
+          spacing: _wrapSpace,
+          runSpacing: _wrapSpace,
           children: tags,
         ),
       )
@@ -212,18 +214,18 @@ class ListLogsStatsState extends State<ListLogsStats> {
   Widget _buildList() {
     return widget.logs.isEmpty
         ? Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.all(30),
-            child: AutoSizeText(
-              tr('none'),
-              style: Interface.s16w300n(Interface.dark),
-            ),
-          )
+      alignment: Alignment.topLeft,
+      padding: const EdgeInsets.all(30),
+      child: AutoSizeText(
+        tr('none'),
+        style: Interface.s16w300n(Interface.dark),
+      ),
+    )
         : Column(children: [
-            _buildStats("stats", "stats", _buildGeneralTags()),
-            _buildStats("trophy_diamond", "trophy_rating", _buildTrophyTags()),
-            _buildStats("fur", "fur_rarity", _buildFurTags()),
-          ]);
+      _buildStats("stats", "stats", _buildGeneralTags()),
+      _buildStats("trophy_diamond", "trophy_rating", _buildTrophyTags()),
+      _buildStats("fur", "fur_rarity", _buildFurTags()),
+    ]);
   }
 
   Widget _buildWidgets() {

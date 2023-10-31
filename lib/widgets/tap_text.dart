@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 class WidgetTapText extends StatelessWidget {
   final String text;
   final Color? color, background;
-  final double height;
   final Function onTap;
+
+  final double height = 70;
 
   const WidgetTapText({
     Key? key,
     required this.text,
     this.color,
     this.background,
-    this.height = 80,
     required this.onTap,
   }) : super(key: key);
 

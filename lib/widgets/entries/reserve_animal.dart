@@ -31,6 +31,10 @@ class EntryReserveAnimal extends StatefulWidget {
 }
 
 class EntryReserveAnimalState extends State<EntryReserveAnimal> {
+  final double _editIconSize = 20;
+  final double _loadoutIconSize = 10;
+  final double _dotSize = 10;
+
   late final Animal _animal;
 
   @override
@@ -54,8 +58,8 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: SvgPicture.asset(
                   "assets/graphics/icons/edit.svg",
-                  height: 20,
-                  width: 20,
+                  width: _editIconSize,
+                  height: _editIconSize,
                   alignment: Alignment.centerLeft,
                   colorFilter: ColorFilter.mode(
                     Interface.light,
@@ -91,7 +95,7 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                               padding: EdgeInsets.only(bottom: HelperLoadout.containsCallerForAnimal(_animal.id) ? 3 : 0),
                               child: SvgPicture.asset(
                                 "assets/graphics/icons/loadout.svg",
-                                width: 11,
+                                width: _loadoutIconSize,
                                 colorFilter: ColorFilter.mode(
                                   Interface.dark,
                                   BlendMode.srcIn,
@@ -103,7 +107,7 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                               padding: EdgeInsets.only(top: (HelperLoadout.loadoutMin <= _animal.level && _animal.level <= HelperLoadout.loadoutMax) ? 3 : 0),
                               child: SvgPicture.asset(
                                 "assets/graphics/icons/sense_hearing.svg",
-                                width: 11,
+                                width: _loadoutIconSize,
                                 colorFilter: ColorFilter.mode(
                                   Interface.dark,
                                   BlendMode.srcIn,
@@ -115,8 +119,8 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                       padding: const EdgeInsets.only(left: 15),
                       child: _animal.isFromDlc
                           ? Container(
-                              height: 9,
-                              width: 9,
+                              height: _dotSize,
+                              width: _dotSize,
                               decoration: BoxDecoration(
                                 color: Interface.primary,
                                 border: Border.all(
@@ -125,7 +129,9 @@ class EntryReserveAnimalState extends State<EntryReserveAnimal> {
                                 ),
                                 borderRadius: BorderRadius.circular(5),
                               ))
-                          : Container(width: 9))
+                          : Container(
+                              width: _dotSize,
+                            ))
                 ]))));
   }
 

@@ -15,16 +15,36 @@ class HelperMap {
   static final Map<String, dynamic> _zones = {};
 
   static final List<bool> _activeE = [
-    true, //OUTPOSTS
+    false, //OUTPOSTS
     false, //LOOKOUTS
-    false, //HIdES
+    false, //HIDES
   ];
   static final List<Color> _colorsE = [
     Interface.dark, //OUTPOSTS
     Interface.dark, //LOOKOUTS
-    Interface.dark, //HIdES
+    Interface.dark, //HIDES
   ];
-  static final List<bool> _active = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  static final List<bool> _active = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
   static const List<Color> _colors = [
     Color(0xFF7C4DFF),
     Color(0xFFAB47BC),
@@ -47,15 +67,15 @@ class HelperMap {
     Color(0xFF8D6E63)
   ];
 
-  static List<Animal> get getAnimals => _animals;
+  static List<Animal> get animals => _animals;
 
-  static List<String> get getNames => _names;
+  static List<String> get names => _names;
 
-  static List<LatLng> get getOutposts => _outposts;
+  static List<LatLng> get outposts => _outposts;
 
-  static List<LatLng> get getLookouts => _lookouts;
+  static List<LatLng> get lookouts => _lookouts;
 
-  static List<LatLng> get getHides => _hides;
+  static List<LatLng> get hides => _hides;
 
   static Animal getAnimal(int index) => _animals[index];
 
@@ -73,9 +93,9 @@ class HelperMap {
 
   static bool getOpacityE(int index) => isActiveE(index);
 
-  static List<MapObject> getAnimalZones(int animalId, int zoom) {
+  static List<MapObject> getAnimalZones(int animalId) {
     List<MapObject> result = [];
-    for (List<dynamic> object in _zones[animalId.toString()][zoom.toString()].cast()) {
+    for (List<dynamic> object in _zones[animalId.toString()].cast()) {
       double x = object[0];
       double y = object[1];
       int zone = object.length > 2 ? object[2] : 3;
@@ -121,7 +141,7 @@ class HelperMap {
     _hides.clear();
     _zones.clear();
     for (int i = 0; i < _activeE.length; i++) {
-      _activeE[i] = (i == 0) ? true : false;
+      _activeE[i] = false;
     }
     for (int i = 0; i < _active.length; i++) {
       _active[i] = false;

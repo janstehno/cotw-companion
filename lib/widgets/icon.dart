@@ -6,16 +6,16 @@ import 'package:flutter_svg/svg.dart';
 
 class WidgetIcon extends StatelessWidget {
   final String icon;
-  final Color color, background;
   final double size;
+  final Color color, background;
   final bool isActive;
 
   const WidgetIcon({
     Key? key,
     required this.icon,
+    this.size = 35,
     required this.color,
     required this.background,
-    this.size = 35,
     this.isActive = true,
   }) : super(key: key);
 

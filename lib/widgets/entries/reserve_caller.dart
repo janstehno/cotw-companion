@@ -26,6 +26,8 @@ class EntryReserveCaller extends StatefulWidget {
 }
 
 class EntryReserveCallerState extends State<EntryReserveCaller> {
+  final double _dotSize = 10;
+
   late final Caller _caller;
 
   @override
@@ -56,8 +58,8 @@ class EntryReserveCallerState extends State<EntryReserveCaller> {
                   padding: const EdgeInsets.only(left: 15),
                   child: _caller.isFromDlc
                       ? Container(
-                          height: 9,
-                          width: 9,
+                          height: _dotSize,
+                          width: _dotSize,
                           decoration: BoxDecoration(
                             color: Interface.primary,
                             border: Border.all(
@@ -66,7 +68,9 @@ class EntryReserveCallerState extends State<EntryReserveCaller> {
                             ),
                             borderRadius: BorderRadius.circular(5),
                           ))
-                      : Container(width: 9))
+                      : Container(
+                          width: _dotSize,
+                        ))
             ])));
   }
 

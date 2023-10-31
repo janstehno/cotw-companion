@@ -37,6 +37,26 @@ class EntryLog extends StatefulWidget {
 }
 
 class EntryLogState extends State<EntryLog> {
+  final double _dateHeight = 15;
+  final double _dateIconSize = 9;
+  final double _nameHeight = 30;
+  final double _lodgeIconSize = 15;
+  final double _genderIconSize = 15;
+  final double _reserveIconHeight = 15;
+  final double _reserveIconSize = 10;
+  final double _furHeight = 15;
+  final double _furDotSize = 9;
+  final double _harvestHeight = 30;
+  final double _harvestWidth = 20;
+  final double _harvestIconSize = 15;
+  final double _trophyWidth = 100;
+  final double _trophyHeight = 30;
+  final double _trophyIconSize = 20;
+  final double _weightWidth = 65;
+  final double _weightHeight = 15;
+  final double _editIconSize = 20;
+  final double _toLodgeIconSize = 20;
+
   late final Settings _settings;
 
   late int _style;
@@ -52,8 +72,8 @@ class EntryLogState extends State<EntryLog> {
   }
 
   void _getData() {
-    _style = _settings.getCompactLogbook;
-    _dateOfRecord = _settings.getDateOfRecord;
+    _style = _settings.compactLogbook;
+    _dateOfRecord = _settings.dateOfRecord;
     _reserve = widget.log.reserve;
     _animal = widget.log.animal;
     _fur = widget.log.fur;
@@ -103,14 +123,15 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildDate() {
     return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
       Container(
-          width: 15,
-          height: 15,
+          width: _dateHeight,
+          height: _dateHeight,
           alignment: Alignment.center,
           margin: const EdgeInsets.only(right: 5),
+          padding: const EdgeInsets.all(3),
           child: SvgPicture.asset(
             "assets/graphics/icons/sort_date.svg",
-            width: 9,
-            height: 9,
+            width: _dateIconSize,
+            height: _dateIconSize,
             colorFilter: ColorFilter.mode(
               Interface.dark,
               BlendMode.srcIn,
@@ -118,12 +139,12 @@ class EntryLogState extends State<EntryLog> {
           )),
       Expanded(
           child: Container(
-              height: 15,
+              height: _dateHeight,
               alignment: Alignment.centerLeft,
               child: AutoSizeText(
                 widget.log.dateFormatted,
                 maxLines: 1,
-                minFontSize: 10,
+                minFontSize: 8,
                 textAlign: TextAlign.left,
                 style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
               )))
@@ -132,7 +153,7 @@ class EntryLogState extends State<EntryLog> {
 
   Widget _buildName() {
     return Container(
-      height: 30,
+      height: _nameHeight,
       alignment: Alignment.centerLeft,
       margin: const EdgeInsets.only(right: 30),
       child: AutoSizeText(
@@ -151,8 +172,8 @@ class EntryLogState extends State<EntryLog> {
             margin: const EdgeInsets.only(right: 5),
             child: SvgPicture.asset(
               "assets/graphics/icons/trophy_lodge.svg",
-              width: 15,
-              height: 15,
+              width: _lodgeIconSize,
+              height: _lodgeIconSize,
               colorFilter: ColorFilter.mode(
                 Interface.primary,
                 BlendMode.srcIn,
@@ -166,8 +187,8 @@ class EntryLogState extends State<EntryLog> {
         alignment: Alignment.centerRight,
         child: SvgPicture.asset(
           widget.log.isMale ? "assets/graphics/icons/gender_male.svg" : "assets/graphics/icons/gender_female.svg",
-          width: 15,
-          height: 15,
+          width: _genderIconSize,
+          height: _genderIconSize,
           colorFilter: ColorFilter.mode(
             widget.log.isMale ? Interface.genderMale : Interface.genderFemale,
             BlendMode.srcIn,
@@ -178,14 +199,14 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildReserve() {
     return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
       Container(
-          width: 15,
-          height: 15,
+          width: _reserveIconHeight,
+          height: _reserveIconHeight,
           alignment: Alignment.center,
           margin: const EdgeInsets.only(right: 5),
           child: SvgPicture.asset(
             "assets/graphics/icons/reserve.svg",
-            width: 10,
-            height: 10,
+            width: _reserveIconSize,
+            height: _reserveIconSize,
             colorFilter: ColorFilter.mode(
               Interface.dark,
               BlendMode.srcIn,
@@ -193,12 +214,12 @@ class EntryLogState extends State<EntryLog> {
           )),
       Expanded(
           child: Container(
-              height: 15,
+              height: _reserveIconHeight,
               alignment: Alignment.centerLeft,
               child: AutoSizeText(
                 _reserve.getName(context.locale),
                 maxLines: 1,
-                minFontSize: 10,
+                minFontSize: 8,
                 textAlign: TextAlign.left,
                 style: Interface.s14w300n(Interface.dark.withOpacity(0.75)),
               )))
@@ -208,26 +229,26 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildFur() {
     return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
       Container(
-          width: 15,
-          height: 15,
+          width: _furHeight,
+          height: _furHeight,
           alignment: Alignment.center,
           margin: const EdgeInsets.only(right: 5),
           child: Container(
-              width: 9,
-              height: 9,
+              width: _furDotSize,
+              height: _furDotSize,
               decoration: ShapeDecoration(
                 color: _fur.color,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
               ))),
       Expanded(
           child: Container(
-              height: 15,
+              height: _furHeight,
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(right: _style == 2 ? 30 : 0),
               child: AutoSizeText(
                 _fur.getName(context.locale),
                 maxLines: 1,
-                minFontSize: 10,
+                minFontSize: 8,
                 textAlign: TextAlign.left,
                 style: Interface.s14w300n(Interface.dark.withOpacity(0.75)),
               )))
@@ -236,14 +257,14 @@ class EntryLogState extends State<EntryLog> {
 
   Widget _buildHarvestCheckIcon(String icon, bool checked) {
     return Container(
-        height: 20,
-        width: 20,
+        height: _harvestHeight,
+        width: _harvestWidth,
         margin: const EdgeInsets.only(right: 10),
         alignment: Alignment.center,
         child: SvgPicture.asset(
           "assets/graphics/icons/$icon.svg",
-          width: 15,
-          height: 15,
+          width: _harvestIconSize,
+          height: _harvestIconSize,
           colorFilter: ColorFilter.mode(
             checked ? Interface.primary : Interface.disabled.withOpacity(0.3),
             BlendMode.srcIn,
@@ -253,7 +274,7 @@ class EntryLogState extends State<EntryLog> {
 
   Widget _buildHarvestCheck() {
     return Container(
-        height: 30,
+        height: _harvestHeight,
         margin: const EdgeInsets.only(top: 15),
         child: Row(
           mainAxisSize: MainAxisSize.max,
@@ -271,10 +292,10 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildTrophyWeight(bool buildWeight) {
     return ConstrainedBox(
         constraints: BoxConstraints(
-          minWidth: 100,
-          maxWidth: 100,
-          minHeight: (widget.log.weight > 0 && buildWeight) || _style == 3 ? 45 : 30,
-          maxHeight: (widget.log.weight > 0 && buildWeight) || _style == 3 ? 45 : 30,
+          minWidth: _trophyWidth,
+          maxWidth: _trophyWidth,
+          minHeight: (widget.log.weight > 0 && buildWeight) || _style == 3 ? _trophyHeight + _weightHeight : _trophyHeight,
+          maxHeight: (widget.log.weight > 0 && buildWeight) || _style == 3 ? _trophyHeight + _weightHeight : _trophyHeight,
         ),
         child: Container(
             alignment: Alignment.centerRight,
@@ -283,8 +304,7 @@ class EntryLogState extends State<EntryLog> {
               widget.log.weight > 0 && buildWeight ? _buildWeight() : const SizedBox.shrink(),
               Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
-                    width: 20,
-                    height: 30,
+                    width: _trophyIconSize,
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(right: 5),
                     child: SvgPicture.asset(
@@ -301,7 +321,7 @@ class EntryLogState extends State<EntryLog> {
                         child: AutoSizeText(
                           widget.log.removePointZero("${widget.log.trophy}"),
                           maxLines: 1,
-                          minFontSize: 10,
+                          minFontSize: 8,
                           style: Interface.s16w500n(Interface.dark),
                         )))
               ]),
@@ -310,7 +330,8 @@ class EntryLogState extends State<EntryLog> {
 
   Widget _buildWeight() {
     return SizedBox(
-        height: 15,
+        width: _weightWidth,
+        height: _weightHeight,
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(
               alignment: Alignment.centerLeft,
@@ -318,7 +339,7 @@ class EntryLogState extends State<EntryLog> {
               child: AutoSizeText(
                 widget.log.removePointZero("${widget.log.weight} ${widget.log.usesImperials ? tr('pounds') : tr('kilograms')}"),
                 maxLines: 1,
-                minFontSize: 10,
+                minFontSize: 8,
                 textAlign: TextAlign.left,
                 style: Interface.s14w300n(Interface.dark),
               ))
@@ -436,8 +457,8 @@ class EntryLogState extends State<EntryLog> {
                     padding: const EdgeInsets.only(left: 30, right: 30),
                     child: SvgPicture.asset(
                       "assets/graphics/icons/edit.svg",
-                      height: 20,
-                      width: 20,
+                      height: _editIconSize,
+                      width: _editIconSize,
                       alignment: Alignment.centerLeft,
                       colorFilter: const ColorFilter.mode(
                         Interface.alwaysDark,
@@ -451,8 +472,8 @@ class EntryLogState extends State<EntryLog> {
                     padding: const EdgeInsets.only(left: 30, right: 30),
                     child: SvgPicture.asset(
                       "assets/graphics/icons/trophy_lodge.svg",
-                      height: 20,
-                      width: 20,
+                      height: _toLodgeIconSize,
+                      width: _toLodgeIconSize,
                       alignment: Alignment.centerLeft,
                       colorFilter: ColorFilter.mode(
                         Interface.light,

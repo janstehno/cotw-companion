@@ -3,7 +3,7 @@
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/widgets/entries/fur.dart';
-import 'package:cotwcompanion/widgets/title_big_dot.dart';
+import 'package:cotwcompanion/widgets/title_small_dot.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +58,7 @@ class ListFurAnimalsState extends State<ListFurAnimals> {
     return _animalFurs.isNotEmpty
         ? Column(
             children: [
-              WidgetTitleBigDot(
+              WidgetTitleSmallDot(
                 primaryText: tr(_getRarity()),
                 dotColor: _animalFurs[0].color,
               ),

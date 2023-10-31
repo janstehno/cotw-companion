@@ -19,20 +19,24 @@ class WidgetMenuBar extends StatefulWidget {
 }
 
 class WidgetMenuBarState extends State<WidgetMenuBar> {
+  final double _itemWidth = 35;
+  final double _rowSpace = 10;
+  final double _rowMargin = 20;
+
   double _newWidth = 0;
   double _newHeight = 0;
 
   void _getWidth() {
-    double itemLength = (35 * widget.items.length) + (10 * (widget.items.length - 1));
-    _newWidth = widget.width > (40 + itemLength) ? (40 + itemLength) : widget.width;
+    double itemLength = (_itemWidth * widget.items.length) + (_rowSpace * (widget.items.length - 1));
+    _newWidth = widget.width > (_rowMargin * 2 + itemLength) ? (_rowMargin * 2 + itemLength) : widget.width;
   }
 
   void _getHeight() {
     _newHeight = widget.height;
     for (EntryMenuBarItem item in widget.items) {
       if (item.menuOpened) {
-        double itemLength = (35 * item.menuButtons.length) + (10 * (item.menuButtons.length - 1));
-        _newHeight = widget.height + (20 + itemLength);
+        double itemLength = (_itemWidth * item.menuButtons.length) + (_rowSpace * (item.menuButtons.length - 1));
+        _newHeight = widget.height + (_rowMargin + itemLength);
       }
     }
   }
@@ -43,8 +47,8 @@ class WidgetMenuBarState extends State<WidgetMenuBar> {
       widgets.add(
         AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          width: 35,
-          margin: EdgeInsets.fromLTRB(index == 0 ? 20 : 5, 0, index == widget.items.length - 1 ? 20 : 5, 20),
+          width: _itemWidth,
+          margin: EdgeInsets.fromLTRB(index == 0 ? _rowMargin : _rowSpace / 2, 0, index == widget.items.length - 1 ? _rowMargin : _rowSpace / 2, _rowMargin),
           child: widget.items[index],
         ),
       );

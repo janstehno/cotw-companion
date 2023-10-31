@@ -10,6 +10,7 @@ class WidgetSwitchIcon extends StatelessWidget {
   final double buttonSize;
   final Function onTap;
   final bool isActive;
+  final bool usable;
 
   const WidgetSwitchIcon({
     Key? key,
@@ -22,13 +23,16 @@ class WidgetSwitchIcon extends StatelessWidget {
     this.activeBackground,
     required this.onTap,
     required this.isActive,
+    this.usable = true,
   }) : super(key: key);
 
   Widget _buildWidgets() {
     return GestureDetector(
-        onTap: () {
-          onTap();
-        },
+        onTap: usable
+            ? () {
+                onTap();
+              }
+            : () {},
         child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             height: buttonSize,
@@ -36,12 +40,16 @@ class WidgetSwitchIcon extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(35 / 4)),
-              color: isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3),
+              color: usable && isActive
+                  ? activeBackground ?? Interface.primary
+                  : usable
+                      ? background ?? Interface.disabled.withOpacity(0.3)
+                      : (background ?? Interface.disabled).withOpacity(0.3),
             ),
             child: icon.isEmpty && activeIcon.isEmpty
                 ? const SizedBox.shrink()
                 : SvgPicture.asset(
-                    isActive
+                    usable && isActive
                         ? activeIcon.isEmpty
                             ? icon
                             : activeIcon
@@ -49,7 +57,11 @@ class WidgetSwitchIcon extends StatelessWidget {
                     width: buttonSize / 2,
                     height: buttonSize / 2,
                     colorFilter: ColorFilter.mode(
-                      isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled,
+                      usable && isActive
+                          ? activeColor ?? Interface.accent
+                          : usable
+                              ? color ?? Interface.alwaysDark.withOpacity(0.75)
+                              : (color ?? Interface.alwaysDark).withOpacity(0.75),
                       BlendMode.srcIn,
                     ),
                   )));

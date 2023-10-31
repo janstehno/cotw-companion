@@ -20,6 +20,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class BuilderHome extends StatelessWidget {
+
+  final double indicatorSize = 30;
+
   const BuilderHome({
     Key? key,
   }) : super(key: key);
@@ -67,7 +70,19 @@ class BuilderHome extends StatelessWidget {
             var mapObjects = snapshot.data![12] as Map<String, dynamic>;
             var widget = snapshot.data![13] as Widget;
             HelperJSON.setLists(
-                ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, mapObjects);
+                ammo,
+                animals,
+                animalsCallers,
+                animalsFurs,
+                animalsReserves,
+                animalsZones,
+                callers,
+                dlcs,
+                furs,
+                reserves,
+                weapons,
+                weaponsAmmo,
+                mapObjects);
             HelperJSON.setWeaponAmmo();
             HelperLog.context = context;
             return widget;
@@ -77,7 +92,10 @@ class BuilderHome extends StatelessWidget {
               return Container(
                 color: Interface.body,
                 padding: const EdgeInsets.all(30),
-                child: SpinKitThreeBounce(size: 30, color: Interface.dark),
+                child: SpinKitThreeBounce(
+                  size: indicatorSize,
+                  color: Interface.dark,
+                ),
               );
             });
           }

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.8.1";
+  static const String version = "1.8.2";
   static const int greatOneId = 100;
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;
@@ -145,6 +145,9 @@ class Interface {
 
   //smallText, subTextTitle
   static TextStyle s12w300n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+
+  //textFieldBorder
+  static InputBorder textFieldBorder() => const OutlineInputBorder(borderSide: BorderSide(width: 0.05, color: Colors.transparent));
 
   static void setColors(bool darkMode) {
     _darkMode = darkMode;

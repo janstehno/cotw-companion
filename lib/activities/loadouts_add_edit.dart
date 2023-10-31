@@ -14,7 +14,7 @@ import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/snackbar.dart';
-import 'package:cotwcompanion/widgets/text_field.dart';
+import 'package:cotwcompanion/widgets/text_field_indicator.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:cotwcompanion/widgets/title_big_button.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,6 +40,8 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   final RegExp _nameRegex = RegExp(r'^(\p{L}|[\d_\-]){1,30}$', unicode: true);
   final List<int> _selectedAmmo = [];
   final List<int> _selectedCallers = [];
+  final double _addButtonSize = 60;
+  final double _safeSpaceHeight = 100;
 
   late ScaffoldMessengerState _scaffoldMessengerState;
 
@@ -189,7 +191,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
       WidgetTitleBig(
         primaryText: tr('name'),
       ),
-      WidgetTextField(
+      WidgetTextFieldIndicator(
         numberOnly: false,
         correct: _correctName,
         controller: _controller,
@@ -228,7 +230,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
             sigma: 7,
             color: Interface.alwaysDark,
             child: WidgetButtonIcon(
-              buttonSize: 60,
+              buttonSize: _addButtonSize,
               icon: _editing ? "assets/graphics/icons/edit.svg" : "assets/graphics/icons/plus.svg",
               onTap: () {
                 _focus();
@@ -259,7 +261,9 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
         ),
         _buildName(),
         _buildWeaponsCallers(),
-        const SizedBox(height: 90),
+        SizedBox(
+          height: _safeSpaceHeight,
+        ),
       ]))),
       _buildAdd(),
     ]);

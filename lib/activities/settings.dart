@@ -5,7 +5,9 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/drop_down.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
+import 'package:cotwcompanion/widgets/settings_double.dart';
 import 'package:cotwcompanion/widgets/tap_text_indicator.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:cotwcompanion/widgets/title_big_switch.dart';
@@ -36,7 +38,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
 
   List<DropdownMenuItem> _buildDropDownLanguages() {
     List<DropdownMenuItem> items = [];
-    for (int index = 0; index < _settings.getLanguages.length; index++) {
+    for (int index = 0; index < _settings.languages.length; index++) {
       items.add(DropdownMenuItem(
           value: index,
           child: Container(
@@ -56,59 +58,16 @@ class ActivitySettingsState extends State<ActivitySettings> {
       WidgetTitleBig(
         primaryText: tr('language'),
       ),
-      DropdownButton(
-          dropdownColor: Interface.dropDown,
-          underline: const SizedBox.shrink(),
-          icon: const SizedBox.shrink(),
-          elevation: 0,
-          itemHeight: 60,
-          menuMaxHeight: 300,
-          isExpanded: true,
-          value: _settings.getLanguage,
-          onChanged: (dynamic value) {
+      WidgetDropDown(
+          value: _settings.language,
+          items: _buildDropDownLanguages(),
+          onTap: (dynamic value) {
             setState(() {
               _settings.changeLanguage(value);
               EasyLocalization.of(context)!.setLocale(_settings.getLocale(value));
               widget.callback();
             });
-          },
-          items: _buildDropDownLanguages())
-    ]);
-  }
-
-  Widget _buildColor() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr('color'),
-      ),
-      Container(
-          padding: const EdgeInsets.all(30),
-          child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              _buildColorButton(Interface.purple),
-              _buildColorButton(Interface.darkPink),
-              _buildColorButton(Interface.pink),
-              _buildColorButton(Interface.red),
-              _buildColorButton(Interface.redOrange),
-              _buildColorButton(Interface.orange),
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              _buildColorButton(Interface.teal),
-              _buildColorButton(Interface.green),
-              _buildColorButton(Interface.lightGreen),
-              _buildColorButton(Interface.grassGreen),
-              _buildColorButton(Interface.lightYellow),
-              _buildColorButton(Interface.yellow),
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-              _buildColorButton(Interface.lightBlue),
-              _buildColorButton(Interface.blue),
-              _buildColorButton(Interface.oceanBlue),
-              _buildColorButton(Interface.darkBlue),
-              _buildColorButton(Interface.grey),
-              _buildColorButton(Interface.brown),
-            ])
-          ])),
+          })
     ]);
   }
 
@@ -126,78 +85,97 @@ class ActivitySettingsState extends State<ActivitySettings> {
         ));
   }
 
+  Widget _buildColor() {
+    return Column(
+      children: [
+        WidgetTitleBig(
+          primaryText: tr('color'),
+        ),
+        Container(
+            padding: const EdgeInsets.all(30),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildColorButton(Interface.purple),
+                    _buildColorButton(Interface.darkPink),
+                    _buildColorButton(Interface.pink),
+                    _buildColorButton(Interface.red),
+                    _buildColorButton(Interface.redOrange),
+                    _buildColorButton(Interface.orange),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildColorButton(Interface.teal),
+                    _buildColorButton(Interface.green),
+                    _buildColorButton(Interface.lightGreen),
+                    _buildColorButton(Interface.grassGreen),
+                    _buildColorButton(Interface.lightYellow),
+                    _buildColorButton(Interface.yellow),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildColorButton(Interface.lightBlue),
+                    _buildColorButton(Interface.blue),
+                    _buildColorButton(Interface.oceanBlue),
+                    _buildColorButton(Interface.darkBlue),
+                    _buildColorButton(Interface.grey),
+                    _buildColorButton(Interface.brown),
+                  ],
+                )
+              ],
+            )),
+      ],
+    );
+  }
+
   Widget _buildInterface() {
     return Column(children: [
       WidgetTitleBig(
         primaryText: tr('interface'),
       ),
       Container(
-          padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Expanded(
-                child: GestureDetector(
+          padding: const EdgeInsets.only(left: 30, right: 30),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: WidgetSettingsDouble(
+                    text: tr('light_mode'),
+                    isActive: !(_settings.darkMode),
                     onTap: () {
                       setState(() {
                         _settings.changeTheme(false);
                         widget.callback();
                       });
-                    },
-                    child: Container(
-                        height: 60,
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              width: 20,
-                              height: 20,
-                              margin: const EdgeInsets.only(right: 15),
-                              decoration: BoxDecoration(
-                                color: _settings.getDarkMode ? Interface.disabled : Interface.primary,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            Expanded(
-                                child: AutoSizeText(
-                              tr('light_mode'),
-                              textAlign: TextAlign.start,
-                              style: Interface.s16w300n(Interface.dark),
-                            ))
-                          ],
-                        )))),
-            Expanded(
-                child: GestureDetector(
+                    }),
+              ),
+              Expanded(
+                child: WidgetSettingsDouble(
+                    text: tr('dark_mode'),
+                    alignRight: true,
+                    isActive: _settings.darkMode,
                     onTap: () {
                       setState(() {
                         _settings.changeTheme(true);
                         widget.callback();
                       });
-                    },
-                    child: Container(
-                        height: 60,
-                        color: Colors.transparent,
-                        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                          Expanded(
-                              child: AutoSizeText(
-                            tr('dark_mode'),
-                            textAlign: TextAlign.end,
-                            style: Interface.s16w300n(Interface.dark),
-                          )),
-                          AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            width: 20,
-                            height: 20,
-                            margin: const EdgeInsets.only(left: 15),
-                            decoration: BoxDecoration(
-                              color: _settings.getDarkMode ? Interface.primary : Interface.disabled,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          )
-                        ]))))
-          ]))
+                    }),
+              ),
+            ],
+          ))
     ]);
   }
 
@@ -207,72 +185,37 @@ class ActivitySettingsState extends State<ActivitySettings> {
         primaryText: tr('units'),
       ),
       Container(
-          padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Expanded(
-                child: GestureDetector(
+          padding: const EdgeInsets.only(left: 30, right: 30),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: WidgetSettingsDouble(
+                    text: tr('metric_units'),
+                    isActive: !(_settings.imperialUnits),
                     onTap: () {
                       setState(() {
                         _settings.changeUnits(false);
                         widget.callback();
                       });
-                    },
-                    child: Container(
-                        height: 60,
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              width: 20,
-                              height: 20,
-                              margin: const EdgeInsets.only(right: 15),
-                              decoration: BoxDecoration(
-                                color: _settings.getImperialUnits ? Interface.disabled : Interface.primary,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            Expanded(
-                                child: AutoSizeText(
-                              tr('metric_units'),
-                              textAlign: TextAlign.start,
-                              style: Interface.s16w300n(Interface.dark),
-                            ))
-                          ],
-                        )))),
-            Expanded(
-                child: GestureDetector(
+                    }),
+              ),
+              Expanded(
+                child: WidgetSettingsDouble(
+                    text: tr('imperial_units'),
+                    alignRight: true,
+                    isActive: _settings.imperialUnits,
                     onTap: () {
                       setState(() {
                         _settings.changeUnits(true);
                         widget.callback();
                       });
-                    },
-                    child: Container(
-                        height: 60,
-                        color: Colors.transparent,
-                        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                          Expanded(
-                              child: AutoSizeText(
-                            tr('imperial_units'),
-                            textAlign: TextAlign.end,
-                            style: Interface.s16w300n(Interface.dark),
-                          )),
-                          AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            width: 20,
-                            height: 20,
-                            margin: const EdgeInsets.only(left: 15),
-                            decoration: BoxDecoration(
-                              color: _settings.getImperialUnits ? Interface.primary : Interface.disabled,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          )
-                        ]))))
-          ]))
+                    }),
+              )
+            ],
+          ))
     ]);
   }
 
@@ -285,7 +228,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
             WidgetTitleBigSwitch(
                 primaryText: tr('fur_rarity_per_cent'),
                 maxLines: 2,
-                isActive: _settings.getFurRarityPerCent,
+                isActive: _settings.furRarityPerCent,
                 onTap: () {
                   setState(() {
                     _settings.changeFurRarityPerCent();
@@ -293,7 +236,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
                   });
                 }),
             Container(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                padding: const EdgeInsets.only(left: 30, right: 30),
                 child: AutoSizeText(
                   "by Ramalamadingdong7",
                   style: Interface.s14w500n(Interface.dark),
@@ -314,9 +257,19 @@ class ActivitySettingsState extends State<ActivitySettings> {
         primaryText: tr('other'),
       ),
       WidgetTapTextIndicator(
+          text: tr('map_performance_mode'),
+          maxLines: 2,
+          isActive: _settings.mapPerformanceMode,
+          onTap: () {
+            setState(() {
+              _settings.changeMapPerformanceMode();
+              widget.callback();
+            });
+          }),
+      WidgetTapTextIndicator(
           text: tr('map_zones_accuracy'),
           maxLines: 2,
-          isActive: _settings.getMapZonesAccuracy,
+          isActive: _settings.mapZonesAccuracy,
           onTap: () {
             setState(() {
               _settings.changeMapZonesAccuracy();
@@ -326,7 +279,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
       WidgetTapTextIndicator(
           text: tr('best_weapons'),
           maxLines: 2,
-          isActive: _settings.getBestWeaponsForAnimal,
+          isActive: _settings.bestWeaponsForAnimal,
           onTap: () {
             setState(() {
               _settings.changeBestWeaponsForAnimal();

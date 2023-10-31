@@ -9,6 +9,7 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/drop_down.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/slider.dart';
@@ -32,6 +33,14 @@ class ActivityNeedZones extends StatefulWidget {
 class ActivityNeedZonesState extends State<ActivityNeedZones> {
   final List<bool> _shownClasses = [false, false, false, false, false, false, false, false, false];
   final List<bool> _disabledClasses = [true, true, true, true, true, true, true, true, true];
+  final double _interfaceHeight = 45;
+  final double _interfaceIconSize = 45;
+  final double _timeWidth = 40;
+  final double _timeDotWidth = 15;
+  final double _timeDotSize = 3.5;
+  final double _switchWidth = 30;
+  final double _switchSpace = 10;
+  final double _switchPadding = 30;
 
   late List<int> _allClasses = [];
   late RestartableTimer _timer;
@@ -43,6 +52,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   int _minute = 30;
   int _second = 0;
   int _reserveId = 1;
+  int _inGameSecond = 995572;
 
   @override
   void initState() {
@@ -53,15 +63,14 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   }
 
   void _adjustSecond() {
-    int inGameSecond = 995572;
     setState(() {
       _timer.cancel();
       if (_hour < 4) {
-        inGameSecond = 1000717;
+        _inGameSecond = 1000717;
       } else if (_hour > 15) {
-        inGameSecond = 1021850;
+        _inGameSecond = 1021850;
       }
-      _timer = RestartableTimer(Duration(microseconds: inGameSecond), () => _changeTime());
+      _timer = RestartableTimer(Duration(microseconds: _inGameSecond), () => _changeTime());
     });
   }
 
@@ -131,39 +140,33 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
         ? const SizedBox.shrink()
         : Container(
             padding: const EdgeInsets.all(0),
-            child: DropdownButton(
-              dropdownColor: Interface.dropDown,
-              underline: const SizedBox.shrink(),
-              icon: const SizedBox.shrink(),
-              elevation: 0,
-              itemHeight: 60,
-              menuMaxHeight: 300,
-              isExpanded: true,
-              value: _reserveId,
-              onChanged: (dynamic value) {
-                setState(() {
-                  _reserveId = value;
-                  _allClasses = HelperJSON.getReserve(value).allClasses;
-                  _resetSwitches();
-                });
-              },
-              items: _buildDropDownReserves(),
-            ));
+            child: WidgetDropDown(
+                value: _reserveId,
+                items: _buildDropDownReserves(),
+                onTap: (dynamic value) {
+                  setState(() {
+                    _reserveId = value;
+                    _allClasses = HelperJSON.getReserve(value).allClasses;
+                    _resetSwitches();
+                  });
+                }));
   }
 
   List<DropdownMenuItem> _buildDropDownReserves() {
     List<DropdownMenuItem> items = [];
     for (Reserve reserve in HelperJSON.reserves) {
-      items.add(DropdownMenuItem(
-          value: reserve.id,
-          child: Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              child: AutoSizeText(
-                reserve.getName(context.locale),
-                maxLines: 1,
-                style: Interface.s16w300n(Interface.dark),
-              ))));
+      items.add(
+        DropdownMenuItem(
+            value: reserve.id,
+            child: Container(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.only(left: 30, right: 30),
+                child: AutoSizeText(
+                  reserve.getName(context.locale),
+                  maxLines: 1,
+                  style: Interface.s16w300n(Interface.dark),
+                ))),
+      );
     }
     return items;
   }
@@ -173,7 +176,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return Row(children: [
       _compact
           ? WidgetButtonIcon(
-              buttonSize: 45,
+              buttonSize: _interfaceIconSize,
               icon: "assets/graphics/icons/min_max.svg",
               color: color,
               background: Colors.transparent,
@@ -186,7 +189,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           : const SizedBox.shrink(),
       portrait
           ? WidgetSwitchIcon(
-              buttonSize: 45,
+              buttonSize: _interfaceIconSize,
               icon: "assets/graphics/icons/view_compact.svg",
               activeIcon: "assets/graphics/icons/view_expanded.svg",
               color: color,
@@ -208,7 +211,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   Widget _buildTime(Color color) {
     return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
       AnimatedContainer(
-          width: 40,
+          width: _timeWidth,
           padding: const EdgeInsets.only(right: 3),
           duration: const Duration(microseconds: 200),
           child: AutoSizeText(
@@ -218,20 +221,20 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             style: Interface.s18w500n(Interface.dark),
           )),
       AnimatedContainer(
-          width: 15,
+          width: _timeDotWidth,
           duration: const Duration(microseconds: 200),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
-                width: 3.5,
-                height: 3.5,
+                width: _timeDotSize,
+                height: _timeDotSize,
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(2),
                 ),
                 margin: const EdgeInsets.only(bottom: 2)),
             Container(
-              width: 3.5,
-              height: 3.5,
+              width: _timeDotSize,
+              height: _timeDotSize,
               decoration: BoxDecoration(
                 color: color,
                 borderRadius: BorderRadius.circular(2),
@@ -240,7 +243,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             )
           ])),
       AnimatedContainer(
-          width: 40,
+          width: _timeWidth,
           duration: const Duration(microseconds: 200),
           child: AutoSizeText(
             _minute.toInt().toString(),
@@ -249,20 +252,20 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             style: Interface.s18w500n(Interface.dark),
           )),
       AnimatedContainer(
-          width: 15,
+          width: _timeDotWidth,
           duration: const Duration(microseconds: 200),
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
-                width: 3.5,
-                height: 3.5,
+                width: _timeDotSize,
+                height: _timeDotSize,
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 margin: const EdgeInsets.only(bottom: 2)),
             Container(
-              width: 3.5,
-              height: 3.5,
+              width: _timeDotSize,
+              height: _timeDotSize,
               decoration: BoxDecoration(
                 color: color,
                 borderRadius: BorderRadius.circular(10),
@@ -271,7 +274,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             )
           ])),
       AnimatedContainer(
-          width: 40,
+          width: _timeWidth,
           padding: const EdgeInsets.only(left: 3),
           duration: const Duration(microseconds: 200),
           child: AutoSizeText(
@@ -287,7 +290,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     Color color = Interface.dark;
     Color background = Interface.primary.withOpacity(0.5);
     return AnimatedContainer(
-        height: 45,
+        height: _interfaceHeight,
         padding: const EdgeInsets.only(left: 20, right: 20),
         duration: const Duration(microseconds: 200),
         color: background,
@@ -298,20 +301,19 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   }
 
   double _getSwitchSize() {
-    double itemWidth = 30;
     double screenWidth = MediaQuery.of(context).size.width;
-    double itemsBetween = 8 * 10 + 60;
+    double itemsBetween = 8 * _switchSpace + _switchPadding * 2;
     double availableWidth = screenWidth - itemsBetween;
-    double itemsWidth = 9 * itemWidth;
+    double itemsWidth = 9 * _switchWidth;
     double calcWidth = availableWidth / 9;
-    return availableWidth > itemsWidth ? itemWidth : calcWidth;
+    return availableWidth > itemsWidth ? _switchWidth : calcWidth;
   }
 
   List<Widget> _buildClassSwitches() {
     List<Widget> switches = [];
     for (int index = 0; index < 9; index++) {
       switches.add(Container(
-          margin: EdgeInsets.only(right: index < 8 ? 10 : 0),
+          margin: EdgeInsets.only(right: index < 8 ? _switchSpace : 0),
           child: WidgetSwitchText(
             buttonWidth: _getSwitchSize(),
             buttonHeight: _getSwitchSize(),

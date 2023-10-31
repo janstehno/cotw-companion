@@ -31,13 +31,16 @@ class FilterPickerText extends StatefulWidget {
 }
 
 class FilterPickerTextState extends State<FilterPickerText> {
+  final double _buttonHeight = 30;
+  final double _wrapSpace = 10;
+
   List<Widget> _buildSwitches() {
     List<Widget> switches = [];
     for (int index = 0; index < widget.values.length; index++) {
       int key = widget.values[index];
       switches.add(
         WidgetSwitchText(
-            buttonHeight: 30,
+            buttonHeight: _buttonHeight,
             text: widget.keys[index],
             activeColor: widget.colors.isEmpty ? Interface.accent : widget.colors[index],
             activeBackground: widget.backgrounds.isEmpty ? Interface.primary : widget.backgrounds[index],
@@ -62,8 +65,8 @@ class FilterPickerTextState extends State<FilterPickerText> {
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
         child: Wrap(
-          spacing: 10,
-          runSpacing: 10,
+          spacing: _wrapSpace,
+          runSpacing: _wrapSpace,
           alignment: WrapAlignment.start,
           children: _buildSwitches(),
         ),

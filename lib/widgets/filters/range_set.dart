@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/widgets/text_field.dart';
+import 'package:cotwcompanion/widgets/text_field_indicator.dart';
 import 'package:cotwcompanion/widgets/title_info_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -78,14 +78,14 @@ class FilterRangeSetState extends State<FilterRangeSet> {
       Row(
         children: [
           Expanded(
-            child: WidgetTextField(
+            child: WidgetTextFieldIndicator(
               icon: "assets/graphics/icons/range_min.svg",
               controller: _controllerMin,
               correct: _controllerMin.text.isNotEmpty ? (double.tryParse(_controllerMin.text) ?? widget.min - 1) >= widget.min : true,
             ),
           ),
           Expanded(
-            child: WidgetTextField(
+            child: WidgetTextFieldIndicator(
               icon: "assets/graphics/icons/range_max.svg",
               controller: _controllerMax,
               correct: _controllerMax.text.isNotEmpty ? (double.tryParse(_controllerMax.text) ?? widget.max + 1) <= widget.max : true,

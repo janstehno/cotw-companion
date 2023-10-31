@@ -1,24 +1,19 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/button_icon.dart';
+import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:flutter/material.dart';
 
-class WidgetTitleBigButton extends WidgetTitleBig {
+class WidgetTitleBigIcon extends WidgetTitleBig {
   final String icon;
-  final Color? color, background;
-  final Function onTap;
 
-  const WidgetTitleBigButton({
+  const WidgetTitleBigIcon({
     super.key,
     required super.primaryText,
     super.secondaryText,
     required this.icon,
-    this.color,
-    this.background,
-    required this.onTap,
   });
 
   Widget _buildWidgets() {
@@ -52,14 +47,17 @@ class WidgetTitleBigButton extends WidgetTitleBig {
                             style: Interface.s12w300n(Interface.disabled),
                           )
                         ]))),
-          WidgetButtonIcon(
-            icon: icon,
-            color: color,
-            background: background,
-            onTap: () {
-              onTap();
-            },
-          )
+          Container(
+              height: super.height,
+              color: Interface.title,
+              padding: const EdgeInsets.only(right: 25),
+              alignment: Alignment.center,
+              child: WidgetTag.big(
+                height: super.height / 1.75,
+                icon: icon,
+                color: Interface.disabled,
+                background: Colors.transparent,
+              ))
         ]));
   }
 

@@ -1,6 +1,6 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'dart:math';
+import 'dart:math' hide log;
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/map_information.dart';
@@ -39,16 +39,21 @@ class ActivityMap extends StatefulWidget {
 
 class ActivityMapState extends State<ActivityMap> {
   final MapController _mapController = MapController(location: const LatLng(0, 0), zoom: 1, projection: const MapProjection());
+  final List<Widget> _outpostLocations = [];
+  final List<Widget> _lookoutLocations = [];
+  final List<Widget> _hideLocations = [];
+  final List<Widget> _zoneLocations = [];
+  final double _menuHeight = 75;
   final double _zoomSpeed = 0.02;
   final double _minZoom = 1;
   final double _maxZoom = 3;
   final int _minRowTiles = 4;
-  final int _recommendedNumber = 100;
-  final double _menuHeight = 75;
+  final int _recommendedNumberOfZones = 100;
 
   late final Reserve _reserve;
   late final Settings _settings;
 
+  late MapTransformer _mapTransformer;
   late double _tileSize;
 
   Offset? _dragStart;
@@ -57,10 +62,11 @@ class ActivityMapState extends State<ActivityMap> {
   double _centerLngEnd = const LatLng(0, 0).longitude;
   double _screenWidth = 0;
   double _screenHeight = 0;
-  double _circle = 200;
-  double _circleBorder = 2;
-  int _level = 1;
+  double _distanceThreshold = 0.3;
+  double _dotSize = 5;
+  double _circleSize = 200;
   double _opacity = 1;
+  int _level = 1;
   bool _showInterface = true;
 
   @override
@@ -71,7 +77,9 @@ class ActivityMapState extends State<ActivityMap> {
   }
 
   void _reload() {
-    setState(() {});
+    setState(() {
+      _updateMap();
+    });
   }
 
   void _getScreenSize() {
@@ -92,18 +100,21 @@ class ActivityMapState extends State<ActivityMap> {
   void _values(double zoom) {
     if (zoom >= 1) {
       _level = 1;
-      _circle = 200;
-      _circleBorder = 2;
+      _dotSize = 5;
+      _circleSize = 200;
+      _distanceThreshold = 0.3;
     }
-    if (zoom > 1.667) {
+    if (zoom > 1.666) {
       _level = 2;
-      _circle = 150;
-      _circleBorder = 3;
+      _dotSize = 7.5;
+      _circleSize = 100;
+      _distanceThreshold = 0.1;
     }
-    if (zoom > 2.334) {
+    if (zoom > 2.333) {
       _level = 3;
-      _circle = 10;
-      _circleBorder = 5;
+      _dotSize = 10;
+      _circleSize = 0;
+      _distanceThreshold = 0;
     }
   }
 
@@ -112,54 +123,84 @@ class ActivityMapState extends State<ActivityMap> {
     return false;
   }
 
+  void _updateZoneStyle() {
+    setState(() {
+      _settings.changeMapZonesStyle();
+      _clearZoneLocations();
+      _updateZoneLocations();
+    });
+  }
+
+  void _updateZoneType() {
+    setState(() {
+      _settings.changeMapZonesType();
+      _clearZoneLocations();
+      _updateZoneLocations();
+    });
+  }
+
   void _onScaleStart(ScaleStartDetails details) {
+    setState(() {
+      _clearLocations();
+      _clearZoneLocations();
+    });
     _dragStart = details.focalPoint;
     _scaleStart = 1.0;
   }
 
-  void _onScaleUpdate(ScaleUpdateDetails details, MapTransformer transformer) {
+  void _onScaleEnd() {
+    setState(() {
+      _updateLocations();
+      _updateZoneLocations();
+    });
+  }
+
+  void _onScaleUpdate(ScaleUpdateDetails details) {
     final scaleDiff = details.scale - _scaleStart;
     _scaleStart = details.scale;
     _values(_mapController.zoom);
 
     if (scaleDiff > 0) {
-      _mapController.zoom = _clamp(_mapController.zoom + _zoomSpeed, _minZoom, _maxZoom);
-      setState(() {});
+      setState(() {
+        _mapController.zoom = _clamp(_mapController.zoom + _zoomSpeed, _minZoom, _maxZoom);
+      });
     } else if (scaleDiff < 0) {
-      _mapController.zoom = _clamp(_mapController.zoom - _zoomSpeed, _minZoom, _maxZoom);
-      setState(() {});
+      setState(() {
+        _mapController.zoom = _clamp(_mapController.zoom - _zoomSpeed, _minZoom, _maxZoom);
+      });
     } else {
       final now = details.focalPoint;
       final diff = now - _dragStart!;
-      _dragStart = now;
-      transformer.drag(diff.dx, diff.dy);
-      setState(() {});
+      setState(() {
+        _dragStart = now;
+        _mapTransformer.drag(diff.dx, diff.dy);
+      });
     }
 
     //LEFT BORDER
-    if (transformer.toOffset(LatLng(_mapController.center.latitude, -360)).dx > 0) {
-      double y = _centerLngEnd + (-360 - transformer.toLatLng(const Offset(0, 0)).longitude);
+    if (_mapTransformer.toOffset(LatLng(_mapController.center.latitude, -360)).dx > 0) {
+      double y = _centerLngEnd + (-360 - _mapTransformer.toLatLng(const Offset(0, 0)).longitude);
       y = y > 0 ? 0 : y;
       _mapController.center = LatLng(_mapController.center.latitude, y);
     }
 
     //RIGHT BORDER
-    if (transformer.toOffset(LatLng(_mapController.center.latitude, 360)).dx < _screenWidth) {
-      double y = _centerLngEnd + (360 - transformer.toLatLng(Offset(_screenWidth, 0)).longitude);
+    if (_mapTransformer.toOffset(LatLng(_mapController.center.latitude, 360)).dx < _screenWidth) {
+      double y = _centerLngEnd + (360 - _mapTransformer.toLatLng(Offset(_screenWidth, 0)).longitude);
       y = y < 0 ? 0 : y;
       _mapController.center = LatLng(_mapController.center.latitude, y);
     }
 
     //TOP BORDER
-    if (transformer.toOffset(LatLng(-360, _mapController.center.longitude)).dy > 0) {
-      double x = _centerLatEnd + (-360 - transformer.toLatLng(const Offset(0, 0)).latitude);
+    if (_mapTransformer.toOffset(LatLng(-360, _mapController.center.longitude)).dy > 0) {
+      double x = _centerLatEnd + (-360 - _mapTransformer.toLatLng(const Offset(0, 0)).latitude);
       x = x > 0 ? 0 : x;
       _mapController.center = LatLng(x, _mapController.center.longitude);
     }
 
     //BOTTOM BORDER
-    if (transformer.toOffset(LatLng(360, _mapController.center.longitude)).dy < _screenHeight) {
-      double x = _centerLatEnd + (360 - transformer.toLatLng(Offset(0, _screenHeight)).latitude);
+    if (_mapTransformer.toOffset(LatLng(360, _mapController.center.longitude)).dy < _screenHeight) {
+      double x = _centerLatEnd + (360 - _mapTransformer.toLatLng(Offset(0, _screenHeight)).latitude);
       x = x < 0 ? 0 : x;
       _mapController.center = LatLng(x, _mapController.center.longitude);
     }
@@ -168,15 +209,46 @@ class ActivityMapState extends State<ActivityMap> {
     _centerLngEnd = _mapController.center.longitude;
   }
 
+  Future<void> _updateMap() async {
+    _clearLocations();
+    await _updateLocations();
+    _clearZoneLocations();
+    await _updateZoneLocations();
+  }
+
+  void _clearLocations() {
+    _outpostLocations.clear();
+    _lookoutLocations.clear();
+    _hideLocations.clear();
+  }
+
+  void _clearZoneLocations() {
+    _zoneLocations.clear();
+  }
+
+  Future<void> _updateLocations() async {
+    _outpostLocations.addAll(await _buildObjectMarkers(HelperMap.outposts, 15, MapItem.outpost));
+    _lookoutLocations.addAll(await _buildObjectMarkers(HelperMap.lookouts, 15, MapItem.lookout));
+    _hideLocations.addAll(await _buildObjectMarkers(HelperMap.hides, 3, MapItem.hide));
+  }
+
+  Future<void> _updateZoneLocations() async {
+    for (int index = 0; index < HelperMap.animals.length; index++) {
+      _zoneLocations.addAll(await _buildZones(index));
+    }
+  }
+
   Widget _buildMap(Orientation orientation) {
     return MapLayout(
         tileSize: _tileSize.toInt() + 1,
         controller: _mapController,
         builder: (context, transformer) {
+          _mapTransformer = transformer;
           return GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onScaleStart: _onScaleStart,
-              onScaleUpdate: (details) => _onScaleUpdate(details, transformer),
+              onScaleStart: (details) => _onScaleStart(details),
+              onScaleUpdate: (details) => _onScaleUpdate(details),
+              onScaleEnd: (details) => _onScaleEnd(),
               child: Stack(children: [
                 TileLayer(builder: (context, x, y, z) {
                   if ((z == 1 && (x >= -1 && y >= -1 && x <= 2 && y <= 2)) ||
@@ -190,26 +262,15 @@ class ActivityMapState extends State<ActivityMap> {
                   return const SizedBox.shrink();
                 }),
                 Container(color: Interface.alwaysDark.withOpacity(0.5)),
-                ..._buildObjectMarkers(transformer, HelperMap.getOutposts, Interface.alwaysLight, 15, MapItem.outpost),
-                ..._buildObjectMarkers(transformer, HelperMap.getLookouts, Interface.alwaysLight, 15, MapItem.lookout),
-                ..._buildObjectMarkers(transformer, HelperMap.getHides, Interface.alwaysLight, 3, MapItem.hide),
-                for (int index = 0; index < HelperMap.getAnimals.length; index++) ..._buildZones(transformer, index)
+                ..._outpostLocations,
+                ..._lookoutLocations,
+                ..._hideLocations,
+                ..._zoneLocations,
               ]));
         });
   }
 
-  Iterable<Widget> _buildObjectMarkers(MapTransformer transformer, List<LatLng> list, Color color, double iconSize, MapItem objectType) {
-    String icon = Graphics.getMapObjectIcon(objectType, _level);
-    if (HelperMap.isActiveE(objectType.index)) {
-      final positions = list.map(transformer.toOffset).toList();
-      return positions.map(
-        (offset) => _buildObjectMarker(offset, icon, color, iconSize, objectType),
-      );
-    }
-    return [];
-  }
-
-  Widget _buildObjectMarker(Offset offset, String icon, Color color, double markerSize, MapItem objectType) {
+  Widget _buildObjectMarker(Offset offset, String icon, double markerSize, MapItem objectType) {
     double size = markerSize + (_mapController.zoom * 5);
     double left = offset.dx - (size / 2);
     double right = offset.dx + (size / 2);
@@ -227,64 +288,111 @@ class ActivityMapState extends State<ActivityMap> {
               : Image.asset(
                   icon,
                   fit: BoxFit.fitWidth,
-                  color: color,
+                  color: Interface.alwaysLight,
                 ));
     }
     return const SizedBox.shrink();
   }
 
-  Iterable<Widget> _buildZones(MapTransformer transformer, int index) {
+  Future<List<Widget>> _buildObjectMarkers(List<LatLng> list, double iconSize, MapItem objectType) async {
+    String icon = Graphics.getMapObjectIcon(objectType, _level);
+    if (HelperMap.isActiveE(objectType.index)) {
+      final positions = list.map(_mapTransformer.toOffset).toList();
+      return positions.map((offset) => _buildObjectMarker(offset, icon, iconSize, objectType)).toList();
+    }
+    return [];
+  }
+
+  Future<Iterable<Widget>> _buildZones(int index) async {
     if (HelperMap.isActive(index)) {
-      Animal animal = HelperMap.getAnimals[index];
-      return _buildZoneMarkers(transformer, HelperMap.getAnimalZones(animal.id, _level), index);
+      Animal animal = HelperMap.animals[index];
+      return _buildZoneMarkers(HelperMap.getAnimalZones(animal.id), index);
     } else {
       return [];
     }
   }
 
-  Iterable<Widget> _buildZoneMarkers(MapTransformer transformer, List<MapObject> objects, int index) {
-    return objects.map((object) {
-      Offset offset = transformer.toOffset(object.coord);
+  List<MapObject> _clusterObjects(List<MapObject> objects) {
+    final List<List<MapObject>> clusters = [];
+    final Set<MapObject> usedPositions = {};
+    for (int i = 0; i < objects.length; i++) {
+      if (usedPositions.contains(objects[i])) {
+        continue;
+      }
+      final List<MapObject> cluster = [objects[i]];
+      for (int j = 0; j < objects.length; j++) {
+        if (usedPositions.contains(objects[j])) {
+          continue;
+        }
+        final double distance = sqrt(pow(objects[i].x - objects[j].x, 2) + pow(objects[i].y - objects[j].y, 2));
+        if (distance < _distanceThreshold) {
+          cluster.add(objects[j]);
+          usedPositions.add(objects[j]);
+        }
+      }
+      clusters.add(cluster);
+    }
+
+    final List<MapObject> clusteredPositions = clusters.map((cluster) {
+      final double x = cluster.map((position) => position.x).reduce((a, b) => a + b) / cluster.length;
+      final double y = cluster.map((position) => position.y).reduce((a, b) => a + b) / cluster.length;
+      final int zone = cluster.first.zone;
+      return MapObject(x: x, y: y, zone: zone);
+    }).toList();
+
+    return clusteredPositions;
+  }
+
+  Future<Iterable<Widget>> _buildZoneMarkers(List<MapObject> objects, int index) async {
+    List<MapObject> clusteredObjects = _settings.mapPerformanceMode ? _clusterObjects(objects) : objects;
+    return clusteredObjects.map((object) {
+      Offset offset = _mapTransformer.toOffset(object.coord);
       Color color = HelperMap.getColor(index);
-      if (_settings.getMapZonesType && object.zone != 3 && _level == 3) color = Zone.colorForZone(object.zone);
+      bool condition = (!_settings.mapPerformanceMode || _level == 3) && _settings.mapZonesType && object.zone != 3;
+      if (condition) color = Zone.colorForZone(object.zone);
       return _buildZoneMarker(offset, color, index);
     });
   }
 
   Widget _buildZoneMarker(Offset offset, Color color, int index) {
+    bool condition = _settings.mapPerformanceMode && _settings.mapZonesStyle && _level != 3;
+
     double mx = 0;
     double my = 0;
-    double size = _settings.getMapZonesStyle ? _circle : 10;
-    if (!_settings.getMapZonesType && _level == 3) {
-      mx = cos(((360 / HelperMap.getAnimals.length) / HelperMap.getAnimals.length) * index) * (7);
-      my = sin(((360 / HelperMap.getAnimals.length) / HelperMap.getAnimals.length) * index) * (7);
+
+    if (!_settings.mapZonesType && (!_settings.mapPerformanceMode || _level == 3)) {
+      mx = cos(((360 / HelperMap.animals.length) / HelperMap.animals.length) * index) * (7);
+      my = sin(((360 / HelperMap.animals.length) / HelperMap.animals.length) * index) * (7);
     }
+
+    double size = condition ? _circleSize : _dotSize;
     double left = offset.dx - (size / 2) + mx;
     double right = offset.dx + (size / 2) - mx;
     double top = offset.dy - (size / 2) + my;
     double bottom = offset.dy + (size / 2) - my;
+
     if (_inView(left, top, right, bottom)) {
-      if (_settings.getMapZonesStyle) {
+      if (condition) {
         return Positioned(
-            width: _circle,
-            height: _circle,
+            width: _circleSize,
+            height: _circleSize,
             left: left,
             top: top,
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: color, width: _circleBorder),
-                borderRadius: BorderRadius.circular(_circle),
+                border: Border.all(color: color, width: 1.5),
+                borderRadius: BorderRadius.circular(_circleSize),
               ),
             ));
       } else {
         return Positioned(
-            width: 10,
-            height: 10,
+            width: _dotSize,
+            height: _dotSize,
             left: left,
             top: top,
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: color, width: 5),
+                color: color,
                 borderRadius: BorderRadius.circular(10),
               ),
             ));
@@ -295,33 +403,40 @@ class ActivityMapState extends State<ActivityMap> {
 
   Widget _buildAnimalList() {
     List<Widget> widgets = [];
-    for (int i = 0; i < HelperMap.getNames.length; i++) {
+    for (int i = 0; i < HelperMap.names.length; i++) {
       if (HelperMap.isActive(i)) {
-        String name = HelperMap.getNames[i];
-        int o = HelperMap.getAnimalZones(HelperMap.getAnimal(i).id, 3).length;
-        int p = ((o * 100) / _recommendedNumber).round();
-        p = p > 100 ? 100 : p;
-        widgets.add(Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          _settings.getMapZonesAccuracy
-              ? Container(
-                  width: 35,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(right: 5),
+        String name = HelperMap.names[i];
+        int foundZones = HelperMap.getAnimalZones(HelperMap.getAnimal(i).id).length;
+        int perCent = ((foundZones * 100) / _recommendedNumberOfZones).round();
+        perCent = perCent > 100 ? 100 : perCent;
+        widgets.add(
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _settings.mapZonesAccuracy
+                  ? Container(
+                      width: 35,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 5),
+                      child: AutoSizeText(
+                        "$perCent%",
+                        maxLines: 1,
+                        textAlign: TextAlign.end,
+                        style: Interface.s12w300n(HelperMap.getColor(i)),
+                      ))
+                  : const SizedBox.shrink(),
+              Expanded(
                   child: AutoSizeText(
-                    "$p%",
-                    maxLines: 1,
-                    textAlign: TextAlign.end,
-                    style: Interface.s12w300n(HelperMap.getColor(i)),
-                  ))
-              : const SizedBox.shrink(),
-          Expanded(
-              child: AutoSizeText(
-            name,
-            maxLines: 1,
-            textAlign: TextAlign.start,
-            style: Interface.s12w300n(HelperMap.getColor(i)),
-          ))
-        ]));
+                name,
+                maxLines: 1,
+                textAlign: TextAlign.start,
+                style: Interface.s12w300n(HelperMap.getColor(i)),
+              ))
+            ],
+          ),
+        );
       }
     }
     return Column(
@@ -387,27 +502,23 @@ class ActivityMapState extends State<ActivityMap> {
                 ),
                 EntryMenuBarItem(
                   barButton: WidgetSwitchIcon(
-                      icon: "assets/graphics/icons/zone_feed.svg",
-                      color: Interface.alwaysDark,
-                      background: Interface.alwaysLight,
-                      isActive: _settings.getMapZonesType,
-                      onTap: () {
-                        setState(() {
-                          _settings.changeMapZonesType();
-                        });
-                      }),
+                    icon: "assets/graphics/icons/zone_feed.svg",
+                    color: Interface.alwaysDark,
+                    background: Interface.alwaysLight,
+                    isActive: _settings.mapZonesType,
+                    usable: !_settings.mapPerformanceMode || _level == 3,
+                    onTap: _updateZoneType,
+                  ),
                 ),
                 EntryMenuBarItem(
                   barButton: WidgetSwitchIcon(
-                      icon: "assets/graphics/icons/other.svg",
-                      color: Interface.alwaysDark,
-                      background: Interface.alwaysLight,
-                      isActive: _settings.getMapZonesStyle,
-                      onTap: () {
-                        setState(() {
-                          _settings.changeMapZonesStyle();
-                        });
-                      }),
+                    icon: "assets/graphics/icons/other.svg",
+                    color: Interface.alwaysDark,
+                    background: Interface.alwaysLight,
+                    isActive: _settings.mapZonesStyle,
+                    usable: _settings.mapPerformanceMode && _level != 3,
+                    onTap: _updateZoneStyle,
+                  ),
                 ),
                 EntryMenuBarItem(
                   barButton: WidgetButtonIcon(
@@ -433,14 +544,16 @@ class ActivityMapState extends State<ActivityMap> {
               if (_opacity == 1) {
                 _opacity = 0;
                 Future.delayed(const Duration(milliseconds: 200), () {
-                  _showInterface = false;
-                  setState(() {});
+                  setState(() {
+                    _showInterface = false;
+                  });
                 });
               } else if (_opacity == 0) {
                 _showInterface = true;
                 Future.delayed(const Duration(milliseconds: 200), () {
-                  _opacity = 1;
-                  setState(() {});
+                  setState(() {
+                    _opacity = 1;
+                  });
                 });
               }
               setState(() {});

@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class BuilderLoadouts extends StatelessWidget {
+
+  final double indicatorSize = 30;
+
   const BuilderLoadouts({
     Key? key,
   }) : super(key: key);
@@ -34,7 +37,10 @@ class BuilderLoadouts extends StatelessWidget {
             return Container(
               padding: const EdgeInsets.all(30),
               color: Interface.body,
-              child: SpinKitThreeBounce(size: 30, color: Interface.dark),
+              child: SpinKitThreeBounce(
+                size: indicatorSize,
+                color: Interface.dark,
+              ),
             );
           }
         });

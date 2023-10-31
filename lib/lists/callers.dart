@@ -30,7 +30,7 @@ class ListCallersState extends State<ListCallers> {
 
   @override
   void initState() {
-    _imperials = Provider.of<Settings>(context, listen: false).getImperialUnits;
+    _imperials = Provider.of<Settings>(context, listen: false).imperialUnits;
     _controller.addListener(() => _filter());
     super.initState();
   }

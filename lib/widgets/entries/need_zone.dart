@@ -36,19 +36,26 @@ class EntryNeedZone extends StatefulWidget {
 
 class EntryNeedZoneState extends State<EntryNeedZone> {
   final List<int> _finalZones = [];
+  final double _itemHeight = 75;
+  final int _itemsPerScreen = 10;
+  final double _topMenuHeight = 70;
+  final double _zoneIconSize = 35;
+  final double _zoneIconSpace = 10;
+  final double _editIconSize = 20;
+  final double _loadoutIconSize = 10;
 
   double _getSize() {
     double top = widget.compact
         ? widget.classSwitches
-            ? 140
-            : 70
+            ? _topMenuHeight * 2
+            : _topMenuHeight
         : 0;
-    double height = (MediaQuery.of(context).size.height - top) / (widget.count <= 10 ? widget.count : 10);
+    double height = (MediaQuery.of(context).size.height - top) / (widget.count <= _itemsPerScreen ? widget.count : _itemsPerScreen);
     return widget.compact
-        ? height < 75
+        ? height < _itemHeight
             ? height
-            : 75
-        : 75;
+            : _itemHeight
+        : _itemHeight;
   }
 
   void _getData() {
@@ -77,6 +84,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
     int zoneAfterAfter = _finalZones[2];
     return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       WidgetIcon(
+        size: _zoneIconSize,
         icon: Zone.iconForZone(zoneNow),
         color: zoneNow == 4
             ? Interface.dark
@@ -86,7 +94,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
         background: Zone.colorForZone(zoneNow),
       ),
       WidgetIcon(
-        size: 30,
+        size: _zoneIconSize - 5,
         icon: Zone.iconForZone(zoneAfter),
         color: zoneAfter == 4
             ? Interface.dark.withOpacity(0.75)
@@ -96,7 +104,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
         background: Zone.colorForZone(zoneAfter).withOpacity(0.5),
       ),
       WidgetIcon(
-        size: 25,
+        size: _zoneIconSize - 10,
         icon: Zone.iconForZone(zoneAfterAfter),
         color: zoneAfter == 4
             ? Interface.dark.withOpacity(0.5)
@@ -132,8 +140,8 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: SvgPicture.asset(
                   "assets/graphics/icons/edit.svg",
-                  height: 20,
-                  width: 20,
+                  height: _editIconSize,
+                  width: _editIconSize,
                   alignment: Alignment.centerLeft,
                   colorFilter: ColorFilter.mode(
                     Interface.light,
@@ -171,7 +179,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                           ]))),
                   HelperLoadout.isLoadoutActivated
                       ? Container(
-                          width: 10,
+                          width: _loadoutIconSize,
                           padding: const EdgeInsets.all(0),
                           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
                             (HelperLoadout.loadoutMin <= widget.animal.level && widget.animal.level <= HelperLoadout.loadoutMax)
@@ -179,7 +187,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                                     padding: EdgeInsets.only(bottom: (HelperLoadout.containsCallerForAnimal(widget.animal.id)) ? 3 : 0),
                                     child: SvgPicture.asset(
                                       "assets/graphics/icons/loadout.svg",
-                                      width: 10,
+                                      width: _loadoutIconSize,
                                       colorFilter: ColorFilter.mode(
                                         Interface.dark,
                                         BlendMode.srcIn,
@@ -192,7 +200,7 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                                         top: (HelperLoadout.loadoutMin <= widget.animal.level && widget.animal.level <= HelperLoadout.loadoutMax) ? 3 : 0),
                                     child: SvgPicture.asset(
                                       "assets/graphics/icons/sense_hearing.svg",
-                                      width: 10,
+                                      width: _loadoutIconSize,
                                       colorFilter: ColorFilter.mode(
                                         Interface.dark,
                                         BlendMode.srcIn,
@@ -202,9 +210,9 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                           ]))
                       : const SizedBox.shrink(),
                   AnimatedContainer(
-                    width: 125,
+                    width: _zoneIconSize + _zoneIconSize - 5 + _zoneIconSize - 10 + _zoneIconSpace * 2,
                     duration: const Duration(milliseconds: 200),
-                    padding: const EdgeInsets.only(left: 15),
+                    margin: const EdgeInsets.only(left: 15),
                     child: _getZones(),
                   )
                 ]))));

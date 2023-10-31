@@ -53,30 +53,22 @@ class ListWeaponsState extends State<ListWeapons> {
         icon: "assets/graphics/icons/other.svg",
         text: tr('weapon_type'),
       ),
-      SizedBox(
-          height: 60,
-          child: FilterSwitch(
-            text: tr('weapons_rifles'),
-            filterKey: FilterKey.weaponsRifles,
-          )),
-      SizedBox(
-          height: 60,
-          child: FilterSwitch(
-            text: tr('weapons_shotguns'),
-            filterKey: FilterKey.weaponsShotguns,
-          )),
-      SizedBox(
-          height: 60,
-          child: FilterSwitch(
-            text: tr('weapons_handguns'),
-            filterKey: FilterKey.weaponsHandguns,
-          )),
-      SizedBox(
-          height: 60,
-          child: FilterSwitch(
-            text: tr('weapons_bows_crossbows'),
-            filterKey: FilterKey.weaponsBows,
-          )),
+      FilterSwitch(
+        text: tr('weapons_rifles'),
+        filterKey: FilterKey.weaponsRifles,
+      ),
+      FilterSwitch(
+        text: tr('weapons_shotguns'),
+        filterKey: FilterKey.weaponsShotguns,
+      ),
+      FilterSwitch(
+        text: tr('weapons_handguns'),
+        filterKey: FilterKey.weaponsHandguns,
+      ),
+      FilterSwitch(
+        text: tr('weapons_bows_crossbows'),
+        filterKey: FilterKey.weaponsBows,
+      ),
       FilterValueSet(
         text: tr('animal_class'),
         icon: "assets/graphics/icons/level.svg",

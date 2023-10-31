@@ -48,6 +48,7 @@ class ActivityLogsState extends State<ActivityLogs> {
   final TextEditingControllerWorkaround _controller = TextEditingControllerWorkaround(text: "");
   final List<Log> _logs = [];
   final double _menuHeight = 75;
+  final double _removeButtonSize = 60;
 
   late final Settings _settings;
 
@@ -82,7 +83,7 @@ class ActivityLogsState extends State<ActivityLogs> {
       _logs.clear();
       _logs.addAll(HelperFilter.filterLogs(_controller.text, context));
 
-      if (!widget.trophyLodge && !_settings.getTrophyLodgeRecord) {
+      if (!widget.trophyLodge && !_settings.trophyLodgeRecord) {
         _logs.removeWhere((log) => log.isInLodge);
       }
       if (widget.trophyLodge) {
@@ -195,7 +196,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                           )),
                       Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                         WidgetButtonIcon(
-                            buttonSize: 60,
+                            buttonSize: _removeButtonSize,
                             icon: "assets/graphics/icons/remove_bin.svg",
                             color: Interface.alwaysDark,
                             background: Interface.red,
@@ -207,7 +208,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                               });
                             }),
                         WidgetButtonIcon(
-                            buttonSize: 60,
+                            buttonSize: _removeButtonSize,
                             icon: "assets/graphics/icons/menu_close.svg",
                             color: Interface.light,
                             background: Interface.dark,
@@ -239,7 +240,9 @@ class ActivityLogsState extends State<ActivityLogs> {
                         callback: _filter,
                         context: context,
                       ),
-                      const SizedBox(height: 75)
+                      SizedBox(
+                        height: _menuHeight,
+                      )
                     ])
                   : EntryLog(
                       index: index,
@@ -316,9 +319,9 @@ class ActivityLogsState extends State<ActivityLogs> {
           }),
       menuButtons: [
         WidgetButtonIcon(
-            icon: _settings.getCompactLogbook == 3
+            icon: _settings.compactLogbook == 3
                 ? "assets/graphics/icons/view_semi_compact.svg"
-                : _settings.getCompactLogbook == 2
+                : _settings.compactLogbook == 2
                     ? "assets/graphics/icons/view_compact.svg"
                     : "assets/graphics/icons/view_expanded.svg",
             color: Interface.light,
@@ -333,7 +336,7 @@ class ActivityLogsState extends State<ActivityLogs> {
             icon: "assets/graphics/icons/sort_date.svg",
             color: Interface.light,
             background: Interface.dark,
-            isActive: _settings.getDateOfRecord,
+            isActive: _settings.dateOfRecord,
             onTap: () {
               setState(() {
                 _focus();
@@ -346,7 +349,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                 icon: "assets/graphics/icons/trophy_lodge.svg",
                 color: Interface.light,
                 background: Interface.dark,
-                isActive: _settings.getTrophyLodgeRecord,
+                isActive: _settings.trophyLodgeRecord,
                 onTap: () {
                   setState(() {
                     _focus();

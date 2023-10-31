@@ -32,7 +32,7 @@ class EntryCallerState extends State<EntryCaller> {
 
   @override
   void initState() {
-    _imperialUnits = Provider.of<Settings>(context, listen: false).getImperialUnits;
+    _imperialUnits = Provider.of<Settings>(context, listen: false).imperialUnits;
     super.initState();
   }
 

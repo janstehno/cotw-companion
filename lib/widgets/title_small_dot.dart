@@ -2,30 +2,26 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/widgets/title_small.dart';
 import 'package:flutter/material.dart';
 
-class WidgetTitleBigDot extends StatelessWidget {
-  final String primaryText;
-  final String secondaryText;
+class WidgetTitleSmallDot extends WidgetTitleSmall {
   final Color dotColor;
-  final int maxLines;
 
-  static const double height = 50;
+  final double _dotSize = 10;
 
-  const WidgetTitleBigDot({
-    Key? key,
-    required this.primaryText,
-    this.secondaryText = "",
-    this.dotColor = Colors.transparent,
-    this.maxLines = 1,
-  }) : super(key: key);
+  const WidgetTitleSmallDot({
+    super.key,
+    required super.primaryText,
+    required this.dotColor,
+  });
 
   Widget _buildWidgets() {
     return Container(
-        height: height,
+        height: super.height,
         color: Interface.sectionTitle,
         alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
           secondaryText.isEmpty
               ? AutoSizeText(
@@ -49,8 +45,8 @@ class WidgetTitleBigDot extends StatelessWidget {
                   )
                 ]),
           Container(
-              width: 10,
-              height: 10,
+              width: _dotSize,
+              height: _dotSize,
               decoration: ShapeDecoration(
                 color: dotColor,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.3)),

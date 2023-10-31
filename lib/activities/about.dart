@@ -13,6 +13,8 @@ class ActivityAbout extends StatelessWidget {
   final EdgeInsets _padding = const EdgeInsets.all(30);
   final String _email = "toastovac@email.cz";
 
+  final double _footerHeight = 70;
+
   const ActivityAbout({
     Key? key,
   }) : super(key: key);
@@ -238,7 +240,7 @@ class ActivityAbout extends StatelessWidget {
     return Row(children: [
       Expanded(
           child: Container(
-              height: 70,
+              height: _footerHeight,
               alignment: Alignment.center,
               color: Interface.title,
               child: SelectableText(

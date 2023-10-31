@@ -11,6 +11,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class BuilderLogs extends StatelessWidget {
   final bool trophyLodge;
 
+  final double indicatorSize = 30;
+
   const BuilderLogs({
     Key? key,
     required this.trophyLodge,
@@ -37,7 +39,10 @@ class BuilderLogs extends StatelessWidget {
             return Container(
               padding: const EdgeInsets.all(30),
               color: Interface.body,
-              child: SpinKitThreeBounce(size: 30, color: Interface.dark),
+              child: SpinKitThreeBounce(
+                size: indicatorSize,
+                color: Interface.dark,
+              ),
             );
           }
         });

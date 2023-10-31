@@ -9,6 +9,8 @@ import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/entries/ammo_statistics.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/widgets/title_small.dart';
+import 'package:cotwcompanion/widgets/title_small_price.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,14 +34,32 @@ class ActivityAmmoInfoState extends State<ActivityAmmoInfo> {
   @override
   void initState() {
     _ammo = HelperJSON.getAmmo(widget.ammoId);
-    _imperialUnits = Provider.of<Settings>(context, listen: false).getImperialUnits;
+    _imperialUnits = Provider.of<Settings>(context, listen: false).imperialUnits;
     super.initState();
   }
 
+  Widget _buildAmmoPrice() {
+    return Row(children: [
+      Expanded(
+        child: WidgetTitleSmall(
+          primaryText: tr('price'),
+        ),
+      ),
+      WidgetTitleSmallPrice(
+        primaryText: _ammo.price.toString(),
+      ),
+    ]);
+  }
+
   Widget _buildStatistics() {
-    return EntryAmmoStatistics(
-      ammo: _ammo,
-      imperialUnits: _imperialUnits,
+    return Column(
+      children: [
+        EntryAmmoStatistics(
+          ammo: _ammo,
+          imperialUnits: _imperialUnits,
+        ),
+        _buildAmmoPrice(),
+      ],
     );
   }
 

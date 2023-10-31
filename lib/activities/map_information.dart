@@ -30,8 +30,8 @@ class ActivityMapInformation extends StatelessWidget {
   Widget _buildZoom() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        icon: "assets/graphics/icons/weapon_expansion.svg",
-        text: tr('zoom'),
+        icon: "assets/graphics/icons/repair.svg",
+        text: tr('map_info_1'),
       ),
       Container(
           alignment: Alignment.centerLeft,
@@ -47,9 +47,15 @@ class ActivityMapInformation extends StatelessWidget {
           )),
       Container(
           alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
+          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: WidgetRichText(
             text: tr('map_info_1_3'),
+          )),
+      Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
+          child: WidgetRichText(
+            text: tr('map_info_1_4'),
           )),
     ]);
   }

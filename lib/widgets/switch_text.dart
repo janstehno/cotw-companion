@@ -27,7 +27,7 @@ class WidgetSwitchText extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
-    Color actualColor = isActive ? activeColor ?? Interface.accent : color ?? Interface.disabled;
+    Color actualColor = isActive ? activeColor ?? Interface.accent : color ?? Interface.alwaysDark.withOpacity(0.75);
     Color actualBackground = isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3);
     return Row(mainAxisSize: MainAxisSize.min, children: [
       GestureDetector(

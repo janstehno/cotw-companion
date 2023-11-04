@@ -8,7 +8,9 @@ import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HelperLoadout {
   static late Loadout _lastRemovedLoadout;
@@ -131,16 +133,34 @@ class HelperLoadout {
     _writeFile();
   }
 
+  static Future<bool> save() async {
+    final status = await Permission.storage.request();
+    if (status.isGranted) {
+      bool saved = await saveFile();
+      return saved;
+    }
+    return false;
+  }
+
   static Future<bool> saveFile() async {
-    final output = await getExternalStorageDirectory();
-    if (output != null) {
+    final Directory? directory = await DownloadsPath.downloadsDirectory();
+    if (directory != null) {
       String content = _parseLoadoutsToJsonString();
       if (content == "[]") return false;
-      RegExp pathToDownloads = RegExp(r'.+0/');
-      final path = '${pathToDownloads.stringMatch(output.path).toString()}Download';
-      final fileName = "${dateTime(DateTime.now())}-saved-loadouts-cotwcompanion.json";
-      File('$path/$fileName').writeAsString(content);
+      final String fileName = "${dateTime(DateTime.now())}-saved-loadouts-cotwcompanion.json";
+      final File file = File('${directory.path}/$fileName');
+      await directory.create(recursive: true);
+      await file.writeAsString(content);
       return true;
+    }
+    return false;
+  }
+
+  static Future<bool> load() async {
+    final status = await Permission.storage.request();
+    if (status.isGranted) {
+      bool loaded = await loadFile();
+      return loaded;
     }
     return false;
   }

@@ -3,7 +3,7 @@ description: Companion for the game theHunter Call of the Wild
 
 publish_to: 'none'
 
-version: 1.8.2+56
+version: 1.8.3+57
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
@@ -27,6 +27,7 @@ dependencies:
   flutter_svg: ^2.0.7
   http: ^1.1.0
   latlng: ^0.2.1
+  lecle_downloads_path_provider: ^0.0.2+8
   logger: ^2.0.1
   map: ^1.4.1
   material_scrollbar: ^0.0.1

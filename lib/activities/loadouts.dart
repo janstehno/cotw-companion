@@ -19,7 +19,6 @@ import 'package:cotwcompanion/widgets/searchbar.dart';
 import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class ActivityLoadouts extends StatefulWidget {
   const ActivityLoadouts({
@@ -87,11 +86,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   void loadFile() async {
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }
-    final bool fileLoaded = await HelperLoadout.loadFile();
+    final bool fileLoaded = await HelperLoadout.load();
     if (fileLoaded) {
       _filter();
       _buildSnackBar(
@@ -107,11 +102,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   void saveFile() async {
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }
-    final bool fileSaved = await HelperLoadout.saveFile();
+    final bool fileSaved = await HelperLoadout.save();
     if (fileSaved) {
       _buildSnackBar(
         tr('file_exported'),

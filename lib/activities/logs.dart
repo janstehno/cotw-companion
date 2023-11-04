@@ -29,7 +29,6 @@ import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class ActivityLogs extends StatefulWidget {
@@ -138,11 +137,7 @@ class ActivityLogsState extends State<ActivityLogs> {
   }
 
   void loadFile() async {
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }
-    final bool fileLoaded = await HelperLog.loadFile();
+    final bool fileLoaded = await HelperLog.load();
     if (fileLoaded) {
       _filter();
       _buildSnackBar(
@@ -158,11 +153,7 @@ class ActivityLogsState extends State<ActivityLogs> {
   }
 
   void saveFile() async {
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }
-    final bool fileSaved = await HelperLog.saveFile();
+    final bool fileSaved = await HelperLog.save();
     if (fileSaved) {
       _buildSnackBar(
         tr('file_exported'),

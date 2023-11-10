@@ -31,7 +31,7 @@ class WidgetSnackBar extends StatelessWidget {
       case Process.error:
         return Interface.red;
       case Process.info:
-        return Interface.grey;
+        return Interface.dark;
     }
   }
 
@@ -73,11 +73,11 @@ class WidgetSnackBar extends StatelessWidget {
           icon.isEmpty
               ? const SizedBox.shrink()
               : WidgetButtonIcon(
-            icon: icon,
-            onTap: () {
-              if (onSnackBarTap != null) onSnackBarTap!();
-            },
-          )
+                  icon: icon,
+                  onTap: () {
+                    if (onSnackBarTap != null) onSnackBarTap!();
+                  },
+                )
         ]));
   }
 

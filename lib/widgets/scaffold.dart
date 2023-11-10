@@ -10,6 +10,7 @@ class WidgetScaffold extends StatefulWidget {
   final WidgetAppBar? appBar;
   final Widget body;
   final Function? filter;
+  final bool filterChanged;
   final TextEditingController? searchController;
   final bool customBody, appBarFixed;
 
@@ -18,6 +19,7 @@ class WidgetScaffold extends StatefulWidget {
     this.appBar,
     required this.body,
     this.filter,
+    this.filterChanged = false,
     this.searchController,
     this.customBody = false,
     this.appBarFixed = false,
@@ -35,6 +37,7 @@ class WidgetScaffoldState extends State<WidgetScaffold> {
   Widget _buildSearchBar() {
     return WidgetSearchBar(
       controller: widget.searchController ?? TextEditingController(),
+      filterChanged: widget.filterChanged,
       onFilter: widget.filter,
     );
   }

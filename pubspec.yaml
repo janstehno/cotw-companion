@@ -3,7 +3,7 @@ description: Companion for the game theHunter Call of the Wild
 
 publish_to: 'none'
 
-version: 1.8.3+57
+version: 1.8.4+58
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
@@ -13,6 +13,7 @@ dependencies:
   async: ^2.11.0
   auto_size_text: ^3.0.0
   bloc: ^8.1.2
+  collection: ^1.17.1
   easy_localization: ^3.0.2
   easy_rich_text: ^2.0.0
   equatable: ^2.0.5

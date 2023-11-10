@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 class FilterPickerIcon extends StatefulWidget {
   final String icon, text;
   final FilterKey filterKey;
-  final List<int> values;
   final List<String> icons;
   final List<Color> colors, backgrounds;
 
@@ -18,7 +17,6 @@ class FilterPickerIcon extends StatefulWidget {
     required this.icon,
     required this.text,
     required this.filterKey,
-    required this.values,
     required this.icons,
     required this.colors,
     required this.backgrounds,
@@ -32,10 +30,18 @@ class FilterPickerIconState extends State<FilterPickerIcon> {
   final double _buttonSize = 30;
   final double _wrapSpace = 10;
 
+  late final List<int> values;
+
+  @override
+  void initState() {
+    values = HelperFilter.getDefaultListKeys(widget.filterKey);
+    super.initState();
+  }
+
   List<Widget> _buildSwitches() {
     List<Widget> switches = [];
-    for (int index = 0; index < widget.values.length; index++) {
-      int key = widget.values[index];
+    for (int index = 0; index < values.length; index++) {
+      int key = values[index];
       switches.add(
         WidgetSwitchIcon(
             buttonSize: _buttonSize,

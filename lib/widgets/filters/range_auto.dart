@@ -14,8 +14,6 @@ import 'package:flutter/material.dart';
 class FilterRangeAuto extends StatefulWidget {
   final String icon, text;
   final FilterKey filterKeyLower, filterKeyUpper;
-  final int min, max;
-  final double handleSize = 30;
 
   const FilterRangeAuto({
     Key? key,
@@ -23,8 +21,6 @@ class FilterRangeAuto extends StatefulWidget {
     required this.text,
     required this.filterKeyLower,
     required this.filterKeyUpper,
-    required this.min,
-    required this.max,
   }) : super(key: key);
 
   @override
@@ -32,6 +28,17 @@ class FilterRangeAuto extends StatefulWidget {
 }
 
 class FilterRangeAutoState extends State<FilterRangeAuto> {
+  final double _handleSize = 30;
+
+  late final num min, max;
+
+  @override
+  void initState() {
+    min = HelperFilter.getDefaultValue(widget.filterKeyLower);
+    max = HelperFilter.getDefaultValue(widget.filterKeyUpper);
+    super.initState();
+  }
+
   Widget _buildWidgets() {
     return Column(children: [
       WidgetTitleInfoIcon(
@@ -42,29 +49,29 @@ class FilterRangeAutoState extends State<FilterRangeAuto> {
         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
         child: FlutterSlider(
             rangeSlider: true,
-            min: widget.min.toDouble(),
-            max: widget.max.toDouble(),
+            min: min.toDouble(),
+            max: max.toDouble(),
             values: [
               HelperFilter.getIntValue(widget.filterKeyLower).toDouble(),
               HelperFilter.getIntValue(widget.filterKeyUpper).toDouble(),
             ],
-            handlerWidth: widget.handleSize,
-            handlerHeight: widget.handleSize,
+            handlerWidth: _handleSize,
+            handlerHeight: _handleSize,
             tooltip: FlutterSliderTooltip(disabled: true),
             trackBar: FlutterSliderTrackBar(
                 activeTrackBarHeight: 3,
                 inactiveTrackBarHeight: 3,
                 activeTrackBar: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(1)),
-                  color: Interface.primary.withOpacity(0.65),
+                  color: Interface.primary.withOpacity(0.75),
                 ),
                 inactiveTrackBar: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(1)),
-                  color: Interface.disabled.withOpacity(0.35),
+                  color: Interface.disabled.withOpacity(0.3),
                 )),
             handler: FlutterSliderHandler(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(widget.handleSize / 4)),
+                  borderRadius: BorderRadius.all(Radius.circular(_handleSize / 4)),
                   color: Interface.primary,
                 ),
                 child: Container(
@@ -75,7 +82,7 @@ class FilterRangeAutoState extends State<FilterRangeAuto> {
                     ))),
             rightHandler: FlutterSliderHandler(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(widget.handleSize / 4)),
+                  borderRadius: BorderRadius.all(Radius.circular(_handleSize / 4)),
                   color: Interface.primary,
                 ),
                 child: Container(

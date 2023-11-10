@@ -54,10 +54,12 @@ class ActivityFilterState extends State<ActivityFilter> {
           ])),
       Expanded(
           child: WidgetScrollbar(
-            child: SingleChildScrollView(
-              child: Column(children: widget.filters),
-            ),
-          )),
+        child: SingleChildScrollView(
+          child: Column(
+            children: widget.filters,
+          ),
+        ),
+      )),
     ]);
   }
 

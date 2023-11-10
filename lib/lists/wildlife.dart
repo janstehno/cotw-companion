@@ -49,13 +49,11 @@ class ListWildlifeState extends State<ListWildlife> {
       FilterPickerAuto(
         text: tr('animal_class'),
         icon: "assets/graphics/icons/level.svg",
-        values: const [1, 2, 3, 4, 5, 6, 7, 8, 9],
         filterKey: FilterKey.animalsClass,
       ),
       FilterPickerAuto(
         text: tr('animal_difficulty'),
         icon: "assets/graphics/icons/stats.svg",
-        values: const [3, 5, 9],
         filterKey: FilterKey.animalsDifficulty,
       ),
     ];
@@ -83,6 +81,7 @@ class ListWildlifeState extends State<ListWildlife> {
         context: context,
       ),
       searchController: _controller,
+      filterChanged: HelperFilter.animalFiltersChanged(),
       filter: _buildFilter,
       body: _buildList(),
     );

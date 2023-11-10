@@ -29,7 +29,7 @@ class WidgetSwitchSort extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
-    Color widgetColor = isActive ? activeColor ?? Interface.accent : color ?? Interface.alwaysDark.withOpacity(0.75);
+    Color widgetColor = isActive ? activeColor ?? Interface.accent : color ?? Interface.dark.withOpacity(0.3);
     Color widgetBackground = isActive ? activeBackground ?? Interface.primary : background ?? Interface.disabled.withOpacity(0.3);
     String orderArrow = isAscended ? "assets/graphics/icons/sort_ascended.svg" : "assets/graphics/icons/sort_descended.svg";
     return Stack(children: [

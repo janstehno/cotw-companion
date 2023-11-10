@@ -49,8 +49,6 @@ class ListReservesState extends State<ListReserves> {
       FilterRangeAuto(
         text: tr('wildlife'),
         icon: "assets/graphics/icons/target.svg",
-        min: 8,
-        max: 19,
         filterKeyLower: FilterKey.reservesCountMin,
         filterKeyUpper: FilterKey.reservesCountMax,
       )
@@ -79,6 +77,7 @@ class ListReservesState extends State<ListReserves> {
         context: context,
       ),
       searchController: _controller,
+      filterChanged: HelperFilter.reserveFiltersChanged(),
       filter: _buildFilter,
       body: _buildList(),
     );

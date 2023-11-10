@@ -49,10 +49,9 @@ class EntryLogState extends State<EntryLog> {
   final double _harvestHeight = 30;
   final double _harvestWidth = 20;
   final double _harvestIconSize = 15;
-  final double _trophyWidth = 100;
+  final double _trophyWeightWidth = 100;
   final double _trophyHeight = 30;
   final double _trophyIconSize = 20;
-  final double _weightWidth = 65;
   final double _weightHeight = 15;
   final double _editIconSize = 20;
   final double _toLodgeIconSize = 20;
@@ -292,101 +291,142 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildTrophyWeight(bool buildWeight) {
     return ConstrainedBox(
         constraints: BoxConstraints(
-          minWidth: _trophyWidth,
-          maxWidth: _trophyWidth,
+          minWidth: _trophyWeightWidth,
+          maxWidth: _trophyWeightWidth,
           minHeight: (widget.log.weight > 0 && buildWeight) || _style == 3 ? _trophyHeight + _weightHeight : _trophyHeight,
           maxHeight: (widget.log.weight > 0 && buildWeight) || _style == 3 ? _trophyHeight + _weightHeight : _trophyHeight,
         ),
         child: Container(
             alignment: Alignment.centerRight,
             margin: EdgeInsets.only(top: (widget.log.weight > 0 && buildWeight) || (_style == 1 || _style == 2) ? 0 : 15),
-            child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end, children: [
-              widget.log.weight > 0 && buildWeight ? _buildWeight() : const SizedBox.shrink(),
-              Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                Container(
-                    width: _trophyIconSize,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(right: 5),
-                    child: SvgPicture.asset(
-                      widget.log.getTrophyRatingIcon(),
-                      fit: BoxFit.fitWidth,
-                      colorFilter: ColorFilter.mode(
-                        widget.log.getTrophyColor(),
-                        BlendMode.srcIn,
-                      ),
-                    )),
-                Expanded(
-                    child: Container(
-                        alignment: Alignment.centerRight,
-                        child: AutoSizeText(
-                          widget.log.removePointZero("${widget.log.trophy}"),
-                          maxLines: 1,
-                          minFontSize: 8,
-                          style: Interface.s16w500n(Interface.dark),
-                        )))
-              ]),
-            ])));
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                widget.log.weight > 0 && buildWeight ? _buildWeight() : const SizedBox.shrink(),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                        width: _trophyIconSize,
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(right: 5),
+                        child: SvgPicture.asset(
+                          widget.log.getTrophyRatingIcon(),
+                          fit: BoxFit.fitWidth,
+                          colorFilter: ColorFilter.mode(
+                            widget.log.getTrophyColor(),
+                            BlendMode.srcIn,
+                          ),
+                        )),
+                    Expanded(
+                        child: Container(
+                            height: _trophyHeight,
+                            alignment: Alignment.centerRight,
+                            child: AutoSizeText(
+                              widget.log.removePointZero("${widget.log.trophy}"),
+                              maxLines: 1,
+                              minFontSize: 8,
+                              style: Interface.s16w500n(Interface.dark),
+                            )))
+                  ],
+                ),
+              ],
+            )));
   }
 
   Widget _buildWeight() {
     return SizedBox(
-        width: _weightWidth,
+        width: _trophyWeightWidth,
         height: _weightHeight,
-        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(left: 10),
-              child: AutoSizeText(
-                widget.log.removePointZero("${widget.log.weight} ${widget.log.usesImperials ? tr('pounds') : tr('kilograms')}"),
-                maxLines: 1,
-                minFontSize: 8,
-                textAlign: TextAlign.left,
-                style: Interface.s14w300n(Interface.dark),
-              ))
-        ]));
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.only(left: 10),
+                child: AutoSizeText(
+                  widget.log.removePointZero("${widget.log.weight} ${widget.log.usesImperials ? tr('pounds') : tr('kilograms')}"),
+                  maxLines: 1,
+                  minFontSize: 8,
+                  textAlign: TextAlign.left,
+                  style: Interface.s14w300n(Interface.dark),
+                ))
+          ],
+        ));
   }
 
   Widget _buildLogCompact() {
     return Column(children: [
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
-        _buildTrophyWeight(false),
-      ]),
+      Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
+          _buildTrophyWeight(false),
+        ],
+      ),
       _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
     ]);
   }
 
   Widget _buildLogSemiCompact() {
     return Column(children: [
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
-        _buildTrophyWeight(false),
-      ]),
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-        Expanded(
-            child: Column(children: [
-          _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
-          _buildFur(),
-        ])),
-        _buildGender(),
-      ])
+      Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
+          _buildTrophyWeight(false),
+        ],
+      ),
+      Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Expanded(
+              child: Column(children: [
+            _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
+            _buildFur(),
+          ])),
+          _buildGender(),
+        ],
+      )
     ]);
   }
 
   Widget _buildLogNonCompact() {
     return Column(children: [
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-        _buildLodge(),
-        Expanded(child: _buildName()),
-        _buildGender(),
-      ]),
+      Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildLodge(),
+          Expanded(child: _buildName()),
+          _buildGender(),
+        ],
+      ),
       _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
       widget.log.reserveId > -1 ? _buildReserve() : const SizedBox.shrink(),
       _buildFur(),
-      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Expanded(child: widget.log.reserveId > -1 ? _buildHarvestCheck() : const SizedBox.shrink()),
-        _buildTrophyWeight(true),
-      ])
+      Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(child: widget.log.reserveId > -1 ? _buildHarvestCheck() : const SizedBox.shrink()),
+          _buildTrophyWeight(true),
+        ],
+      )
     ]);
   }
 
@@ -395,15 +435,20 @@ class EntryLogState extends State<EntryLog> {
         color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
         child: Padding(
             padding: const EdgeInsets.fromLTRB(30, 25, 30, 25),
-            child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-              _style == 1
-                  ? _buildLogCompact()
-                  : _style == 2
-                      ? _buildLogSemiCompact()
-                      : _style == 3
-                          ? _buildLogNonCompact()
-                          : const SizedBox.shrink()
-            ])));
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _style == 1
+                    ? _buildLogCompact()
+                    : _style == 2
+                        ? _buildLogSemiCompact()
+                        : _style == 3
+                            ? _buildLogNonCompact()
+                            : const SizedBox.shrink()
+              ],
+            )));
   }
 
   Widget _buildWidgets() {

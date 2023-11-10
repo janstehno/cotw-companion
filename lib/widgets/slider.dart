@@ -37,11 +37,11 @@ class WidgetSlider extends StatelessWidget {
             inactiveTrackBarHeight: _trackSize,
             activeTrackBar: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(1)),
-              color: Interface.primary.withOpacity(0.65),
+              color: Interface.primary.withOpacity(0.75),
             ),
             inactiveTrackBar: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(1)),
-              color: Interface.disabled.withOpacity(0.35),
+              color: Interface.disabled.withOpacity(0.3),
             )),
         handler: FlutterSliderHandler(
             decoration: BoxDecoration(

@@ -10,18 +10,15 @@ import 'package:flutter/material.dart';
 class FilterPickerText extends StatefulWidget {
   final String icon, text;
   final FilterKey filterKey;
-  final List<int> values;
-  final List<String> keys;
-  final List<Color> colors;
-  final List<Color> backgrounds;
+  final List<String> labels;
+  final List<Color> colors, backgrounds;
 
   const FilterPickerText({
     Key? key,
     required this.icon,
     required this.text,
     required this.filterKey,
-    required this.values,
-    required this.keys,
+    required this.labels,
     this.colors = const [],
     this.backgrounds = const [],
   }) : super(key: key);
@@ -34,14 +31,22 @@ class FilterPickerTextState extends State<FilterPickerText> {
   final double _buttonHeight = 30;
   final double _wrapSpace = 10;
 
+  late final List<int> values;
+
+  @override
+  void initState() {
+    values = HelperFilter.getDefaultListKeys(widget.filterKey);
+    super.initState();
+  }
+
   List<Widget> _buildSwitches() {
     List<Widget> switches = [];
-    for (int index = 0; index < widget.values.length; index++) {
-      int key = widget.values[index];
+    for (int index = 0; index < values.length; index++) {
+      int key = values[index];
       switches.add(
         WidgetSwitchText(
             buttonHeight: _buttonHeight,
-            text: widget.keys[index],
+            text: widget.labels[index],
             activeColor: widget.colors.isEmpty ? Interface.accent : widget.colors[index],
             activeBackground: widget.backgrounds.isEmpty ? Interface.primary : widget.backgrounds[index],
             isActive: HelperFilter.getBoolValueList(widget.filterKey, key),

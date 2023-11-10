@@ -86,7 +86,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   void loadFile() async {
-    final bool fileLoaded = await HelperLoadout.load();
+    final bool fileLoaded = await HelperLoadout.loadFile();
     if (fileLoaded) {
       _filter();
       _buildSnackBar(
@@ -102,7 +102,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   void saveFile() async {
-    final bool fileSaved = await HelperLoadout.save();
+    final bool fileSaved = await HelperLoadout.saveFile();
     if (fileSaved) {
       _buildSnackBar(
         tr('file_exported'),
@@ -162,10 +162,10 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
             icon: "assets/graphics/icons/export.svg",
             color: Interface.light,
             background: Interface.dark,
-            onTap: () {
+            onTap: () async {
+              saveFile();
               setState(() {
                 _focus();
-                saveFile();
                 _fileOptionsOpened = !_fileOptionsOpened;
               });
             }),
@@ -173,10 +173,10 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
             icon: "assets/graphics/icons/import.svg",
             color: Interface.light,
             background: Interface.dark,
-            onTap: () {
+            onTap: () async {
+              loadFile();
               setState(() {
                 _focus();
-                loadFile();
                 _fileOptionsOpened = !_fileOptionsOpened;
               });
             }),
@@ -210,8 +210,6 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
         icon: "assets/graphics/icons/loadout.svg",
         text: tr('weapon_ammo'),
         decimal: false,
-        min: 1,
-        max: 200,
         filterKeyLower: FilterKey.loadoutsAmmoMin,
         filterKeyUpper: FilterKey.loadoutsAmmoMax,
       ),
@@ -219,8 +217,6 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
         icon: "assets/graphics/icons/caller.svg",
         text: tr('callers'),
         decimal: false,
-        min: 1,
-        max: 50,
         filterKeyLower: FilterKey.loadoutsCallersMin,
         filterKeyUpper: FilterKey.loadoutsCallersMax,
       ),
@@ -240,6 +236,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
         ),
         WidgetSearchBar(
           controller: _controller,
+          filterChanged: HelperFilter.loadoutFiltersChanged(),
           onFilter: _buildFilter,
         ),
         Expanded(

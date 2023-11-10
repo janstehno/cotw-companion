@@ -10,7 +10,7 @@ class WidgetSwitchIcon extends StatelessWidget {
   final double buttonSize;
   final Function onTap;
   final bool isActive;
-  final bool usable;
+  final bool disabled;
 
   const WidgetSwitchIcon({
     Key? key,
@@ -23,16 +23,31 @@ class WidgetSwitchIcon extends StatelessWidget {
     this.activeBackground,
     required this.onTap,
     required this.isActive,
-    this.usable = true,
+    this.disabled = false,
   }) : super(key: key);
 
   Widget _buildWidgets() {
+    String actualIcon = !disabled && isActive
+        ? activeIcon.isEmpty
+            ? icon
+            : activeIcon
+        : icon;
+    Color actualColor = !disabled && isActive
+        ? activeColor ?? Interface.accent
+        : !disabled
+            ? color ?? Interface.dark.withOpacity(0.3)
+            : (color ?? Interface.dark).withOpacity(0.3);
+    Color actualBackground = !disabled && isActive
+        ? activeBackground ?? Interface.primary
+        : !disabled
+            ? background ?? Interface.disabled.withOpacity(0.3)
+            : (background ?? Interface.disabled).withOpacity(0.3);
     return GestureDetector(
-        onTap: usable
-            ? () {
+        onTap: disabled
+            ? () {}
+            : () {
                 onTap();
-              }
-            : () {},
+              },
         child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             height: buttonSize,
@@ -40,28 +55,16 @@ class WidgetSwitchIcon extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(35 / 4)),
-              color: usable && isActive
-                  ? activeBackground ?? Interface.primary
-                  : usable
-                      ? background ?? Interface.disabled.withOpacity(0.3)
-                      : (background ?? Interface.disabled).withOpacity(0.3),
+              color: actualBackground,
             ),
             child: icon.isEmpty && activeIcon.isEmpty
                 ? const SizedBox.shrink()
                 : SvgPicture.asset(
-                    usable && isActive
-                        ? activeIcon.isEmpty
-                            ? icon
-                            : activeIcon
-                        : icon,
+                    actualIcon,
                     width: buttonSize / 2,
                     height: buttonSize / 2,
                     colorFilter: ColorFilter.mode(
-                      usable && isActive
-                          ? activeColor ?? Interface.accent
-                          : usable
-                              ? color ?? Interface.alwaysDark.withOpacity(0.75)
-                              : (color ?? Interface.alwaysDark).withOpacity(0.75),
+                      actualColor,
                       BlendMode.srcIn,
                     ),
                   )));

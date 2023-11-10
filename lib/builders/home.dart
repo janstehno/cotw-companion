@@ -1,10 +1,12 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:async';
+
+import 'package:cotwcompanion/activities/home.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/activities/home.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
@@ -20,7 +22,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class BuilderHome extends StatelessWidget {
-
   final double indicatorSize = 30;
 
   const BuilderHome({
@@ -70,21 +71,10 @@ class BuilderHome extends StatelessWidget {
             var mapObjects = snapshot.data![12] as Map<String, dynamic>;
             var widget = snapshot.data![13] as Widget;
             HelperJSON.setLists(
-                ammo,
-                animals,
-                animalsCallers,
-                animalsFurs,
-                animalsReserves,
-                animalsZones,
-                callers,
-                dlcs,
-                furs,
-                reserves,
-                weapons,
-                weaponsAmmo,
-                mapObjects);
+                ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, mapObjects);
             HelperJSON.setWeaponAmmo();
             HelperLog.context = context;
+            HelperFilter.initializeFilters();
             return widget;
           } else {
             return OrientationBuilder(builder: (context, orientation) {

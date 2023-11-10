@@ -10,7 +10,6 @@ import 'package:cotwcompanion/model/log.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -121,67 +120,65 @@ class HelperLog {
     _writeFile();
   }
 
-  static Future<bool> save() async {
-    final status = await Permission.storage.request();
-    if (status.isGranted) {
-      bool saved = await saveFile();
-      return saved;
-    }
-    return false;
-  }
-
   static Future<bool> saveFile() async {
-    final Directory? directory = await DownloadsPath.downloadsDirectory();
-    if (directory != null) {
-      String content = _parseLogsToJsonString();
+    final PermissionStatus status = await Permission.storage.request();
+    if (status.isGranted) {
+      final Directory? directory;
+      if (Platform.isAndroid) {
+        directory = await getExternalStorageDirectory();
+      } else {
+        directory = await getDownloadsDirectory();
+      }
+      if (directory == null) return false;
+      final String path = Platform.isAndroid ? "${directory.path.split("/0")[0]}/0/Download" : directory.path;
+      final String content = _parseLogsToJsonString();
       if (content == "[]") return false;
-      final String fileName = "${Log.dateToString(DateTime.now())}-saved-logbook-cotwcompanion.json";
-      final File file = File('${directory.path}/$fileName');
-      await directory.create(recursive: true);
-      await file.writeAsString(content);
+      final String name = "${Log.dateToString(DateTime.now())}-saved-logbook-cotwcompanion.json";
+      try {
+        final File file = File("$path/$name");
+        final String jsonData = jsonEncode(content);
+        await file.writeAsString(jsonData);
+      } on Exception {
+        return false;
+      }
       return true;
     }
     return false;
   }
 
-  static Future<bool> load() async {
+  static Future<bool> loadFile() async {
     final status = await Permission.storage.request();
     if (status.isGranted) {
-      bool loaded = await loadFile();
-      return loaded;
-    }
-    return false;
-  }
-
-  static Future<bool> loadFile() async {
-    FilePickerResult? result;
-    try {
-      result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['json']);
-    } catch (e) {
-      return false;
-    }
-    if (result != null) {
-      String? filePath = result.files.single.path;
-      if (filePath != null) {
-        File file = File(filePath);
-        final data = await readExternalFile(file);
-        List<dynamic> list = [];
-        try {
-          list = json.decode(data) as List<dynamic>;
-        } catch (e) {
-          return false;
-        }
-        List<Log> logs = [];
-        logs = list.map((e) => Log.fromJson(e)).toList();
-        if (logs.isNotEmpty) {
-          _addLogs(logs);
-          _reIndex();
-          _reName();
-          _writeFile();
-          FilePicker.platform.clearTemporaryFiles();
-          return true;
+      FilePickerResult? result;
+      try {
+        result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['json']);
+      } catch (e) {
+        return false;
+      }
+      if (result != null) {
+        String? filePath = result.files.single.path;
+        if (filePath != null) {
+          File file = File(filePath);
+          final data = await readExternalFile(file);
+          List<dynamic> list = [];
+          try {
+            list = json.decode(data) as List<dynamic>;
+          } catch (e) {
+            return false;
+          }
+          List<Log> logs = [];
+          logs = list.map((e) => Log.fromJson(e)).toList();
+          if (logs.isNotEmpty) {
+            _addLogs(logs);
+            _reIndex();
+            _reName();
+            _writeFile();
+            FilePicker.platform.clearTemporaryFiles();
+            return true;
+          }
         }
       }
+      return false;
     }
     return false;
   }

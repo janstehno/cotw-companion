@@ -1,5 +1,6 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
+import 'package:collection/collection.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
@@ -18,7 +19,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HelperFilter {
-  static final Map<FilterKey, dynamic> _filters = {
+  static const Map<FilterKey, dynamic> _defaultFilters = {
     FilterKey.reservesCountMin: 8,
     FilterKey.reservesCountMax: 19,
     FilterKey.animalsClass: {1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true},
@@ -33,7 +34,7 @@ class HelperFilter {
     FilterKey.weaponsHandguns: true,
     FilterKey.weaponsBows: true,
     FilterKey.callersEffectiveRange: {150: true, 200: true, 250: true, 500: true},
-    FilterKey.logsGender: {0: true, 1: true},
+    FilterKey.logsGender: {1: true, 0: true},
     FilterKey.logsTrophyRating: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
     FilterKey.logsFurRarity: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
     FilterKey.logsTrophyScoreMin: 0.0,
@@ -47,10 +48,97 @@ class HelperFilter {
       6: {"order": 0, "active": false, "ascended": true, "key": ""},
     },
     FilterKey.loadoutsAmmoMin: 1,
-    FilterKey.loadoutsAmmoMax: 200,
+    FilterKey.loadoutsAmmoMax: 120,
     FilterKey.loadoutsCallersMin: 1,
-    FilterKey.loadoutsCallersMax: 50,
+    FilterKey.loadoutsCallersMax: 30,
   };
+  static Map<FilterKey, dynamic> _filters = {};
+
+  static void initializeFilters() {
+    _filters = {
+      FilterKey.reservesCountMin: 8,
+      FilterKey.reservesCountMax: 19,
+      FilterKey.animalsClass: {1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true},
+      FilterKey.animalsDifficulty: {3: true, 5: true, 9: true},
+      FilterKey.weaponsAnimalClass: 0,
+      FilterKey.weaponsClassMin: 1,
+      FilterKey.weaponsClassMax: 9,
+      FilterKey.weaponsMagMin: 1,
+      FilterKey.weaponsMagMax: 15,
+      FilterKey.weaponsRifles: true,
+      FilterKey.weaponsShotguns: true,
+      FilterKey.weaponsHandguns: true,
+      FilterKey.weaponsBows: true,
+      FilterKey.callersEffectiveRange: {150: true, 200: true, 250: true, 500: true},
+      FilterKey.logsGender: {1: true, 0: true},
+      FilterKey.logsTrophyRating: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
+      FilterKey.logsFurRarity: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
+      FilterKey.logsTrophyScoreMin: 0.0,
+      FilterKey.logsTrophyScoreMax: 9999.999,
+      FilterKey.logsSort: {
+        1: {"order": 0, "active": false, "ascended": true, "key": ""},
+        2: {"order": 0, "active": false, "ascended": true, "key": ""},
+        3: {"order": 0, "active": false, "ascended": true, "key": ""},
+        4: {"order": 0, "active": false, "ascended": true, "key": ""},
+        5: {"order": 0, "active": false, "ascended": true, "key": ""},
+        6: {"order": 0, "active": false, "ascended": true, "key": ""},
+      },
+      FilterKey.loadoutsAmmoMin: 1,
+      FilterKey.loadoutsAmmoMax: 120,
+      FilterKey.loadoutsCallersMin: 1,
+      FilterKey.loadoutsCallersMax: 30,
+    };
+  }
+
+  static bool reserveFiltersChanged() {
+    return !(_defaultFilters[FilterKey.reservesCountMin] == _filters[FilterKey.reservesCountMin] &&
+        _defaultFilters[FilterKey.reservesCountMax] == _filters[FilterKey.reservesCountMax]);
+  }
+
+  static bool animalFiltersChanged() {
+    return !(const DeepCollectionEquality().equals(_defaultFilters[FilterKey.animalsClass], _filters[FilterKey.animalsClass]) ||
+        const DeepCollectionEquality().equals(_defaultFilters[FilterKey.animalsDifficulty], _filters[FilterKey.animalsDifficulty]));
+  }
+
+  static bool weaponFiltersChanged() {
+    return !(_defaultFilters[FilterKey.weaponsRifles] == _filters[FilterKey.weaponsRifles] &&
+        _defaultFilters[FilterKey.weaponsShotguns] == _filters[FilterKey.weaponsShotguns] &&
+        _defaultFilters[FilterKey.weaponsHandguns] == _filters[FilterKey.weaponsHandguns] &&
+        _defaultFilters[FilterKey.weaponsBows] == _filters[FilterKey.weaponsBows] &&
+        _defaultFilters[FilterKey.weaponsMagMin] == _filters[FilterKey.weaponsMagMin] &&
+        _defaultFilters[FilterKey.weaponsMagMax] == _filters[FilterKey.weaponsMagMax] &&
+        _defaultFilters[FilterKey.weaponsClassMin] == _filters[FilterKey.weaponsClassMin] &&
+        _defaultFilters[FilterKey.weaponsClassMax] == _filters[FilterKey.weaponsClassMax] &&
+        const DeepCollectionEquality().equals(_defaultFilters[FilterKey.weaponsAnimalClass], _filters[FilterKey.weaponsAnimalClass]));
+  }
+
+  static bool callerFiltersChanged() {
+    return !(const DeepCollectionEquality().equals(_defaultFilters[FilterKey.callersEffectiveRange], _filters[FilterKey.callersEffectiveRange]));
+  }
+
+  static bool logFiltersChanged() {
+    return !(const DeepCollectionEquality().equals(_defaultFilters[FilterKey.logsGender], _filters[FilterKey.logsGender]) &&
+        const DeepCollectionEquality().equals(_defaultFilters[FilterKey.logsFurRarity], _filters[FilterKey.logsFurRarity]) &&
+        const DeepCollectionEquality().equals(_defaultFilters[FilterKey.logsTrophyRating], _filters[FilterKey.logsTrophyRating]) &&
+        _defaultFilters[FilterKey.logsTrophyScoreMin] == _filters[FilterKey.logsTrophyScoreMin] &&
+        _defaultFilters[FilterKey.logsTrophyScoreMax] == _filters[FilterKey.logsTrophyScoreMax] &&
+        const DeepCollectionEquality().equals(_defaultFilters[FilterKey.logsSort], _filters[FilterKey.logsSort]));
+  }
+
+  static bool loadoutFiltersChanged() {
+    return !(_defaultFilters[FilterKey.loadoutsAmmoMin] == _filters[FilterKey.loadoutsAmmoMin] &&
+        _defaultFilters[FilterKey.loadoutsAmmoMax] == _filters[FilterKey.loadoutsAmmoMax] &&
+        _defaultFilters[FilterKey.loadoutsCallersMin] == _filters[FilterKey.loadoutsCallersMin] &&
+        _defaultFilters[FilterKey.loadoutsCallersMax] == _filters[FilterKey.loadoutsCallersMax]);
+  }
+
+  static num getDefaultValue(FilterKey filterKey) {
+    return _defaultFilters[filterKey];
+  }
+
+  static List<int> getDefaultListKeys(FilterKey filterKey) {
+    return _defaultFilters[filterKey].keys.toList();
+  }
 
   static dynamic getSortValue(FilterKey filterKey, int listKey, String key) {
     return _filters[filterKey][listKey][key];

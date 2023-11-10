@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 class FilterSorterIcon extends StatefulWidget {
   final String icon, text;
   final FilterKey filterKey;
-  final List<int> values;
   final List<String> icons;
   final List<bool> criteria;
   final List<String> preferences;
@@ -20,7 +19,6 @@ class FilterSorterIcon extends StatefulWidget {
     required this.icon,
     required this.text,
     required this.filterKey,
-    required this.values,
     required this.icons,
     required this.criteria,
     required this.preferences,
@@ -33,19 +31,27 @@ class FilterSorterIcon extends StatefulWidget {
 class FilterSorterIconState extends State<FilterSorterIcon> {
   final double _itemWidth = 30;
 
+  late final List<int> values;
+
+  @override
+  void initState() {
+    values = HelperFilter.getDefaultListKeys(widget.filterKey);
+    super.initState();
+  }
+
   double _getSwitchSize() {
     double screenWidth = MediaQuery.of(context).size.width;
-    double itemsBetween = (widget.values.length - 1) * 10 + 60;
+    double itemsBetween = (values.length - 1) * 10 + 60;
     double availableWidth = screenWidth - itemsBetween;
-    double itemsWidth = widget.values.length * _itemWidth;
-    double calcWidth = availableWidth / widget.values.length;
+    double itemsWidth = values.length * _itemWidth;
+    double calcWidth = availableWidth / values.length;
     return availableWidth > itemsWidth ? _itemWidth : calcWidth;
   }
 
   List<Widget> _buildSwitches() {
     List<Widget> switches = [];
-    for (int index = 0; index < widget.values.length; index++) {
-      int key = widget.values[index];
+    for (int index = 0; index < values.length; index++) {
+      int key = values[index];
       bool criteria = widget.criteria[index];
       String preference = widget.preferences[index];
       int order = HelperFilter.getSortValue(widget.filterKey, key, "order");

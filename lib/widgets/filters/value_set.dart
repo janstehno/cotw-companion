@@ -8,20 +8,19 @@ import 'package:flutter/material.dart';
 
 class FilterValueSet extends StatefulWidget {
   final String icon, text;
-  final FilterKey filterKey;
-  final bool decimal;
-  final num min, max;
+  final FilterKey filterKey, filterKeyLower, filterKeyUpper;
   final num defaultValue;
+  final bool decimal;
 
   const FilterValueSet({
     Key? key,
     required this.icon,
     required this.text,
-    required this.filterKey,
     required this.decimal,
-    required this.min,
-    required this.max,
     required this.defaultValue,
+    required this.filterKey,
+    required this.filterKeyLower,
+    required this.filterKeyUpper,
   }) : super(key: key);
 
   @override
@@ -31,8 +30,12 @@ class FilterValueSet extends StatefulWidget {
 class FilterValueSetState extends State<FilterValueSet> {
   final TextEditingController _controller = TextEditingController();
 
+  late final num min, max;
+
   @override
   void initState() {
+    min = HelperFilter.getDefaultValue(widget.filterKeyLower);
+    max = HelperFilter.getDefaultValue(widget.filterKeyUpper);
     _setupControllers();
     super.initState();
   }
@@ -73,7 +76,7 @@ class FilterValueSetState extends State<FilterValueSet> {
           Expanded(
             child: WidgetTextFieldIndicator(
               controller: _controller,
-              correct: _controller.text.isNotEmpty ? ((value >= widget.min) && (value <= widget.max)) || (value == 0) : true,
+              correct: _controller.text.isNotEmpty ? ((value >= min) && (value <= max)) || (value == 0) : true,
             ),
           ),
         ],

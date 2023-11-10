@@ -54,8 +54,7 @@ class ListCallersState extends State<ListCallers> {
       FilterPickerText(
         text: tr('caller_range'),
         icon: "assets/graphics/icons/range.svg",
-        values: const [150, 200, 250, 500],
-        keys: _imperials
+        labels: _imperials
             ? [
                 "164 ${tr('yards')}",
                 "218 ${tr('yards')}",
@@ -95,6 +94,7 @@ class ListCallersState extends State<ListCallers> {
         context: context,
       ),
       searchController: _controller,
+      filterChanged: HelperFilter.callerFiltersChanged(),
       filter: _buildFilter,
       body: _buildList(),
     );

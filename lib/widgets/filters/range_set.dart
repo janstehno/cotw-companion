@@ -8,17 +8,14 @@ import 'package:flutter/material.dart';
 
 class FilterRangeSet extends StatefulWidget {
   final String icon, text;
-  final bool decimal;
-  final num min, max;
   final FilterKey filterKeyLower, filterKeyUpper;
+  final bool decimal;
 
   const FilterRangeSet({
     Key? key,
     required this.icon,
     required this.text,
     required this.decimal,
-    required this.min,
-    required this.max,
     required this.filterKeyLower,
     required this.filterKeyUpper,
   }) : super(key: key);
@@ -31,8 +28,12 @@ class FilterRangeSetState extends State<FilterRangeSet> {
   final TextEditingController _controllerMin = TextEditingController();
   final TextEditingController _controllerMax = TextEditingController();
 
+  late final num min, max;
+
   @override
   void initState() {
+    min = HelperFilter.getDefaultValue(widget.filterKeyLower);
+    max = HelperFilter.getDefaultValue(widget.filterKeyUpper);
     _setupControllers();
     super.initState();
   }
@@ -40,12 +41,12 @@ class FilterRangeSetState extends State<FilterRangeSet> {
   void _setupControllers() {
     if (widget.decimal) {
       _controllerMin.text =
-          HelperFilter.getDoubleValue(widget.filterKeyLower) == widget.min ? "" : HelperFilter.getDoubleValue(widget.filterKeyLower).toString().replaceFirst(".0", "");
+          HelperFilter.getDoubleValue(widget.filterKeyLower) == min ? "" : HelperFilter.getDoubleValue(widget.filterKeyLower).toString().replaceFirst(".0", "");
       _controllerMax.text =
-          HelperFilter.getDoubleValue(widget.filterKeyUpper) == widget.max ? "" : HelperFilter.getDoubleValue(widget.filterKeyUpper).toString().replaceFirst(".0", "");
+          HelperFilter.getDoubleValue(widget.filterKeyUpper) == max ? "" : HelperFilter.getDoubleValue(widget.filterKeyUpper).toString().replaceFirst(".0", "");
     } else {
-      _controllerMin.text = HelperFilter.getIntValue(widget.filterKeyLower) == widget.min ? "" : HelperFilter.getIntValue(widget.filterKeyLower).toString();
-      _controllerMax.text = HelperFilter.getIntValue(widget.filterKeyUpper) == widget.max ? "" : HelperFilter.getIntValue(widget.filterKeyUpper).toString();
+      _controllerMin.text = HelperFilter.getIntValue(widget.filterKeyLower) == min ? "" : HelperFilter.getIntValue(widget.filterKeyLower).toString();
+      _controllerMax.text = HelperFilter.getIntValue(widget.filterKeyUpper) == max ? "" : HelperFilter.getIntValue(widget.filterKeyUpper).toString();
     }
     _controllerMin.addListener(() => _setValues());
     _controllerMax.addListener(() => _setValues());
@@ -53,18 +54,18 @@ class FilterRangeSetState extends State<FilterRangeSet> {
 
   void _setValues() {
     if (widget.decimal) {
-      double min = _controllerMin.text.isEmpty ? widget.min.toDouble() : double.tryParse(_controllerMin.text) ?? widget.min.toDouble();
-      double max = _controllerMax.text.isEmpty ? widget.max.toDouble() : double.tryParse(_controllerMax.text) ?? widget.max.toDouble();
+      double newMin = _controllerMin.text.isEmpty ? min.toDouble() : double.tryParse(_controllerMin.text) ?? min.toDouble();
+      double newMax = _controllerMax.text.isEmpty ? max.toDouble() : double.tryParse(_controllerMax.text) ?? max.toDouble();
       setState(() {
-        HelperFilter.changeDoubleValue(widget.filterKeyLower, min);
-        HelperFilter.changeDoubleValue(widget.filterKeyUpper, max);
+        HelperFilter.changeDoubleValue(widget.filterKeyLower, newMin);
+        HelperFilter.changeDoubleValue(widget.filterKeyUpper, newMax);
       });
     } else {
-      int min = _controllerMin.text.isEmpty ? widget.min.toInt() : int.tryParse(_controllerMin.text) ?? widget.min.toInt();
-      int max = _controllerMax.text.isEmpty ? widget.max.toInt() : int.tryParse(_controllerMax.text) ?? widget.max.toInt();
+      int newMin = _controllerMin.text.isEmpty ? min.toInt() : int.tryParse(_controllerMin.text) ?? min.toInt();
+      int newMax = _controllerMax.text.isEmpty ? max.toInt() : int.tryParse(_controllerMax.text) ?? max.toInt();
       setState(() {
-        HelperFilter.changeIntValue(widget.filterKeyLower, min);
-        HelperFilter.changeIntValue(widget.filterKeyUpper, max);
+        HelperFilter.changeIntValue(widget.filterKeyLower, newMin);
+        HelperFilter.changeIntValue(widget.filterKeyUpper, newMax);
       });
     }
   }
@@ -81,14 +82,14 @@ class FilterRangeSetState extends State<FilterRangeSet> {
             child: WidgetTextFieldIndicator(
               icon: "assets/graphics/icons/range_min.svg",
               controller: _controllerMin,
-              correct: _controllerMin.text.isNotEmpty ? (double.tryParse(_controllerMin.text) ?? widget.min - 1) >= widget.min : true,
+              correct: _controllerMin.text.isNotEmpty ? (double.tryParse(_controllerMin.text) ?? min - 1) >= min : true,
             ),
           ),
           Expanded(
             child: WidgetTextFieldIndicator(
               icon: "assets/graphics/icons/range_max.svg",
               controller: _controllerMax,
-              correct: _controllerMax.text.isNotEmpty ? (double.tryParse(_controllerMax.text) ?? widget.max + 1) <= widget.max : true,
+              correct: _controllerMax.text.isNotEmpty ? (double.tryParse(_controllerMax.text) ?? max + 1) <= max : true,
             ),
           )
         ],

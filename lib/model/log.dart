@@ -66,7 +66,7 @@ class Log {
 
   String get date => _date;
 
-  String get dateForCompare => getDate(DateStructure.compare, _date);
+  DateTime get dateForCompare => getDate(DateStructure.compare, _date);
 
   String get dateFormatted => getDate(DateStructure.format, _date);
 
@@ -173,28 +173,28 @@ class Log {
     }
   }
 
-  static String dateToString(DateTime dateTime) {
-    return "${dateTime.year}-${dateTime.month}-${dateTime.day}-${dateTime.hour}-${dateTime.minute}";
+  static String dateToString(DateTime date) {
+    return "${date.year}-${date.month}-${date.day}-${date.hour}-${date.minute}";
   }
 
-  static String getDate(DateStructure type, String date) {
+  static dynamic getDate(DateStructure type, String date) {
     int year = int.parse(date.split("-")[0]);
     int month = int.parse(date.split("-")[1]);
     int day = int.parse(date.split("-")[2]);
     int hour = int.parse(date.split("-")[3]);
     int minute = int.parse(date.split("-")[4]);
     String yy = "$year";
-    String mm = month < 9 ? "0$month" : "$month";
-    String dd = day < 9 ? "0$day" : "$day";
-    String h = hour < 9 ? "0$hour" : "$hour";
-    String m = minute < 9 ? "0$minute" : "$minute";
+    String mm = month < 10 ? "0$month" : "$month";
+    String dd = day < 10 ? "0$day" : "$day";
+    String h = hour < 10 ? "0$hour" : "$hour";
+    String m = minute < 10 ? "0$minute" : "$minute";
     switch (type) {
-      case DateStructure.format:
-        return "$day. $month. $year  $hour:${minute < 9 ? "0$minute" : minute}";
       case DateStructure.compare:
-        return "$yy$mm$dd$h$m";
-      default:
-        return "$yy-$mm-$dd-$h-$m";
+        return DateTime.parse("$yy$mm${dd}T$h${m}00");
+      case DateStructure.format:
+        return "$day. $month. $year  $hour:$m";
+      case DateStructure.json:
+        return date;
     }
   }
 

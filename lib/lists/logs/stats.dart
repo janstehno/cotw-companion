@@ -1,7 +1,5 @@
 // Copyright (c) 2022 - 2023 Jan Stehnoer';
 
-import 'dart:developer';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -41,7 +39,6 @@ class ListLogsStatsState extends State<ListLogsStats> {
   }
 
   void _getStats() {
-    log(widget.logs.length.toString());
     for (Log log in widget.logs) {
       if (log.isInLodge) _trophyLodge += 1;
       _setTrophy(log.trophyRatingWithGO);
@@ -214,18 +211,18 @@ class ListLogsStatsState extends State<ListLogsStats> {
   Widget _buildList() {
     return widget.logs.isEmpty
         ? Container(
-      alignment: Alignment.topLeft,
-      padding: const EdgeInsets.all(30),
-      child: AutoSizeText(
-        tr('none'),
-        style: Interface.s16w300n(Interface.dark),
-      ),
-    )
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.all(30),
+            child: AutoSizeText(
+              tr('none'),
+              style: Interface.s16w300n(Interface.dark),
+            ),
+          )
         : Column(children: [
-      _buildStats("stats", "stats", _buildGeneralTags()),
-      _buildStats("trophy_diamond", "trophy_rating", _buildTrophyTags()),
-      _buildStats("fur", "fur_rarity", _buildFurTags()),
-    ]);
+            _buildStats("stats", "stats", _buildGeneralTags()),
+            _buildStats("trophy_diamond", "trophy_rating", _buildTrophyTags()),
+            _buildStats("fur", "fur_rarity", _buildFurTags()),
+          ]);
   }
 
   Widget _buildWidgets() {

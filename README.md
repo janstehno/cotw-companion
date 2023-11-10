@@ -1,5 +1,7 @@
 # **COTW Companion**
 
+`This application is a fan-made project. It is definitely not official and has no connection to the game developers whatsoever.`
+
 Companion application for the game theHunter™ Call of the Wild. Application offers information about
 huntable animals, usable weapons and callers and information about reserves you can hunt in.
 Application also offers interactive maps and list of need zones changing over time.

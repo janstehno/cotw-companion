@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 
 class FilterSwitch extends StatefulWidget {
   final String text;
-  final double height;
   final FilterKey filterKey;
+  final double height;
 
   const FilterSwitch({
     Key? key,

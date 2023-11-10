@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 
 class WidgetSearchBar extends StatefulWidget {
   final TextEditingController controller;
+  final bool filterChanged;
   final Function? onFilter;
 
   final double height = 40;
@@ -14,6 +15,7 @@ class WidgetSearchBar extends StatefulWidget {
   const WidgetSearchBar({
     Key? key,
     required this.controller,
+    required this.filterChanged,
     required this.onFilter,
   }) : super(key: key);
 
@@ -24,6 +26,7 @@ class WidgetSearchBar extends StatefulWidget {
 class WidgetSearchBarState extends State<WidgetSearchBar> {
   final double _iconWidth = 25;
   final double _iconSize = 15;
+  final double _filterIndicatorSize = 7;
 
   Widget _buildWidgets() {
     return Container(
@@ -77,19 +80,36 @@ class WidgetSearchBarState extends State<WidgetSearchBar> {
                 }),
             widget.onFilter != null
                 ? GestureDetector(
-                    child: Container(
-                        width: _iconWidth,
-                        color: Colors.transparent,
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          "assets/graphics/icons/filter.svg",
-                          width: _iconSize,
-                          height: _iconSize,
-                          colorFilter: ColorFilter.mode(
-                            Interface.dark,
-                            BlendMode.srcIn,
-                          ),
-                        )),
+                    child: Stack(children: [
+                      Container(
+                          width: _iconWidth,
+                          color: Colors.transparent,
+                          alignment: Alignment.center,
+                          child: Stack(
+                            children: [
+                              SvgPicture.asset(
+                                "assets/graphics/icons/filter.svg",
+                                width: _iconSize,
+                                height: _iconSize,
+                                colorFilter: ColorFilter.mode(
+                                  Interface.dark,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                            ],
+                          )),
+                      Positioned(
+                          top: 10,
+                          right: 3,
+                          child: Container(
+                            width: _filterIndicatorSize,
+                            height: _filterIndicatorSize,
+                            decoration: BoxDecoration(
+                              color: widget.filterChanged ? Interface.primary : Colors.transparent,
+                              borderRadius: BorderRadius.circular(_filterIndicatorSize * 2),
+                            ),
+                          ))
+                    ]),
                     onTap: () {
                       widget.onFilter!();
                     })

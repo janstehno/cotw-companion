@@ -24,7 +24,10 @@ class BuilderLogs extends StatelessWidget {
 
   Widget _buildWidgets() {
     return FutureBuilder(
-        future: Future.wait([HelperLog.readLogs(), _forcedDelay()]),
+        future: Future.wait([
+          HelperLog.readLogs(),
+          _forcedDelay(),
+        ]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError) {
             return WidgetError(

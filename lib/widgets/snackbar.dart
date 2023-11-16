@@ -14,7 +14,8 @@ class WidgetSnackBar extends StatelessWidget {
 
   final double height = 75;
 
-  final double _iconSize = 10;
+  final double _iconSize = 15;
+  final double _iconPadding = 5;
 
   const WidgetSnackBar({
     Key? key,
@@ -24,12 +25,23 @@ class WidgetSnackBar extends StatelessWidget {
     this.onSnackBarTap,
   }) : super(key: key);
 
-  Color _getColor() {
+  Color _getBackground() {
     switch (process) {
       case Process.success:
         return Interface.lightGreen;
       case Process.error:
         return Interface.red;
+      case Process.info:
+        return Interface.search;
+    }
+  }
+
+  Color _getColor() {
+    switch (process) {
+      case Process.success:
+        return Interface.alwaysDark;
+      case Process.error:
+        return Interface.alwaysLight;
       case Process.info:
         return Interface.dark;
     }
@@ -49,18 +61,26 @@ class WidgetSnackBar extends StatelessWidget {
   Widget _buildWidgets() {
     return Container(
         height: height,
-        color: Interface.search,
+        color: _getBackground(),
         padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          SvgPicture.asset(
-            _getIcon(),
-            width: _iconSize,
-            height: _iconSize,
-            colorFilter: ColorFilter.mode(
-              _getColor(),
-              BlendMode.srcIn,
-            ),
-          ),
+          Container(
+              width: _iconSize + _iconPadding,
+              height: _iconSize + _iconPadding,
+              padding: EdgeInsets.all(_iconPadding),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: _getColor().withOpacity(0.85),
+              ),
+              child: SvgPicture.asset(
+                _getIcon(),
+                width: _iconSize,
+                height: _iconSize,
+                colorFilter: ColorFilter.mode(
+                  _getBackground(),
+                  BlendMode.srcIn,
+                ),
+              )),
           Expanded(
               child: Container(
                   padding: EdgeInsets.only(left: 10, right: icon.isNotEmpty ? 30 : 0),

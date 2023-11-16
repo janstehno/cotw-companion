@@ -39,7 +39,7 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
 
   Widget _buildMap() {
     return WidgetTitleBigButton(
-      primaryText: tr('map'),
+      primaryText: tr("map"),
       icon: "assets/graphics/icons/map.svg",
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => BuilderMap(reserveId: widget.reserveId)));
@@ -111,13 +111,13 @@ class ActivityReserveInfoState extends State<ActivityReserveInfo> {
   Widget _buildAnimalsCallers() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('wildlife'),
+        primaryText: tr("wildlife"),
       ),
       ListReserveAnimals(
         reserveId: widget.reserveId,
       ),
       WidgetTitleBig(
-        primaryText: tr('callers'),
+        primaryText: tr("callers"),
       ),
       ListReserveCallers(
         reserveId: widget.reserveId,

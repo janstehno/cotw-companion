@@ -145,84 +145,84 @@ class HelperJSON {
 
   static Future<String> _getData(String name) async {
     final String content;
-    content = await root_bundle.rootBundle.loadString('assets/raw/$name.json');
+    content = await root_bundle.rootBundle.loadString("assets/raw/$name.json");
     return content;
   }
 
   static Future<List<Ammo>> readAmmo() async {
-    final data = await _getData('ammo');
+    final data = await _getData("ammo");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Ammo.fromJson(e)).toList();
   }
 
   static Future<List<Animal>> readAnimals() async {
-    final data = await _getData('animals');
+    final data = await _getData("animals");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Animal.fromJson(e)).toList();
   }
 
   static Future<List<IdtoId>> readAnimalsCallers() async {
-    final data = await _getData('animalscallers');
+    final data = await _getData("animalscallers");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => IdtoId.fromJson(e, "ANIMAL_ID", "CALLER_ID")).toList();
   }
 
   static Future<List<AnimalFur>> readAnimalsFurs() async {
-    final data = await _getData('animalsfurs');
+    final data = await _getData("animalsfurs");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => AnimalFur.fromJson(e)).toList();
   }
 
   static Future<List<IdtoId>> readAnimalsReserves() async {
-    final data = await _getData('animalsreserves');
+    final data = await _getData("animalsreserves");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => IdtoId.fromJson(e, "ANIMAL_ID", "RESERVE_ID")).toList();
   }
 
   static Future<List<Zone>> readAnimalsZones() async {
-    final data = await _getData('animalszones');
+    final data = await _getData("animalszones");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Zone.fromJson(e)).toList();
   }
 
   static Future<List<Caller>> readCallers() async {
-    final data = await _getData('callers');
+    final data = await _getData("callers");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Caller.fromJson(e)).toList();
   }
 
   static Future<List<Dlc>> readDlcs() async {
-    final data = await _getData('dlcs');
+    final data = await _getData("dlcs");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Dlc.fromJson(e)).toList();
   }
 
   static Future<List<Fur>> readFurs() async {
-    final data = await _getData('furs');
+    final data = await _getData("furs");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Fur.fromJson(e)).toList();
   }
 
   static Future<List<Reserve>> readReserves() async {
-    final data = await _getData('reserves');
+    final data = await _getData("reserves");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Reserve.fromJson(e)).toList();
   }
 
   static Future<List<Weapon>> readWeapons() async {
-    final data = await _getData('weapons');
+    final data = await _getData("weapons");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Weapon.fromJson(e)).toList();
   }
 
   static Future<List<IdtoId>> readWeaponsAmmo() async {
-    final data = await _getData('weaponsammo');
+    final data = await _getData("weaponsammo");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => IdtoId.fromJson(e, "WEAPON_ID", "AMMO_ID")).toList();
   }
 
   static Future<Map<String, dynamic>> readMapObjects() async {
-    final data = await _getData('mapobjects');
+    final data = await _getData("mapobjects");
     Map<String, dynamic> result = Map.castFrom(json.decode(data));
     return result;
   }

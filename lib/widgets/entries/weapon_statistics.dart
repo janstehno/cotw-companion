@@ -62,16 +62,16 @@ class EntryWeaponStatistics extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildWeaponDetail(true, "weapon_accuracy", weapon.accuracy == -1 ? tr('none') : weapon.accuracy.toString()),
-                _buildWeaponDetail(false, "weapon_recoil", weapon.recoil == -1 ? tr('none') : weapon.recoil.toString())
+                _buildWeaponDetail(true, "weapon_accuracy", weapon.accuracy == -1 ? tr("none") : weapon.accuracy.toString()),
+                _buildWeaponDetail(false, "weapon_recoil", weapon.recoil == -1 ? tr("none") : weapon.recoil.toString())
               ],
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildWeaponDetail(true, "weapon_reload", weapon.reload == -1 ? tr('none') : weapon.reload.toString()),
-                _buildWeaponDetail(false, "weapon_hipshot", weapon.hipshot == -1 ? tr('none') : weapon.hipshot.toString())
+                _buildWeaponDetail(true, "weapon_reload", weapon.reload == -1 ? tr("none") : weapon.reload.toString()),
+                _buildWeaponDetail(false, "weapon_hipshot", weapon.hipshot == -1 ? tr("none") : weapon.hipshot.toString())
               ],
             )
           ],

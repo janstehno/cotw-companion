@@ -56,7 +56,7 @@ class ActivityAbout extends StatelessWidget {
   Widget _buildLanguage() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('language'),
+        primaryText: tr("language"),
       ),
       Container(
           padding: _padding,
@@ -70,7 +70,7 @@ class ActivityAbout extends StatelessWidget {
   Widget _buildSupport() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('support'),
+        primaryText: tr("support"),
       ),
       Container(
           padding: _padding,
@@ -190,7 +190,7 @@ class ActivityAbout extends StatelessWidget {
   Widget _buildDonate() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('support_me'),
+        primaryText: tr("support_me"),
       ),
       Container(
           padding: _padding,
@@ -255,7 +255,7 @@ class ActivityAbout extends StatelessWidget {
   Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-          text: tr('about'),
+          text: tr("about"),
           context: context,
         ),
         body: Column(children: [

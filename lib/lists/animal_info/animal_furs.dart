@@ -41,7 +41,7 @@ class ListAnimalFursState extends State<ListAnimalFurs> {
         ? Row(mainAxisSize: MainAxisSize.max, children: [
             Expanded(
                 child: AutoSizeText(
-              tr('none'),
+              tr("none"),
               maxLines: 1,
               style: Interface.s16w300n(Interface.dark),
             ))

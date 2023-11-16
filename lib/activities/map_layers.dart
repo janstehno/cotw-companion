@@ -83,7 +83,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
   Widget _buildList() {
     return Column(children: [
       WidgetTitleBigSwitch(
-        primaryText: tr('wildlife'),
+        primaryText: tr("wildlife"),
         icon: "assets/graphics/icons/empty.svg",
         activeIcon: "assets/graphics/icons/full.svg",
         activeColor: Interface.light,

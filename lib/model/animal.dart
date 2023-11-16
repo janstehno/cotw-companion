@@ -215,9 +215,9 @@ class Animal {
     return text;
   }
 
-  String getWeight(bool units) => units ? "$_weightLB ${tr('pounds')}" : "$_weightKG ${tr('kilograms')}";
+  String getWeight(bool units) => units ? "$_weightLB ${tr("pounds")}" : "$_weightKG ${tr("kilograms")}";
 
-  String getWeightGO(bool units) => units ? "$_weightGOLB ${tr('pounds')}" : "$_weightGOKG ${tr('kilograms')}";
+  String getWeightGO(bool units) => units ? "$_weightGOLB${tr("pounds")}" : "$_weightGOKG ${tr("kilograms")}";
 
   double getWeightWithoutUnits(bool units) => units ? _weightLB : _weightKG;
 

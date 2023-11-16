@@ -31,21 +31,21 @@ void main() async {
   Interface.setColors(darkMode);
   runApp(EasyLocalization(
     path: 'assets/translations',
-    startLocale: const Locale('en'),
-    fallbackLocale: const Locale('en'),
+    startLocale: const Locale("en"),
+    fallbackLocale: const Locale("en"),
     supportedLocales: const [
-      Locale('en'),
-      Locale('ru'),
-      Locale('cs'),
-      Locale('pl'),
-      Locale('de'),
-      Locale('fr'),
-      Locale('es'),
-      Locale('pt', 'BR'),
-      Locale('pt', 'PT'),
-      Locale('ja'),
-      Locale('hu'),
-      Locale('tr')
+      Locale("en"),
+      Locale("ru"),
+      Locale("cs"),
+      Locale("pl"),
+      Locale("de"),
+      Locale("fr"),
+      Locale("es"),
+      Locale("pt', 'BR"),
+      Locale("pt', 'PT"),
+      Locale("ja"),
+      Locale("hu"),
+      Locale("tr")
     ],
     saveLocale: true,
     useFallbackTranslations: true,
@@ -95,7 +95,7 @@ class App extends StatelessWidget {
             brightness: Brightness.dark,
             scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Interface.ff42)),
             textSelectionTheme: TextSelectionThemeData(selectionColor: Interface.light, selectionHandleColor: Interface.dark),
-            fontFamily: 'Normal'),
+            fontFamily: "Normal"),
         home: Column(mainAxisSize: MainAxisSize.max, children: [
           Expanded(
               child: Container(

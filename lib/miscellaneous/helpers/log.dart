@@ -1,6 +1,7 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -129,15 +130,21 @@ class HelperLog {
       } else {
         directory = await getDownloadsDirectory();
       }
-      if (directory == null) return false;
-      final String path = Platform.isAndroid ? "${directory.path.split("/0")[0]}/0/Download" : directory.path;
+      if (directory == null) {
+        return false;
+      }
+      final String? path = await FilePicker.platform.getDirectoryPath();
+      if (path == null) {
+        return false;
+      }
       final String content = _parseLogsToJsonString();
-      if (content == "[]") return false;
+      if (content == "[]") {
+        return false;
+      }
       final String name = "${Log.dateToString(DateTime.now())}-saved-logbook-cotwcompanion.json";
       try {
         final File file = File("$path/$name");
-        final String jsonData = jsonEncode(content);
-        await file.writeAsString(jsonData);
+        await file.writeAsString(content);
       } on Exception {
         return false;
       }
@@ -147,36 +154,50 @@ class HelperLog {
   }
 
   static Future<bool> loadFile() async {
-    final status = await Permission.storage.request();
+    final PermissionStatus status = await Permission.storage.request();
     if (status.isGranted) {
-      FilePickerResult? result;
+      Directory? directory;
+      if (Platform.isAndroid) {
+        directory = await getExternalStorageDirectory();
+      } else {
+        directory = await getDownloadsDirectory();
+      }
+      if (directory == null) {
+        return false;
+      }
+      final FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ["json"],
+      );
+      if (result == null) {
+        return false;
+      }
+      final String? filePath = result.files.first.path;
+      if (filePath == null) {
+        log("filePath");
+        return false;
+      }
+      log("creating file");
+      final File file = File(filePath);
+      log("reading data");
+      final data = await readExternalFile(file);
+      List<dynamic> list = [];
+      log("trying to decode the data to a list");
       try {
-        result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['json']);
+        list = json.decode(data) as List<dynamic>;
       } catch (e) {
         return false;
       }
-      if (result != null) {
-        String? filePath = result.files.single.path;
-        if (filePath != null) {
-          File file = File(filePath);
-          final data = await readExternalFile(file);
-          List<dynamic> list = [];
-          try {
-            list = json.decode(data) as List<dynamic>;
-          } catch (e) {
-            return false;
-          }
-          List<Log> logs = [];
-          logs = list.map((e) => Log.fromJson(e)).toList();
-          if (logs.isNotEmpty) {
-            _addLogs(logs);
-            _reIndex();
-            _reName();
-            _writeFile();
-            FilePicker.platform.clearTemporaryFiles();
-            return true;
-          }
-        }
+      log("$list");
+      log("creating logs");
+      List<Log> logs = [];
+      logs = list.map((e) => Log.fromJson(e)).toList();
+      if (logs.isNotEmpty) {
+        _addLogs(logs);
+        _reIndex();
+        _reName();
+        _writeFile();
+        return true;
       }
       return false;
     }
@@ -190,7 +211,7 @@ class HelperLog {
 
   static Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/logbook.json');
+    return File("$path/logbook.json");
   }
 
   static Future<String> readExternalFile(File file) async {

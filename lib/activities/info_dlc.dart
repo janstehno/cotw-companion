@@ -52,7 +52,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
     if (widget.dlc.reserve.isNotEmpty) {
       reserves = [
         WidgetTitleBig(
-          primaryText: tr('reserves'),
+          primaryText: tr("reserves"),
         ),
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
@@ -68,7 +68,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
     if (widget.dlc.animals.isNotEmpty) {
       animals = [
         WidgetTitleBig(
-          primaryText: tr('wildlife'),
+          primaryText: tr("wildlife"),
         ),
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
@@ -85,7 +85,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
     if (widget.dlc.weapons.isNotEmpty) {
       weapons = [
         WidgetTitleBig(
-          primaryText: tr('weapons'),
+          primaryText: tr("weapons"),
         ),
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),
@@ -101,7 +101,7 @@ class ActivityDlcInfoState extends State<ActivityDlcInfo> {
     if (widget.dlc.callers.isNotEmpty) {
       callers = [
         WidgetTitleBig(
-          primaryText: tr('callers'),
+          primaryText: tr("callers"),
         ),
         Container(
             padding: const EdgeInsets.only(top: 30, bottom: 30),

@@ -38,7 +38,7 @@ class ActivityFilterState extends State<ActivityFilter> {
                 child: Container(
                     margin: const EdgeInsets.only(right: 30),
                     child: AutoSizeText(
-                      tr('filter').toUpperCase(),
+                      tr("filter").toUpperCase(),
                       maxLines: 1,
                       textAlign: TextAlign.start,
                       style: Interface.s24w600c(Interface.accent),

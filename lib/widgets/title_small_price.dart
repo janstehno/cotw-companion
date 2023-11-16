@@ -40,9 +40,9 @@ class WidgetTitleSmallPrice extends WidgetTitleSmall {
                     )),
             AutoSizeText(
               primaryText == "0"
-                  ? tr('free')
+                  ? tr("free")
                   : primaryText == "-1"
-                      ? tr('none')
+                      ? tr("none")
                       : primaryText,
               maxLines: 1,
               textAlign: TextAlign.start,

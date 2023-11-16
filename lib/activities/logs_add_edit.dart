@@ -51,8 +51,8 @@ class ActivityLogsAddEdit extends StatefulWidget {
 class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   final TextEditingController _controllerTrophyNumber = TextEditingController();
   final TextEditingController _controllerWeightNumber = TextEditingController();
-  final RegExp _equalsDoubleTrophyNumber = RegExp(r'^\d{1,4}(\.\d{1,3})?$');
-  final RegExp _equalsDoubleWeightNumber = RegExp(r'^\d{1,4}(\.\d{1,3})?$');
+  final RegExp _equalsDoubleTrophyNumber = RegExp(r"^\d{1,4}(\.\d{1,3})?$");
+  final RegExp _equalsDoubleWeightNumber = RegExp(r"^\d{1,4}(\.\d{1,3})?$");
   final HelperLogger _logger = HelperLogger("[LOGS] [ADD & EDIT]");
   final List<Animal> _animals = [];
   final List<AnimalFur> _furs = [];
@@ -429,7 +429,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
               AutoSizeText(
-                tr('time').toUpperCase(),
+                tr("time").toUpperCase(),
                 maxLines: 1,
                 textAlign: TextAlign.start,
                 style: Interface.s20w600c(Interface.dark),
@@ -446,7 +446,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildReserve() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('reserve'),
+        primaryText: tr("reserve"),
       ),
       WidgetDropDown(
           value: _selectedReserve,
@@ -464,7 +464,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildAnimal() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('animal'),
+        primaryText: tr("animal"),
       ),
       WidgetDropDown(
           value: _selectedAnimal,
@@ -482,7 +482,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildFur() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('animal_fur'),
+        primaryText: tr("animal_fur"),
       ),
       WidgetDropDown(
           value: _selectedFur,
@@ -500,7 +500,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildGender() {
     return Column(children: [
       WidgetTitleBigSwitch(
-          primaryText: tr('animal_gender'),
+          primaryText: tr("animal_gender"),
           icon: "assets/graphics/icons/gender_female.svg",
           color: Interface.alwaysDark,
           background: Interface.red,
@@ -523,12 +523,12 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     return Column(children: [
       widget.log != null
           ? WidgetTitleBig(
-              primaryText: tr('animal_trophy'),
-              secondaryText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
+              primaryText: tr("animal_trophy"),
+              secondaryText: "${tr("max")}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
             )
           : WidgetTitleBigButton(
-              primaryText: tr('animal_trophy'),
-              secondaryText: "${tr('max')}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
+              primaryText: tr("animal_trophy"),
+              secondaryText: "${tr("max")}: ${_maxTrophy == 0 ? "?" : _maxTrophy.toString()}",
               icon: "assets/graphics/icons/menu_open.svg",
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ListTrophyLodgeLogs(trophyLodgeLogs: _trophyLodgeLogs)));
@@ -544,8 +544,8 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
     _textTrophyAndWeightListener(1);
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('animal_weight'),
-        secondaryText: "${tr('max')}: ${_maxWeight == 0 ? "?" : _maxWeight.toString()}",
+        primaryText: tr("animal_weight"),
+        secondaryText: "${tr("max")}: ${_maxWeight == 0 ? "?" : _maxWeight.toString()}",
       ),
       WidgetTextFieldIndicator(
         correct: _correctWeightNumber,
@@ -557,7 +557,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildHarvestCheck() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('harvest_check'),
+        primaryText: tr("harvest_check"),
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
@@ -606,7 +606,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   Widget _buildTrophyRating() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('trophy_rating'),
+        primaryText: tr("trophy_rating"),
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
@@ -698,7 +698,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
           child: Column(
             children: [
               WidgetAppBar(
-                text: widget.log != null ? tr('edit') : tr('add'),
+                text: widget.log != null ? tr("edit") : tr("add"),
                 context: context,
               ),
               _buildDate(),

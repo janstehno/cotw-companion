@@ -113,52 +113,52 @@ class EntryLoadoutState extends State<EntryLoadout> {
               _ammo.isEmpty
                   ? const SizedBox.shrink()
                   : Container(
-                  height: _ammoHeight,
-                  alignment: Alignment.centerLeft,
-                  child: AutoSizeText(
-                    tr("weapon_ammo"),
-                    style: Interface.s14w300n(Interface.dark),
-                  )),
+                      height: _ammoHeight,
+                      alignment: Alignment.centerLeft,
+                      child: AutoSizeText(
+                        tr("weapon_ammo"),
+                        style: Interface.s14w300n(Interface.dark),
+                      )),
               _ammo.isEmpty
                   ? const SizedBox.shrink()
                   : ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _ammo.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                        height: _ammoHeight,
-                        alignment: Alignment.centerLeft,
-                        child: AutoSizeText(
-                          _ammo[index].getName(context.locale),
-                          style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
-                        ));
-                  }),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: _ammo.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                            height: _ammoHeight,
+                            alignment: Alignment.centerLeft,
+                            child: AutoSizeText(
+                              _ammo[index].getName(context.locale),
+                              style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
+                            ));
+                      }),
               _callers.isNotEmpty && _ammo.isNotEmpty ? const SizedBox(height: 10) : const SizedBox.shrink(),
               _callers.isEmpty
                   ? const SizedBox.shrink()
                   : Container(
-                  height: _callerHeight,
-                  alignment: Alignment.centerLeft,
-                  child: AutoSizeText(
-                    tr("callers"),
-                    style: Interface.s14w300n(Interface.dark),
-                  )),
+                      height: _callerHeight,
+                      alignment: Alignment.centerLeft,
+                      child: AutoSizeText(
+                        tr("callers"),
+                        style: Interface.s14w300n(Interface.dark),
+                      )),
               _callers.isEmpty
                   ? const SizedBox.shrink()
                   : ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _callers.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                        height: _callerHeight,
-                        alignment: Alignment.centerLeft,
-                        child: AutoSizeText(
-                          _callers[index].getName(context.locale),
-                          style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
-                        ));
-                  }),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: _callers.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                            height: _callerHeight,
+                            alignment: Alignment.centerLeft,
+                            child: AutoSizeText(
+                              _callers[index].getName(context.locale),
+                              style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
+                            ));
+                      }),
             ])));
   }
 
@@ -200,7 +200,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                     _hideSnackBar();
                   },
                   child: WidgetSnackBar(
-                    text: tr('item_removed'),
+                    text: tr("item_removed"),
                     icon: "assets/graphics/icons/reload.svg",
                     process: Process.info,
                     onSnackBarTap: () {
@@ -215,8 +215,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          ActivityLoadoutsAddEdit(
+                      builder: (context) => ActivityLoadoutsAddEdit(
                             loadout: widget.loadout,
                             callback: widget.callback,
                           )));

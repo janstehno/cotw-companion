@@ -50,7 +50,7 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                   child: Padding(
                       padding: const EdgeInsets.only(right: 30),
                       child: AutoSizeText(
-                        tr('caller_range'),
+                        tr("caller_range"),
                         maxLines: 1,
                         style: Interface.s16w300n(Interface.dark),
                       ))),
@@ -66,12 +66,12 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                       child: Padding(
                           padding: const EdgeInsets.only(right: 30),
                           child: AutoSizeText(
-                            tr('caller_duration'),
+                            tr("caller_duration"),
                             maxLines: 1,
                             style: Interface.s16w300n(Interface.dark),
                           ))),
                   Text(
-                    "${_caller.duration} ${tr('seconds')}",
+                    "${_caller.duration} ${tr("seconds")}",
                     style: Interface.s18w500n(Interface.dark),
                   )
                 ])),
@@ -82,7 +82,7 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                       child: Padding(
                           padding: const EdgeInsets.only(right: 30),
                           child: AutoSizeText(
-                            tr('caller_strength'),
+                            tr("caller_strength"),
                             maxLines: 1,
                             style: Interface.s16w300n(Interface.dark),
                           ))),
@@ -96,7 +96,7 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                   child: Padding(
                       padding: const EdgeInsets.only(right: 30),
                       child: AutoSizeText(
-                        tr('price'),
+                        tr("price"),
                         maxLines: 1,
                         style: Interface.s16w300n(Interface.dark),
                       ))),
@@ -117,9 +117,9 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
                         )),
                 AutoSizeText(
                   _caller.price == 0
-                      ? tr('free')
+                      ? tr("free")
                       : _caller.price == -1
-                          ? tr('none')
+                          ? tr("none")
                           : "${_caller.price}",
                   maxLines: 1,
                   textAlign: TextAlign.start,
@@ -134,7 +134,7 @@ class ActivityCallerInfoState extends State<ActivityCallerInfo> {
   Widget _buildAnimals() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('recommended_animals'),
+        primaryText: tr("recommended_animals"),
       ),
       Container(
           padding: _padding,

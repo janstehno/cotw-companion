@@ -33,7 +33,7 @@ class ActivityFurInfoState extends State<ActivityFurInfo> {
   Widget _buildStatistics() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('fur_rarity'),
+        primaryText: tr("fur_rarity"),
       ),
       ListFurAnimals(
         furId: widget.furId,

@@ -193,7 +193,7 @@ class ActivityHomeState extends State<ActivityHome> {
             margin: const EdgeInsets.only(bottom: 7),
             child: WidgetButtonIconText(
               icon: "assets/graphics/icons/about.svg",
-              text: tr('about'),
+              text: tr("about"),
               color: Interface.alwaysDark,
               background: Interface.alwaysLight,
               buttonHeight: _footerRightButtonHeight,
@@ -205,7 +205,7 @@ class ActivityHomeState extends State<ActivityHome> {
             margin: const EdgeInsets.only(bottom: 7),
             child: WidgetButtonIconText(
               icon: "assets/graphics/icons/issue.svg",
-              text: tr('issues'),
+              text: tr("issues"),
               color: Interface.alwaysDark,
               background: Interface.red,
               buttonHeight: _footerRightButtonHeight,
@@ -218,7 +218,7 @@ class ActivityHomeState extends State<ActivityHome> {
             margin: const EdgeInsets.only(bottom: 7),
             child: WidgetButtonIconText(
               icon: "assets/graphics/icons/idea.svg",
-              text: tr('ideas'),
+              text: tr("ideas"),
               color: Interface.alwaysDark,
               background: Interface.yellow,
               buttonHeight: _footerRightButtonHeight,
@@ -229,7 +229,7 @@ class ActivityHomeState extends State<ActivityHome> {
             )),
         WidgetButtonIconText(
           icon: "assets/graphics/icons/repair.svg",
-          text: tr('patch_notes'),
+          text: tr("patch_notes"),
           color: Interface.alwaysDark,
           background: Interface.blue,
           buttonHeight: _footerRightButtonHeight,

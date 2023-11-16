@@ -47,12 +47,12 @@ class ListWildlifeState extends State<ListWildlife> {
   List<Widget> _buildFilters() {
     return [
       FilterPickerAuto(
-        text: tr('animal_class'),
+        text: tr("animal_class"),
         icon: "assets/graphics/icons/level.svg",
         filterKey: FilterKey.animalsClass,
       ),
       FilterPickerAuto(
-        text: tr('animal_difficulty'),
+        text: tr("animal_difficulty"),
         icon: "assets/graphics/icons/stats.svg",
         filterKey: FilterKey.animalsDifficulty,
       ),
@@ -77,7 +77,7 @@ class ListWildlifeState extends State<ListWildlife> {
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('wildlife'),
+        text: tr("wildlife"),
         context: context,
       ),
       searchController: _controller,

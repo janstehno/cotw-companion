@@ -141,12 +141,12 @@ class ActivityLogsState extends State<ActivityLogs> {
     if (fileLoaded) {
       _filter();
       _buildSnackBar(
-        tr('file_imported'),
+        tr("file_imported"),
         Process.success,
       );
     } else {
       _buildSnackBar(
-        tr('file_not_imported'),
+        tr("file_not_imported"),
         Process.error,
       );
     }
@@ -156,12 +156,12 @@ class ActivityLogsState extends State<ActivityLogs> {
     final bool fileSaved = await HelperLog.saveFile();
     if (fileSaved) {
       _buildSnackBar(
-        tr('file_exported'),
+        tr("file_exported"),
         Process.success,
       );
     } else {
       _buildSnackBar(
-        tr('file_not_exported'),
+        tr("file_not_exported"),
         Process.error,
       );
     }
@@ -180,7 +180,7 @@ class ActivityLogsState extends State<ActivityLogs> {
                           padding: const EdgeInsets.all(30),
                           alignment: Alignment.center,
                           child: AutoSizeText(
-                            tr('remove_all_items'),
+                            tr("remove_all_items"),
                             maxLines: 2,
                             textAlign: TextAlign.center,
                             style: Interface.s18w500n(Interface.alwaysLight),
@@ -411,14 +411,14 @@ class ActivityLogsState extends State<ActivityLogs> {
     return [
       FilterRangeSet(
         icon: "${assets}stats.svg",
-        text: tr('animal_trophy'),
+        text: tr("animal_trophy"),
         decimal: true,
         filterKeyLower: FilterKey.logsTrophyScoreMin,
         filterKeyUpper: FilterKey.logsTrophyScoreMax,
       ),
       FilterPickerIcon(
         icon: "${assets}trophy_diamond.svg",
-        text: tr('trophy_rating'),
+        text: tr("trophy_rating"),
         filterKey: FilterKey.logsTrophyRating,
         icons: [
           "${assets}trophy_none.svg",
@@ -447,13 +447,13 @@ class ActivityLogsState extends State<ActivityLogs> {
       ),
       FilterPickerText(
         icon: "${assets}fur.svg",
-        text: tr('fur_rarity'),
+        text: tr("fur_rarity"),
         labels: [
-          tr('rarity_common'),
-          tr('rarity_uncommon'),
-          tr('rarity_rare'),
-          tr('rarity_very_rare'),
-          tr('rarity_mission'),
+          tr("rarity_common"),
+          tr("rarity_uncommon"),
+          tr("rarity_rare"),
+          tr("rarity_very_rare"),
+          tr("rarity_mission"),
           HelperJSON.getFur(Interface.greatOneId).getName(context.locale),
         ],
         colors: [
@@ -476,7 +476,7 @@ class ActivityLogsState extends State<ActivityLogs> {
       ),
       FilterPickerIcon(
         icon: "${assets}gender.svg",
-        text: tr('animal_gender'),
+        text: tr("animal_gender"),
         filterKey: FilterKey.logsGender,
         icons: [
           "${assets}gender_male.svg",
@@ -493,7 +493,7 @@ class ActivityLogsState extends State<ActivityLogs> {
       ),
       FilterSorterIcon(
         icon: "${assets}sort.svg",
-        text: tr('sort'),
+        text: tr("sort"),
         filterKey: FilterKey.logsSort,
         icons: [
           "${assets}sort_az.svg",
@@ -531,7 +531,7 @@ class ActivityLogsState extends State<ActivityLogs> {
     return Stack(children: [
       Column(mainAxisSize: MainAxisSize.max, children: [
         WidgetAppBar(
-          text: widget.trophyLodge ? tr('trophy_lodge') : tr('logbook'),
+          text: widget.trophyLodge ? tr("trophy_lodge") : tr("logbook"),
           context: context,
         ),
         WidgetSearchBar(

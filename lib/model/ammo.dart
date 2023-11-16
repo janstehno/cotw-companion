@@ -69,7 +69,7 @@ class Ammo {
 
   String get classRange => _min == _max ? _min.toString() : "$_min - $_max";
 
-  String getRange(bool units) => units ? "$_rangeYD ${tr('yards')}" : "$_rangeM ${tr('meters')}";
+  String getRange(bool units) => units ? "$_rangeYD ${tr("yards")}" : "$_rangeM ${tr("meters")}";
 
   String getName(Locale locale) {
     switch (locale.languageCode.toString()) {

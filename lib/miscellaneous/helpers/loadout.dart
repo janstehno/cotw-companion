@@ -7,6 +7,7 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
+import 'package:cotwcompanion/model/log.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -135,21 +136,27 @@ class HelperLoadout {
   static Future<bool> saveFile() async {
     final PermissionStatus status = await Permission.storage.request();
     if (status.isGranted) {
-      final Directory? directory;
+      Directory? directory;
       if (Platform.isAndroid) {
         directory = await getExternalStorageDirectory();
       } else {
         directory = await getDownloadsDirectory();
       }
-      if (directory == null) return false;
-      final String path = Platform.isAndroid ? "${directory.path.split("/0")[0]}/0/Download" : directory.path;
+      if (directory == null) {
+        return false;
+      }
+      final String? path = await FilePicker.platform.getDirectoryPath();
+      if (path == null) {
+        return false;
+      }
       final String content = _parseLoadoutsToJsonString();
-      if (content == "[]") return false;
-      final String name = "${dateTime(DateTime.now())}-saved-loadouts-cotwcompanion.json";
+      if (content == "[]") {
+        return false;
+      }
+      final String name = "${Log.dateToString(DateTime.now())}-saved-loadouts-cotwcompanion.json";
       try {
         final File file = File("$path/$name");
-        final String jsonData = jsonEncode(content);
-        await file.writeAsString(jsonData);
+        await file.writeAsString(content);
       } on Exception {
         return false;
       }
@@ -159,35 +166,43 @@ class HelperLoadout {
   }
 
   static Future<bool> loadFile() async {
-    final status = await Permission.storage.request();
+    final PermissionStatus status = await Permission.storage.request();
     if (status.isGranted) {
-      FilePickerResult? result;
+      Directory? directory;
+      if (Platform.isAndroid) {
+        directory = await getExternalStorageDirectory();
+      } else {
+        directory = await getDownloadsDirectory();
+      }
+      if (directory == null) {
+        return false;
+      }
+      final FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ["json"],
+      );
+      if (result == null) {
+        return false;
+      }
+      final String? filePath = result.files.first.path;
+      if (filePath == null) {
+        return false;
+      }
+      final File file = File(filePath);
+      final data = await readExternalFile(file);
+      List<dynamic> list = [];
       try {
-        result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['json']);
+        list = json.decode(data) as List<dynamic>;
       } catch (e) {
         return false;
       }
-      if (result != null) {
-        String? filePath = result.files.single.path;
-        if (filePath != null) {
-          File file = File(filePath);
-          final data = await readExternalFile(file);
-          List<dynamic> list = [];
-          try {
-            list = json.decode(data) as List<dynamic>;
-          } catch (e) {
-            return false;
-          }
-          List<Loadout> loadouts = [];
-          loadouts = list.map((e) => Loadout.fromJson(e)).toList();
-          if (loadouts.isNotEmpty) {
-            _addLoadouts(loadouts);
-            _reIndex();
-            _writeFile();
-            FilePicker.platform.clearTemporaryFiles();
-            return true;
-          }
-        }
+      List<Loadout> loadouts = [];
+      loadouts = list.map((e) => Loadout.fromJson(e)).toList();
+      if (loadouts.isNotEmpty) {
+        _addLoadouts(loadouts);
+        _reIndex();
+        _writeFile();
+        return true;
       }
       return false;
     }
@@ -201,7 +216,7 @@ class HelperLoadout {
 
   static Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/loadouts.json');
+    return File("$path/loadouts.json");
   }
 
   static Future<String> readExternalFile(File file) async {
@@ -248,14 +263,5 @@ class HelperLoadout {
     }
     parsed += "]";
     return parsed;
-  }
-
-  static String dateTime(DateTime dateTime) {
-    String year = dateTime.year.toString();
-    String month = dateTime.month > 9 ? dateTime.month.toString() : "0${dateTime.month}";
-    String day = dateTime.day > 9 ? dateTime.day.toString() : "0${dateTime.day}";
-    String hour = dateTime.hour > 9 ? dateTime.hour.toString() : "0${dateTime.hour}";
-    String minute = dateTime.minute > 9 ? dateTime.minute.toString() : "0${dateTime.minute}";
-    return "$year-$month-$day-$hour-$minute";
   }
 }

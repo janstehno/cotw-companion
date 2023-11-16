@@ -156,7 +156,7 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10),
                 child: AutoSizeText(
-                  widget.log.usesImperials ? ("${widget.log.weight} ${tr('pounds')}") : ("${widget.log.weight} ${tr('kilograms')}"),
+                  widget.log.usesImperials ? ("${widget.log.weight} ${tr("pounds")}") : ("${widget.log.weight} ${tr("kilograms")}"),
                   maxLines: 1,
                   minFontSize: 8,
                   textAlign: TextAlign.left,

@@ -47,7 +47,7 @@ class ListReservesState extends State<ListReserves> {
   List<Widget> _buildFilters() {
     return [
       FilterRangeAuto(
-        text: tr('wildlife'),
+        text: tr("wildlife"),
         icon: "assets/graphics/icons/target.svg",
         filterKeyLower: FilterKey.reservesCountMin,
         filterKeyUpper: FilterKey.reservesCountMax,
@@ -73,7 +73,7 @@ class ListReservesState extends State<ListReserves> {
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('reserves'),
+        text: tr("reserves"),
         context: context,
       ),
       searchController: _controller,

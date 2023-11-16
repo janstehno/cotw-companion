@@ -20,10 +20,10 @@ class WidgetRichText extends StatelessWidget {
       defaultStyle: Interface.s16w300n(Interface.dark),
       patternList: [
         EasyRichTextPattern(
-            targetString: '(\\*)(.*?)(\\*)',
+            targetString: "(\\*)(.*?)(\\*)",
             matchBuilder: (BuildContext context, RegExpMatch? match) {
               return TextSpan(
-                text: match?[0]?.replaceAll('*', ''),
+                text: match?[0]?.replaceAll("*", ""),
                 style: Interface.s16w500n(Interface.primary),
               );
             })

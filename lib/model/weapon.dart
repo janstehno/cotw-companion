@@ -141,13 +141,13 @@ class Weapon {
   String getTypeAsString() {
     switch (_type) {
       case (WeaponType.rifle):
-        return tr('rifle');
+        return tr("rifle");
       case (WeaponType.shotgun):
-        return tr('shotgun');
+        return tr("shotgun");
       case (WeaponType.handgun):
-        return tr('handgun');
+        return tr("handgun");
       case (WeaponType.bow):
-        return tr('bow_crossbow');
+        return tr("bow_crossbow");
       default:
         return "";
     }
@@ -219,6 +219,6 @@ class Weapon {
     if (mapRep.containsKey(propertyName)) {
       return mapRep[propertyName];
     }
-    throw ArgumentError('Could not find filter property. Please, go back or restart the application.');
+    throw ArgumentError("Could not find filter property. Please, go back or restart the application.");
   }
 }

@@ -56,7 +56,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   Widget _buildLanguage() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('language'),
+        primaryText: tr("language"),
       ),
       WidgetDropDown(
           value: _settings.language,
@@ -89,7 +89,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
     return Column(
       children: [
         WidgetTitleBig(
-          primaryText: tr('color'),
+          primaryText: tr("color"),
         ),
         Container(
             padding: const EdgeInsets.all(30),
@@ -142,7 +142,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   Widget _buildInterface() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('interface'),
+        primaryText: tr("interface"),
       ),
       Container(
           padding: const EdgeInsets.only(left: 30, right: 30),
@@ -153,7 +153,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
             children: [
               Expanded(
                 child: WidgetSettingsDouble(
-                    text: tr('light_mode'),
+                    text: tr("light_mode"),
                     isActive: !(_settings.darkMode),
                     onTap: () {
                       setState(() {
@@ -164,7 +164,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
               ),
               Expanded(
                 child: WidgetSettingsDouble(
-                    text: tr('dark_mode'),
+                    text: tr("dark_mode"),
                     alignRight: true,
                     isActive: _settings.darkMode,
                     onTap: () {
@@ -182,7 +182,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   Widget _buildUnits() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('units'),
+        primaryText: tr("units"),
       ),
       Container(
           padding: const EdgeInsets.only(left: 30, right: 30),
@@ -193,7 +193,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
             children: [
               Expanded(
                 child: WidgetSettingsDouble(
-                    text: tr('metric_units'),
+                    text: tr("metric_units"),
                     isActive: !(_settings.imperialUnits),
                     onTap: () {
                       setState(() {
@@ -204,7 +204,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
               ),
               Expanded(
                 child: WidgetSettingsDouble(
-                    text: tr('imperial_units'),
+                    text: tr("imperial_units"),
                     alignRight: true,
                     isActive: _settings.imperialUnits,
                     onTap: () {
@@ -226,7 +226,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
           color: Interface.title,
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             WidgetTitleBigSwitch(
-                primaryText: tr('fur_rarity_per_cent'),
+                primaryText: tr("fur_rarity_per_cent"),
                 maxLines: 2,
                 isActive: _settings.furRarityPerCent,
                 onTap: () {
@@ -244,7 +244,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
             Container(
                 padding: const EdgeInsets.fromLTRB(30, 5, 30, 25),
                 child: Text(
-                  tr('fur_rarity_warning'),
+                  tr("fur_rarity_warning"),
                   style: Interface.s12w300n(Interface.red),
                 ))
           ]))
@@ -254,10 +254,10 @@ class ActivitySettingsState extends State<ActivitySettings> {
   Widget _buildOther() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('other'),
+        primaryText: tr("other"),
       ),
       WidgetTapTextIndicator(
-          text: tr('map_performance_mode'),
+          text: tr("map_performance_mode"),
           maxLines: 2,
           isActive: _settings.mapPerformanceMode,
           onTap: () {
@@ -267,7 +267,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
             });
           }),
       WidgetTapTextIndicator(
-          text: tr('map_zones_accuracy'),
+          text: tr("map_zones_accuracy"),
           maxLines: 2,
           isActive: _settings.mapZonesAccuracy,
           onTap: () {
@@ -277,7 +277,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
             });
           }),
       WidgetTapTextIndicator(
-          text: tr('best_weapons'),
+          text: tr("best_weapons"),
           maxLines: 2,
           isActive: _settings.bestWeaponsForAnimal,
           onTap: () {
@@ -292,7 +292,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-          text: tr('settings'),
+          text: tr("settings"),
           context: context,
         ),
         body: Column(children: [

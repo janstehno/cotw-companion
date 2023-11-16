@@ -54,7 +54,7 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
     animals.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       WidgetTitleSmall(
-        primaryText: "${tr('animal_class')} ${animals[0].level}",
+        primaryText: "${tr("animal_class")} ${animals[0].level}",
       ),
       Container(
           padding: const EdgeInsets.all(30),

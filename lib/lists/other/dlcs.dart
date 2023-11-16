@@ -59,7 +59,7 @@ class ListDlcsState extends State<ListDlcs> {
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('content_downloadable_content'),
+        text: tr("content_downloadable_content"),
         context: context,
       ),
       body: _buildList(),

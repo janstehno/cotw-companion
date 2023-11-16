@@ -113,7 +113,7 @@ class EntryLogState extends State<EntryLog> {
             _hideSnackBar();
           },
           child: WidgetSnackBar(
-            text: widget.log.isInLodge ? tr('item_moved_to_lodge') : tr('item_removed_from_lodge'),
+            text: widget.log.isInLodge ? tr("item_moved_to_lodge") : tr("item_removed_from_lodge"),
             process: Process.info,
           )),
     ));
@@ -351,7 +351,7 @@ class EntryLogState extends State<EntryLog> {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10),
                 child: AutoSizeText(
-                  widget.log.removePointZero("${widget.log.weight} ${widget.log.usesImperials ? tr('pounds') : tr('kilograms')}"),
+                  widget.log.removePointZero("${widget.log.weight} ${widget.log.usesImperials ? tr("pounds") : tr("kilograms")}"),
                   maxLines: 1,
                   minFontSize: 8,
                   textAlign: TextAlign.left,
@@ -475,7 +475,7 @@ class EntryLogState extends State<EntryLog> {
                     _hideSnackBar();
                   },
                   child: WidgetSnackBar(
-                    text: tr('item_removed'),
+                    text: tr("item_removed"),
                     icon: "assets/graphics/icons/reload.svg",
                     process: Process.info,
                     onSnackBarTap: () {

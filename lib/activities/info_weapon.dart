@@ -48,7 +48,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                       child: Container(
                           margin: const EdgeInsets.only(right: 30),
                           child: AutoSizeText(
-                            tr('weapon_type'),
+                            tr("weapon_type"),
                             maxLines: 1,
                             style: Interface.s16w300n(Interface.dark),
                           ))),
@@ -64,7 +64,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                           child: Padding(
                               padding: const EdgeInsets.only(right: 30),
                               child: AutoSizeText(
-                                tr('price'),
+                                tr("price"),
                                 maxLines: 1,
                                 style: Interface.s16w300n(Interface.dark),
                               ))),
@@ -84,9 +84,9 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                                 )),
                         AutoSizeText(
                           _weapon.price == 0
-                              ? tr('free')
+                              ? tr("free")
                               : _weapon.price == -1
-                                  ? tr('none')
+                                  ? tr("none")
                                   : "${_weapon.price}",
                           maxLines: 1,
                           textAlign: TextAlign.start,
@@ -99,7 +99,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
                       child: Container(
                           margin: const EdgeInsets.only(right: 30),
                           child: AutoSizeText(
-                            tr('weapon_magazine'),
+                            tr("weapon_magazine"),
                             maxLines: 1,
                             style: Interface.s16w300n(Interface.dark),
                           ))),
@@ -120,7 +120,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
   Widget _buildAmmo() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('weapon_ammo'),
+        primaryText: tr("weapon_ammo"),
       ),
       ListWeaponAmmo(
         weaponId: _weapon.id,
@@ -131,7 +131,7 @@ class ActivityWeaponInfoState extends State<ActivityWeaponInfo> {
   Widget _buildAnimals() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('recommended_animals'),
+        primaryText: tr("recommended_animals"),
       ),
       ListWeaponAnimals(
         min: _weapon.min,

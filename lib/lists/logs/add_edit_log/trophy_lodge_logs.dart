@@ -31,7 +31,7 @@ class ListTrophyLodgeLogs extends StatelessWidget {
   Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('trophy_lodge'),
+        text: tr("trophy_lodge"),
         context: context,
       ),
       appBarFixed: true,

@@ -106,7 +106,7 @@ class ListLoadoutItemsState extends State<ListLoadoutItems> {
     _filter();
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: widget.type == Item.ammo ? tr('weapons') : tr('callers'),
+        text: widget.type == Item.ammo ? tr("weapons") : tr("callers"),
         context: context,
       ),
       searchController: _controller,

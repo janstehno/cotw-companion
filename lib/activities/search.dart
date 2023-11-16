@@ -165,7 +165,7 @@ class ActivitySearchState extends State<ActivitySearch> {
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('search'),
+        text: tr("search"),
         context: context,
       ),
       searchController: _controller,

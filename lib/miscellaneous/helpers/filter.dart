@@ -96,7 +96,7 @@ class HelperFilter {
   }
 
   static bool animalFiltersChanged() {
-    return !(const DeepCollectionEquality().equals(_defaultFilters[FilterKey.animalsClass], _filters[FilterKey.animalsClass]) ||
+    return !(const DeepCollectionEquality().equals(_defaultFilters[FilterKey.animalsClass], _filters[FilterKey.animalsClass]) &&
         const DeepCollectionEquality().equals(_defaultFilters[FilterKey.animalsDifficulty], _filters[FilterKey.animalsDifficulty]));
   }
 

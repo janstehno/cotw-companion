@@ -60,7 +60,7 @@ class Caller {
 
   bool get isFromDlc => _dlc == 1;
 
-  String getRange(bool units) => units ? "$_rangeYD ${tr('yards')}" : "$_rangeM ${tr('meters')}";
+  String getRange(bool units) => units ? "$_rangeYD ${tr("yards")}" : "$_rangeM ${tr("meters")}";
 
   String getName(Locale locale) {
     switch (locale.languageCode.toString()) {

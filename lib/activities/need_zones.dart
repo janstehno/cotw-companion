@@ -354,7 +354,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
         ? const SizedBox.shrink()
         : Column(children: [
             WidgetTitleBigSwitch(
-              primaryText: tr('time'),
+              primaryText: tr("time"),
               icon: "assets/graphics/icons/stop.svg",
               color: Interface.alwaysDark,
               background: Interface.red,
@@ -371,7 +371,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               child: _buildTimeSliders(),
             ),
             WidgetTitleBigButton(
-              primaryText: tr('reserve'),
+              primaryText: tr("reserve"),
               icon: "assets/graphics/icons/map.svg",
               onTap: () {
                 Navigator.push(
@@ -396,7 +396,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
       _compact
           ? const SizedBox.shrink()
           : WidgetTitleBig(
-              primaryText: tr('animal_need_zones'),
+              primaryText: tr("animal_need_zones"),
             ),
       _buildClass(),
       ListNeedZones(
@@ -417,7 +417,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
             context: context,
           )
         : WidgetAppBar(
-            text: tr('animal_need_zones'),
+            text: tr("animal_need_zones"),
             context: context,
           );
   }

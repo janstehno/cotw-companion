@@ -16,13 +16,13 @@ class ActivityMapInformation extends StatelessWidget {
     return Column(children: [
       WidgetTitleInfoIcon(
         icon: "assets/graphics/icons/fullscreen.svg",
-        text: tr('interface'),
+        text: tr("interface"),
       ),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
           child: WidgetRichText(
-            text: tr('map_info_0_1'),
+            text: tr("map_info_0_1"),
           )),
     ]);
   }
@@ -31,31 +31,31 @@ class ActivityMapInformation extends StatelessWidget {
     return Column(children: [
       WidgetTitleInfoIcon(
         icon: "assets/graphics/icons/repair.svg",
-        text: tr('map_info_1'),
+        text: tr("map_info_1"),
       ),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
           child: WidgetRichText(
-            text: tr('map_info_1_1'),
+            text: tr("map_info_1_1"),
           )),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: WidgetRichText(
-            text: tr('map_info_1_2'),
+            text: tr("map_info_1_2"),
           )),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: WidgetRichText(
-            text: tr('map_info_1_3'),
+            text: tr("map_info_1_3"),
           )),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
           child: WidgetRichText(
-            text: tr('map_info_1_4'),
+            text: tr("map_info_1_4"),
           )),
     ]);
   }
@@ -64,7 +64,7 @@ class ActivityMapInformation extends StatelessWidget {
     return Column(children: [
       WidgetTitleInfoIcon(
         icon: "assets/graphics/icons/other.svg",
-        text: tr('map_info_3'),
+        text: tr("map_info_3"),
       ),
     ]);
   }
@@ -73,13 +73,13 @@ class ActivityMapInformation extends StatelessWidget {
     return Column(children: [
       WidgetTitleInfoIcon(
         icon: "assets/graphics/icons/zone_feed.svg",
-        text: tr('map_info_2'),
+        text: tr("map_info_2"),
       ),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
           child: WidgetRichText(
-            text: tr('map_info_2_1'),
+            text: tr("map_info_2_1"),
           )),
     ]);
   }
@@ -88,25 +88,25 @@ class ActivityMapInformation extends StatelessWidget {
     return Column(children: [
       WidgetTitleInfoIcon(
         icon: "assets/graphics/icons/min_max.svg",
-        text: tr('map_info_4'),
+        text: tr("map_info_4"),
       ),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
           child: WidgetRichText(
-            text: tr('map_info_4_1'),
+            text: tr("map_info_4_1"),
           )),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: WidgetRichText(
-            text: tr('map_info_4_2'),
+            text: tr("map_info_4_2"),
           )),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
           child: WidgetRichText(
-            text: tr('map_info_4_3'),
+            text: tr("map_info_4_3"),
           )),
     ]);
   }
@@ -114,7 +114,7 @@ class ActivityMapInformation extends StatelessWidget {
   Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-          text: tr('help'),
+          text: tr("help"),
           context: context,
         ),
         body: Column(children: [

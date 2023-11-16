@@ -15,6 +15,13 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        background: Interface.even,
+        version: "1.8.5",
+        changes: const [
+          "- Improvement of the UI. You can now choose, where the file with all your harvests will be saved to / loaded from. Permission is still needed, otherwise the app will not be able to save or load the file."
+        ],
+      ),
+      WidgetPatchNote(
         background: Interface.odd,
         version: "1.8.3 - 1.8.4",
       ),
@@ -444,7 +451,7 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('patch_notes'),
+        text: tr("patch_notes"),
         context: context,
       ),
       body: _buildList(),

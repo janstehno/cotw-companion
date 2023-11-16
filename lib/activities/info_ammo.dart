@@ -42,7 +42,7 @@ class ActivityAmmoInfoState extends State<ActivityAmmoInfo> {
     return Row(children: [
       Expanded(
         child: WidgetTitleSmall(
-          primaryText: tr('price'),
+          primaryText: tr("price"),
         ),
       ),
       WidgetTitleSmallPrice(
@@ -66,7 +66,7 @@ class ActivityAmmoInfoState extends State<ActivityAmmoInfo> {
   Widget _buildWeapons() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('weapons'),
+        primaryText: tr("weapons"),
       ),
       ListAmmoWeapons(ammoId: _ammo.id),
     ]);
@@ -75,7 +75,7 @@ class ActivityAmmoInfoState extends State<ActivityAmmoInfo> {
   Widget _buildAnimals() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('recommended_animals'),
+        primaryText: tr("recommended_animals"),
       ),
       ListWeaponAnimals(
         min: _ammo.min,

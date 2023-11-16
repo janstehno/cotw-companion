@@ -59,7 +59,7 @@ class ListAnimalCallersState extends State<ListAnimalCallers> {
                 );
               })
           : AutoSizeText(
-              tr('none'),
+              tr("none"),
               maxLines: 1,
               style: Interface.s16w300n(Interface.dark),
             )

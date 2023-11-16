@@ -129,7 +129,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                     child: Container(
                         padding: const EdgeInsets.only(right: 15),
                         child: AutoSizeText(
-                          tr('animal_class'),
+                          tr("animal_class"),
                           maxLines: 1,
                           style: Interface.s16w300n(Interface.dark),
                         ))),
@@ -145,7 +145,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                         child: Container(
                             padding: const EdgeInsets.only(right: 15),
                             child: AutoSizeText(
-                              tr('animal_difficulty'),
+                              tr("animal_difficulty"),
                               maxLines: 1,
                               style: Interface.s16w300n(Interface.dark),
                             ))),
@@ -162,7 +162,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   Widget _buildReserves() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('reserves'),
+        primaryText: tr("reserves"),
       ),
       Container(
           padding: _padding,
@@ -178,11 +178,11 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
         Expanded(
           child: _animal.grounded
               ? WidgetTitleBigIcon(
-                  primaryText: tr('animal_trophy'),
+                  primaryText: tr("animal_trophy"),
                   icon: "assets/graphics/icons/grounded.svg",
                 )
               : WidgetTitleBig(
-                  primaryText: tr('animal_trophy'),
+                  primaryText: tr("animal_trophy"),
                 ),
         ),
       ]),
@@ -226,8 +226,8 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             ]),
           ])),
       WidgetTitleBig(
-        primaryText: tr('animal_maximum_trophy'),
-        secondaryText: tr('subject_to_change'),
+        primaryText: tr("animal_maximum_trophy"),
+        secondaryText: tr("subject_to_change"),
       ),
       Container(
           padding: _padding,
@@ -290,8 +290,8 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   Widget _buildFurs() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('animal_furs'),
-        secondaryText: tr('subject_to_change'),
+        primaryText: tr("animal_furs"),
+        secondaryText: tr("subject_to_change"),
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(60, 30, 60, 0),
@@ -309,7 +309,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                         _toggleRarity(0);
                       },
                       child: WidgetTag.small(
-                        value: tr('rarity_common'),
+                        value: tr("rarity_common"),
                         color: Interface.light,
                         background: Interface.rarityCommon,
                       )),
@@ -318,7 +318,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                         _toggleRarity(1);
                       },
                       child: WidgetTag.small(
-                        value: tr('rarity_uncommon'),
+                        value: tr("rarity_uncommon"),
                         color: Interface.alwaysDark,
                         background: Interface.rarityUncommon,
                       )),
@@ -327,7 +327,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                         _toggleRarity(2);
                       },
                       child: WidgetTag.small(
-                        value: tr('rarity_rare'),
+                        value: tr("rarity_rare"),
                         color: Interface.alwaysDark,
                         background: Interface.rarityRare,
                       )),
@@ -336,7 +336,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                         _toggleRarity(3);
                       },
                       child: WidgetTag.small(
-                        value: tr('rarity_very_rare'),
+                        value: tr("rarity_very_rare"),
                         color: Interface.alwaysDark,
                         background: Interface.rarityVeryRare,
                       )),
@@ -345,7 +345,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                         _toggleRarity(4);
                       },
                       child: WidgetTag.small(
-                        value: tr('rarity_mission'),
+                        value: tr("rarity_mission"),
                         color: Interface.alwaysDark,
                         background: Interface.rarityMission,
                       )),
@@ -365,7 +365,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   Widget _buildZones() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('animal_need_zones'),
+        primaryText: tr("animal_need_zones"),
       ),
       Container(
           padding: const EdgeInsets.fromLTRB(60, 30, 60, 0),
@@ -379,22 +379,22 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                 alignment: WrapAlignment.center,
                 children: [
                   WidgetTag.small(
-                    value: tr('animal_other'),
+                    value: tr("animal_other"),
                     color: Interface.light,
                     background: Interface.zoneOther,
                   ),
                   WidgetTag.small(
-                    value: tr('animal_feed'),
+                    value: tr("animal_feed"),
                     color: Interface.alwaysDark,
                     background: Interface.zoneFeed,
                   ),
                   WidgetTag.small(
-                    value: tr('animal_drink'),
+                    value: tr("animal_drink"),
                     color: Interface.alwaysDark,
                     background: Interface.zoneDrink,
                   ),
                   WidgetTag.small(
-                    value: tr('animal_rest'),
+                    value: tr("animal_rest"),
                     color: Interface.alwaysDark,
                     background: Interface.zoneRest,
                   )
@@ -410,7 +410,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
     return _animal.level > 1
         ? Column(children: [
             WidgetTitleBig(
-              primaryText: tr('animal_anatomy'),
+              primaryText: tr("animal_anatomy"),
             ),
             Stack(children: [
               SvgPicture.asset(
@@ -434,7 +434,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
     return _animal.hasSenses
         ? Column(children: [
             WidgetTitleBig(
-              primaryText: tr('animal_senses'),
+              primaryText: tr("animal_senses"),
             ),
             Container(
                 padding: _padding,
@@ -468,7 +468,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   Widget _buildCallers() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('recommended_callers'),
+        primaryText: tr("recommended_callers"),
       ),
       Container(
         padding: _padding,
@@ -481,10 +481,10 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   Widget _buildWeapons() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('recommended_weapons'),
+        primaryText: tr("recommended_weapons"),
       ),
       WidgetTitleSmall(
-        primaryText: tr('weapons_rifles'),
+        primaryText: tr("weapons_rifles"),
       ),
       Container(
         padding: _padding,
@@ -492,7 +492,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
         child: ListAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.rifle),
       ),
       WidgetTitleSmall(
-        primaryText: tr('weapons_shotguns'),
+        primaryText: tr("weapons_shotguns"),
       ),
       Container(
         padding: _padding,
@@ -500,7 +500,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
         child: ListAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.shotgun),
       ),
       WidgetTitleSmall(
-        primaryText: tr('weapons_handguns'),
+        primaryText: tr("weapons_handguns"),
       ),
       Container(
         padding: _padding,
@@ -508,7 +508,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
         child: ListAnimalWeapons(animalLevel: _animal.level, weaponType: WeaponType.handgun),
       ),
       WidgetTitleSmall(
-        primaryText: tr('weapons_bows_crossbows'),
+        primaryText: tr("weapons_bows_crossbows"),
       ),
       Container(
         padding: _padding,

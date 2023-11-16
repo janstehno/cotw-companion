@@ -51,26 +51,26 @@ class ListWeaponsState extends State<ListWeapons> {
     return [
       WidgetTitleInfoIcon(
         icon: "assets/graphics/icons/other.svg",
-        text: tr('weapon_type'),
+        text: tr("weapon_type"),
       ),
       FilterSwitch(
-        text: tr('weapons_rifles'),
+        text: tr("weapons_rifles"),
         filterKey: FilterKey.weaponsRifles,
       ),
       FilterSwitch(
-        text: tr('weapons_shotguns'),
+        text: tr("weapons_shotguns"),
         filterKey: FilterKey.weaponsShotguns,
       ),
       FilterSwitch(
-        text: tr('weapons_handguns'),
+        text: tr("weapons_handguns"),
         filterKey: FilterKey.weaponsHandguns,
       ),
       FilterSwitch(
-        text: tr('weapons_bows_crossbows'),
+        text: tr("weapons_bows_crossbows"),
         filterKey: FilterKey.weaponsBows,
       ),
       FilterValueSet(
-        text: tr('animal_class'),
+        text: tr("animal_class"),
         icon: "assets/graphics/icons/level.svg",
         decimal: false,
         defaultValue: 0,
@@ -79,13 +79,13 @@ class ListWeaponsState extends State<ListWeapons> {
         filterKeyUpper: FilterKey.weaponsClassMax,
       ),
       FilterRangeAuto(
-        text: tr('animal_class'),
+        text: tr("animal_class"),
         icon: "assets/graphics/icons/min_max.svg",
         filterKeyLower: FilterKey.weaponsClassMin,
         filterKeyUpper: FilterKey.weaponsClassMax,
       ),
       FilterRangeAuto(
-        text: tr('weapon_magazine'),
+        text: tr("weapon_magazine"),
         icon: "assets/graphics/icons/weapon_mag.svg",
         filterKeyLower: FilterKey.weaponsMagMin,
         filterKeyUpper: FilterKey.weaponsMagMax,
@@ -111,7 +111,7 @@ class ListWeaponsState extends State<ListWeapons> {
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('weapons'),
+        text: tr("weapons"),
         context: context,
       ),
       searchController: _controller,

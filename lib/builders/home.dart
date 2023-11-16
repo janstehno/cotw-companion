@@ -73,8 +73,8 @@ class BuilderHome extends StatelessWidget {
             HelperJSON.setLists(
                 ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, mapObjects);
             HelperJSON.setWeaponAmmo();
-            HelperLog.context = context;
             HelperFilter.initializeFilters();
+            HelperLog.context = context;
             return widget;
           } else {
             return OrientationBuilder(builder: (context, orientation) {

@@ -140,7 +140,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
     List<WidgetTag> tags = [];
     if (_fur[0]! > 0) {
       tags.add(WidgetTag.special(
-        identifier: tr('rarity_common'),
+        identifier: tr("rarity_common"),
         value: _fur[0].toString(),
         color: Interface.light,
         background: Interface.rarityCommon,
@@ -148,7 +148,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
     }
     if (_fur[1]! > 0) {
       tags.add(WidgetTag.special(
-        identifier: tr('rarity_uncommon'),
+        identifier: tr("rarity_uncommon"),
         value: _fur[1].toString(),
         color: Interface.alwaysDark,
         background: Interface.rarityUncommon,
@@ -156,7 +156,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
     }
     if (_fur[2]! > 0) {
       tags.add(WidgetTag.special(
-        identifier: tr('rarity_rare'),
+        identifier: tr("rarity_rare"),
         value: _fur[2].toString(),
         color: Interface.alwaysDark,
         background: Interface.rarityRare,
@@ -164,7 +164,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
     }
     if (_fur[3]! > 0) {
       tags.add(WidgetTag.special(
-        identifier: tr('rarity_very_rare'),
+        identifier: tr("rarity_very_rare"),
         value: _fur[3].toString(),
         color: Interface.alwaysDark,
         background: Interface.rarityVeryRare,
@@ -172,7 +172,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
     }
     if (_fur[4]! > 0) {
       tags.add(WidgetTag.special(
-        identifier: tr('rarity_mission'),
+        identifier: tr("rarity_mission"),
         value: _fur[4].toString(),
         color: Interface.alwaysDark,
         background: Interface.rarityMission,
@@ -214,7 +214,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
             alignment: Alignment.topLeft,
             padding: const EdgeInsets.all(30),
             child: AutoSizeText(
-              tr('none'),
+              tr("none"),
               style: Interface.s16w300n(Interface.dark),
             ),
           )
@@ -228,7 +228,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('stats'),
+        text: tr("stats"),
         context: context,
       ),
       appBarFixed: true,

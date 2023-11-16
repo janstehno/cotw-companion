@@ -52,20 +52,20 @@ class ListCallersState extends State<ListCallers> {
   List<Widget> _buildFilters() {
     return [
       FilterPickerText(
-        text: tr('caller_range'),
+        text: tr("caller_range"),
         icon: "assets/graphics/icons/range.svg",
         labels: _imperials
             ? [
-                "164 ${tr('yards')}",
-                "218 ${tr('yards')}",
-                "273 ${tr('yards')}",
-                "546 ${tr('yards')}",
+                "164 ${tr("yards")}",
+                "218 ${tr("yards")}",
+                "273 ${tr("yards")}",
+                "546 ${tr("yards")}",
               ]
             : [
-                "150 ${tr('meters')}",
-                "200 ${tr('meters')}",
-                "250 ${tr('meters')}",
-                "500 ${tr('meters')}",
+                "150 ${tr("meters")}",
+                "200 ${tr("meters")}",
+                "250 ${tr("meters")}",
+                "500 ${tr("meters")}",
               ],
         filterKey: FilterKey.callersEffectiveRange,
       ),
@@ -90,7 +90,7 @@ class ListCallersState extends State<ListCallers> {
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr('callers'),
+        text: tr("callers"),
         context: context,
       ),
       searchController: _controller,

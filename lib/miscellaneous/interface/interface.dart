@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.8.4";
+  static const String version = "1.8.5";
   static const int greatOneId = 100;
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;
@@ -105,46 +105,46 @@ class Interface {
   static const Color ff00 = Color(0xFF000000);
 
   //appbar
-  static TextStyle s28w600c(Color color) => TextStyle(color: color, fontSize: 28, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+  static TextStyle s28w600c(Color color) => TextStyle(color: color, fontSize: 28, fontWeight: FontWeight.w600, fontFamily: "Condensed");
 
   //homeTitle
-  static TextStyle s24w600c(Color color) => TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+  static TextStyle s24w600c(Color color) => TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.w600, fontFamily: "Condensed");
 
   //bigTitle
-  static TextStyle s20w600c(Color color) => TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+  static TextStyle s20w600c(Color color) => TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.w600, fontFamily: "Condensed");
 
   //homeText
-  static TextStyle s18w400c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Condensed');
+  static TextStyle s18w400c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: "Condensed");
 
   //mediumTitle
-  static TextStyle s18w600c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+  static TextStyle s18w600c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w600, fontFamily: "Condensed");
 
   //smallTitle
-  static TextStyle s16w600c(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Condensed');
+  static TextStyle s16w600c(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: "Condensed");
 
   //importantText, stats, buttons, sliders
-  static TextStyle s18w500n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w500, fontFamily: 'Normal');
+  static TextStyle s18w500n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w500, fontFamily: "Normal");
 
   //itemTitle
-  static TextStyle s18w300n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+  static TextStyle s18w300n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w300, fontFamily: "Normal");
 
   //bigTag, richText
-  static TextStyle s16w500n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500, fontFamily: 'Normal');
+  static TextStyle s16w500n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500, fontFamily: "Normal");
 
   //generalText
-  static TextStyle s16w300n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+  static TextStyle s16w300n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w300, fontFamily: "Normal");
 
   //mediumTag
-  static TextStyle s14w500n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w500, fontFamily: 'Normal');
+  static TextStyle s14w500n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w500, fontFamily: "Normal");
 
   //snackBar, logText, loadoutText
-  static TextStyle s14w300n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+  static TextStyle s14w300n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w300, fontFamily: "Normal");
 
   //smallTag
-  static TextStyle s12w500n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w500, fontFamily: 'Normal');
+  static TextStyle s12w500n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w500, fontFamily: "Normal");
 
   //smallText, subTextTitle
-  static TextStyle s12w300n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w300, fontFamily: 'Normal');
+  static TextStyle s12w300n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w300, fontFamily: "Normal");
 
   //textFieldBorder
   static InputBorder textFieldBorder() => const OutlineInputBorder(borderSide: BorderSide(width: 0.05, color: Colors.transparent));

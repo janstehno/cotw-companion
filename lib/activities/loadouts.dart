@@ -90,12 +90,12 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     if (fileLoaded) {
       _filter();
       _buildSnackBar(
-        tr('file_imported'),
+        tr("file_imported"),
         Process.success,
       );
     } else {
       _buildSnackBar(
-        tr('file_not_imported'),
+        tr("file_not_imported"),
         Process.error,
       );
     }
@@ -105,12 +105,12 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     final bool fileSaved = await HelperLoadout.saveFile();
     if (fileSaved) {
       _buildSnackBar(
-        tr('file_exported'),
+        tr("file_exported"),
         Process.success,
       );
     } else {
       _buildSnackBar(
-        tr('file_not_exported'),
+        tr("file_not_exported"),
         Process.error,
       );
     }
@@ -208,14 +208,14 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     return [
       FilterRangeSet(
         icon: "assets/graphics/icons/loadout.svg",
-        text: tr('weapon_ammo'),
+        text: tr("weapon_ammo"),
         decimal: false,
         filterKeyLower: FilterKey.loadoutsAmmoMin,
         filterKeyUpper: FilterKey.loadoutsAmmoMax,
       ),
       FilterRangeSet(
         icon: "assets/graphics/icons/caller.svg",
-        text: tr('callers'),
+        text: tr("callers"),
         decimal: false,
         filterKeyLower: FilterKey.loadoutsCallersMin,
         filterKeyUpper: FilterKey.loadoutsCallersMax,
@@ -231,7 +231,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
     return Stack(children: [
       Column(mainAxisSize: MainAxisSize.max, children: [
         WidgetAppBar(
-          text: tr('loadouts'),
+          text: tr("loadouts"),
           context: context,
         ),
         WidgetSearchBar(

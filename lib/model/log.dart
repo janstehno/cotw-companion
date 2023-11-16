@@ -242,6 +242,6 @@ class Log {
     if (mapRep.containsKey(propertyName)) {
       return mapRep[propertyName];
     }
-    throw ArgumentError('Could not find filter property. Please, go back or restart the application.');
+    throw ArgumentError("Could not find filter property. Please, go back or restart the application.");
   }
 }

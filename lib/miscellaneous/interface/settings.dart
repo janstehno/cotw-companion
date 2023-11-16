@@ -20,18 +20,18 @@ class Settings extends ChangeNotifier {
     "Türkçe",
   ];
   final List<Locale> _languageCodes = const [
-    Locale('en'),
-    Locale('ru'),
-    Locale('cs'),
-    Locale('pl'),
-    Locale('de'),
-    Locale('fr'),
-    Locale('es'),
-    Locale('pt', 'BR'),
-    Locale('pt', 'PT'),
-    Locale('ja'),
-    Locale('hu'),
-    Locale('tr'),
+    Locale("en"),
+    Locale("ru"),
+    Locale("cs"),
+    Locale("pl"),
+    Locale("de"),
+    Locale("fr"),
+    Locale("es"),
+    Locale("pt', 'BR"),
+    Locale("pt', 'PT"),
+    Locale("ja"),
+    Locale("hu"),
+    Locale("tr"),
   ];
 
   late int _language;
@@ -65,17 +65,29 @@ class Settings extends ChangeNotifier {
     required furRarityPerCent,
   }) {
     _language = language;
+
     _color = color;
+
     _compactLogbook = compactLogbook;
+
     _darkMode = darkMode;
+
     _imperialUnits = imperialUnits;
+
     _mapZonesType = mapZonesType;
+
     _mapZonesStyle = mapZonesStyle;
+
     _mapZonesAccuracy = mapZonesAccuracy;
+
     _mapPerformanceMode = mapPerformanceMode;
+
     _bestWeaponsForAnimal = bestWeaponsForAnimal;
+
     _dateOfRecord = dateOfRecord;
+
     _trophyLodgeRecord = trophyLodgeRecord;
+
     _furRarityPerCent = furRarityPerCent;
   }
 

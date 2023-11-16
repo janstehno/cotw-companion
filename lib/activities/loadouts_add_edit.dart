@@ -89,11 +89,11 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
 
   void _isNameCorrect() {
     if (_controller.text.isEmpty) {
-      _errorMessage = tr('error_no_name');
+      _errorMessage = tr("error_no_name");
     } else if (!_correctName) {
-      _errorMessage = tr('error_wrong_name');
+      _errorMessage = tr("error_wrong_name");
     } else if (_selectedAmmo.isEmpty && _selectedCallers.isEmpty) {
-      _errorMessage = tr('error_no_chosen_item');
+      _errorMessage = tr("error_no_chosen_item");
     } else {
       _errorMessage = "";
     }
@@ -189,7 +189,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   Widget _buildName() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr('name'),
+        primaryText: tr("name"),
       ),
       WidgetTextFieldIndicator(
         numberOnly: false,
@@ -202,7 +202,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
   Widget _buildWeaponsCallers() {
     return Column(children: [
       WidgetTitleBigButton(
-        primaryText: tr('weapons'),
+        primaryText: tr("weapons"),
         icon: "assets/graphics/icons/menu_open.svg",
         onTap: () {
           _focus();
@@ -211,7 +211,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
       ),
       _listOfAmmo(),
       WidgetTitleBigButton(
-        primaryText: tr('callers'),
+        primaryText: tr("callers"),
         icon: "assets/graphics/icons/menu_open.svg",
         onTap: () {
           _focus();
@@ -256,7 +256,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
           child: SingleChildScrollView(
               child: Column(children: [
         WidgetAppBar(
-          text: _editing ? tr('edit') : tr('add'),
+          text: _editing ? tr("edit") : tr("add"),
           context: context,
         ),
         _buildName(),

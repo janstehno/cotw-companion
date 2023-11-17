@@ -136,15 +136,6 @@ class HelperLoadout {
   static Future<bool> saveFile() async {
     final PermissionStatus status = await Permission.storage.request();
     if (status.isGranted) {
-      Directory? directory;
-      if (Platform.isAndroid) {
-        directory = await getExternalStorageDirectory();
-      } else {
-        directory = await getDownloadsDirectory();
-      }
-      if (directory == null) {
-        return false;
-      }
       final String? path = await FilePicker.platform.getDirectoryPath();
       if (path == null) {
         return false;
@@ -168,15 +159,6 @@ class HelperLoadout {
   static Future<bool> loadFile() async {
     final PermissionStatus status = await Permission.storage.request();
     if (status.isGranted) {
-      Directory? directory;
-      if (Platform.isAndroid) {
-        directory = await getExternalStorageDirectory();
-      } else {
-        directory = await getDownloadsDirectory();
-      }
-      if (directory == null) {
-        return false;
-      }
       final FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
         allowedExtensions: ["json"],

@@ -33,20 +33,7 @@ void main() async {
     path: 'assets/translations',
     startLocale: const Locale("en"),
     fallbackLocale: const Locale("en"),
-    supportedLocales: const [
-      Locale("en"),
-      Locale("ru"),
-      Locale("cs"),
-      Locale("pl"),
-      Locale("de"),
-      Locale("fr"),
-      Locale("es"),
-      Locale("pt', 'BR"),
-      Locale("pt', 'PT"),
-      Locale("ja"),
-      Locale("hu"),
-      Locale("tr")
-    ],
+    supportedLocales: Interface.languageCodes,
     saveLocale: true,
     useFallbackTranslations: true,
     child: ChangeNotifierProvider(

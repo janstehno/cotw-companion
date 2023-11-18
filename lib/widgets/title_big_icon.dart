@@ -2,12 +2,14 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class WidgetTitleBigIcon extends WidgetTitleBig {
   final String icon;
+
+  final double _iconWidth = 20;
 
   const WidgetTitleBigIcon({
     super.key,
@@ -50,13 +52,11 @@ class WidgetTitleBigIcon extends WidgetTitleBig {
           Container(
               height: super.height,
               color: Interface.title,
-              padding: const EdgeInsets.only(right: 25),
               alignment: Alignment.center,
-              child: WidgetTag.big(
-                height: super.height / 1.75,
-                icon: icon,
-                color: Interface.disabled,
-                background: Colors.transparent,
+              child: SvgPicture.asset(
+                icon,
+                width: _iconWidth,
+                colorFilter: ColorFilter.mode(Interface.disabled, BlendMode.srcIn),
               ))
         ]));
   }

@@ -1,13 +1,13 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/log.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -122,7 +122,13 @@ class HelperLog {
   }
 
   static Future<bool> saveFile() async {
-    final PermissionStatus status = await Permission.storage.request();
+    PermissionStatus status = PermissionStatus.granted;
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo device = await DeviceInfoPlugin().androidInfo;
+      if (int.parse(device.version.release) < 13) {
+        status = await Permission.storage.request();
+      }
+    }
     if (status.isGranted) {
       final String? path = await FilePicker.platform.getDirectoryPath();
       if (path == null) {
@@ -145,43 +151,33 @@ class HelperLog {
   }
 
   static Future<bool> loadFile() async {
-    final PermissionStatus status = await Permission.storage.request();
-    if (status.isGranted) {
-      final FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ["json"],
-      );
-      if (result == null) {
-        return false;
-      }
-      final String? filePath = result.files.first.path;
-      if (filePath == null) {
-        log("filePath");
-        return false;
-      }
-      log("creating file");
-      final File file = File(filePath);
-      log("reading data");
-      final data = await readExternalFile(file);
-      List<dynamic> list = [];
-      log("trying to decode the data to a list");
-      try {
-        list = json.decode(data) as List<dynamic>;
-      } catch (e) {
-        return false;
-      }
-      log("$list");
-      log("creating logs");
-      List<Log> logs = [];
-      logs = list.map((e) => Log.fromJson(e)).toList();
-      if (logs.isNotEmpty) {
-        _addLogs(logs);
-        _reIndex();
-        _reName();
-        _writeFile();
-        return true;
-      }
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ["json"],
+    );
+    if (result == null) {
       return false;
+    }
+    final String? filePath = result.files.first.path;
+    if (filePath == null) {
+      return false;
+    }
+    final File file = File(filePath);
+    final data = await readExternalFile(file);
+    List<dynamic> list = [];
+    try {
+      list = json.decode(data) as List<dynamic>;
+    } catch (e) {
+      return false;
+    }
+    List<Log> logs = [];
+    logs = list.map((e) => Log.fromJson(e)).toList();
+    if (logs.isNotEmpty) {
+      _addLogs(logs);
+      _reIndex();
+      _reName();
+      _writeFile();
+      return true;
     }
     return false;
   }

@@ -9,7 +9,7 @@ Application also offers interactive maps and list of need zones changing over ti
 ### **Newest version**
 
 - [**android**](https://play.google.com/store/apps/details?id=com.toastyapps.cotwcompanion)
-- [**ios**](https://apps.apple.com/us/app/cotw-companion/id6443782494)
+- [**ios**](https://apps.apple.com/us/app/cotw-companion/id6443782494) (not available at this moment)
 
 ### **Some history and staff**
 

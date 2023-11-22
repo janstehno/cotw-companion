@@ -8,6 +8,7 @@ import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 import 'package:cotwcompanion/model/log.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -134,7 +135,13 @@ class HelperLoadout {
   }
 
   static Future<bool> saveFile() async {
-    final PermissionStatus status = await Permission.storage.request();
+    PermissionStatus status = PermissionStatus.granted;
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo device = await DeviceInfoPlugin().androidInfo;
+      if (int.parse(device.version.release) < 13) {
+        status = await Permission.storage.request();
+      }
+    }
     if (status.isGranted) {
       final String? path = await FilePicker.platform.getDirectoryPath();
       if (path == null) {
@@ -157,36 +164,32 @@ class HelperLoadout {
   }
 
   static Future<bool> loadFile() async {
-    final PermissionStatus status = await Permission.storage.request();
-    if (status.isGranted) {
-      final FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ["json"],
-      );
-      if (result == null) {
-        return false;
-      }
-      final String? filePath = result.files.first.path;
-      if (filePath == null) {
-        return false;
-      }
-      final File file = File(filePath);
-      final data = await readExternalFile(file);
-      List<dynamic> list = [];
-      try {
-        list = json.decode(data) as List<dynamic>;
-      } catch (e) {
-        return false;
-      }
-      List<Loadout> loadouts = [];
-      loadouts = list.map((e) => Loadout.fromJson(e)).toList();
-      if (loadouts.isNotEmpty) {
-        _addLoadouts(loadouts);
-        _reIndex();
-        _writeFile();
-        return true;
-      }
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ["json"],
+    );
+    if (result == null) {
       return false;
+    }
+    final String? filePath = result.files.first.path;
+    if (filePath == null) {
+      return false;
+    }
+    final File file = File(filePath);
+    final data = await readExternalFile(file);
+    List<dynamic> list = [];
+    try {
+      list = json.decode(data) as List<dynamic>;
+    } catch (e) {
+      return false;
+    }
+    List<Loadout> loadouts = [];
+    loadouts = list.map((e) => Loadout.fromJson(e)).toList();
+    if (loadouts.isNotEmpty) {
+      _addLoadouts(loadouts);
+      _reIndex();
+      _writeFile();
+      return true;
     }
     return false;
   }

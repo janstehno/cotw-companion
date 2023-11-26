@@ -24,8 +24,6 @@ class Loadout {
 
   List<int> get callers => _callers.cast();
 
-  String toJson() => '{"ID":$_id,"NAME":"$_name","AMMO":${HelperJSON.listToJson(_ammo)},"CALLERS":${HelperJSON.listToJson(_callers)}}';
-
   set setAmmo(List<dynamic> ammo) {
     _ammo.clear();
     _ammo.addAll(ammo);
@@ -37,6 +35,9 @@ class Loadout {
   }
 
   set setId(int id) => _id = id;
+
+  @override
+  String toString() => '{"ID":$_id,"NAME":"$_name","AMMO":${HelperJSON.listToJson(_ammo)},"CALLERS":${HelperJSON.listToJson(_callers)}}';
 
   factory Loadout.fromJson(Map<String, dynamic> json) {
     Loadout loadout = Loadout(

@@ -24,12 +24,6 @@ class ListAnimalCallers extends StatefulWidget {
 class ListAnimalCallersState extends State<ListAnimalCallers> {
   late final List<Caller> _callers = [];
 
-  @override
-  void initState() {
-    _getCallers();
-    super.initState();
-  }
-
   void _getCallers() {
     _callers.clear();
     for (IdtoId iti in HelperJSON.animalsCallers) {
@@ -45,6 +39,7 @@ class ListAnimalCallersState extends State<ListAnimalCallers> {
   }
 
   Widget _buildWidgets() {
+    _getCallers();
     return Column(children: [
       _callers.isNotEmpty
           ? ListView.builder(

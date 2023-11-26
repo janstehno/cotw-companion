@@ -8,6 +8,8 @@ import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
@@ -283,13 +285,13 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
   }
 
   void _getTrophyOf(Animal animal) {
-    if (_selectedFurId == Interface.greatOneId) {
+    if (_selectedFurId == Values.greatOneId) {
       //GREAT ONE
       _maxTrophy = animal.trophyGO;
-      _maxWeight = animal.getWeightGOWithoutUnits(_usesImperials);
+      _maxWeight = animal.weightGO(_usesImperials);
     } else {
       _maxTrophy = animal.trophy;
-      _maxWeight = animal.getWeightWithoutUnits(_usesImperials);
+      _maxWeight = animal.weight(_usesImperials);
     }
   }
 
@@ -386,7 +388,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
 
   Log _createLog() => Log(
         id: widget.log == null ? HelperLog.logs.length : widget.log!.id,
-        date: Log.dateToString(_dateTime),
+        date: Utils.dateToString(_dateTime),
         reserveId: widget.fromTrophyLodge ? -1 : _selectedReserveId,
         animalId: _selectedAnimalId,
         furId: _selectedFurId,
@@ -435,7 +437,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 style: Interface.s20w600c(Interface.dark),
               ),
               AutoSizeText(
-                Log.getDate(DateStructure.format, Log.dateToString(_dateTime)),
+                Log.getDate(DateStructure.format, Utils.dateToString(_dateTime)),
                 maxLines: 1,
                 textAlign: TextAlign.start,
                 style: Interface.s16w300n(Interface.dark),
@@ -656,9 +658,9 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                   });
                 }),
             WidgetSwitchIcon(
-                icon: _selectedFurId == Interface.greatOneId ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg",
-                activeColor: _selectedFurId == Interface.greatOneId ? Interface.light : Interface.alwaysDark,
-                activeBackground: _selectedFurId == Interface.greatOneId ? Interface.trophyGreatOne : Interface.trophyDiamond,
+                icon: _selectedFurId == Values.greatOneId ? "assets/graphics/icons/trophy_great_one.svg" : "assets/graphics/icons/trophy_diamond.svg",
+                activeColor: _selectedFurId == Values.greatOneId ? Interface.light : Interface.alwaysDark,
+                activeBackground: _selectedFurId == Values.greatOneId ? Interface.trophyGreatOne : Interface.trophyDiamond,
                 isActive: _trophyRating == 4,
                 onTap: () {
                   setState(() {
@@ -684,7 +686,7 @@ class ActivityLogsAddEditState extends State<ActivityLogsAddEdit> {
                 _focus();
                 _getHarvestCheck();
                 Log log = _createLog();
-                widget.log != null ? HelperLog.editLog(log) : HelperLog.addLog(log);
+                widget.log != null ? HelperLog.editItem(log) : HelperLog.addItem(log);
                 widget.callback();
                 Navigator.pop(context);
               },

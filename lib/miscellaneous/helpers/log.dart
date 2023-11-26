@@ -1,22 +1,19 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/log.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class HelperLog {
+  static late Log _lastRemovedItem;
+
   static late BuildContext _context;
-  static late Log _lastRemovedLog;
 
   static final List<Log> _logs = [];
   static final List<Log> _corruptedLogs = [];
@@ -25,13 +22,13 @@ class HelperLog {
       r'^(20(1[789]|2[0123456789])|2030)-((0?2-(0?[1-9]|[12][0-9]))|(0?[469]|11)-(0?[1-9]|[12][0-9]|30)|(0?[13578]|1[02])-(0?[1-9]|[12][0-9]|3[01]))-(0?0-|0?[1-9]-|1[0-9]-|2[0-3]-)(0?0|0?[1-9]|[1-5][0-9])(-0?0|-0?[1-9]|-[1-5][0-9])?$',
       unicode: true);
 
-  static set context(BuildContext context) {
-    _context = context;
-  }
-
   static List<Log> get logs => _logs;
 
-  static List<Log> get corruptedLogs => _corruptedLogs;
+  static List<Log> get corruptedItems => _corruptedLogs;
+
+  static void setContext(BuildContext context) {
+    _context = context;
+  }
 
   static void _reIndex() {
     _logs.sort((a, b) => b.dateForCompare.compareTo(a.dateForCompare));
@@ -50,14 +47,14 @@ class HelperLog {
       Animal animal = HelperJSON.getAnimal(log.animalId);
       //FOR SORTING & FILTERING
       if (log.reserveId == -1) {
-        log.setAnimalName = animal.getName(_context.locale);
+        log.setAnimalName = animal.getNameByLocale(_context.locale);
       } else {
         log.setAnimalName = animal.getNameBasedOnReserve(_context.locale, log.reserveId);
       }
     }
   }
 
-  static void _addLogs(List<Log> logs) {
+  static void addItems(List<Log> logs) {
     _logs.clear();
     _corruptedLogs.clear();
     for (Log log in logs) {
@@ -66,7 +63,7 @@ class HelperLog {
       if (!_dateReg.hasMatch(log.date)) continue;
       if (log.animalId <= 0 || log.animalId > HelperJSON.animals.length) continue;
       if (log.reserveId <= -2 || log.reserveId == 0 || log.reserveId > HelperJSON.reserves.length) continue;
-      if (log.furId <= 0 || (log.furId >= HelperJSON.furs.length && log.furId < Interface.greatOneId) || log.furId > Interface.greatOneId) {
+      if (log.furId <= 0 || (log.furId >= HelperJSON.furs.length && log.furId < Values.greatOneId) || log.furId > Values.greatOneId) {
         continue;
       }
       if (log.trophy < 0 || log.trophy > 9999.999) continue;
@@ -77,179 +74,113 @@ class HelperLog {
     }
   }
 
-  static void setLogs(List<Log> logs) {
-    _addLogs(logs);
+  static void setItems(List<Log> logs) {
+    addItems(logs);
     _reIndex();
     _reName();
   }
 
-  static void addLog(Log log) {
+  static void addItem(Log log) {
     _logs.add(log);
     _reIndex();
     _reName();
-    _writeFile();
+    writeFile();
   }
 
-  static void editLog(Log log) {
+  static void editItem(Log log) {
     _logs[log.id] = log;
     _reName();
-    _writeFile();
+    writeFile();
   }
 
   static void undoRemove() {
-    addLog(_lastRemovedLog);
+    addItem(_lastRemovedItem);
     _reIndex();
   }
 
-  static void removeLogOnIndex(int index) {
-    _lastRemovedLog = _logs.elementAt(index);
+  static void removeItemOnIndex(int index) {
+    _lastRemovedItem = _logs.elementAt(index);
     _logs.removeAt(index);
     _reIndex();
-    _writeFile();
+    writeFile();
   }
 
-  static void removeLogs() {
+  static void removeAll() {
     _logs.clear();
     _corruptedLogs.clear();
     _reIndex();
-    _writeFile();
+    writeFile();
   }
 
-  static void moveLogToLodge(int loadoutId) {
-    bool lodge = _logs[loadoutId].isInLodge ? false : true;
-    _logs[loadoutId].setLodge = lodge ? 1 : 0;
-    _writeFile();
+  static void moveLogToLodge(int logId) {
+    bool lodge = _logs[logId].isInLodge ? false : true;
+    _logs[logId].setLodge = lodge ? 1 : 0;
+    writeFile();
   }
 
-  static Future<bool> saveFile() async {
-    PermissionStatus status = PermissionStatus.granted;
-    if (Platform.isAndroid) {
-      AndroidDeviceInfo device = await DeviceInfoPlugin().androidInfo;
-      if (int.parse(device.version.release) < 13) {
-        status = await Permission.storage.request();
-      }
-    }
-    if (status.isGranted) {
-      final String? path = await FilePicker.platform.getDirectoryPath();
-      if (path == null) {
-        return false;
-      }
-      final String content = _parseLogsToJsonString();
-      if (content == "[]") {
-        return false;
-      }
-      final String name = "${Log.dateToString(DateTime.now())}-saved-logbook-cotwcompanion.json";
+  static Future<bool> exportFile() async {
+    final String name = "${Utils.dateToString(DateTime.now())}-saved-logbook-cotwcompanion.json";
+    final String content = parseToJson();
+    return await Utils.exportFile(content, name);
+  }
+
+  static Future<bool> importFile() async {
+    return Utils.importFile((content) {
+      List<dynamic> data = [];
       try {
-        final File file = File("$path/$name");
-        await file.writeAsString(content);
-      } on Exception {
+        data = json.decode(content) as List<dynamic>;
+      } catch (e) {
         return false;
       }
-      return true;
-    }
-    return false;
-  }
-
-  static Future<bool> loadFile() async {
-    final FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ["json"],
-    );
-    if (result == null) {
+      List<Log> logs = [];
+      try {
+        logs = data.map((e) => Log.fromJson(e)).toList();
+      } catch (e) {
+        return false;
+      }
+      if (logs.isNotEmpty) {
+        addItems(logs);
+        _reIndex();
+        _reName();
+        writeFile();
+        return true;
+      }
       return false;
-    }
-    final String? filePath = result.files.first.path;
-    if (filePath == null) {
-      return false;
-    }
-    final File file = File(filePath);
-    final data = await readExternalFile(file);
-    List<dynamic> list = [];
-    try {
-      list = json.decode(data) as List<dynamic>;
-    } catch (e) {
-      return false;
-    }
-    List<Log> logs = [];
-    logs = list.map((e) => Log.fromJson(e)).toList();
-    if (logs.isNotEmpty) {
-      _addLogs(logs);
-      _reIndex();
-      _reName();
-      _writeFile();
-      return true;
-    }
-    return false;
+    });
   }
 
-  static Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
+  static void writeFile() {
+    final String content = parseToJson();
+    Utils.writeFile(content, "logbook");
   }
 
-  static Future<File> get _localFile async {
-    final path = await _localPath;
-    return File("$path/logbook.json");
-  }
-
-  static Future<String> readExternalFile(File file) async {
-    try {
-      final String contents;
-      await file.exists() ? contents = await file.readAsString() : contents = "[]";
-      if (contents.startsWith("[") && contents.endsWith("]")) return contents;
-      return "[]";
-    } catch (e) {
-      return e.toString();
-    }
-  }
-
-  static Future<List<Log>> readLogs() async {
-    final data = await HelperLog._readFile();
+  static Future<List<Log>> readFile() async {
+    final data = await Utils.readFile("logbook");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Log.fromJson(e)).toList();
   }
 
-  static Future<String> _readFile() async {
-    try {
-      final file = await _localFile;
-      final String contents;
-      await file.exists() ? contents = await file.readAsString() : contents = "[]";
-      return contents;
-    } catch (e) {
-      return e.toString();
-    }
-  }
-
-  static Future<File> _writeFile() async {
-    String content = _parseLogsToJsonString();
-    final file = await _localFile;
-    return file.writeAsString(content);
-  }
-
-  static String _parseLogsToJsonString() {
-    String parsed = "[";
-    for (int index = 0; index < _logs.length; index++) {
-      parsed += _logs[index].toJson();
-      if (index != _logs.length - 1) {
-        parsed += ",";
-      } else if (_corruptedLogs.isNotEmpty) {
-        parsed += ",";
-      }
+  static String parseToJson() {
+    String parsed = HelperJSON.listToJson(_logs);
+    if (_corruptedLogs.isNotEmpty) {
+      parsed.replaceFirst("]", ",");
     }
     for (int index = 0; index < _corruptedLogs.length; index++) {
-      parsed += _corruptedLogs[index].toJson();
+      parsed += _corruptedLogs[index].toString();
       if (index != _corruptedLogs.length - 1) {
         parsed += ",";
       }
     }
-    parsed += "]";
+    if (_corruptedLogs.isNotEmpty) {
+      parsed += "]";
+    }
     return parsed;
   }
 
   static int getTrophyRating(double trophy, int animalId, int furId, bool harvestCheckPassed) {
-    Animal animal = HelperJSON.getAnimal(animalId);
-    int decrease = harvestCheckPassed ? 0 : 1;
-    if (furId == Interface.greatOneId) {
+    final Animal animal = HelperJSON.getAnimal(animalId);
+    final int decrease = harvestCheckPassed ? 0 : 1;
+    if (furId == Values.greatOneId) {
       return 5 - (decrease * 2);
     }
     if (trophy >= animal.diamond) {

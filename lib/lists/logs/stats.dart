@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
@@ -180,7 +181,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
     }
     if (_fur[5]! > 0) {
       tags.add(WidgetTag.special(
-        identifier: HelperJSON.getFur(Interface.greatOneId).getName(context.locale),
+        identifier: HelperJSON.getFur(Values.greatOneId).getName(context.locale),
         value: _fur[5].toString(),
         color: Interface.alwaysDark,
         background: Interface.rarityGreatOne,

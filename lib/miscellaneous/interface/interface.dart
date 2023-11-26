@@ -3,25 +3,9 @@
 import 'package:flutter/material.dart';
 
 class Interface {
-  static const String version = "1.8.8";
-  static const int greatOneId = 100;
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;
   static const Color shadow = ff42;
-  static const List<Locale> languageCodes = [
-    Locale("en"),
-    Locale("ru"),
-    Locale("cs"),
-    Locale("pl"),
-    Locale("de"),
-    Locale("fr"),
-    Locale("es"),
-    Locale("pt", "BR"),
-    Locale("pt", "PT"),
-    Locale("ja"),
-    Locale("hu"),
-    Locale("tr"),
-  ];
 
   static bool _darkMode = false;
   static double accentBorderWidth = 0;

@@ -39,6 +39,20 @@ class FilterRangeAutoState extends State<FilterRangeAuto> {
     super.initState();
   }
 
+  FlutterSliderHandler _buildSliderHandler(FilterKey filterKey) {
+    return FlutterSliderHandler(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(_handleSize / 4)),
+          color: Interface.primary,
+        ),
+        child: Container(
+            alignment: Alignment.center,
+            child: AutoSizeText(
+              HelperFilter.getIntValue(filterKey).toString(),
+              style: Interface.s18w500n(Interface.accent),
+            )));
+  }
+
   Widget _buildWidgets() {
     return Column(children: [
       WidgetTitleInfoIcon(
@@ -69,28 +83,8 @@ class FilterRangeAutoState extends State<FilterRangeAuto> {
                   borderRadius: const BorderRadius.all(Radius.circular(1)),
                   color: Interface.disabled.withOpacity(0.3),
                 )),
-            handler: FlutterSliderHandler(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(_handleSize / 4)),
-                  color: Interface.primary,
-                ),
-                child: Container(
-                    alignment: Alignment.center,
-                    child: AutoSizeText(
-                      HelperFilter.getIntValue(widget.filterKeyLower).toString(),
-                      style: Interface.s18w500n(Interface.accent),
-                    ))),
-            rightHandler: FlutterSliderHandler(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(_handleSize / 4)),
-                  color: Interface.primary,
-                ),
-                child: Container(
-                    alignment: Alignment.center,
-                    child: AutoSizeText(
-                      HelperFilter.getIntValue(widget.filterKeyUpper).toString(),
-                      style: Interface.s18w500n(Interface.accent),
-                    ))),
+            handler: _buildSliderHandler(widget.filterKeyLower),
+            rightHandler: _buildSliderHandler(widget.filterKeyUpper),
             onDragging: (id, lower, upper) {
               setState(() {
                 HelperFilter.changeIntValue(widget.filterKeyLower, lower.toInt());

@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class WidgetFurPerCent extends StatelessWidget {
   Widget _buildWidgets() {
     String left, right, point, percent;
     left = right = point = percent = "";
-    if (animalFur.furId != Interface.greatOneId) {
+    if (animalFur.furId != Values.greatOneId) {
       left = animalFur.perCent.toString().split(".")[0];
       right = animalFur.perCent.toString().split(".")[1];
       point = ".";

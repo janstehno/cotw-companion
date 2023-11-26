@@ -5,12 +5,11 @@ import 'dart:ui';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/ammo.dart';
+import 'package:cotwcompanion/model/translatable.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class Weapon {
-  final int _id;
+class Weapon extends Translatable {
   String _name;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
   final WeaponType _type;
   final int _mag, _accuracy, _recoil, _reload, _hipshot, _price;
   int _min, _max;
@@ -18,17 +17,17 @@ class Weapon {
   final int _dlc;
 
   Weapon({
-    required id,
+    required super.id,
+    required super.en,
+    required super.ru,
+    required super.cs,
+    required super.pl,
+    required super.de,
+    required super.fr,
+    required super.es,
+    required super.br,
+    required super.ja,
     required name,
-    required en,
-    required ru,
-    required cs,
-    required pl,
-    required de,
-    required fr,
-    required es,
-    required br,
-    required ja,
     required type,
     required mag,
     required accuracy,
@@ -40,17 +39,7 @@ class Weapon {
     required max,
     required ammo,
     required dlc,
-  })  : _id = id,
-        _name = name,
-        _en = en,
-        _ru = ru,
-        _cs = cs,
-        _pl = pl,
-        _de = de,
-        _fr = fr,
-        _es = es,
-        _br = br,
-        _ja = ja,
+  })  : _name = name,
         _type = type,
         _mag = mag,
         _accuracy = accuracy,
@@ -61,8 +50,6 @@ class Weapon {
         _min = min,
         _max = max,
         _dlc = dlc;
-
-  int get id => _id;
 
   WeaponType get type => _type;
 
@@ -150,33 +137,6 @@ class Weapon {
         return tr("bow_crossbow");
       default:
         return "";
-    }
-  }
-
-  String getName(Locale locale) {
-    switch (locale.languageCode.toString()) {
-      case "ru":
-        return _ru.isEmpty ? _en : _ru;
-      case "cs":
-        return _cs.isEmpty ? _en : _cs;
-      case "pl":
-        return _pl.isEmpty ? _en : _pl;
-      case "de":
-        return _de.isEmpty ? _en : _de;
-      case "fr":
-        return _fr.isEmpty ? _en : _fr;
-      case "es":
-        return _es.isEmpty ? _en : _es;
-      case "br":
-        return _br.isEmpty ? _en : _br;
-      case "pt":
-        return _br.isEmpty ? _en : _br;
-      case "ja":
-        return _ja.isEmpty ? _en : _ja;
-      case "sk":
-        return _cs.isEmpty ? _en : _cs;
-      default:
-        return _en;
     }
   }
 

@@ -1,52 +1,37 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'dart:ui';
-
+import 'package:cotwcompanion/model/translatable.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class Caller {
-  final int _id;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
+class Caller extends Translatable {
   final int _rangeM;
   final double _rangeYD;
   final int _duration, _strength, _price;
   final int _dlc;
 
-  Caller(
-      {required id,
-      required en,
-      required ru,
-      required cs,
-      required pl,
-      required de,
-      required fr,
-      required es,
-      required br,
-      required ja,
-      required rangeM,
-      required rangeYD,
-      required duration,
-      required strength,
-      required price,
-      required dlc})
-      : _id = id,
-        _en = en,
-        _ru = ru,
-        _cs = cs,
-        _pl = pl,
-        _de = de,
-        _fr = fr,
-        _es = es,
-        _br = br,
-        _ja = ja,
-        _rangeM = rangeM,
+  Caller({
+    required super.id,
+    required super.en,
+    required super.ru,
+    required super.cs,
+    required super.pl,
+    required super.de,
+    required super.fr,
+    required super.es,
+    required super.br,
+    required super.ja,
+    required rangeM,
+    required rangeYD,
+    required duration,
+    required strength,
+    required price,
+    required dlc,
+  })  : _rangeM = rangeM,
         _rangeYD = rangeYD,
         _duration = duration,
         _strength = strength,
         _price = price,
         _dlc = dlc;
-
-  int get id => _id;
 
   int get strength => _strength;
 
@@ -61,33 +46,6 @@ class Caller {
   bool get isFromDlc => _dlc == 1;
 
   String getRange(bool units) => units ? "$_rangeYD ${tr("yards")}" : "$_rangeM ${tr("meters")}";
-
-  String getName(Locale locale) {
-    switch (locale.languageCode.toString()) {
-      case "ru":
-        return _ru.isEmpty ? _en : _ru;
-      case "cs":
-        return _cs.isEmpty ? _en : _cs;
-      case "pl":
-        return _pl.isEmpty ? _en : _pl;
-      case "de":
-        return _de.isEmpty ? _en : _de;
-      case "fr":
-        return _fr.isEmpty ? _en : _fr;
-      case "es":
-        return _es.isEmpty ? _en : _es;
-      case "br":
-        return _br.isEmpty ? _en : _br;
-      case "pt":
-        return _br.isEmpty ? _en : _br;
-      case "ja":
-        return _ja.isEmpty ? _en : _ja;
-      case "sk":
-        return _cs.isEmpty ? _en : _cs;
-      default:
-        return _en;
-    }
-  }
 
   factory Caller.fromJson(Map<String, dynamic> json) {
     return Caller(

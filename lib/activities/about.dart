@@ -1,29 +1,23 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ActivityAbout extends StatelessWidget {
   final EdgeInsets _padding = const EdgeInsets.all(30);
-  final String _email = "toastovac@email.cz";
 
   final double _footerHeight = 70;
 
   const ActivityAbout({
     Key? key,
   }) : super(key: key);
-
-  void _redirectTo(String host, String path) async {
-    if (!await launchUrl(Uri(scheme: "https", host: host, path: path), mode: LaunchMode.externalApplication)) {
-      throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
-    }
-  }
 
   Widget _buildAbout() {
     return Column(children: [
@@ -208,7 +202,7 @@ class ActivityAbout extends StatelessWidget {
                 color: Interface.alwaysLight,
                 background: Interface.darkBlue,
                 onTap: () {
-                  _redirectTo("paypal.me", "/toastovac");
+                  Utils.redirectTo("paypal.me", "/toastovac");
                 },
               ),
               Container(
@@ -219,7 +213,7 @@ class ActivityAbout extends StatelessWidget {
                     color: Interface.alwaysDark,
                     background: Interface.yellow,
                     onTap: () {
-                      _redirectTo("buymeacoffee.com", "/toastovac");
+                      Utils.redirectTo("buymeacoffee.com", "/toastovac");
                     },
                   )),
               WidgetButtonIcon(
@@ -228,7 +222,7 @@ class ActivityAbout extends StatelessWidget {
                 color: Interface.alwaysDark,
                 background: Interface.red,
                 onTap: () {
-                  _redirectTo("patreon.com", "/Toastovac");
+                  Utils.redirectTo("patreon.com", "/Toastovac");
                 },
               )
             ])
@@ -244,7 +238,7 @@ class ActivityAbout extends StatelessWidget {
               alignment: Alignment.center,
               color: Interface.title,
               child: SelectableText(
-                _email,
+                Values.email,
                 maxLines: 1,
                 textAlign: TextAlign.center,
                 style: Interface.s16w300n(Interface.dark),

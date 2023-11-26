@@ -22,12 +22,6 @@ class ListAnimalReserves extends StatefulWidget {
 class ListAnimalReservesState extends State<ListAnimalReserves> {
   late final List<Reserve> _reserves = [];
 
-  @override
-  void initState() {
-    _getReserves();
-    super.initState();
-  }
-
   void _getReserves() {
     _reserves.clear();
     for (IdtoId iti in HelperJSON.animalsReserves) {
@@ -43,6 +37,7 @@ class ListAnimalReservesState extends State<ListAnimalReserves> {
   }
 
   Widget _buildWidgets() {
+    _getReserves();
     return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

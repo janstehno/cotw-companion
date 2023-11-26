@@ -97,7 +97,7 @@ class ActivitySearchState extends State<ActivitySearch> {
               return EntryFastSearch(
                 index: _itemIndex,
                 icon: "assets/graphics/icons/wildlife.svg",
-                text: _animals[index].getName(context.locale),
+                text: _animals[index].getNameByLocale(context.locale),
                 activity: ActivityAnimalInfo(animalId: _animals[index].id),
                 callback: _focus,
               );

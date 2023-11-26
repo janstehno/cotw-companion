@@ -3,7 +3,7 @@
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/widgets/entries/fur.dart';
-import 'package:cotwcompanion/widgets/title_small_dot.dart';
+import 'package:cotwcompanion/widgets/title_small.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -23,12 +23,6 @@ class ListFurAnimals extends StatefulWidget {
 
 class ListFurAnimalsState extends State<ListFurAnimals> {
   late final List<AnimalFur> _animalFurs = [];
-
-  @override
-  void initState() {
-    _getAnimalFurs();
-    super.initState();
-  }
 
   String _getRarity() {
     switch (widget.rarity) {
@@ -55,11 +49,13 @@ class ListFurAnimalsState extends State<ListFurAnimals> {
   }
 
   Widget _buildWidgets() {
+    _getAnimalFurs();
     return _animalFurs.isNotEmpty
         ? Column(
             children: [
-              WidgetTitleSmallDot(
+              WidgetTitleSmall(
                 primaryText: tr(_getRarity()),
+                dot: true,
                 dotColor: _animalFurs[0].color,
               ),
               Container(

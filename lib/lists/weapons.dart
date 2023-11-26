@@ -1,53 +1,37 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/filter.dart';
+import 'package:cotwcompanion/lists/items.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/model/weapon.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/entries/weapon.dart';
 import 'package:cotwcompanion/widgets/filters/range_auto.dart';
 import 'package:cotwcompanion/widgets/filters/switch.dart';
 import 'package:cotwcompanion/widgets/filters/value_set.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_info_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListWeapons extends StatefulWidget {
+class ListWeapons extends ListItems {
   const ListWeapons({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  }) : super(name: "weapons");
 
   @override
   ListWeaponsState createState() => ListWeaponsState();
 }
 
-class ListWeaponsState extends State<ListWeapons> {
-  final TextEditingController _controller = TextEditingController();
-  final List<Weapon> _weapons = [];
-
+class ListWeaponsState extends ListItemsState {
   @override
-  void initState() {
-    _controller.addListener(() => _filter());
-    super.initState();
-  }
-
-  void _focus() {
-    FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
-  }
-
-  void _filter() {
+  void filter() {
     setState(() {
-      _weapons.clear();
-      _weapons.addAll(HelperFilter.filterWeapons(_controller.text, context));
+      items.clear();
+      items.addAll(HelperFilter.filterWeapons(controller.text, context));
+      filterChanged = HelperFilter.weaponFiltersChanged();
     });
   }
 
-  List<Widget> _buildFilters() {
+  @override
+  List<Widget> buildFilters() {
     return [
       WidgetTitleInfoIcon(
         icon: "assets/graphics/icons/other.svg",
@@ -93,34 +77,8 @@ class ListWeaponsState extends State<ListWeapons> {
     ];
   }
 
-  void _buildFilter() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityFilter(filters: _buildFilters(), filter: _filter)));
-  }
-
-  Widget _buildList() {
-    _filter();
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _weapons.length,
-        itemBuilder: (context, index) {
-          return EntryWeapon(index: index, weapon: _weapons[index], callback: _focus);
-        });
-  }
-
-  Widget _buildWidgets() {
-    return WidgetScaffold(
-      appBar: WidgetAppBar(
-        text: tr("weapons"),
-        context: context,
-      ),
-      searchController: _controller,
-      filterChanged: HelperFilter.weaponFiltersChanged(),
-      filter: _buildFilter,
-      body: _buildList(),
-    );
-  }
-
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  EntryWeapon buildItemEntry(int index) {
+    return EntryWeapon(index: index, weapon: items[index], callback: focus);
+  }
 }

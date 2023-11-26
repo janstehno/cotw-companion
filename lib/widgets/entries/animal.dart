@@ -57,7 +57,7 @@ class EntryAnimalState extends State<EntryAnimal> {
       ),
       WidgetTag.big(
         icon: "assets/graphics/icons/trophy_diamond.svg",
-        value: widget.animal.removePointZero(widget.animal.diamond.toString()),
+        value: widget.animal.trophyAsString(widget.animal.diamond),
         color: Interface.alwaysDark,
         background: Interface.trophyDiamond,
       ),
@@ -93,7 +93,7 @@ class EntryAnimalState extends State<EntryAnimal> {
             padding: const EdgeInsets.all(30),
             color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
             child: EntryItem(
-              text: widget.animal.getName(context.locale),
+              text: widget.animal.getNameByLocale(context.locale),
               itemIcon: Graphics.getAnimalIcon(widget.animal.id),
               tags: _buildTags(),
             )));

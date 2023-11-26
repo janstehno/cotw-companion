@@ -242,7 +242,7 @@ class ActivityLoadoutsAddEditState extends State<ActivityLoadoutsAddEdit> {
                     _scaffoldMessengerState.hideCurrentSnackBar();
                   });
                   Loadout loadout = _createLoadout();
-                  _editing ? HelperLoadout.editLoadout(loadout) : HelperLoadout.addLoadout(loadout);
+                  _editing ? HelperLoadout.editItem(loadout) : HelperLoadout.addItem(loadout);
                   widget.callback();
                   Navigator.pop(context);
                 }

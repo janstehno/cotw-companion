@@ -2,6 +2,7 @@
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:flutter/material.dart';
 
 class AnimalFur {
@@ -62,7 +63,7 @@ class AnimalFur {
   }
 
   String getName(Locale locale) {
-    return _rarity == 5 ? HelperJSON.getFur(Interface.greatOneId).getName(locale) : HelperJSON.getFur(_furId).getName(locale);
+    return _rarity == 5 ? HelperJSON.getFur(Values.greatOneId).getName(locale) : HelperJSON.getFur(_furId).getName(locale);
   }
 
   factory AnimalFur.fromJson(Map<String, dynamic> json) {

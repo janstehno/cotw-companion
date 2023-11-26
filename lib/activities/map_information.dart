@@ -60,15 +60,6 @@ class ActivityMapInformation extends StatelessWidget {
     ]);
   }
 
-  Widget _buildShowCircles() {
-    return Column(children: [
-      WidgetTitleInfoIcon(
-        icon: "assets/graphics/icons/other.svg",
-        text: tr("map_info_3"),
-      ),
-    ]);
-  }
-
   Widget _buildShowZoneType() {
     return Column(children: [
       WidgetTitleInfoIcon(
@@ -80,6 +71,21 @@ class ActivityMapInformation extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
           child: WidgetRichText(
             text: tr("map_info_2_1"),
+          )),
+    ]);
+  }
+
+  Widget _buildShowCircles() {
+    return Column(children: [
+      WidgetTitleInfoIcon(
+        icon: "assets/graphics/icons/other.svg",
+        text: tr("map_info_3"),
+      ),
+      Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+          child: WidgetRichText(
+            text: tr("map_info_3_1"),
           )),
     ]);
   }
@@ -120,8 +126,8 @@ class ActivityMapInformation extends StatelessWidget {
         body: Column(children: [
           _buildFullscreen(),
           _buildZoom(),
-          _buildShowCircles(),
           _buildShowZoneType(),
+          _buildShowCircles(),
           _buildMinMax(),
         ]));
   }

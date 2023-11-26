@@ -52,7 +52,7 @@ class EntryFurState extends State<EntryFur> {
                   alignment: Alignment.centerLeft,
                   margin: const EdgeInsets.only(right: 10),
                   child: AutoSizeText(
-                    _animal.getName(context.locale),
+                    _animal.getNameByLocale(context.locale),
                     maxLines: 1,
                     style: Interface.s16w300n(Interface.dark),
                   )),

@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -130,9 +131,10 @@ class EntryTrophyLodgeRecordState extends State<EntryTrophyLodgeRecord> {
                         )),
                     Expanded(
                         child: Container(
+                            height: _trophyHeight,
                             alignment: Alignment.centerRight,
                             child: AutoSizeText(
-                              widget.log.trophy.toString(),
+                              Utils.removePointZero(widget.log.trophy),
                               maxLines: 1,
                               minFontSize: 8,
                               style: Interface.s18w500n(Interface.dark),

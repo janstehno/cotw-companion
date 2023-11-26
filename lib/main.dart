@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+ // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'package:cotwcompanion/builders/home.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -33,7 +33,7 @@ void main() async {
     path: 'assets/translations',
     startLocale: const Locale("en"),
     fallbackLocale: const Locale("en"),
-    supportedLocales: Interface.languageCodes,
+    supportedLocales: Settings.languageCodes,
     saveLocale: true,
     useFallbackTranslations: true,
     child: ChangeNotifierProvider(

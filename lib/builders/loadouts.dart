@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class BuilderLoadouts extends StatelessWidget {
-
   final double indicatorSize = 30;
 
   const BuilderLoadouts({
@@ -22,7 +21,10 @@ class BuilderLoadouts extends StatelessWidget {
 
   Widget _buildWidgets() {
     return FutureBuilder(
-        future: Future.wait([HelperLoadout.readLoadouts(), _forcedDelay()]),
+        future: Future.wait([
+          HelperLoadout.readFile(),
+          _forcedDelay(),
+        ]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError) {
             return WidgetError(
@@ -31,7 +33,7 @@ class BuilderLoadouts extends StatelessWidget {
           } else if (snapshot.hasData) {
             var loadouts = snapshot.data![0] as List<Loadout>;
             var widget = snapshot.data![1] as Widget;
-            HelperLoadout.setLoadouts(loadouts);
+            HelperLoadout.setItems(loadouts);
             return widget;
           } else {
             return Container(

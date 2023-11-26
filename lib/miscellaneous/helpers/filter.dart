@@ -55,39 +55,17 @@ class HelperFilter {
   static Map<FilterKey, dynamic> _filters = {};
 
   static void initializeFilters() {
-    _filters = {
-      FilterKey.reservesCountMin: 8,
-      FilterKey.reservesCountMax: 19,
-      FilterKey.animalsClass: {1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true},
-      FilterKey.animalsDifficulty: {3: true, 5: true, 9: true},
-      FilterKey.weaponsAnimalClass: 0,
-      FilterKey.weaponsClassMin: 1,
-      FilterKey.weaponsClassMax: 9,
-      FilterKey.weaponsMagMin: 1,
-      FilterKey.weaponsMagMax: 15,
-      FilterKey.weaponsRifles: true,
-      FilterKey.weaponsShotguns: true,
-      FilterKey.weaponsHandguns: true,
-      FilterKey.weaponsBows: true,
-      FilterKey.callersEffectiveRange: {150: true, 200: true, 250: true, 500: true},
-      FilterKey.logsGender: {1: true, 0: true},
-      FilterKey.logsTrophyRating: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
-      FilterKey.logsFurRarity: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
-      FilterKey.logsTrophyScoreMin: 0.0,
-      FilterKey.logsTrophyScoreMax: 9999.999,
-      FilterKey.logsSort: {
-        1: {"order": 0, "active": false, "ascended": true, "key": ""},
-        2: {"order": 0, "active": false, "ascended": true, "key": ""},
-        3: {"order": 0, "active": false, "ascended": true, "key": ""},
-        4: {"order": 0, "active": false, "ascended": true, "key": ""},
-        5: {"order": 0, "active": false, "ascended": true, "key": ""},
-        6: {"order": 0, "active": false, "ascended": true, "key": ""},
-      },
-      FilterKey.loadoutsAmmoMin: 1,
-      FilterKey.loadoutsAmmoMax: 120,
-      FilterKey.loadoutsCallersMin: 1,
-      FilterKey.loadoutsCallersMax: 30,
-    };
+    _filters = deepCopyFilters(_defaultFilters);
+  }
+
+  static Map<K, V> deepCopyFilters<K, V>(Map<K, V> original) {
+    return Map.from(original.map((key, value) {
+      if (value is Map) {
+        return MapEntry(key, deepCopyFilters(value));
+      } else {
+        return MapEntry(key, value);
+      }
+    }));
   }
 
   static bool reserveFiltersChanged() {
@@ -244,11 +222,11 @@ class HelperFilter {
     animals.addAll(HelperJSON.animals);
     animals = animals
         .where((animal) =>
-            (searchText.isNotEmpty ? animal.getName(context.locale).toLowerCase().replaceFirst("&", "").contains(searchText.toLowerCase()) : true) &&
+            (searchText.isNotEmpty ? animal.getNameByLocale(context.locale).toLowerCase().replaceFirst(" & ", " ").contains(searchText.toLowerCase()) : true) &&
             getBoolValueList(FilterKey.animalsClass, animal.level) &&
             getBoolValueList(FilterKey.animalsDifficulty, animal.difficulty))
         .toList();
-    animals.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
+    animals.sort((a, b) => a.getNameByLocale(context.locale).compareTo(b.getNameByLocale(context.locale)));
     return animals;
   }
 

@@ -19,17 +19,12 @@ class ListWeaponAmmo extends StatefulWidget {
 class ListWeaponAmmoState extends State<ListWeaponAmmo> {
   late final List<dynamic> _ammo = [];
 
-  @override
-  void initState() {
-    _getWeapon();
-    super.initState();
-  }
-
   void _getWeapon() {
     _ammo.addAll(HelperJSON.getWeapon(widget.weaponId).ammo);
   }
 
   Widget _buildWidgets() {
+    _getWeapon();
     return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/widgets/fur_per_cent.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -95,7 +96,7 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
   }
 
   Widget _buildWidgets() {
-    return widget.animalFur.furId != Interface.greatOneId
+    return widget.animalFur.furId != Values.greatOneId
         ? Container(
             margin: const EdgeInsets.only(bottom: 3),
             child: _buildAnimalFur(),

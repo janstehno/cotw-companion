@@ -36,8 +36,7 @@ class ListReserveAnimalsState extends State<ListReserveAnimals> {
         }
       }
     }
-    _animals.sort(
-        (a, b) => a.getNameBasedOnReserve(context.locale, widget.reserveId).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserveId)));
+    _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserveId).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserveId)));
     _animals.sort((a, b) => a.level.compareTo(b.level));
   }
 

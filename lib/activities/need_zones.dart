@@ -62,6 +62,12 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   void _adjustSecond() {
     setState(() {
       _timer.cancel();

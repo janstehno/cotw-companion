@@ -14,6 +14,8 @@ import 'package:cotwcompanion/lists/reserves.dart';
 import 'package:cotwcompanion/lists/weapons.dart';
 import 'package:cotwcompanion/lists/wildlife.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/button_icon_text.dart';
 import 'package:cotwcompanion/widgets/entries/menu.dart';
@@ -21,7 +23,6 @@ import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ActivityHome extends StatefulWidget {
   const ActivityHome({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class ActivityHomeState extends State<ActivityHome> {
   final double _footerRightButtonHeight = 30;
   final double _menuTopBarHeight = 95;
 
+  late Orientation _orientation;
   late double _screenWidth, _screenHeight;
 
   bool _menuOpened = false;
@@ -47,12 +49,6 @@ class ActivityHomeState extends State<ActivityHome> {
   void _getScreenSizes() {
     _screenWidth = MediaQuery.of(context).size.width;
     _screenHeight = MediaQuery.of(context).size.height - 1;
-  }
-
-  void _redirectTo(String host, String path) async {
-    if (!await launchUrl(Uri(scheme: "https", host: host, path: path), mode: LaunchMode.externalApplication)) {
-      throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
-    }
   }
 
   Widget _buildName() {
@@ -73,7 +69,7 @@ class ActivityHomeState extends State<ActivityHome> {
                             maxLines: 1,
                             style: Interface.s24w600c(Interface.alwaysLight),
                           )),
-                      AutoSizeText(Interface.version,
+                      AutoSizeText(Values.version,
                           maxLines: 1,
                           style: Interface.s18w400c(
                             Interface.alwaysLight.withOpacity(0.5),
@@ -116,11 +112,11 @@ class ActivityHomeState extends State<ActivityHome> {
     );
   }
 
-  Widget _buildMenu(Orientation orientation) {
+  Widget _buildMenu() {
     return AnimatedPositioned(
         duration: const Duration(milliseconds: 200),
-        left: _menuOpened ? _screenWidth / (orientation == Orientation.portrait ? 5 : 1.75) : _screenWidth,
-        width: _screenWidth - _screenWidth / (orientation == Orientation.portrait ? 5 : 1.75),
+        left: _menuOpened ? _screenWidth / (_orientation == Orientation.portrait ? 5 : 1.75) : _screenWidth,
+        width: _screenWidth - _screenWidth / (_orientation == Orientation.portrait ? 5 : 1.75),
         height: _screenHeight,
         child: Container(
             color: Interface.body,
@@ -161,7 +157,7 @@ class ActivityHomeState extends State<ActivityHome> {
   Widget _buildLink(String icon, String host, String path) {
     return GestureDetector(
         onTap: () {
-          _redirectTo(host, path);
+          Utils.redirectTo(host, path);
         },
         child: Container(
             padding: const EdgeInsets.only(right: 15),
@@ -183,62 +179,74 @@ class ActivityHomeState extends State<ActivityHome> {
     ]);
   }
 
-  Widget _buildButtons() {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Container(
-            margin: const EdgeInsets.only(bottom: 7),
-            child: WidgetButtonIconText(
-              icon: "assets/graphics/icons/about.svg",
-              text: tr("about"),
-              color: Interface.alwaysDark,
-              background: Interface.alwaysLight,
-              buttonHeight: _footerRightButtonHeight,
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityAbout()));
-              },
-            )),
-        Container(
-            margin: const EdgeInsets.only(bottom: 7),
-            child: WidgetButtonIconText(
-              icon: "assets/graphics/icons/issue.svg",
-              text: tr("issues"),
-              color: Interface.alwaysDark,
-              background: Interface.red,
-              buttonHeight: _footerRightButtonHeight,
-              isExternalLink: true,
-              onTap: () {
-                _redirectTo("github.com", "/janstehno/cotwcompanion/issues");
-              },
-            )),
-        Container(
-            margin: const EdgeInsets.only(bottom: 7),
-            child: WidgetButtonIconText(
-              icon: "assets/graphics/icons/idea.svg",
-              text: tr("ideas"),
-              color: Interface.alwaysDark,
-              background: Interface.yellow,
-              buttonHeight: _footerRightButtonHeight,
-              isExternalLink: true,
-              onTap: () {
-                _redirectTo("github.com", "/janstehno/cotwcompanion/discussions");
-              },
-            )),
-        WidgetButtonIconText(
-          icon: "assets/graphics/icons/repair.svg",
-          text: tr("patch_notes"),
-          color: Interface.alwaysDark,
-          background: Interface.blue,
-          buttonHeight: _footerRightButtonHeight,
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
-          },
-        ),
-      ],
-    );
+  List<Widget> _buildButtons() {
+    EdgeInsets margin = EdgeInsets.only(bottom: _orientation == Orientation.portrait ? 7 : 0, right: _orientation == Orientation.portrait ? 0 : 7);
+    return [
+      Container(
+          margin: margin,
+          child: WidgetButtonIconText(
+            icon: "assets/graphics/icons/about.svg",
+            text: tr("about"),
+            color: Interface.alwaysDark,
+            background: Interface.alwaysLight,
+            buttonHeight: _footerRightButtonHeight,
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityAbout()));
+            },
+          )),
+      Container(
+          margin: margin,
+          child: WidgetButtonIconText(
+            icon: "assets/graphics/icons/issue.svg",
+            text: tr("issues"),
+            color: Interface.alwaysDark,
+            background: Interface.red,
+            buttonHeight: _footerRightButtonHeight,
+            isExternalLink: true,
+            onTap: () {
+              Utils.redirectTo("github.com", "/janstehno/cotwcompanion/issues");
+            },
+          )),
+      Container(
+          margin: margin,
+          child: WidgetButtonIconText(
+            icon: "assets/graphics/icons/idea.svg",
+            text: tr("ideas"),
+            color: Interface.alwaysDark,
+            background: Interface.yellow,
+            buttonHeight: _footerRightButtonHeight,
+            isExternalLink: true,
+            onTap: () {
+              Utils.redirectTo("github.com", "/janstehno/cotwcompanion/discussions");
+            },
+          )),
+      WidgetButtonIconText(
+        icon: "assets/graphics/icons/repair.svg",
+        text: tr("patch_notes"),
+        color: Interface.alwaysDark,
+        background: Interface.blue,
+        buttonHeight: _footerRightButtonHeight,
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
+        },
+      ),
+    ];
+  }
+
+  Widget _buildFooterMenu() {
+    return _orientation == Orientation.portrait
+        ? Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: _buildButtons(),
+          )
+        : Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: _buildButtons(),
+          );
   }
 
   Widget _buildFooter() {
@@ -250,7 +258,7 @@ class ActivityHomeState extends State<ActivityHome> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           _buildLinks(),
-          _buildButtons(),
+          _buildFooterMenu(),
         ],
       ),
     );
@@ -265,6 +273,7 @@ class ActivityHomeState extends State<ActivityHome> {
           toolbarHeight: 0.1,
         ),
         body: OrientationBuilder(builder: (context, orientation) {
+          _orientation = orientation;
           return Stack(children: [
             SizedBox(
                 height: _screenHeight - 0.1,
@@ -283,7 +292,7 @@ class ActivityHomeState extends State<ActivityHome> {
               _buildName(),
               _buildFooter(),
             ]),
-            _buildMenu(orientation),
+            _buildMenu(),
           ]);
         }));
   }

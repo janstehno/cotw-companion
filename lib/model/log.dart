@@ -6,6 +6,7 @@ import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/reserve.dart';
@@ -56,11 +57,6 @@ class Log {
         _harvestVitalOrgan = harvestVitalOrgan,
         _harvestNoTrophyOrgan = harvestNoTrophyOrgan,
         _corrupted = corrupted;
-
-  @override
-  String toString() {
-    return "$_id: RID: $_reserveId, AID: $_animalId, FID: $_furId, T: $_trophy, W: $_weight";
-  }
 
   int get id => _id;
 
@@ -126,21 +122,12 @@ class Log {
 
   AnimalFur get fur => HelperJSON.getAnimalFur(_animalId, _furId);
 
-  String toJson() =>
+  @override
+  String toString() =>
       '{"ID":$id,"DATE":"${getDate(DateStructure.json, _date)}","ANIMAL_ID":$_animalId,"RESERVE_ID":$_reserveId,"FUR_ID":$_furId,"TROPHY_RATING":$_trophyRating,"TROPHY":$_trophy,"WEIGHT":$_weight,"IMPERIALS":$_imperials,"LODGE":$_lodge,"GENDER":$_gender,"CORRECT_AMMUNITION":$_harvestCorrectAmmo,"MAX_TWO_SHOTS":$_harvestTwoShots,"VITAL_ORGAN":$_harvestVitalOrgan,"NO_TROPHY_ORGAN":$_harvestNoTrophyOrgan}';
 
-  String removePointZero(String value) {
-    String text = value;
-    List<String> tmp = text.split(".");
-    List<String> split = tmp[1].split(" ");
-    if (int.parse(split[0]) == 0) {
-      (split.length == 2 && split[1].isNotEmpty) ? text = tmp[0] + (" ${split[1]}") : text = tmp[0];
-    }
-    return text;
-  }
-
   bool isGreatOne() {
-    return _furId == Interface.greatOneId;
+    return _furId == Values.greatOneId;
   }
 
   String getTrophyRatingIcon() {
@@ -171,10 +158,6 @@ class Log {
       default:
         return Interface.trophyNone;
     }
-  }
-
-  static String dateToString(DateTime date) {
-    return "${date.year}-${date.month}-${date.day}-${date.hour}-${date.minute}";
   }
 
   static dynamic getDate(DateStructure type, String date) {

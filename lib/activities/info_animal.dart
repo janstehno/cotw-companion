@@ -190,14 +190,14 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
           padding: _padding,
           child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
             WidgetTrophyScore(
-              text: _animal.removePointZero(_animal.silver.toString()),
+              text: _animal.trophyAsString(_animal.silver),
               icon: "assets/graphics/icons/trophy_silver.svg",
               color: Interface.alwaysDark,
               background: Interface.trophySilver,
               margin: const EdgeInsets.only(bottom: 10),
             ),
             WidgetTrophyScore(
-              text: _animal.removePointZero(_animal.gold.toString()),
+              text: _animal.trophyAsString(_animal.gold),
               icon: "assets/graphics/icons/trophy_gold.svg",
               color: Interface.alwaysDark,
               background: Interface.trophyGold,
@@ -205,7 +205,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             ),
             Row(children: [
               WidgetTrophyScore(
-                text: _animal.removePointZero(_animal.diamond.toString()),
+                text: _animal.trophyAsString(_animal.diamond),
                 icon: "assets/graphics/icons/trophy_diamond.svg",
                 color: Interface.alwaysDark,
                 background: Interface.trophyDiamond,
@@ -237,7 +237,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                 child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
                   Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
                     WidgetTrophyScore(
-                      text: _animal.removePointZero(_animal.trophy.toString()),
+                      text: _animal.trophyAsString(_animal.trophy),
                       icon: "assets/graphics/icons/harvest_no_trophy_organ.svg",
                       color: Interface.accent,
                       background: Interface.primary,
@@ -255,7 +255,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                         : const SizedBox.shrink()
                   ]),
                   WidgetTrophyScore(
-                    text: _animal.removePointZero(_animal.getWeight(_imperialUnits)),
+                    text: _animal.weightAsString(_imperialUnits),
                     icon: "assets/graphics/icons/weight.svg",
                     color: Interface.accent,
                     background: Interface.primary,
@@ -266,7 +266,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
             _animal.hasGO
                 ? Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
                     WidgetTrophyScore(
-                      text: _animal.removePointZero(_animal.trophyGO.toString()),
+                      text: _animal.trophyAsString(_animal.trophyGO),
                       icon: "assets/graphics/icons/trophy_great_one.svg",
                       color: Interface.accent,
                       background: Interface.primary,
@@ -274,7 +274,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
                       margin: const EdgeInsets.only(right: 10),
                     ),
                     WidgetTrophyScore(
-                      text: _animal.removePointZero(_animal.getWeightGO(_imperialUnits)),
+                      text: _animal.weightGOAsString(_imperialUnits),
                       icon: "assets/graphics/icons/weight.svg",
                       color: Interface.accent,
                       background: Interface.primary,
@@ -521,7 +521,7 @@ class ActivityAnimalInfoState extends State<ActivityAnimalInfo> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-          text: _animal.getName(context.locale),
+          text: _animal.getNameByLocale(context.locale),
           maxLines: _animal.getName(context.locale).split(" ").length > 2 ? 2 : 1,
           context: context,
         ),

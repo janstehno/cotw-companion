@@ -21,11 +21,6 @@ class ListAnimalFurs extends StatefulWidget {
 class ListAnimalFursState extends State<ListAnimalFurs> {
   late final List<AnimalFur> _furs = [];
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void _getFurs() {
     _furs.clear();
     for (AnimalFur animalFur in HelperJSON.animalsFurs) {

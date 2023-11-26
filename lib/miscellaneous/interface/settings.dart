@@ -5,6 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends ChangeNotifier {
+  static const List<Locale> languageCodes = [
+    Locale("en"),
+    Locale("ru"),
+    Locale("cs"),
+    Locale("pl"),
+    Locale("de"),
+    Locale("fr"),
+    Locale("es"),
+    Locale("pt", "BR"),
+    Locale("pt", "PT"),
+    Locale("ja"),
+    Locale("hu"),
+    Locale("tr"),
+  ];
+
   final List<String> _languages = [
     "English",
     "Русский",
@@ -105,7 +120,7 @@ class Settings extends ChangeNotifier {
 
   List<String> get languages => _languages;
 
-  Locale getLocale(int index) => Interface.languageCodes[index];
+  Locale getLocale(int index) => languageCodes[index];
 
   String getLocaleName(int index) => _languages[index];
 

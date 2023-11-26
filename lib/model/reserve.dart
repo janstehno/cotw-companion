@@ -1,28 +1,25 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'dart:ui';
-
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
+import 'package:cotwcompanion/model/translatable.dart';
 
-class Reserve {
-  final int _id;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
+class Reserve extends Translatable {
   final int _count;
   final int _summer, _winter, _plains, _fields, _lowlands, _hills, _mountains, _forest;
   final int _dlc;
 
   Reserve({
-    required id,
-    required en,
-    required ru,
-    required cs,
-    required pl,
-    required de,
-    required fr,
-    required es,
-    required br,
-    required ja,
+    required super.id,
+    required super.en,
+    required super.ru,
+    required super.cs,
+    required super.pl,
+    required super.de,
+    required super.fr,
+    required super.es,
+    required super.br,
+    required super.ja,
     required count,
     required dlc,
     required summer,
@@ -33,17 +30,7 @@ class Reserve {
     required hills,
     required mountains,
     required forest,
-  })  : _id = id,
-        _en = en,
-        _ru = ru,
-        _cs = cs,
-        _pl = pl,
-        _de = de,
-        _fr = fr,
-        _es = es,
-        _br = br,
-        _ja = ja,
-        _count = count,
+  })  : _count = count,
         _summer = summer,
         _winter = winter,
         _plains = plains,
@@ -53,8 +40,6 @@ class Reserve {
         _mountains = mountains,
         _forest = forest,
         _dlc = dlc;
-
-  int get id => _id;
 
   int get count => _count;
 
@@ -79,7 +64,7 @@ class Reserve {
   List<int> get allClasses {
     List<int> classes = [];
     for (IdtoId iti in HelperJSON.animalsReserves) {
-      if (iti.secondId == _id) {
+      if (iti.secondId == id) {
         int level = HelperJSON.getAnimal(iti.firstId).level;
         if (!classes.contains(level)) {
           classes.add(level);
@@ -87,35 +72,6 @@ class Reserve {
       }
     }
     return classes;
-  }
-
-  String get en => _en;
-
-  String getName(Locale locale) {
-    switch (locale.languageCode.toString()) {
-      case "ru":
-        return _ru.isEmpty ? _en : _ru;
-      case "cs":
-        return _cs.isEmpty ? _en : _cs;
-      case "pl":
-        return _pl.isEmpty ? _en : _pl;
-      case "de":
-        return _de.isEmpty ? _en : _de;
-      case "fr":
-        return _fr.isEmpty ? _en : _fr;
-      case "es":
-        return _es.isEmpty ? _en : _es;
-      case "br":
-        return _br.isEmpty ? _en : _br;
-      case "pt":
-        return _br.isEmpty ? _en : _br;
-      case "ja":
-        return _ja.isEmpty ? _en : _ja;
-      case "sk":
-        return _cs.isEmpty ? _en : _cs;
-      default:
-        return en;
-    }
   }
 
   factory Reserve.fromJson(Map<String, dynamic> json) {

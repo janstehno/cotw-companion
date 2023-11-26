@@ -2,11 +2,11 @@
 
 import 'dart:ui';
 
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/model/translatable.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class Animal {
-  final int _id;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
+class Animal extends Translatable {
   final int _level, _difficulty;
   final double _silver, _gold, _diamond;
   final double _trophy, _weightKG, _weightLB;
@@ -15,16 +15,16 @@ class Animal {
   final int _diamondFemale, _grounded, _dlc;
 
   Animal({
-    required id,
-    required en,
-    required ru,
-    required cs,
-    required pl,
-    required de,
-    required fr,
-    required es,
-    required br,
-    required ja,
+    required super.id,
+    required super.en,
+    required super.ru,
+    required super.cs,
+    required super.pl,
+    required super.de,
+    required super.fr,
+    required super.es,
+    required super.br,
+    required super.ja,
     required level,
     required difficulty,
     required silver,
@@ -42,17 +42,7 @@ class Animal {
     required diamondFemale,
     required grounded,
     required dlc,
-  })  : _id = id,
-        _en = en,
-        _ru = ru,
-        _cs = cs,
-        _pl = pl,
-        _de = de,
-        _fr = fr,
-        _es = es,
-        _br = br,
-        _ja = ja,
-        _level = level,
+  })  : _level = level,
         _difficulty = difficulty,
         _silver = silver,
         _gold = gold,
@@ -69,8 +59,6 @@ class Animal {
         _diamondFemale = diamondFemale,
         _grounded = grounded,
         _dlc = dlc;
-
-  int get id => _id;
 
   int get level => _level;
 
@@ -90,9 +78,13 @@ class Animal {
 
   double get weightLB => _weightLB;
 
+  double weight(bool units) => units ? _weightLB : _weightKG;
+
   double get weightGOKG => _weightGOKG;
 
   double get weightGOLB => _weightGOLB;
+
+  double weightGO(bool units) => units ? _weightGOLB : _weightGOKG;
 
   int get sight => _sight;
 
@@ -109,8 +101,6 @@ class Animal {
   bool get hasGO => _trophyGO != -1;
 
   bool get hasSenses => _sight > 0 || _hearing > 0 || _smell > 0;
-
-  String get en => _en;
 
   set setTrophyGO(double value) => _trophyGO = value;
 
@@ -151,75 +141,34 @@ class Animal {
     return animal;
   }
 
-  String getNameENBasedOnReserve(int reserveId) => getNameBasedOnReserve(const Locale("en"), reserveId);
-
-  String getNameBasedOnReserve(Locale locale, int reserveId) {
-    if (reserveId == -1) return getName(locale);
-    if ((locale.languageCode.toString() == "en" && _id == 34 && reserveId == 5 /*Puma in PF*/) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") &&
-            _id == 55 &&
-            (reserveId == 9 || reserveId == 14) /*Feral Pig in TANP & ECA*/) ||
-        (locale.languageCode.toString() != "pl" && (_id == 60 && reserveId == 10) /*Mexican Bobcat in RDA*/)) {
-      return getNameByLocale(locale).split("/")[0];
-    } else if ((locale.languageCode.toString() == "en" && _id == 34 && reserveId == 8 /*Mountain Lion in SRP*/) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && _id == 55 && reserveId == 11 /*Wild Hog in MAP*/) ||
-        (locale.languageCode.toString() != "pl" && (_id == 60 && reserveId == 13) /*Bobcat in NEM*/)) {
-      return getNameByLocale(locale).split("/")[1];
+  String getNameByLocale(Locale locale) {
+    if (getName(locale).split("/").length > 1) {
+      return "${getName(locale).split("/")[0]} & ${getName(locale).split("/")[1]}";
     } else {
       return getName(locale);
     }
   }
 
-  String getName(Locale locale) {
-    if (getNameByLocale(locale).split("/").length > 1) {
-      return "${getNameByLocale(locale).split("/")[0]} & ${getNameByLocale(locale).split("/")[1]}";
+  String getNameBasedOnReserve(Locale locale, int reserveId) {
+    if (reserveId == -1) return getNameByLocale(locale);
+    if ((locale.languageCode.toString() == "en" && id == 34 && reserveId == 5 /*Puma in PF*/) ||
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") &&
+            id == 55 &&
+            (reserveId == 9 || reserveId == 14) /*Feral Pig in TANP & ECA*/) ||
+        (locale.languageCode.toString() != "pl" && (id == 60 && reserveId == 10) /*Mexican Bobcat in RDA*/)) {
+      return getName(locale).split("/")[0];
+    } else if ((locale.languageCode.toString() == "en" && id == 34 && reserveId == 8 /*Mountain Lion in SRP*/) ||
+        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") && id == 55 && reserveId == 11 /*Wild Hog in MAP*/) ||
+        (locale.languageCode.toString() != "pl" && (id == 60 && reserveId == 13) /*Bobcat in NEM*/)) {
+      return getName(locale).split("/")[1];
     } else {
-      return getNameByLocale(locale);
+      return getName(locale);
     }
   }
 
-  String getNameByLocale(Locale locale) {
-    switch (locale.languageCode.toString()) {
-      case "ru":
-        return _ru.isEmpty ? _en : _ru;
-      case "cs":
-        return _cs.isEmpty ? _en : _cs;
-      case "pl":
-        return _pl.isEmpty ? _en : _pl;
-      case "de":
-        return _de.isEmpty ? _en : _de;
-      case "fr":
-        return _fr.isEmpty ? _en : _fr;
-      case "es":
-        return _es.isEmpty ? _en : _es;
-      case "br":
-        return _br.isEmpty ? _en : _br;
-      case "pt":
-        return _br.isEmpty ? _en : _br;
-      case "ja":
-        return _ja.isEmpty ? _en : _ja;
-      case "sk":
-        return _cs.isEmpty ? _en : _cs;
-      default:
-        return _en;
-    }
-  }
+  String trophyAsString(double trophy) => Utils.removePointZero(trophy);
 
-  String removePointZero(String value) {
-    String text = value;
-    List<String> tmp = text.split(".");
-    List<String> split = tmp[1].split(" ");
-    if (int.parse(split[0]) == 0) {
-      (split.length == 2 && split[1].isNotEmpty) ? text = tmp[0] + (" ${split[1]}") : text = tmp[0];
-    }
-    return text;
-  }
+  String weightAsString(bool units) => "${Utils.removePointZero(weight(units))} ${units ? tr("pounds") : tr("kilograms")}";
 
-  String getWeight(bool units) => units ? "$_weightLB ${tr("pounds")}" : "$_weightKG ${tr("kilograms")}";
-
-  String getWeightGO(bool units) => units ? "$_weightGOLB${tr("pounds")}" : "$_weightGOKG ${tr("kilograms")}";
-
-  double getWeightWithoutUnits(bool units) => units ? _weightLB : _weightKG;
-
-  double getWeightGOWithoutUnits(bool units) => units ? _weightGOLB : _weightGOKG;
+  String weightGOAsString(bool units) => "${Utils.removePointZero(weightGO(units))} ${units ? tr("pounds") : tr("kilograms")}";
 }

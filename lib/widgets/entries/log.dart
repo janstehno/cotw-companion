@@ -7,6 +7,7 @@ import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/log.dart';
@@ -76,6 +77,17 @@ class EntryLogState extends State<EntryLog> {
     _reserve = widget.log.reserve;
     _animal = widget.log.animal;
     _fur = widget.log.fur;
+  }
+
+  void _buildSnackBar(String message, Process process) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      Utils.snackBarUndo(
+        _hideSnackBar,
+        message,
+        process,
+        _undo,
+      ),
+    );
   }
 
   void _hideSnackBar() {
@@ -327,7 +339,7 @@ class EntryLogState extends State<EntryLog> {
                             height: _trophyHeight,
                             alignment: Alignment.centerRight,
                             child: AutoSizeText(
-                              widget.log.removePointZero("${widget.log.trophy}"),
+                              Utils.removePointZero(widget.log.trophy),
                               maxLines: 1,
                               minFontSize: 8,
                               style: Interface.s16w500n(Interface.dark),
@@ -351,7 +363,7 @@ class EntryLogState extends State<EntryLog> {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10),
                 child: AutoSizeText(
-                  widget.log.removePointZero("${widget.log.weight} ${widget.log.usesImperials ? tr("pounds") : tr("kilograms")}"),
+                  "${Utils.removePointZero(widget.log.weight)} ${widget.log.usesImperials ? tr("pounds") : tr("kilograms")}",
                   maxLines: 1,
                   minFontSize: 8,
                   textAlign: TextAlign.left,
@@ -361,32 +373,36 @@ class EntryLogState extends State<EntryLog> {
         ));
   }
 
+  Widget _buildNameTrophy() {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: Row(
+          children: [
+            _buildLodge(),
+            Expanded(
+              child: _buildName(),
+            )
+          ],
+        )),
+        _buildTrophyWeight(false),
+      ],
+    );
+  }
+
   Widget _buildLogCompact() {
     return Column(children: [
-      Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
-          _buildTrophyWeight(false),
-        ],
-      ),
+      _buildNameTrophy(),
       _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
     ]);
   }
 
   Widget _buildLogSemiCompact() {
     return Column(children: [
-      Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(child: Row(children: [_buildLodge(), Expanded(child: _buildName())])),
-          _buildTrophyWeight(false),
-        ],
-      ),
+      _buildNameTrophy(),
       Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -462,26 +478,14 @@ class EntryLogState extends State<EntryLog> {
         },
         onDoubleTap: () {
           setState(() {
-            HelperLog.removeLogOnIndex(widget.log.id);
+            HelperLog.removeItemOnIndex(widget.log.id);
             _hideSnackBar();
             widget.callback();
           });
-          ScaffoldMessenger.of(widget.context).showSnackBar(SnackBar(
-              duration: const Duration(milliseconds: 5000),
-              padding: const EdgeInsets.all(0),
-              backgroundColor: Interface.search,
-              content: GestureDetector(
-                  onTap: () {
-                    _hideSnackBar();
-                  },
-                  child: WidgetSnackBar(
-                    text: tr("item_removed"),
-                    icon: "assets/graphics/icons/reload.svg",
-                    process: Process.info,
-                    onSnackBarTap: () {
-                      _undo();
-                    },
-                  ))));
+          _buildSnackBar(
+            tr("item_removed"),
+            Process.info,
+          );
         },
         child: Dismissible(
             key: Key(widget.log.id.toString()),

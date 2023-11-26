@@ -25,12 +25,6 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
 
   late final List<Animal> _animals = [];
 
-  @override
-  void initState() {
-    _getAnimals();
-    super.initState();
-  }
-
   void _getAnimals() {
     _animals.clear();
     for (Animal animal in HelperJSON.animals) {
@@ -39,6 +33,14 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
       }
     }
     _splitByLevel();
+  }
+
+  List<List<Animal>> _reduceEmptyLists() {
+    List<List<Animal>> animals = [];
+    for (List<Animal> animalList in _splitAnimals) {
+      if (animalList.isNotEmpty) animals.add(animalList);
+    }
+    return animals;
   }
 
   void _splitByLevel() {
@@ -51,7 +53,7 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
   }
 
   Widget _buildAnimals(List<Animal> animals) {
-    animals.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
+    animals.sort((a, b) => a.getNameByLocale(context.locale).compareTo(b.getNameByLocale(context.locale)));
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       WidgetTitleSmall(
         primaryText: "${tr("animal_class")} ${animals[0].level}",
@@ -65,7 +67,7 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
               itemBuilder: (context, index) {
                 Animal animal = animals[index];
                 return WidgetTextDlc(
-                  text: animal.getName(context.locale),
+                  text: animal.getNameByLocale(context.locale),
                   dlc: animal.isFromDlc,
                 );
               }))
@@ -73,10 +75,8 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
   }
 
   Widget _buildWidgets() {
-    List<List<Animal>> animals = [];
-    for (List<Animal> animalList in _splitAnimals) {
-      if (animalList.isNotEmpty) animals.add(animalList);
-    }
+    _getAnimals();
+    List<List<Animal>> animals = _reduceEmptyLists();
     return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

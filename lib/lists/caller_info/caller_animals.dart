@@ -34,7 +34,7 @@ class ListCallerAnimalsState extends State<ListCallerAnimals> {
         }
       }
     }
-    _animals.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
+    _animals.sort((a, b) => a.getNameByLocale(context.locale).compareTo(b.getNameByLocale(context.locale)));
   }
 
   Widget _buildWidgets() {
@@ -46,7 +46,7 @@ class ListCallerAnimalsState extends State<ListCallerAnimals> {
         itemBuilder: (context, index) {
           Animal animal = _animals[index];
           return WidgetTextDlc(
-            text: animal.getName(context.locale),
+            text: animal.getNameByLocale(context.locale),
             dlc: animal.isFromDlc,
           );
         });

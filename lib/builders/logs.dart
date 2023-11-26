@@ -25,7 +25,7 @@ class BuilderLogs extends StatelessWidget {
   Widget _buildWidgets() {
     return FutureBuilder(
         future: Future.wait([
-          HelperLog.readLogs(),
+          HelperLog.readFile(),
           _forcedDelay(),
         ]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -36,7 +36,7 @@ class BuilderLogs extends StatelessWidget {
           } else if (snapshot.hasData) {
             var logs = snapshot.data![0] as List<Log>;
             var widget = snapshot.data![1] as Widget;
-            HelperLog.setLogs(logs);
+            HelperLog.setItems(logs);
             return widget;
           } else {
             return Container(

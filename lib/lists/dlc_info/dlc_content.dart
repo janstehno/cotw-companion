@@ -47,8 +47,7 @@ class ListDlcContentState extends State<ListDlcContent> {
     }
     _items.addAll(result);
     widget.type == 1 && widget.reserves.isNotEmpty
-        ? _items.sort((a, b) =>
-            a.getNameBasedOnReserve(context.locale, widget.reserves[0]).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserves[0])))
+        ? _items.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserves[0]).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserves[0])))
         : _items.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
   }
 

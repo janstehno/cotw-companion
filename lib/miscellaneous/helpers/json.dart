@@ -1,8 +1,9 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
@@ -96,7 +97,7 @@ class HelperJSON {
   }
 
   static Fur getFur(int id) {
-    if (id == Interface.greatOneId) return _furs.last;
+    if (id == Values.greatOneId) return _furs.last;
     return _furs.elementAt(id - 1);
   }
 
@@ -227,6 +228,19 @@ class HelperJSON {
     return result;
   }
 
+  static void setWeaponAmmo() {
+    final List<int> ammo = [];
+    for (Weapon weapon in _weapons) {
+      ammo.clear();
+      for (IdtoId iti in _weaponsAmmo) {
+        if (weapon.id == iti.firstId) {
+          ammo.add(iti.secondId);
+        }
+      }
+      weapon.setAmmo = ammo;
+    }
+  }
+
   static String listToJson(List<dynamic> list) {
     String parsed = "[";
     for (int index = 0; index < list.length; index++) {
@@ -239,16 +253,14 @@ class HelperJSON {
     return parsed;
   }
 
-  static void setWeaponAmmo() {
-    final List<int> ammo = [];
-    for (Weapon weapon in _weapons) {
-      ammo.clear();
-      for (IdtoId iti in _weaponsAmmo) {
-        if (weapon.id == iti.firstId) {
-          ammo.add(iti.secondId);
-        }
-      }
-      weapon.setAmmo = ammo;
+  static Future<String> fileToJson(File file) async {
+    try {
+      final String contents;
+      await file.exists() ? contents = await file.readAsString() : contents = "[]";
+      if (contents.startsWith("[") && contents.endsWith("]")) return contents;
+      return "[]";
+    } catch (e) {
+      return e.toString();
     }
   }
 }

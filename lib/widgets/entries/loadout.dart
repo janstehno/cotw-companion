@@ -6,10 +6,10 @@ import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/loadout.dart';
-import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -48,17 +48,28 @@ class EntryLoadoutState extends State<EntryLoadout> {
   bool _detailText = false;
   bool _detailContainer = false;
 
-  _hideSnackBar() {
+  void _buildSnackBar(String message, Process process) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      Utils.snackBarUndo(
+        _hideSnackBar,
+        message,
+        process,
+        _undo,
+      ),
+    );
+  }
+
+  void _hideSnackBar() {
     ScaffoldMessenger.of(widget.context).hideCurrentSnackBar();
   }
 
-  _undo() {
+  void _undo() {
     HelperLoadout.undoRemove();
     _hideSnackBar();
     widget.callback();
   }
 
-  _getLists() {
+  void _getLists() {
     _ammo = [];
     _callers = [];
     for (int index in widget.loadout.ammo) {
@@ -187,26 +198,14 @@ class EntryLoadoutState extends State<EntryLoadout> {
         },
         onDoubleTap: () {
           setState(() {
-            HelperLoadout.removeLoadoutOnIndex(widget.loadout.id);
+            HelperLoadout.removeItemOnIndex(widget.loadout.id);
             _hideSnackBar();
             widget.callback();
           });
-          ScaffoldMessenger.of(widget.context).showSnackBar(SnackBar(
-              duration: const Duration(milliseconds: 5000),
-              padding: const EdgeInsets.all(0),
-              backgroundColor: Interface.search,
-              content: GestureDetector(
-                  onTap: () {
-                    _hideSnackBar();
-                  },
-                  child: WidgetSnackBar(
-                    text: tr("item_removed"),
-                    icon: "assets/graphics/icons/reload.svg",
-                    process: Process.info,
-                    onSnackBarTap: () {
-                      _undo();
-                    },
-                  ))));
+          _buildSnackBar(
+            tr("item_removed"),
+            Process.info,
+          );
         },
         child: Dismissible(
             key: Key(widget.loadout.id.toString()),

@@ -1,84 +1,28 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/ammo.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:cotwcompanion/widgets/entries/statistics.dart';
 
-class EntryAmmoStatistics extends StatelessWidget {
+class EntryAmmoStatistics extends EntryStatistics {
   final Ammo ammo;
   final bool imperialUnits;
 
-  final double height = 65;
-
-  final double _iconSize = 15;
-
-  const EntryAmmoStatistics({
-    Key? key,
+  EntryAmmoStatistics({
+    super.key,
     required this.ammo,
     required this.imperialUnits,
-  }) : super(key: key);
-
-  Widget _buildAmmoDetail(bool leftToRight, String icon, String text) {
-    return Container(
-        alignment: Alignment.center,
-        height: height / 2,
-        child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          leftToRight
-              ? const SizedBox.shrink()
-              : Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Text(
-                    text,
-                    style: Interface.s16w300n(Interface.dark),
-                  )),
-          SvgPicture.asset(
-            "assets/graphics/icons/$icon.svg",
-            width: _iconSize,
-            height: _iconSize,
-            colorFilter: ColorFilter.mode(
-              Interface.dark,
-              BlendMode.srcIn,
-            ),
-          ),
-          leftToRight
-              ? Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    text,
-                    style: Interface.s16w300n(Interface.dark),
-                  ))
-              : const SizedBox.shrink()
-        ]));
-  }
-
-  Widget _buildWidgets() {
-    return Container(
-        padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildAmmoDetail(true, "min_max", ammo.classRange),
-                _buildAmmoDetail(false, "weapon_penetration", ammo.penetration.toString()),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildAmmoDetail(true, "range", ammo.getRange(imperialUnits)),
-                _buildAmmoDetail(false, "weapon_expansion", ammo.expansion.toString()),
-              ],
-            )
+  }) : super(
+          labels: [
+            "min_max",
+            "weapon_penetration",
+            "range",
+            "weapon_expansion",
           ],
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) => _buildWidgets();
+          values: [
+            ammo.classRange,
+            ammo.penetration,
+            ammo.getRange(imperialUnits),
+            ammo.expansion,
+          ],
+        );
 }

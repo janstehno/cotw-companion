@@ -6,6 +6,7 @@ import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
@@ -16,7 +17,6 @@ import 'package:cotwcompanion/widgets/menubar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/searchbar.dart';
-import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -69,24 +69,15 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   void _buildSnackBar(String message, Process process) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(milliseconds: 1000),
-        padding: const EdgeInsets.all(0),
-        backgroundColor: Interface.search,
-        content: GestureDetector(
-            onTap: () {
-              setState(() {
-                _scaffoldMessengerState.hideCurrentSnackBar();
-              });
-            },
-            child: WidgetSnackBar(
-              text: message,
-              process: process,
-            ))));
+    ScaffoldMessenger.of(context).showSnackBar(Utils.snackBar(() {
+      setState(() {
+        _scaffoldMessengerState.hideCurrentSnackBar();
+      });
+    }, message, process));
   }
 
   void loadFile() async {
-    final bool fileLoaded = await HelperLoadout.loadFile();
+    final bool fileLoaded = await HelperLoadout.importFile();
     if (fileLoaded) {
       _filter();
       _buildSnackBar(
@@ -102,7 +93,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
   }
 
   void saveFile() async {
-    final bool fileSaved = await HelperLoadout.saveFile();
+    final bool fileSaved = await HelperLoadout.exportFile();
     if (fileSaved) {
       _buildSnackBar(
         tr("file_exported"),

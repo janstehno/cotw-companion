@@ -11,6 +11,8 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/miscellaneous/search_controller.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
@@ -25,7 +27,6 @@ import 'package:cotwcompanion/widgets/menubar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/searchbar.dart';
-import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,7 @@ class ActivityLogsState extends State<ActivityLogs> {
 
   void _removeLogs() {
     setState(() {
-      HelperLog.removeLogs();
+      HelperLog.removeAll();
       _filter();
     });
   }
@@ -120,24 +121,15 @@ class ActivityLogsState extends State<ActivityLogs> {
   }
 
   void _buildSnackBar(String message, Process process) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(milliseconds: 1000),
-        padding: const EdgeInsets.all(0),
-        backgroundColor: Interface.search,
-        content: GestureDetector(
-            onTap: () {
-              setState(() {
-                _scaffoldMessengerState.hideCurrentSnackBar();
-              });
-            },
-            child: WidgetSnackBar(
-              text: message,
-              process: process,
-            ))));
+    ScaffoldMessenger.of(context).showSnackBar(Utils.snackBar(() {
+      setState(() {
+        _scaffoldMessengerState.hideCurrentSnackBar();
+      });
+    }, message, process));
   }
 
   void loadFile() async {
-    final bool fileLoaded = await HelperLog.loadFile();
+    final bool fileLoaded = await HelperLog.importFile();
     if (fileLoaded) {
       _filter();
       _buildSnackBar(
@@ -153,7 +145,7 @@ class ActivityLogsState extends State<ActivityLogs> {
   }
 
   void saveFile() async {
-    final bool fileSaved = await HelperLog.saveFile();
+    final bool fileSaved = await HelperLog.exportFile();
     if (fileSaved) {
       _buildSnackBar(
         tr("file_exported"),
@@ -420,7 +412,7 @@ class ActivityLogsState extends State<ActivityLogs> {
         icon: "${assets}trophy_diamond.svg",
         text: tr("trophy_rating"),
         filterKey: FilterKey.logsTrophyRating,
-        icons: [
+        labels: [
           "${assets}trophy_none.svg",
           "${assets}trophy_bronze.svg",
           "${assets}trophy_silver.svg",
@@ -454,7 +446,7 @@ class ActivityLogsState extends State<ActivityLogs> {
           tr("rarity_rare"),
           tr("rarity_very_rare"),
           tr("rarity_mission"),
-          HelperJSON.getFur(Interface.greatOneId).getName(context.locale),
+          HelperJSON.getFur(Values.greatOneId).getName(context.locale),
         ],
         colors: [
           Interface.light,
@@ -478,7 +470,7 @@ class ActivityLogsState extends State<ActivityLogs> {
         icon: "${assets}gender.svg",
         text: tr("animal_gender"),
         filterKey: FilterKey.logsGender,
-        icons: [
+        labels: [
           "${assets}gender_male.svg",
           "${assets}gender_female.svg",
         ],

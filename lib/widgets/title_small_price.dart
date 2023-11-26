@@ -17,7 +17,7 @@ class WidgetTitleSmallPrice extends WidgetTitleSmall {
 
   Widget _buildWidgets() {
     return Container(
-        height: height,
+        height: smallHeight,
         color: Interface.sectionTitle,
         alignment: alignment,
         padding: const EdgeInsets.only(right: 30),

@@ -1,20 +1,15 @@
 // Copyright (c) 2022 - 2023 Jan Stehno
 
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
-import 'package:cotwcompanion/model/log.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class HelperLoadout {
-  static late Loadout _lastRemovedLoadout;
+  static late Loadout _lastRemovedItem;
 
   static final List<Loadout> _loadouts = [];
   static final Loadout _defaultLoadout = Loadout(id: -1, name: "Default");
@@ -26,13 +21,13 @@ class HelperLoadout {
 
   static List<Loadout> get loadouts => _loadouts;
 
-  static int get loadoutMin => _min;
-
-  static int get loadoutMax => _max;
-
   static Loadout get activeLoadout => _activeLoadout;
 
   static bool get isLoadoutActivated => _activeLoadout.id > -1;
+
+  static int get loadoutMin => _min;
+
+  static int get loadoutMax => _max;
 
   static void _reIndex() {
     _loadouts.sort((a, b) => a.name.compareTo(b.name));
@@ -41,7 +36,7 @@ class HelperLoadout {
     }
   }
 
-  static void _addLoadouts(List<Loadout> loadouts) {
+  static void addItems(List<Loadout> loadouts) {
     _loadouts.clear();
     for (Loadout loadout in loadouts) {
       loadout.setAmmo = knownAmmo(loadout);
@@ -103,150 +98,85 @@ class HelperLoadout {
     return false;
   }
 
-  static void setLoadouts(List<Loadout> loadouts) {
-    _addLoadouts(loadouts);
+  static void setItems(List<Loadout> loadouts) {
+    addItems(loadouts);
     _reIndex();
   }
 
-  static void addLoadout(Loadout loadout) {
+  static void addItem(Loadout loadout) {
     _loadouts.add(loadout);
     _reIndex();
-    _writeFile();
+    writeFile();
   }
 
-  static void editLoadout(Loadout loadout) {
+  static void editItem(Loadout loadout) {
     _loadouts[loadout.id] = loadout;
-    _writeFile();
+    writeFile();
   }
 
   static void undoRemove() {
-    addLoadout(_lastRemovedLoadout);
+    addItem(_lastRemovedItem);
     _reIndex();
   }
 
-  static void removeLoadoutOnIndex(int index) {
-    _lastRemovedLoadout = _loadouts.elementAt(index);
+  static void removeItemOnIndex(int index) {
+    _lastRemovedItem = _loadouts.elementAt(index);
     _loadouts.removeAt(index);
     if (_loadouts.isEmpty || _activeLoadout.id == index) {
       useLoadout(-1);
     }
     _reIndex();
-    _writeFile();
+    writeFile();
   }
 
-  static Future<bool> saveFile() async {
-    PermissionStatus status = PermissionStatus.granted;
-    if (Platform.isAndroid) {
-      AndroidDeviceInfo device = await DeviceInfoPlugin().androidInfo;
-      if (int.parse(device.version.release) < 13) {
-        status = await Permission.storage.request();
-      }
-    }
-    if (status.isGranted) {
-      final String? path = await FilePicker.platform.getDirectoryPath();
-      if (path == null) {
-        return false;
-      }
-      final String content = _parseLoadoutsToJsonString();
-      if (content == "[]") {
-        return false;
-      }
-      final String name = "${Log.dateToString(DateTime.now())}-saved-loadouts-cotwcompanion.json";
+  static void removeAll() {
+    _loadouts.clear();
+    _reIndex();
+    writeFile();
+  }
+
+  static Future<bool> exportFile() async {
+    final String name = "${Utils.dateToString(DateTime.now())}-saved-loadouts-cotwcompanion.json";
+    final String content = HelperJSON.listToJson(_loadouts);
+    return await Utils.exportFile(content, name);
+  }
+
+  static Future<bool> importFile() async {
+    return Utils.importFile((content) {
+      List<dynamic> data = [];
       try {
-        final File file = File("$path/$name");
-        await file.writeAsString(content);
-      } on Exception {
+        data = json.decode(content) as List<dynamic>;
+      } catch (e) {
         return false;
       }
-      return true;
-    }
-    return false;
-  }
-
-  static Future<bool> loadFile() async {
-    final FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ["json"],
-    );
-    if (result == null) {
+      List<Loadout> loadouts = [];
+      try {
+        loadouts = data.map((e) => Loadout.fromJson(e)).toList();
+      } catch (e) {
+        return false;
+      }
+      if (loadouts.isNotEmpty) {
+        addItems(loadouts);
+        _reIndex();
+        writeFile();
+        return true;
+      }
       return false;
-    }
-    final String? filePath = result.files.first.path;
-    if (filePath == null) {
-      return false;
-    }
-    final File file = File(filePath);
-    final data = await readExternalFile(file);
-    List<dynamic> list = [];
-    try {
-      list = json.decode(data) as List<dynamic>;
-    } catch (e) {
-      return false;
-    }
-    List<Loadout> loadouts = [];
-    loadouts = list.map((e) => Loadout.fromJson(e)).toList();
-    if (loadouts.isNotEmpty) {
-      _addLoadouts(loadouts);
-      _reIndex();
-      _writeFile();
-      return true;
-    }
-    return false;
+    });
   }
 
-  static Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
+  static void writeFile() async {
+    final String content = parseToJson();
+    Utils.writeFile(content, "loadouts");
   }
 
-  static Future<File> get _localFile async {
-    final path = await _localPath;
-    return File("$path/loadouts.json");
-  }
-
-  static Future<String> readExternalFile(File file) async {
-    try {
-      final String contents;
-      await file.exists() ? contents = await file.readAsString() : contents = "[]";
-      if (contents.startsWith("[") && contents.endsWith("]")) return contents;
-      return "[]";
-    } catch (e) {
-      return e.toString();
-    }
-  }
-
-  static Future<List<Loadout>> readLoadouts() async {
-    final data = await HelperLoadout._readFile();
+  static Future<List<Loadout>> readFile() async {
+    final data = await Utils.readFile("loadouts");
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Loadout.fromJson(e)).toList();
   }
 
-  static Future<String> _readFile() async {
-    try {
-      final file = await _localFile;
-      final String contents;
-      await file.exists() ? contents = await file.readAsString() : contents = "[]";
-      return contents;
-    } catch (e) {
-      return e.toString();
-    }
-  }
-
-  static Future<File> _writeFile() async {
-    String content = _parseLoadoutsToJsonString();
-    final file = await _localFile;
-    return file.writeAsString(content);
-  }
-
-  static String _parseLoadoutsToJsonString() {
-    String parsed = "[";
-    for (int index = 0; index < _loadouts.length; index++) {
-      parsed += _loadouts[index].toJson();
-      if (index != _loadouts.length - 1) {
-        parsed += ",";
-      }
-    }
-    parsed += "]";
-    return parsed;
+  static parseToJson() {
+    return HelperJSON.listToJson(_loadouts);
   }
 }

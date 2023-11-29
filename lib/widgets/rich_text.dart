@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';

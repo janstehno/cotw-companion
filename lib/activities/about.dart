@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
@@ -9,11 +9,10 @@ import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ActivityAbout extends StatelessWidget {
   final EdgeInsets _padding = const EdgeInsets.all(30);
-
-  final double _footerHeight = 70;
 
   const ActivityAbout({
     Key? key,
@@ -22,7 +21,7 @@ class ActivityAbout extends StatelessWidget {
   Widget _buildAbout() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr("about_paragraph_1_4"),
+        primaryText: tr("not_official"),
       ),
       Container(
           padding: _padding,
@@ -30,17 +29,17 @@ class ActivityAbout extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.only(bottom: 15),
                 child: Text(
-                  tr("about_paragraph_1_1"),
+                  tr("about_first_things_first"),
                   style: Interface.s16w300n(Interface.dark),
                 )),
             Container(
                 margin: const EdgeInsets.only(bottom: 15),
                 child: Text(
-                  tr("about_paragraph_1_2"),
+                  tr("about_maps"),
                   style: Interface.s16w300n(Interface.dark),
                 )),
             Text(
-              tr("about_paragraph_1_3"),
+              tr("about_user_interface"),
               style: Interface.s16w300n(Interface.dark),
             ),
           ]))
@@ -55,7 +54,7 @@ class ActivityAbout extends StatelessWidget {
       Container(
           padding: _padding,
           child: Text(
-            tr("about_paragraph_3"),
+            tr("about_language"),
             style: Interface.s16w300n(Interface.dark),
           ))
     ]);
@@ -192,7 +191,7 @@ class ActivityAbout extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.only(bottom: 30),
                 child: Text(
-                  tr("about_paragraph_2"),
+                  tr("about_support"),
                   style: Interface.s16w300n(Interface.dark),
                 )),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -230,18 +229,49 @@ class ActivityAbout extends StatelessWidget {
     ]);
   }
 
+  Widget _buildFooterLine(String icon, String text) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+            width: 16,
+            height: 16,
+            margin: const EdgeInsets.only(right: 5),
+            child: SvgPicture.asset(
+              "assets/graphics/icons/$icon.svg",
+              fit: BoxFit.fitWidth,
+              colorFilter: ColorFilter.mode(
+                Interface.dark,
+                BlendMode.srcIn,
+              ),
+            )),
+        SelectableText(
+          text,
+          maxLines: 1,
+          textAlign: TextAlign.center,
+          style: Interface.s16w300n(Interface.dark),
+        ),
+      ],
+    );
+  }
+
   Widget _buildFooter() {
     return Row(children: [
       Expanded(
           child: Container(
-              height: _footerHeight,
+              padding: const EdgeInsets.fromLTRB(30, 25, 30, 25),
               alignment: Alignment.center,
               color: Interface.title,
-              child: SelectableText(
-                Values.email,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                style: Interface.s16w300n(Interface.dark),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildFooterLine("post", Values.email),
+                  _buildFooterLine("discord", Values.discord),
+                ],
               )))
     ]);
   }

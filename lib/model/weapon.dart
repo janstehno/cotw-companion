@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'dart:ui';
 
@@ -9,12 +9,13 @@ import 'package:cotwcompanion/model/translatable.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class Weapon extends Translatable {
-  String _name;
   final WeaponType _type;
-  final int _mag, _accuracy, _recoil, _reload, _hipshot, _price;
-  int _min, _max;
-  final List<dynamic> _ammo = [];
+  final int _mag, _accuracy, _recoil, _reload, _hipshot, _price, _score;
   final int _dlc;
+
+  String _name;
+  int _min, _max;
+  List<dynamic> _ammo;
 
   Weapon({
     required super.id,
@@ -27,7 +28,6 @@ class Weapon extends Translatable {
     required super.es,
     required super.br,
     required super.ja,
-    required name,
     required type,
     required mag,
     required accuracy,
@@ -35,21 +35,21 @@ class Weapon extends Translatable {
     required reload,
     required hipshot,
     required price,
-    required min,
-    required max,
-    required ammo,
+    required score,
     required dlc,
-  })  : _name = name,
-        _type = type,
+  })  : _type = type,
         _mag = mag,
         _accuracy = accuracy,
         _recoil = recoil,
         _reload = reload,
         _hipshot = hipshot,
         _price = price,
-        _min = min,
-        _max = max,
-        _dlc = dlc;
+        _score = score,
+        _dlc = dlc,
+        _name = "",
+        _min = 0,
+        _max = 0,
+        _ammo = [];
 
   WeaponType get type => _type;
 
@@ -65,6 +65,8 @@ class Weapon extends Translatable {
 
   int get price => _price;
 
+  int get score => _score;
+
   int get min => _min;
 
   int get max => _max;
@@ -74,6 +76,8 @@ class Weapon extends Translatable {
   int get dlc => _dlc;
 
   bool get isFromDlc => _dlc == 1;
+
+  bool get hasRequirements => _score > 0;
 
   int get maxPenetration {
     int max = 0;
@@ -152,7 +156,6 @@ class Weapon extends Translatable {
       es: json['ES'],
       br: json['BR'],
       ja: json['JA'],
-      name: "",
       type: WeaponType.values.elementAt(json['TYPE']),
       mag: json['MAG'],
       accuracy: json['ACCURACY'],
@@ -160,9 +163,7 @@ class Weapon extends Translatable {
       reload: json['RELOAD'],
       hipshot: json['HIPSHOT'],
       price: json['PRICE'],
-      min: 0,
-      max: 0,
-      ammo: [],
+      score: json['SCORE'],
       dlc: json['DLC'],
     );
   }

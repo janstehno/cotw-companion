@@ -1,0 +1,13 @@
+<!-- Copyright (c) 2023 Jan Stehno -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <rect x="8.59" y="9.73" width="3.32" height="18.79" stroke-width="2.5" fill="none"
+        stroke="#212121" stroke-linejoin="round" transform="translate(16.53 -1.65) rotate(45)" />
+    <path d="M23.26,9.3,20.6,6.64,13.87,3.06,11.5,5.43s1-.14,3.13,2,1.14,3.67,1.14,3.67l.92.91"
+        fill="none" stroke="#212121" stroke-linejoin="round" stroke-width="2.5" />
+    <path d="M25.26,15.92l2.31-2.31L26,12a2.05,2.05,0,0,1-1.8-.66,3.26,3.26,0,0,1-.9-2L21,7"
+        fill="none" stroke="#212121" stroke-linejoin="round" stroke-width="2.5" />
+    <path
+        d="M25.26,15.92,23,18.22l-1.61-1.6a2.05,2.05,0,0,0-.66-1.8,3.26,3.26,0,0,0-2-.9l-2.28-2.28"
+        fill="none" stroke="#212121" stroke-linejoin="round" stroke-width="2.5" />
+    <rect width="30" height="30" fill="none" />
+</svg>

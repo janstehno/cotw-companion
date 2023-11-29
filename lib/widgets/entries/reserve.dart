@@ -1,9 +1,10 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/info_reserve.dart';
-import 'package:cotwcompanion/builders/map.dart';
+import 'package:cotwcompanion/activities/detail/reserve.dart';
+import 'package:cotwcompanion/activities/map.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
@@ -53,19 +54,19 @@ class EntryReserveState extends State<EntryReserve> {
           widget.callback();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ActivityReserveInfo(reserveId: widget.reserve.id)),
+            MaterialPageRoute(builder: (context) => ActivityDetailReserve(reserve: widget.reserve)),
           );
         },
         child: Container(
             padding: const EdgeInsets.all(30),
-            color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+            color: Utils.background(widget.index),
             child: EntryItem(
               text: widget.reserve.getName(context.locale),
               itemIcon: Graphics.getReserveIcon(widget.reserve.id),
               buttonIcon: "assets/graphics/icons/map.svg",
               tags: _buildTags(),
               onButtonTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => BuilderMap(reserveId: widget.reserve.id)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMap(reserveId: widget.reserve.id)));
               },
             )));
   }

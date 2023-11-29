@@ -61,7 +61,7 @@ class FilterSorterIconState extends State<FilterSorterIcon> {
           margin: const EdgeInsets.only(right: 10),
           child: WidgetSwitchSort(
             size: _getSwitchSize(),
-            icon: widget.icons[index],
+            icon: widget.icons.elementAt(index),
             orderNumber: order,
             isAscended: ascended,
             isActive: active,

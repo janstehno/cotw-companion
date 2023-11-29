@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'dart:convert';
 import 'dart:io';
@@ -10,9 +10,15 @@ import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/dlc.dart';
 import 'package:cotwcompanion/model/fur.dart';
+import 'package:cotwcompanion/model/giver.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
+import 'package:cotwcompanion/model/mission.dart';
+import 'package:cotwcompanion/model/multimount.dart';
+import 'package:cotwcompanion/model/perk.dart';
 import 'package:cotwcompanion/model/reserve.dart';
+import 'package:cotwcompanion/model/skill.dart';
 import 'package:cotwcompanion/model/weapon.dart';
+import 'package:cotwcompanion/model/weapon_ammo.dart';
 import 'package:cotwcompanion/model/zone.dart';
 import 'package:flutter/services.dart' as root_bundle;
 
@@ -28,35 +34,35 @@ class HelperJSON {
   static final List<Fur> _furs = [];
   static final List<Reserve> _reserves = [];
   static final List<Weapon> _weapons = [];
-  static final List<IdtoId> _weaponsAmmo = [];
+  static final List<WeaponAmmo> _weaponsAmmo = [];
+  static final List<Mission> _missions = [];
+  static final List<Giver> _missionsGivers = [];
+  static final List<Perk> _perks = [];
+  static final List<Skill> _skills = [];
+  static final List<Multimount> _multimounts = [];
   static final Map<String, dynamic> _mapObjects = {};
 
   static void setLists(
-      List<Ammo> ammo,
-      List<Animal> animals,
-      List<IdtoId> animalsCallers,
-      List<AnimalFur> animalsFurs,
-      List<IdtoId> animalsReserves,
-      List<Zone> animalsZones,
-      List<Caller> callers,
-      List<Dlc> dlcs,
-      List<Fur> furs,
-      List<Reserve> reserves,
-      List<Weapon> weapons,
-      List<IdtoId> weaponsAmmo,
-      Map<String, dynamic> mapObjects) {
-    _ammo.clear();
-    _animals.clear();
-    _animalsCallers.clear();
-    _animalsFurs.clear();
-    _animalsReserves.clear();
-    _animalsZones.clear();
-    _callers.clear();
-    _dlcs.clear();
-    _furs.clear();
-    _reserves.clear();
-    _weapons.clear();
-    _weaponsAmmo.clear();
+    List<Ammo> ammo,
+    List<Animal> animals,
+    List<IdtoId> animalsCallers,
+    List<AnimalFur> animalsFurs,
+    List<IdtoId> animalsReserves,
+    List<Zone> animalsZones,
+    List<Caller> callers,
+    List<Dlc> dlcs,
+    List<Fur> furs,
+    List<Reserve> reserves,
+    List<Weapon> weapons,
+    List<WeaponAmmo> weaponsAmmo,
+    Map<String, dynamic> mapObjects,
+    List<Mission> missions,
+    List<Giver> missionsGivers,
+    List<Perk> perks,
+    List<Skill> skills,
+    List<Multimount> multimounts,
+  ) {
+    _clearLists();
     _ammo.addAll(ammo);
     _animals.addAll(animals);
     _animalsCallers.addAll(animalsCallers);
@@ -69,7 +75,33 @@ class HelperJSON {
     _reserves.addAll(reserves);
     _weapons.addAll(weapons);
     _weaponsAmmo.addAll(weaponsAmmo);
+    _missions.addAll(missions);
+    _missionsGivers.addAll(missionsGivers);
+    _perks.addAll(perks);
+    _skills.addAll(skills);
+    _multimounts.addAll(multimounts);
     _mapObjects.addAll(mapObjects);
+  }
+
+  static void _clearLists() {
+    _ammo.clear();
+    _animals.clear();
+    _animalsCallers.clear();
+    _animalsFurs.clear();
+    _animalsReserves.clear();
+    _animalsZones.clear();
+    _callers.clear();
+    _dlcs.clear();
+    _furs.clear();
+    _reserves.clear();
+    _weapons.clear();
+    _weaponsAmmo.clear();
+    _missions.clear();
+    _missionsGivers.clear();
+    _perks.clear();
+    _skills.clear();
+    _multimounts.clear();
+    _mapObjects.clear();
   }
 
   static Reserve getReserve(int id) {
@@ -120,6 +152,26 @@ class HelperJSON {
     return _mapObjects[reserveId.toString()];
   }
 
+  static Mission getMission(int id) {
+    return _missions.elementAt(id - 1);
+  }
+
+  static Giver getMissionGiver(int id) {
+    return _missionsGivers.elementAt(id - 1);
+  }
+
+  static Perk getPerk(int id) {
+    return _perks.elementAt(id - 1);
+  }
+
+  static Skill getSkill(int id) {
+    return _skills.elementAt(id - 1);
+  }
+
+  static Multimount getMultimount(int id) {
+    return _multimounts.elementAt(id - 1);
+  }
+
   static List<Ammo> get ammo => _ammo;
 
   static List<Animal> get animals => _animals;
@@ -142,7 +194,17 @@ class HelperJSON {
 
   static List<Weapon> get weapons => _weapons;
 
-  static List<IdtoId> get weaponsAmmo => _weaponsAmmo;
+  static List<WeaponAmmo> get weaponsAmmo => _weaponsAmmo;
+
+  static List<Mission> get missions => _missions;
+
+  static List<Giver> get missionsGivers => _missionsGivers;
+
+  static List<Skill> get skills => _skills;
+
+  static List<Perk> get perks => _perks;
+
+  static List<Multimount> get multimounts => _multimounts;
 
   static Future<String> _getData(String name) async {
     final String content;
@@ -216,16 +278,46 @@ class HelperJSON {
     return list.map((e) => Weapon.fromJson(e)).toList();
   }
 
-  static Future<List<IdtoId>> readWeaponsAmmo() async {
+  static Future<List<WeaponAmmo>> readWeaponsAmmo() async {
     final data = await _getData("weaponsammo");
     final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => IdtoId.fromJson(e, "WEAPON_ID", "AMMO_ID")).toList();
+    return list.map((e) => WeaponAmmo.fromJson(e, "WEAPON_ID", "AMMO_ID")).toList();
   }
 
   static Future<Map<String, dynamic>> readMapObjects() async {
     final data = await _getData("mapobjects");
     Map<String, dynamic> result = Map.castFrom(json.decode(data));
     return result;
+  }
+
+  static Future<List<Mission>> readMissions() async {
+    final data = await _getData("missions");
+    final list = json.decode(data) as List<dynamic>;
+    return list.map((e) => Mission.fromJson(e)).toList();
+  }
+
+  static Future<List<Giver>> readMissionsGivers() async {
+    final data = await _getData("missionsgivers");
+    final list = json.decode(data) as List<dynamic>;
+    return list.map((e) => Giver.fromJson(e)).toList();
+  }
+
+  static Future<List<Perk>> readPerks() async {
+    final data = await _getData("perks");
+    final list = json.decode(data) as List<dynamic>;
+    return list.map((e) => Perk.fromJson(e)).toList();
+  }
+
+  static Future<List<Skill>> readSkills() async {
+    final data = await _getData("skills");
+    final list = json.decode(data) as List<dynamic>;
+    return list.map((e) => Skill.fromJson(e)).toList();
+  }
+
+  static Future<List<Multimount>> readMultimounts() async {
+    final data = await _getData("multimounts");
+    final list = json.decode(data) as List<dynamic>;
+    return list.map((e) => Multimount.fromJson(e)).toList();
   }
 
   static void setWeaponAmmo() {
@@ -244,7 +336,7 @@ class HelperJSON {
   static String listToJson(List<dynamic> list) {
     String parsed = "[";
     for (int index = 0; index < list.length; index++) {
-      parsed += list[index].toString();
+      parsed += list.elementAt(index).toString();
       if (index != list.length - 1) {
         parsed += ",";
       }

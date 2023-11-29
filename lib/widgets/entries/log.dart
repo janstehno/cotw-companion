@@ -1,8 +1,8 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/activities/info_animal.dart';
-import 'package:cotwcompanion/activities/logs_add_edit.dart';
+import 'package:cotwcompanion/activities/detail/animal.dart';
+import 'package:cotwcompanion/activities/edit/logs.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -60,7 +60,7 @@ class EntryLogState extends State<EntryLog> {
   late final Settings _settings;
 
   late int _style;
-  late bool _dateOfRecord;
+  late bool _entryDate;
   late Reserve _reserve;
   late Animal _animal;
   late AnimalFur _fur;
@@ -73,7 +73,7 @@ class EntryLogState extends State<EntryLog> {
 
   void _getData() {
     _style = _settings.compactLogbook;
-    _dateOfRecord = _settings.dateOfRecord;
+    _entryDate = _settings.entryDate;
     _reserve = widget.log.reserve;
     _animal = widget.log.animal;
     _fur = widget.log.fur;
@@ -104,7 +104,7 @@ class EntryLogState extends State<EntryLog> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ActivityLogsAddEdit(
+            builder: (context) => ActivityEditLogs(
                   log: widget.log,
                   fromTrophyLodge: widget.log.reserveId == -1,
                   callback: widget.callback,
@@ -396,7 +396,7 @@ class EntryLogState extends State<EntryLog> {
   Widget _buildLogCompact() {
     return Column(children: [
       _buildNameTrophy(),
-      _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
+      _entryDate ? _buildDate() : const SizedBox.shrink(),
     ]);
   }
 
@@ -410,7 +410,7 @@ class EntryLogState extends State<EntryLog> {
         children: [
           Expanded(
               child: Column(children: [
-            _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
+            _entryDate ? _buildDate() : const SizedBox.shrink(),
             _buildFur(),
           ])),
           _buildGender(),
@@ -431,7 +431,7 @@ class EntryLogState extends State<EntryLog> {
           _buildGender(),
         ],
       ),
-      _dateOfRecord ? _buildDate() : const SizedBox.shrink(),
+      _entryDate ? _buildDate() : const SizedBox.shrink(),
       widget.log.reserveId > -1 ? _buildReserve() : const SizedBox.shrink(),
       _buildFur(),
       Row(
@@ -448,7 +448,7 @@ class EntryLogState extends State<EntryLog> {
 
   Widget _buildLog() {
     return Container(
-        color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+        color: Utils.background(widget.index),
         child: Padding(
             padding: const EdgeInsets.fromLTRB(30, 25, 30, 25),
             child: Column(
@@ -471,14 +471,11 @@ class EntryLogState extends State<EntryLog> {
     _getData();
     return GestureDetector(
         onTap: () {
-          setState(() {
-            widget.callback();
-          });
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityAnimalInfo(animalId: _animal.id)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityDetailAnimal(animalId: _animal.id)));
         },
         onDoubleTap: () {
           setState(() {
-            HelperLog.removeItemOnIndex(widget.log.id);
+            HelperLog.removeLogOnIndex(widget.log.id);
             _hideSnackBar();
             widget.callback();
           });
@@ -493,11 +490,10 @@ class EntryLogState extends State<EntryLog> {
             confirmDismiss: (direction) async {
               if (direction == DismissDirection.startToEnd) {
                 _startToEnd();
-                return false;
               } else {
                 _endToStart();
-                return false;
               }
+              return false;
             },
             background: Container(
                 alignment: Alignment.centerLeft,

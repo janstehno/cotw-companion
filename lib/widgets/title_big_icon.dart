@@ -19,7 +19,7 @@ class WidgetTitleBigIcon extends WidgetTitleBig {
 
   Widget _buildIcon() {
     return Container(
-        height: super.height,
+        height: WidgetTitleBig.height,
         color: Interface.title,
         alignment: Alignment.center,
         child: SvgPicture.asset(

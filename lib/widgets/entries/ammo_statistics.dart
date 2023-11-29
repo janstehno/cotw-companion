@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/widgets/entries/statistics.dart';

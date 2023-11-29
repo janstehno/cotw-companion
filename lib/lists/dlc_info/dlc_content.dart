@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -62,8 +62,8 @@ class ListDlcContentState extends State<ListDlcContent> {
               padding: const EdgeInsets.only(left: 30, right: 30),
               child: AutoSizeText(
                 widget.type == 1 && widget.reserves.isNotEmpty
-                    ? _items[index].getNameBasedOnReserve(context.locale, widget.reserves[0])
-                    : _items[index].getName(context.locale),
+                    ? _items.elementAt(index).getNameBasedOnReserve(context.locale, widget.reserves[0])
+                    : _items.elementAt(index).getName(context.locale),
                 style: Interface.s16w300n(Interface.dark),
               ));
         });

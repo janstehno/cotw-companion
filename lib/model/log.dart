@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'dart:core';
 
@@ -108,7 +108,7 @@ class Log {
 
   bool get isCorrupted => _corrupted;
 
-  set setId(int value) => _id = value;
+  set setId(int id) => _id = id;
 
   set setAnimalName(String value) => _animalName = value;
 

@@ -1,6 +1,7 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/widgets/title_big_switch.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +28,8 @@ class WidgetLoadoutSwitch extends WidgetTitleBigSwitch {
   @override
   Widget buildTitle(Widget? additional) {
     return Container(
-        height: height,
-        color: index % 2 == 0 ? Interface.even : Interface.odd,
+        height: WidgetTitleBigSwitch.height,
+        color: Utils.background(index),
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(

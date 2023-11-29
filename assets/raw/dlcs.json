@@ -207,7 +207,7 @@
       ],
       "JA": [
         "ATVをアンロックする。",
-        "ATV「SABER 4X4」は保護区を横断する高速な移動手段です。ほとんどの地形を走行することができますが、移動中は常にとても大きな音を出します。",
+        "ATV SABER 4X4は保護区を横断する高速な移動手段です。ほとんどの地形を走行することができますが、移動中は常にとても大きな音を出します。",
         "ATVはロッカーのガレージから*無料*でリクエストできます。"
       ],
       "HU": [
@@ -1353,9 +1353,9 @@
       ],
       "RU": [
         "Открывает охотничью собаку в магазине.",
-        "Используйте его, чтобы отследить запах крови раненой жертвы. Привлечение вашей собаки к работе дает ей опыт, который используется для прохождения *30* уровней компаньона и *15* уровней отслеживания.",
-        "Вы можете назвать свою собаку, выбрать вариант ее шубки и указать, какими чертами она должна обладать. Добавьте несколько собак в свой список и выберите одну для охоты.",
-        "Первая ищейка доступна *бесплатно*. Бладхаунд доступен как самец, так и самка, и поставляется в *6* вариантах шубы."
+        "Используйте его, чтобы отследить запах крови раненой жертвы. Заставляя вашу собаку работать, вы получаете опыт, который используется для прохождения *30* уровней компаньона и *15* уровней следопыта.",
+        "Вы можете дать имя своей собаке, выбрать вариант ее шубы и выбрать, какими чертами она должна обладать. Добавьте в свой список несколько собак и выберите одну для охоты.",
+        "Первый — *бесплатно*. Собака доступна как кобелю, так и суке, и поставляется в *6* вариантах шубы."
       ],
       "CS": [
         "Odemyká v obchodě loveckého psa.",
@@ -1365,45 +1365,45 @@
       ],
       "PL": [
         "Odblokowuje psa myśliwskiego w sklepie.",
-        "Użyj go, aby śledzić zapach krwi zranionej ofiary. Zatrudnienie psa do pracy daje mu doświadczenie, które jest wykorzystywane do przechodzenia przez *30* poziomów towarzyszy i *15* poziomów śledzenia.",
-        "Możesz nazwać swojego psa, wybrać jego odmianę futra i wybrać cechy, które powinien mieć. Dodaj kilka psów do swojego planu i wybierz jednego, z którym będziesz polować.",
-        "Pierwszy ogar jest za *darmowy*. Bloodhound jest dostępny zarówno jako mężczyzna, jak i kobieta, i występuje w *6* odmianach futra."
+        "Użyj go, aby śledzić zapach krwi zranionej ofiary. Zaprzęgnięcie psa do pracy daje mu doświadczenie, które służy do przechodzenia przez *30* poziomów towarzysza i *15* poziomów tropiciela.",
+        "Możesz nadać swojemu psu imię, wybrać jego odmianę futra i określić, jakie cechy powinien mieć. Dodaj wiele psów do swojej listy i wybierz jednego, z którym będziesz polować.",
+        "Pierwszy jest *bezpłatny*. Pies jest dostępny w wersji samca i samicy i występuje w *6* wersjach futra."
       ],
       "DE": [
         "Schaltet den Jagdhund im Shop frei.",
-        "Verwenden Sie es, um den Blutgeruch von verletzter Beute zu verfolgen. Wenn Sie Ihren Hund arbeiten lassen, erhält er Erfahrung, die verwendet wird, um durch seine *30* Gefährtenstufen und fortzuschreiten*15* Tracker-Level.",
-        "Sie können Ihrem Hund einen Namen geben, seine Fellvariante auswählen und auswählen, welche Eigenschaften er haben soll. Fügen Sie Ihrer Liste mehrere Hunde hinzu und wählen Sie einen aus, mit dem Sie auf die Jagd gehen möchten.",
-        "Der erste Bluthund ist *kostenlos*. Der Bloodhound ist sowohl als Männchen als auch als Weibchen erhältlich und kommt in *6* Fellvarianten."
+        "Verwenden Sie es, um den Blutgeruch von verletzter Beute zu verfolgen. Wenn du deinen Hund zur Arbeit schickst, erhält er Erfahrung, die er nutzt, um durch seine *30* Gefährtenstufen und *15* Fährtenleserstufen voranzukommen.",
+        "Sie können Ihrem Hund einen Namen geben, seine Fellvariante auswählen und festlegen, welche Eigenschaften er haben soll. Fügen Sie mehrere Hunde zu Ihrer Liste hinzu und wählen Sie einen aus, mit dem Sie auf die Jagd gehen möchten.",
+        "Der erste ist *kostenlos*. Der Hund ist sowohl als Rüde als auch als Hündin erhältlich und in *6* Pelzmantelvarianten erhältlich."
       ],
       "FR": [
         "Déverrouille le chien de chasse dans la boutique.",
-        "Utilisez-le pour suivre l'odeur du sang d'une proie blessée. Mettre votre chien au travail lui donne de l'expérience, qui est utilisée pour progresser dans ses *30* niveaux de compagnon et *15* niveaux de suivi.",
-        "Vous pouvez nommer votre chien, choisir son manteau de fourrure et aussi choisir les traits qu'il aura. Ajoutez plusieurs chiens à votre liste et choisissez-en un avec qui partir à la chasse.",
-        "Le premier limier est *gratuit*. Le chien est disponible en tant que mâle ou femelle et se décline en *6* variations de manteaux de fourrure."
+        "Utilisez-le pour suivre l'odeur du sang d'une proie blessée. Faire travailler votre chien lui donne de l'expérience, qui lui permet de progresser dans ses *30* niveaux de compagnon et *15* niveaux de pisteur.",
+        "Vous pouvez nommer votre chien, choisir sa variante de manteau de fourrure et choisir les traits qu'il devrait avoir. Ajoutez plusieurs chiens à votre liste et choisissez-en un avec lequel partir à la chasse.",
+        "Le premier est *gratuit*. Le chien est disponible en version mâle et femelle, et se décline en *6* variantes de manteaux de fourrure."
       ],
       "ES": [
         "Desbloquea el perro de caza en la tienda.",
-        "Úsalo para rastrear el olor de la sangre de una presa herida. Poner a su perro a trabajar le da experiencia, que se utiliza para progresar a través de sus *30* niveles de compañía y *15* niveles de seguimiento.",
-        "Puede nombrar a su perro, elegir su variación de pelaje y elegir qué rasgos debe tener. Agregue varios perros a su lista y elija uno para ir a cazar.",
-        "El primer sabueso es *gratis*. El Bloodhound está disponible tanto para hombre como para mujer, y viene en *6* variaciones de abrigo de piel."
+        "Úsalo para rastrear el olor de la sangre de una presa herida. Poner a tu perro a trabajar le da experiencia, que se utiliza para progresar a través de sus *30* niveles de compañero y *15* niveles de rastreador.",
+        "Puedes nombrar a tu perro, elegir la variación de su pelaje y elegir qué rasgos debe tener. Añade varios perros a tu lista y elige uno para ir a cazar.",
+        "El primero es *gratis*. El perro está disponible como macho y hembra, y viene en *6* variaciones de abrigos de piel."
       ],
       "BR": [
         "Desbloqueia o cão de caça na loja.",
-        "Use-o para rastrear o cheiro de sangue de presas feridas. Colocar seu cão para trabalhar lhe dá experiência, que é usada para progredir através de seus *30* níveis de companheiro e *15* níveis de rastreador.",
-        "Você pode nomear seu cão, escolher sua variação de casaco de pele e escolher quais características ele deve ter. Adicione vários cães à sua lista e escolha um para caçar.",
-        "O primeiro cão de caça é de *grátis*. O Bloodhound está disponível como macho e fêmea e vem em *6* variações de casaco de pele."
+        "Use-o para rastrear o cheiro de sangue de presas feridas. Colocar seu cão para trabalhar dá a ele experiência, que é usada para progredir através de seus *30* níveis de companheiro e *15* níveis de rastreador.",
+        "Você pode nomear seu cachorro, escolher a variação do casaco de pele e quais características ele deve ter. Adicione vários cães à sua lista e escolha um para caçar.",
+        "O primeiro é *de graça*. O cão está disponível tanto como macho quanto como fêmea, e vem em *6* variações de casaco de pele."
       ],
       "JA": [
         "狩猟犬をアンロックする。",
-        "狩猟犬は傷付いた獲物の血の匂いを追いかけることができます。一緒に活動することで狩猟犬は経験値を獲得し、仲間レベル*30*とトラッカーレベル*15*まで成長します。",
-        "狩猟犬には名前を付けることができ、複数の毛並みや特徴を選択することができます。狩猟犬は複数登録でき、そのうち一匹を連れて行くことが可能です。",
-        "1匹目のブラッドハウンドは*無料*で迎えることができます。ブラッドハウンドの見た目はオスとメス、*6*種類の毛並みが用意されています。"
+        "狩猟犬は傷付いた獲物の血の匂いを追いかけることができます。犬を働かせると経験が得られ、*30* コンパニオン レベルと *15* トラッカー レベルを進めるために使用されます。",
+        "犬に名前を付け、毛皮のバリエーションを選択し、どのような特徴を持つべきかを選ぶことができます。複数の犬を名簿に追加し、一緒に狩りに行く犬を 1 匹選びましょう。",
+        "最初の 1 匹は *無料* です。犬はオスとメスの両方で利用可能で、毛皮のコートのバリエーションは *6* あります。"
       ],
       "HU": [
         "Feloldja a vadász kutyát az üzletben.",
-        "Használja a sebzett vadtól származó vér nyomon követésére. Ha munkába állítja a kutyáját, tapasztalatot ad neki, amelyet a *30* kísérőszintig és a *15* nyomkövető szintig lehet fejleszteni.",
-        "Elnevezheti kutyáját, kiválaszthatja a bundája színét, és kiválaszthatja, hogy milyen tulajdonságokkal kell rendelkeznie. Vegyen fel több kutyát a névsorába, és válasszon egyet, amellyel vadászni indul.",
-        "Az első véreb *ingyenes*. A véreb hímként és nőstényként is elérhető, és *6* szőrme variációban kapható."
+        "Használja a sebzett vadtól származó vér nyomon követésére. Ha munkába állítja kutyáját, tapasztalatot ad neki, amelyet a *30* kísérőszinten és a *15* nyomkövető szinten való haladáshoz használ fel.",
+        "Elnevezheti kutyáját, kiválaszthatja a bundája változatát, és kiválaszthatja, hogy milyen tulajdonságokkal kell rendelkeznie. Vegyen fel több kutyát a névsorba, és válasszon egyet, amellyel vadászni szeretne.",
+        "Az első *ingyenes*. A kutya kanként és nőstényként is elérhető, és *6* szőrme változatban kapható."
       ]
     }
   },
@@ -1951,5 +1951,115 @@
       49,
       50
     ]
+  },
+  {
+    "ID": 46,
+    "NAME": "Labrador Retriever",
+    "DATE": "2023-11-28",
+    "TYPE": 0,
+    "DESCRIPTION": {
+      "EN": [
+        "Unlocks hunting dog in the shop.",
+        "Use it to bring downed animals of class 1 back to you. Putting your dog to work gives it experience, which is used to progress through its *30* companion levels and *15* tracker levels.",
+        "You can name your dog, choose its fur coat variation, and pick what traits it should have. Add multiple dogs to your roster, and pick one to go hunting with.",
+        "First one is for *free*. The dog is available as both male and female, and comes in *6* fur coat variations."
+      ],
+      "RU": [
+        "Открывает охотничью собаку в магазине.",
+        "Используйте его, чтобы вернуть к себе сбитых животных класса 1. Заставляя вашу собаку работать, вы получаете опыт, который используется для прохождения *30* уровней компаньона и *15* уровней следопыта.",
+        "Вы можете дать имя своей собаке, выбрать вариант ее шубы и выбрать, какими чертами она должна обладать. Добавьте в свой список несколько собак и выберите одну для охоты.",
+        "Первый — *бесплатно*. Собака доступна как кобелю, так и суке, и поставляется в *6* вариантах шубы."
+      ],
+      "CS": [
+        "Odemyká v obchodě loveckého psa.",
+        "Použitelný především pro nošení ulovené zvěře třídy 1. Práce se psem mu dává zkušenosti, díky kterým postupuje skrz *30* úrovní společníka a *15* úrovní stopaře.",
+        "Svého psa můžete pojmenovat, vybrat mu srst a jeho schopnosti. Psů můžete mít víc. Stačí si pak jen jednoho před lovem vybrat.",
+        "První je *zdarma*. Lovecký pes je k dispozici v obou pohlavích a můžete si vybrat mezi *6* variantami srstí."
+      ],
+      "PL": [
+        "Odblokowuje psa myśliwskiego w sklepie.",
+        "Użyj go, aby sprowadzić do siebie powalone zwierzęta klasy 1. Zaprzęgnięcie psa do pracy daje mu doświadczenie, które służy do przechodzenia przez *30* poziomów towarzysza i *15* poziomów tropiciela.",
+        "Możesz nadać swojemu psu imię, wybrać jego odmianę futra i określić, jakie cechy powinien mieć. Dodaj wiele psów do swojej listy i wybierz jednego, z którym będziesz polować.",
+        "Pierwszy jest *bezpłatny*. Pies jest dostępny w wersji samca i samicy i występuje w *6* wersjach futra."
+      ],
+      "DE": [
+        "Schaltet den Jagdhund im Shop frei.",
+        "Benutze es, um erlegte Tiere der Klasse 1 zu dir zurückzubringen. Wenn du deinen Hund zur Arbeit schickst, erhält er Erfahrung, die er nutzt, um durch seine *30* Gefährtenstufen und *15* Fährtenleserstufen voranzukommen.",
+        "Sie können Ihrem Hund einen Namen geben, seine Fellvariante auswählen und festlegen, welche Eigenschaften er haben soll. Fügen Sie mehrere Hunde zu Ihrer Liste hinzu und wählen Sie einen aus, mit dem Sie auf die Jagd gehen möchten.",
+        "Der erste ist *kostenlos*. Der Hund ist sowohl als Rüde als auch als Hündin erhältlich und in *6* Pelzmantelvarianten erhältlich."
+      ],
+      "FR": [
+        "Débloque le chien de chasse dans la boutique.",
+        "Utilisez-le pour vous ramener des animaux abattus de classe 1. Faire travailler votre chien lui donne de l'expérience, qui lui permet de progresser dans ses *30* niveaux de compagnon et *15* niveaux de pisteur.",
+        "Vous pouvez nommer votre chien, choisir sa variante de manteau de fourrure et choisir les traits qu'il devrait avoir. Ajoutez plusieurs chiens à votre liste et choisissez-en un avec lequel partir à la chasse.",
+        "Le premier est *gratuit*. Le chien est disponible en version mâle et femelle, et se décline en *6* variantes de manteaux de fourrure."
+      ],
+      "ES": [
+        "Desbloquea el perro de caza en la tienda.",
+        "Úsalo para traerte animales caídos de clase 1. Poner a tu perro a trabajar le da experiencia, que se utiliza para progresar a través de sus *30* niveles de compañero y *15* niveles de rastreador.",
+        "Puedes nombrar a tu perro, elegir la variación de su pelaje y elegir qué rasgos debe tener. Añade varios perros a tu lista y elige uno para ir a cazar.",
+        "El primero es *gratis*. El perro está disponible como macho y hembra, y viene en *6* variaciones de abrigos de piel."
+      ],
+      "BR": [
+        "Desbloqueia cachorro de caça na loja.",
+        "Use-o para trazer animais abatidos da classe 1 de volta para você. Colocar seu cão para trabalhar dá a ele experiência, que é usada para progredir através de seus *30* níveis de companheiro e *15* níveis de rastreador.",
+        "Você pode nomear seu cachorro, escolher a variação do casaco de pele e quais características ele deve ter. Adicione vários cães à sua lista e escolha um para caçar.",
+        "O primeiro é *de graça*. O cão está disponível tanto como macho quanto como fêmea, e vem em *6* variações de casaco de pele."
+      ],
+      "JA": [
+        "店内の狩猟犬のロックを解除します。",
+        "クラス 1 のダウンした動物を連れ戻すために使用します。犬を働かせると経験が得られ、*30* コンパニオン レベルと *15* トラッカー レベルを進めるために使用されます。",
+        "犬に名前を付け、毛皮のバリエーションを選択し、どのような特徴を持つべきかを選ぶことができます。複数の犬を名簿に追加し、一緒に狩りに行く犬を 1 匹選びましょう。",
+        "最初の 1 匹は *無料* です。犬はオスとメスの両方で利用可能で、毛皮のコートのバリエーションは *6* あります。"
+      ],
+      "HU": [
+        "Kioldja a vadászkutyát az üzletben.",
+        "Használja arra, hogy visszahozza magának az 1. osztályba tartozó leütött állatokat. Ha munkába állítja kutyáját, tapasztalatot ad neki, amelyet a *30* kísérőszinten és a *15* nyomkövető szinten való haladáshoz használ fel.",
+        "Elnevezheti kutyáját, kiválaszthatja a bundája változatát, és kiválaszthatja, hogy milyen tulajdonságokkal kell rendelkeznie. Vegyen fel több kutyát a névsorba, és válasszon egyet, amellyel vadászni szeretne.",
+        "Az első *ingyenes*. A kutya kanként és nőstényként is elérhető, és *6* szőrme változatban kapható."
+      ]
+    }
+  },
+  {
+    "ID": 47,
+    "NAME": "Yukon Valley Cosmetic Pack",
+    "DATE": "2023-12-12",
+    "TYPE": -1
+  },
+  {
+    "ID": 48,
+    "NAME": "Cuatro Colinas Cosmetic Pack",
+    "DATE": "2023-12-12",
+    "TYPE": -1
+  },
+  {
+    "ID": 49,
+    "NAME": "Silver Ridge Peaks Cosmetic Pack",
+    "DATE": "2023-12-12",
+    "TYPE": -1
+  },
+  {
+    "ID": 50,
+    "NAME": "Te Awaroa Cosmetic Pack",
+    "DATE": "2023-12-12",
+    "TYPE": -1
+  },
+  {
+    "ID": 51,
+    "NAME": "Rancho del Arroyo Cosmetic Pack",
+    "DATE": "2023-12-12",
+    "TYPE": -1
+  },
+  {
+    "ID": 52,
+    "NAME": "Mississippi Acres Cosmetic Pack",
+    "DATE": "2023-12-12",
+    "TYPE": -1
+  },
+  {
+    "ID": 53,
+    "NAME": "Revontuli Coast Cosmetic Pack",
+    "DATE": "2023-12-12",
+    "TYPE": -1
   }
 ]

@@ -4,9 +4,17 @@ import 'dart:io';
 
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/model/dlc.dart';
+import 'package:cotwcompanion/model/log.dart';
+import 'package:cotwcompanion/model/multimount.dart';
+import 'package:cotwcompanion/model/perk.dart';
+import 'package:cotwcompanion/model/proficiency.dart';
+import 'package:cotwcompanion/model/skill.dart';
 import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,6 +22,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
+  static Color background(int index) => index % 2 == 0 ? Interface.odd : Interface.even;
+
   static void redirectTo(String host, String path) async {
     if (!await launchUrl(Uri(scheme: "https", host: host, path: path), mode: LaunchMode.externalApplication)) {
       throw 'Unfortunately the link could not be launched. Please, go back or restart the application.';
@@ -27,9 +37,7 @@ class Utils {
     return text;
   }
 
-  static String dateToString(DateTime date) {
-    return "${date.year}-${date.month}-${date.day}-${date.hour}-${date.minute}";
-  }
+  static String dateToString(DateTime date) => "${date.year}-${date.month}-${date.day}-${date.hour}-${date.minute}";
 
   static SnackBar snackBar(Function hide, String message, Process process) {
     return SnackBar(
@@ -133,5 +141,84 @@ class Utils {
   static Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
+  }
+
+  static Map<int, List<Perk>> getPerksFor(ProficiencyType type) {
+    Map<int, List<Perk>> perks = {0: [], 1: [], 2: [], 3: []};
+    for (Perk perk in HelperJSON.perks) {
+      if (perk.type == type.index) perks[perk.tier]!.add(perk);
+    }
+    return perks;
+  }
+
+  static Map<int, List<Skill>> getSkillsFor(ProficiencyType type) {
+    Map<int, List<Skill>> perks = {0: [], 1: [], 2: [], 3: [], 4: []};
+    for (Skill skill in HelperJSON.skills) {
+      if (skill.type == type.index) perks[skill.tier]!.add(skill);
+    }
+    return perks;
+  }
+
+  static void resetSkillsFor(ProficiencyType type) {
+    for (Skill skill in HelperJSON.skills) {
+      if (skill.type == type.index) skill.resetLevel();
+    }
+  }
+
+  static void resetPerksFor(ProficiencyType type) {
+    for (Perk perk in HelperJSON.perks) {
+      if (perk.type == type.index) perk.resetLevel();
+    }
+  }
+
+  static int getSkillPointsFor(ProficiencyType type, bool actual) {
+    int points = 0;
+    for (Proficiency skill in HelperJSON.skills) {
+      if (skill.type == type.index) points += actual ? skill.actualLevel : skill.level;
+    }
+    return points;
+  }
+
+  static int getPerkPointsFor(ProficiencyType type, bool actual) {
+    int points = 0;
+    for (Perk perk in HelperJSON.perks) {
+      if (perk.type == type.index) points += actual ? perk.actualLevel : perk.level;
+    }
+    return points;
+  }
+
+  static int getActiveSkillPoints() {
+    int points = 0;
+    for (Proficiency skill in HelperJSON.skills) {
+      points += skill.actualLevel;
+    }
+    return points;
+  }
+
+  static int getActivePerkPoints() {
+    int points = 0;
+    for (Perk perk in HelperJSON.perks) {
+      points += perk.actualLevel;
+    }
+    return points;
+  }
+
+  static String getWeaponDLC(int id) {
+    for (Dlc dlc in HelperJSON.dlcs) {
+      if (dlc.weapons.contains(id)) return dlc.en;
+    }
+    return tr("none");
+  }
+
+  static int? isMultimountAnimalInTrophyLodge(MultimountAnimal multimountAnimal, List<int> usedLogs) {
+    List<Log> logs = [];
+    logs.addAll(HelperLog.logs);
+    Log log;
+    try {
+      log = logs.firstWhere((log) => log.isInLodge && log.animalId == multimountAnimal.id && log.gender == multimountAnimal.gender && !usedLogs.contains(log.id));
+    } catch (e) {
+      return null;
+    }
+    return log.id;
   }
 }

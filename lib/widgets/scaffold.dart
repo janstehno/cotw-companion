@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
@@ -43,20 +43,26 @@ class WidgetScaffoldState extends State<WidgetScaffold> {
   }
 
   Widget _buildWithoutSearch() {
-    return Column(children: [
-      widget.appBarFixed ? _buildAppBar() : const SizedBox.shrink(),
-      Expanded(
+    return Column(
+      children: [
+        widget.appBarFixed ? _buildAppBar() : const SizedBox.shrink(),
+        Expanded(
           child: Container(
-        color: Interface.body,
-        child: WidgetScrollbar(
-            child: SingleChildScrollView(
-          child: Column(children: [
-            widget.appBarFixed ? const SizedBox.shrink() : _buildAppBar(),
-            widget.body,
-          ]),
-        )),
-      ))
-    ]);
+            color: Interface.body,
+            child: WidgetScrollbar(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    widget.appBarFixed ? const SizedBox.shrink() : _buildAppBar(),
+                    widget.body,
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildWithSearch() {

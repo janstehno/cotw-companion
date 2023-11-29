@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +45,8 @@ class Settings extends ChangeNotifier {
   late bool _mapZonesAccuracy;
   late bool _mapPerformanceMode;
   late bool _bestWeaponsForAnimal;
-  late bool _dateOfRecord;
-  late bool _trophyLodgeRecord;
+  late bool _entryDate;
+  late bool _trophyLodgeEntry;
   late bool _furRarityPerCent;
   late SharedPreferences _sharedPreferences;
 
@@ -61,8 +61,8 @@ class Settings extends ChangeNotifier {
     required mapZonesAccuracy,
     required mapPerformanceMode,
     required bestWeaponsForAnimal,
-    required dateOfRecord,
-    required trophyLodgeRecord,
+    required entryDate,
+    required trophyLodgeEntry,
     required furRarityPerCent,
   }) {
     _language = language;
@@ -85,9 +85,9 @@ class Settings extends ChangeNotifier {
 
     _bestWeaponsForAnimal = bestWeaponsForAnimal;
 
-    _dateOfRecord = dateOfRecord;
+    _entryDate = entryDate;
 
-    _trophyLodgeRecord = trophyLodgeRecord;
+    _trophyLodgeEntry = trophyLodgeEntry;
 
     _furRarityPerCent = furRarityPerCent;
   }
@@ -110,9 +110,9 @@ class Settings extends ChangeNotifier {
 
   bool get bestWeaponsForAnimal => _bestWeaponsForAnimal;
 
-  bool get dateOfRecord => _dateOfRecord;
+  bool get entryDate => _entryDate;
 
-  bool get trophyLodgeRecord => _trophyLodgeRecord;
+  bool get trophyLodgeEntry => _trophyLodgeEntry;
 
   bool get furRarityPerCent => _furRarityPerCent;
 
@@ -226,26 +226,26 @@ class Settings extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> changeDateOfRecord() async {
+  Future<void> changeEntryDate() async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    if (_dateOfRecord == true) {
-      _dateOfRecord = false;
-      await _sharedPreferences.setBool("dateOfRecord", false);
+    if (_entryDate == true) {
+      _entryDate = false;
+      await _sharedPreferences.setBool("entryDate", false);
     } else {
-      _dateOfRecord = true;
-      await _sharedPreferences.setBool("dateOfRecord", true);
+      _entryDate = true;
+      await _sharedPreferences.setBool("entryDate", true);
     }
     notifyListeners();
   }
 
-  Future<void> changeTrophyLodgeRecord() async {
+  Future<void> changeTrophyLodgeEntry() async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    if (_trophyLodgeRecord == true) {
-      _trophyLodgeRecord = false;
-      await _sharedPreferences.setBool("trophyLodgeRecord", false);
+    if (_trophyLodgeEntry == true) {
+      _trophyLodgeEntry = false;
+      await _sharedPreferences.setBool("trophyLodgeEntry", false);
     } else {
-      _trophyLodgeRecord = true;
-      await _sharedPreferences.setBool("trophyLodgeRecord", true);
+      _trophyLodgeEntry = true;
+      await _sharedPreferences.setBool("trophyLodgeEntry", true);
     }
     notifyListeners();
   }

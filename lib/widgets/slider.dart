@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:another_xlider/another_xlider.dart';
 import 'package:another_xlider/models/handler.dart';

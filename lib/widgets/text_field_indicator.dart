@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/text_field.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 
 class WidgetTextFieldIndicator extends StatelessWidget {
   final String? icon;
-  final bool correct, numberOnly;
+  final bool correct, decimal, numberOnly;
   final TextEditingController controller;
 
   final double height = 60;
@@ -20,6 +20,7 @@ class WidgetTextFieldIndicator extends StatelessWidget {
     this.icon,
     required this.controller,
     required this.correct,
+    this.decimal = true,
     this.numberOnly = true,
   }) : super(key: key);
 
@@ -48,6 +49,7 @@ class WidgetTextFieldIndicator extends StatelessWidget {
                 child: Container(
                     alignment: Alignment.centerLeft,
                     child: WidgetTextField(
+                      decimal: decimal,
                       numberOnly: numberOnly,
                       controller: controller,
                     ))),

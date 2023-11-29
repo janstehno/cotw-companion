@@ -1,7 +1,10 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/widgets/entries/weapon_ammo.dart';
+import 'package:cotwcompanion/widgets/title_small.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ListWeaponAmmo extends StatefulWidget {
@@ -30,9 +33,16 @@ class ListWeaponAmmoState extends State<ListWeaponAmmo> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _ammo.length,
         itemBuilder: (context, index) {
-          return EntryWeaponAmmo(
-            index: index,
-            ammoId: _ammo[index],
+          Ammo ammo = HelperJSON.getAmmo(_ammo[index]);
+          return Column(
+            children: [
+              WidgetTitleSmall(
+                primaryText: ammo.getName(context.locale),
+              ),
+              EntryWeaponAmmo(
+                ammo: ammo,
+              ),
+            ],
           );
         });
   }

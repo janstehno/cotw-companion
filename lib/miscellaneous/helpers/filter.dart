@@ -1,7 +1,8 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/enumerator.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
@@ -9,12 +10,14 @@ import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/caller.dart';
+import 'package:cotwcompanion/model/enumerator.dart';
 import 'package:cotwcompanion/model/fur.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 import 'package:cotwcompanion/model/log.dart';
+import 'package:cotwcompanion/model/mission.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/model/weapon.dart';
+import 'package:cotwcompanion/model/weapon_ammo.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +54,8 @@ class HelperFilter {
     FilterKey.loadoutsAmmoMax: 120,
     FilterKey.loadoutsCallersMin: 1,
     FilterKey.loadoutsCallersMax: 30,
+    FilterKey.missionType: {0: true, 1: true},
+    FilterKey.missionDifficulty: {1: true, 2: true, 3: true, 4: true},
   };
   static Map<FilterKey, dynamic> _filters = {};
 
@@ -108,6 +113,11 @@ class HelperFilter {
         _defaultFilters[FilterKey.loadoutsAmmoMax] == _filters[FilterKey.loadoutsAmmoMax] &&
         _defaultFilters[FilterKey.loadoutsCallersMin] == _filters[FilterKey.loadoutsCallersMin] &&
         _defaultFilters[FilterKey.loadoutsCallersMax] == _filters[FilterKey.loadoutsCallersMax]);
+  }
+
+  static bool missionFiltersChanged() {
+    return !(const DeepCollectionEquality().equals(_defaultFilters[FilterKey.missionType], _filters[FilterKey.missionType]) &&
+        const DeepCollectionEquality().equals(_defaultFilters[FilterKey.missionDifficulty], _filters[FilterKey.missionDifficulty]));
   }
 
   static num getDefaultValue(FilterKey filterKey) {
@@ -323,14 +333,14 @@ class HelperFilter {
   }
 
   static List<int> filterLoadoutAmmo(String searchText, BuildContext context) {
-    List<int> weaponAmmo = [];
-    for (IdtoId iti in HelperJSON.weaponsAmmo) {
-      if (HelperJSON.getWeapon(iti.firstId).getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) ||
-          HelperJSON.getAmmo(iti.secondId).getName(context.locale).toLowerCase().contains(searchText.toLowerCase())) {
-        weaponAmmo.add(iti.id);
+    List<int> filtered = [];
+    for (WeaponAmmo weaponAmmo in HelperJSON.weaponsAmmo) {
+      if (HelperJSON.getWeapon(weaponAmmo.firstId).getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) ||
+          HelperJSON.getAmmo(weaponAmmo.secondId).getName(context.locale).toLowerCase().contains(searchText.toLowerCase())) {
+        filtered.add(weaponAmmo.id);
       }
     }
-    return weaponAmmo;
+    return filtered;
   }
 
   static List<int> filterLoadoutCallers(String searchText, BuildContext context) {
@@ -341,5 +351,24 @@ class HelperFilter {
       }
     }
     return callers;
+  }
+
+  static List<Mission> filterMissions(String searchText, BuildContext context) {
+    List<Mission> missions = [];
+    missions.addAll(HelperJSON.missions);
+    missions = missions
+        .where((mission) =>
+            (searchText.isNotEmpty ? mission.getName(context.locale).toLowerCase().contains(searchText.toLowerCase()) : true) &&
+            getBoolValueList(FilterKey.missionType, mission.type) &&
+            getBoolValueList(FilterKey.missionDifficulty, mission.difficulty))
+        .toList();
+    return missions;
+  }
+
+  static Iterable<Enumerator> filterEnumerators(String searchText, BuildContext context) {
+    List<Enumerator> enumerators = [];
+    enumerators.addAll(HelperEnumerator.enumerators);
+    enumerators = enumerators.where((enumerator) => (searchText.isNotEmpty ? enumerator.name.toLowerCase().contains(searchText.toLowerCase()) : true)).toList();
+    return enumerators;
   }
 }

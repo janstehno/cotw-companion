@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/text_field.dart';
@@ -15,7 +15,7 @@ class WidgetSearchBar extends StatefulWidget {
   const WidgetSearchBar({
     Key? key,
     required this.controller,
-    required this.filterChanged,
+    this.filterChanged = false,
     required this.onFilter,
   }) : super(key: key);
 

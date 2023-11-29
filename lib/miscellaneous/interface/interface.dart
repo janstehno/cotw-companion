@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:flutter/material.dart';
 
@@ -151,8 +151,8 @@ class Interface {
     _darkMode = darkMode;
     if (darkMode) {
       body = ff06;
-      odd = ff06;
-      even = ff0d;
+      odd = ff0d;
+      even = ff06;
       title = ff12;
       sectionTitle = ff0d;
       light = ff0d;
@@ -183,8 +183,8 @@ class Interface {
       );
     } else {
       body = fffe;
-      odd = fffe;
-      even = fff5;
+      odd = fff5;
+      even = fffe;
       title = ffef;
       sectionTitle = fff5;
       light = fff5;

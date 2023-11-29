@@ -1,10 +1,11 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/activities/info_animal.dart';
-import 'package:cotwcompanion/activities/logs_add_edit.dart';
+import 'package:cotwcompanion/activities/detail/animal.dart';
+import 'package:cotwcompanion/activities/edit/logs.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/zone.dart';
 import 'package:cotwcompanion/widgets/icon.dart';
@@ -123,14 +124,15 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
         direction: DismissDirection.startToEnd,
         confirmDismiss: (direction) async {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ActivityLogsAddEdit(
-                        animalId: widget.animal.id,
-                        reserveId: widget.reserveId,
-                        callback: () {},
-                        fromTrophyLodge: false,
-                      )));
+            context,
+            MaterialPageRoute(
+                builder: (context) => ActivityEditLogs(
+                      animalId: widget.animal.id,
+                      reserveId: widget.reserveId,
+                      callback: () {},
+                      fromTrophyLodge: false,
+                    )),
+          );
           return false;
         },
         background: Container(
@@ -150,12 +152,12 @@ class EntryNeedZoneState extends State<EntryNeedZone> {
                 ))),
         child: GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityAnimalInfo(animalId: widget.animal.id)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityDetailAnimal(animalId: widget.animal.id)));
             },
             child: Container(
                 height: _getSize(),
                 padding: const EdgeInsets.only(left: 30, right: 30),
-                color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+                color: Utils.background(widget.index),
                 child: Row(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.center, children: [
                   Expanded(
                       child: Container(

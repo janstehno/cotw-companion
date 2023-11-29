@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 
@@ -193,6 +193,61 @@ class Graphics {
     "banteng"
   ];
 
+  static const List<String> _skills = [
+    "locatetracks",
+    "trackknowledge",
+    "imonlyhappywhenitrains",
+    "hardened",
+    "connectthedots",
+    "softfeet",
+    "weatherprediction",
+    "innatetriangulation",
+    "improvisedblind",
+    "endurance",
+    "disturbedvegetation",
+    "windprediction",
+    "startlecall",
+    "scenttinkerer",
+    "spottingknowledge",
+    "dazedandconfused",
+    "themorethemerrier",
+    "sightspotting",
+    "fatalattraction",
+    "impactresistant",
+    "tag",
+    "whosdeer",
+    "packmule",
+    "keeneye",
+    "hillcaller",
+    "haggle"
+  ];
+  static const List<String> _perks = [
+    "musclememory",
+    "breathcontrol",
+    "zeroing",
+    "steadyhands",
+    "focusedshot",
+    "windage",
+    "botheyesopen",
+    "fastshouldering",
+    "bodycontrol",
+    "tracershot",
+    "recoilmanagement",
+    "boomstick",
+    "sprintandload",
+    "quickfeet",
+    "survivalinstinct",
+    "ranger",
+    "lightninghands",
+    "quickdraw",
+    "fulldraw",
+    "movenshoot",
+    "increasedconfidence",
+    "recycle",
+    "likeapro",
+    "pumpingiron"
+  ];
+
   static String getReserveIcon(int id) {
     return "$_directory/reserves/${_reserves[id - 1]}.svg";
   }
@@ -219,6 +274,14 @@ class Graphics {
 
   static String getAnatomyAsset(int id, AnatomyPart part) {
     return "assets/graphics/anatomy/${_animals[id - 1]}_${part.name}.svg";
+  }
+
+  static String getSkillIcon(int id) {
+    return "$_directory/proficiency/${_skills[id - 1]}.svg";
+  }
+
+  static String getPerkIcon(int id) {
+    return "$_directory/proficiency/${_perks[id - 1]}.svg";
   }
 
   static String getMapTile(int id, int x, int y, int z) {

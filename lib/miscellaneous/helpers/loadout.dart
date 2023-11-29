@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'dart:convert';
 
@@ -9,10 +9,10 @@ import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 
 class HelperLoadout {
-  static late Loadout _lastRemovedItem;
+  static late Loadout _lastRemovedLoadout;
 
   static final List<Loadout> _loadouts = [];
-  static final Loadout _defaultLoadout = Loadout(id: -1, name: "Default");
+  static final Loadout _defaultLoadout = Loadout();
 
   static Loadout _activeLoadout = _defaultLoadout;
 
@@ -36,7 +36,7 @@ class HelperLoadout {
     }
   }
 
-  static void addItems(List<Loadout> loadouts) {
+  static void addLoadouts(List<Loadout> loadouts) {
     _loadouts.clear();
     for (Loadout loadout in loadouts) {
       loadout.setAmmo = knownAmmo(loadout);
@@ -98,29 +98,29 @@ class HelperLoadout {
     return false;
   }
 
-  static void setItems(List<Loadout> loadouts) {
-    addItems(loadouts);
+  static void setLoadouts(List<Loadout> loadouts) {
+    addLoadouts(loadouts);
     _reIndex();
   }
 
-  static void addItem(Loadout loadout) {
+  static void addLoadout(Loadout loadout) {
     _loadouts.add(loadout);
     _reIndex();
     writeFile();
   }
 
-  static void editItem(Loadout loadout) {
+  static void editLoadout(Loadout loadout) {
     _loadouts[loadout.id] = loadout;
     writeFile();
   }
 
   static void undoRemove() {
-    addItem(_lastRemovedItem);
+    addLoadout(_lastRemovedLoadout);
     _reIndex();
   }
 
-  static void removeItemOnIndex(int index) {
-    _lastRemovedItem = _loadouts.elementAt(index);
+  static void removeLoadoutOnIndex(int index) {
+    _lastRemovedLoadout = _loadouts.elementAt(index);
     _loadouts.removeAt(index);
     if (_loadouts.isEmpty || _activeLoadout.id == index) {
       useLoadout(-1);
@@ -156,7 +156,7 @@ class HelperLoadout {
         return false;
       }
       if (loadouts.isNotEmpty) {
-        addItems(loadouts);
+        addLoadouts(loadouts);
         _reIndex();
         writeFile();
         return true;

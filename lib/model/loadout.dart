@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'dart:core';
 
@@ -7,14 +7,18 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 class Loadout {
   int _id;
   String _name;
-  final List<dynamic> _ammo = [];
-  final List<dynamic> _callers = [];
+  final List<dynamic> _ammo;
+  final List<dynamic> _callers;
 
   Loadout({
-    required id,
-    required name,
-  })  : _id = id,
-        _name = name;
+    id,
+    name,
+    ammo,
+    callers,
+  })  : _id = id ?? -1,
+        _name = name ?? "Default",
+        _ammo = ammo ?? [],
+        _callers = callers ?? [];
 
   int get id => _id;
 
@@ -40,12 +44,11 @@ class Loadout {
   String toString() => '{"ID":$_id,"NAME":"$_name","AMMO":${HelperJSON.listToJson(_ammo)},"CALLERS":${HelperJSON.listToJson(_callers)}}';
 
   factory Loadout.fromJson(Map<String, dynamic> json) {
-    Loadout loadout = Loadout(
+    return Loadout(
       id: json['ID'],
       name: json['NAME'],
+      ammo: json['AMMO'],
+      callers: json['CALLERS'],
     );
-    loadout.setAmmo = json['AMMO'] ?? [];
-    loadout.setCallers = json['CALLERS'] ?? [];
-    return loadout;
   }
 }

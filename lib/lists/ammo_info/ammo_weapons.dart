@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
@@ -22,12 +22,6 @@ class ListAmmoWeapons extends StatefulWidget {
 class ListAmmoWeaponsState extends State<ListAmmoWeapons> {
   late final List<Weapon> _weapons = [];
 
-  @override
-  void initState() {
-    _getWeapons();
-    super.initState();
-  }
-
   void _getWeapons() {
     for (IdtoId iti in HelperJSON.weaponsAmmo) {
       if (iti.secondId == widget.ammoId) {
@@ -37,6 +31,7 @@ class ListAmmoWeaponsState extends State<ListAmmoWeapons> {
   }
 
   Widget _buildWidgets() {
+    _getWeapons();
     return Container(
         padding: const EdgeInsets.all(30),
         child: ListView.builder(
@@ -45,8 +40,8 @@ class ListAmmoWeaponsState extends State<ListAmmoWeapons> {
             itemCount: _weapons.length,
             itemBuilder: (context, index) {
               return WidgetTextDlc(
-                text: _weapons[index].getName(context.locale),
-                dlc: _weapons[index].isFromDlc,
+                text: _weapons.elementAt(index).getName(context.locale),
+                dlc: _weapons.elementAt(index).isFromDlc,
               );
             }));
   }

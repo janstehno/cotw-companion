@@ -1,7 +1,7 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
+import 'package:cotwcompanion/activities/edit/loadouts.dart';
 import 'package:cotwcompanion/activities/filter.dart';
-import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
@@ -109,31 +109,24 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
 
   Widget _buildLoadouts() {
     _filter();
-    bool last = false;
     return WidgetScrollbar(
-        child: ListView.builder(
-            itemCount: _loadouts.length,
-            itemBuilder: (context, index) {
-              index == _loadouts.length - 1 ? last = true : last = false;
-              return last
-                  ? Column(children: [
-                      EntryLoadout(
-                        index: index,
-                        loadout: _loadouts[index],
-                        callback: _callback,
-                        context: context,
-                      ),
-                      SizedBox(
-                        height: _menuHeight,
-                      ),
-                    ])
-                  : EntryLoadout(
-                      index: index,
-                      loadout: _loadouts[index],
-                      callback: _callback,
-                      context: context,
-                    );
-            }));
+        child: Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+              itemCount: _loadouts.length,
+              itemBuilder: (context, index) {
+                return EntryLoadout(
+                  index: index,
+                  loadout: _loadouts.elementAt(index),
+                  callback: _callback,
+                  context: context,
+                );
+              }),
+        ),
+        SizedBox(height: _menuHeight),
+      ],
+    ));
   }
 
   EntryMenuBarItem _buildFileOptions() {
@@ -188,7 +181,7 @@ class ActivityLoadoutsState extends State<ActivityLoadouts> {
               icon: "assets/graphics/icons/plus.svg",
               onTap: () {
                 _focus();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLoadoutsAddEdit(callback: _filter)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditLoadouts(callback: _filter)));
               }),
         ),
       ],

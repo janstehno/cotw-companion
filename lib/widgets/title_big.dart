@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -10,7 +10,7 @@ class WidgetTitleBig extends StatelessWidget {
   final int maxLines;
   final bool upperCase;
 
-  final double height = 70;
+  static const double height = 70;
 
   const WidgetTitleBig({
     Key? key,

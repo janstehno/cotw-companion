@@ -17,6 +17,7 @@
     "PENETRATION": 10,
     "EXPANSION": 0,
     "PRICE": 530,
+    "SCORE": 700,
     "DLC": 0
   },
   {
@@ -37,6 +38,7 @@
     "PENETRATION": 50,
     "EXPANSION": 0,
     "PRICE": 700,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -57,6 +59,7 @@
     "PENETRATION": 90,
     "EXPANSION": 0,
     "PRICE": 880,
+    "SCORE": 3500,
     "DLC": 0
   },
   {
@@ -77,6 +80,7 @@
     "PENETRATION": 15,
     "EXPANSION": 0,
     "PRICE": 500,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -97,6 +101,7 @@
     "PENETRATION": 75,
     "EXPANSION": 0,
     "PRICE": 750,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -117,6 +122,7 @@
     "PENETRATION": 90,
     "EXPANSION": 0,
     "PRICE": 900,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -137,6 +143,7 @@
     "PENETRATION": 0,
     "EXPANSION": 0,
     "PRICE": 200,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -157,6 +164,7 @@
     "PENETRATION": 10,
     "EXPANSION": 12,
     "PRICE": 220,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -177,6 +185,7 @@
     "PENETRATION": 20,
     "EXPANSION": 3,
     "PRICE": 350,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -197,6 +206,7 @@
     "PENETRATION": 15,
     "EXPANSION": 17,
     "PRICE": 0,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -217,6 +227,7 @@
     "PENETRATION": 30,
     "EXPANSION": 4,
     "PRICE": 530,
+    "SCORE": 50,
     "DLC": 0
   },
   {
@@ -237,6 +248,7 @@
     "PENETRATION": 17,
     "EXPANSION": 24,
     "PRICE": 440,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -257,6 +269,7 @@
     "PENETRATION": 35,
     "EXPANSION": 5,
     "PRICE": 700,
+    "SCORE": 700,
     "DLC": 0
   },
   {
@@ -277,6 +290,7 @@
     "PENETRATION": 20,
     "EXPANSION": 53,
     "PRICE": 610,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -297,6 +311,7 @@
     "PENETRATION": 40,
     "EXPANSION": 12,
     "PRICE": 880,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -317,6 +332,7 @@
     "PENETRATION": 21,
     "EXPANSION": 60,
     "PRICE": 720,
+    "SCORE": 6000,
     "DLC": 1
   },
   {
@@ -337,6 +353,7 @@
     "PENETRATION": 42,
     "EXPANSION": 14,
     "PRICE": 950,
+    "SCORE": 6400,
     "DLC": 1
   },
   {
@@ -357,6 +374,7 @@
     "PENETRATION": 20,
     "EXPANSION": 27,
     "PRICE": 660,
+    "SCORE": 2800,
     "DLC": 0
   },
   {
@@ -377,6 +395,7 @@
     "PENETRATION": 40,
     "EXPANSION": 6,
     "PRICE": 390,
+    "SCORE": 3500,
     "DLC": 0
   },
   {
@@ -397,6 +416,7 @@
     "PENETRATION": 20,
     "EXPANSION": 53,
     "PRICE": 610,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -417,6 +437,7 @@
     "PENETRATION": 40,
     "EXPANSION": 12,
     "PRICE": 880,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -437,6 +458,7 @@
     "PENETRATION": 25,
     "EXPANSION": 100,
     "PRICE": 2000,
+    "SCORE": 5700,
     "DLC": 1
   },
   {
@@ -457,6 +479,7 @@
     "PENETRATION": 100,
     "EXPANSION": 23,
     "PRICE": 2660,
+    "SCORE": 6500,
     "DLC": 1
   },
   {
@@ -477,6 +500,7 @@
     "PENETRATION": 20,
     "EXPANSION": 20,
     "PRICE": 400,
+    "SCORE": 350,
     "DLC": 1
   },
   {
@@ -497,6 +521,7 @@
     "PENETRATION": 40,
     "EXPANSION": 4,
     "PRICE": 650,
+    "SCORE": 550,
     "DLC": 1
   },
   {
@@ -517,6 +542,7 @@
     "PENETRATION": 22,
     "EXPANSION": 68,
     "PRICE": 790,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -537,6 +563,7 @@
     "PENETRATION": 45,
     "EXPANSION": 16,
     "PRICE": 1050,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -557,6 +584,7 @@
     "PENETRATION": 15,
     "EXPANSION": 17,
     "PRICE": 380,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -577,6 +605,7 @@
     "PENETRATION": 5,
     "EXPANSION": 10,
     "PRICE": 200,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -597,6 +626,7 @@
     "PENETRATION": 17,
     "EXPANSION": 17,
     "PRICE": 480,
+    "SCORE": 1000,
     "DLC": 0
   },
   {
@@ -617,6 +647,7 @@
     "PENETRATION": 35,
     "EXPANSION": 4,
     "PRICE": 220,
+    "SCORE": 1300,
     "DLC": 0
   },
   {
@@ -637,6 +668,7 @@
     "PENETRATION": 17,
     "EXPANSION": 70,
     "PRICE": 260,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -657,6 +689,7 @@
     "PENETRATION": 70,
     "EXPANSION": 16,
     "PRICE": 530,
+    "SCORE": 2500,
     "DLC": 0
   },
   {
@@ -677,6 +710,7 @@
     "PENETRATION": 12,
     "EXPANSION": 18,
     "PRICE": 220,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -697,6 +731,7 @@
     "PENETRATION": 50,
     "EXPANSION": 4,
     "PRICE": 350,
+    "SCORE": 450,
     "DLC": 0
   },
   {
@@ -717,6 +752,7 @@
     "PENETRATION": 17,
     "EXPANSION": 70,
     "PRICE": 530,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -737,6 +773,7 @@
     "PENETRATION": 25,
     "EXPANSION": 100,
     "PRICE": 440,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -757,6 +794,7 @@
     "PENETRATION": 100,
     "EXPANSION": 23,
     "PRICE": 770,
+    "SCORE": 5300,
     "DLC": 0
   },
   {
@@ -777,6 +815,7 @@
     "PENETRATION": 15,
     "EXPANSION": 70,
     "PRICE": 200,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -797,6 +836,7 @@
     "PENETRATION": 27,
     "EXPANSION": 6,
     "PRICE": 300,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -817,6 +857,7 @@
     "PENETRATION": 19,
     "EXPANSION": 53,
     "PRICE": 590,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -837,6 +878,7 @@
     "PENETRATION": 45,
     "EXPANSION": 13,
     "PRICE": 850,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -857,6 +899,7 @@
     "PENETRATION": 30,
     "EXPANSION": 30,
     "PRICE": 300,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -877,6 +920,7 @@
     "PENETRATION": 40,
     "EXPANSION": 30,
     "PRICE": 450,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -897,6 +941,7 @@
     "PENETRATION": 20,
     "EXPANSION": 53,
     "PRICE": 610,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -917,6 +962,7 @@
     "PENETRATION": 40,
     "EXPANSION": 12,
     "PRICE": 880,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -937,6 +983,7 @@
     "PENETRATION": 0,
     "EXPANSION": 0,
     "PRICE": 180,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -957,6 +1004,7 @@
     "PENETRATION": 5,
     "EXPANSION": 0,
     "PRICE": 530,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -977,6 +1025,7 @@
     "PENETRATION": 37,
     "EXPANSION": 16,
     "PRICE": 880,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -997,6 +1046,7 @@
     "PENETRATION": 0,
     "EXPANSION": 0,
     "PRICE": 180,
+    "SCORE": 150,
     "DLC": 0
   },
   {
@@ -1017,6 +1067,7 @@
     "PENETRATION": 5,
     "EXPANSION": 0,
     "PRICE": 530,
+    "SCORE": 0,
     "DLC": 0
   },
   {
@@ -1037,6 +1088,7 @@
     "PENETRATION": 40,
     "EXPANSION": 19,
     "PRICE": 880,
+    "SCORE": 3100,
     "DLC": 0
   },
   {
@@ -1057,6 +1109,7 @@
     "PENETRATION": 0,
     "EXPANSION": 0,
     "PRICE": 150,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1077,6 +1130,7 @@
     "PENETRATION": 0,
     "EXPANSION": 0,
     "PRICE": 150,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1097,6 +1151,7 @@
     "PENETRATION": 4,
     "EXPANSION": 0,
     "PRICE": 500,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1117,6 +1172,7 @@
     "PENETRATION": 33,
     "EXPANSION": 16,
     "PRICE": 800,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1137,6 +1193,7 @@
     "PENETRATION": 0,
     "EXPANSION": 0,
     "PRICE": 200,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1157,6 +1214,7 @@
     "PENETRATION": 5,
     "EXPANSION": 0,
     "PRICE": 600,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1177,6 +1235,7 @@
     "PENETRATION": 45,
     "EXPANSION": 22,
     "PRICE": 950,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1197,6 +1256,7 @@
     "PENETRATION": 10,
     "EXPANSION": 0,
     "PRICE": 600,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1217,6 +1277,7 @@
     "PENETRATION": 50,
     "EXPANSION": 0,
     "PRICE": 770,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1237,6 +1298,7 @@
     "PENETRATION": 90,
     "EXPANSION": 0,
     "PRICE": 950,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1257,6 +1319,7 @@
     "PENETRATION": 15,
     "EXPANSION": 3,
     "PRICE": 300,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1277,6 +1340,7 @@
     "PENETRATION": 7,
     "EXPANSION": 10,
     "PRICE": 200,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1297,6 +1361,7 @@
     "PENETRATION": 19,
     "EXPANSION": 52,
     "PRICE": 690,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1317,6 +1382,7 @@
     "PENETRATION": 44,
     "EXPANSION": 13,
     "PRICE": 850,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1337,6 +1403,7 @@
     "PENETRATION": 17,
     "EXPANSION": 1,
     "PRICE": 250,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1357,6 +1424,7 @@
     "PENETRATION": 55,
     "EXPANSION": 6,
     "PRICE": 600,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1377,6 +1445,7 @@
     "PENETRATION": 50,
     "EXPANSION": 8,
     "PRICE": 350,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1397,6 +1466,7 @@
     "PENETRATION": 12,
     "EXPANSION": 36,
     "PRICE": 280,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1417,6 +1487,7 @@
     "PENETRATION": 42,
     "EXPANSION": 20,
     "PRICE": 500,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1437,6 +1508,7 @@
     "PENETRATION": 20,
     "EXPANSION": 60,
     "PRICE": 450,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1457,6 +1529,7 @@
     "PENETRATION": 12,
     "EXPANSION": 15,
     "PRICE": 230,
+    "SCORE": 0,
     "DLC": 1
   },
   {
@@ -1477,6 +1550,7 @@
     "PENETRATION": 25,
     "EXPANSION": 3,
     "PRICE": 375,
+    "SCORE": 0,
     "DLC": 1
   }
 ]

@@ -9,7 +9,7 @@ class WidgetTitleSmall extends WidgetTitleBig {
   final bool dot;
   final Color? dotColor;
 
-  final double smallHeight = 50;
+  final double smallHeight = 60;
 
   final double _dotSize = 10;
 
@@ -47,9 +47,11 @@ class WidgetTitleSmall extends WidgetTitleBig {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            buildText(
-              Interface.s16w600c(Interface.dark),
-              Interface.s12w300n(Interface.disabled),
+            Expanded(
+              child: buildText(
+                Interface.s18w600c(Interface.dark),
+                Interface.s12w300n(Interface.disabled),
+              ),
             ),
             _buildDot(),
           ],

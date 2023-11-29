@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
@@ -9,6 +9,8 @@ class WidgetTitleBigSwitch extends WidgetTitleBig {
   final Color? color, background, activeColor, activeBackground;
   final bool isActive;
   final Function onTap;
+
+  static const double height = WidgetTitleBig.height;
 
   const WidgetTitleBigSwitch({
     super.key,

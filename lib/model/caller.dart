@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/model/translatable.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -6,7 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 class Caller extends Translatable {
   final int _rangeM;
   final double _rangeYD;
-  final int _duration, _strength, _price;
+  final int _duration, _strength, _price, _level;
   final int _dlc;
 
   Caller({
@@ -25,12 +25,14 @@ class Caller extends Translatable {
     required duration,
     required strength,
     required price,
+    required level,
     required dlc,
   })  : _rangeM = rangeM,
         _rangeYD = rangeYD,
         _duration = duration,
         _strength = strength,
         _price = price,
+        _level = level,
         _dlc = dlc;
 
   int get strength => _strength;
@@ -39,11 +41,15 @@ class Caller extends Translatable {
 
   int get price => _price;
 
+  int get level => _level;
+
   int get rangeM => _rangeM;
 
   double get rangeYD => _rangeYD;
 
   bool get isFromDlc => _dlc == 1;
+
+  bool get hasRequirements => _level > 0;
 
   String getRange(bool units) => units ? "$_rangeYD ${tr("yards")}" : "$_rangeM ${tr("meters")}";
 
@@ -64,6 +70,7 @@ class Caller extends Translatable {
         duration: json['DURATION'],
         strength: json['STRENGTH'],
         price: json['PRICE'],
+        level: json['LEVEL'],
         dlc: json['DLC']);
   }
 }

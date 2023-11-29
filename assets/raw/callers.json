@@ -15,6 +15,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 5,
     "DLC": 0
   },
   {
@@ -33,6 +34,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -51,6 +53,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 0
   },
   {
@@ -69,6 +72,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 0,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -87,6 +91,7 @@
     "DURATION": 90,
     "STRENGTH": 50,
     "PRICE": 0,
+    "LEVEL": 0,
     "DLC": 0
   },
   {
@@ -105,6 +110,7 @@
     "DURATION": 90,
     "STRENGTH": 25,
     "PRICE": 6000,
+    "LEVEL": 37,
     "DLC": 0
   },
   {
@@ -123,6 +129,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 15,
     "DLC": 0
   },
   {
@@ -141,6 +148,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 35,
     "DLC": 0
   },
   {
@@ -159,6 +167,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 25,
     "DLC": 0
   },
   {
@@ -177,6 +186,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 0,
+    "LEVEL": 0,
     "DLC": 0
   },
   {
@@ -195,6 +205,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 27,
     "DLC": 0
   },
   {
@@ -213,6 +224,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 0,
+    "LEVEL": 0,
     "DLC": 0
   },
   {
@@ -231,6 +243,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 0
   },
   {
@@ -249,6 +262,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 13,
     "DLC": 0
   },
   {
@@ -267,6 +281,7 @@
     "DURATION": 90,
     "STRENGTH": 50,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -285,6 +300,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -303,6 +319,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -321,6 +338,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -339,6 +357,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -357,6 +376,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -375,6 +395,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -393,6 +414,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -411,6 +433,7 @@
     "DURATION": 90,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   },
   {
@@ -429,6 +452,7 @@
     "DURATION": 25,
     "STRENGTH": 40,
     "PRICE": 6000,
+    "LEVEL": 0,
     "DLC": 1
   }
 ]

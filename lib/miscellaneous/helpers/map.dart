@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -140,11 +140,11 @@ class HelperMap {
     _outposts.clear();
     _hides.clear();
     _zones.clear();
-    for (int i = 0; i < _activeE.length; i++) {
-      _activeE[i] = false;
+    for (int index = 0; index < _activeE.length; index++) {
+      _activeE[index] = false;
     }
-    for (int i = 0; i < _active.length; i++) {
-      _active[i] = false;
+    for (int index = 0; index < _active.length; index++) {
+      _active[index] = false;
     }
   }
 

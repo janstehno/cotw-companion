@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'dart:ui';
 
@@ -109,7 +109,7 @@ class Animal extends Translatable {
   set setWeightGOLB(double value) => _weightGOLB = value;
 
   factory Animal.fromJson(Map<String, dynamic> json) {
-    Animal animal = Animal(
+    return Animal(
       id: json['ID'],
       en: json['EN'],
       ru: json['RU'],
@@ -138,7 +138,6 @@ class Animal extends Translatable {
       grounded: json['GROUNDED'] ?? 0,
       dlc: json['DLC'],
     );
-    return animal;
   }
 
   String getNameByLocale(Locale locale) {

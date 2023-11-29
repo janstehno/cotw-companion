@@ -1,8 +1,9 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/zone.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -12,6 +13,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ListAnimalZones extends StatefulWidget {
   final int animalId;
+  final int? reserveId;
 
   final double height = 350;
   final double reserveHeight = 30;
@@ -20,6 +22,7 @@ class ListAnimalZones extends StatefulWidget {
   const ListAnimalZones({
     Key? key,
     required this.animalId,
+    this.reserveId,
   }) : super(key: key);
 
   @override
@@ -27,7 +30,6 @@ class ListAnimalZones extends StatefulWidget {
 }
 
 class ListAnimalZonesState extends State<ListAnimalZones> {
-  final PageController controller = PageController(viewportFraction: 1, keepPage: true);
   final double _iconSize = 12;
   final double _pieInnerRadius = 23;
   final double _pieOuterRadius = 50;
@@ -38,9 +40,17 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
   final double _pieOuterDegree = -97.5;
   final double _dotSize = 10;
 
+  late final PageController controller;
   late final Map<int, List<Zone>> _zones = {};
   late final List<PieChartSectionData> _data = [];
   late final List<PieChartSectionData> _numberData = [];
+
+  @override
+  void initState() {
+    List<IdtoId> animalsReserves = HelperJSON.animalsReserves.where((idToId) => idToId.firstId == widget.animalId).toList();
+    controller = PageController(viewportFraction: 1, keepPage: true, initialPage: animalsReserves.indexWhere((idToId) => idToId.secondId == (widget.reserveId ?? 0)));
+    super.initState();
+  }
 
   void _getZones() {
     _zones.clear();

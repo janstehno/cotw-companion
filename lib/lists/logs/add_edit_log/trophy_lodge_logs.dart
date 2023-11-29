@@ -1,8 +1,8 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/entries/trophy_lodge_record.dart';
+import 'package:cotwcompanion/widgets/entries/trophy_lodge.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +21,9 @@ class ListTrophyLodgeLogs extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: trophyLodgeLogs.length,
         itemBuilder: (context, index) {
-          return EntryTrophyLodgeRecord(
+          return EntryTrophyLodge(
             index: index,
-            log: trophyLodgeLogs[index],
+            log: trophyLodgeLogs.elementAt(index),
           );
         });
   }

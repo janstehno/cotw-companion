@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 enum Item {
   reserve,
@@ -6,6 +6,15 @@ enum Item {
   caller,
   weapon,
   ammo,
+}
+
+enum ProficiencyType {
+  rifle,
+  shotgun,
+  handgun,
+  archery,
+  stalker,
+  ambusher,
 }
 
 enum MapItem {
@@ -26,6 +35,15 @@ enum AnatomyPart {
   body,
   organs,
   bones,
+}
+
+enum MultimountSize {
+  xs,
+  s,
+  m,
+  l,
+  xl,
+  xxl,
 }
 
 enum DateStructure {
@@ -65,4 +83,6 @@ enum FilterKey {
   loadoutsAmmoMax,
   loadoutsCallersMin,
   loadoutsCallersMax,
+  missionType,
+  missionDifficulty,
 }

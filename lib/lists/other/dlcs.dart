@@ -1,8 +1,9 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/info_dlc.dart';
+import 'package:cotwcompanion/activities/detail/dlc.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/dlc.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
@@ -22,12 +23,6 @@ class ListDlcs extends StatefulWidget {
 class ListDlcsState extends State<ListDlcs> {
   late final List<Dlc> _dlcs = [];
 
-  @override
-  void initState() {
-    _getData();
-    super.initState();
-  }
-
   void _getData() {
     _dlcs.addAll(HelperJSON.dlcs);
     _dlcs.sort((a, b) => b.date.compareTo(a.date));
@@ -39,16 +34,16 @@ class ListDlcsState extends State<ListDlcs> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _dlcs.length,
         itemBuilder: (context, index) {
-          Dlc dlc = _dlcs[index];
+          Dlc dlc = _dlcs.elementAt(index);
           return WidgetTapText(
-            text: dlc.name,
+            text: dlc.en,
             color: dlc.type == -1 ? Interface.disabled : Interface.dark,
-            background: index % 2 == 0 ? Interface.even : Interface.odd,
+            background: Utils.background(index),
             onTap: () {
               if (dlc.type != -1) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ActivityDlcInfo(dlc: dlc)),
+                  MaterialPageRoute(builder: (context) => ActivityDetailDlc(dlc: dlc)),
                 );
               }
             },
@@ -57,10 +52,12 @@ class ListDlcsState extends State<ListDlcs> {
   }
 
   Widget _buildWidgets() {
+    _getData();
     return WidgetScaffold(
       appBar: WidgetAppBar(
         text: tr("content_downloadable_content"),
         context: context,
+        maxLines: 2,
       ),
       body: _buildList(),
     );

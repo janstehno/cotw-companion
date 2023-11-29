@@ -1,16 +1,19 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/info_ammo.dart';
-import 'package:cotwcompanion/activities/info_animal.dart';
-import 'package:cotwcompanion/activities/info_caller.dart';
-import 'package:cotwcompanion/activities/info_fur.dart';
-import 'package:cotwcompanion/activities/info_reserve.dart';
-import 'package:cotwcompanion/activities/info_weapon.dart';
+import 'package:cotwcompanion/activities/detail/ammo.dart';
+import 'package:cotwcompanion/activities/detail/animal.dart';
+import 'package:cotwcompanion/activities/detail/caller.dart';
+import 'package:cotwcompanion/activities/detail/fur.dart';
+import 'package:cotwcompanion/activities/detail/mission.dart';
+import 'package:cotwcompanion/activities/detail/reserve.dart';
+import 'package:cotwcompanion/activities/detail/weapon.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/fur.dart';
+import 'package:cotwcompanion/model/mission.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/model/weapon.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
@@ -34,6 +37,7 @@ class ActivitySearchState extends State<ActivitySearch> {
   final List<Weapon> _weapons = [];
   final List<Ammo> _ammo = [];
   final List<Caller> _callers = [];
+  final List<Mission> _missions = [];
 
   int _itemIndex = -1;
   int _itemLimit = 5;
@@ -61,12 +65,14 @@ class ActivitySearchState extends State<ActivitySearch> {
       _weapons.clear();
       _ammo.clear();
       _callers.clear();
+      _missions.clear();
       _reserves.addAll(HelperFilter.filterReserves(_controller.text, context));
       _animals.addAll(HelperFilter.filterAnimals(_controller.text, context));
       _furs.addAll(HelperFilter.filterFurs(_controller.text, context));
       _weapons.addAll(HelperFilter.filterWeapons(_controller.text, context));
       _ammo.addAll(HelperFilter.filterAmmo(_controller.text, context));
       _callers.addAll(HelperFilter.filterCallers(_controller.text, context));
+      _missions.addAll(HelperFilter.filterMissions(_controller.text, context));
     });
   }
 
@@ -83,8 +89,8 @@ class ActivitySearchState extends State<ActivitySearch> {
               return EntryFastSearch(
                 index: _itemIndex,
                 icon: "assets/graphics/icons/reserve.svg",
-                text: _reserves[index].getName(context.locale),
-                activity: ActivityReserveInfo(reserveId: _reserves[index].id),
+                text: _reserves.elementAt(index).getName(context.locale),
+                activity: ActivityDetailReserve(reserve: _reserves[index]),
                 callback: _focus,
               );
             }),
@@ -97,8 +103,8 @@ class ActivitySearchState extends State<ActivitySearch> {
               return EntryFastSearch(
                 index: _itemIndex,
                 icon: "assets/graphics/icons/wildlife.svg",
-                text: _animals[index].getNameByLocale(context.locale),
-                activity: ActivityAnimalInfo(animalId: _animals[index].id),
+                text: _animals.elementAt(index).getNameByLocale(context.locale),
+                activity: ActivityDetailAnimal(animalId: _animals.elementAt(index).id),
                 callback: _focus,
               );
             }),
@@ -111,8 +117,8 @@ class ActivitySearchState extends State<ActivitySearch> {
               return EntryFastSearch(
                 index: _itemIndex,
                 icon: "assets/graphics/icons/fur.svg",
-                text: _furs[index].getName(context.locale),
-                activity: ActivityFurInfo(furId: _furs[index].id),
+                text: _furs.elementAt(index).getName(context.locale),
+                activity: ActivityDetailFur(fur: _furs[index]),
                 callback: _focus,
               );
             }),
@@ -125,8 +131,8 @@ class ActivitySearchState extends State<ActivitySearch> {
               return EntryFastSearch(
                 index: _itemIndex,
                 icon: "assets/graphics/icons/weapon.svg",
-                text: _weapons[index].getName(context.locale),
-                activity: ActivityWeaponInfo(weaponId: _weapons[index].id),
+                text: _weapons.elementAt(index).getName(context.locale),
+                activity: ActivityDetailWeapon(weapon: _weapons[index]),
                 callback: _focus,
               );
             }),
@@ -139,8 +145,8 @@ class ActivitySearchState extends State<ActivitySearch> {
               return EntryFastSearch(
                 index: _itemIndex,
                 icon: "assets/graphics/icons/harvest_correct_ammo.svg",
-                text: _ammo[index].getName(context.locale),
-                activity: ActivityAmmoInfo(ammoId: _ammo[index].id),
+                text: _ammo.elementAt(index).getName(context.locale),
+                activity: ActivityDetailAmmo(ammo: _ammo[index]),
                 callback: _focus,
               );
             }),
@@ -153,8 +159,23 @@ class ActivitySearchState extends State<ActivitySearch> {
               return EntryFastSearch(
                 index: _itemIndex,
                 icon: "assets/graphics/icons/caller.svg",
-                text: _callers[index].getName(context.locale),
-                activity: ActivityCallerInfo(callerId: _callers[index].id),
+                text: _callers.elementAt(index).getName(context.locale),
+                activity: ActivityDetailCaller(caller: _callers[index]),
+                callback: _focus,
+              );
+            }),
+        ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: _missions.length < _itemLimit ? _missions.length : _itemLimit,
+            itemBuilder: (context, index) {
+              _itemIndex++;
+              return EntryFastSearch(
+                index: _itemIndex,
+                icon: "assets/graphics/icons/missions.svg",
+                text: _missions.elementAt(index).getName(context.locale),
+                subText: HelperJSON.getMissionGiver(_missions.elementAt(index).giverId).getName(context.locale),
+                activity: ActivityDetailMission(mission: _missions[index]),
                 callback: _focus,
               );
             }),

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'dart:convert';
 
@@ -11,7 +11,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HelperLog {
-  static late Log _lastRemovedItem;
+  static late Log _lastRemovedLog;
 
   static late BuildContext _context;
 
@@ -24,7 +24,7 @@ class HelperLog {
 
   static List<Log> get logs => _logs;
 
-  static List<Log> get corruptedItems => _corruptedLogs;
+  static List<Log> get corruptedLogs => _corruptedLogs;
 
   static void setContext(BuildContext context) {
     _context = context;
@@ -54,7 +54,7 @@ class HelperLog {
     }
   }
 
-  static void addItems(List<Log> logs) {
+  static void addLogs(List<Log> logs) {
     _logs.clear();
     _corruptedLogs.clear();
     for (Log log in logs) {
@@ -74,32 +74,32 @@ class HelperLog {
     }
   }
 
-  static void setItems(List<Log> logs) {
-    addItems(logs);
+  static void setLogs(List<Log> logs) {
+    addLogs(logs);
     _reIndex();
     _reName();
   }
 
-  static void addItem(Log log) {
+  static void addLog(Log log) {
     _logs.add(log);
     _reIndex();
     _reName();
     writeFile();
   }
 
-  static void editItem(Log log) {
+  static void editLog(Log log) {
     _logs[log.id] = log;
     _reName();
     writeFile();
   }
 
   static void undoRemove() {
-    addItem(_lastRemovedItem);
+    addLog(_lastRemovedLog);
     _reIndex();
   }
 
-  static void removeItemOnIndex(int index) {
-    _lastRemovedItem = _logs.elementAt(index);
+  static void removeLogOnIndex(int index) {
+    _lastRemovedLog = _logs.elementAt(index);
     _logs.removeAt(index);
     _reIndex();
     writeFile();
@@ -139,7 +139,7 @@ class HelperLog {
         return false;
       }
       if (logs.isNotEmpty) {
-        addItems(logs);
+        addLogs(logs);
         _reIndex();
         _reName();
         writeFile();
@@ -166,7 +166,7 @@ class HelperLog {
       parsed.replaceFirst("]", ",");
     }
     for (int index = 0; index < _corruptedLogs.length; index++) {
-      parsed += _corruptedLogs[index].toString();
+      parsed += _corruptedLogs.elementAt(index).toString();
       if (index != _corruptedLogs.length - 1) {
         parsed += ",";
       }

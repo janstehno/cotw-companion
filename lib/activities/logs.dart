@@ -1,9 +1,9 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cotwcompanion/activities/edit/logs.dart';
 import 'package:cotwcompanion/activities/filter.dart';
-import 'package:cotwcompanion/activities/logs_add_edit.dart';
-import 'package:cotwcompanion/activities/logs_information.dart';
+import 'package:cotwcompanion/activities/help/logs.dart';
 import 'package:cotwcompanion/lists/logs/stats.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
@@ -83,7 +83,7 @@ class ActivityLogsState extends State<ActivityLogs> {
       _logs.clear();
       _logs.addAll(HelperFilter.filterLogs(_controller.text, context));
 
-      if (!widget.trophyLodge && !_settings.trophyLodgeRecord) {
+      if (!widget.trophyLodge && !_settings.trophyLodgeEntry) {
         _logs.removeWhere((log) => log.isInLodge);
       }
       if (widget.trophyLodge) {
@@ -209,31 +209,24 @@ class ActivityLogsState extends State<ActivityLogs> {
   Widget _buildLogs() {
     _filter();
     return WidgetScrollbar(
-        child: ListView.builder(
-            itemCount: _logs.length,
-            itemBuilder: (context, index) {
-              Log log = _logs[index];
-              bool last = false;
-              index == _logs.length - 1 ? last = true : last = false;
-              return last
-                  ? Column(children: [
-                      EntryLog(
-                        index: index,
-                        log: log,
-                        callback: _filter,
-                        context: context,
-                      ),
-                      SizedBox(
-                        height: _menuHeight,
-                      )
-                    ])
-                  : EntryLog(
-                      index: index,
-                      log: log,
-                      callback: _filter,
-                      context: context,
-                    );
-            }));
+        child: Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+              itemCount: _logs.length,
+              itemBuilder: (context, index) {
+                Log log = _logs.elementAt(index);
+                return EntryLog(
+                  index: index,
+                  log: log,
+                  callback: _filter,
+                  context: context,
+                );
+              }),
+        ),
+        SizedBox(height: _menuHeight),
+      ],
+    ));
   }
 
   EntryMenuBarItem _buildFileOptions() {
@@ -319,11 +312,11 @@ class ActivityLogsState extends State<ActivityLogs> {
             icon: "assets/graphics/icons/sort_date.svg",
             color: Interface.light,
             background: Interface.dark,
-            isActive: _settings.dateOfRecord,
+            isActive: _settings.entryDate,
             onTap: () {
               setState(() {
                 _focus();
-                _settings.changeDateOfRecord();
+                _settings.changeEntryDate();
               });
             }),
         widget.trophyLodge
@@ -332,11 +325,11 @@ class ActivityLogsState extends State<ActivityLogs> {
                 icon: "assets/graphics/icons/trophy_lodge.svg",
                 color: Interface.light,
                 background: Interface.dark,
-                isActive: _settings.trophyLodgeRecord,
+                isActive: _settings.trophyLodgeEntry,
                 onTap: () {
                   setState(() {
                     _focus();
-                    _settings.changeTrophyLodgeRecord();
+                    _settings.changeTrophyLodgeEntry();
                     _filter();
                   });
                 })
@@ -359,7 +352,7 @@ class ActivityLogsState extends State<ActivityLogs> {
               onTap: () {
                 setState(() {
                   _focus();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityLogsInformation()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityHelpLogs()));
                 });
               }),
         ),
@@ -391,7 +384,7 @@ class ActivityLogsState extends State<ActivityLogs> {
               icon: "assets/graphics/icons/plus.svg",
               onTap: () {
                 _focus();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityLogsAddEdit(fromTrophyLodge: widget.trophyLodge, callback: _filter)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditLogs(fromTrophyLodge: widget.trophyLodge, callback: _filter)));
               }),
         ),
       ],
@@ -520,38 +513,46 @@ class ActivityLogsState extends State<ActivityLogs> {
   }
 
   Widget _buildBody() {
-    return Stack(children: [
-      Column(mainAxisSize: MainAxisSize.max, children: [
-        WidgetAppBar(
-          text: widget.trophyLodge ? tr("trophy_lodge") : tr("logbook"),
-          context: context,
-        ),
-        WidgetSearchBar(
-          controller: _controller,
-          filterChanged: HelperFilter.logFiltersChanged(),
-          onFilter: _buildFilter,
-        ),
-        Expanded(
-            child: Stack(children: [
-          _buildLogs(),
-          Positioned(
-            right: 0,
-            bottom: 0,
-            child: Container(
-              height: _menuHeight,
-              width: MediaQuery.of(context).size.width,
-              color: Interface.search,
+    return Stack(
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            WidgetAppBar(
+              text: widget.trophyLodge ? tr("trophy_lodge") : tr("logbook"),
+              context: context,
             ),
-          ),
-          Positioned(
-            right: 0,
-            bottom: 0,
-            child: _buildMenu(),
-          )
-        ]))
-      ]),
-      _buildYesNo(),
-    ]);
+            WidgetSearchBar(
+              controller: _controller,
+              filterChanged: HelperFilter.logFiltersChanged(),
+              onFilter: _buildFilter,
+            ),
+            Expanded(
+              child: Stack(
+                children: [
+                  _buildLogs(),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      height: _menuHeight,
+                      width: MediaQuery.of(context).size.width,
+                      color: Interface.search,
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: _buildMenu(),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+        _buildYesNo(),
+      ],
+    );
   }
 
   Widget _buildWidgets() {

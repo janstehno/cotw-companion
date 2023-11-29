@@ -1,6 +1,6 @@
- // Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/builders/home.dart';
+import 'package:cotwcompanion/home.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/scroll_behavior.dart';
@@ -24,8 +24,8 @@ void main() async {
   bool mapZonesAccuracy = sharedPreferences.getBool("mapZonesAccuracy") ?? false;
   bool mapPerformanceMode = sharedPreferences.getBool("mapPerformanceMode") ?? false;
   bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
-  bool dateOfRecord = sharedPreferences.getBool("dateOfRecord") ?? false;
-  bool trophyLodgeRecord = sharedPreferences.getBool("trophyLodgeRecord") ?? false;
+  bool entryDate = sharedPreferences.getBool("entryDate") ?? false;
+  bool trophyLodgeEntry = sharedPreferences.getBool("trophyLodgeEntry") ?? false;
   bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
   Interface.setPrimaryColor(Color(color));
   Interface.setColors(darkMode);
@@ -48,8 +48,8 @@ void main() async {
         mapZonesAccuracy: mapZonesAccuracy,
         mapPerformanceMode: mapPerformanceMode,
         bestWeaponsForAnimal: bestWeaponsForAnimal,
-        dateOfRecord: dateOfRecord,
-        trophyLodgeRecord: trophyLodgeRecord,
+        entryDate: entryDate,
+        trophyLodgeEntry: trophyLodgeEntry,
         furRarityPerCent: furRarityPerCent,
       ),
       child: const App(),
@@ -70,7 +70,9 @@ class App extends StatelessWidget {
           ErrorWidget.builder = ((details) => MaterialApp(
                 debugShowCheckedModeBanner: false,
                 home: WidgetError(
-                  text: details.exceptionAsString(),
+                  code: "Ex0000",
+                  text: details.toString(),
+                  context: context,
                 ),
               ));
           return ScrollConfiguration(

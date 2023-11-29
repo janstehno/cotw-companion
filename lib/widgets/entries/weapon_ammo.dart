@@ -1,22 +1,20 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/widgets/entries/ammo_statistics.dart';
-import 'package:cotwcompanion/widgets/title_small.dart';
-import 'package:cotwcompanion/widgets/title_small_price.dart';
+import 'package:cotwcompanion/widgets/entries/parameter.dart';
+import 'package:cotwcompanion/widgets/price.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EntryWeaponAmmo extends StatefulWidget {
-  final int index, ammoId;
+  final Ammo ammo;
 
   const EntryWeaponAmmo({
     Key? key,
-    required this.index,
-    required this.ammoId,
+    required this.ammo,
   }) : super(key: key);
 
   @override
@@ -24,36 +22,36 @@ class EntryWeaponAmmo extends StatefulWidget {
 }
 
 class EntryWeaponAmmoState extends State<EntryWeaponAmmo> {
-  late final Ammo _ammo;
   late final bool _imperialUnits;
 
   @override
   void initState() {
-    _ammo = HelperJSON.getAmmo(widget.ammoId);
     _imperialUnits = Provider.of<Settings>(context, listen: false).imperialUnits;
     super.initState();
   }
 
-  Widget _buildAmmoTitle() {
-    return Row(children: [
-      Expanded(
-        child: WidgetTitleSmall(
-          primaryText: _ammo.getName(context.locale),
-        ),
-      ),
-      WidgetTitleSmallPrice(
-        primaryText: _ammo.price.toString(),
-      ),
-    ]);
+  Widget _buildRequirements() {
+    return widget.ammo.hasRequirements
+        ? Container(
+            margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+            child: EntryParameter(
+              text: tr("requirement_score"),
+              value: widget.ammo.score,
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
   Widget _buildWidgets() {
     return Column(
-      mainAxisSize: MainAxisSize.max,
       children: [
-        _buildAmmoTitle(),
+        Container(
+          margin: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+          child: EntryParameterPrice(price: widget.ammo.price),
+        ),
+        _buildRequirements(),
         EntryAmmoStatistics(
-          ammo: _ammo,
+          ammo: widget.ammo,
           imperialUnits: _imperialUnits,
         ),
       ],

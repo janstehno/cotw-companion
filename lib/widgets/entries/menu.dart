@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 
 class EntryMenu extends StatelessWidget {
   final String icon, text;
+  final Color background;
   final Function? onMenuTap;
 
   final double height = 60;
@@ -17,6 +18,7 @@ class EntryMenu extends StatelessWidget {
     Key? key,
     required this.text,
     required this.icon,
+    this.background = Colors.transparent,
     required this.onMenuTap,
   }) : super(key: key);
 
@@ -24,7 +26,7 @@ class EntryMenu extends StatelessWidget {
     return GestureDetector(
       child: Container(
           height: height,
-          color: Colors.transparent,
+          color: background,
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: Row(children: [
             Container(

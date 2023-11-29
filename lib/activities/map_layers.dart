@@ -1,7 +1,9 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/map.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
@@ -11,12 +13,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityMapLayers extends StatefulWidget {
-  final String name;
+  final Reserve reserve;
   final Function callback;
 
   const ActivityMapLayers({
     Key? key,
-    required this.name,
+    required this.reserve,
     required this.callback,
   }) : super(key: key);
 
@@ -104,7 +106,7 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
             return WidgetTapTextIndicator(
               text: HelperMap.getName(index),
               color: HelperMap.getColor(index),
-              background: index % 2 == 0 ? Interface.even : Interface.odd,
+              background: Utils.background(index),
               isActive: HelperMap.isActive(index),
               onTap: () {
                 setState(() {
@@ -120,8 +122,8 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
   Widget _buildWidgets() {
     return WidgetScaffold(
         appBar: WidgetAppBar(
-          text: widget.name,
-          maxLines: widget.name.split(" ").length > 2 ? 2 : 1,
+          text: widget.reserve.getName(context.locale),
+          maxLines: widget.reserve.getName(context.locale).split(" ").length > 2 ? 2 : 1,
           context: context,
         ),
         body: Column(children: [

@@ -27,9 +27,9 @@ class FilterPickerIconState extends FilterPickerState {
   Widget buildItem(int index, int key) {
     return WidgetSwitchIcon(
         buttonSize: _buttonSize,
-        icon: widget.labels[index],
-        activeColor: widget.colors[index],
-        activeBackground: widget.backgrounds[index],
+        icon: widget.labels.elementAt(index),
+        activeColor: widget.colors.elementAt(index),
+        activeBackground: widget.backgrounds.elementAt(index),
         isActive: HelperFilter.getBoolValueList(widget.filterKey, key),
         onTap: () {
           setState(() {

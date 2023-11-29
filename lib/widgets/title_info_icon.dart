@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -37,14 +37,14 @@ class WidgetTitleInfoIcon extends StatelessWidget {
               alignRight
                   ? const SizedBox.shrink()
                   : SvgPicture.asset(
-                icon,
-                width: _iconSize,
-                height: _iconSize,
-                colorFilter: ColorFilter.mode(
-                  color ?? Interface.dark,
-                  BlendMode.srcIn,
-                ),
-              ),
+                      icon,
+                      width: _iconSize,
+                      height: _iconSize,
+                      colorFilter: ColorFilter.mode(
+                        color ?? Interface.dark,
+                        BlendMode.srcIn,
+                      ),
+                    ),
               Expanded(
                   child: Container(
                       margin: EdgeInsets.only(left: alignRight ? 0 : 15, right: alignRight ? 15 : 0),
@@ -54,14 +54,14 @@ class WidgetTitleInfoIcon extends StatelessWidget {
                       ))),
               alignRight
                   ? SvgPicture.asset(
-                icon,
-                width: _iconSize,
-                height: _iconSize,
-                colorFilter: ColorFilter.mode(
-                  color ?? Interface.dark,
-                  BlendMode.srcIn,
-                ),
-              )
+                      icon,
+                      width: _iconSize,
+                      height: _iconSize,
+                      colorFilter: ColorFilter.mode(
+                        color ?? Interface.dark,
+                        BlendMode.srcIn,
+                      ),
+                    )
                   : const SizedBox.shrink(),
             ]));
   }

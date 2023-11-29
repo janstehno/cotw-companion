@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
@@ -14,6 +14,18 @@ class ActivityPatchNotes extends StatelessWidget {
 
   Widget _buildList() {
     return Column(children: [
+      WidgetPatchNote(
+        background: Interface.even,
+        version: "1.9.0",
+        changes: const [
+          "- New Year update.",
+          "- New features, improvements of the UI, and other fixes.",
+          "- Planner for skills and perks was added. It works like the one in the game. You can also set your current level. Perks and skills are only translated to English and Czech.",
+          "- Missions for each reserve were added. You can find them under the list of callers in reserve's detailed info. Difficulty of mission is subjective and can always be changed. Missions are only translated to English and Czech.",
+          "- Counters were added. You can create any number of counter groups (for each reserve or animal for example). Each counter group can contain any number of counters.",
+          "- Matmat's multi trophy mounts were added. You can see what multi mounts you can assemble based on saved harvests in the Trophy lodge.",
+        ],
+      ),
       WidgetPatchNote(
         background: Interface.odd,
         version: "1.8.6 - 1.8.9",

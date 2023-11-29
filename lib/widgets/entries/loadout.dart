@@ -1,7 +1,7 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/activities/loadouts_add_edit.dart';
+import 'package:cotwcompanion/activities/edit/loadouts.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
@@ -85,7 +85,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
   Widget _buildName() {
     return Container(
         height: widget.height,
-        color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+        color: Utils.background(widget.index),
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: 30, right: 30),
         child: Row(children: [
@@ -113,7 +113,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
   Widget _buildDetail() {
     _getLists();
     return AnimatedContainer(
-        color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+        color: Utils.background(widget.index),
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 15),
         height: _detailContainer ? ((20 * _ammo.length) + (20 * _callers.length) + (_ammo.isNotEmpty ? 40 : 0) + (_callers.isNotEmpty ? 40 : 0)) : 0,
         duration: _duration,
@@ -141,7 +141,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                             height: _ammoHeight,
                             alignment: Alignment.centerLeft,
                             child: AutoSizeText(
-                              _ammo[index].getName(context.locale),
+                              _ammo.elementAt(index).getName(context.locale),
                               style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
                             ));
                       }),
@@ -166,7 +166,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                             height: _callerHeight,
                             alignment: Alignment.centerLeft,
                             child: AutoSizeText(
-                              _callers[index].getName(context.locale),
+                              _callers.elementAt(index).getName(context.locale),
                               style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
                             ));
                       }),
@@ -198,7 +198,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
         },
         onDoubleTap: () {
           setState(() {
-            HelperLoadout.removeItemOnIndex(widget.loadout.id);
+            HelperLoadout.removeLoadoutOnIndex(widget.loadout.id);
             _hideSnackBar();
             widget.callback();
           });
@@ -212,12 +212,13 @@ class EntryLoadoutState extends State<EntryLoadout> {
             direction: DismissDirection.startToEnd,
             confirmDismiss: (direction) async {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ActivityLoadoutsAddEdit(
-                            loadout: widget.loadout,
-                            callback: widget.callback,
-                          )));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ActivityEditLoadouts(
+                          loadout: widget.loadout,
+                          callback: widget.callback,
+                        )),
+              );
               return false;
             },
             background: Container(

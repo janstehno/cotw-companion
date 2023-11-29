@@ -1,8 +1,8 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:async/async.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/builders/map.dart';
+import 'package:cotwcompanion/activities/map.dart';
 import 'package:cotwcompanion/lists/need_zones/need_zones.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -382,7 +382,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BuilderMap(reserveId: _reserveId)),
+                  MaterialPageRoute(builder: (context) => ActivityMap(reserveId: _reserveId)),
                 );
               },
             )
@@ -446,17 +446,21 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           Expanded(
               child: Row(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.start, children: [
             Flexible(
-                flex: 2,
-                child: WidgetScrollbar(
-                    child: SingleChildScrollView(
+              flex: 2,
+              child: WidgetScrollbar(
+                child: SingleChildScrollView(
                   child: _buildTimeAndSelectors(false),
-                ))),
+                ),
+              ),
+            ),
             Flexible(
-                flex: 3,
-                child: WidgetScrollbar(
-                    child: SingleChildScrollView(
+              flex: 3,
+              child: WidgetScrollbar(
+                child: SingleChildScrollView(
                   child: _buildNeedZones(),
-                )))
+                ),
+              ),
+            ),
           ]))
         ]));
   }

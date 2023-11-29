@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class WidgetTitleBigButton extends WidgetTitleBig {
   final String icon;
-  final Color? color, background;
+  final Color? buttonColor, buttonBackground;
   final Function onTap;
 
   const WidgetTitleBigButton({
@@ -14,16 +14,16 @@ class WidgetTitleBigButton extends WidgetTitleBig {
     required super.primaryText,
     super.secondaryText,
     required this.icon,
-    this.color,
-    this.background,
+    this.buttonColor,
+    this.buttonBackground,
     required this.onTap,
   });
 
   Widget _buildButton() {
     return WidgetButtonIcon(
       icon: icon,
-      color: color,
-      background: background,
+      color: buttonColor,
+      background: buttonBackground,
       onTap: () {
         onTap();
       },

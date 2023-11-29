@@ -28,9 +28,9 @@ class FilterPickerTextState extends FilterPickerState {
   Widget buildItem(int index, int key) {
     return WidgetSwitchText(
         buttonHeight: _buttonHeight,
-        text: widget.labels[index],
-        activeColor: widget.colors.isEmpty ? Interface.accent : widget.colors[index],
-        activeBackground: widget.backgrounds.isEmpty ? Interface.primary : widget.backgrounds[index],
+        text: widget.labels.elementAt(index),
+        activeColor: widget.colors.isEmpty ? Interface.accent : widget.colors.elementAt(index),
+        activeBackground: widget.backgrounds.isEmpty ? Interface.primary : widget.backgrounds.elementAt(index),
         isActive: HelperFilter.getBoolValueList(widget.filterKey, key),
         onTap: () {
           setState(() {

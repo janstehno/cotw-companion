@@ -1,8 +1,9 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/info_caller.dart';
+import 'package:cotwcompanion/activities/detail/caller.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
@@ -69,17 +70,17 @@ class ListReserveCallersState extends State<ListReserveCallers> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _callers.length,
         itemBuilder: (context, index) {
-          int callerId = _callers[index].id;
+          Caller caller = _callers[index];
           return EntryReserveCaller(
-              callerId: callerId,
+              callerId: caller.id,
               color: Interface.dark,
-              background: index % 2 == 0 ? Interface.even : Interface.odd,
+              background: Utils.background(index),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ActivityCallerInfo(
-                              callerId: callerId,
+                        builder: (context) => ActivityDetailCaller(
+                              caller: caller,
                             )));
               });
         });

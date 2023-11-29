@@ -1,0 +1,12 @@
+<!-- Copyright (c) 2023 Jan Stehno -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+    <polygon points="13.89 3.32 6.15 11.06 1.5 11.06 1.5 18.99 6.1 18.99 13.89 26.79 13.89 3.32"
+        fill="#212121" />
+    <rect x="14.52" y="13.95" width="16.51" height="1.94"
+        transform="translate(37.69 -7.85) rotate(90)" fill="#212121" />
+    <rect x="15.82" y="13.95" width="23.41" height="1.94"
+        transform="translate(42.45 -12.61) rotate(90)" fill="#212121" />
+    <rect x="12.87" y="13.95" width="10.29" height="1.94"
+        transform="translate(32.93 -3.1) rotate(90)" fill="#212121" />
+    <rect width="30" height="30" fill="none" />
+</svg>

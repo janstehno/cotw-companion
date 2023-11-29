@@ -1,9 +1,9 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class WidgetAppBar extends StatelessWidget {
   final String text;
@@ -15,7 +15,7 @@ class WidgetAppBar extends StatelessWidget {
 
   const WidgetAppBar({
     Key? key,
-    required this.text,
+    this.text = "",
     this.height = 90,
     this.maxLines = 1,
     required this.context,

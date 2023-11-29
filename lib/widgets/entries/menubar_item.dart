@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class EntryMenuBarItemState extends State<EntryMenuBarItem> {
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
               opacity: widget.menuOpened ? 1 : 0,
-              child: widget.menuButtons[index],
+              child: widget.menuButtons.elementAt(index),
             )),
       );
     }

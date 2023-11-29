@@ -1,9 +1,10 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/info_caller.dart';
+import 'package:cotwcompanion/activities/detail/caller.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
@@ -62,12 +63,12 @@ class EntryCallerState extends State<EntryCaller> {
           widget.callback();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ActivityCallerInfo(callerId: widget.caller.id)),
+            MaterialPageRoute(builder: (context) => ActivityDetailCaller(caller: widget.caller)),
           );
         },
         child: Container(
             padding: const EdgeInsets.all(30),
-            color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+            color: Utils.background(widget.index),
             child: EntryItem(
               text: widget.caller.getName(context.locale),
               itemIcon: Graphics.getCallerIcon(widget.caller.id),

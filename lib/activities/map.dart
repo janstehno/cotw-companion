@@ -1,9 +1,9 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'dart:math' hide log;
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/activities/map_information.dart';
+import 'package:cotwcompanion/activities/help/map.dart';
 import 'package:cotwcompanion/activities/map_layers.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
@@ -13,6 +13,7 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/projection.dart';
 import 'package:cotwcompanion/model/animal.dart';
+import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/map_zone.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/model/zone.dart';
@@ -20,6 +21,7 @@ import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
 import 'package:cotwcompanion/widgets/menubar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
@@ -80,6 +82,26 @@ class ActivityMapState extends State<ActivityMap> {
     setState(() {
       _updateMap();
     });
+  }
+
+  void _getAnimals() {
+    _getMapObjects();
+    for (IdtoId iti in HelperJSON.animalsReserves) {
+      if (iti.secondId == widget.reserveId) {
+        for (Animal animal in HelperJSON.animals) {
+          if (animal.id == iti.firstId) {
+            HelperMap.addAnimal(animal);
+            break;
+          }
+        }
+      }
+    }
+    HelperMap.addNames(context.locale, widget.reserveId);
+  }
+
+  void _getMapObjects() {
+    HelperMap.clearMap();
+    HelperMap.addObjects(HelperJSON.getMapObjects(widget.reserveId));
   }
 
   void _getScreenSize() {
@@ -497,7 +519,7 @@ class ActivityMapState extends State<ActivityMap> {
                       color: Interface.alwaysDark,
                       background: Interface.alwaysLight,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityMapInformation()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityHelpMap()));
                       }),
                 ),
                 EntryMenuBarItem(
@@ -526,7 +548,7 @@ class ActivityMapState extends State<ActivityMap> {
                       color: Interface.alwaysDark,
                       background: Interface.alwaysLight,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMapLayers(name: _reserve.en, callback: _reload)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMapLayers(reserve: _reserve, callback: _reload)));
                       }),
                 )
               ],
@@ -573,6 +595,7 @@ class ActivityMapState extends State<ActivityMap> {
 
   Widget _buildWidgets() {
     _getScreenSize();
+    _getAnimals();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,

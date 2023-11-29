@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
@@ -66,7 +66,7 @@ class ListFurAnimalsState extends State<ListFurAnimals> {
                       itemCount: _animalFurs.length,
                       itemBuilder: (context, index) {
                         return EntryFur(
-                          animalFur: _animalFurs[index],
+                          animalFur: _animalFurs.elementAt(index),
                         );
                       }))
             ],

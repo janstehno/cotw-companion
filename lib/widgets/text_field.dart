@@ -1,14 +1,15 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:flutter/material.dart';
 
 class WidgetTextField extends StatelessWidget {
-  final bool numberOnly;
+  final bool decimal, numberOnly;
   final TextEditingController controller;
 
   const WidgetTextField({
     Key? key,
+    this.decimal = true,
     this.numberOnly = false,
     required this.controller,
   }) : super(key: key);
@@ -16,8 +17,8 @@ class WidgetTextField extends StatelessWidget {
   Widget _buildWidgets() {
     return TextField(
       keyboardType: numberOnly
-          ? const TextInputType.numberWithOptions(
-              decimal: true,
+          ? TextInputType.numberWithOptions(
+              decimal: decimal,
               signed: false,
             )
           : TextInputType.text,

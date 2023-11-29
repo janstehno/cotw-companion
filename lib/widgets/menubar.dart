@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class WidgetMenuBarState extends State<WidgetMenuBar> {
           duration: const Duration(milliseconds: 200),
           width: _itemWidth,
           margin: EdgeInsets.fromLTRB(index == 0 ? _rowMargin : _rowSpace / 2, 0, index == widget.items.length - 1 ? _rowMargin : _rowSpace / 2, _rowMargin),
-          child: widget.items[index],
+          child: widget.items.elementAt(index),
         ),
       );
     }
@@ -60,18 +60,20 @@ class WidgetMenuBarState extends State<WidgetMenuBar> {
     _getWidth();
     _getHeight();
     return AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        width: _newWidth,
-        height: _newHeight,
-        child: SingleChildScrollView(
-            reverse: true,
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: _buildItems(),
-            )));
+      duration: const Duration(milliseconds: 200),
+      width: _newWidth,
+      height: _newHeight,
+      child: SingleChildScrollView(
+        reverse: true,
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: _buildItems(),
+        ),
+      ),
+    );
   }
 
   @override

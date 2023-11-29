@@ -1,18 +1,16 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/about.dart';
-import 'package:cotwcompanion/activities/need_zones.dart';
 import 'package:cotwcompanion/activities/patch_notes.dart';
 import 'package:cotwcompanion/activities/search.dart';
 import 'package:cotwcompanion/activities/settings.dart';
-import 'package:cotwcompanion/builders/loadouts.dart';
-import 'package:cotwcompanion/builders/logs.dart';
-import 'package:cotwcompanion/lists/callers.dart';
-import 'package:cotwcompanion/lists/other.dart';
-import 'package:cotwcompanion/lists/reserves.dart';
-import 'package:cotwcompanion/lists/weapons.dart';
-import 'package:cotwcompanion/lists/wildlife.dart';
+import 'package:cotwcompanion/lists/home/callers.dart';
+import 'package:cotwcompanion/lists/home/other.dart';
+import 'package:cotwcompanion/lists/home/reserves.dart';
+import 'package:cotwcompanion/lists/home/tools.dart';
+import 'package:cotwcompanion/lists/home/weapons.dart';
+import 'package:cotwcompanion/lists/home/wildlife.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
@@ -36,6 +34,14 @@ class ActivityHomeState extends State<ActivityHome> {
   final double _footerLeftButtonSize = 20;
   final double _footerRightButtonHeight = 30;
   final double _menuTopBarHeight = 95;
+  final List<List<dynamic>> _menuItems = [
+    ["reserves", "reserve", const ListReserves()],
+    ["wildlife", "wildlife", const ListWildlife()],
+    ["weapons", "weapon", const ListWeapons()],
+    ["callers", "caller", const ListCallers()],
+    ["tools", "hammer", const ListTools()],
+    ["other", "other", const ListOther()],
+  ];
 
   late Orientation _orientation;
   late double _screenWidth, _screenHeight;
@@ -102,10 +108,11 @@ class ActivityHomeState extends State<ActivityHome> {
         ]));
   }
 
-  Widget _buildMenuItem(String text, String icon, Widget activity) {
+  Widget _buildMenuItem(int index, String text, String icon, Widget activity) {
     return EntryMenu(
       text: tr(text),
       icon: "assets/graphics/icons/$icon.svg",
+      background: Utils.background(index),
       onMenuTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => activity));
       },
@@ -124,24 +131,30 @@ class ActivityHomeState extends State<ActivityHome> {
               WidgetScrollbar(
                   child: SingleChildScrollView(
                       child: Padding(
-                          padding: const EdgeInsets.only(top: 105, bottom: 40),
-                          child:
-                              Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            _buildMenuItem("reserves", "reserve", const ListReserves()),
-                            _buildMenuItem("wildlife", "wildlife", const ListWildlife()),
-                            _buildMenuItem("weapons", "weapon", const ListWeapons()),
-                            _buildMenuItem("callers", "caller", const ListCallers()),
-                            const Padding(padding: EdgeInsets.all(15)),
-                            _buildMenuItem("animal_need_zones", "need_zones", const ActivityNeedZones()),
-                            _buildMenuItem("trophy_lodge", "trophy_lodge", const BuilderLogs(trophyLodge: true)),
-                            _buildMenuItem("logbook", "catch_book", const BuilderLogs(trophyLodge: false)),
-                            _buildMenuItem("loadouts", "loadout", const BuilderLoadouts()),
-                            const Padding(padding: EdgeInsets.all(15)),
-                            _buildMenuItem("other", "other", const ListOther()),
-                          ])))),
+                          padding: EdgeInsets.only(top: _menuTopBarHeight, bottom: 30),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: _menuItems.length,
+                                  itemBuilder: (context, index) {
+                                    List<dynamic> menuItem = _menuItems.elementAt(index);
+                                    return _buildMenuItem(
+                                      index,
+                                      menuItem[0],
+                                      menuItem[1],
+                                      menuItem[2],
+                                    );
+                                  })
+                            ],
+                          )))),
               Container(
                   height: _menuTopBarHeight,
-                  color: Interface.sectionTitle,
+                  color: Interface.title,
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   alignment: Alignment.centerRight,
                   child: WidgetButtonIcon(
@@ -173,10 +186,15 @@ class ActivityHomeState extends State<ActivityHome> {
   }
 
   Widget _buildLinks() {
-    return Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
-      _buildLink("github", "github.com", "/janstehno"),
-      _buildLink("reddit", "reddit.com", "/user/Toastovac"),
-    ]);
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _buildLink("github", "github.com", "/janstehno"),
+        _buildLink("reddit", "reddit.com", "/user/Toastovac"),
+      ],
+    );
   }
 
   List<Widget> _buildButtons() {

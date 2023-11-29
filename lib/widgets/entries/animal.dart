@@ -1,8 +1,9 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/info_animal.dart';
+import 'package:cotwcompanion/activities/detail/animal.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/widgets/entries/item.dart';
 import 'package:cotwcompanion/widgets/tag.dart';
@@ -86,12 +87,12 @@ class EntryAnimalState extends State<EntryAnimal> {
           widget.callback();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ActivityAnimalInfo(animalId: widget.animal.id)),
+            MaterialPageRoute(builder: (context) => ActivityDetailAnimal(animalId: widget.animal.id)),
           );
         },
         child: Container(
             padding: const EdgeInsets.all(30),
-            color: widget.index % 2 == 0 ? Interface.even : Interface.odd,
+            color: Utils.background(widget.index),
             child: EntryItem(
               text: widget.animal.getNameByLocale(context.locale),
               itemIcon: Graphics.getAnimalIcon(widget.animal.id),

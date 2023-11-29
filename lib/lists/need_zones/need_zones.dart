@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -38,8 +38,7 @@ class ListNeedZonesState extends State<ListNeedZones> {
         if (widget.classes.elementAt(animal.level - 1)) _animals.add(animal);
       }
     }
-    _animals.sort(
-        (a, b) => a.getNameBasedOnReserve(context.locale, widget.reserveId).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserveId)));
+    _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserveId).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserveId)));
     _animals.sort((a, b) => a.level.compareTo(b.level));
   }
 
@@ -50,10 +49,10 @@ class ListNeedZonesState extends State<ListNeedZones> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _animals.length,
         itemBuilder: (context, index) {
-          List<Zone> zones = Zone.animalZones(_animals[index].id, widget.reserveId);
+          List<Zone> zones = Zone.animalZones(_animals.elementAt(index).id, widget.reserveId);
           return EntryNeedZone(
             index: index,
-            animal: _animals[index],
+            animal: _animals.elementAt(index),
             reserveId: widget.reserveId,
             hour: widget.hour,
             count: _animals.length,

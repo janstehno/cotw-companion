@@ -1,46 +1,70 @@
+// Copyright (c) 2023 Jan Stehno
+
 import 'package:flutter/material.dart';
 
 abstract class Translatable {
-  final int id;
-  final String en, ru, cs, pl, de, fr, es, br, ja;
+  final int _id;
+  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
 
   Translatable({
-    required this.id,
-    required this.en,
-    required this.ru,
-    required this.cs,
-    required this.pl,
-    required this.de,
-    required this.fr,
-    required this.es,
-    required this.br,
-    required this.ja,
-  });
+    required id,
+    required en,
+    ru,
+    cs,
+    pl,
+    de,
+    fr,
+    es,
+    br,
+    ja,
+  })  : _id = id,
+        _en = en,
+        _ru = ru ?? "",
+        _cs = cs ?? "",
+        _pl = pl ?? "",
+        _de = de ?? "",
+        _fr = fr ?? "",
+        _es = es ?? "",
+        _br = br ?? "",
+        _ja = ja ?? "";
+
+  int get id => _id;
+
+  String get en => _en;
 
   String getName(Locale locale) {
+    String result;
     switch (locale.languageCode.toString()) {
       case "ru":
-        return ru.isEmpty ? en : ru;
+        result = _ru;
+        break;
       case "cs":
-        return cs.isEmpty ? en : cs;
+        result = _cs;
+        break;
       case "pl":
-        return pl.isEmpty ? en : pl;
+        result = _pl;
+        break;
       case "de":
-        return de.isEmpty ? en : de;
+        result = _de;
+        break;
       case "fr":
-        return fr.isEmpty ? en : fr;
+        result = _fr;
+        break;
       case "es":
-        return es.isEmpty ? en : es;
+        result = _es;
+        break;
       case "br":
-        return br.isEmpty ? en : br;
+        result = _br;
+        break;
       case "pt":
-        return br.isEmpty ? en : br;
+        result = _br;
+        break;
       case "ja":
-        return ja.isEmpty ? en : ja;
-      case "sk":
-        return cs.isEmpty ? en : cs;
+        result = _ja;
+        break;
       default:
-        return en;
+        return _en;
     }
+    return result.isEmpty ? _en : result;
   }
 }

@@ -5,10 +5,7 @@
     "RU": "Альбинос",
     "CS": "Albín",
     "PL": "Albinos",
-    "DE": "Albino",
     "FR": "Albinos",
-    "ES": "Albino",
-    "BR": "Albino",
     "JA": "アルビノ"
   },
   {
@@ -122,24 +119,18 @@
   {
     "ID": 11,
     "EN": "Light grey leucistic",
-    "RU": "",
     "CS": "Světle šedý leucismus",
     "PL": "Jasnoszary leucystyczny",
-    "DE": "",
     "FR": "Leucique gris",
-    "ES": "",
     "BR": "Leucismo cinza claro",
     "JA": "ライトグレーリューシスティック"
   },
   {
     "ID": 12,
     "EN": "Bald leucistic",
-    "RU": "",
     "CS": "Olysaný leucismus",
     "PL": "Łysy leucystyczny",
-    "DE": "",
     "FR": "Leucique belle",
-    "ES": "",
     "BR": "Leucismo manchas escuras",
     "JA": "ボールドリューシスティック"
   },
@@ -149,9 +140,6 @@
     "RU": "Бежевый",
     "CS": "Béžová",
     "PL": "Beżowy",
-    "DE": "Beige",
-    "FR": "Beige",
-    "ES": "Beige",
     "BR": "Bege",
     "JA": "ベージュ"
   },
@@ -182,7 +170,6 @@
   {
     "ID": 16,
     "EN": "Leucistic",
-    "RU": "",
     "CS": "Leucismus",
     "PL": "Leucystyczny",
     "DE": "Leuzistisch",
@@ -198,7 +185,6 @@
     "CS": "Blond",
     "PL": "Płowy",
     "DE": "Blond",
-    "FR": "Blonde",
     "ES": "Rubio",
     "BR": "Amarelado",
     "JA": "ブロンド"
@@ -245,8 +231,6 @@
     "RU": "Оранжевый",
     "CS": "Oranžová",
     "PL": "Pomarańczowy",
-    "DE": "Orange",
-    "FR": "Orange",
     "ES": "Naranja",
     "BR": "Laranja",
     "JA": "オレンジ"
@@ -327,24 +311,14 @@
     "ID": 28,
     "EN": "Fantasma",
     "RU": "Призрак",
-    "CS": "Fantasma",
-    "PL": "Fantasma",
     "DE": "Gespenstisch",
-    "FR": "Fantasma",
-    "ES": "Fantasma",
-    "BR": "Fantasma",
     "JA": "ファンタズマ"
   },
   {
     "ID": 29,
     "EN": "Ogro",
     "RU": "Людоед",
-    "CS": "Ogro",
-    "PL": "Ogro",
     "DE": "Oger",
-    "FR": "Ogro",
-    "ES": "Ogro",
-    "BR": "Ogro",
     "JA": "オグロ"
   },
   {
@@ -362,13 +336,6 @@
   {
     "ID": 31,
     "EN": "Sombra",
-    "RU": "",
-    "CS": "Sombra",
-    "PL": "",
-    "DE": "Sombra",
-    "FR": "",
-    "ES": "",
-    "BR": "Sombra",
     "JA": "ソンブラ"
   },
   {
@@ -379,7 +346,6 @@
     "PL": "Nieskazitelne",
     "DE": "Sauber",
     "FR": "Irréprochable",
-    "ES": "",
     "BR": "Prístino",
     "JA": "プリスティン"
   },
@@ -389,9 +355,7 @@
     "RU": "Зима",
     "CS": "Zimní",
     "PL": "Zimowy",
-    "DE": "Winter",
     "FR": "Hiver",
-    "ES": "",
     "BR": "Inverno",
     "JA": "ウィンター"
   },
@@ -401,7 +365,6 @@
     "RU": "Золотистый",
     "CS": "Zlatá",
     "PL": "Złoty",
-    "DE": "Gold",
     "FR": "Or",
     "ES": "Oro",
     "BR": "Ouro",
@@ -410,12 +373,10 @@
   {
     "ID": 35,
     "EN": "Crowned",
-    "RU": "",
     "CS": "Korunkovaná",
     "PL": "Koronowany",
     "DE": "Gekrönt",
     "FR": "Couronné",
-    "ES": "",
     "BR": "Coroado",
     "JA": ""
   },
@@ -530,26 +491,12 @@
   {
     "ID": 45,
     "EN": "Chocolate",
-    "RU": "",
-    "CS": "Čokoláda",
-    "PL": "",
-    "DE": "",
-    "FR": "",
-    "ES": "",
-    "BR": "",
-    "JA": ""
+    "CS": "Čokoláda"
   },
   {
     "ID": 46,
     "EN": "Dusky gradient",
-    "RU": "",
-    "CS": "Setmělá",
-    "PL": "",
-    "DE": "",
-    "FR": "",
-    "ES": "",
-    "BR": "",
-    "JA": ""
+    "CS": "Setmělá"
   },
   {
     "ID": 47,
@@ -578,13 +525,8 @@
   {
     "ID": 49,
     "EN": "Blue",
-    "RU": "",
-    "CS": "",
     "PL": "Niebieski",
-    "DE": "",
     "FR": "Bleu",
-    "ES": "",
-    "BR": "",
     "JA": "ブルー"
   },
   {
@@ -602,13 +544,7 @@
   {
     "ID": 51,
     "EN": "Ochre",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Ocre",
-    "ES": "",
-    "BR": "",
     "JA": "オーカー"
   },
   {
@@ -626,85 +562,43 @@
   {
     "ID": 53,
     "EN": "Mottled",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Tacheté",
-    "ES": "",
-    "BR": "",
     "JA": "まだら"
   },
   {
     "ID": 54,
     "EN": "Molting",
-    "RU": "",
-    "CS": "",
     "PL": "Wyliniały",
-    "DE": "",
-    "FR": "",
-    "ES": "",
-    "BR": "",
     "JA": "換羽"
   },
   {
     "ID": 55,
     "EN": "Buff",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Beige",
-    "ES": "",
-    "BR": "",
     "JA": "バフ"
   },
   {
     "ID": 56,
     "EN": "Light buff",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Beige clair",
-    "ES": "",
-    "BR": "",
     "JA": "ライトバフ"
   },
   {
     "ID": 57,
     "EN": "Two tones",
-    "RU": "",
     "CS": "Dva tóny",
-    "PL": "",
-    "DE": "",
     "FR": "Deux tons",
-    "ES": "",
-    "BR": "",
     "JA": "ツートーン"
   },
   {
     "ID": 58,
     "EN": "Light bronze",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Bronze clair",
-    "ES": "",
-    "BR": "",
     "JA": "ライトブロンズ"
   },
   {
     "ID": 59,
     "EN": "Bronze",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
-    "FR": "Bronze",
-    "ES": "",
-    "BR": "",
     "JA": "ブロンズ"
   },
   {
@@ -722,182 +616,88 @@
   {
     "ID": 61,
     "EN": "Red spotted",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Rouge tacheté",
-    "ES": "",
-    "BR": "",
     "JA": "赤まだら"
   },
   {
     "ID": 62,
     "EN": "Piebald grey",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Gris tacheté",
-    "ES": "",
-    "BR": "",
     "JA": "グレーパイボールド"
   },
   {
     "ID": 63,
     "EN": "Piebald blonde",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Blond tacheté",
-    "ES": "",
-    "BR": "",
     "JA": "ブロンドパイボールド"
   },
   {
     "ID": 64,
     "EN": "Hybrid",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Hybride",
-    "ES": "",
-    "BR": "",
     "JA": ""
   },
   {
     "ID": 65,
     "EN": "Bicolor",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Bi-couleur or Bicolor",
-    "ES": "",
-    "BR": "",
     "JA": "バイカラー"
   },
   {
     "ID": 66,
     "EN": "Pale",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Pâle",
-    "ES": "",
-    "BR": "",
     "JA": ""
   },
   {
     "ID": 67,
     "EN": "Bright",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Brillant",
-    "ES": "",
-    "BR": "",
     "JA": "ブライト"
   },
   {
     "ID": 68,
     "EN": "Eclipse",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Éclipse",
-    "ES": "",
-    "BR": "",
     "JA": "換毛・換羽"
   },
   {
     "ID": 69,
     "EN": "Cream",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Crème",
-    "ES": "",
-    "BR": "",
     "JA": "クリーム"
   },
   {
     "ID": 70,
     "EN": "Blue hybrid",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Hybride bleu",
-    "ES": "",
-    "BR": "",
     "JA": ""
   },
   {
     "ID": 71,
     "EN": "Green hybrid",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Hybride vert",
-    "ES": "",
-    "BR": "",
     "JA": ""
   },
   {
     "ID": 72,
     "EN": "Dark green",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Vert foncé",
-    "ES": "",
-    "BR": "",
     "JA": "ダークグリーン"
   },
   {
     "ID": 73,
     "EN": "Light green",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
     "FR": "Vert clair",
-    "ES": "",
-    "BR": "",
     "JA": "ライトグリーン"
   },
   {
     "ID": 74,
-    "EN": "Maroon",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
-    "FR": "",
-    "ES": "",
-    "BR": "",
-    "JA": ""
+    "EN": "Maroon"
   },
   {
     "ID": 75,
-    "EN": "Yellow",
-    "RU": "",
-    "CS": "",
-    "PL": "",
-    "DE": "",
-    "FR": "",
-    "ES": "",
-    "BR": "",
-    "JA": ""
+    "EN": "Yellow"
   },
   {
     "ID": 100,

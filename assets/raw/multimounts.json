@@ -1,0 +1,997 @@
+[
+  {
+    "ID": 1,
+    "EN": "Alpha wolf",
+    "RU": "Альфа-волк",
+    "CS": "Alfa vlk",
+    "PL": "Wilk alfa",
+    "DE": "Alpha-Wolf",
+    "FR": "Loup alpha",
+    "ES": "Lobo alfa",
+    "BR": "Lobo alfa",
+    "JA": "リ一ダ一オオ力ミ",
+    "SIZE": 3,
+    "PRICE": 7800,
+    "ANIMALS": [
+      {
+        "ID": 20,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 20,
+        "GENDER": 0,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 2,
+    "EN": "Bear hug",
+    "RU": "Медвежьи объятья",
+    "CS": "Medvědí obětí",
+    "PL": "Niedźwiedzi uścisk",
+    "DE": "Bärische Umarmung",
+    "FR": "Câlin entre ours",
+    "ES": "Abrazo de oso",
+    "BR": "Abraço do urso",
+    "JA": "ベアハグ",
+    "SIZE": 4,
+    "PRICE": 7150,
+    "ANIMALS": [
+      {
+        "ID": 22,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 3,
+    "EN": "Bear necessities",
+    "RU": "Медвежьи нужды",
+    "CS": "Moudrost medvědí",
+    "PL": "Niedźwiedzie potrzeby",
+    "DE": "Bärische Notwendigkeiten",
+    "FR": "Minimours vital",
+    "ES": "Lo más vital",
+    "BR": "Necessidades básicas",
+    "JA": "べア一~ネセシテイ",
+    "SIZE": 4,
+    "PRICE": 6500,
+    "ANIMALS": [
+      {
+        "ID": 4,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 4,
+    "EN": "Bison bonanza",
+    "RU": "Столкновение бизонов",
+    "CS": "Naleziště bizonů",
+    "PL": "Bizonowa bonanza",
+    "DE": "Bison-Duo",
+    "FR": "Bisons balèzes",
+    "ES": "Bison bonanza",
+    "BR": "Fartura de bisões",
+    "JA": "バイソン祭り",
+    "SIZE": 5,
+    "PRICE": 8450,
+    "ANIMALS": [
+      {
+        "ID": 15,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 5,
+    "EN": "Breadwinner",
+    "RU": "Добытчик",
+    "CS": "Živitel",
+    "PL": "Żywiciel rodziny",
+    "DE": "Versorger",
+    "FR": "Gagne-pain",
+    "ES": "Cabeza de familia",
+    "BR": "Ganha-pâo",
+    "JA": "大黒柱",
+    "SIZE": 5,
+    "PRICE": 16900,
+    "ANIMALS": [
+      {
+        "ID": 10,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 27,
+        "GENDER": 1,
+        "COUNT": 2
+      },
+      {
+        "ID": 27,
+        "GENDER": 0,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 6,
+    "EN": "Bunny squad",
+    "RU": "Заячий отряд",
+    "CS": "Skupina králíků",
+    "PL": "Zajęczy oddział",
+    "DE": "Häschentruppe",
+    "FR": "Bande de lapins",
+    "ES": "Grupo conejil",
+    "BR": "Turma dos coelhos",
+    "JA": "ウサギの群れ",
+    "SIZE": 1,
+    "PRICE": 2600,
+    "ANIMALS": [
+      {
+        "ID": 50,
+        "GENDER": 1,
+        "COUNT": 2
+      },
+      {
+        "ID": 50,
+        "GENDER": 0,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 7,
+    "EN": "Bye, son",
+    "RU": "Дерзкий бизон",
+    "CS": "Sbohem, bizone",
+    "PL": "Żegnaj, synku",
+    "DE": "Mach's gut, mein Sohn",
+    "FR": "C'est la fin",
+    "ES": "Simple y llanamente",
+    "BR": "Adeus, filho",
+    "JA": "さらば",
+    "SIZE": 5,
+    "PRICE": 9425,
+    "ANIMALS": [
+      {
+        "ID": 32,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 20,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 20,
+        "GENDER": 0,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 8,
+    "EN": "Collision",
+    "RU": "Столкновение",
+    "CS": "Střet",
+    "PL": "Kolizja",
+    "DE": "Kollision",
+    "FR": "Impact",
+    "ES": "Colisión",
+    "BR": "Colisão",
+    "JA": "激突",
+    "SIZE": 3,
+    "PRICE": 4225,
+    "ANIMALS": [
+      {
+        "ID": 6,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 34,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 9,
+    "EN": "Davod v Goliath",
+    "RU": "Давид против Голиафа",
+    "CS": "David a Goliáš",
+    "PL": "Dawid kontra Goliat",
+    "DE": "David vs. Goliath",
+    "FR": "David contre Goliath",
+    "ES": "David contra Goliat",
+    "BR": "Davi e Golias",
+    "JA": "ダビデ対ゴリアテ",
+    "SIZE": 4,
+    "PRICE": 4875,
+    "ANIMALS": [
+      {
+        "ID": 9,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 15,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 10,
+    "EN": "Emergency takeoff",
+    "RU": "Резкий взлет",
+    "CS": "Nouzový odlet",
+    "PL": "Start awaryjny",
+    "DE": "Not-Abflug",
+    "FR": "Envol d'urgence",
+    "ES": "Despegue de emergencia",
+    "BR": "Decolagem de emergência",
+    "JA": "緊急離陸",
+    "SIZE": 2,
+    "PRICE": 2925,
+    "ANIMALS": [
+      {
+        "ID": 13,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 28,
+        "GENDER": 1,
+        "COUNT": 2
+      },
+      {
+        "ID": 28,
+        "GENDER": 0,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 11,
+    "EN": "Fangs out",
+    "RU": "Оскаленные клыки",
+    "CS": "Vyceněné tesáky",
+    "PL": "Obnażone kły",
+    "DE": "Zähne Zeigen",
+    "FR": "Montrer les crocs",
+    "ES": "Colmillos fuera",
+    "BR": "Presas â mostra",
+    "JA": "ファングス~アウ卜",
+    "SIZE": 3,
+    "PRICE": 9750,
+    "ANIMALS": [
+      {
+        "ID": 24,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 25,
+        "GENDER": 1,
+        "COUNT": 3
+      }
+    ]
+  },
+  {
+    "ID": 12,
+    "EN": "Flee state",
+    "RU": "Ъегство",
+    "CS": "Útěk",
+    "PL": "Paniczna ucieczka",
+    "DE": "Auf der Flucht",
+    "FR": "État d'alerte",
+    "ES": "Pies en polvorosa",
+    "BR": "A fuga",
+    "JA": "逃走状況",
+    "SIZE": 4,
+    "PRICE": 5200,
+    "ANIMALS": [
+      {
+        "ID": 35,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 35,
+        "GENDER": 0,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 13,
+    "EN": "Fleeing pheasants",
+    "RU": "Убегающие Фазаны",
+    "CS": "Prchající bažanti",
+    "PL": "Uciekające bażanty",
+    "DE": "Flüchtende Fasane",
+    "FR": "Faisans en fuite",
+    "ES": "Faisanes a la fuga",
+    "BR": "Faisões em fuga",
+    "JA": "逃走中のキジ",
+    "SIZE": 0,
+    "PRICE": 1300,
+    "ANIMALS": [
+      {
+        "ID": 57,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 14,
+    "EN": "Fowl feud",
+    "RU": "Птичья вражда",
+    "CS": "Ptačí boj",
+    "PL": "Ptasia wojna",
+    "DE": "Hühnerstreit",
+    "FR": "Querelle de coucou",
+    "ES": "Pelea de gallos",
+    "BR": "Rixa de aves",
+    "JA": "不和ライチヨウ",
+    "SIZE": 1,
+    "PRICE": 1300,
+    "ANIMALS": [
+      {
+        "ID": 74,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 15,
+    "EN": "Fowl play",
+    "RU": "Игра в салочкл",
+    "CS": "Ptačí hra",
+    "PL": "Ptasia zabawa",
+    "DE": "Hühnerspeil",
+    "FR": "Mauvais cygne",
+    "ES": "Gallo encerrado",
+    "BR": "Brincadeira de aves",
+    "JA": "フアウルプレイ",
+    "SIZE": 1,
+    "PRICE": 1950,
+    "ANIMALS": [
+      {
+        "ID": 78,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 80,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 16,
+    "EN": "Fox's lunch",
+    "RU": "Лисий Обед",
+    "CS": "Liščí oběd",
+    "PL": "Kolacja lisa",
+    "DE": "Fuchs, du hast den hasen Gestohlen",
+    "FR": "Le repas du guerrier",
+    "ES": "Poniéndose las botas",
+    "BR": "Almoço da raposa",
+    "JA": "キツネの昼食",
+    "SIZE": 1,
+    "PRICE": 1625,
+    "ANIMALS": [
+      {
+        "ID": 36,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 50,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 17,
+    "EN": "Foxy foes",
+    "RU": "Хитрые враги",
+    "CS": "Prohnaní nepřátelé",
+    "PL": "Lisi wrogowie",
+    "DE": "Fuchsige Feinde",
+    "FR": "Rusé comme un renard",
+    "ES": "Openentes astutos",
+    "BR": "Raposas adversárias",
+    "JA": "ずる賢い相手",
+    "SIZE": 2,
+    "PRICE": 2600,
+    "ANIMALS": [
+      {
+        "ID": 36,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 63,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 18,
+    "EN": "Friendly competition",
+    "RU": "Товарищеское соревноваие",
+    "CS": "Přátelská soutěž",
+    "PL": "Przyjazna rywalizacja",
+    "DE": "Freundschaftlicher Wettstreit",
+    "FR": "Compétition amicale",
+    "ES": "Competición amistosa",
+    "BR": "Competição amistosa",
+    "JA": "友好的な競争",
+    "SIZE": 2,
+    "PRICE": 2600,
+    "ANIMALS": [
+      {
+        "ID": 13,
+        "GENDER": 1,
+        "COUNT": 2
+      },
+      {
+        "ID": 50,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 19,
+    "EN": "Gobble gobble",
+    "RU": "Индюк тоже думал",
+    "CS": "Hudry hudry",
+    "PL": "Gul-gul",
+    "DE": "Krächz, krächz",
+    "FR": "Glou glou",
+    "ES": "¡Gluglú!",
+    "BR": "Gluglu",
+    "JA": "ゴブル ′ ゴブル",
+    "SIZE": 3,
+    "PRICE": 1950,
+    "ANIMALS": [
+      {
+        "ID": 47,
+        "GENDER": 1,
+        "COUNT": 2
+      },
+      {
+        "ID": 47,
+        "GENDER": 0,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 20,
+    "EN": "Grumpy geese",
+    "RU": "Злые гуси",
+    "CS": "Naštvaná husa",
+    "PL": "Wkurzone gęsi",
+    "DE": "Grummelnde Gans",
+    "FR": "Bernaches grincheuses",
+    "ES": "Haciendo el ganso",
+    "BR": "Gansos zangados",
+    "JA": "不機嫌なガン",
+    "SIZE": 2,
+    "PRICE": 1300,
+    "ANIMALS": [
+      {
+        "ID": 9,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 21,
+    "EN": "Head first",
+    "RU": "Лоъ в лоъ",
+    "CS": "Hlavou napřed",
+    "PL": "Głową naprzód",
+    "DE": "Mit dem kopf Voran",
+    "FR": "Tête la première",
+    "ES": "La cabeza por delante",
+    "BR": "De cabeça",
+    "JA": "へツ ドフア一ス卜",
+    "SIZE": 4,
+    "PRICE": 3900,
+    "ANIMALS": [
+      {
+        "ID": 2,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 21,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 22,
+    "EN": "Hot javelinas",
+    "RU": "Усташие Джавелины",
+    "CS": "Žhavá prasata",
+    "PL": "Rozjuszone javelinas",
+    "DE": "Heiße Javelinas",
+    "FR": "Javelines coriaces",
+    "ES": "Pecaríes inquietos",
+    "BR": "Procos-do-mato em conflito",
+    "JA": "ホツ 卜なハベリ一ナ",
+    "SIZE": 2,
+    "PRICE": 5200,
+    "ANIMALS": [
+      {
+        "ID": 59,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 23,
+    "EN": "Huddle fallow",
+    "RU": "Вместе теплее",
+    "CS": "Choulící se daňkové",
+    "PL": "Przytulanki danieli",
+    "DE": "Hirschwirrwarr",
+    "FR": "Rassemblement de daims",
+    "ES": "Amor de gamos",
+    "BR": "Gamos unidos",
+    "JA": "群れ合いダマジ力",
+    "SIZE": 3,
+    "PRICE": 5850,
+    "ANIMALS": [
+      {
+        "ID": 18,
+        "GENDER": 1,
+        "COUNT": 3
+      }
+    ]
+  },
+  {
+    "ID": 24,
+    "EN": "Huddle roe",
+    "RU": "Стадный инстинкт",
+    "CS": "Choulící se srnci",
+    "PL": "Przytulanki saren",
+    "DE": "Rehwirrwarr",
+    "FR": "Rassemblement de chevreuils",
+    "ES": "El roce hace el corzo",
+    "BR": "Corças unidas",
+    "JA": "群れ合う丿ロジ力",
+    "SIZE": 3,
+    "PRICE": 3900,
+    "ANIMALS": [
+      {
+        "ID": 39,
+        "GENDER": 1,
+        "COUNT": 3
+      }
+    ]
+  },
+  {
+    "ID": 25,
+    "EN": "Huddle whitetail",
+    "RU": "Белрхвостое стадо",
+    "CS": "Choulící se běloocasáci",
+    "PL": "Przytulanki mulaków",
+    "DE": "Weißwedelhirschwirrwarr",
+    "FR": "Rassemblement de cerfs de virginie",
+    "ES": "El ciervo y el miedo",
+    "BR": "Caudas brancas unidas",
+    "JA": "群れ合うオジロジ力",
+    "SIZE": 3,
+    "PRICE": 5850,
+    "ANIMALS": [
+      {
+        "ID": 51,
+        "GENDER": 1,
+        "COUNT": 3
+      }
+    ]
+  },
+  {
+    "ID": 26,
+    "EN": "Lucky crocodile",
+    "RU": "Везучий крокодил",
+    "CS": "Šťastný krokodýl",
+    "PL": "Szczęśliwy krokodyl",
+    "DE": "Glückliches Krokodil",
+    "FR": "Crocodile chanceux",
+    "ES": "Cocodrilo afortunado",
+    "BR": "Um crocodilo sortudo",
+    "JA": "幸運なイリ工ワ二",
+    "SIZE": 4,
+    "PRICE": 3900,
+    "ANIMALS": [
+      {
+        "ID": 83,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 88,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 27,
+    "EN": "Moosic to my ears",
+    "RU": "Дремучий лось",
+    "CS": "Hudba pro mé uši",
+    "PL": "Łoś jaki jest, każdy widzi",
+    "DE": "W-elch entzückender Anblick",
+    "FR": "Élan de poésie",
+    "ES": "¿Qué alce usted?",
+    "BR": "Admiralces",
+    "JA": "素晴らしきへラジ力",
+    "SIZE": 4,
+    "PRICE": 4225,
+    "ANIMALS": [
+      {
+        "ID": 29,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 67,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 28,
+    "EN": "Not a log",
+    "RU": "Не бревно",
+    "CS": "To není kláda",
+    "PL": "Nie kłoda",
+    "DE": "Kein Baumstamm",
+    "FR": "Pas du bois",
+    "ES": "No es un tronco",
+    "BR": "Falso tronco",
+    "JA": "丸太じゃない",
+    "SIZE": 3,
+    "PRICE": 4225,
+    "ANIMALS": [
+      {
+        "ID": 62,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 64,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 29,
+    "EN": "Pair of predators",
+    "RU": "Два хищника",
+    "CS": "Pár dravců",
+    "PL": "Para drapieżników",
+    "DE": "Zwei Raubtiere",
+    "FR": "Couple de preédateurs",
+    "ES": "Pareja de depredadores",
+    "BR": "Um par de predadores",
+    "JA": "捕食者のペア",
+    "SIZE": 2,
+    "PRICE": 2925,
+    "ANIMALS": [
+      {
+        "ID": 13,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 60,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 30,
+    "EN": "Play fighting",
+    "RU": "Шуточный бой",
+    "CS": "Hravý souboj",
+    "PL": "Wesołe przepychanki",
+    "DE": "Spielerischer Kampf",
+    "FR": "Bagarre amicale",
+    "ES": "Juego agresivo",
+    "BR": "Brincando de briga",
+    "JA": "じゃれ合い",
+    "SIZE": 2,
+    "PRICE": 3900,
+    "ANIMALS": [
+      {
+        "ID": 14,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 14,
+        "GENDER": 0,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 31,
+    "EN": "Rival rabbits",
+    "RU": "Соперничающие зайцы",
+    "CS": "Konkurenční zajíci",
+    "PL": "Rywalizujące króliki",
+    "DE": "Rivalisierende Hasen",
+    "FR": "Lapins rivaux",
+    "ES": "Liebres rivales",
+    "BR": "Lebres rivais",
+    "JA": "ライバルのウサギ",
+    "SIZE": 0,
+    "PRICE": 1300,
+    "ANIMALS": [
+      {
+        "ID": 61,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 32,
+    "EN": "Roo mble",
+    "RU": "Кенгурукопашка",
+    "CS": "Klokaní potyčka",
+    "PL": "Kangurumba",
+    "DE": "Kängu-Rumba",
+    "FR": "Courroux de kangourou",
+    "ES": "Cangurrumba",
+    "BR": "Ramboru",
+    "JA": "(力ンガ) ル-ンバ",
+    "SIZE": 4,
+    "PRICE": 3900,
+    "ANIMALS": [
+      {
+        "ID": 85,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 33,
+    "EN": "Royality",
+    "RU": "Королеиевская кровь",
+    "CS": "Královská rodina",
+    "PL": "Rodzina królewska",
+    "DE": "Das Königshaus",
+    "FR": "Royauté",
+    "ES": "Realeza",
+    "BR": "Realeza",
+    "JA": "王権",
+    "SIZE": 5,
+    "PRICE": 8450,
+    "ANIMALS": [
+      {
+        "ID": 27,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 27,
+        "GENDER": 0,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 34,
+    "EN": "Side by side",
+    "RU": "Плеяом к плечу",
+    "CS": "Bok po boku",
+    "PL": "Łeb w łeb",
+    "DE": "Seite an Seite",
+    "FR": "Côte á côte",
+    "ES": "Ciervo contra ciervo",
+    "BR": "Laod a lado",
+    "JA": "隣同士",
+    "SIZE": 5,
+    "PRICE": 3900,
+    "ANIMALS": [
+      {
+        "ID": 51,
+        "GENDER": 1,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 35,
+    "EN": "Sleigh sold separately",
+    "RU": "Сани продаются отдельно",
+    "CS": "Sáně se prodávají zvlášť",
+    "PL": "Sanie sprzedawane osobno",
+    "DE": "Schlitten separat erhältlich",
+    "FR": "Traîneau vendu séprément",
+    "ES": "No incluye trineo",
+    "BR": "Trenó vendido separadamente",
+    "JA": "ソリは別売り",
+    "SIZE": 4,
+    "PRICE": 7800,
+    "ANIMALS": [
+      {
+        "ID": 37,
+        "GENDER": 1,
+        "COUNT": 3
+      }
+    ]
+  },
+  {
+    "ID": 36,
+    "EN": "Smooth operator",
+    "RU": "Ловкий делец",
+    "CS": "Zdvořilý manupulant",
+    "PL": "Sprawny operator",
+    "DE": "Reibungsloser Bediener",
+    "FR": "À l'aise",
+    "ES": "Adulador",
+    "BR": "Operador suave",
+    "JA": "口説き上手",
+    "SIZE": 1,
+    "PRICE": 1950,
+    "ANIMALS": [
+      {
+        "ID": 76,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 76,
+        "GENDER": 0,
+        "COUNT": 2
+      }
+    ]
+  },
+  {
+    "ID": 37,
+    "EN": "Tactical espionage",
+    "RU": "Разведка боем",
+    "CS": "Taktická špionáž",
+    "PL": "Szpiegostwo taktyczne",
+    "DE": "Taktische Spionage",
+    "FR": "Espionnage tactique",
+    "ES": "Espionaje Táctico",
+    "BR": "Espionagem tática",
+    "JA": "狩りの偵察",
+    "SIZE": 5,
+    "PRICE": 5850,
+    "ANIMALS": [
+      {
+        "ID": 34,
+        "GENDER": 0,
+        "COUNT": 1
+      },
+      {
+        "ID": 41,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 38,
+    "EN": "The grand slam",
+    "RU": "Великая охота",
+    "CS": "Grand slam",
+    "PL": "Wielki szlem",
+    "DE": "Der Grand Slam",
+    "FR": "Le grand chelem",
+    "ES": "El gran desafío ibérico",
+    "BR": "O grand slam",
+    "JA": "グラン ドスラム",
+    "SIZE": 3,
+    "PRICE": 7800,
+    "ANIMALS": [
+      {
+        "ID": 2,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 21,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 40,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 45,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 39,
+    "EN": "The lookout",
+    "RU": "Дозорный",
+    "CS": "Na vyhlídce",
+    "PL": "Czujka",
+    "DE": "Beim Wacheschieben",
+    "FR": "Le guet",
+    "ES": "El vigía",
+    "BR": "Vigilância",
+    "JA": "警戒態勢",
+    "SIZE": 2,
+    "PRICE": 3900,
+    "ANIMALS": [
+      {
+        "ID": 26,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 26,
+        "GENDER": 0,
+        "COUNT": 1
+      }
+    ]
+  },
+  {
+    "ID": 40,
+    "EN": "Two turkey types",
+    "RU": "Два втда индеек",
+    "CS": "Dva druhy krocanů",
+    "PL": "Dwa różne podgatunki indyków",
+    "DE": "Zwei Arten von Truthähnen",
+    "FR": "Deux espèces de dindon",
+    "ES": "Dos tipos de pavo",
+    "BR": "Dois tipos de perus",
+    "JA": "2つの七面鳥の夕イブ",
+    "SIZE": 1,
+    "PRICE": 1300,
+    "ANIMALS": [
+      {
+        "ID": 47,
+        "GENDER": 1,
+        "COUNT": 1
+      },
+      {
+        "ID": 58,
+        "GENDER": 1,
+        "COUNT": 1
+      }
+    ]
+  }
+]

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/model/translatable.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -7,7 +7,7 @@ class Ammo extends Translatable {
   final int _min, _max;
   final int _rangeM;
   final double _rangeYD;
-  final int _penetration, _expansion, _price;
+  final int _penetration, _expansion, _price, _score;
   final int _dlc;
 
   Ammo({
@@ -28,6 +28,7 @@ class Ammo extends Translatable {
     required penetration,
     required expansion,
     required price,
+    required score,
     required dlc,
   })  : _min = min,
         _max = max,
@@ -36,6 +37,7 @@ class Ammo extends Translatable {
         _penetration = penetration,
         _expansion = expansion,
         _price = price,
+        _score = score,
         _dlc = dlc;
 
   int get min => _min;
@@ -48,9 +50,13 @@ class Ammo extends Translatable {
 
   int get price => _price;
 
+  int get score => _score;
+
   int get dlc => _dlc;
 
   bool get isFromDlc => _dlc == 1;
+
+  bool get hasRequirements => _score > 0;
 
   String get classRange => _min == _max ? _min.toString() : "$_min - $_max";
 
@@ -75,6 +81,7 @@ class Ammo extends Translatable {
       penetration: json['PENETRATION'],
       expansion: json['EXPANSION'],
       price: json['PRICE'],
+      score: json['SCORE'],
       dlc: json['DLC'],
     );
   }

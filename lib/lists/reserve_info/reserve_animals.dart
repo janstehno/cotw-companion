@@ -1,9 +1,10 @@
-// Copyright (c) 2022 - 2023 Jan Stehno
+// Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/info_animal.dart';
-import 'package:cotwcompanion/activities/logs_add_edit.dart';
+import 'package:cotwcompanion/activities/detail/animal.dart';
+import 'package:cotwcompanion/activities/edit/logs.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/widgets/entries/reserve_animal.dart';
@@ -47,21 +48,21 @@ class ListReserveAnimalsState extends State<ListReserveAnimals> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _animals.length,
         itemBuilder: (context, index) {
-          int animalId = _animals[index].id;
+          Animal animal = _animals[index];
           return EntryReserveAnimal(
-              animalId: animalId,
+              animalId: animal.id,
               reserveId: widget.reserveId,
               color: Interface.dark,
-              background: index % 2 == 0 ? Interface.even : Interface.odd,
+              background: Utils.background(index),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityAnimalInfo(animalId: animalId)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityDetailAnimal(animalId: animal.id, reserveId: widget.reserveId)));
               },
               onDismiss: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ActivityLogsAddEdit(
-                              animalId: animalId,
+                        builder: (context) => ActivityEditLogs(
+                              animalId: animal.id,
                               reserveId: widget.reserveId,
                               callback: () {},
                               fromTrophyLodge: false,

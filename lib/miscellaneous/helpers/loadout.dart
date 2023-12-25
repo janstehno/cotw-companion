@@ -12,7 +12,7 @@ class HelperLoadout {
   static late Loadout _lastRemovedLoadout;
 
   static final List<Loadout> _loadouts = [];
-  static final Loadout _defaultLoadout = Loadout();
+  static final Loadout _defaultLoadout = Loadout(ammo: [], callers: []);
 
   static Loadout _activeLoadout = _defaultLoadout;
 

@@ -13,12 +13,12 @@ class Loadout {
   Loadout({
     id,
     name,
-    ammo,
-    callers,
+    required ammo,
+    required callers,
   })  : _id = id ?? -1,
         _name = name ?? "Default",
-        _ammo = ammo ?? [],
-        _callers = callers ?? [];
+        _ammo = ammo,
+        _callers = callers;
 
   int get id => _id;
 

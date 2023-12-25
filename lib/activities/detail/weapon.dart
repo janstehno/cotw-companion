@@ -6,7 +6,7 @@ import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/weapon.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/entries/parameter.dart';
-import 'package:cotwcompanion/widgets/entries/weapon_statistics.dart';
+import 'package:cotwcompanion/widgets/entries/weapon/statistics.dart';
 import 'package:cotwcompanion/widgets/price.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';

@@ -8,7 +8,7 @@ import 'package:cotwcompanion/model/animal_fur.dart';
 import 'package:cotwcompanion/widgets/fur_per_cent.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class EntryAnimalFur extends StatefulWidget {
@@ -28,6 +28,9 @@ class EntryAnimalFur extends StatefulWidget {
 class EntryAnimalFurState extends State<EntryAnimalFur> {
   final double _rarityWidth = 20;
   final double _rarityHeight = 10;
+  final double _maleIconSize = 13;
+  final double _femaleIconSize = 14;
+  final double _safeSpaceSize = 15;
 
   late final bool _showPerCent;
 
@@ -71,8 +74,8 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
           child: widget.animalFur.male
               ? SvgPicture.asset(
                   "assets/graphics/icons/gender_male.svg",
-                  width: 13,
-                  height: 13,
+                  width: _maleIconSize,
+                  height: _maleIconSize,
                   colorFilter: const ColorFilter.mode(
                     Interface.genderMale,
                     BlendMode.srcIn,
@@ -81,16 +84,16 @@ class EntryAnimalFurState extends State<EntryAnimalFur> {
               : widget.animalFur.female
                   ? SvgPicture.asset(
                       "assets/graphics/icons/gender_female.svg",
-                      width: 14,
-                      height: 14,
+                      width: _femaleIconSize,
+                      height: _femaleIconSize,
                       colorFilter: const ColorFilter.mode(
                         Interface.genderFemale,
                         BlendMode.srcIn,
                       ),
                     )
-                  : const SizedBox(
-                      height: 15,
-                      width: 15,
+                  : SizedBox(
+                      width: _safeSpaceSize,
+                      height: _safeSpaceSize,
                     ))
     ]);
   }

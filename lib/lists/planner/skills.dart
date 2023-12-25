@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/lists/planner/proficiency.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/widgets/entries/skill.dart';
+import 'package:cotwcompanion/widgets/entries/planner/skill.dart';
 import 'package:flutter/material.dart';
 
 class ListSkills extends ListProficiency {

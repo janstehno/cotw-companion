@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/lists/planner/proficiency.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/widgets/entries/perk.dart';
+import 'package:cotwcompanion/widgets/entries/planner/perk.dart';
 import 'package:flutter/material.dart';
 
 class ListPerks extends ListProficiency {

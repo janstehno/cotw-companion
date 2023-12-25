@@ -27,6 +27,8 @@ class Enumerator {
 
   set setId(int id) => _id = id;
 
+  void sortCounters() => _counters.sort((a, b) => a.id.compareTo(b.id));
+
   void addCounter(Counter counter) => _counters.add(counter);
 
   void removeCounterOnIndex(int id) => _counters.removeAt(id);

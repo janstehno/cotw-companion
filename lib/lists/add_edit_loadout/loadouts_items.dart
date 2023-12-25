@@ -5,7 +5,7 @@ import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/entries/loadout_switch.dart';
+import 'package:cotwcompanion/widgets/entries/loadouts/loadout_switch.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

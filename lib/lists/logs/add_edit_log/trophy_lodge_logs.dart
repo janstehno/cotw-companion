@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/entries/trophy_lodge.dart';
+import 'package:cotwcompanion/widgets/entries/logs/trophy_lodge.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

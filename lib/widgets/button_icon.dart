@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WidgetButtonIcon extends StatelessWidget {
   final String icon;

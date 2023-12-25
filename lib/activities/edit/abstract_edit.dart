@@ -1,10 +1,12 @@
+// Copyright (c) 2023 Jan Stehno
+
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
-import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:cotwcompanion/widgets/text_field_indicator.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -62,23 +64,6 @@ abstract class ActivityEditState extends State<ActivityEdit> {
 
   void checkData();
 
-  void _buildSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(milliseconds: 5000),
-        padding: const EdgeInsets.all(0),
-        backgroundColor: Interface.search,
-        content: GestureDetector(
-            onTap: () {
-              setState(() {
-                scaffoldMessengerState.hideCurrentSnackBar();
-              });
-            },
-            child: WidgetSnackBar(
-              text: errorMessage,
-              process: Process.error,
-            ))));
-  }
-
   Widget buildName() {
     return Column(
       children: [
@@ -110,14 +95,15 @@ abstract class ActivityEditState extends State<ActivityEdit> {
                 focus();
                 checkData();
                 if (errorMessage.isEmpty) {
-                  setState(() {
-                    scaffoldMessengerState.hideCurrentSnackBar();
-                  });
                   addOrEdit();
                   widget.callback();
                   Navigator.pop(context);
                 } else {
-                  _buildSnackBar(errorMessage);
+                  Utils.buildSnackBarMessage(
+                    errorMessage,
+                    Process.error,
+                    context,
+                  );
                 }
               },
             )));

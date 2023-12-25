@@ -23,6 +23,8 @@ class WidgetProficiencyDetail extends StatefulWidget {
 }
 
 class WidgetProficiencyDetailState extends State<WidgetProficiencyDetail> {
+  final double _levelSize = 20;
+
   double _screenWidth = 0;
   double _screenHeight = 0;
 
@@ -78,8 +80,8 @@ class WidgetProficiencyDetailState extends State<WidgetProficiencyDetail> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 20,
-            height: 20,
+            width: _levelSize,
+            height: _levelSize,
             margin: const EdgeInsets.only(right: 7),
             alignment: Alignment.center,
             decoration: BoxDecoration(

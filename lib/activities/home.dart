@@ -20,7 +20,7 @@ import 'package:cotwcompanion/widgets/entries/menu.dart';
 import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ActivityHome extends StatefulWidget {
   const ActivityHome({Key? key}) : super(key: key);

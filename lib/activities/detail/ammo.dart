@@ -4,7 +4,7 @@ import 'package:cotwcompanion/lists/ammo_info/ammo_weapons.dart';
 import 'package:cotwcompanion/lists/weapon_info/weapon_animals.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/entries/weapon_ammo.dart';
+import 'package:cotwcompanion/widgets/entries/weapon/ammo.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';

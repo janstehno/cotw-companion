@@ -39,38 +39,50 @@ class Utils {
 
   static String dateToString(DateTime date) => "${date.year}-${date.month}-${date.day}-${date.hour}-${date.minute}";
 
-  static SnackBar snackBar(Function hide, String message, Process process) {
-    return SnackBar(
+  static void _hideSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+  }
+
+  static void _buildSnackBar(WidgetSnackBar snackBar, BuildContext context) {
+    _hideSnackBar(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         duration: const Duration(milliseconds: 1000),
         padding: const EdgeInsets.all(0),
         backgroundColor: Interface.search,
         content: GestureDetector(
-            onTap: () {
-              hide();
-            },
-            child: WidgetSnackBar(
-              text: message,
-              process: process,
-            )));
+          onTap: () {
+            _hideSnackBar(context);
+          },
+          child: snackBar,
+        ),
+      ),
+    );
   }
 
-  static SnackBar snackBarUndo(Function hide, String message, Process process, Function undo) {
-    return SnackBar(
-        duration: const Duration(milliseconds: 5000),
-        padding: const EdgeInsets.all(0),
-        backgroundColor: Interface.search,
-        content: GestureDetector(
-            onTap: () {
-              hide();
-            },
-            child: WidgetSnackBar(
-              text: message,
-              process: process,
-              icon: "assets/graphics/icons/reload.svg",
-              onSnackBarTap: () {
-                undo();
-              },
-            )));
+  static void buildSnackBarMessage(String message, Process process, BuildContext context) {
+    _buildSnackBar(
+      WidgetSnackBar(
+        text: message,
+        process: process,
+      ),
+      context,
+    );
+  }
+
+  static void buildSnackBarUndo(String message, Process process, Function undo, BuildContext context) {
+    _buildSnackBar(
+      WidgetSnackBar(
+        text: message,
+        process: process,
+        icon: "assets/graphics/icons/reload.svg",
+        onSnackBarTap: () {
+          _hideSnackBar(context);
+          undo();
+        },
+      ),
+      context,
+    );
   }
 
   static Future<bool> exportFile(String content, String name) async {

@@ -3,7 +3,7 @@
 import 'package:cotwcompanion/lists/home/items.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/widgets/entries/reserve.dart';
+import 'package:cotwcompanion/widgets/entries/reserve/reserve.dart';
 import 'package:cotwcompanion/widgets/filters/range_auto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

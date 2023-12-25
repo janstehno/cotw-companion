@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 abstract class EntryStatistics extends StatelessWidget {
   final List<String> labels;

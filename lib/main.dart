@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/home.dart';
+import 'package:cotwcompanion/builders/home.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/scroll_behavior.dart';

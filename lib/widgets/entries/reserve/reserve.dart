@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/activities/detail/reserve.dart';
-import 'package:cotwcompanion/activities/map.dart';
+import 'package:cotwcompanion/builders/map.dart';
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
@@ -66,7 +66,7 @@ class EntryReserveState extends State<EntryReserve> {
               buttonIcon: "assets/graphics/icons/map.svg",
               tags: _buildTags(),
               onButtonTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMap(reserveId: widget.reserve.id)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BuilderMap(reserveId: widget.reserve.id)));
               },
             )));
   }

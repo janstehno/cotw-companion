@@ -13,7 +13,6 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/projection.dart';
 import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/map_zone.dart';
 import 'package:cotwcompanion/model/reserve.dart';
 import 'package:cotwcompanion/model/zone.dart';
@@ -21,7 +20,6 @@ import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
 import 'package:cotwcompanion/widgets/menubar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
@@ -82,26 +80,6 @@ class ActivityMapState extends State<ActivityMap> {
     setState(() {
       _updateMap();
     });
-  }
-
-  void _getAnimals() {
-    _getMapObjects();
-    for (IdtoId iti in HelperJSON.animalsReserves) {
-      if (iti.secondId == widget.reserveId) {
-        for (Animal animal in HelperJSON.animals) {
-          if (animal.id == iti.firstId) {
-            HelperMap.addAnimal(animal);
-            break;
-          }
-        }
-      }
-    }
-    HelperMap.addNames(context.locale, widget.reserveId);
-  }
-
-  void _getMapObjects() {
-    HelperMap.clearMap();
-    HelperMap.addObjects(HelperJSON.getMapObjects(widget.reserveId));
   }
 
   void _getScreenSize() {
@@ -595,7 +573,6 @@ class ActivityMapState extends State<ActivityMap> {
 
   Widget _buildWidgets() {
     _getScreenSize();
-    _getAnimals();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,

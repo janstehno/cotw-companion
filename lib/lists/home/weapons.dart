@@ -3,7 +3,7 @@
 import 'package:cotwcompanion/lists/home/items.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/widgets/entries/weapon.dart';
+import 'package:cotwcompanion/widgets/entries/weapon/weapon.dart';
 import 'package:cotwcompanion/widgets/filters/range_auto.dart';
 import 'package:cotwcompanion/widgets/filters/switch.dart';
 import 'package:cotwcompanion/widgets/filters/value_set.dart';

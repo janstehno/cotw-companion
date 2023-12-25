@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/animal_fur.dart';
-import 'package:cotwcompanion/widgets/entries/animal_fur.dart';
+import 'package:cotwcompanion/widgets/entries/animal/fur.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

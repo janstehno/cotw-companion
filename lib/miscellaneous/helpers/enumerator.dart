@@ -17,7 +17,7 @@ class HelperEnumerator {
   static void _reSort() {
     _enumerators.sort((a, b) => a.id.compareTo(b.id));
     for (Enumerator enumerator in _enumerators) {
-      enumerator.counters.sort((a, b) => a.id.compareTo(b.id));
+      enumerator.sortCounters();
     }
     writeFile();
   }
@@ -52,7 +52,7 @@ class HelperEnumerator {
     writeFile();
   }
 
-  static void swapIndexOfCounters(int enumeratorId, int counterId, int newCounterId) {
+  static void changeIndexOfCounters(int enumeratorId, int counterId, int newCounterId) {
     List<dynamic> counters = _enumerators.elementAt(enumeratorId).counters;
     counters.insert(newCounterId, counters.elementAt(counterId));
     int oldId = newCounterId > counterId ? counterId : counterId + 1;

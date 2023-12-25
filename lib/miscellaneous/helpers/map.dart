@@ -77,17 +77,17 @@ class HelperMap {
 
   static List<LatLng> get hides => _hides;
 
-  static Animal getAnimal(int index) => _animals[index];
+  static Animal getAnimal(int index) => _animals.elementAt(index);
 
-  static String getName(int index) => _names[index];
+  static String getName(int index) => _names.elementAt(index);
 
-  static bool isActive(int index) => _active[index];
+  static bool isActive(int index) => _active.elementAt(index);
 
-  static bool isActiveE(int index) => _activeE[index];
+  static bool isActiveE(int index) => _activeE.elementAt(index);
 
-  static Color getColor(int index) => _colors[index];
+  static Color getColor(int index) => _colors.elementAt(index);
 
-  static Color getColorE(int index) => _colorsE[index];
+  static Color getColorE(int index) => _colorsE.elementAt(index);
 
   static bool getOpacity(int index) => isActive(index);
 
@@ -105,11 +105,11 @@ class HelperMap {
   }
 
   static void activate(int index) {
-    _active[index] = (!_active[index]);
+    _active[index] = !(_active.elementAt(index));
   }
 
   static void activateE(int index) {
-    _activeE[index] = (!_activeE[index]);
+    _activeE[index] = !(_activeE.elementAt(index));
   }
 
   static void activateAll() {

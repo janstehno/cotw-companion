@@ -15,6 +15,10 @@ class ActivityPatchNotes extends StatelessWidget {
   Widget _buildList() {
     return Column(children: [
       WidgetPatchNote(
+        background: Interface.odd,
+        version: "1.9.1",
+      ),
+      WidgetPatchNote(
         background: Interface.even,
         version: "1.9.0",
         changes: const [

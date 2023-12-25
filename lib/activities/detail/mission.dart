@@ -10,7 +10,7 @@ import 'package:cotwcompanion/widgets/tag.dart';
 import 'package:cotwcompanion/widgets/title_big.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ActivityDetailMission extends StatefulWidget {
   final Mission mission;
@@ -84,7 +84,7 @@ class ActivityDetailMissionState extends State<ActivityDetailMission> {
         WidgetTag.small(
           color: Interface.alwaysDark,
           background: widget.mission.getDifficultyColor(),
-          value: tr(widget.mission.getDifficultyAsString()),
+          value: widget.mission.getDifficultyAsString(),
         ),
       ],
     );

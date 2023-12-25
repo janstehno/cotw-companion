@@ -7,7 +7,7 @@ import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/caller.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:cotwcompanion/widgets/entries/reserve_caller.dart';
+import 'package:cotwcompanion/widgets/entries/reserve/caller.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

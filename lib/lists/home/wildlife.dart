@@ -3,7 +3,7 @@
 import 'package:cotwcompanion/lists/home/items.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/widgets/entries/animal.dart';
+import 'package:cotwcompanion/widgets/entries/animal/animal.dart';
 import 'package:cotwcompanion/widgets/filters/picker_auto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

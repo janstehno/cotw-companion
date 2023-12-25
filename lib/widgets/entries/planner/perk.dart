@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
 import 'package:cotwcompanion/model/perk.dart';
-import 'package:cotwcompanion/widgets/entries/proficiency.dart';
+import 'package:cotwcompanion/widgets/entries/planner/proficiency.dart';
 import 'package:flutter/material.dart';
 
 class EntryPerk extends EntryProficiency {

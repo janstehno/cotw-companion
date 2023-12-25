@@ -13,7 +13,7 @@ import 'package:cotwcompanion/model/loadout.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class EntryLoadout extends StatefulWidget {
   final int index;
@@ -48,24 +48,8 @@ class EntryLoadoutState extends State<EntryLoadout> {
   bool _detailText = false;
   bool _detailContainer = false;
 
-  void _buildSnackBar(String message, Process process) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      Utils.snackBarUndo(
-        _hideSnackBar,
-        message,
-        process,
-        _undo,
-      ),
-    );
-  }
-
-  void _hideSnackBar() {
-    ScaffoldMessenger.of(widget.context).hideCurrentSnackBar();
-  }
-
   void _undo() {
     HelperLoadout.undoRemove();
-    _hideSnackBar();
     widget.callback();
   }
 
@@ -78,8 +62,8 @@ class EntryLoadoutState extends State<EntryLoadout> {
     for (int index in widget.loadout.callers) {
       _callers.add(HelperJSON.getCaller(index));
     }
-    _ammo.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
-    _callers.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
+    _ammo.sort((a, b) => a.getName(widget.context.locale).compareTo(b.getName(widget.context.locale)));
+    _callers.sort((a, b) => a.getName(widget.context.locale).compareTo(b.getName(widget.context.locale)));
   }
 
   Widget _buildName() {
@@ -141,7 +125,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                             height: _ammoHeight,
                             alignment: Alignment.centerLeft,
                             child: AutoSizeText(
-                              _ammo.elementAt(index).getName(context.locale),
+                              _ammo.elementAt(index).getName(widget.context.locale),
                               style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
                             ));
                       }),
@@ -166,7 +150,7 @@ class EntryLoadoutState extends State<EntryLoadout> {
                             height: _callerHeight,
                             alignment: Alignment.centerLeft,
                             child: AutoSizeText(
-                              _callers.elementAt(index).getName(context.locale),
+                              _callers.elementAt(index).getName(widget.context.locale),
                               style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
                             ));
                       }),
@@ -199,26 +183,20 @@ class EntryLoadoutState extends State<EntryLoadout> {
         onDoubleTap: () {
           setState(() {
             HelperLoadout.removeLoadoutOnIndex(widget.loadout.id);
-            _hideSnackBar();
             widget.callback();
           });
-          _buildSnackBar(
+          Utils.buildSnackBarUndo(
             tr("item_removed"),
             Process.info,
+            _undo,
+            widget.context,
           );
         },
         child: Dismissible(
             key: Key(widget.loadout.id.toString()),
             direction: DismissDirection.startToEnd,
             confirmDismiss: (direction) async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ActivityEditLoadouts(
-                          loadout: widget.loadout,
-                          callback: widget.callback,
-                        )),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditLoadouts(loadout: widget.loadout, callback: widget.callback)));
               return false;
             },
             background: Container(

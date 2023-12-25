@@ -2,7 +2,7 @@
 
 import 'package:async/async.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/activities/map.dart';
+import 'package:cotwcompanion/builders/map.dart';
 import 'package:cotwcompanion/lists/need_zones/need_zones.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
@@ -382,7 +382,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ActivityMap(reserveId: _reserveId)),
+                  MaterialPageRoute(builder: (context) => BuilderMap(reserveId: _reserveId)),
                 );
               },
             )

@@ -1,8 +1,8 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/enumerators.dart';
-import 'package:cotwcompanion/activities/loadouts.dart';
-import 'package:cotwcompanion/activities/logs.dart';
+import 'package:cotwcompanion/activities/entries/enumerators.dart';
+import 'package:cotwcompanion/activities/entries/loadouts.dart';
+import 'package:cotwcompanion/activities/entries/logs.dart';
 import 'package:cotwcompanion/activities/need_zones.dart';
 import 'package:cotwcompanion/activities/planner.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';

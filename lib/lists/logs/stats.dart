@@ -13,7 +13,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ListLogsStats extends StatefulWidget {
-  final List<Log> logs;
+  final List<dynamic> logs;
   final bool trophyLodge;
 
   const ListLogsStats({

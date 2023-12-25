@@ -2,7 +2,7 @@
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/model/ammo.dart';
-import 'package:cotwcompanion/widgets/entries/weapon_ammo.dart';
+import 'package:cotwcompanion/widgets/entries/weapon/ammo.dart';
 import 'package:cotwcompanion/widgets/title_small.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

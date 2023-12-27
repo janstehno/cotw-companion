@@ -9,13 +9,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityEditCounters extends ActivityEdit {
-  final Enumerator enumerator;
+  final int enumeratorId;
   final Counter? counter;
 
   const ActivityEditCounters({
     super.key,
     required super.callback,
-    required this.enumerator,
+    required this.enumeratorId,
     this.counter,
   });
 
@@ -26,11 +26,11 @@ class ActivityEditCounters extends ActivityEdit {
 class ActivityEditCountersState extends ActivityEditState {
   final TextEditingController _controllerValue = TextEditingController(text: "0");
 
-  late final Enumerator _enumerator;
+  late final int _enumeratorId;
 
   @override
   void initState() {
-    _enumerator = (widget as ActivityEditCounters).enumerator;
+    _enumeratorId = (widget as ActivityEditCounters).enumeratorId;
     _controllerValue.addListener(() => reload());
     super.initState();
   }
@@ -58,7 +58,7 @@ class ActivityEditCountersState extends ActivityEditState {
 
   Counter _createCounter() {
     Counter? counter = (widget as ActivityEditCounters).counter;
-    int counterId = editing ? counter!.id : HelperEnumerator.enumerators.elementAt(_enumerator.id).counters.length;
+    int counterId = editing ? counter!.id : HelperEnumerator.enumerators.elementAt(_enumeratorId).counters.length;
     counter = Counter(id: counterId, name: controller.text, value: int.tryParse(_controllerValue.text) ?? 0);
     return counter;
   }
@@ -81,7 +81,7 @@ class ActivityEditCountersState extends ActivityEditState {
   @override
   void addOrEdit() {
     Counter counter = _createCounter();
-    editing ? HelperEnumerator.editCounter(_enumerator.id, counter) : HelperEnumerator.addCounter(_enumerator.id, counter);
+    editing ? HelperEnumerator.editCounter(_enumeratorId, counter) : HelperEnumerator.addCounter(_enumeratorId, counter);
   }
 
   @override

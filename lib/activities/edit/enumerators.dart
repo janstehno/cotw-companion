@@ -7,12 +7,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityEditEnumerators extends ActivityEdit {
-  final Enumerator? enumerator;
+  final int? enumeratorId;
 
   const ActivityEditEnumerators({
     super.key,
     required super.callback,
-    this.enumerator,
+    this.enumeratorId,
   });
 
   @override
@@ -22,10 +22,11 @@ class ActivityEditEnumerators extends ActivityEdit {
 class ActivityEditEnumeratorsState extends ActivityEditState {
   @override
   void getData() {
-    if ((widget as ActivityEditEnumerators).enumerator != null) {
+    int? enumeratorId = (widget as ActivityEditEnumerators).enumeratorId;
+    if (enumeratorId != null) {
       //WHEN EDITING
       editing = true;
-      controller.text = (widget as ActivityEditEnumerators).enumerator!.name;
+      controller.text = HelperEnumerator.getEnumerator(enumeratorId).name;
     }
   }
 
@@ -41,10 +42,10 @@ class ActivityEditEnumeratorsState extends ActivityEditState {
   }
 
   Enumerator _createEnumerator() {
-    Enumerator? enumerator = (widget as ActivityEditEnumerators).enumerator;
-    int enumeratorId = editing ? enumerator!.id : HelperEnumerator.enumerators.length;
-    enumerator = Enumerator(id: enumeratorId, name: controller.text, counters: enumerator != null ? enumerator.counters : []);
-    return enumerator;
+    int? enumeratorId = (widget as ActivityEditEnumerators).enumeratorId;
+    Enumerator enumerator = HelperEnumerator.getEnumerator(enumeratorId!);
+    int newEnumeratorId = editing ? enumerator.id : HelperEnumerator.enumerators.length;
+    return Enumerator(id: newEnumeratorId, name: controller.text, counters: enumerator.counters);
   }
 
   @override

@@ -169,7 +169,6 @@ abstract class ActivityEntriesState extends State<ActivityEntries> {
           Expanded(
             child: ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   dynamic item = items.elementAt(index);

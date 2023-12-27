@@ -5,7 +5,6 @@ import 'package:cotwcompanion/activities/entries/entries_reorderable.dart';
 import 'package:cotwcompanion/activities/help/counters.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/enumerator.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/model/enumerator.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/entries/enumerators/counter.dart';
@@ -13,23 +12,23 @@ import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
 import 'package:flutter/material.dart';
 
 class ActivityCounters extends ActivityEntriesReorderable {
-  final Enumerator enumerator;
+  final int enumeratorId;
 
   ActivityCounters({
     super.key,
-    required this.enumerator,
-  }) : super(name: enumerator.name);
+    required this.enumeratorId,
+  }) : super(name: HelperEnumerator.getEnumerator(enumeratorId).name);
 
   @override
   ActivityCountersState createState() => ActivityCountersState();
 }
 
 class ActivityCountersState extends ActivityEntriesReorderableState {
-  late final Enumerator _enumerator;
+  late final int _enumeratorId;
 
   @override
   void initState() {
-    _enumerator = (widget as ActivityCounters).enumerator;
+    _enumeratorId = (widget as ActivityCounters).enumeratorId;
     super.initState();
   }
 
@@ -37,14 +36,14 @@ class ActivityCountersState extends ActivityEntriesReorderableState {
   void filter() {
     setState(() {
       items.clear();
-      items.addAll(_enumerator.counters);
+      items.addAll(HelperEnumerator.counters(_enumeratorId));
     });
   }
 
   @override
   void removeAll() {
     setState(() {
-      HelperEnumerator.removeAllCounters(_enumerator.id);
+      HelperEnumerator.removeAllCounters(_enumeratorId);
       filter();
     });
   }
@@ -52,18 +51,18 @@ class ActivityCountersState extends ActivityEntriesReorderableState {
   @override
   void onReorder(int oldIndex, int newIndex) {
     setState(() {
-      HelperEnumerator.changeIndexOfCounters(_enumerator.id, oldIndex, newIndex);
+      HelperEnumerator.changeIndexOfCounters(_enumeratorId, oldIndex, newIndex);
       filter();
     });
   }
 
   @override
-  Widget buildEntry(int index, item) {
+  Widget buildEntry(int index, dynamic item) {
     return EntryCounter(
       key: Key(index.toString()),
       index: index,
       counter: item,
-      enumerator: _enumerator,
+      enumerator: HelperEnumerator.getEnumerator(_enumeratorId),
       callback: filter,
       context: context,
     );
@@ -100,7 +99,7 @@ class ActivityCountersState extends ActivityEntriesReorderableState {
             icon: "assets/graphics/icons/plus.svg",
             onTap: () {
               focus();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditCounters(enumerator: _enumerator, callback: filter)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditCounters(enumeratorId: _enumeratorId, callback: filter)));
             }),
       ),
     ];

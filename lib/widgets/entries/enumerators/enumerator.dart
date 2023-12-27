@@ -8,7 +8,7 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/widgets/entries/enumerators/entry.dart';
 import 'package:flutter/material.dart';
 
-class EntryEnumerator extends EntryEnumeratorsEntry {
+class EntryEnumerator extends EntryEnumeratorEntry {
   const EntryEnumerator({
     super.key,
     required super.index,
@@ -21,16 +21,16 @@ class EntryEnumerator extends EntryEnumeratorsEntry {
   State<StatefulWidget> createState() => EntryEnumeratorState();
 }
 
-class EntryEnumeratorState extends EntryEnumeratorsEntryState {
+class EntryEnumeratorState extends EntryEnumeratorEntryState {
   @override
   void onTap() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityCounters(enumerator: widget.enumerator)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityCounters(enumeratorId: widget.enumerator.id)));
     widget.callback();
   }
 
   @override
   void startToEnd() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditEnumerators(enumerator: widget.enumerator, callback: widget.callback)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditEnumerators(enumeratorId: widget.enumerator.id, callback: widget.callback)));
   }
 
   @override

@@ -320,7 +320,7 @@ class HelperJSON {
     return list.map((e) => Multimount.fromJson(e)).toList();
   }
 
-  static void setWeaponAmmo() {
+  static void initializeWeaponAmmo() {
     final List<int> ammo = [];
     for (Weapon weapon in _weapons) {
       ammo.clear();

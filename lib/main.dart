@@ -89,7 +89,7 @@ class App extends StatelessWidget {
           Expanded(
               child: Container(
             color: Interface.primary,
-            child: const BuilderHome(),
+            child: BuilderHome(),
           ))
         ]));
   }

@@ -53,7 +53,7 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState {
   Future<bool> fileSaved() async => await HelperEnumerator.exportFile();
 
   @override
-  Widget buildEntry(int index, item) {
+  Widget buildEntry(int index, dynamic item) {
     return EntryEnumerator(
       key: Key(index.toString()),
       index: index,

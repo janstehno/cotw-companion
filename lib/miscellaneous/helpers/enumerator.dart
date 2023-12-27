@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/enumerator.dart';
 
 class HelperEnumerator {
@@ -13,6 +14,8 @@ class HelperEnumerator {
   static final List<Enumerator> _enumerators = [];
 
   static List<Enumerator> get enumerators => _enumerators;
+
+  static List<dynamic> counters(int enumeratorId) => _enumerators.elementAt(enumeratorId).counters;
 
   static void _reSort() {
     _enumerators.sort((a, b) => a.id.compareTo(b.id));
@@ -41,6 +44,10 @@ class HelperEnumerator {
     writeFile();
   }
 
+  static Enumerator getEnumerator(int enumeratorId) {
+    return _enumerators.elementAt(enumeratorId);
+  }
+
   static void changeIndexOfEnumerators(int enumeratorId, int newEnumeratorId) {
     _enumerators.insert(newEnumeratorId, _enumerators.elementAt(enumeratorId));
     int oldId = newEnumeratorId > enumeratorId ? enumeratorId : enumeratorId + 1;
@@ -53,12 +60,11 @@ class HelperEnumerator {
   }
 
   static void changeIndexOfCounters(int enumeratorId, int counterId, int newCounterId) {
-    List<dynamic> counters = _enumerators.elementAt(enumeratorId).counters;
-    counters.insert(newCounterId, counters.elementAt(counterId));
+    counters(enumeratorId).insert(newCounterId, counters(enumeratorId).elementAt(counterId));
     int oldId = newCounterId > counterId ? counterId : counterId + 1;
-    counters.removeAt(oldId);
-    for (Counter counter in counters) {
-      counter.setId = counters.indexOf(counter);
+    counters(enumeratorId).removeAt(oldId);
+    for (Counter counter in counters(enumeratorId)) {
+      counter.setId = counters(enumeratorId).indexOf(counter);
     }
     _reSort();
     writeFile();
@@ -142,11 +148,11 @@ class HelperEnumerator {
 
   static void writeFile() {
     final String content = parseToJson();
-    Utils.writeFile(content, "enumerators");
+    Utils.writeFile(content, Values.enumerators);
   }
 
   static Future<List<Enumerator>> readFile() async {
-    final data = await Utils.readFile("enumerators");
+    final data = await Utils.readFile(Values.enumerators);
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Enumerator.fromJson(e)).toList();
   }

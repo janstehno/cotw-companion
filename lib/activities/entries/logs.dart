@@ -80,7 +80,7 @@ class ActivityLogsState extends ActivityEntriesState {
   Future<bool> fileSaved() async => await HelperLog.exportFile();
 
   @override
-  Widget buildEntry(index, item) {
+  Widget buildEntry(int index, dynamic item) {
     return EntryLog(
       index: index,
       log: item,

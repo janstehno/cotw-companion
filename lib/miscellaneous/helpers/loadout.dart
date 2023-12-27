@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
@@ -167,11 +168,11 @@ class HelperLoadout {
 
   static void writeFile() async {
     final String content = parseToJson();
-    Utils.writeFile(content, "loadouts");
+    Utils.writeFile(content, Values.loadouts);
   }
 
   static Future<List<Loadout>> readFile() async {
-    final data = await Utils.readFile("loadouts");
+    final data = await Utils.readFile(Values.loadouts);
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Loadout.fromJson(e)).toList();
   }

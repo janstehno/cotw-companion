@@ -151,11 +151,11 @@ class HelperLog {
 
   static void writeFile() {
     final String content = parseToJson();
-    Utils.writeFile(content, "logbook");
+    Utils.writeFile(content, Values.logbook);
   }
 
   static Future<List<Log>> readFile() async {
-    final data = await Utils.readFile("logbook");
+    final data = await Utils.readFile(Values.logbook);
     final list = json.decode(data) as List<dynamic>;
     return list.map((e) => Log.fromJson(e)).toList();
   }

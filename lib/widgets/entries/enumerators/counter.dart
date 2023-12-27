@@ -8,7 +8,7 @@ import 'package:cotwcompanion/model/enumerator.dart';
 import 'package:cotwcompanion/widgets/entries/enumerators/entry.dart';
 import 'package:flutter/material.dart';
 
-class EntryCounter extends EntryEnumeratorsEntry {
+class EntryCounter extends EntryEnumeratorEntry {
   final Counter counter;
 
   const EntryCounter({
@@ -24,7 +24,7 @@ class EntryCounter extends EntryEnumeratorsEntry {
   State<StatefulWidget> createState() => EntryCounterState();
 }
 
-class EntryCounterState extends EntryEnumeratorsEntryState {
+class EntryCounterState extends EntryEnumeratorEntryState {
   late final Counter _counter;
 
   @override
@@ -35,7 +35,8 @@ class EntryCounterState extends EntryEnumeratorsEntryState {
 
   @override
   void startToEnd() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditCounters(enumerator: widget.enumerator, counter: _counter, callback: widget.callback)));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ActivityEditCounters(enumeratorId: widget.enumerator.id, counter: _counter, callback: widget.callback)));
   }
 
   @override
@@ -76,7 +77,7 @@ class EntryCounterState extends EntryEnumeratorsEntryState {
         Expanded(
           child: AutoSizeText(
             _counter.name,
-            maxLines: 1,
+            maxLines: 2,
             style: Interface.s18w500n(Interface.dark),
           ),
         ),

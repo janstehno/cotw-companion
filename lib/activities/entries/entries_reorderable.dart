@@ -22,8 +22,8 @@ abstract class ActivityEntriesReorderableState extends ActivityEntriesState {
         children: [
           Expanded(
             child: ReorderableListView.builder(
+              key: GlobalKey(),
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
               itemCount: items.length,
               itemBuilder: (context, index) {
                 dynamic item = items.elementAt(index);

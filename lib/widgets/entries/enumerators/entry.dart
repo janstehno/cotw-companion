@@ -8,7 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-abstract class EntryEnumeratorsEntry extends StatefulWidget {
+abstract class EntryEnumeratorEntry extends StatefulWidget {
   final int index;
   final Enumerator enumerator;
   final Function callback;
@@ -16,7 +16,7 @@ abstract class EntryEnumeratorsEntry extends StatefulWidget {
 
   final double height = 70;
 
-  const EntryEnumeratorsEntry({
+  const EntryEnumeratorEntry({
     Key? key,
     required this.index,
     required this.enumerator,
@@ -25,7 +25,7 @@ abstract class EntryEnumeratorsEntry extends StatefulWidget {
   }) : super(key: key);
 }
 
-abstract class EntryEnumeratorsEntryState extends State<EntryEnumeratorsEntry> {
+abstract class EntryEnumeratorEntryState extends State<EntryEnumeratorEntry> {
   final double _editIconSize = 20;
 
   void undo() {}

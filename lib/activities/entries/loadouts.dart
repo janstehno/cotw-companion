@@ -47,7 +47,7 @@ class ActivityLoadoutsState extends ActivityEntriesState {
   Future<bool> fileSaved() async => await HelperLoadout.exportFile();
 
   @override
-  Widget buildEntry(int index, item) {
+  Widget buildEntry(int index, dynamic item) {
     return EntryLoadout(
       index: index,
       loadout: item,

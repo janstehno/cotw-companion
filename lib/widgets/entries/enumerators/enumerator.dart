@@ -30,7 +30,7 @@ class EntryEnumeratorState extends EntryEnumeratorEntryState {
 
   @override
   void startToEnd() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditEnumerators(enumeratorId: widget.enumerator.id, callback: widget.callback)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditEnumerators(enumerator: widget.enumerator, callback: widget.callback)));
   }
 
   @override

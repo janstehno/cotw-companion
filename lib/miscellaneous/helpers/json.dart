@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -23,6 +24,8 @@ import 'package:cotwcompanion/model/zone.dart';
 import 'package:flutter/services.dart' as root_bundle;
 
 class HelperJSON {
+  static final HelperLogger _logger = HelperLogger.appLoading();
+
   static final List<Ammo> _ammo = [];
   static final List<Animal> _animals = [];
   static final List<IdtoId> _animalsCallers = [];
@@ -62,6 +65,7 @@ class HelperJSON {
     List<Skill> skills,
     List<Multimount> multimounts,
   ) {
+    _logger.i("Initializing lists in HelperJSON...");
     _clearLists();
     _ammo.addAll(ammo);
     _animals.addAll(animals);
@@ -81,6 +85,8 @@ class HelperJSON {
     _skills.addAll(skills);
     _multimounts.addAll(multimounts);
     _mapObjects.addAll(mapObjects);
+    initializeWeaponAmmo();
+    _logger.t("Lists initialized");
   }
 
   static void _clearLists() {
@@ -213,111 +219,236 @@ class HelperJSON {
   }
 
   static Future<List<Ammo>> readAmmo() async {
-    final data = await _getData("ammo");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Ammo.fromJson(e)).toList();
+    try {
+      final data = await _getData("ammo");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Ammo> ammo = list.map((e) => Ammo.fromJson(e)).toList();
+      _logger.t("${ammo.length} ammo loaded");
+      return ammo;
+    } catch (e) {
+      _logger.w("Ammo not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Animal>> readAnimals() async {
-    final data = await _getData("animals");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Animal.fromJson(e)).toList();
+    try {
+      final data = await _getData("animals");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Animal> animals = list.map((e) => Animal.fromJson(e)).toList();
+      _logger.t("${animals.length} animals loaded");
+      return animals;
+    } catch (e) {
+      _logger.w("Animals not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<IdtoId>> readAnimalsCallers() async {
-    final data = await _getData("animalscallers");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => IdtoId.fromJson(e, "ANIMAL_ID", "CALLER_ID")).toList();
+    try {
+      final data = await _getData("animalscallers");
+      final list = json.decode(data) as List<dynamic>;
+      final List<IdtoId> animalsCallers = list.map((e) => IdtoId.fromJson(e, "ANIMAL_ID", "CALLER_ID")).toList();
+      _logger.t("${list.length} animal's callers loaded");
+      return animalsCallers;
+    } catch (e) {
+      _logger.w("Animal's callers not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<AnimalFur>> readAnimalsFurs() async {
-    final data = await _getData("animalsfurs");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => AnimalFur.fromJson(e)).toList();
+    try {
+      final data = await _getData("animalsfurs");
+      final list = json.decode(data) as List<dynamic>;
+      final List<AnimalFur> animalsFurs = list.map((e) => AnimalFur.fromJson(e)).toList();
+      _logger.t("${animalsFurs.length} animal's furs loaded");
+      return animalsFurs;
+    } catch (e) {
+      _logger.w("Animal's furs not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<IdtoId>> readAnimalsReserves() async {
-    final data = await _getData("animalsreserves");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => IdtoId.fromJson(e, "ANIMAL_ID", "RESERVE_ID")).toList();
+    try {
+      final data = await _getData("animalsreserves");
+      final list = json.decode(data) as List<dynamic>;
+      final List<IdtoId> animalsReserves = list.map((e) => IdtoId.fromJson(e, "ANIMAL_ID", "RESERVE_ID")).toList();
+      _logger.t("${animalsReserves.length} animal's reserves loaded");
+      return animalsReserves;
+    } catch (e) {
+      _logger.w("Animal's reserves not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Zone>> readAnimalsZones() async {
-    final data = await _getData("animalszones");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Zone.fromJson(e)).toList();
+    try {
+      final data = await _getData("animalszones");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Zone> animalsZones = list.map((e) => Zone.fromJson(e)).toList();
+      _logger.t("${animalsZones.length} animal's zones loaded");
+      return animalsZones;
+    } catch (e) {
+      _logger.w("Animal's zones not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Caller>> readCallers() async {
-    final data = await _getData("callers");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Caller.fromJson(e)).toList();
+    try {
+      final data = await _getData("callers");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Caller> callers = list.map((e) => Caller.fromJson(e)).toList();
+      _logger.t("${callers.length} callers loaded");
+      return callers;
+    } catch (e) {
+      _logger.w("Callers not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Dlc>> readDlcs() async {
-    final data = await _getData("dlcs");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Dlc.fromJson(e)).toList();
+    try {
+      final data = await _getData("dlcs");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Dlc> dlcs = list.map((e) => Dlc.fromJson(e)).toList();
+      _logger.t("${dlcs.length} dlcs loaded");
+      return dlcs;
+    } catch (e) {
+      _logger.w("Dlcs not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Fur>> readFurs() async {
-    final data = await _getData("furs");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Fur.fromJson(e)).toList();
+    try {
+      final data = await _getData("furs");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Fur> furs = list.map((e) => Fur.fromJson(e)).toList();
+      _logger.t("${furs.length} furs loaded");
+      return furs;
+    } catch (e) {
+      _logger.w("Furs not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Reserve>> readReserves() async {
-    final data = await _getData("reserves");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Reserve.fromJson(e)).toList();
+    try {
+      final data = await _getData("reserves");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Reserve> reserves = list.map((e) => Reserve.fromJson(e)).toList();
+      _logger.t("${reserves.length} reserves loaded");
+      return reserves;
+    } catch (e) {
+      _logger.w("Reserves not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Weapon>> readWeapons() async {
-    final data = await _getData("weapons");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Weapon.fromJson(e)).toList();
+    try {
+      final data = await _getData("weapons");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Weapon> weapons = list.map((e) => Weapon.fromJson(e)).toList();
+      _logger.t("${weapons.length} weapons loaded");
+      return weapons;
+    } catch (e) {
+      _logger.w("Weapons not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<WeaponAmmo>> readWeaponsAmmo() async {
-    final data = await _getData("weaponsammo");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => WeaponAmmo.fromJson(e, "WEAPON_ID", "AMMO_ID")).toList();
+    try {
+      final data = await _getData("weaponsammo");
+      final list = json.decode(data) as List<dynamic>;
+      final List<WeaponAmmo> weaponsAmmo = list.map((e) => WeaponAmmo.fromJson(e, "WEAPON_ID", "AMMO_ID")).toList();
+      _logger.t("${weaponsAmmo.length} weapon's ammo loaded");
+      return weaponsAmmo;
+    } catch (e) {
+      _logger.w("Weapon's ammo not loaded");
+      rethrow;
+    }
   }
 
   static Future<Map<String, dynamic>> readMapObjects() async {
-    final data = await _getData("mapobjects");
-    Map<String, dynamic> result = Map.castFrom(json.decode(data));
-    return result;
+    try {
+      final data = await _getData("mapobjects");
+      final Map<String, dynamic> mapObjects = Map.castFrom(json.decode(data));
+      _logger.t("${mapObjects.length} map objects loaded");
+      return mapObjects;
+    } catch (e) {
+      _logger.w("Map objects not loaded");
+      return {};
+    }
   }
 
   static Future<List<Mission>> readMissions() async {
-    final data = await _getData("missions");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Mission.fromJson(e)).toList();
+    try {
+      final data = await _getData("missions");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Mission> missions = list.map((e) => Mission.fromJson(e)).toList();
+      _logger.t("${missions.length} missions loaded");
+      return missions;
+    } catch (e) {
+      _logger.w("Missions not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Giver>> readMissionsGivers() async {
-    final data = await _getData("missionsgivers");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Giver.fromJson(e)).toList();
+    try {
+      final data = await _getData("missionsgivers");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Giver> missionsGivers = list.map((e) => Giver.fromJson(e)).toList();
+      _logger.t("${missionsGivers.length} mission's givers loaded");
+      return missionsGivers;
+    } catch (e) {
+      _logger.w("Mission's givers not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Perk>> readPerks() async {
-    final data = await _getData("perks");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Perk.fromJson(e)).toList();
+    try {
+      final data = await _getData("perks");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Perk> perks = list.map((e) => Perk.fromJson(e)).toList();
+      _logger.t("${perks.length} perks loaded");
+      return perks;
+    } catch (e) {
+      _logger.w("Perks not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Skill>> readSkills() async {
-    final data = await _getData("skills");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Skill.fromJson(e)).toList();
+    try {
+      final data = await _getData("skills");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Skill> skills = list.map((e) => Skill.fromJson(e)).toList();
+      _logger.t("${skills.length} skills loaded");
+      return skills;
+    } catch (e) {
+      _logger.w("Skills not loaded");
+      rethrow;
+    }
   }
 
   static Future<List<Multimount>> readMultimounts() async {
-    final data = await _getData("multimounts");
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Multimount.fromJson(e)).toList();
+    try {
+      final data = await _getData("multimounts");
+      final list = json.decode(data) as List<dynamic>;
+      final List<Multimount> multimounts = list.map((e) => Multimount.fromJson(e)).toList();
+      _logger.t("${multimounts.length} multimounts loaded");
+      return multimounts;
+    } catch (e) {
+      _logger.w("Multimounts not loaded");
+      rethrow;
+    }
   }
 
   static void initializeWeaponAmmo() {

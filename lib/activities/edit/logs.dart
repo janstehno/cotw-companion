@@ -55,7 +55,7 @@ class ActivityEditLogsState extends State<ActivityEditLogs> {
   final TextEditingController _controllerWeightNumber = TextEditingController();
   final RegExp _equalsDoubleTrophyNumber = RegExp(r"^\d{1,4}(\.\d{1,3})?$");
   final RegExp _equalsDoubleWeightNumber = RegExp(r"^\d{1,4}(\.\d{1,3})?$");
-  final HelperLogger _logger = HelperLogger("[LOGS] [ADD & EDIT]");
+  final HelperLogger _logger = HelperLogger.logsEdit();
   final List<Animal> _animals = [];
   final List<AnimalFur> _furs = [];
   final List<Log> _trophyLodgeLogs = [];
@@ -387,7 +387,7 @@ class ActivityEditLogsState extends State<ActivityEditLogs> {
   }
 
   Log _createLog() => Log(
-        id: widget.log == null ? HelperLog.logs.length : widget.log!.id,
+        id: widget.log != null ? widget.log!.id : HelperLog.logs.length,
         date: Utils.dateToString(_dateTime),
         reserveId: widget.fromTrophyLodge ? -1 : _selectedReserveId,
         animalId: _selectedAnimalId,

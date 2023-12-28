@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/edit/abstract_edit.dart';
+import 'package:cotwcompanion/activities/edit/edit.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/enumerator.dart';
 import 'package:cotwcompanion/model/enumerator.dart';
 import 'package:cotwcompanion/widgets/text_field_indicator.dart';
@@ -26,10 +26,12 @@ class ActivityEditCounters extends ActivityEdit {
 class ActivityEditCountersState extends ActivityEditState {
   final TextEditingController _controllerValue = TextEditingController(text: "0");
 
+  late final Counter? _counter;
   late final int _enumeratorId;
 
   @override
   void initState() {
+    _counter = (widget as ActivityEditCounters).counter;
     _enumeratorId = (widget as ActivityEditCounters).enumeratorId;
     _controllerValue.addListener(() => reload());
     super.initState();
@@ -37,11 +39,11 @@ class ActivityEditCountersState extends ActivityEditState {
 
   @override
   void getData() {
-    if ((widget as ActivityEditCounters).counter != null) {
+    if (_counter != null) {
       //WHEN EDITING
       editing = true;
-      controller.text = (widget as ActivityEditCounters).counter!.name;
-      _controllerValue.text = (widget as ActivityEditCounters).counter!.value.toString();
+      controller.text = HelperEnumerator.getCounter(_enumeratorId, _counter!.id).name;
+      _controllerValue.text = HelperEnumerator.getCounter(_enumeratorId, _counter!.id).value.toString();
     }
   }
 
@@ -57,10 +59,11 @@ class ActivityEditCountersState extends ActivityEditState {
   }
 
   Counter _createCounter() {
-    Counter? counter = (widget as ActivityEditCounters).counter;
-    int counterId = editing ? counter!.id : HelperEnumerator.enumerators.elementAt(_enumeratorId).counters.length;
-    counter = Counter(id: counterId, name: controller.text, value: int.tryParse(_controllerValue.text) ?? 0);
-    return counter;
+    return Counter(
+      id: editing ? _counter!.id : HelperEnumerator.enumerators.elementAt(_enumeratorId).counters.length,
+      name: controller.text,
+      value: int.tryParse(_controllerValue.text) ?? 0,
+    );
   }
 
   Widget _buildValue() {

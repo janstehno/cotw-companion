@@ -1,18 +1,18 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/edit/abstract_edit.dart';
+import 'package:cotwcompanion/activities/edit/edit.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/enumerator.dart';
 import 'package:cotwcompanion/model/enumerator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityEditEnumerators extends ActivityEdit {
-  final int? enumeratorId;
+  final Enumerator? enumerator;
 
   const ActivityEditEnumerators({
     super.key,
     required super.callback,
-    this.enumeratorId,
+    this.enumerator,
   });
 
   @override
@@ -20,13 +20,20 @@ class ActivityEditEnumerators extends ActivityEdit {
 }
 
 class ActivityEditEnumeratorsState extends ActivityEditState {
+  late final Enumerator? _enumerator;
+
+  @override
+  void initState() {
+    _enumerator = (widget as ActivityEditEnumerators).enumerator;
+    super.initState();
+  }
+
   @override
   void getData() {
-    int? enumeratorId = (widget as ActivityEditEnumerators).enumeratorId;
-    if (enumeratorId != null) {
+    if (_enumerator != null) {
       //WHEN EDITING
       editing = true;
-      controller.text = HelperEnumerator.getEnumerator(enumeratorId).name;
+      controller.text = HelperEnumerator.getEnumerator(_enumerator!.id).name;
     }
   }
 
@@ -42,10 +49,11 @@ class ActivityEditEnumeratorsState extends ActivityEditState {
   }
 
   Enumerator _createEnumerator() {
-    int? enumeratorId = (widget as ActivityEditEnumerators).enumeratorId;
-    Enumerator enumerator = HelperEnumerator.getEnumerator(enumeratorId!);
-    int newEnumeratorId = editing ? enumerator.id : HelperEnumerator.enumerators.length;
-    return Enumerator(id: newEnumeratorId, name: controller.text, counters: enumerator.counters);
+    return Enumerator(
+      id: editing ? _enumerator!.id : HelperEnumerator.enumerators.length,
+      name: controller.text,
+      counters: _enumerator != null ? HelperEnumerator.getEnumerator(_enumerator!.id).counters : [],
+    );
   }
 
   @override

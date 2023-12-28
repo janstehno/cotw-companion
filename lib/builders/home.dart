@@ -63,7 +63,7 @@ class BuilderHome extends StatelessWidget {
     HelperEnumerator.readFile(),
   ];
 
-  void _initializeData(AsyncSnapshot<List<dynamic>> snapshot, BuildContext context) async {
+  void _initializeJsonData(AsyncSnapshot<List<dynamic>> snapshot) {
     List<Ammo> ammo = snapshot.data![0] ?? [];
     List<Animal> animals = snapshot.data![1] ?? [];
     List<IdtoId> animalsCallers = snapshot.data![2] ?? [];
@@ -82,15 +82,15 @@ class BuilderHome extends StatelessWidget {
     List<Perk> perks = snapshot.data![15] ?? [];
     List<Skill> skills = snapshot.data![16] ?? [];
     List<Multimount> multimounts = snapshot.data![17] ?? [];
+    HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, mapObjects,
+        missions, missionsGivers, perks, skills, multimounts);
+  }
+
+  void _initializeFileData(AsyncSnapshot<List<dynamic>> snapshot, BuildContext context) {
     List<Log> logs = snapshot.data![18] ?? [];
     List<Loadout> loadouts = snapshot.data![19] ?? [];
     List<Enumerator> enumerators = snapshot.data![20] ?? [];
-    HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs, reserves, weapons, weaponsAmmo, mapObjects,
-        missions, missionsGivers, perks, skills, multimounts);
-    HelperJSON.initializeWeaponAmmo();
-    HelperFilter.initializeFilters();
-    HelperLog.setContext(context);
-    HelperLog.setLogs(logs);
+    HelperLog.setLogs(logs, context);
     HelperLoadout.setLoadouts(loadouts);
     HelperEnumerator.setEnumerators(enumerators);
   }
@@ -114,23 +114,23 @@ class BuilderHome extends StatelessWidget {
     if (snapshot.hasError) {
       return WidgetError(
         code: "Ex0001",
-        text: snapshot.error.toString(),
-        context: context,
+        error: "${snapshot.error}",
+        stack: "${snapshot.stackTrace}",
       );
     } else if (!snapshot.hasData) {
-      return WidgetError(
+      return const WidgetError(
         code: "Ex0002",
-        text: "Snapshot has no data.",
-        context: context,
+        error: "Snapshot has no data.",
       );
     } else if (snapshot.data!.length != _data.length) {
-      return WidgetError(
+      return const WidgetError(
         code: "Ex0003",
-        text: "Snapshot data length is not correct.",
-        context: context,
+        error: "Snapshot data length is not correct.",
       );
     } else {
-      _initializeData(snapshot, context);
+      _initializeJsonData(snapshot);
+      _initializeFileData(snapshot, context);
+      HelperFilter.initializeFilters();
       return const ActivityHome();
     }
   }

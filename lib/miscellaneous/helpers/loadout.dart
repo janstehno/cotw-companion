@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/ammo.dart';
@@ -10,6 +11,8 @@ import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 
 class HelperLoadout {
+  static final HelperLogger _logger = HelperLogger.appLoading();
+
   static late Loadout _lastRemovedLoadout;
 
   static final List<Loadout> _loadouts = [];
@@ -100,8 +103,10 @@ class HelperLoadout {
   }
 
   static void setLoadouts(List<Loadout> loadouts) {
+    _logger.i("Initializing loadouts in HelperLoadout...");
     addLoadouts(loadouts);
     _reIndex();
+    _logger.t("Loadouts initialized");
   }
 
   static void addLoadout(Loadout loadout) {
@@ -172,9 +177,16 @@ class HelperLoadout {
   }
 
   static Future<List<Loadout>> readFile() async {
-    final data = await Utils.readFile(Values.loadouts);
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Loadout.fromJson(e)).toList();
+    try {
+      final data = await Utils.readFile(Values.loadouts);
+      final list = json.decode(data) as List<dynamic>;
+      final List<Loadout> loadouts = list.map((e) => Loadout.fromJson(e)).toList();
+      _logger.t("${loadouts.length} loadouts loaded");
+      return loadouts;
+    } catch (e) {
+      _logger.t("Loadouts not loaded");
+      rethrow;
+    }
   }
 
   static parseToJson() {

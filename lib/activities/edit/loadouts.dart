@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jan Stehno
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/activities/edit/abstract_edit.dart';
+import 'package:cotwcompanion/activities/edit/edit.dart';
 import 'package:cotwcompanion/lists/add_edit_loadout/loadouts_items.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';

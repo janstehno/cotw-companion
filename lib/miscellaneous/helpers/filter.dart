@@ -6,6 +6,7 @@ import 'package:cotwcompanion/miscellaneous/helpers/enumerator.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -22,6 +23,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HelperFilter {
+  static final HelperLogger _logger = HelperLogger.appLoading();
+
   static const Map<FilterKey, dynamic> _defaultFilters = {
     FilterKey.reservesCountMin: 8,
     FilterKey.reservesCountMax: 19,
@@ -60,7 +63,9 @@ class HelperFilter {
   static Map<FilterKey, dynamic> _filters = {};
 
   static void initializeFilters() {
+    _logger.i("Initializing filters in HelperFilter...");
     _filters = deepCopyFilters(_defaultFilters);
+    _logger.t("Filters initialized");
   }
 
   static Map<K, V> deepCopyFilters<K, V>(Map<K, V> original) {

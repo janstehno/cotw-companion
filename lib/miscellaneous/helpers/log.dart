@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -11,6 +12,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HelperLog {
+  static final HelperLogger _logger = HelperLogger.appLoading();
+
   static late Log _lastRemovedLog;
 
   static late BuildContext _context;
@@ -25,10 +28,6 @@ class HelperLog {
   static List<Log> get logs => _logs;
 
   static List<Log> get corruptedLogs => _corruptedLogs;
-
-  static void setContext(BuildContext context) {
-    _context = context;
-  }
 
   static void _reIndex() {
     _logs.sort((a, b) => b.dateForCompare.compareTo(a.dateForCompare));
@@ -74,10 +73,13 @@ class HelperLog {
     }
   }
 
-  static void setLogs(List<Log> logs) {
+  static void setLogs(List<Log> logs, BuildContext context) {
+    _logger.i("Initializing logs in HelperLog...");
+    _context = context;
     addLogs(logs);
     _reIndex();
     _reName();
+    _logger.t("Logs initialized");
   }
 
   static void addLog(Log log) {
@@ -155,9 +157,16 @@ class HelperLog {
   }
 
   static Future<List<Log>> readFile() async {
-    final data = await Utils.readFile(Values.logbook);
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Log.fromJson(e)).toList();
+    try {
+      final data = await Utils.readFile(Values.logbook);
+      final list = json.decode(data) as List<dynamic>;
+      final List<Log> logs = list.map((e) => Log.fromJson(e)).toList();
+      _logger.t("${logs.length} logs loaded");
+      return logs;
+    } catch (e) {
+      _logger.t("Logs not loaded");
+      rethrow;
+    }
   }
 
   static String parseToJson() {

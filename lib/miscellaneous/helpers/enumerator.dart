@@ -3,11 +3,14 @@
 import 'dart:convert';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/enumerator.dart';
 
 class HelperEnumerator {
+  static final HelperLogger _logger = HelperLogger.appLoading();
+
   static late Enumerator _lastRemovedEnumerator;
   static late Counter _lastRemovedCounter;
 
@@ -26,10 +29,12 @@ class HelperEnumerator {
   }
 
   static void setEnumerators(List<Enumerator> enumerators) {
+    _logger.i("Initializing enumerators in HelperEnumerator...");
     _enumerators.clear();
     _enumerators.addAll(enumerators);
     _reSort();
     writeFile();
+    _logger.t("Enumerators initialized");
   }
 
   static void addEnumerator(Enumerator enumerator) {
@@ -46,6 +51,10 @@ class HelperEnumerator {
 
   static Enumerator getEnumerator(int enumeratorId) {
     return _enumerators.elementAt(enumeratorId);
+  }
+
+  static Counter getCounter(int enumeratorId, int counterId) {
+    return getEnumerator(enumeratorId).counterOnIndex(counterId);
   }
 
   static void changeIndexOfEnumerators(int enumeratorId, int newEnumeratorId) {
@@ -152,9 +161,16 @@ class HelperEnumerator {
   }
 
   static Future<List<Enumerator>> readFile() async {
-    final data = await Utils.readFile(Values.enumerators);
-    final list = json.decode(data) as List<dynamic>;
-    return list.map((e) => Enumerator.fromJson(e)).toList();
+    try {
+      final data = await Utils.readFile(Values.enumerators);
+      final list = json.decode(data) as List<dynamic>;
+      final List<Enumerator> enumerators = list.map((e) => Enumerator.fromJson(e)).toList();
+      _logger.t("${enumerators.length} enumerators loaded");
+      return enumerators;
+    } catch (e) {
+      _logger.t("Enumerators not loaded");
+      rethrow;
+    }
   }
 
   static String parseToJson() {

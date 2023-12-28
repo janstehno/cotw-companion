@@ -71,8 +71,7 @@ class App extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 home: WidgetError(
                   code: "Ex0000",
-                  text: details.toString(),
-                  context: context,
+                  error: details.toString(),
                 ),
               ));
           return ScrollConfiguration(

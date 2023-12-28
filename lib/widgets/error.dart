@@ -2,25 +2,23 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 
 class WidgetError extends StatelessWidget {
   final String code;
-  final String text;
-  final BuildContext context;
+  final String error;
+  final String stack;
 
   const WidgetError({
     Key? key,
     required this.code,
-    required this.text,
-    required this.context,
+    required this.error,
+    this.stack = "",
   }) : super(key: key);
 
   Widget _buildWidgets() {
     return WidgetScaffold(
-        appBar: WidgetAppBar(context: context),
         body: SingleChildScrollView(
             child: Container(
                 alignment: Alignment.center,
@@ -32,16 +30,39 @@ class WidgetError extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AutoSizeText(
-                      "Error has occurred. Please restart the application. Don't forget to contact me about any problems. Details:",
+                      "Error has occurred. Please restart the application. Don't forget to contact me about any problems.",
                       textAlign: TextAlign.start,
-                      style: Interface.s16w300n(Interface.dark),
+                      style: Interface.s14w500n(Interface.dark),
                     ),
                     Container(
-                        margin: const EdgeInsets.only(top: 15),
+                      margin: const EdgeInsets.only(top: 15),
+                      child: AutoSizeText(
+                        "\n$code",
+                        textAlign: TextAlign.start,
+                        style: Interface.s14w500n(Interface.dark),
+                      ),
+                    ),
+                    Container(
+                        margin: const EdgeInsets.only(top: 5),
                         child: AutoSizeText(
-                          "$code\n$text",
+                          error,
                           textAlign: TextAlign.start,
-                          style: Interface.s16w300n(Interface.dark),
+                          style: Interface.s14w300n(Interface.dark),
+                        )),
+                    Container(
+                      margin: const EdgeInsets.only(top: 15),
+                      child: AutoSizeText(
+                        "\nStack",
+                        textAlign: TextAlign.start,
+                        style: Interface.s14w500n(Interface.dark),
+                      ),
+                    ),
+                    Container(
+                        margin: const EdgeInsets.only(top: 5),
+                        child: AutoSizeText(
+                          stack,
+                          textAlign: TextAlign.start,
+                          style: Interface.s14w300n(Interface.dark),
                         )),
                   ],
                 ))));

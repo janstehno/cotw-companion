@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/builders/home.dart';
+import 'package:cotwcompanion/builders/home/data_first.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/scroll_behavior.dart';
@@ -61,36 +61,42 @@ class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   MaterialApp _buildApp(BuildContext context) {
+    precacheImage(const AssetImage("assets/graphics/images/cotw.jpg"), context);
     return MaterialApp(
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        debugShowCheckedModeBanner: false,
-        builder: (BuildContext context, Widget? widget) {
-          ErrorWidget.builder = ((details) => MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: WidgetError(
-                  code: "Ex0000",
-                  error: details.toString(),
-                ),
-              ));
-          return ScrollConfiguration(
-            behavior: InvisibleScrollBehavior(),
-            child: widget!,
-          );
-        },
-        theme: ThemeData(
-            brightness: Brightness.dark,
-            scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Interface.ff42)),
-            textSelectionTheme: TextSelectionThemeData(selectionColor: Interface.light, selectionHandleColor: Interface.dark),
-            fontFamily: "Normal"),
-        home: Column(mainAxisSize: MainAxisSize.max, children: [
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      debugShowCheckedModeBanner: false,
+      builder: (BuildContext context, Widget? widget) {
+        ErrorWidget.builder = ((details) => MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: WidgetError(
+                code: "Ex0000",
+                error: details.toString(),
+              ),
+            ));
+        return ScrollConfiguration(
+          behavior: InvisibleScrollBehavior(),
+          child: widget!,
+        );
+      },
+      theme: ThemeData(
+          brightness: Brightness.dark,
+          scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Interface.ff42)),
+          textSelectionTheme: TextSelectionThemeData(selectionColor: Interface.light, selectionHandleColor: Interface.dark),
+          fontFamily: "Normal"),
+      home: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
           Expanded(
-              child: Container(
-            color: Interface.primary,
-            child: BuilderHome(),
-          ))
-        ]));
+            child: Container(
+              color: Interface.primary,
+              child: BuilderDataFirst(),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   @override

@@ -58,7 +58,6 @@ class HelperJSON {
     List<Reserve> reserves,
     List<Weapon> weapons,
     List<WeaponAmmo> weaponsAmmo,
-    Map<String, dynamic> mapObjects,
     List<Mission> missions,
     List<Giver> missionsGivers,
     List<Perk> perks,
@@ -84,7 +83,6 @@ class HelperJSON {
     _perks.addAll(perks);
     _skills.addAll(skills);
     _multimounts.addAll(multimounts);
-    _mapObjects.addAll(mapObjects);
     initializeWeaponAmmo();
     _logger.t("Lists initialized");
   }
@@ -107,32 +105,24 @@ class HelperJSON {
     _perks.clear();
     _skills.clear();
     _multimounts.clear();
+  }
+
+  static void setMapObjects(Map<String, dynamic> mapObjects) {
     _mapObjects.clear();
+    _mapObjects.addAll(mapObjects);
   }
 
-  static Reserve getReserve(int id) {
-    return _reserves.elementAt(id - 1);
-  }
+  static Reserve getReserve(int id) => _reserves.elementAt(id - 1);
 
-  static Animal getAnimal(int id) {
-    return _animals.elementAt(id - 1);
-  }
+  static Animal getAnimal(int id) => _animals.elementAt(id - 1);
 
-  static Caller getCaller(int id) {
-    return _callers.elementAt(id - 1);
-  }
+  static Caller getCaller(int id) => _callers.elementAt(id - 1);
 
-  static Weapon getWeapon(int id) {
-    return _weapons.elementAt(id - 1);
-  }
+  static Weapon getWeapon(int id) => _weapons.elementAt(id - 1);
 
-  static Ammo getAmmo(int id) {
-    return _ammo.elementAt(id - 1);
-  }
+  static Ammo getAmmo(int id) => _ammo.elementAt(id - 1);
 
-  static IdtoId getWeaponsAmmo(int id) {
-    return _weaponsAmmo.elementAt(id - 1);
-  }
+  static IdtoId getWeaponsAmmo(int id) => _weaponsAmmo.elementAt(id - 1);
 
   static Fur getFur(int id) {
     if (id == Values.greatOneId) return _furs.last;
@@ -154,29 +144,17 @@ class HelperJSON {
     return _animalsFurs.elementAt(1);
   }
 
-  static dynamic getMapObjects(int reserveId) {
-    return _mapObjects[reserveId.toString()];
-  }
+  static Mission getMission(int id) => _missions.elementAt(id - 1);
 
-  static Mission getMission(int id) {
-    return _missions.elementAt(id - 1);
-  }
+  static Giver getMissionGiver(int id) => _missionsGivers.elementAt(id - 1);
 
-  static Giver getMissionGiver(int id) {
-    return _missionsGivers.elementAt(id - 1);
-  }
+  static Perk getPerk(int id) => _perks.elementAt(id - 1);
 
-  static Perk getPerk(int id) {
-    return _perks.elementAt(id - 1);
-  }
+  static Skill getSkill(int id) => _skills.elementAt(id - 1);
 
-  static Skill getSkill(int id) {
-    return _skills.elementAt(id - 1);
-  }
+  static Multimount getMultimount(int id) => _multimounts.elementAt(id - 1);
 
-  static Multimount getMultimount(int id) {
-    return _multimounts.elementAt(id - 1);
-  }
+  static dynamic getMapObjects(int reserveId) => _mapObjects[reserveId.toString()];
 
   static List<Ammo> get ammo => _ammo;
 

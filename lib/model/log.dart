@@ -4,7 +4,6 @@ import 'dart:core';
 
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -188,13 +187,7 @@ class Log {
       animalId: json['ANIMAL_ID'],
       reserveId: json['RESERVE_ID'],
       furId: json['FUR_ID'],
-      trophyRating: json['TROPHY_RATING'] ??
-          HelperLog.getTrophyRating(
-            json['TROPHY'],
-            json['ANIMAL_ID'],
-            json['FUR_ID'],
-            json['CORRECT_AMMUNITION'] == 1 && json['MAX_TWO_SHOTS'] == 1 && json['VITAL_ORGAN'] == 1 && json['NO_TROPHY_ORGAN'] == 1,
-          ),
+      trophyRating: json['TROPHY_RATING'] ?? 0,
       trophy: json['TROPHY'],
       weight: json['WEIGHT'],
       imperials: json['IMPERIALS'],

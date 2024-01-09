@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/builders/home/data_first.dart';
+import 'package:cotwcompanion/builders/home.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/scroll_behavior.dart';
@@ -72,7 +72,7 @@ class App extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               home: WidgetError(
                 code: "Ex0000",
-                error: details.toString(),
+                stack: details.toString(),
               ),
             ));
         return ScrollConfiguration(
@@ -91,7 +91,7 @@ class App extends StatelessWidget {
           Expanded(
             child: Container(
               color: Interface.primary,
-              child: BuilderDataFirst(),
+              child: const BuilderHome(),
             ),
           )
         ],

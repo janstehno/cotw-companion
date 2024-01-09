@@ -41,7 +41,7 @@ class HelperLog {
     }
   }
 
-  static void _reName() {
+  static void reName() {
     for (Log log in _logs) {
       Animal animal = HelperJSON.getAnimal(log.animalId);
       //FOR SORTING & FILTERING
@@ -78,39 +78,34 @@ class HelperLog {
     _context = context;
     addLogs(logs);
     _reIndex();
-    _reName();
     _logger.t("Logs initialized");
   }
 
   static void addLog(Log log) {
     _logs.add(log);
-    _reIndex();
-    _reName();
+    reName();
     writeFile();
   }
 
   static void editLog(Log log) {
     _logs[log.id] = log;
-    _reName();
+    reName();
     writeFile();
   }
 
   static void undoRemove() {
     addLog(_lastRemovedLog);
-    _reIndex();
   }
 
   static void removeLogOnIndex(int index) {
     _lastRemovedLog = _logs.elementAt(index);
     _logs.removeAt(index);
-    _reIndex();
     writeFile();
   }
 
   static void removeAll() {
     _logs.clear();
     _corruptedLogs.clear();
-    _reIndex();
     writeFile();
   }
 
@@ -143,7 +138,6 @@ class HelperLog {
       if (logs.isNotEmpty) {
         addLogs(logs);
         _reIndex();
-        _reName();
         writeFile();
         return true;
       }
@@ -184,23 +178,5 @@ class HelperLog {
       parsed += "]";
     }
     return parsed;
-  }
-
-  static int getTrophyRating(double trophy, int animalId, int furId, bool harvestCheckPassed) {
-    final Animal animal = HelperJSON.getAnimal(animalId);
-    final int decrease = harvestCheckPassed ? 0 : 1;
-    if (furId == Values.greatOneId) {
-      return 5 - (decrease * 2);
-    }
-    if (trophy >= animal.diamond) {
-      return 4 - decrease;
-    } else if (trophy >= animal.gold) {
-      return 3 - decrease;
-    } else if (trophy >= animal.silver) {
-      return 2 - decrease;
-    } else if (trophy > 0) {
-      return 1 - decrease;
-    }
-    return 0;
   }
 }

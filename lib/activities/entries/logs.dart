@@ -47,6 +47,7 @@ class ActivityLogsState extends ActivityEntriesState {
   void initState() {
     _settings = Provider.of<Settings>(context, listen: false);
     _trophyLodge = (widget as ActivityLogs).trophyLodge;
+    HelperLog.reName();
     super.initState();
   }
 

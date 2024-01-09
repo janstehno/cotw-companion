@@ -2,7 +2,6 @@
 
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:flutter/material.dart';
-import 'package:material_scrollbar/material_scrollbar.dart';
 
 class WidgetScrollbar extends StatelessWidget {
   final Widget child;
@@ -13,9 +12,9 @@ class WidgetScrollbar extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildWidgets() {
-    return MaterialScrollBar(
-      trackColor: Interface.ff42.withOpacity(0.5),
+    return RawScrollbar(
       thumbColor: Interface.primary,
+      thickness: 3,
       child: child,
     );
   }

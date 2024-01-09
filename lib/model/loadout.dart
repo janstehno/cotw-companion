@@ -7,18 +7,18 @@ import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 class Loadout {
   int _id;
   String _name;
-  final List<dynamic> _ammo;
-  final List<dynamic> _callers;
+  List<dynamic> _ammo;
+  List<dynamic> _callers;
 
   Loadout({
     id,
     name,
-    required ammo,
-    required callers,
+    ammo,
+    callers,
   })  : _id = id ?? -1,
         _name = name ?? "Default",
-        _ammo = ammo,
-        _callers = callers;
+        _ammo = ammo ?? [],
+        _callers = callers ?? [];
 
   int get id => _id;
 

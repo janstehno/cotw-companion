@@ -16,7 +16,7 @@ class HelperLoadout {
   static late Loadout _lastRemovedLoadout;
 
   static final List<Loadout> _loadouts = [];
-  static final Loadout _defaultLoadout = Loadout(ammo: [], callers: []);
+  static final Loadout _defaultLoadout = Loadout();
 
   static Loadout _activeLoadout = _defaultLoadout;
 
@@ -111,7 +111,6 @@ class HelperLoadout {
 
   static void addLoadout(Loadout loadout) {
     _loadouts.add(loadout);
-    _reIndex();
     writeFile();
   }
 
@@ -122,7 +121,6 @@ class HelperLoadout {
 
   static void undoRemove() {
     addLoadout(_lastRemovedLoadout);
-    _reIndex();
   }
 
   static void removeLoadoutOnIndex(int index) {
@@ -131,13 +129,11 @@ class HelperLoadout {
     if (_loadouts.isEmpty || _activeLoadout.id == index) {
       useLoadout(-1);
     }
-    _reIndex();
     writeFile();
   }
 
   static void removeAll() {
     _loadouts.clear();
-    _reIndex();
     writeFile();
   }
 

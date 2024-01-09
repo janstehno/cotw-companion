@@ -13,7 +13,7 @@ class WidgetError extends StatelessWidget {
   const WidgetError({
     Key? key,
     required this.code,
-    required this.error,
+    this.error = "",
     this.stack = "",
   }) : super(key: key);
 
@@ -42,28 +42,34 @@ class WidgetError extends StatelessWidget {
                         style: Interface.s14w500n(Interface.dark),
                       ),
                     ),
-                    Container(
-                        margin: const EdgeInsets.only(top: 5),
-                        child: AutoSizeText(
-                          error,
-                          textAlign: TextAlign.start,
-                          style: Interface.s14w300n(Interface.dark),
-                        )),
-                    Container(
-                      margin: const EdgeInsets.only(top: 15),
-                      child: AutoSizeText(
-                        "\nStack",
-                        textAlign: TextAlign.start,
-                        style: Interface.s14w500n(Interface.dark),
-                      ),
-                    ),
-                    Container(
-                        margin: const EdgeInsets.only(top: 5),
-                        child: AutoSizeText(
-                          stack,
-                          textAlign: TextAlign.start,
-                          style: Interface.s14w300n(Interface.dark),
-                        )),
+                    error.isNotEmpty
+                        ? Container(
+                            margin: const EdgeInsets.only(top: 5),
+                            child: AutoSizeText(
+                              error,
+                              textAlign: TextAlign.start,
+                              style: Interface.s14w300n(Interface.dark),
+                            ))
+                        : const SizedBox.shrink(),
+                    stack.isNotEmpty
+                        ? Container(
+                            margin: EdgeInsets.only(top: error.isNotEmpty ? 15 : 10),
+                            child: AutoSizeText(
+                              "\nStack",
+                              textAlign: TextAlign.start,
+                              style: Interface.s14w500n(Interface.dark),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    stack.isNotEmpty
+                        ? Container(
+                            margin: const EdgeInsets.only(top: 5),
+                            child: AutoSizeText(
+                              stack,
+                              textAlign: TextAlign.start,
+                              style: Interface.s14w300n(Interface.dark),
+                            ))
+                        : const SizedBox.shrink(),
                   ],
                 ))));
   }

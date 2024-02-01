@@ -103,46 +103,52 @@ class Interface {
   static const Color ff00 = Color(0xFF000000);
 
   //appbar
-  static TextStyle s28w600c(Color color) => TextStyle(color: color, fontSize: 28, fontWeight: FontWeight.w600, fontFamily: "Condensed");
+  static TextStyle s28w600c(Color color) => TextStyle(color: color, fontSize: 28, fontWeight: FontWeight.w600, height: 1.1, fontFamily: "Condensed");
 
   //homeTitle
-  static TextStyle s24w600c(Color color) => TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.w600, fontFamily: "Condensed");
+  static TextStyle s24w600c(Color color) => TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.w600, height: 1.1, fontFamily: "Condensed");
 
   //bigTitle
-  static TextStyle s20w600c(Color color) => TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.w600, fontFamily: "Condensed");
+  static TextStyle s20w600c(Color color) => TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.w600, height: 1.1, fontFamily: "Condensed");
 
   //homeText
-  static TextStyle s18w400c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: "Condensed");
+  static TextStyle s18w400c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w400, height: 1.1, fontFamily: "Condensed");
 
   //mediumTitle
-  static TextStyle s18w600c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w600, fontFamily: "Condensed");
+  static TextStyle s18w600c(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w600, height: 1.1, fontFamily: "Condensed");
 
   //smallTitle
-  static TextStyle s16w600c(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w600, fontFamily: "Condensed");
+  static TextStyle s16w600c(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w600, height: 1.1, fontFamily: "Condensed");
 
   //importantText, stats, buttons, sliders
-  static TextStyle s18w500n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w500, fontFamily: "Normal");
+  static TextStyle s18w500n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w500, height: 1.1, fontFamily: "Normal");
 
   //itemTitle
-  static TextStyle s18w300n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w300, fontFamily: "Normal");
+  static TextStyle s18w300n(Color color) => TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w300, height: 1.1, fontFamily: "Normal");
 
   //bigTag, richText
-  static TextStyle s16w500n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500, fontFamily: "Normal");
+  static TextStyle s16w500n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500, height: 1.1, fontFamily: "Normal");
 
   //generalText
-  static TextStyle s16w300n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w300, fontFamily: "Normal");
+  static TextStyle s16w300n(Color color) => TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w300, height: 1.1, fontFamily: "Normal");
 
   //mediumTag
-  static TextStyle s14w500n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w500, fontFamily: "Normal");
+  static TextStyle s14w500n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w500, height: 1.1, fontFamily: "Normal");
 
   //snackBar, logText, loadoutText
-  static TextStyle s14w300n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w300, fontFamily: "Normal");
+  static TextStyle s14w300n(Color color) => TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w300, height: 1.1, fontFamily: "Normal");
 
   //smallTag
-  static TextStyle s12w500n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w500, fontFamily: "Normal");
+  static TextStyle s12w500n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w500, height: 1.1, fontFamily: "Normal");
 
   //smallText, subTextTitle
-  static TextStyle s12w300n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w300, fontFamily: "Normal");
+  static TextStyle s12w300n(Color color) => TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w300, height: 1.1, fontFamily: "Normal");
+
+  //smallestImportantText
+  static TextStyle s10w500n(Color color) => TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w500, height: 1.1, fontFamily: "Normal");
+
+  //smallestText
+  static TextStyle s10w300n(Color color) => TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w300, height: 1.1, fontFamily: "Normal");
 
   //textFieldBorder
   static InputBorder textFieldBorder() => const OutlineInputBorder(borderSide: BorderSide(width: 0.05, color: Colors.transparent));
@@ -170,16 +176,17 @@ class Interface {
       rarityCommon = ffee;
       omniDatePickerScheme = ColorScheme(
         brightness: Brightness.dark,
-        primary: Interface.primary,
-        onPrimary: Interface.accent,
-        secondary: Colors.transparent,
-        onSecondary: Colors.transparent,
-        error: Colors.transparent,
-        onError: Colors.transparent,
-        background: Colors.transparent,
-        onBackground: Colors.transparent,
-        surface: Colors.transparent,
-        onSurface: Interface.alwaysLight,
+        primary: primary,
+        onPrimary: accent,
+        secondary: body,
+        onSecondary: dark,
+        background: body,
+        onBackground: dark,
+        surface: sectionTitle,
+        onSurface: dark,
+        surfaceTint: disabled,
+        error: body,
+        onError: red,
       );
     } else {
       body = fffe;
@@ -202,16 +209,17 @@ class Interface {
       rarityCommon = ff17;
       omniDatePickerScheme = ColorScheme(
         brightness: Brightness.light,
-        primary: Interface.primary,
-        onPrimary: Interface.accent,
-        secondary: Colors.transparent,
-        onSecondary: Colors.transparent,
-        error: Colors.transparent,
-        onError: Colors.transparent,
-        background: Colors.transparent,
-        onBackground: Colors.transparent,
-        surface: Colors.transparent,
-        onSurface: Interface.alwaysDark,
+        primary: primary,
+        onPrimary: accent,
+        secondary: body,
+        onSecondary: dark,
+        background: body,
+        onBackground: dark,
+        surface: sectionTitle,
+        onSurface: dark,
+        surfaceTint: disabled,
+        error: body,
+        onError: red,
       );
     }
   }

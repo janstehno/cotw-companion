@@ -83,90 +83,48 @@ class BuilderHomeState extends State<BuilderHome> {
   }
 
   Future<List<dynamic>> _loadData() async {
-    if (_loadedData[0] == null) {
-      List<Ammo> ammo = await HelperJSON.readAmmo();
-      _updateProgress(0, ammo);
-    }
-    if (_loadedData[1] == null) {
-      List<Animal> animals = await HelperJSON.readAnimals();
-      _updateProgress(1, animals);
-    }
-    if (_loadedData[2] == null) {
-      List<IdtoId> animalsCallers = await HelperJSON.readAnimalsCallers();
-      _updateProgress(2, animalsCallers);
-    }
-    if (_loadedData[3] == null) {
-      List<AnimalFur> animalsFurs = await HelperJSON.readAnimalsFurs();
-      _updateProgress(3, animalsFurs);
-    }
-    if (_loadedData[4] == null) {
-      List<IdtoId> animalsReserves = await HelperJSON.readAnimalsReserves();
-      _updateProgress(4, animalsReserves);
-    }
-    if (_loadedData[5] == null) {
-      List<Zone> animalsZones = await HelperJSON.readAnimalsZones();
-      _updateProgress(5, animalsZones);
-    }
-    if (_loadedData[6] == null) {
-      List<Caller> callers = await HelperJSON.readCallers();
-      _updateProgress(6, callers);
-    }
-    if (_loadedData[7] == null) {
-      List<Dlc> dlcs = await HelperJSON.readDlcs();
-      _updateProgress(7, dlcs);
-    }
-    if (_loadedData[8] == null) {
-      List<Fur> furs = await HelperJSON.readFurs();
-      _updateProgress(8, furs);
-    }
-    if (_loadedData[9] == null) {
-      List<Reserve> reserves = await HelperJSON.readReserves();
-      _updateProgress(9, reserves);
-    }
-    if (_loadedData[10] == null) {
-      List<Weapon> weapons = await HelperJSON.readWeapons();
-      _updateProgress(10, weapons);
-    }
-    if (_loadedData[11] == null) {
-      List<WeaponAmmo> weaponsAmmo = await HelperJSON.readWeaponsAmmo();
-      _updateProgress(11, weaponsAmmo);
-    }
-    if (_loadedData[12] == null) {
-      List<Mission> missions = await HelperJSON.readMissions();
-      _updateProgress(12, missions);
-    }
-    if (_loadedData[13] == null) {
-      List<Giver> missionsGivers = await HelperJSON.readMissionsGivers();
-      _updateProgress(13, missionsGivers);
-    }
-    if (_loadedData[14] == null) {
-      List<Perk> perks = await HelperJSON.readPerks();
-      _updateProgress(14, perks);
-    }
-    if (_loadedData[15] == null) {
-      List<Skill> skills = await HelperJSON.readSkills();
-      _updateProgress(15, skills);
-    }
-    if (_loadedData[16] == null) {
-      List<Multimount> multimounts = await HelperJSON.readMultimounts();
-      _updateProgress(16, multimounts);
-    }
-    if (_loadedData[17] == null) {
-      Map<String, dynamic> mapObjects = await HelperJSON.readMapObjects();
-      _updateProgress(17, mapObjects);
-    }
-    if (_loadedData[18] == null) {
-      List<Log> logs = await HelperLog.readFile();
-      _updateProgress(18, logs);
-    }
-    if (_loadedData[19] == null) {
-      List<Loadout> loadouts = await HelperLoadout.readFile();
-      _updateProgress(19, loadouts);
-    }
-    if (_loadedData[20] == null) {
-      List<Enumerator> enumerators = await HelperEnumerator.readFile();
-      _updateProgress(20, enumerators);
-    }
+    List<Ammo> ammo = await HelperJSON.readAmmo();
+    _updateProgress(0, ammo);
+    List<Animal> animals = await HelperJSON.readAnimals();
+    _updateProgress(1, animals);
+    List<IdtoId> animalsCallers = await HelperJSON.readAnimalsCallers();
+    _updateProgress(2, animalsCallers);
+    List<AnimalFur> animalsFurs = await HelperJSON.readAnimalsFurs();
+    _updateProgress(3, animalsFurs);
+    List<IdtoId> animalsReserves = await HelperJSON.readAnimalsReserves();
+    _updateProgress(4, animalsReserves);
+    List<Zone> animalsZones = await HelperJSON.readAnimalsZones();
+    _updateProgress(5, animalsZones);
+    List<Caller> callers = await HelperJSON.readCallers();
+    _updateProgress(6, callers);
+    List<Dlc> dlcs = await HelperJSON.readDlcs();
+    _updateProgress(7, dlcs);
+    List<Fur> furs = await HelperJSON.readFurs();
+    _updateProgress(8, furs);
+    List<Reserve> reserves = await HelperJSON.readReserves();
+    _updateProgress(9, reserves);
+    List<Weapon> weapons = await HelperJSON.readWeapons();
+    _updateProgress(10, weapons);
+    List<WeaponAmmo> weaponsAmmo = await HelperJSON.readWeaponsAmmo();
+    _updateProgress(11, weaponsAmmo);
+    List<Mission> missions = await HelperJSON.readMissions();
+    _updateProgress(12, missions);
+    List<Giver> missionsGivers = await HelperJSON.readMissionsGivers();
+    _updateProgress(13, missionsGivers);
+    List<Perk> perks = await HelperJSON.readPerks();
+    _updateProgress(14, perks);
+    List<Skill> skills = await HelperJSON.readSkills();
+    _updateProgress(15, skills);
+    List<Multimount> multimounts = await HelperJSON.readMultimounts();
+    _updateProgress(16, multimounts);
+    Map<String, dynamic> mapObjects = await HelperJSON.readMapObjects();
+    _updateProgress(17, mapObjects);
+    List<Log> logs = await HelperLog.readFile();
+    _updateProgress(18, logs);
+    List<Loadout> loadouts = await HelperLoadout.readFile();
+    _updateProgress(19, loadouts);
+    List<Enumerator> enumerators = await HelperEnumerator.readFile();
+    _updateProgress(20, enumerators);
     return _loadedData;
   }
 

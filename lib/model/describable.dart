@@ -4,7 +4,7 @@ import 'package:cotwcompanion/model/translatable.dart';
 import 'package:flutter/material.dart';
 
 abstract class Describable extends Translatable {
-  List<dynamic> _dEn, _dRu, _dCs, _dPl, _dDe, _dFr, _dEs, _dBr, _dJa, _dHu;
+  List<dynamic> _dEn, _dRu, _dCs, _dPl, _dDe, _dFr, _dEs, _dBr, _dJa, _dZh, _dHu;
 
   Describable({
     required super.id,
@@ -17,6 +17,7 @@ abstract class Describable extends Translatable {
     super.es,
     super.br,
     super.ja,
+    super.zh,
     required dEn,
     required dRu,
     required dCs,
@@ -26,6 +27,7 @@ abstract class Describable extends Translatable {
     required dEs,
     required dBr,
     required dJa,
+    required dZh,
     dHu,
   })  : _dEn = dEn ?? [],
         _dRu = dRu ?? [],
@@ -36,6 +38,7 @@ abstract class Describable extends Translatable {
         _dEs = dEs ?? [],
         _dBr = dBr ?? [],
         _dJa = dJa ?? [],
+        _dZh = dZh ?? [],
         _dHu = dHu ?? [];
 
   set setEn(List<dynamic> en) => _dEn = en;
@@ -55,6 +58,8 @@ abstract class Describable extends Translatable {
   set setBr(List<dynamic> br) => _dBr = br;
 
   set setJa(List<dynamic> ja) => _dJa = ja;
+
+  set setZh(List<dynamic> zh) => _dZh = zh;
 
   set setHu(List<dynamic> hu) => _dHu = hu;
 
@@ -87,6 +92,9 @@ abstract class Describable extends Translatable {
         break;
       case "ja":
         result.addAll(_dJa);
+        break;
+      case "zh":
+        result.addAll(_dZh);
         break;
       case "hu":
         result.addAll(_dHu);

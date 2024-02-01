@@ -267,9 +267,9 @@ class ActivitySettingsState extends State<ActivitySettings> {
             });
           }),
       WidgetTapTextIndicator(
-          text: tr("map_zones_accuracy"),
+          text: tr("map_zones_count"),
           maxLines: 2,
-          isActive: _settings.mapZonesAccuracy,
+          isActive: _settings.mapZonesCount,
           onTap: () {
             setState(() {
               _settings.changeMapZonesAccuracy();

@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jan Stehno
 
 class Values {
-  static const String version = "1.9.5";
+  static const String version = "1.9.6";
   static const String email = "toastovac@email.cz";
   static const String discord = "Toastovac";
   static const int greatOneId = 100;

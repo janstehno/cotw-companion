@@ -8,7 +8,7 @@ abstract class EntryStatistics extends StatelessWidget {
   final List<String> labels;
   final List<dynamic> values;
 
-  final double height = 65;
+  final double height = 60;
   final double _iconSize = 15;
 
   const EntryStatistics({

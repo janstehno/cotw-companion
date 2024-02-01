@@ -16,6 +16,7 @@ class Settings extends ChangeNotifier {
     Locale("pt", "BR"),
     Locale("pt", "PT"),
     Locale("ja"),
+    Locale("zh"),
     Locale("hu"),
     Locale("tr"),
   ];
@@ -31,6 +32,7 @@ class Settings extends ChangeNotifier {
     "Português (Brasil)",
     "Português (Portugal)",
     "日本語",
+    "中文",
     "Magyar",
     "Türkçe",
   ];
@@ -42,7 +44,7 @@ class Settings extends ChangeNotifier {
   late bool _imperialUnits;
   late bool _mapZonesType;
   late bool _mapZonesStyle;
-  late bool _mapZonesAccuracy;
+  late bool _mapZonesCount;
   late bool _mapPerformanceMode;
   late bool _bestWeaponsForAnimal;
   late bool _entryDate;
@@ -58,7 +60,7 @@ class Settings extends ChangeNotifier {
     required imperialUnits,
     required mapZonesType,
     required mapZonesStyle,
-    required mapZonesAccuracy,
+    required mapZonesCount,
     required mapPerformanceMode,
     required bestWeaponsForAnimal,
     required entryDate,
@@ -66,29 +68,17 @@ class Settings extends ChangeNotifier {
     required furRarityPerCent,
   }) {
     _language = language;
-
     _color = color;
-
     _compactLogbook = compactLogbook;
-
     _darkMode = darkMode;
-
     _imperialUnits = imperialUnits;
-
     _mapZonesType = mapZonesType;
-
     _mapZonesStyle = mapZonesStyle;
-
-    _mapZonesAccuracy = mapZonesAccuracy;
-
+    _mapZonesCount = mapZonesCount;
     _mapPerformanceMode = mapPerformanceMode;
-
     _bestWeaponsForAnimal = bestWeaponsForAnimal;
-
     _entryDate = entryDate;
-
     _trophyLodgeEntry = trophyLodgeEntry;
-
     _furRarityPerCent = furRarityPerCent;
   }
 
@@ -104,7 +94,7 @@ class Settings extends ChangeNotifier {
 
   bool get mapZonesStyle => _mapZonesStyle;
 
-  bool get mapZonesAccuracy => _mapZonesAccuracy;
+  bool get mapZonesCount => _mapZonesCount;
 
   bool get mapPerformanceMode => _mapPerformanceMode;
 
@@ -192,12 +182,12 @@ class Settings extends ChangeNotifier {
 
   Future<void> changeMapZonesAccuracy() async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    if (_mapZonesAccuracy == true) {
-      _mapZonesAccuracy = false;
-      await _sharedPreferences.setBool("mapZonesAccuracy", false);
+    if (_mapZonesCount == true) {
+      _mapZonesCount = false;
+      await _sharedPreferences.setBool("mapZonesCount", false);
     } else {
-      _mapZonesAccuracy = true;
-      await _sharedPreferences.setBool("mapZonesAccuracy", true);
+      _mapZonesCount = true;
+      await _sharedPreferences.setBool("mapZonesCount", true);
     }
     notifyListeners();
   }

@@ -4,19 +4,20 @@ import 'package:flutter/material.dart';
 
 abstract class Translatable {
   final int _id;
-  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja;
+  final String _en, _ru, _cs, _pl, _de, _fr, _es, _br, _ja, _zh;
 
   Translatable({
     required id,
     required en,
-    ru,
-    cs,
-    pl,
-    de,
-    fr,
-    es,
-    br,
-    ja,
+    required ru,
+    required cs,
+    required pl,
+    required de,
+    required fr,
+    required es,
+    required br,
+    required ja,
+    required zh,
   })  : _id = id,
         _en = en,
         _ru = ru ?? "",
@@ -26,7 +27,8 @@ abstract class Translatable {
         _fr = fr ?? "",
         _es = es ?? "",
         _br = br ?? "",
-        _ja = ja ?? "";
+        _ja = ja ?? "",
+        _zh = zh ?? "";
 
   int get id => _id;
 
@@ -61,6 +63,9 @@ abstract class Translatable {
         break;
       case "ja":
         result = _ja;
+        break;
+      case "zh":
+        result = _zh;
         break;
       default:
         return _en;

@@ -228,29 +228,32 @@ abstract class ActivityHelp extends StatelessWidget {
     ]);
   }
 
-  Widget buildAccuracy() {
+  Widget buildZonesDisclaimer() {
     return Column(children: [
       WidgetTitleInfoIcon(
-        icon: "assets/graphics/icons/min_max.svg",
-        text: tr("help_accuracy"),
+        icon: "assets/graphics/icons/need_zones.svg",
+        text: tr("animal_need_zones"),
+      ),
+      Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+          child: WidgetRichText(
+            text: tr("help_zones_disclaimer"),
+          )),
+    ]);
+  }
+
+  Widget buildZoneCount() {
+    return Column(children: [
+      WidgetTitleInfoIcon(
+        icon: "assets/graphics/icons/stats.svg",
+        text: tr("help_zone_count"),
       ),
       Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
           child: WidgetRichText(
-            text: tr("help_accuracy_info"),
-          )),
-      Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-          child: WidgetRichText(
-            text: tr("help_accuracy_first_example"),
-          )),
-      Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
-          child: WidgetRichText(
-            text: tr("help_accuracy_second_example"),
+            text: tr("help_zone_count_info"),
           )),
     ]);
   }

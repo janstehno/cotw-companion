@@ -30,6 +30,7 @@ class Dlc extends Describable {
           dEs: [],
           dBr: [],
           dJa: [],
+          dZh: [],
           dHu: [],
         );
 
@@ -71,6 +72,7 @@ class Dlc extends Describable {
       dlc.setEs = json['DESCRIPTION']['ES'];
       dlc.setBr = json['DESCRIPTION']['BR'];
       dlc.setJa = json['DESCRIPTION']['JA'];
+      dlc.setZh = json['DESCRIPTION']['ZH'];
       dlc.setHu = json['DESCRIPTION']['HU'];
     }
     if (type == 1) {

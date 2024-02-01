@@ -51,7 +51,7 @@ class ActivityDetailWeaponState extends State<ActivityDetailWeapon> {
 
   Widget _buildType() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 7),
       child: EntryParameter(
         text: tr("type"),
         value: widget.weapon.getTypeAsString(),
@@ -61,7 +61,7 @@ class ActivityDetailWeaponState extends State<ActivityDetailWeapon> {
 
   Widget _buildMagazine() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 7),
       child: EntryParameter(
         text: tr("weapon_magazine"),
         value: widget.weapon.id == 21 ? "1/2" : widget.weapon.mag,
@@ -72,7 +72,7 @@ class ActivityDetailWeaponState extends State<ActivityDetailWeapon> {
   Widget _buildRequirements() {
     return widget.weapon.hasRequirements
         ? Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 7),
             child: EntryParameter(
               text: tr("requirement_score"),
               value: widget.weapon.score,
@@ -84,7 +84,7 @@ class ActivityDetailWeaponState extends State<ActivityDetailWeapon> {
   Widget _buildDlc() {
     return widget.weapon.isFromDlc
         ? Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 7),
             child: EntryParameter(
               text: "DLC",
               value: Utils.getWeaponDLC(widget.weapon.id),

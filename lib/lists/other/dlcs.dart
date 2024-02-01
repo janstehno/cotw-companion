@@ -57,7 +57,6 @@ class ListDlcsState extends State<ListDlcs> {
       appBar: WidgetAppBar(
         text: tr("content_downloadable_content"),
         context: context,
-        maxLines: 2,
       ),
       body: _buildList(),
     );

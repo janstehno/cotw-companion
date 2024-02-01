@@ -413,6 +413,9 @@ class ActivityEditLogsState extends State<ActivityEditLogs> {
           _dateTime = (await showOmniDateTimePicker(
                 context: context,
                 theme: ThemeData(
+                  focusColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                   colorScheme: Interface.omniDatePickerScheme,
                 ),
                 is24HourMode: true,

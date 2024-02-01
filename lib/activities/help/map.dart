@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/help/abstract_help.dart';
+import 'package:cotwcompanion/activities/help/help.dart';
 import 'package:flutter/material.dart';
 
 class ActivityHelpMap extends ActivityHelp {
@@ -11,11 +11,12 @@ class ActivityHelpMap extends ActivityHelp {
   @override
   Widget buildBody() {
     return Column(children: [
+      buildZonesDisclaimer(),
       buildFullscreen(),
       buildZoom(),
       buildShowZoneType(),
       buildShowCircles(),
-      buildAccuracy(),
+      buildZoneCount(),
     ]);
   }
 }

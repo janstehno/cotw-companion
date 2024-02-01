@@ -58,10 +58,10 @@ class WidgetSwitchText extends StatelessWidget {
                 text,
                 maxLines: 1,
                 style: buttonHeight <= 25
-                    ? Interface.s14w500n(actualColor)
+                    ? Interface.s12w500n(actualColor)
                     : buttonHeight <= 35
-                        ? Interface.s16w500n(actualColor)
-                        : Interface.s18w500n(actualColor),
+                        ? Interface.s14w500n(actualColor)
+                        : Interface.s16w500n(actualColor),
               )))
     ]);
   }

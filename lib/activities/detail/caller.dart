@@ -58,7 +58,7 @@ class ActivityDetailCallerState extends State<ActivityDetailCaller> {
 
   Widget _buildRange() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 7),
       child: EntryParameter(
         text: tr("caller_range"),
         value: widget.caller.getRange(_imperialUnits),
@@ -68,7 +68,7 @@ class ActivityDetailCallerState extends State<ActivityDetailCaller> {
 
   Widget _buildDuration() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 7),
       child: EntryParameter(
         text: tr("caller_duration"),
         value: "${widget.caller.duration} ${tr("seconds")}",
@@ -78,7 +78,7 @@ class ActivityDetailCallerState extends State<ActivityDetailCaller> {
 
   Widget _buildStrength() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 7),
       child: EntryParameter(
         text: tr("caller_strength"),
         value: widget.caller.strength,
@@ -89,7 +89,7 @@ class ActivityDetailCallerState extends State<ActivityDetailCaller> {
   Widget _buildRequirements() {
     return widget.caller.hasRequirements
         ? Container(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 7),
             child: EntryParameter(
               text: tr("requirement_level"),
               value: widget.caller.level,

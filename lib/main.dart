@@ -21,7 +21,7 @@ void main() async {
   bool imperialUnits = sharedPreferences.getBool("imperialUnits") ?? false;
   bool mapZonesType = sharedPreferences.getBool("mapZonesType") ?? false;
   bool mapZonesStyle = sharedPreferences.getBool("mapZonesStyle") ?? false;
-  bool mapZonesAccuracy = sharedPreferences.getBool("mapZonesAccuracy") ?? false;
+  bool mapZonesCount = sharedPreferences.getBool("mapZonesCount") ?? false;
   bool mapPerformanceMode = sharedPreferences.getBool("mapPerformanceMode") ?? false;
   bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
   bool entryDate = sharedPreferences.getBool("entryDate") ?? false;
@@ -45,7 +45,7 @@ void main() async {
         imperialUnits: imperialUnits,
         mapZonesType: mapZonesType,
         mapZonesStyle: mapZonesStyle,
-        mapZonesAccuracy: mapZonesAccuracy,
+        mapZonesCount: mapZonesCount,
         mapPerformanceMode: mapPerformanceMode,
         bestWeaponsForAnimal: bestWeaponsForAnimal,
         entryDate: entryDate,
@@ -81,10 +81,11 @@ class App extends StatelessWidget {
         );
       },
       theme: ThemeData(
-          brightness: Brightness.dark,
-          scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Interface.ff42)),
-          textSelectionTheme: TextSelectionThemeData(selectionColor: Interface.light, selectionHandleColor: Interface.dark),
-          fontFamily: "Normal"),
+        brightness: Brightness.dark,
+        scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Interface.ff42)),
+        textSelectionTheme: TextSelectionThemeData(selectionColor: Interface.light, selectionHandleColor: Interface.dark),
+        fontFamily: "Normal",
+      ),
       home: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

@@ -14,6 +14,7 @@ class Fur extends Translatable {
     required super.es,
     required super.br,
     required super.ja,
+    required super.zh,
   });
 
   factory Fur.fromJson(Map<String, dynamic> json) {
@@ -28,6 +29,7 @@ class Fur extends Translatable {
       es: json['ES'],
       br: json['BR'],
       ja: json['JA'],
+      zh: json['ZH'],
     );
   }
 }

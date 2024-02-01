@@ -17,7 +17,7 @@ class WidgetAppBar extends StatelessWidget {
     Key? key,
     this.text = "",
     this.height = 90,
-    this.maxLines = 1,
+    this.maxLines = 2,
     required this.context,
   }) : super(key: key);
 

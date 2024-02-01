@@ -19,6 +19,7 @@ import 'package:cotwcompanion/model/zone.dart';
 import 'package:cotwcompanion/widgets/button_icon.dart';
 import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
 import 'package:cotwcompanion/widgets/menubar.dart';
+import 'package:cotwcompanion/widgets/scrollbar.dart';
 import 'package:cotwcompanion/widgets/switch_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
@@ -48,7 +49,6 @@ class ActivityMapState extends State<ActivityMap> {
   final double _minZoom = 1;
   final double _maxZoom = 3;
   final int _minRowTiles = 4;
-  final int _recommendedNumberOfZones = 100;
 
   late final Reserve _reserve;
   late final Settings _settings;
@@ -401,40 +401,60 @@ class ActivityMapState extends State<ActivityMap> {
     return const SizedBox.shrink();
   }
 
+  Widget _buildZoneCount(int value, Color color) {
+    return SizedBox(
+      width: 25,
+      child: AutoSizeText(
+        value == 0 ? "•" : "$value",
+        maxLines: 1,
+        minFontSize: 8,
+        textAlign: TextAlign.center,
+        style: Interface.s10w500n(value == 0 ? Interface.disabled : color),
+      ),
+    );
+  }
+
   Widget _buildAnimalList() {
     List<Widget> widgets = [];
     for (int i = 0; i < HelperMap.names.length; i++) {
       if (HelperMap.isActive(i)) {
         String name = HelperMap.names[i];
-        int foundZones = HelperMap.getAnimalZones(HelperMap.getAnimal(i).id).length;
-        int perCent = ((foundZones * 100) / _recommendedNumberOfZones).round();
-        perCent = perCent > 100 ? 100 : perCent;
+        List<MapObject> foundZones = HelperMap.getAnimalZones(HelperMap.getAnimal(i).id);
+        int foundFeedZones = foundZones.where((zone) => zone.zone == 0).length;
+        int foundDrinkZones = foundZones.where((zone) => zone.zone == 1).length;
+        int foundRestZones = foundZones.where((zone) => zone.zone == 2).length;
         widgets.add(
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _settings.mapZonesAccuracy
-                  ? Container(
-                      width: 35,
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.only(right: 5),
-                      child: AutoSizeText(
-                        "$perCent%",
-                        maxLines: 1,
-                        textAlign: TextAlign.end,
-                        style: Interface.s12w300n(HelperMap.getColor(i)),
-                      ))
-                  : const SizedBox.shrink(),
-              Expanded(
+          Container(
+            padding: const EdgeInsets.only(top: 1, bottom: 1),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _settings.mapZonesCount && _settings.mapZonesType
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          _buildZoneCount(foundDrinkZones, Interface.zoneDrink),
+                          _buildZoneCount(foundFeedZones, Interface.zoneFeed),
+                          _buildZoneCount(foundRestZones, Interface.zoneRest),
+                        ],
+                      )
+                    : _settings.mapZonesCount
+                        ? _buildZoneCount(foundZones.length, HelperMap.getColor(i))
+                        : const SizedBox.shrink(),
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
                   child: AutoSizeText(
-                name,
-                maxLines: 1,
-                textAlign: TextAlign.start,
-                style: Interface.s12w300n(HelperMap.getColor(i)),
-              ))
-            ],
+                    name,
+                    maxLines: 1,
+                    minFontSize: 8,
+                    textAlign: TextAlign.start,
+                    style: Interface.s10w500n(HelperMap.getColor(i)),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }
@@ -452,26 +472,41 @@ class ActivityMapState extends State<ActivityMap> {
                 left: 0,
                 top: 0,
                 child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 200),
+                  opacity: _opacity,
+                  duration: const Duration(milliseconds: 200),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: 0.75 * _screenHeight,
+                    ),
                     child: Container(
                       width: _screenWidth,
-                      color: Interface.alwaysDark.withOpacity(0.3),
-                      padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
-                      child: _buildAnimalList(),
-                    )))
+                      padding: const EdgeInsets.fromLTRB(10, 12, 10, 13),
+                      color: HelperMap.isAnimalLayerActive() ? Interface.alwaysDark.withOpacity(0.65) : Colors.transparent,
+                      child: WidgetScrollbar(
+                          child: SingleChildScrollView(
+                        child: _buildAnimalList(),
+                      )),
+                    ),
+                  ),
+                ),
+              )
             : Positioned(
                 left: 0,
                 top: 0,
                 child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 200),
-                    child: Container(
-                      height: _screenHeight,
-                      color: Interface.alwaysDark.withOpacity(0.3),
-                      padding: HelperMap.isAnimalLayerActive() ? const EdgeInsets.all(15) : const EdgeInsets.all(0),
+                  opacity: _opacity,
+                  duration: const Duration(milliseconds: 200),
+                  child: Container(
+                    height: _screenHeight,
+                    padding: const EdgeInsets.fromLTRB(20, 12, 20, 13),
+                    color: HelperMap.isAnimalLayerActive() ? Interface.alwaysDark.withOpacity(0.65) : Colors.transparent,
+                    child: WidgetScrollbar(
+                        child: SingleChildScrollView(
                       child: _buildAnimalList(),
-                    )))
+                    )),
+                  ),
+                ),
+              )
         : const SizedBox.shrink();
   }
 

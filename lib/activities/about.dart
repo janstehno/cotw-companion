@@ -68,114 +68,157 @@ class ActivityAbout extends StatelessWidget {
       Container(
           padding: _padding,
           child: Column(children: [
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Container(
-                  margin: const EdgeInsets.only(bottom: 5),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(
-                      "Русский",
-                      style: Interface.s16w300n(Interface.disabled),
-                    ),
-                    Text(
-                      "Vełeş",
-                      style: Interface.s16w300n(Interface.dark),
-                    )
-                  ])),
-              Container(
-                  margin: const EdgeInsets.only(top: 5, bottom: 5),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Text(
-                      "日本語",
-                      style: Interface.s16w300n(Interface.disabled),
-                    ),
-                    Text(
-                      "kuyokuyo",
-                      style: Interface.s16w300n(Interface.dark),
-                    )
-                  ]))
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Container(
-                  margin: const EdgeInsets.only(top: 5, bottom: 5),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(
-                      "Deutch",
-                      style: Interface.s16w300n(Interface.disabled),
-                    ),
-                    Text(
-                      "MorbusGon",
-                      style: Interface.s16w300n(Interface.dark),
-                    )
-                  ])),
-              Container(
-                  margin: const EdgeInsets.only(top: 5, bottom: 5),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Text(
-                      "Polski",
-                      style: Interface.s16w300n(Interface.disabled),
-                    ),
-                    Text(
-                      "KorneliooS",
-                      style: Interface.s16w300n(Interface.dark),
-                    )
-                  ])),
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Container(
-                  margin: const EdgeInsets.only(top: 5, bottom: 5),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(
-                      "Français",
-                      style: Interface.s16w300n(Interface.disabled),
-                    ),
-                    Text(
-                      "BlocusEnergy",
-                      style: Interface.s16w300n(Interface.dark),
-                    )
-                  ])),
-              Container(
-                  margin: const EdgeInsets.only(top: 5, bottom: 5),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Text(
-                      "Magyar",
-                      style: Interface.s16w300n(Interface.disabled),
-                    ),
-                    Text(
-                      "Marcopolo",
-                      style: Interface.s16w300n(Interface.dark),
-                    )
-                  ])),
-            ]),
-            Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(
-                      "Türkçe",
-                      style: Interface.s16w300n(Interface.disabled),
-                    ),
-                    Text(
-                      "Ali Yahya Say",
-                      style: Interface.s16w300n(Interface.dark),
-                    )
-                  ])),
-              Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Text(
-                      "Português (Brasil)",
-                      style: Interface.s16w300n(Interface.disabled),
-                    ),
-                    Text(
-                      "RECRUTA",
-                      style: Interface.s16w300n(Interface.dark),
-                    ),
-                    Text(
-                      "DI ÂNGELO",
-                      style: Interface.s16w300n(Interface.dark),
-                    )
-                  ])),
-            ])
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(bottom: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(
+                        "Русский",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "Vełeş",
+                        style: Interface.s16w300n(Interface.dark),
+                      )
+                    ])),
+                Container(
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Text(
+                        "日本語",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "kuyokuyo",
+                        style: Interface.s16w300n(Interface.dark),
+                      )
+                    ]))
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(
+                        "中文",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "Aaron5242",
+                        style: Interface.s16w300n(Interface.dark),
+                      ),
+                      Text(
+                        "pippo5244",
+                        style: Interface.s16w300n(Interface.dark),
+                      ),
+                    ])),
+                Container(
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Text(
+                        "Deutch",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "MorbusGon",
+                        style: Interface.s16w300n(Interface.dark),
+                      )
+                    ])),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(
+                        "Polski",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "KorneliooS",
+                        style: Interface.s16w300n(Interface.dark),
+                      )
+                    ])),
+                Container(
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Text(
+                        "Français",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "BlocusEnergy",
+                        style: Interface.s16w300n(Interface.dark),
+                      )
+                    ])),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(
+                        "Magyar",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "Marcopolo",
+                        style: Interface.s16w300n(Interface.dark),
+                      )
+                    ])),
+                Container(
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Text(
+                        "Türkçe",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "Ali Yahya Say",
+                        style: Interface.s16w300n(Interface.dark),
+                      )
+                    ])),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 5),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(
+                        "Português (Brasil)",
+                        style: Interface.s16w300n(Interface.disabled),
+                      ),
+                      Text(
+                        "RECRUTA",
+                        style: Interface.s16w300n(Interface.dark),
+                      ),
+                      Text(
+                        "DI ÂNGELO",
+                        style: Interface.s16w300n(Interface.dark),
+                      )
+                    ])),
+              ],
+            )
           ]))
     ]);
   }

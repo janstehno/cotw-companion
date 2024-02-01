@@ -10,6 +10,7 @@
     "ES": "Coto de Caza de Hirschfelden",
     "BR": "Reserva de caça Hirschfelden",
     "JA": "ヒルシュフェルデン保護区",
+    "ZH": "赫希费尔登狩猎保护区",
     "COUNT": 9,
     "DLC": 0,
     "ENVIRONMENT": {
@@ -32,6 +33,7 @@
     "ES": "Distrito Del Lago Layton",
     "BR": "Distrito do lago Layton",
     "JA": "レイトン湖水地方",
+    "ZH": "莱顿湖区",
     "COUNT": 9,
     "DLC": 0,
     "ENVIRONMENT": {
@@ -56,6 +58,7 @@
     "ES": "Parque Nacional Taiga Medved",
     "BR": "Parque Nacional Medved-Taiga",
     "JA": "メドヴェド＝タイガ国立公園",
+    "ZH": "梅德韦泰嘉国家公园",
     "COUNT": 8,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -80,6 +83,7 @@
     "ES": "Sabana Vurhonga",
     "BR": "Savanna de Vurhonga",
     "JA": "ヴルホンガ・サバンナ",
+    "ZH": "乌尔霍加热带稀树草原",
     "COUNT": 10,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -98,6 +102,7 @@
     "EN": "Parque Fernando",
     "RU": "Парк-Фернандо",
     "JA": "パルケ・フェルナンド",
+    "ZH": "费南多自然公园",
     "COUNT": 8,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -122,6 +127,7 @@
     "ES": "Reserva Natural Del Valle Del Yukón",
     "BR": "Reserva Natural do Vale do Yukon",
     "JA": "ユーコンバレー自然保護区",
+    "ZH": "育空河谷自然保护区",
     "COUNT": 8,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -146,6 +152,7 @@
     "ES": "Reserva de Cuatro Colinas",
     "BR": "Reserva de caça Cuatro Colinas",
     "JA": "クアトロ・コリナス狩猟保護区",
+    "ZH": "夸特罗·科利纳斯野生动物保护区",
     "COUNT": 11,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -165,6 +172,7 @@
     "RU": "Серебряные Вершины",
     "PL": "Łańcuch Silver Ridge",
     "JA": "シルバーリッジ・ピークス",
+    "ZH": "银岭峰",
     "COUNT": 9,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -189,6 +197,7 @@
     "ES": "Parque Nacional Te Awaroa",
     "BR": "Parque Nacional de Te Awaroa",
     "JA": "テ・アワロア国立公園",
+    "ZH": "蒂阿拉罗瓦国家公园",
     "COUNT": 9,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -207,6 +216,7 @@
     "EN": "Rancho Del Arroyo",
     "RU": "Ранчо \"Дель-Арройо\"",
     "JA": "渓谷牧場",
+    "ZH": "阿罗约牧场",
     "COUNT": 10,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -231,6 +241,7 @@
     "ES": "Reserva de Mississippi Acres",
     "BR": "Reserva de Mississippi Acres",
     "JA": "ミシシッピ・エーカーズ保護区",
+    "ZH": "密西西比阿克里斯保护区",
     "COUNT": 10,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -255,6 +266,7 @@
     "ES": "Costa de Revontuli",
     "BR": "Costa Revontuli",
     "JA": "レボントゥリ海岸",
+    "ZH": "雷文图里海岸",
     "COUNT": 19,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -274,6 +286,7 @@
     "RU": "Нью-Ингланд Маунтинс",
     "PL": "Góry Nowej Anglii",
     "JA": "ニューイングランド山地",
+    "ZH": "新英格兰山脉",
     "COUNT": 15,
     "DLC": 1,
     "ENVIRONMENT": {
@@ -297,6 +310,7 @@
     "FR": "Côte D'Émeraude Australie",
     "BR": "Costa Esmeralda Austrália",
     "JA": "エメラルド海岸 オーストラリア",
+    "ZH": "澳大利亚翡翠海岸",
     "COUNT": 14,
     "DLC": 1,
     "ENVIRONMENT": {

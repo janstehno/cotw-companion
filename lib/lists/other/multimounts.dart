@@ -44,7 +44,6 @@ class ListMultimountsState extends State<ListMultimounts> {
       appBar: WidgetAppBar(
         text: tr("content_matmats_multimounts"),
         context: context,
-        maxLines: 2,
       ),
       body: _buildList(),
     );

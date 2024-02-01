@@ -6,7 +6,8 @@
     "CS": "Albín",
     "PL": "Albinos",
     "FR": "Albinos",
-    "JA": "アルビノ"
+    "JA": "アルビノ",
+    "ZH": "白化"
   },
   {
     "ID": 2,
@@ -18,7 +19,8 @@
     "FR": "Mélanique",
     "ES": "Melanítico",
     "BR": "Melânico",
-    "JA": "メラニスティック"
+    "JA": "メラニスティック",
+    "ZH": "黑化"
   },
   {
     "ID": 3,
@@ -30,7 +32,8 @@
     "FR": "Pie",
     "ES": "Harinoso",
     "BR": "Malhado",
-    "JA": "パイボールド"
+    "JA": "パイボールド",
+    "ZH": "花斑"
   },
   {
     "ID": 4,
@@ -42,7 +45,8 @@
     "FR": "Gris",
     "ES": "Gris",
     "BR": "Cinza",
-    "JA": "グレー"
+    "JA": "グレー",
+    "ZH": "灰色"
   },
   {
     "ID": 5,
@@ -54,7 +58,8 @@
     "FR": "Gris clair",
     "ES": "Gris claro",
     "BR": "Cinza-claro",
-    "JA": "ライトグレー"
+    "JA": "ライトグレー",
+    "ZH": "浅灰色"
   },
   {
     "ID": 6,
@@ -66,7 +71,8 @@
     "FR": "Brune",
     "ES": "Pardo",
     "BR": "Marrom",
-    "JA": "ブラウン"
+    "JA": "ブラウン",
+    "ZH": "褐色"
   },
   {
     "ID": 7,
@@ -78,7 +84,8 @@
     "FR": "Brun clair",
     "ES": "Marrón claro",
     "BR": "Pardo-claro",
-    "JA": "ライトブラウン"
+    "JA": "ライトブラウン",
+    "ZH": "浅褐色"
   },
   {
     "ID": 8,
@@ -90,7 +97,8 @@
     "FR": "Châtaigne",
     "ES": "Castaño",
     "BR": "Castanho",
-    "JA": "チェストナット"
+    "JA": "チェストナット",
+    "ZH": "珍惜栗色"
   },
   {
     "ID": 9,
@@ -102,7 +110,8 @@
     "FR": "Marron hybride",
     "ES": "Híbrido pardo",
     "BR": "Marrom híbrido",
-    "JA": "ブランハイブリッド"
+    "JA": "ブランハイブリッド",
+    "ZH": "棕色混种"
   },
   {
     "ID": 10,
@@ -114,7 +123,8 @@
     "FR": "Couleur moca",
     "ES": "Moca",
     "BR": "Café",
-    "JA": "モカ"
+    "JA": "モカ",
+    "ZH": "咖啡色"
   },
   {
     "ID": 11,
@@ -123,7 +133,8 @@
     "PL": "Jasnoszary leucystyczny",
     "FR": "Leucique gris",
     "BR": "Leucismo cinza claro",
-    "JA": "ライトグレーリューシスティック"
+    "JA": "ライトグレーリューシスティック",
+    "ZH": "浅灰色亚种"
   },
   {
     "ID": 12,
@@ -132,7 +143,8 @@
     "PL": "Łysy leucystyczny",
     "FR": "Leucique belle",
     "BR": "Leucismo manchas escuras",
-    "JA": "ボールドリューシスティック"
+    "JA": "ボールドリューシスティック",
+    "ZH": "无毛亚种"
   },
   {
     "ID": 13,
@@ -141,7 +153,8 @@
     "CS": "Béžová",
     "PL": "Beżowy",
     "BR": "Bege",
-    "JA": "ベージュ"
+    "JA": "ベージュ",
+    "ZH": "米色"
   },
   {
     "ID": 14,
@@ -153,7 +166,8 @@
     "FR": "Rose",
     "ES": "Rosa",
     "BR": "Rosa",
-    "JA": "ピンク"
+    "JA": "ピンク",
+    "ZH": "粉色"
   },
   {
     "ID": 15,
@@ -165,7 +179,8 @@
     "FR": "Rouge",
     "ES": "Rojo",
     "BR": "Vermelho",
-    "JA": "レッド"
+    "JA": "レッド",
+    "ZH": "红色"
   },
   {
     "ID": 16,
@@ -176,7 +191,8 @@
     "FR": "Leucique",
     "ES": "Leucístico",
     "BR": "Leucismo",
-    "JA": "リューシスティック"
+    "JA": "リューシスティック",
+    "ZH": "白色亚种"
   },
   {
     "ID": 17,
@@ -187,7 +203,8 @@
     "DE": "Blond",
     "ES": "Rubio",
     "BR": "Amarelado",
-    "JA": "ブロンド"
+    "JA": "ブロンド",
+    "ZH": "亚麻色"
   },
   {
     "ID": 18,
@@ -199,7 +216,8 @@
     "FR": "Sombre",
     "ES": "Oscuro",
     "BR": "Escuro",
-    "JA": "ダーク"
+    "JA": "ダーク",
+    "ZH": "深色"
   },
   {
     "ID": 19,
@@ -211,7 +229,8 @@
     "FR": "Marron foncé",
     "ES": "Marrón negruzco",
     "BR": "Preto e marrom",
-    "JA": "ブラックブラウン"
+    "JA": "ブラックブラウン",
+    "ZH": "黑棕色"
   },
   {
     "ID": 20,
@@ -223,7 +242,8 @@
     "FR": "Brun foncé",
     "ES": "Marrón",
     "BR": "Pardo escuro",
-    "JA": "ダークブラウン"
+    "JA": "ダークブラウン",
+    "ZH": "深棕色"
   },
   {
     "ID": 21,
@@ -233,7 +253,8 @@
     "PL": "Pomarańczowy",
     "ES": "Naranja",
     "BR": "Laranja",
-    "JA": "オレンジ"
+    "JA": "オレンジ",
+    "ZH": "橙色"
   },
   {
     "ID": 22,
@@ -245,7 +266,8 @@
     "FR": "Obscur",
     "ES": "Negruzco",
     "BR": "Cinzento",
-    "JA": "ダスキー"
+    "JA": "ダスキー",
+    "ZH": "暗黑色"
   },
   {
     "ID": 23,
@@ -257,7 +279,8 @@
     "FR": "Noire et dorée",
     "ES": "Dorado oscuro",
     "BR": "Preto e Dourado",
-    "JA": "ブラックゴールド"
+    "JA": "ブラックゴールド",
+    "ZH": "黑金色"
   },
   {
     "ID": 24,
@@ -269,7 +292,8 @@
     "FR": "Noir",
     "ES": "Negro",
     "BR": "Preto",
-    "JA": "ブラック"
+    "JA": "ブラック",
+    "ZH": "黑色"
   },
   {
     "ID": 25,
@@ -281,7 +305,8 @@
     "FR": "Blanc",
     "ES": "Blanco",
     "BR": "Branco",
-    "JA": "ホワイト"
+    "JA": "ホワイト",
+    "ZH": "白色"
   },
   {
     "ID": 26,
@@ -293,7 +318,8 @@
     "FR": "Rouge foncé",
     "ES": "Rojo oscuro",
     "BR": "Vermelho-escuro",
-    "JA": "ダークレッド"
+    "JA": "ダークレッド",
+    "ZH": "深红色"
   },
   {
     "ID": 27,
@@ -305,21 +331,24 @@
     "FR": "Blanc d'oeuf",
     "ES": "Clara de huevo",
     "BR": "Clara de Ovo",
-    "JA": "エッグホワイト"
+    "JA": "エッグホワイト",
+    "ZH": "蛋白"
   },
   {
     "ID": 28,
     "EN": "Fantasma",
     "RU": "Призрак",
     "DE": "Gespenstisch",
-    "JA": "ファンタズマ"
+    "JA": "ファンタズマ",
+    "ZH": "幻想"
   },
   {
     "ID": 29,
     "EN": "Ogro",
     "RU": "Людоед",
     "DE": "Oger",
-    "JA": "オグロ"
+    "JA": "オグロ",
+    "ZH": "食人魔"
   },
   {
     "ID": 30,
@@ -331,12 +360,14 @@
     "FR": "Vert olive",
     "ES": "Verde oliva",
     "BR": "Oliva",
-    "JA": "オリーブ"
+    "JA": "オリーブ",
+    "ZH": "橄榄色"
   },
   {
     "ID": 31,
     "EN": "Sombra",
-    "JA": "ソンブラ"
+    "JA": "ソンブラ",
+    "ZH": "影子"
   },
   {
     "ID": 32,
@@ -347,7 +378,8 @@
     "DE": "Sauber",
     "FR": "Irréprochable",
     "BR": "Prístino",
-    "JA": "プリスティン"
+    "JA": "プリスティン",
+    "ZH": "原始"
   },
   {
     "ID": 33,
@@ -357,7 +389,8 @@
     "PL": "Zimowy",
     "FR": "Hiver",
     "BR": "Inverno",
-    "JA": "ウィンター"
+    "JA": "ウィンター",
+    "ZH": "冬季"
   },
   {
     "ID": 34,
@@ -368,7 +401,8 @@
     "FR": "Or",
     "ES": "Oro",
     "BR": "Ouro",
-    "JA": "ゴールド"
+    "JA": "ゴールド",
+    "ZH": "金色"
   },
   {
     "ID": 35,
@@ -378,7 +412,7 @@
     "DE": "Gekrönt",
     "FR": "Couronné",
     "BR": "Coroado",
-    "JA": ""
+    "ZH": "白顶"
   },
   {
     "ID": 36,
@@ -390,7 +424,8 @@
     "FR": "Dilué",
     "ES": "Atenuado",
     "BR": "Diluído",
-    "JA": "ダイルート"
+    "JA": "ダイルート",
+    "ZH": "稀释"
   },
   {
     "ID": 37,
@@ -402,7 +437,8 @@
     "FR": "Esprit",
     "ES": "Espíritu",
     "BR": "Espírito",
-    "JA": "スピリット"
+    "JA": "スピリット",
+    "ZH": "灵性"
   },
   {
     "ID": 38,
@@ -414,7 +450,8 @@
     "FR": "Cannelle",
     "ES": "Canela",
     "BR": "Canela",
-    "JA": "シナモン"
+    "JA": "シナモン",
+    "ZH": "肉桂色"
   },
   {
     "ID": 39,
@@ -426,7 +463,8 @@
     "FR": "Brun roux",
     "ES": "Marrón rojizo",
     "BR": "Marrom avermelhado",
-    "JA": "レッドブラウン"
+    "JA": "レッドブラウン",
+    "ZH": "红棕色"
   },
   {
     "ID": 40,
@@ -438,7 +476,8 @@
     "FR": "Nuances d'ocre",
     "ES": "Tonos miel",
     "BR": "Cor-de-mel",
-    "JA": "ハニートーン"
+    "JA": "ハニートーン",
+    "ZH": "蜂蜜色"
   },
   {
     "ID": 41,
@@ -450,7 +489,8 @@
     "FR": "Brun et gris",
     "ES": "Pardo grisáceo",
     "BR": "Castanho acinzentado",
-    "JA": "グレーブラウン"
+    "JA": "グレーブラウン",
+    "ZH": "灰褐色"
   },
   {
     "ID": 42,
@@ -462,7 +502,8 @@
     "FR": "Brun blanc",
     "ES": "Blanco y pardo",
     "BR": "Pardo e branco",
-    "JA": "ホワイトブラウン"
+    "JA": "ホワイトブラウン",
+    "ZH": "白棕色"
   },
   {
     "ID": 43,
@@ -474,7 +515,8 @@
     "FR": "Noir et blanc",
     "ES": "Negro y blanco",
     "BR": "Preto e branco",
-    "JA": "ブラックホワイト"
+    "JA": "ブラックホワイト",
+    "ZH": "黑白色"
   },
   {
     "ID": 44,
@@ -486,17 +528,19 @@
     "FR": "Mixte",
     "ES": "Mixto",
     "BR": "Cores mistas",
-    "JA": ""
+    "ZH": "混合色"
   },
   {
     "ID": 45,
     "EN": "Chocolate",
-    "CS": "Čokoláda"
+    "CS": "Čokoláda",
+    "ZH": "巧克力色"
   },
   {
     "ID": 46,
     "EN": "Dusky gradient",
-    "CS": "Setmělá"
+    "CS": "Setmělá",
+    "ZH": "黝黑渐层"
   },
   {
     "ID": 47,
@@ -508,7 +552,8 @@
     "FR": "Taches noires",
     "ES": "Manchas negras",
     "BR": "Manchas pretas",
-    "JA": "ブラックスポット"
+    "JA": "ブラックスポット",
+    "ZH": "黑色斑点"
   },
   {
     "ID": 48,
@@ -520,14 +565,16 @@
     "FR": "Tacheté",
     "ES": "Moteado",
     "BR": "Manchas",
-    "JA": "まだら"
+    "JA": "まだら",
+    "ZH": "斑点"
   },
   {
     "ID": 49,
     "EN": "Blue",
     "PL": "Niebieski",
     "FR": "Bleu",
-    "JA": "ブルー"
+    "JA": "ブルー",
+    "ZH": "蓝色"
   },
   {
     "ID": 50,
@@ -539,13 +586,15 @@
     "FR": "Brun clair",
     "ES": "Pardo",
     "BR": "Bronzeado",
-    "JA": "タン"
+    "JA": "タン",
+    "ZH": "棕褐色"
   },
   {
     "ID": 51,
     "EN": "Ochre",
     "FR": "Ocre",
-    "JA": "オーカー"
+    "JA": "オーカー",
+    "ZH": "黄褐色"
   },
   {
     "ID": 52,
@@ -557,49 +606,57 @@
     "FR": "Gris foncé",
     "ES": "Gris oscuro",
     "BR": "Cinza-escuro",
-    "JA": "ダークグレイ"
+    "JA": "ダークグレイ",
+    "ZH": "深灰色"
   },
   {
     "ID": 53,
     "EN": "Mottled",
     "FR": "Tacheté",
-    "JA": "まだら"
+    "JA": "まだら",
+    "ZH": "杂色"
   },
   {
     "ID": 54,
     "EN": "Molting",
     "PL": "Wyliniały",
-    "JA": "換羽"
+    "JA": "換羽",
+    "ZH": "杂色中（换羽期杂色）"
   },
   {
     "ID": 55,
     "EN": "Buff",
     "FR": "Beige",
-    "JA": "バフ"
+    "JA": "バフ",
+    "ZH": "黄褐色"
   },
   {
     "ID": 56,
     "EN": "Light buff",
     "FR": "Beige clair",
-    "JA": "ライトバフ"
+    "JA": "ライトバフ",
+    "ZH": "浅黄色"
   },
   {
     "ID": 57,
     "EN": "Two tones",
     "CS": "Dva tóny",
     "FR": "Deux tons",
-    "JA": "ツートーン"
+    "JA": "ツートーン",
+    "ZH": "两色"
   },
   {
     "ID": 58,
     "EN": "Light bronze",
     "FR": "Bronze clair",
-    "JA": "ライトブロンズ"
+    "JA": "ライトブロンズ",
+    "ZH": "浅青铜色"
   },
   {
     "ID": 59,
     "EN": "Bronze",
-    "JA": "ブロンズ"
+    "JA": "ブロンズ",
+    "ZH": "青铜色"
   },
   {
     "ID": 60,
@@ -611,93 +668,105 @@
     "FR": "Noir tacheté",
     "ES": "Moteado oscuro",
     "BR": "Escuro e pintado",
-    "JA": "濃いまだら"
+    "JA": "濃いまだら",
+    "ZH": "深色斑点"
   },
   {
     "ID": 61,
     "EN": "Red spotted",
     "FR": "Rouge tacheté",
-    "JA": "赤まだら"
+    "JA": "赤まだら",
+    "ZH": "赤色斑点"
   },
   {
     "ID": 62,
     "EN": "Piebald grey",
     "FR": "Gris tacheté",
-    "JA": "グレーパイボールド"
+    "JA": "グレーパイボールド",
+    "ZH": "灰色带花斑"
   },
   {
     "ID": 63,
     "EN": "Piebald blonde",
     "FR": "Blond tacheté",
-    "JA": "ブロンドパイボールド"
+    "JA": "ブロンドパイボールド",
+    "ZH": "亚麻色带花斑"
   },
   {
     "ID": 64,
     "EN": "Hybrid",
     "FR": "Hybride",
-    "JA": ""
+    "ZH": "混种"
   },
   {
     "ID": 65,
     "EN": "Bicolor",
     "FR": "Bi-couleur or Bicolor",
-    "JA": "バイカラー"
+    "JA": "バイカラー",
+    "ZH": "双色"
   },
   {
     "ID": 66,
     "EN": "Pale",
     "FR": "Pâle",
-    "JA": ""
+    "ZH": "浅色"
   },
   {
     "ID": 67,
     "EN": "Bright",
     "FR": "Brillant",
-    "JA": "ブライト"
+    "JA": "ブライト",
+    "ZH": "明亮"
   },
   {
     "ID": 68,
     "EN": "Eclipse",
     "FR": "Éclipse",
-    "JA": "換毛・換羽"
+    "JA": "換毛・換羽",
+    "ZH": "晦暗"
   },
   {
     "ID": 69,
     "EN": "Cream",
     "FR": "Crème",
-    "JA": "クリーム"
+    "JA": "クリーム",
+    "ZH": "米黄色"
   },
   {
     "ID": 70,
     "EN": "Blue hybrid",
     "FR": "Hybride bleu",
-    "JA": ""
+    "ZH": "蓝色混种"
   },
   {
     "ID": 71,
     "EN": "Green hybrid",
     "FR": "Hybride vert",
-    "JA": ""
+    "ZH": "绿色混种"
   },
   {
     "ID": 72,
     "EN": "Dark green",
     "FR": "Vert foncé",
-    "JA": "ダークグリーン"
+    "JA": "ダークグリーン",
+    "ZH": "深绿色"
   },
   {
     "ID": 73,
     "EN": "Light green",
     "FR": "Vert clair",
-    "JA": "ライトグリーン"
+    "JA": "ライトグリーン",
+    "ZH": "浅绿色"
   },
   {
     "ID": 74,
-    "EN": "Maroon"
+    "EN": "Maroon",
+    "ZH": "栗色"
   },
   {
     "ID": 75,
-    "EN": "Yellow"
+    "EN": "Yellow",
+    "ZH": "黄色"
   },
   {
     "ID": 100,
@@ -709,6 +778,7 @@
     "FR": "Grandiose",
     "ES": "Magnífico",
     "BR": "Gradioso",
-    "JA": "グレートワン"
+    "JA": "グレートワン",
+    "ZH": "珍禽异兽"
   }
 ]

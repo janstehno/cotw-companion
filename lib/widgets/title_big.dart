@@ -42,6 +42,7 @@ class WidgetTitleBig extends StatelessWidget {
               AutoSizeText(
                 secondaryText,
                 maxLines: 1,
+                minFontSize: 4,
                 textAlign: TextAlign.start,
                 style: secondaryStyle,
               )

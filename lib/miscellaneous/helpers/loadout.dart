@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
+import 'package:cotwcompanion/miscellaneous/interface/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/ammo.dart';
@@ -11,7 +11,7 @@ import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/loadout.dart';
 
 class HelperLoadout {
-  static final HelperLogger _logger = HelperLogger.appLoading();
+  static final HelperLogger _logger = HelperLogger.loadingLoadouts();
 
   static late Loadout _lastRemovedLoadout;
 

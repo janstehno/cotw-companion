@@ -9,12 +9,15 @@ import 'package:cotwcompanion/widgets/entries/enumerators/entry.dart';
 import 'package:flutter/material.dart';
 
 class EntryEnumerator extends EntryEnumeratorEntry {
+  final HelperEnumerator helperEnumerator;
+
   const EntryEnumerator({
     super.key,
     required super.index,
     required super.enumerator,
     required super.callback,
     required super.context,
+    required this.helperEnumerator,
   });
 
   @override
@@ -22,21 +25,30 @@ class EntryEnumerator extends EntryEnumeratorEntry {
 }
 
 class EntryEnumeratorState extends EntryEnumeratorEntryState {
+  late final HelperEnumerator _helperEnumerator;
+
+  @override
+  void initState() {
+    _helperEnumerator = (widget as EntryEnumerator).helperEnumerator;
+    super.initState();
+  }
+
   @override
   void onTap() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityCounters(enumeratorId: widget.enumerator.id)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityCounters(enumeratorId: widget.enumerator.id, helperEnumerator: _helperEnumerator)));
     widget.callback();
   }
 
   @override
   void startToEnd() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditEnumerators(enumerator: widget.enumerator, callback: widget.callback)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ActivityEditEnumerators(helperEnumerator: _helperEnumerator, enumerator: widget.enumerator, callback: widget.callback)));
   }
 
   @override
   void endToStart() {
     setState(() {
-      HelperEnumerator.removeEnumeratorOnIndex(widget.index);
+      _helperEnumerator.removeEnumeratorOnIndex(widget.index);
       widget.callback();
     });
     super.endToStart();
@@ -44,7 +56,7 @@ class EntryEnumeratorState extends EntryEnumeratorEntryState {
 
   @override
   void undo() {
-    HelperEnumerator.undoRemoveEnumerator();
+    _helperEnumerator.undoRemoveEnumerator();
     widget.callback();
   }
 

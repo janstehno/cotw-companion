@@ -100,7 +100,7 @@ class EntryLogState extends EntryLogsEntryState {
               child: AutoSizeText(
                 widget.log.dateFormatted,
                 maxLines: 1,
-                minFontSize: 8,
+                minFontSize: 4,
                 textAlign: TextAlign.left,
                 style: Interface.s12w300n(Interface.dark.withOpacity(0.75)),
               )))
@@ -147,7 +147,7 @@ class EntryLogState extends EntryLogsEntryState {
               child: AutoSizeText(
                 reserve.getName(context.locale),
                 maxLines: 1,
-                minFontSize: 8,
+                minFontSize: 4,
                 textAlign: TextAlign.left,
                 style: Interface.s14w300n(Interface.dark.withOpacity(0.75)),
               )))

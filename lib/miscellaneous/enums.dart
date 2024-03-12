@@ -58,6 +58,11 @@ enum Process {
   info,
 }
 
+enum Supporter {
+  translation,
+  donation,
+}
+
 enum FilterKey {
   reservesCountMin,
   reservesCountMax,

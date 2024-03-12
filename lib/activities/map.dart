@@ -27,11 +27,11 @@ import 'package:map/map.dart';
 import 'package:provider/provider.dart';
 
 class ActivityMap extends StatefulWidget {
-  final int reserveId;
+  final HelperMap helperMap;
 
   const ActivityMap({
     Key? key,
-    required this.reserveId,
+    required this.helperMap,
   }) : super(key: key);
 
   @override
@@ -39,7 +39,7 @@ class ActivityMap extends StatefulWidget {
 }
 
 class ActivityMapState extends State<ActivityMap> {
-  final MapController _mapController = MapController(location: const LatLng(0, 0), zoom: 1, projection: const MapProjection());
+  final MapController _mapController = MapController(location: LatLng.degree(0, 0), zoom: 1, projection: const MapProjection());
   final List<Widget> _outpostLocations = [];
   final List<Widget> _lookoutLocations = [];
   final List<Widget> _hideLocations = [];
@@ -58,8 +58,8 @@ class ActivityMapState extends State<ActivityMap> {
 
   Offset? _dragStart;
   double _scaleStart = 1.0;
-  double _centerLatEnd = const LatLng(0, 0).latitude;
-  double _centerLngEnd = const LatLng(0, 0).longitude;
+  double _centerLatEnd = LatLng.degree(0, 0).latitude.degrees;
+  double _centerLngEnd = LatLng.degree(0, 0).longitude.degrees;
   double _screenWidth = 0;
   double _screenHeight = 0;
   double _distanceThreshold = 0.3;
@@ -71,7 +71,7 @@ class ActivityMapState extends State<ActivityMap> {
 
   @override
   void initState() {
-    _reserve = HelperJSON.getReserve(widget.reserveId);
+    _reserve = HelperJSON.getReserve(widget.helperMap.reserveId);
     _settings = Provider.of<Settings>(context, listen: false);
     super.initState();
   }
@@ -178,35 +178,35 @@ class ActivityMapState extends State<ActivityMap> {
     }
 
     //LEFT BORDER
-    if (_mapTransformer.toOffset(LatLng(_mapController.center.latitude, -360)).dx > 0) {
-      double y = _centerLngEnd + (-360 - _mapTransformer.toLatLng(const Offset(0, 0)).longitude);
+    if (_mapTransformer.toOffset(LatLng.degree(_mapController.center.latitude.degrees, -360)).dx > 0) {
+      double y = _centerLngEnd + (-360 - _mapTransformer.toLatLng(const Offset(0, 0)).longitude.degrees);
       y = y > 0 ? 0 : y;
-      _mapController.center = LatLng(_mapController.center.latitude, y);
+      _mapController.center = LatLng.degree(_mapController.center.latitude.degrees, y);
     }
 
     //RIGHT BORDER
-    if (_mapTransformer.toOffset(LatLng(_mapController.center.latitude, 360)).dx < _screenWidth) {
-      double y = _centerLngEnd + (360 - _mapTransformer.toLatLng(Offset(_screenWidth, 0)).longitude);
+    if (_mapTransformer.toOffset(LatLng.degree(_mapController.center.latitude.degrees, 360)).dx < _screenWidth) {
+      double y = _centerLngEnd + (360 - _mapTransformer.toLatLng(Offset(_screenWidth, 0)).longitude.degrees);
       y = y < 0 ? 0 : y;
-      _mapController.center = LatLng(_mapController.center.latitude, y);
+      _mapController.center = LatLng.degree(_mapController.center.latitude.degrees, y);
     }
 
     //TOP BORDER
-    if (_mapTransformer.toOffset(LatLng(-360, _mapController.center.longitude)).dy > 0) {
-      double x = _centerLatEnd + (-360 - _mapTransformer.toLatLng(const Offset(0, 0)).latitude);
+    if (_mapTransformer.toOffset(LatLng.degree(-360, _mapController.center.longitude.degrees)).dy > 0) {
+      double x = _centerLatEnd + (-360 - _mapTransformer.toLatLng(const Offset(0, 0)).latitude.degrees);
       x = x > 0 ? 0 : x;
-      _mapController.center = LatLng(x, _mapController.center.longitude);
+      _mapController.center = LatLng.degree(x, _mapController.center.longitude.degrees);
     }
 
     //BOTTOM BORDER
-    if (_mapTransformer.toOffset(LatLng(360, _mapController.center.longitude)).dy < _screenHeight) {
-      double x = _centerLatEnd + (360 - _mapTransformer.toLatLng(Offset(0, _screenHeight)).latitude);
+    if (_mapTransformer.toOffset(LatLng.degree(360, _mapController.center.longitude.degrees)).dy < _screenHeight) {
+      double x = _centerLatEnd + (360 - _mapTransformer.toLatLng(Offset(0, _screenHeight)).latitude.degrees);
       x = x < 0 ? 0 : x;
-      _mapController.center = LatLng(x, _mapController.center.longitude);
+      _mapController.center = LatLng.degree(x, _mapController.center.longitude.degrees);
     }
 
-    _centerLatEnd = _mapController.center.latitude;
-    _centerLngEnd = _mapController.center.longitude;
+    _centerLatEnd = _mapController.center.latitude.degrees;
+    _centerLngEnd = _mapController.center.longitude.degrees;
   }
 
   Future<void> _updateMap() async {
@@ -227,13 +227,13 @@ class ActivityMapState extends State<ActivityMap> {
   }
 
   Future<void> _updateLocations() async {
-    _outpostLocations.addAll(await _buildObjectMarkers(HelperMap.outposts, 15, MapItem.outpost));
-    _lookoutLocations.addAll(await _buildObjectMarkers(HelperMap.lookouts, 15, MapItem.lookout));
-    _hideLocations.addAll(await _buildObjectMarkers(HelperMap.hides, 3, MapItem.hide));
+    _outpostLocations.addAll(await _buildObjectMarkers(widget.helperMap.outposts, 15, MapItem.outpost));
+    _lookoutLocations.addAll(await _buildObjectMarkers(widget.helperMap.lookouts, 15, MapItem.lookout));
+    _hideLocations.addAll(await _buildObjectMarkers(widget.helperMap.hides, 3, MapItem.hide));
   }
 
   Future<void> _updateZoneLocations() async {
-    for (int index = 0; index < HelperMap.animals.length; index++) {
+    for (int index = 0; index < widget.helperMap.animals.length; index++) {
       _zoneLocations.addAll(await _buildZones(index));
     }
   }
@@ -255,7 +255,7 @@ class ActivityMapState extends State<ActivityMap> {
                       (z == 2 && (x >= -2 && y >= -2 && x <= 5 && y <= 5)) ||
                       (z == 3 && (x >= -4 && y >= -4 && x <= 11 && y <= 11))) {
                     return Image.asset(
-                      Graphics.getMapTile(widget.reserveId, x, y, z),
+                      Graphics.getMapTile(widget.helperMap.reserveId, x, y, z),
                       fit: BoxFit.fitWidth,
                     );
                   }
@@ -296,7 +296,7 @@ class ActivityMapState extends State<ActivityMap> {
 
   Future<List<Widget>> _buildObjectMarkers(List<LatLng> list, double iconSize, MapItem objectType) async {
     String icon = Graphics.getMapObjectIcon(objectType, _level);
-    if (HelperMap.isActiveE(objectType.index)) {
+    if (widget.helperMap.isActiveE(objectType.index)) {
       final positions = list.map(_mapTransformer.toOffset).toList();
       return positions.map((offset) => _buildObjectMarker(offset, icon, iconSize, objectType)).toList();
     }
@@ -304,9 +304,9 @@ class ActivityMapState extends State<ActivityMap> {
   }
 
   Future<Iterable<Widget>> _buildZones(int index) async {
-    if (HelperMap.isActive(index)) {
-      Animal animal = HelperMap.animals[index];
-      return _buildZoneMarkers(HelperMap.getAnimalZones(animal.id), index);
+    if (widget.helperMap.isActive(index)) {
+      Animal animal = widget.helperMap.animals[index];
+      return _buildZoneMarkers(widget.helperMap.getAnimalZones(animal.id), index);
     } else {
       return [];
     }
@@ -347,7 +347,7 @@ class ActivityMapState extends State<ActivityMap> {
     List<MapObject> clusteredObjects = _settings.mapPerformanceMode ? _clusterObjects(objects) : objects;
     return clusteredObjects.map((object) {
       Offset offset = _mapTransformer.toOffset(object.coord);
-      Color color = HelperMap.getColor(index);
+      Color color = widget.helperMap.getColor(index);
       bool condition = (!_settings.mapPerformanceMode || _level == 3) && _settings.mapZonesType && object.zone != 3;
       if (condition) color = Zone.colorForZone(object.zone);
       return _buildZoneMarker(offset, color, index);
@@ -361,8 +361,8 @@ class ActivityMapState extends State<ActivityMap> {
     double my = 0;
 
     if (!_settings.mapZonesType && (!_settings.mapPerformanceMode || _level == 3)) {
-      mx = cos(((360 / HelperMap.animals.length) / HelperMap.animals.length) * index) * (7);
-      my = sin(((360 / HelperMap.animals.length) / HelperMap.animals.length) * index) * (7);
+      mx = cos(((360 / widget.helperMap.animals.length) / widget.helperMap.animals.length) * index) * (7);
+      my = sin(((360 / widget.helperMap.animals.length) / widget.helperMap.animals.length) * index) * (7);
     }
 
     double size = condition ? _circleSize : _dotSize;
@@ -407,7 +407,7 @@ class ActivityMapState extends State<ActivityMap> {
       child: AutoSizeText(
         value == 0 ? "•" : "$value",
         maxLines: 1,
-        minFontSize: 8,
+        minFontSize: 4,
         textAlign: TextAlign.center,
         style: Interface.s10w500n(value == 0 ? Interface.disabled : color),
       ),
@@ -416,10 +416,10 @@ class ActivityMapState extends State<ActivityMap> {
 
   Widget _buildAnimalList() {
     List<Widget> widgets = [];
-    for (int i = 0; i < HelperMap.names.length; i++) {
-      if (HelperMap.isActive(i)) {
-        String name = HelperMap.names[i];
-        List<MapObject> foundZones = HelperMap.getAnimalZones(HelperMap.getAnimal(i).id);
+    for (int i = 0; i < widget.helperMap.names.length; i++) {
+      if (widget.helperMap.isActive(i)) {
+        String name = widget.helperMap.names[i];
+        List<MapObject> foundZones = widget.helperMap.getAnimalZones(widget.helperMap.getAnimal(i).id);
         int foundFeedZones = foundZones.where((zone) => zone.zone == 0).length;
         int foundDrinkZones = foundZones.where((zone) => zone.zone == 1).length;
         int foundRestZones = foundZones.where((zone) => zone.zone == 2).length;
@@ -441,16 +441,16 @@ class ActivityMapState extends State<ActivityMap> {
                         ],
                       )
                     : _settings.mapZonesCount
-                        ? _buildZoneCount(foundZones.length, HelperMap.getColor(i))
+                        ? _buildZoneCount(foundZones.length, widget.helperMap.getColor(i))
                         : const SizedBox.shrink(),
                 Container(
                   margin: const EdgeInsets.only(left: 10),
                   child: AutoSizeText(
                     name,
                     maxLines: 1,
-                    minFontSize: 8,
+                    minFontSize: 4,
                     textAlign: TextAlign.start,
-                    style: Interface.s10w500n(HelperMap.getColor(i)),
+                    style: Interface.s10w500n(widget.helperMap.getColor(i)),
                   ),
                 ),
               ],
@@ -481,7 +481,7 @@ class ActivityMapState extends State<ActivityMap> {
                     child: Container(
                       width: _screenWidth,
                       padding: const EdgeInsets.fromLTRB(10, 12, 10, 13),
-                      color: HelperMap.isAnimalLayerActive() ? Interface.alwaysDark.withOpacity(0.65) : Colors.transparent,
+                      color: widget.helperMap.isAnimalLayerActive() ? Interface.alwaysDark.withOpacity(0.65) : Colors.transparent,
                       child: WidgetScrollbar(
                           child: SingleChildScrollView(
                         child: _buildAnimalList(),
@@ -499,7 +499,7 @@ class ActivityMapState extends State<ActivityMap> {
                   child: Container(
                     height: _screenHeight,
                     padding: const EdgeInsets.fromLTRB(20, 12, 20, 13),
-                    color: HelperMap.isAnimalLayerActive() ? Interface.alwaysDark.withOpacity(0.65) : Colors.transparent,
+                    color: widget.helperMap.isAnimalLayerActive() ? Interface.alwaysDark.withOpacity(0.65) : Colors.transparent,
                     child: WidgetScrollbar(
                         child: SingleChildScrollView(
                       child: _buildAnimalList(),
@@ -561,7 +561,8 @@ class ActivityMapState extends State<ActivityMap> {
                       color: Interface.alwaysDark,
                       background: Interface.alwaysLight,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityMapLayers(reserve: _reserve, callback: _reload)));
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => ActivityMapLayers(helperMap: widget.helperMap, reserve: _reserve, callback: _reload)));
                       }),
                 )
               ],

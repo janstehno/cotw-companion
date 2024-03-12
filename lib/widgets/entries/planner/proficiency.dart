@@ -1,6 +1,7 @@
 // Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/lists/planner/proficiency.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/planner.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/proficiency.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 class EntryProficiency extends StatefulWidget {
+  final HelperPlanner helperPlanner;
   final double size;
   final int availablePoints;
   final Proficiency proficiency;
@@ -15,6 +17,7 @@ class EntryProficiency extends StatefulWidget {
 
   const EntryProficiency({
     Key? key,
+    required this.helperPlanner,
     required this.size,
     required this.availablePoints,
     required this.proficiency,

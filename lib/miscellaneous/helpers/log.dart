@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
+import 'package:cotwcompanion/miscellaneous/interface/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -12,7 +12,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HelperLog {
-  static final HelperLogger _logger = HelperLogger.appLoading();
+  static final HelperLogger _logger = HelperLogger.loadingLogs();
 
   static late Log _lastRemovedLog;
 

@@ -1,6 +1,6 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/multimounts.dart';
 import 'package:cotwcompanion/model/multimount.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/entries/multimount.dart';
@@ -9,8 +9,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ListMultimounts extends StatefulWidget {
+  final HelperMultimounts helperMultimounts;
+
   const ListMultimounts({
     Key? key,
+    required this.helperMultimounts,
   }) : super(key: key);
 
   @override
@@ -21,7 +24,7 @@ class ListMultimountsState extends State<ListMultimounts> {
   late final List<Multimount> _multimounts = [];
 
   void _getData() {
-    _multimounts.addAll(HelperJSON.multimounts);
+    _multimounts.addAll(widget.helperMultimounts.multimounts);
     _multimounts.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
   }
 

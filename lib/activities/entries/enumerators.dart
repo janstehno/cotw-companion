@@ -13,8 +13,11 @@ import 'package:cotwcompanion/widgets/searchbar.dart';
 import 'package:flutter/material.dart';
 
 class ActivityEnumerators extends ActivityEntriesReorderable {
+  final HelperEnumerator helperEnumerator;
+
   const ActivityEnumerators({
     super.key,
+    required this.helperEnumerator,
   }) : super(name: "counters");
 
   @override
@@ -22,18 +25,26 @@ class ActivityEnumerators extends ActivityEntriesReorderable {
 }
 
 class ActivityEnumeratorsState extends ActivityEntriesReorderableState {
+  late final HelperEnumerator _helperEnumerator;
+
+  @override
+  void initState() {
+    _helperEnumerator = (widget as ActivityEnumerators).helperEnumerator;
+    super.initState();
+  }
+
   @override
   void filter() {
     setState(() {
       items.clear();
-      items.addAll(HelperFilter.filterEnumerators(controller.text, context));
+      items.addAll(HelperFilter.filterEnumerators(controller.text, _helperEnumerator.enumerators, context));
     });
   }
 
   @override
   void removeAll() {
     setState(() {
-      HelperEnumerator.removeAllEnumerators();
+      _helperEnumerator.removeAllEnumerators();
       filter();
     });
   }
@@ -41,16 +52,16 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState {
   @override
   void onReorder(int oldIndex, int newIndex) {
     setState(() {
-      HelperEnumerator.changeIndexOfEnumerators(oldIndex, newIndex);
+      _helperEnumerator.changeIndexOfEnumerators(oldIndex, newIndex);
       filter();
     });
   }
 
   @override
-  Future<bool> fileLoaded() async => await HelperEnumerator.importFile();
+  Future<bool> fileLoaded() async => await _helperEnumerator.importFile();
 
   @override
-  Future<bool> fileSaved() async => await HelperEnumerator.exportFile();
+  Future<bool> fileSaved() async => await _helperEnumerator.exportFile();
 
   @override
   Widget buildEntry(int index, dynamic item) {
@@ -59,6 +70,7 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState {
       index: index,
       enumerator: item,
       callback: filter,
+      helperEnumerator: _helperEnumerator,
       context: context,
     );
   }
@@ -84,7 +96,7 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState {
             icon: "assets/graphics/icons/plus.svg",
             onTap: () {
               focus();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditEnumerators(callback: filter)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditEnumerators(helperEnumerator: _helperEnumerator, callback: filter)));
             }),
       ),
     ];

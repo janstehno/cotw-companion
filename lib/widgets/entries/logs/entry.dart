@@ -112,7 +112,7 @@ abstract class EntryLogsEntryState extends State<EntryLogsEntry> {
                 child: AutoSizeText(
                   fur.getName(context.locale),
                   maxLines: 1,
-                  minFontSize: 8,
+                  minFontSize: 4,
                   textAlign: TextAlign.left,
                   style: Interface.s14w300n(Interface.dark.withOpacity(0.75)),
                 )))
@@ -154,7 +154,7 @@ abstract class EntryLogsEntryState extends State<EntryLogsEntry> {
                     child: AutoSizeText(
                       Utils.removePointZero(widget.log.trophy),
                       maxLines: 1,
-                      minFontSize: 8,
+                      minFontSize: 4,
                       style: Interface.s18w500n(Interface.dark),
                     )),
               )
@@ -177,7 +177,7 @@ abstract class EntryLogsEntryState extends State<EntryLogsEntry> {
           child: AutoSizeText(
             "${Utils.removePointZero(widget.log.weight)} ${widget.log.usesImperials ? tr("pounds") : tr("kilograms")}",
             maxLines: 1,
-            minFontSize: 8,
+            minFontSize: 4,
             textAlign: TextAlign.right,
             style: Interface.s14w300n(Interface.dark),
           )),

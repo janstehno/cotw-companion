@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class EntryPerk extends EntryProficiency {
   const EntryPerk({
     super.key,
+    required super.helperPlanner,
     required super.size,
     required super.availablePoints,
     required super.proficiency,
@@ -20,7 +21,7 @@ class EntryPerk extends EntryProficiency {
 }
 
 class EntrySkillState extends EntryProficiencyState {
-  late Perk _perk;
+  late final Perk _perk;
 
   @override
   void initState() {
@@ -30,12 +31,12 @@ class EntrySkillState extends EntryProficiencyState {
 
   @override
   bool isUnlocked() {
-    return _perk.isParentLeveled();
+    return _perk.isParentLeveled(widget.helperPlanner);
   }
 
   @override
   bool isUsable() {
-    return _perk.isUsable(widget.availablePoints);
+    return _perk.isUsable(widget.helperPlanner, widget.availablePoints);
   }
 
   @override

@@ -1,10 +1,10 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/activities/entries/enumerators.dart';
 import 'package:cotwcompanion/activities/entries/loadouts.dart';
 import 'package:cotwcompanion/activities/entries/logs.dart';
 import 'package:cotwcompanion/activities/need_zones.dart';
-import 'package:cotwcompanion/activities/planner.dart';
+import 'package:cotwcompanion/builders/enumerators.dart';
+import 'package:cotwcompanion/builders/planner.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/entries/menu.dart';
@@ -27,8 +27,8 @@ class ListToolsState extends State<ListTools> {
     ["trophy_lodge", "trophy_lodge", const ActivityLogs(trophyLodge: true)],
     ["logbook", "catch_book", const ActivityLogs(trophyLodge: false)],
     ["loadouts", "loadout", const ActivityLoadouts()],
-    ["counters", "number", const ActivityEnumerators()],
-    ["planner", "planner", const ActivityPlanner()],
+    ["counters", "number", const BuilderEnumerators()],
+    ["planner", "planner", const BuilderPlanner()],
   ];
 
   Widget _buildItem(int index, String text, String icon, Widget activity) {

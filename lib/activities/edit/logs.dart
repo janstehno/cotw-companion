@@ -5,8 +5,8 @@ import 'package:cotwcompanion/lists/logs/add_edit_log/trophy_lodge_logs.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
@@ -55,7 +55,7 @@ class ActivityEditLogsState extends State<ActivityEditLogs> {
   final TextEditingController _controllerWeightNumber = TextEditingController();
   final RegExp _equalsDoubleTrophyNumber = RegExp(r"^\d{1,4}(\.\d{1,3})?$");
   final RegExp _equalsDoubleWeightNumber = RegExp(r"^\d{1,4}(\.\d{1,3})?$");
-  final HelperLogger _logger = HelperLogger.logsEdit();
+  final HelperLogger _logger = HelperLogger.editLogs();
   final List<Animal> _animals = [];
   final List<AnimalFur> _furs = [];
   final List<Log> _trophyLodgeLogs = [];

@@ -108,6 +108,9 @@ class Interface {
   //homeTitle
   static TextStyle s24w600c(Color color) => TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.w600, height: 1.1, fontFamily: "Condensed");
 
+  //counterNumber
+  static TextStyle s22w400n(Color color) => TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.w400, height: 1.1, fontFamily: "Normal");
+
   //bigTitle
   static TextStyle s20w600c(Color color) => TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.w600, height: 1.1, fontFamily: "Condensed");
 

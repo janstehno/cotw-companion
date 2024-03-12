@@ -9,6 +9,7 @@ import 'package:cotwcompanion/widgets/entries/enumerators/entry.dart';
 import 'package:flutter/material.dart';
 
 class EntryCounter extends EntryEnumeratorEntry {
+  final HelperEnumerator helperEnumerator;
   final Counter counter;
 
   const EntryCounter({
@@ -17,6 +18,7 @@ class EntryCounter extends EntryEnumeratorEntry {
     required super.enumerator,
     required super.callback,
     required super.context,
+    required this.helperEnumerator,
     required this.counter,
   });
 
@@ -25,10 +27,12 @@ class EntryCounter extends EntryEnumeratorEntry {
 }
 
 class EntryCounterState extends EntryEnumeratorEntryState {
+  late final HelperEnumerator _helperEnumerator;
   late final Counter _counter;
 
   @override
   void initState() {
+    _helperEnumerator = (widget as EntryCounter).helperEnumerator;
     _counter = (widget as EntryCounter).counter;
     super.initState();
   }
@@ -36,13 +40,17 @@ class EntryCounterState extends EntryEnumeratorEntryState {
   @override
   void startToEnd() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ActivityEditCounters(enumeratorId: widget.enumerator.id, counter: _counter, callback: widget.callback)));
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ActivityEditCounters(helperEnumerator: _helperEnumerator, enumeratorId: widget.enumerator.id, counter: _counter, callback: widget.callback)));
   }
 
   @override
   void onTap() {
     setState(() {
       _counter.add();
+      _helperEnumerator.writeFile();
       widget.callback();
     });
   }
@@ -51,6 +59,7 @@ class EntryCounterState extends EntryEnumeratorEntryState {
   void onDoubleTap() {
     setState(() {
       _counter.subtract();
+      _helperEnumerator.writeFile();
       widget.callback();
     });
   }
@@ -58,7 +67,7 @@ class EntryCounterState extends EntryEnumeratorEntryState {
   @override
   void endToStart() {
     setState(() {
-      HelperEnumerator.removeCounterOnIndex(widget.enumerator.id, widget.index);
+      _helperEnumerator.removeCounterOnIndex(widget.enumerator.id, widget.index);
       widget.callback();
     });
     super.endToStart();
@@ -66,7 +75,7 @@ class EntryCounterState extends EntryEnumeratorEntryState {
 
   @override
   void undo() {
-    HelperEnumerator.undoRemoveCounter(widget.enumerator.id);
+    _helperEnumerator.undoRemoveCounter(widget.enumerator.id);
     widget.callback();
   }
 
@@ -84,7 +93,7 @@ class EntryCounterState extends EntryEnumeratorEntryState {
         AutoSizeText(
           _counter.value.toString(),
           maxLines: 1,
-          style: Interface.s16w300n(Interface.dark),
+          style: Interface.s22w400n(Interface.dark),
         )
       ],
     );

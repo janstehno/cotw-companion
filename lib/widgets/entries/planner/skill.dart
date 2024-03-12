@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class EntrySkill extends EntryProficiency {
   const EntrySkill({
     super.key,
+    required super.helperPlanner,
     required super.size,
     required super.availablePoints,
     required super.proficiency,
@@ -30,12 +31,12 @@ class EntrySkillState extends EntryProficiencyState {
 
   @override
   bool isUnlocked() {
-    return _skill.isUnlocked;
+    return _skill.isUnlocked(widget.helperPlanner);
   }
 
   @override
   bool isUsable() {
-    return _skill.isUsable(widget.availablePoints);
+    return _skill.isUsable(widget.helperPlanner, widget.availablePoints);
   }
 
   @override

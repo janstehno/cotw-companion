@@ -3,24 +3,24 @@
 import 'dart:convert';
 
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
+import 'package:cotwcompanion/miscellaneous/interface/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/enumerator.dart';
 
 class HelperEnumerator {
-  static final HelperLogger _logger = HelperLogger.appLoading();
+  final HelperLogger _logger = HelperLogger.loadingEnumerators();
 
-  static late Enumerator _lastRemovedEnumerator;
-  static late Counter _lastRemovedCounter;
+  late Enumerator _lastRemovedEnumerator;
+  late Counter _lastRemovedCounter;
 
-  static final List<Enumerator> _enumerators = [];
+  final List<Enumerator> _enumerators = [];
 
-  static List<Enumerator> get enumerators => _enumerators;
+  List<Enumerator> get enumerators => _enumerators;
 
-  static List<dynamic> counters(int enumeratorId) => _enumerators.elementAt(enumeratorId).counters;
+  List<dynamic> counters(int enumeratorId) => _enumerators.elementAt(enumeratorId).counters;
 
-  static void _reSort() {
+  void _reSort() {
     _enumerators.sort((a, b) => a.id.compareTo(b.id));
     for (Enumerator enumerator in _enumerators) {
       enumerator.sortCounters();
@@ -28,7 +28,7 @@ class HelperEnumerator {
     writeFile();
   }
 
-  static void setEnumerators(List<Enumerator> enumerators) {
+  void setEnumerators(List<Enumerator> enumerators) {
     _logger.i("Initializing enumerators in HelperEnumerator...");
     _enumerators.clear();
     _enumerators.addAll(enumerators);
@@ -37,27 +37,27 @@ class HelperEnumerator {
     _logger.t("Enumerators initialized");
   }
 
-  static void addEnumerator(Enumerator enumerator) {
+  void addEnumerator(Enumerator enumerator) {
     _enumerators.add(enumerator);
     _reSort();
     writeFile();
   }
 
-  static void addCounter(int enumeratorId, Counter counter) {
+  void addCounter(int enumeratorId, Counter counter) {
     _enumerators.elementAt(enumeratorId).addCounter(counter);
     _reSort();
     writeFile();
   }
 
-  static Enumerator getEnumerator(int enumeratorId) {
+  Enumerator getEnumerator(int enumeratorId) {
     return _enumerators.elementAt(enumeratorId);
   }
 
-  static Counter getCounter(int enumeratorId, int counterId) {
+  Counter getCounter(int enumeratorId, int counterId) {
     return getEnumerator(enumeratorId).counterOnIndex(counterId);
   }
 
-  static void changeIndexOfEnumerators(int enumeratorId, int newEnumeratorId) {
+  void changeIndexOfEnumerators(int enumeratorId, int newEnumeratorId) {
     _enumerators.insert(newEnumeratorId, _enumerators.elementAt(enumeratorId));
     int oldId = newEnumeratorId > enumeratorId ? enumeratorId : enumeratorId + 1;
     _enumerators.removeAt(oldId);
@@ -68,7 +68,7 @@ class HelperEnumerator {
     writeFile();
   }
 
-  static void changeIndexOfCounters(int enumeratorId, int counterId, int newCounterId) {
+  void changeIndexOfCounters(int enumeratorId, int counterId, int newCounterId) {
     counters(enumeratorId).insert(newCounterId, counters(enumeratorId).elementAt(counterId));
     int oldId = newCounterId > counterId ? counterId : counterId + 1;
     counters(enumeratorId).removeAt(oldId);
@@ -79,59 +79,59 @@ class HelperEnumerator {
     writeFile();
   }
 
-  static void undoRemoveEnumerator() {
+  void undoRemoveEnumerator() {
     addEnumerator(_lastRemovedEnumerator);
     _reSort();
   }
 
-  static void undoRemoveCounter(int enumeratorId) {
+  void undoRemoveCounter(int enumeratorId) {
     addCounter(enumeratorId, _lastRemovedCounter);
     _reSort();
   }
 
-  static void removeEnumeratorOnIndex(int enumeratorId) {
+  void removeEnumeratorOnIndex(int enumeratorId) {
     _lastRemovedEnumerator = _enumerators.elementAt(enumeratorId);
     _enumerators.removeAt(enumeratorId);
     _reSort();
     writeFile();
   }
 
-  static void removeCounterOnIndex(int enumeratorId, int counterId) {
+  void removeCounterOnIndex(int enumeratorId, int counterId) {
     _lastRemovedCounter = _enumerators.elementAt(enumeratorId).counterOnIndex(counterId);
     _enumerators.elementAt(enumeratorId).removeCounterOnIndex(counterId);
     _reSort();
     writeFile();
   }
 
-  static editEnumerator(Enumerator enumerator) {
+  editEnumerator(Enumerator enumerator) {
     _enumerators[enumerator.id] = enumerator;
     writeFile();
   }
 
-  static editCounter(int enumeratorId, Counter counter) {
+  editCounter(int enumeratorId, Counter counter) {
     _enumerators.elementAt(enumeratorId).counters[counter.id] = counter;
     writeFile();
   }
 
-  static void removeAllEnumerators() {
+  void removeAllEnumerators() {
     _enumerators.clear();
     _reSort();
     writeFile();
   }
 
-  static void removeAllCounters(int enumeratorId) {
+  void removeAllCounters(int enumeratorId) {
     _enumerators.elementAt(enumeratorId).removeAllCounters();
     _reSort();
     writeFile();
   }
 
-  static Future<bool> exportFile() async {
+  Future<bool> exportFile() async {
     final String name = "${Utils.dateToString(DateTime.now())}-saved-counters-cotwcompanion.json";
     final String content = parseToJson();
     return await Utils.exportFile(content, name);
   }
 
-  static Future<bool> importFile() async {
+  Future<bool> importFile() async {
     return Utils.importFile((content) {
       List<dynamic> data = [];
       try {
@@ -155,12 +155,12 @@ class HelperEnumerator {
     });
   }
 
-  static void writeFile() {
+  void writeFile() {
     final String content = parseToJson();
     Utils.writeFile(content, Values.enumerators);
   }
 
-  static Future<List<Enumerator>> readFile() async {
+  Future<List<Enumerator>> readFile() async {
     try {
       final data = await Utils.readFile(Values.enumerators);
       final list = json.decode(data) as List<dynamic>;
@@ -173,7 +173,7 @@ class HelperEnumerator {
     }
   }
 
-  static String parseToJson() {
+  String parseToJson() {
     return HelperJSON.listToJson(_enumerators);
   }
 }

@@ -1,18 +1,21 @@
 // Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/planner.dart';
 import 'package:cotwcompanion/model/proficiency.dart';
 import 'package:cotwcompanion/widgets/entries/planner/proficiency.dart';
 import 'package:flutter/material.dart';
 
 abstract class ListProficiency extends StatefulWidget {
   final ProficiencyType type;
+  final HelperPlanner helperPlanner;
   final int availablePoints;
   final Function refresh, showDetail;
 
   const ListProficiency({
     Key? key,
     required this.type,
+    required this.helperPlanner,
     required this.availablePoints,
     required this.refresh,
     required this.showDetail,
@@ -40,6 +43,7 @@ abstract class ListProficiencyState extends State<ListProficiency> {
 
   Widget buildProficiency(int tier, int index) {
     return EntryProficiency(
+      helperPlanner: widget.helperPlanner,
       size: squareSize,
       availablePoints: widget.availablePoints,
       proficiency: items[tier]!.elementAt(index),

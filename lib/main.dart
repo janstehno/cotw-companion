@@ -71,7 +71,7 @@ class App extends StatelessWidget {
         ErrorWidget.builder = ((details) => MaterialApp(
               debugShowCheckedModeBanner: false,
               home: WidgetError(
-                code: "Ex0000",
+                code: "ExA001",
                 stack: details.toString(),
               ),
             ));

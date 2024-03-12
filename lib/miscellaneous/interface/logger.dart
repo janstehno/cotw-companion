@@ -9,12 +9,40 @@ class HelperLogger {
 
   HelperLogger();
 
-  HelperLogger.appLoading() {
-    identifier = "[APP] [LOADING]";
+  HelperLogger.loadingApp() {
+    identifier = "[LOADING] [APP]";
   }
 
-  HelperLogger.logsEdit() {
-    identifier = "[LOGS] [EDIT]";
+  HelperLogger.loadingEnumerators() {
+    identifier = "[LOADING] [ENUMERATORS]";
+  }
+
+  HelperLogger.loadingPlanner() {
+    identifier = "[LOADING] [PLANNER]";
+  }
+
+  HelperLogger.loadingFilter() {
+    identifier = "[LOADING] [FILTER]";
+  }
+
+  HelperLogger.loadingMultimounts() {
+    identifier = "[LOADING] [MULTIMOUNTS]";
+  }
+
+  HelperLogger.loadingMap() {
+    identifier = "[LOADING] [MAP]";
+  }
+
+  HelperLogger.loadingLoadouts() {
+    identifier = "[LOADING] [LOADOUTS]";
+  }
+
+  HelperLogger.loadingLogs() {
+    identifier = "[LOADING] [LOGS]";
+  }
+
+  HelperLogger.editLogs() {
+    identifier = "[EDIT] [LOGS]";
   }
 
   void t(String message) {

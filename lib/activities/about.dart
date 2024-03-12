@@ -1,5 +1,7 @@
 // Copyright (c) 2023 Jan Stehno
 
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
@@ -60,173 +62,86 @@ class ActivityAbout extends StatelessWidget {
     ]);
   }
 
-  Widget _buildSupport() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr("support"),
-      ),
-      Container(
-          padding: _padding,
-          child: Column(children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(bottom: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(
-                        "Русский",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "Vełeş",
-                        style: Interface.s16w300n(Interface.dark),
-                      )
-                    ])),
-                Container(
-                    margin: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                      Text(
-                        "日本語",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "kuyokuyo",
-                        style: Interface.s16w300n(Interface.dark),
-                      )
-                    ]))
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(
-                        "中文",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "Aaron5242",
-                        style: Interface.s16w300n(Interface.dark),
-                      ),
-                      Text(
-                        "pippo5244",
-                        style: Interface.s16w300n(Interface.dark),
-                      ),
-                    ])),
-                Container(
-                    margin: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                      Text(
-                        "Deutch",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "MorbusGon",
-                        style: Interface.s16w300n(Interface.dark),
-                      )
-                    ])),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(
-                        "Polski",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "KorneliooS",
-                        style: Interface.s16w300n(Interface.dark),
-                      )
-                    ])),
-                Container(
-                    margin: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                      Text(
-                        "Français",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "BlocusEnergy",
-                        style: Interface.s16w300n(Interface.dark),
-                      )
-                    ])),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(
-                        "Magyar",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "Marcopolo",
-                        style: Interface.s16w300n(Interface.dark),
-                      )
-                    ])),
-                Container(
-                    margin: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                      Text(
-                        "Türkçe",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "Ali Yahya Say",
-                        style: Interface.s16w300n(Interface.dark),
-                      )
-                    ])),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(top: 5),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(
-                        "Português (Brasil)",
-                        style: Interface.s16w300n(Interface.disabled),
-                      ),
-                      Text(
-                        "RECRUTA",
-                        style: Interface.s16w300n(Interface.dark),
-                      ),
-                      Text(
-                        "DI ÂNGELO",
-                        style: Interface.s16w300n(Interface.dark),
-                      )
-                    ])),
-              ],
-            )
-          ]))
-    ]);
+  List<Widget> _buildSupportersColumns(List<String> names, Supporter supporter) {
+    List<Widget> rows = [];
+    for (String name in names) {
+      rows.add(AutoSizeText(
+        name,
+        style: supporter == Supporter.translation ? Interface.s16w300n(Interface.dark) : Interface.s12w300n(Interface.disabled),
+        maxLines: 1,
+        minFontSize: 4,
+      ));
+    }
+    return rows;
   }
 
-  Widget _buildDonate() {
+  List<Widget> _buildSupportersRows(Map<String, List<String>> supporters, Supporter supporter) {
+    List<Widget> rows = [];
+    for (MapEntry<String, List<String>> entry in supporters.entries) {
+      rows.add(Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              flex: supporter == Supporter.translation ? 1 : 4,
+              child: AutoSizeText(
+                entry.key,
+                style: supporter == Supporter.translation ? Interface.s14w300n(Interface.disabled) : Interface.s16w300n(Interface.dark),
+                maxLines: 1,
+                minFontSize: 4,
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: _buildSupportersColumns(entry.value, supporter),
+              ),
+            ),
+          ],
+        ),
+      ));
+    }
+    return rows;
+  }
+
+  Widget _buildSupporters(String title, Map<String, List<String>> supporters, Supporter supporter) {
+    return Column(
+      children: [
+        WidgetTitleBig(
+          primaryText: tr(title),
+        ),
+        Container(
+          color: Interface.primary,
+          alignment: Alignment.center,
+          padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+          child: AutoSizeText(
+            tr("${title}_sub"),
+            style: Interface.s16w600c(Interface.accent),
+            maxLines: 1,
+            minFontSize: 4,
+          ),
+        ),
+        Container(
+          padding: _padding.subtract(const EdgeInsets.only(bottom: 10)),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: _buildSupportersRows(supporters, supporter),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDonation() {
     return Column(children: [
       WidgetTitleBig(
-        primaryText: tr("support_me"),
+        primaryText: tr("donation"),
       ),
       Container(
           padding: _padding,
@@ -234,15 +149,15 @@ class ActivityAbout extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.only(bottom: 30),
                 child: Text(
-                  tr("about_support"),
+                  tr("about_donation"),
                   style: Interface.s16w300n(Interface.dark),
                 )),
             Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
               WidgetButtonIcon(
                 buttonSize: 40,
                 icon: "assets/graphics/icons/paypal.svg",
-                color: Interface.alwaysLight,
-                background: Interface.darkBlue,
+                color: Interface.alwaysDark,
+                background: Interface.grey,
                 onTap: () {
                   Utils.redirectTo("paypal.me", "/toastovac");
                 },
@@ -253,7 +168,7 @@ class ActivityAbout extends StatelessWidget {
                     buttonSize: 40,
                     icon: "assets/graphics/icons/coffee.svg",
                     color: Interface.alwaysDark,
-                    background: Interface.yellow,
+                    background: Interface.grey,
                     onTap: () {
                       Utils.redirectTo("buymeacoffee.com", "/toastovac");
                     },
@@ -262,7 +177,7 @@ class ActivityAbout extends StatelessWidget {
                 buttonSize: 40,
                 icon: "assets/graphics/icons/patreon.svg",
                 color: Interface.alwaysDark,
-                background: Interface.red,
+                background: Interface.grey,
                 onTap: () {
                   Utils.redirectTo("patreon.com", "/Toastovac");
                 },
@@ -328,8 +243,9 @@ class ActivityAbout extends StatelessWidget {
         body: Column(children: [
           _buildAbout(),
           _buildLanguage(),
-          _buildSupport(),
-          _buildDonate(),
+          _buildSupporters("translation_supporters", Values.translationSupporters, Supporter.translation),
+          _buildDonation(),
+          _buildSupporters("donation_supporters", Values.donationSupporters, Supporter.donation),
           _buildFooter(),
         ]));
   }

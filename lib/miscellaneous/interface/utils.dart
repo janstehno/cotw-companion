@@ -9,9 +9,6 @@ import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
 import 'package:cotwcompanion/model/dlc.dart';
 import 'package:cotwcompanion/model/log.dart';
 import 'package:cotwcompanion/model/multimount.dart';
-import 'package:cotwcompanion/model/perk.dart';
-import 'package:cotwcompanion/model/proficiency.dart';
-import 'package:cotwcompanion/model/skill.dart';
 import 'package:cotwcompanion/widgets/snackbar.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -153,66 +150,6 @@ class Utils {
   static Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
-  }
-
-  static Map<int, List<Perk>> getPerksFor(ProficiencyType type) {
-    Map<int, List<Perk>> perks = {0: [], 1: [], 2: [], 3: []};
-    for (Perk perk in HelperJSON.perks) {
-      if (perk.type == type.index) perks[perk.tier]!.add(perk);
-    }
-    return perks;
-  }
-
-  static Map<int, List<Skill>> getSkillsFor(ProficiencyType type) {
-    Map<int, List<Skill>> perks = {0: [], 1: [], 2: [], 3: [], 4: []};
-    for (Skill skill in HelperJSON.skills) {
-      if (skill.type == type.index) perks[skill.tier]!.add(skill);
-    }
-    return perks;
-  }
-
-  static void resetSkillsFor(ProficiencyType type) {
-    for (Skill skill in HelperJSON.skills) {
-      if (skill.type == type.index) skill.resetLevel();
-    }
-  }
-
-  static void resetPerksFor(ProficiencyType type) {
-    for (Perk perk in HelperJSON.perks) {
-      if (perk.type == type.index) perk.resetLevel();
-    }
-  }
-
-  static int getSkillPointsFor(ProficiencyType type, bool actual) {
-    int points = 0;
-    for (Proficiency skill in HelperJSON.skills) {
-      if (skill.type == type.index) points += actual ? skill.actualLevel : skill.level;
-    }
-    return points;
-  }
-
-  static int getPerkPointsFor(ProficiencyType type, bool actual) {
-    int points = 0;
-    for (Perk perk in HelperJSON.perks) {
-      if (perk.type == type.index) points += actual ? perk.actualLevel : perk.level;
-    }
-    return points;
-  }
-
-  static int getActiveSkillPoints() {
-    int points = 0;
-    for (Proficiency skill in HelperJSON.skills) {
-      points += skill.actualLevel;
-    }
-    return points;
-  }
-
-  static int getActivePerkPoints() {
-    int points = 0;
-    for (Perk perk in HelperJSON.perks) {
-      points += perk.actualLevel;
-    }
-    return points;
   }
 
   static String getWeaponDLC(int id) {

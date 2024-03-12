@@ -1,30 +1,38 @@
 // Copyright (c) 2023 Jan Stehno
 
+import 'dart:convert';
+
+import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/interface/logger.dart';
 import 'package:cotwcompanion/model/animal.dart';
 import 'package:cotwcompanion/model/map_zone.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 
 class HelperMap {
-  static final List<Animal> _animals = [];
-  static final List<String> _names = [];
-  static final List<LatLng> _outposts = [];
-  static final List<LatLng> _lookouts = [];
-  static final List<LatLng> _hides = [];
-  static final Map<String, dynamic> _zones = {};
+  final HelperLogger _logger = HelperLogger.loadingMap();
 
-  static final List<bool> _activeE = [
+  final List<Animal> _animals = [];
+  final List<String> _names = [];
+  final List<LatLng> _outposts = [];
+  final List<LatLng> _lookouts = [];
+  final List<LatLng> _hides = [];
+  final Map<String, dynamic> _zones = {};
+
+  final int _reserveId;
+
+  final List<bool> _activeE = [
     false, //OUTPOSTS
     false, //LOOKOUTS
     false, //HIDES
   ];
-  static final List<Color> _colorsE = [
+  final List<Color> _colorsE = [
     Interface.dark, //OUTPOSTS
     Interface.dark, //LOOKOUTS
     Interface.dark, //HIDES
   ];
-  static final List<bool> _active = [
+  final List<bool> _active = [
     false,
     false,
     false,
@@ -45,55 +53,61 @@ class HelperMap {
     false,
     false,
   ];
-  static const List<Color> _colors = [
-    Color(0xFF7C4DFF),
-    Color(0xFFAB47BC),
-    Color(0xFFE91E63),
-    Color(0xFFF44336),
-    Color(0xFFFF5722),
-    Color(0xFFFF9800),
-    Color(0xFFFFC107),
-    Color(0xFFFFEB3B),
-    Color(0xFFCDDC39),
-    Color(0xFF8BC34A),
-    Color(0xFF4CAF50),
-    Color(0xFF009688),
-    Color(0xFF00BCD4),
-    Color(0xFF03A9F4),
-    Color(0xFF2196F3),
-    Color(0xFF3D5AFE),
-    Color(0xFF607D8B),
-    Color(0xFF9E9E9E),
-    Color(0xFF8D6E63)
+  final List<Color> _colors = [
+    const Color(0xFF7C4DFF),
+    const Color(0xFFAB47BC),
+    const Color(0xFFE91E63),
+    const Color(0xFFF44336),
+    const Color(0xFFFF5722),
+    const Color(0xFFFF9800),
+    const Color(0xFFFFC107),
+    const Color(0xFFFFEB3B),
+    const Color(0xFFCDDC39),
+    const Color(0xFF8BC34A),
+    const Color(0xFF4CAF50),
+    const Color(0xFF009688),
+    const Color(0xFF00BCD4),
+    const Color(0xFF03A9F4),
+    const Color(0xFF2196F3),
+    const Color(0xFF3D5AFE),
+    const Color(0xFF607D8B),
+    const Color(0xFF9E9E9E),
+    const Color(0xFF8D6E63)
   ];
 
-  static List<Animal> get animals => _animals;
+  HelperMap({
+    required reserveId,
+  }) : _reserveId = reserveId;
 
-  static List<String> get names => _names;
+  int get reserveId => _reserveId;
 
-  static List<LatLng> get outposts => _outposts;
+  List<Animal> get animals => _animals;
 
-  static List<LatLng> get lookouts => _lookouts;
+  List<String> get names => _names;
 
-  static List<LatLng> get hides => _hides;
+  List<LatLng> get outposts => _outposts;
 
-  static Animal getAnimal(int index) => _animals.elementAt(index);
+  List<LatLng> get lookouts => _lookouts;
 
-  static String getName(int index) => _names.elementAt(index);
+  List<LatLng> get hides => _hides;
 
-  static bool isActive(int index) => _active.elementAt(index);
+  Animal getAnimal(int index) => _animals.elementAt(index);
 
-  static bool isActiveE(int index) => _activeE.elementAt(index);
+  String getName(int index) => _names.elementAt(index);
 
-  static Color getColor(int index) => _colors.elementAt(index);
+  bool isActive(int index) => _active.elementAt(index);
 
-  static Color getColorE(int index) => _colorsE.elementAt(index);
+  bool isActiveE(int index) => _activeE.elementAt(index);
 
-  static bool getOpacity(int index) => isActive(index);
+  Color getColor(int index) => _colors.elementAt(index);
 
-  static bool getOpacityE(int index) => isActiveE(index);
+  Color getColorE(int index) => _colorsE.elementAt(index);
 
-  static List<MapObject> getAnimalZones(int animalId) {
+  bool getOpacity(int index) => isActive(index);
+
+  bool getOpacityE(int index) => isActiveE(index);
+
+  List<MapObject> getAnimalZones(int animalId) {
     List<MapObject> result = [];
     for (List<dynamic> object in _zones[animalId.toString()].cast()) {
       double x = object[0];
@@ -104,15 +118,15 @@ class HelperMap {
     return result;
   }
 
-  static void activate(int index) {
+  void activate(int index) {
     _active[index] = !(_active.elementAt(index));
   }
 
-  static void activateE(int index) {
+  void activateE(int index) {
     _activeE[index] = !(_activeE.elementAt(index));
   }
 
-  static void activateAll() {
+  void activateAll() {
     if (isEverythingActive()) {
       for (int index = 0; index < _active.length; index++) {
         _active[index] = false;
@@ -124,16 +138,16 @@ class HelperMap {
     }
   }
 
-  static bool isEverythingActive() {
+  bool isEverythingActive() {
     for (bool b in _active) {
       if (!b) return false;
     }
     return true;
   }
 
-  static bool isAnimalLayerActive() => _active.contains(true);
+  bool isAnimalLayerActive() => _active.contains(true);
 
-  static void clearMap() {
+  void clearMap() {
     _animals.clear();
     _names.clear();
     _lookouts.clear();
@@ -148,18 +162,30 @@ class HelperMap {
     }
   }
 
-  static void addAnimal(Animal animal) {
+  void addAnimal(Animal animal) {
     _animals.add(animal);
   }
 
-  static void addNames(Locale locale, int reserveId) {
-    _animals.sort((a, b) => a.getNameBasedOnReserve(locale, reserveId).compareTo(b.getNameBasedOnReserve(locale, reserveId)));
+  void addNames(Locale locale) {
+    _animals.sort((a, b) => a.getNameBasedOnReserve(locale, _reserveId).compareTo(b.getNameBasedOnReserve(locale, reserveId)));
     for (Animal a in _animals) {
-      _names.add(a.getNameBasedOnReserve(locale, reserveId));
+      _names.add(a.getNameBasedOnReserve(locale, _reserveId));
     }
   }
 
-  static void addObjects(dynamic objects) {
+  Future<Map<String, dynamic>> readMapObjects(String reserve) async {
+    try {
+      final data = await HelperJSON.getData("map/$reserve");
+      final Map<String, dynamic> mapObjects = Map.castFrom(json.decode(data));
+      _logger.t("${mapObjects.length} map objects loaded");
+      return mapObjects;
+    } catch (e) {
+      _logger.w("Map objects not loaded");
+      return {};
+    }
+  }
+
+  void addObjects(dynamic objects) {
     for (int i = 0; i <= 3; i++) {
       String index = i.toString();
       if (i != 3) {

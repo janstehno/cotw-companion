@@ -1,7 +1,6 @@
 // Copyright (c) 2023 Jan Stehno
 
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/planner.dart';
 import 'package:cotwcompanion/model/proficiency.dart';
 
 class Perk extends Proficiency {
@@ -36,16 +35,16 @@ class Perk extends Proficiency {
 
   List<dynamic> get parents => _parent;
 
-  bool isParentLeveled() {
+  bool isParentLeveled(HelperPlanner helperPlanner) {
     if (tier == 0) return true;
     for (int parentId in parents) {
-      if (parentId != 0 && HelperJSON.getPerk(parentId).isLeveled) return true;
+      if (parentId != 0 && helperPlanner.getPerk(parentId).isLeveled) return true;
     }
     return false;
   }
 
-  bool isUsable(int availablePoints) {
-    return availablePoints - Utils.getActivePerkPoints() > 0;
+  bool isUsable(HelperPlanner helperPlanner, int availablePoints) {
+    return availablePoints - helperPlanner.getActivePerkPoints() > 0;
   }
 
   factory Perk.fromJson(Map<String, dynamic> json) {

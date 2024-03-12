@@ -22,5 +22,5 @@ class MapObject {
 
   LatLng get coord => toLatLng(_x, _y);
 
-  static LatLng toLatLng(double x, double y) => LatLng((y * 720) - 360, (x * 720) - 360);
+  static LatLng toLatLng(double x, double y) => LatLng.degree((y * 720) - 360, (x * 720) - 360);
 }

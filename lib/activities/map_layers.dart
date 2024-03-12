@@ -13,11 +13,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityMapLayers extends StatefulWidget {
+  final HelperMap helperMap;
   final Reserve reserve;
   final Function callback;
 
   const ActivityMapLayers({
     Key? key,
+    required this.helperMap,
     required this.reserve,
     required this.callback,
   }) : super(key: key);
@@ -44,10 +46,10 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
               icon: "assets/graphics/icons/outpost.svg",
               activeColor: Interface.light,
               activeBackground: Interface.dark,
-              isActive: HelperMap.isActiveE(0),
+              isActive: widget.helperMap.isActiveE(0),
               onTap: () {
                 setState(() {
-                  HelperMap.activateE(0);
+                  widget.helperMap.activateE(0);
                   widget.callback();
                 });
               },
@@ -57,10 +59,10 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
               icon: "assets/graphics/icons/lookout.svg",
               activeColor: Interface.light,
               activeBackground: Interface.dark,
-              isActive: HelperMap.isActiveE(1),
+              isActive: widget.helperMap.isActiveE(1),
               onTap: () {
                 setState(() {
-                  HelperMap.activateE(1);
+                  widget.helperMap.activateE(1);
                   widget.callback();
                 });
               },
@@ -70,10 +72,10 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
               icon: "assets/graphics/icons/hide.svg",
               activeColor: Interface.light,
               activeBackground: Interface.dark,
-              isActive: HelperMap.isActiveE(2),
+              isActive: widget.helperMap.isActiveE(2),
               onTap: () {
                 setState(() {
-                  HelperMap.activateE(2);
+                  widget.helperMap.activateE(2);
                   widget.callback();
                 });
               },
@@ -90,10 +92,10 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
         activeIcon: "assets/graphics/icons/full.svg",
         activeColor: Interface.light,
         activeBackground: Interface.dark,
-        isActive: HelperMap.isEverythingActive(),
+        isActive: widget.helperMap.isEverythingActive(),
         onTap: () {
           setState(() {
-            HelperMap.activateAll();
+            widget.helperMap.activateAll();
             widget.callback();
           });
         },
@@ -101,16 +103,16 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
       ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: HelperMap.names.length,
+          itemCount: widget.helperMap.names.length,
           itemBuilder: (context, index) {
             return WidgetTapTextIndicator(
-              text: HelperMap.getName(index),
-              color: HelperMap.getColor(index),
+              text: widget.helperMap.getName(index),
+              color: widget.helperMap.getColor(index),
               background: Utils.background(index),
-              isActive: HelperMap.isActive(index),
+              isActive: widget.helperMap.isActive(index),
               onTap: () {
                 setState(() {
-                  HelperMap.activate(index);
+                  widget.helperMap.activate(index);
                   widget.callback();
                 });
               },

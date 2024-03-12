@@ -2,11 +2,10 @@
 
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/enumerator.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/loadout.dart';
 import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
+import 'package:cotwcompanion/miscellaneous/interface/logger.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -23,7 +22,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HelperFilter {
-  static final HelperLogger _logger = HelperLogger.appLoading();
+  static final HelperLogger _logger = HelperLogger.loadingFilter();
 
   static const Map<FilterKey, dynamic> _defaultFilters = {
     FilterKey.reservesCountMin: 8,
@@ -370,9 +369,9 @@ class HelperFilter {
     return missions;
   }
 
-  static Iterable<Enumerator> filterEnumerators(String searchText, BuildContext context) {
+  static Iterable<Enumerator> filterEnumerators(String searchText, List<Enumerator> allEnumerators, BuildContext context) {
     List<Enumerator> enumerators = [];
-    enumerators.addAll(HelperEnumerator.enumerators);
+    enumerators.addAll(allEnumerators);
     enumerators = enumerators.where((enumerator) => (searchText.isNotEmpty ? enumerator.name.toLowerCase().contains(searchText.toLowerCase()) : true)).toList();
     return enumerators;
   }

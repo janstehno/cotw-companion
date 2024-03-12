@@ -588,5 +588,40 @@
     "ID": 118,
     "WEAPON_ID": 50,
     "AMMO_ID": 3
+  },
+  {
+    "ID": 119,
+    "WEAPON_ID": 51,
+    "AMMO_ID": 16
+  },
+  {
+    "ID": 120,
+    "WEAPON_ID": 51,
+    "AMMO_ID": 17
+  },
+  {
+    "ID": 121,
+    "WEAPON_ID": 52,
+    "AMMO_ID": 57
+  },
+  {
+    "ID": 122,
+    "WEAPON_ID": 52,
+    "AMMO_ID": 58
+  },
+  {
+    "ID": 123,
+    "WEAPON_ID": 52,
+    "AMMO_ID": 59
+  },
+  {
+    "ID": 124,
+    "WEAPON_ID": 53,
+    "AMMO_ID": 18
+  },
+  {
+    "ID": 125,
+    "WEAPON_ID": 53,
+    "AMMO_ID": 19
   }
 ]

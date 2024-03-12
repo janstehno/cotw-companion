@@ -2194,5 +2194,57 @@
     "NAME": "Revontuli Coast Cosmetic Pack",
     "DATE": "2023-12-12",
     "TYPE": -1
+  },
+  {
+    "ID": 54,
+    "NAME": "High Caliber Weapon Pack",
+    "DATE": "2024-03-12",
+    "TYPE": 2,
+    "DESCRIPTION": {
+      "EN": [
+        "Unlocks new weapons for you to hunt with."
+      ],
+      "RU": [
+        "Открывает новое оружие для охоты."
+      ],
+      "CS": [
+        "Odemyká nové zbraně, kterými můžete lovit."
+      ],
+      "PL": [
+        "Odblokowuje nowe bronie do polowania."
+      ],
+      "DE": [
+        "Schaltet neue Waffen frei, mit denen du jagen kannst."
+      ],
+      "FR": [
+        "Déverrouille de nouvelles armes avec lesquelles vous pourrez chasser."
+      ],
+      "ES": [
+        "Desbloquea nuevas armas para que caces."
+      ],
+      "BR": [
+        "Desbloqueia novas armas para você caçar."
+      ],
+      "JA": [
+        "新しい武器をアンロックする。"
+      ],
+      "ZH": [
+        "解锁新武器"
+      ],
+      "HU": [
+        "Feloldja az új vadász fegyvereket."
+      ]
+    },
+    "WEAPONS": [
+      51,
+      52,
+      53
+    ]
+  },
+  {
+    "ID": 55,
+    "NAME": "Emerald Coast Cosmetic Pack",
+    "DATE": "2023-03-12",
+    "TYPE": -1
   }
 ]

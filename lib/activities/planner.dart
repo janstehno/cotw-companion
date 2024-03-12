@@ -3,8 +3,8 @@
 import 'package:cotwcompanion/lists/planner/perks.dart';
 import 'package:cotwcompanion/lists/planner/skills.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/planner.dart';
 import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/proficiency.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
@@ -18,8 +18,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityPlanner extends StatefulWidget {
+  final HelperPlanner helperPlanner;
+
   const ActivityPlanner({
     Key? key,
+    required this.helperPlanner,
   }) : super(key: key);
 
   @override
@@ -60,13 +63,13 @@ class ActivityPlannerState extends State<ActivityPlanner> {
 
   void _resetSkillPoints(ProficiencyType type) {
     setState(() {
-      Utils.resetSkillsFor(type);
+      widget.helperPlanner.resetSkillsFor(type);
     });
   }
 
   void _resetPerkPoints(ProficiencyType type) {
     setState(() {
-      Utils.resetPerksFor(type);
+      widget.helperPlanner.resetPerksFor(type);
     });
   }
 
@@ -109,7 +112,7 @@ class ActivityPlannerState extends State<ActivityPlanner> {
       children: [
         WidgetTitleBigButton(
           primaryText: tr(name),
-          secondaryText: "${Utils.getSkillPointsFor(type, true)}/${Utils.getSkillPointsFor(type, false)}",
+          secondaryText: "${widget.helperPlanner.getSkillPointsFor(type, true)}/${widget.helperPlanner.getSkillPointsFor(type, false)}",
           icon: "assets/graphics/icons/reload.svg",
           buttonColor: Interface.dark,
           buttonBackground: Colors.transparent,
@@ -119,6 +122,7 @@ class ActivityPlannerState extends State<ActivityPlanner> {
         ),
         ListSkills(
           type: type,
+          helperPlanner: widget.helperPlanner,
           availablePoints: _availableSkillPoints,
           refresh: () {
             setState(() {});
@@ -134,7 +138,7 @@ class ActivityPlannerState extends State<ActivityPlanner> {
       children: [
         WidgetTitleBigButton(
           primaryText: tr(name),
-          secondaryText: "${Utils.getPerkPointsFor(type, true)}/${Utils.getPerkPointsFor(type, false)}",
+          secondaryText: "${widget.helperPlanner.getPerkPointsFor(type, true)}/${widget.helperPlanner.getPerkPointsFor(type, false)}",
           icon: "assets/graphics/icons/reload.svg",
           buttonColor: Interface.dark,
           buttonBackground: Colors.transparent,
@@ -144,6 +148,7 @@ class ActivityPlannerState extends State<ActivityPlanner> {
         ),
         ListPerks(
           type: type,
+          helperPlanner: widget.helperPlanner,
           availablePoints: _availablePerkPoints,
           refresh: () {
             setState(() {});

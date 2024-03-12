@@ -68,7 +68,7 @@ class WidgetSwitchSort extends StatelessWidget {
                   AutoSizeText(
                     orderNumber.toString(),
                     maxLines: 1,
-                    minFontSize: 8,
+                    minFontSize: 4,
                     textAlign: TextAlign.center,
                     style: Interface.s14w500n(Interface.accent),
                   ),

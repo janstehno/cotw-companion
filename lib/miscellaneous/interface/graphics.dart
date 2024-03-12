@@ -98,7 +98,10 @@ class Graphics {
     "olssonmodel23308",
     "zaganvarminter22250",
     "moradimodel1894",
-    "stenbergtakedownrecurvebow"
+    "stenbergtakedownrecurvebow",
+    "arzyna300magtactical",
+    "strandberg10saexecutive",
+    "4570jernbergsuperior"
   ];
 
   static const List<String> _animals = [
@@ -250,6 +253,10 @@ class Graphics {
 
   static String getReserveIcon(int id) {
     return "$_directory/reserves/${_reserves[id - 1]}.svg";
+  }
+
+  static String getReserveName(int id) {
+    return _reserves[id - 1];
   }
 
   static String getCallerIcon(int id) {

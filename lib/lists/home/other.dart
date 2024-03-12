@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jan Stehno
 
+import 'package:cotwcompanion/builders/multimounts.dart';
 import 'package:cotwcompanion/lists/other/dlcs.dart';
-import 'package:cotwcompanion/lists/other/multimounts.dart';
 import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
 import 'package:cotwcompanion/widgets/appbar.dart';
 import 'package:cotwcompanion/widgets/entries/menu.dart';
@@ -20,7 +20,7 @@ class ListOther extends StatefulWidget {
 
 class ListOtherState extends State<ListOther> {
   final List<List<dynamic>> _items = [
-    ["content_matmats_multimounts", "hammer", const ListMultimounts()],
+    ["content_matmats_multimounts", "hammer", const BuilderMultimounts()],
     ["content_downloadable_content", "dlc", const ListDlcs()],
   ];
 

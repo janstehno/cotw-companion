@@ -14,7 +14,7 @@ class MapProjection extends Projection {
     final lat = 360.0 * yy;
     final lng = 360.0 * xx;
 
-    return LatLng(lat, lng);
+    return LatLng.degree(lat, lng);
   }
 
   @override
@@ -22,8 +22,8 @@ class MapProjection extends Projection {
     final lng = location.longitude;
     final lat = location.latitude;
 
-    double x = (lng + 180.0) / 360.0;
-    double y = (lat + 180.0) / 360.0;
+    double x = (lng.degrees + 180.0) / 360.0;
+    double y = (lat.degrees + 180.0) / 360.0;
 
     return TileIndex(x, y);
   }

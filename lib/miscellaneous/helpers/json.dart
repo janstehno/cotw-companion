@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cotwcompanion/miscellaneous/helpers/logger.dart';
+import 'package:cotwcompanion/miscellaneous/interface/logger.dart';
 import 'package:cotwcompanion/miscellaneous/interface/values.dart';
 import 'package:cotwcompanion/model/ammo.dart';
 import 'package:cotwcompanion/model/animal.dart';
@@ -14,17 +14,14 @@ import 'package:cotwcompanion/model/fur.dart';
 import 'package:cotwcompanion/model/giver.dart';
 import 'package:cotwcompanion/model/idtoid.dart';
 import 'package:cotwcompanion/model/mission.dart';
-import 'package:cotwcompanion/model/multimount.dart';
-import 'package:cotwcompanion/model/perk.dart';
 import 'package:cotwcompanion/model/reserve.dart';
-import 'package:cotwcompanion/model/skill.dart';
 import 'package:cotwcompanion/model/weapon.dart';
 import 'package:cotwcompanion/model/weapon_ammo.dart';
 import 'package:cotwcompanion/model/zone.dart';
 import 'package:flutter/services.dart' as root_bundle;
 
 class HelperJSON {
-  static final HelperLogger _logger = HelperLogger.appLoading();
+  static final HelperLogger _logger = HelperLogger.loadingApp();
 
   static final List<Ammo> _ammo = [];
   static final List<Animal> _animals = [];
@@ -40,10 +37,6 @@ class HelperJSON {
   static final List<WeaponAmmo> _weaponsAmmo = [];
   static final List<Mission> _missions = [];
   static final List<Giver> _missionsGivers = [];
-  static final List<Perk> _perks = [];
-  static final List<Skill> _skills = [];
-  static final List<Multimount> _multimounts = [];
-  static final Map<String, dynamic> _mapObjects = {};
 
   static void setLists(
     List<Ammo> ammo,
@@ -60,9 +53,6 @@ class HelperJSON {
     List<WeaponAmmo> weaponsAmmo,
     List<Mission> missions,
     List<Giver> missionsGivers,
-    List<Perk> perks,
-    List<Skill> skills,
-    List<Multimount> multimounts,
   ) {
     _logger.i("Initializing lists in HelperJSON...");
     _clearLists();
@@ -80,9 +70,6 @@ class HelperJSON {
     _weaponsAmmo.addAll(weaponsAmmo);
     _missions.addAll(missions);
     _missionsGivers.addAll(missionsGivers);
-    _perks.addAll(perks);
-    _skills.addAll(skills);
-    _multimounts.addAll(multimounts);
     initializeWeaponAmmo();
     _logger.t("Lists initialized");
   }
@@ -102,14 +89,6 @@ class HelperJSON {
     _weaponsAmmo.clear();
     _missions.clear();
     _missionsGivers.clear();
-    _perks.clear();
-    _skills.clear();
-    _multimounts.clear();
-  }
-
-  static void setMapObjects(Map<String, dynamic> mapObjects) {
-    _mapObjects.clear();
-    _mapObjects.addAll(mapObjects);
   }
 
   static Reserve getReserve(int id) => _reserves.elementAt(id - 1);
@@ -148,14 +127,6 @@ class HelperJSON {
 
   static Giver getMissionGiver(int id) => _missionsGivers.elementAt(id - 1);
 
-  static Perk getPerk(int id) => _perks.elementAt(id - 1);
-
-  static Skill getSkill(int id) => _skills.elementAt(id - 1);
-
-  static Multimount getMultimount(int id) => _multimounts.elementAt(id - 1);
-
-  static dynamic getMapObjects(int reserveId) => _mapObjects[reserveId.toString()];
-
   static List<Ammo> get ammo => _ammo;
 
   static List<Animal> get animals => _animals;
@@ -184,13 +155,7 @@ class HelperJSON {
 
   static List<Giver> get missionsGivers => _missionsGivers;
 
-  static List<Skill> get skills => _skills;
-
-  static List<Perk> get perks => _perks;
-
-  static List<Multimount> get multimounts => _multimounts;
-
-  static Future<String> _getData(String name) async {
+  static Future<String> getData(String name) async {
     final String content;
     content = await root_bundle.rootBundle.loadString("assets/raw/$name.json");
     return content;
@@ -198,7 +163,7 @@ class HelperJSON {
 
   static Future<List<Ammo>> readAmmo() async {
     try {
-      final data = await _getData("ammo");
+      final data = await getData("ammo");
       final list = json.decode(data) as List<dynamic>;
       final List<Ammo> ammo = list.map((e) => Ammo.fromJson(e)).toList();
       _logger.t("${ammo.length} ammo loaded");
@@ -211,7 +176,7 @@ class HelperJSON {
 
   static Future<List<Animal>> readAnimals() async {
     try {
-      final data = await _getData("animals");
+      final data = await getData("animals");
       final list = json.decode(data) as List<dynamic>;
       final List<Animal> animals = list.map((e) => Animal.fromJson(e)).toList();
       _logger.t("${animals.length} animals loaded");
@@ -224,7 +189,7 @@ class HelperJSON {
 
   static Future<List<IdtoId>> readAnimalsCallers() async {
     try {
-      final data = await _getData("animalscallers");
+      final data = await getData("animalscallers");
       final list = json.decode(data) as List<dynamic>;
       final List<IdtoId> animalsCallers = list.map((e) => IdtoId.fromJson(e, "ANIMAL_ID", "CALLER_ID")).toList();
       _logger.t("${list.length} animal's callers loaded");
@@ -237,7 +202,7 @@ class HelperJSON {
 
   static Future<List<AnimalFur>> readAnimalsFurs() async {
     try {
-      final data = await _getData("animalsfurs");
+      final data = await getData("animalsfurs");
       final list = json.decode(data) as List<dynamic>;
       final List<AnimalFur> animalsFurs = list.map((e) => AnimalFur.fromJson(e)).toList();
       _logger.t("${animalsFurs.length} animal's furs loaded");
@@ -250,7 +215,7 @@ class HelperJSON {
 
   static Future<List<IdtoId>> readAnimalsReserves() async {
     try {
-      final data = await _getData("animalsreserves");
+      final data = await getData("animalsreserves");
       final list = json.decode(data) as List<dynamic>;
       final List<IdtoId> animalsReserves = list.map((e) => IdtoId.fromJson(e, "ANIMAL_ID", "RESERVE_ID")).toList();
       _logger.t("${animalsReserves.length} animal's reserves loaded");
@@ -263,7 +228,7 @@ class HelperJSON {
 
   static Future<List<Zone>> readAnimalsZones() async {
     try {
-      final data = await _getData("animalszones");
+      final data = await getData("animalszones");
       final list = json.decode(data) as List<dynamic>;
       final List<Zone> animalsZones = list.map((e) => Zone.fromJson(e)).toList();
       _logger.t("${animalsZones.length} animal's zones loaded");
@@ -276,7 +241,7 @@ class HelperJSON {
 
   static Future<List<Caller>> readCallers() async {
     try {
-      final data = await _getData("callers");
+      final data = await getData("callers");
       final list = json.decode(data) as List<dynamic>;
       final List<Caller> callers = list.map((e) => Caller.fromJson(e)).toList();
       _logger.t("${callers.length} callers loaded");
@@ -289,7 +254,7 @@ class HelperJSON {
 
   static Future<List<Dlc>> readDlcs() async {
     try {
-      final data = await _getData("dlcs");
+      final data = await getData("dlcs");
       final list = json.decode(data) as List<dynamic>;
       final List<Dlc> dlcs = list.map((e) => Dlc.fromJson(e)).toList();
       _logger.t("${dlcs.length} dlcs loaded");
@@ -302,7 +267,7 @@ class HelperJSON {
 
   static Future<List<Fur>> readFurs() async {
     try {
-      final data = await _getData("furs");
+      final data = await getData("furs");
       final list = json.decode(data) as List<dynamic>;
       final List<Fur> furs = list.map((e) => Fur.fromJson(e)).toList();
       _logger.t("${furs.length} furs loaded");
@@ -315,7 +280,7 @@ class HelperJSON {
 
   static Future<List<Reserve>> readReserves() async {
     try {
-      final data = await _getData("reserves");
+      final data = await getData("reserves");
       final list = json.decode(data) as List<dynamic>;
       final List<Reserve> reserves = list.map((e) => Reserve.fromJson(e)).toList();
       _logger.t("${reserves.length} reserves loaded");
@@ -328,7 +293,7 @@ class HelperJSON {
 
   static Future<List<Weapon>> readWeapons() async {
     try {
-      final data = await _getData("weapons");
+      final data = await getData("weapons");
       final list = json.decode(data) as List<dynamic>;
       final List<Weapon> weapons = list.map((e) => Weapon.fromJson(e)).toList();
       _logger.t("${weapons.length} weapons loaded");
@@ -341,7 +306,7 @@ class HelperJSON {
 
   static Future<List<WeaponAmmo>> readWeaponsAmmo() async {
     try {
-      final data = await _getData("weaponsammo");
+      final data = await getData("weaponsammo");
       final list = json.decode(data) as List<dynamic>;
       final List<WeaponAmmo> weaponsAmmo = list.map((e) => WeaponAmmo.fromJson(e, "WEAPON_ID", "AMMO_ID")).toList();
       _logger.t("${weaponsAmmo.length} weapon's ammo loaded");
@@ -352,21 +317,9 @@ class HelperJSON {
     }
   }
 
-  static Future<Map<String, dynamic>> readMapObjects() async {
-    try {
-      final data = await _getData("mapobjects");
-      final Map<String, dynamic> mapObjects = Map.castFrom(json.decode(data));
-      _logger.t("${mapObjects.length} map objects loaded");
-      return mapObjects;
-    } catch (e) {
-      _logger.w("Map objects not loaded");
-      return {};
-    }
-  }
-
   static Future<List<Mission>> readMissions() async {
     try {
-      final data = await _getData("missions");
+      final data = await getData("missions");
       final list = json.decode(data) as List<dynamic>;
       final List<Mission> missions = list.map((e) => Mission.fromJson(e)).toList();
       _logger.t("${missions.length} missions loaded");
@@ -379,52 +332,13 @@ class HelperJSON {
 
   static Future<List<Giver>> readMissionsGivers() async {
     try {
-      final data = await _getData("missionsgivers");
+      final data = await getData("missionsgivers");
       final list = json.decode(data) as List<dynamic>;
       final List<Giver> missionsGivers = list.map((e) => Giver.fromJson(e)).toList();
       _logger.t("${missionsGivers.length} mission's givers loaded");
       return missionsGivers;
     } catch (e) {
       _logger.w("Mission's givers not loaded");
-      rethrow;
-    }
-  }
-
-  static Future<List<Perk>> readPerks() async {
-    try {
-      final data = await _getData("perks");
-      final list = json.decode(data) as List<dynamic>;
-      final List<Perk> perks = list.map((e) => Perk.fromJson(e)).toList();
-      _logger.t("${perks.length} perks loaded");
-      return perks;
-    } catch (e) {
-      _logger.w("Perks not loaded");
-      rethrow;
-    }
-  }
-
-  static Future<List<Skill>> readSkills() async {
-    try {
-      final data = await _getData("skills");
-      final list = json.decode(data) as List<dynamic>;
-      final List<Skill> skills = list.map((e) => Skill.fromJson(e)).toList();
-      _logger.t("${skills.length} skills loaded");
-      return skills;
-    } catch (e) {
-      _logger.w("Skills not loaded");
-      rethrow;
-    }
-  }
-
-  static Future<List<Multimount>> readMultimounts() async {
-    try {
-      final data = await _getData("multimounts");
-      final list = json.decode(data) as List<dynamic>;
-      final List<Multimount> multimounts = list.map((e) => Multimount.fromJson(e)).toList();
-      _logger.t("${multimounts.length} multimounts loaded");
-      return multimounts;
-    } catch (e) {
-      _logger.w("Multimounts not loaded");
       rethrow;
     }
   }

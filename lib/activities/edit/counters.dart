@@ -9,12 +9,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityEditCounters extends ActivityEdit {
+  final HelperEnumerator helperEnumerator;
   final int enumeratorId;
   final Counter? counter;
 
   const ActivityEditCounters({
     super.key,
     required super.callback,
+    required this.helperEnumerator,
     required this.enumeratorId,
     this.counter,
   });
@@ -26,11 +28,13 @@ class ActivityEditCounters extends ActivityEdit {
 class ActivityEditCountersState extends ActivityEditState {
   final TextEditingController _controllerValue = TextEditingController(text: "0");
 
+  late final HelperEnumerator _helperEnumerator;
   late final Counter? _counter;
   late final int _enumeratorId;
 
   @override
   void initState() {
+    _helperEnumerator = (widget as ActivityEditCounters).helperEnumerator;
     _counter = (widget as ActivityEditCounters).counter;
     _enumeratorId = (widget as ActivityEditCounters).enumeratorId;
     _controllerValue.addListener(() => reload());
@@ -42,8 +46,8 @@ class ActivityEditCountersState extends ActivityEditState {
     if (_counter != null) {
       //WHEN EDITING
       editing = true;
-      controller.text = HelperEnumerator.getCounter(_enumeratorId, _counter!.id).name;
-      _controllerValue.text = HelperEnumerator.getCounter(_enumeratorId, _counter!.id).value.toString();
+      controller.text = _helperEnumerator.getCounter(_enumeratorId, _counter!.id).name;
+      _controllerValue.text = _helperEnumerator.getCounter(_enumeratorId, _counter!.id).value.toString();
     }
   }
 
@@ -60,7 +64,7 @@ class ActivityEditCountersState extends ActivityEditState {
 
   Counter _createCounter() {
     return Counter(
-      id: editing ? _counter!.id : HelperEnumerator.enumerators.elementAt(_enumeratorId).counters.length,
+      id: editing ? _counter!.id : _helperEnumerator.enumerators.elementAt(_enumeratorId).counters.length,
       name: controller.text,
       value: int.tryParse(_controllerValue.text) ?? 0,
     );
@@ -84,7 +88,7 @@ class ActivityEditCountersState extends ActivityEditState {
   @override
   void addOrEdit() {
     Counter counter = _createCounter();
-    editing ? HelperEnumerator.editCounter(_enumeratorId, counter) : HelperEnumerator.addCounter(_enumeratorId, counter);
+    editing ? _helperEnumerator.editCounter(_enumeratorId, counter) : _helperEnumerator.addCounter(_enumeratorId, counter);
   }
 
   @override

@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Jan Stehno
 
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
+import 'package:cotwcompanion/miscellaneous/helpers/planner.dart';
 import 'package:cotwcompanion/model/proficiency.dart';
 
 class Skill extends Proficiency {
@@ -31,10 +31,10 @@ class Skill extends Proficiency {
     required super.ability,
   });
 
-  bool get isUnlocked => tier == 0 || Utils.getSkillPointsFor(ProficiencyType.values.elementAt(type), true) >= ((tier * 4) - 3);
+  bool isUnlocked(HelperPlanner helperPlanner) => tier == 0 || helperPlanner.getSkillPointsFor(ProficiencyType.values.elementAt(type), true) >= ((tier * 4) - 3);
 
-  bool isUsable(int availablePoints) {
-    return availablePoints - Utils.getActiveSkillPoints() > 0;
+  bool isUsable(HelperPlanner helperPlanner, int availablePoints) {
+    return availablePoints - helperPlanner.getActiveSkillPoints() > 0;
   }
 
   factory Skill.fromJson(Map<String, dynamic> json) {

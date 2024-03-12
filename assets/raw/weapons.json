@@ -795,5 +795,44 @@
     "PRICE": 0,
     "SCORE": 0,
     "DLC": 1
+  },
+  {
+    "ID": 51,
+    "EN": "Arzyna .300 Mag Tactical",
+    "TYPE": 0,
+    "MAG": 5,
+    "ACCURACY": 90,
+    "RECOIL": 75,
+    "RELOAD": 59,
+    "HIPSHOT": 50,
+    "PRICE": 0,
+    "SCORE": 0,
+    "DLC": 1
+  },
+  {
+    "ID": 52,
+    "EN": "Strandberg 10SA Executive",
+    "TYPE": 1,
+    "MAG": 4,
+    "ACCURACY": 30,
+    "RECOIL": 82,
+    "RELOAD": 25,
+    "HIPSHOT": 88,
+    "PRICE": 0,
+    "SCORE": 0,
+    "DLC": 1
+  },
+  {
+    "ID": 53,
+    "EN": ".45-70 Jernberg Superior",
+    "TYPE": 2,
+    "MAG": 1,
+    "ACCURACY": 75,
+    "RECOIL": 62,
+    "RELOAD": 58,
+    "HIPSHOT": 25,
+    "PRICE": 0,
+    "SCORE": 0,
+    "DLC": 1
   }
 ]

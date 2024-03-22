@@ -1,137 +1,150 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/map.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/model/reserve.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/switch_icon.dart';
-import 'package:cotwcompanion/widgets/tap_text_indicator.dart';
-import 'package:cotwcompanion/widgets/title_big_switch.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/map.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/button/switch_icon.dart';
+import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
+import 'package:cotwcompanion/widgets/title/title_switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityMapLayers extends StatefulWidget {
-  final HelperMap helperMap;
-  final Reserve reserve;
-  final Function callback;
+  final HelperMap _helperMap;
+  final Function _callback;
 
   const ActivityMapLayers({
-    Key? key,
-    required this.helperMap,
-    required this.reserve,
-    required this.callback,
-  }) : super(key: key);
+    super.key,
+    required HelperMap helperMap,
+    required Function onChange,
+  })  : _helperMap = helperMap,
+        _callback = onChange;
+
+  HelperMap get helperMap => _helperMap;
+
+  Function get callback => _callback;
 
   @override
   ActivityMapLayersState createState() => ActivityMapLayersState();
 }
 
 class ActivityMapLayersState extends State<ActivityMapLayers> {
-  final double _wrapSpace = 10;
-  final double _structureButtonSize = 50;
-
-  Widget _buildEnvironment() {
-    return Container(
-        alignment: Alignment.topCenter,
-        padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-        child: Wrap(
-          alignment: WrapAlignment.center,
-          spacing: _wrapSpace,
-          runSpacing: _wrapSpace,
-          children: [
-            WidgetSwitchIcon(
-              buttonSize: _structureButtonSize,
-              icon: "assets/graphics/icons/outpost.svg",
-              activeColor: Interface.light,
-              activeBackground: Interface.dark,
-              isActive: widget.helperMap.isActiveE(0),
-              onTap: () {
-                setState(() {
-                  widget.helperMap.activateE(0);
-                  widget.callback();
-                });
-              },
-            ),
-            WidgetSwitchIcon(
-              buttonSize: _structureButtonSize,
-              icon: "assets/graphics/icons/lookout.svg",
-              activeColor: Interface.light,
-              activeBackground: Interface.dark,
-              isActive: widget.helperMap.isActiveE(1),
-              onTap: () {
-                setState(() {
-                  widget.helperMap.activateE(1);
-                  widget.callback();
-                });
-              },
-            ),
-            WidgetSwitchIcon(
-              buttonSize: _structureButtonSize,
-              icon: "assets/graphics/icons/hide.svg",
-              activeColor: Interface.light,
-              activeBackground: Interface.dark,
-              isActive: widget.helperMap.isActiveE(2),
-              onTap: () {
-                setState(() {
-                  widget.helperMap.activateE(2);
-                  widget.callback();
-                });
-              },
-            )
-          ],
-        ));
+  Widget _buildOutpost() {
+    return WidgetSwitchIcon(
+      Assets.graphics.icons.outpost,
+      activeColor: Interface.light,
+      activeBackground: Interface.dark,
+      isActive: widget.helperMap.isEnvironmentActive(MapLocationType.outpost),
+      onTap: () {
+        setState(() {
+          widget.helperMap.activateEnvironment(MapLocationType.outpost);
+          widget.callback();
+        });
+      },
+    );
   }
 
-  Widget _buildList() {
-    return Column(children: [
-      WidgetTitleBigSwitch(
-        primaryText: tr("wildlife"),
-        icon: "assets/graphics/icons/empty.svg",
-        activeIcon: "assets/graphics/icons/full.svg",
-        activeColor: Interface.light,
-        activeBackground: Interface.dark,
-        isActive: widget.helperMap.isEverythingActive(),
+  Widget _buildLookout() {
+    return WidgetSwitchIcon(
+      Assets.graphics.icons.lookout,
+      activeColor: Interface.light,
+      activeBackground: Interface.dark,
+      isActive: widget.helperMap.isEnvironmentActive(MapLocationType.lookout),
+      onTap: () {
+        setState(() {
+          widget.helperMap.activateEnvironment(MapLocationType.lookout);
+          widget.callback();
+        });
+      },
+    );
+  }
+
+  Widget _buildHide() {
+    return WidgetSwitchIcon(
+      Assets.graphics.icons.hide,
+      activeColor: Interface.light,
+      activeBackground: Interface.dark,
+      isActive: widget.helperMap.isEnvironmentActive(MapLocationType.hide),
+      onTap: () {
+        setState(() {
+          widget.helperMap.activateEnvironment(MapLocationType.hide);
+          widget.callback();
+        });
+      },
+    );
+  }
+
+  Widget _buildEnvironment() {
+    return WidgetPadding.h30v20(
+      alignment: Alignment.center,
+      child: Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: [
+          _buildOutpost(),
+          _buildLookout(),
+          _buildHide(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAnimalsTitle() {
+    return WidgetTitleSwitchIcon(
+      tr("WILDLIFE"),
+      icon: Assets.graphics.icons.empty,
+      activeIcon: Assets.graphics.icons.full,
+      isActive: widget.helperMap.isEveryAnimalActive,
+      alignRight: true,
+      onTap: () {
+        setState(() {
+          widget.helperMap.activateAllAnimals();
+          widget.callback();
+        });
+      },
+    );
+  }
+
+  List<Widget> _listAnimals() {
+    return widget.helperMap.zones.entries.mapIndexed((i, zone) {
+      return WidgetSectionIndicatorTap(
+        widget.helperMap.getAnimal(widget.helperMap.zonesKeys(context).elementAt(i))!.name,
+        background: Utils.backgroundAt(i),
+        indicatorColor: widget.helperMap.isAnimalActive(i) ? widget.helperMap.getAnimalColor(i) : Interface.disabled,
         onTap: () {
           setState(() {
-            widget.helperMap.activateAll();
+            widget.helperMap.activateAnimal(i);
             widget.callback();
           });
         },
-      ),
-      ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: widget.helperMap.names.length,
-          itemBuilder: (context, index) {
-            return WidgetTapTextIndicator(
-              text: widget.helperMap.getName(index),
-              color: widget.helperMap.getColor(index),
-              background: Utils.background(index),
-              isActive: widget.helperMap.isActive(index),
-              onTap: () {
-                setState(() {
-                  widget.helperMap.activate(index);
-                  widget.callback();
-                });
-              },
-            );
-          })
-    ]);
+      );
+    }).toList();
+  }
+
+  Widget _buildAnimals() {
+    return Column(
+      children: [
+        _buildAnimalsTitle(),
+        ..._listAnimals(),
+      ],
+    );
   }
 
   Widget _buildWidgets() {
     return WidgetScaffold(
-        appBar: WidgetAppBar(
-          text: widget.reserve.getName(context.locale),
-          maxLines: widget.reserve.getName(context.locale).split(" ").length > 2 ? 2 : 1,
-          context: context,
-        ),
-        body: Column(children: [
-          _buildEnvironment(),
-          _buildList(),
-        ]));
+      appBar: WidgetAppBar(
+        widget.helperMap.reserve.name,
+        context: context,
+      ),
+      children: [
+        _buildEnvironment(),
+        _buildAnimals(),
+      ],
+    );
   }
 
   @override

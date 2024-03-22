@@ -1,64 +1,47 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/model/caller.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:cotwcompanion/widgets/text_dlc.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/model/translatable/caller.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/text/text_indicator.dart';
+import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListAnimalCallers extends StatefulWidget {
-  final int animalId;
+class ListAnimalCallers extends StatelessWidget {
+  final Animal _animal;
 
-  const ListAnimalCallers({
-    Key? key,
-    required this.animalId,
-  }) : super(key: key);
+  const ListAnimalCallers(
+    Animal animal, {
+    super.key,
+  }) : _animal = animal;
 
-  @override
-  ListAnimalCallersState createState() => ListAnimalCallersState();
-}
+  List<Caller> get _callers => HelperJSON.getAnimalCallers(_animal.id).sorted(Caller.sortByName);
 
-class ListAnimalCallersState extends State<ListAnimalCallers> {
-  late final List<Caller> _callers = [];
+  Widget _buildCaller(Caller caller) {
+    return WidgetTextIndicator(
+      caller.name,
+      indicatorColor: Interface.primary,
+      isShown: caller.isFromDlc,
+    );
+  }
 
-  void _getCallers() {
-    _callers.clear();
-    for (IdtoId iti in HelperJSON.animalsCallers) {
-      if (iti.firstId == widget.animalId) {
-        for (Caller caller in HelperJSON.callers) {
-          if (caller.id == iti.secondId) {
-            _callers.add(caller);
-            break;
-          }
-        }
-      }
-    }
+  List<Widget> _listCallers() {
+    return _callers.map((e) => _buildCaller(e)).toList();
+  }
+
+  Widget _buildCallers() {
+    return Column(children: _listCallers());
   }
 
   Widget _buildWidgets() {
-    _getCallers();
-    return Column(children: [
-      _callers.isNotEmpty
-          ? ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _callers.length,
-              itemBuilder: (context, index) {
-                Caller caller = _callers[index];
-                return WidgetTextDlc(
-                  text: caller.getName(context.locale),
-                  dlc: caller.isFromDlc,
-                );
-              })
-          : AutoSizeText(
-              tr("none"),
-              maxLines: 1,
-              style: Interface.s16w300n(Interface.dark),
-            )
-    ]);
+    return Column(
+      children: [
+        if (_callers.isNotEmpty) WidgetTitle(tr("RECOMMENDED_CALLERS")),
+        if (_callers.isNotEmpty) WidgetPadding.a30(child: _buildCallers()),
+      ],
+    );
   }
 
   @override

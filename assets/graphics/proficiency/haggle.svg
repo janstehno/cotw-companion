@@ -1,15 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <polyline points="0 5.24 7.13 5.24 7.13 24.76 0 24.76" fill="none" stroke="#212121"
-        stroke-miterlimit="10" stroke-width="3" />
-    <polyline points="19.61 5.24 12.48 5.24 12.48 24.76 19.61 24.76" fill="none" stroke="#212121"
-        stroke-miterlimit="10" stroke-width="3" />
-    <line y1="13.54" x2="19.61" y2="13.54" fill="none" stroke="#212121" stroke-miterlimit="10"
-        stroke-width="1.5" />
-    <line y1="16.46" x2="19.61" y2="16.46" fill="none" stroke="#212121" stroke-miterlimit="10"
-        stroke-width="1.5" />
-    <rect x="25.23" y="8.4" width="3.02" height="9" transform="translate(53.48 25.79) rotate(180)"
-        fill="#212121" />
-    <polygon points="30 17.23 23.48 17.23 26.74 21.6 30 17.23" fill="#212121" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><polyline points="0 5.24 7.13 5.24 7.13 24.76 0 24.76" fill="none" stroke="#212121" stroke-miterlimit="10" stroke-width="3"/><polyline points="19.61 5.24 12.48 5.24 12.48 24.76 19.61 24.76" fill="none" stroke="#212121" stroke-miterlimit="10" stroke-width="3"/><line y1="13.54" x2="19.61" y2="13.54" fill="none" stroke="#212121" stroke-miterlimit="10" stroke-width="1.5"/><line y1="16.46" x2="19.61" y2="16.46" fill="none" stroke="#212121" stroke-miterlimit="10" stroke-width="1.5"/><rect x="25.23" y="8.4" width="3.02" height="9" transform="translate(53.48 25.79) rotate(180)" fill="#212121"/><polygon points="30 17.23 23.48 17.23 26.74 21.6 30 17.23" fill="#212121"/><rect width="30" height="30" fill="none"/></svg>

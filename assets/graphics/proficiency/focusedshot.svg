@@ -1,14 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <circle cx="15" cy="15" r="7.22" fill="none" stroke="#212121" stroke-miterlimit="10"
-        stroke-width="3" />
-    <circle cx="15" cy="15" r="1.99" fill="#212121" />
-    <rect x="25.08" y="14.47" width="4.92" height="1.12" fill="#212121" />
-    <rect x="12.57" y="1.9" width="4.92" height="1.12"
-        transform="translate(12.57 17.49) rotate(-90)" fill="#212121" />
-    <rect y="14.41" width="4.92" height="1.12" transform="translate(4.92 29.94) rotate(-180)"
-        fill="#212121" />
-    <rect x="12.51" y="26.98" width="4.92" height="1.12"
-        transform="translate(42.51 12.57) rotate(90)" fill="#212121" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><circle cx="15" cy="15" r="7.22" fill="none" stroke="#212121" stroke-miterlimit="10" stroke-width="3"/><circle cx="15" cy="15" r="1.99" fill="#212121"/><rect x="25.08" y="14.47" width="4.92" height="1.12" fill="#212121"/><rect x="12.57" y="1.9" width="4.92" height="1.12" transform="translate(12.57 17.49) rotate(-90)" fill="#212121"/><rect y="14.41" width="4.92" height="1.12" transform="translate(4.92 29.94) rotate(-180)" fill="#212121"/><rect x="12.51" y="26.98" width="4.92" height="1.12" transform="translate(42.51 12.57) rotate(90)" fill="#212121"/><rect width="30" height="30" fill="none"/></svg>

@@ -1,84 +1,91 @@
-// Copyright (c) 2023 Jan Stehno
-
+import 'package:cotwcompanion/helpers/planner.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/planner.dart';
-import 'package:cotwcompanion/model/proficiency.dart';
-import 'package:cotwcompanion/widgets/entries/planner/proficiency.dart';
+import 'package:cotwcompanion/model/describable/proficiency.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/parts/planner/proficiency.dart';
 import 'package:flutter/material.dart';
 
-abstract class ListProficiency extends StatefulWidget {
-  final ProficiencyType type;
-  final HelperPlanner helperPlanner;
-  final int availablePoints;
-  final Function refresh, showDetail;
+abstract class ListProficiency<I extends Proficiency> extends StatefulWidget {
+  final ProficiencyType _type;
+  final HelperPlanner _helperPlanner;
+  final int _availablePoints;
+  final Function _rebuild, _showDetail;
 
-  const ListProficiency({
-    Key? key,
-    required this.type,
-    required this.helperPlanner,
-    required this.availablePoints,
-    required this.refresh,
-    required this.showDetail,
-  }) : super(key: key);
+  const ListProficiency(
+    ProficiencyType type, {
+    super.key,
+    required HelperPlanner helperPlanner,
+    required int availablePoints,
+    required Function rebuild,
+    required Function showDetail,
+  })  : _type = type,
+        _helperPlanner = helperPlanner,
+        _availablePoints = availablePoints,
+        _rebuild = rebuild,
+        _showDetail = showDetail;
+
+  ProficiencyType get type => _type;
+
+  HelperPlanner get helperPlanner => _helperPlanner;
+
+  int get availablePoints => _availablePoints;
+
+  Function get rebuild => _rebuild;
+
+  get showDetail => _showDetail;
 }
 
-abstract class ListProficiencyState extends State<ListProficiency> {
-  static const double innerMargin = 5;
-  final double _outerMargin = 30;
-  final int _maxNumberOfColumns = 5;
+abstract class ListProficiencyState<I extends Proficiency> extends State<ListProficiency> {
+  Map<int, List<I>> get items;
 
-  late Map<int, List<Proficiency>> items = {};
+  double _squareSize = 0;
 
-  double squareSize = 0;
-
-  void _getSquareSize(Orientation orientation) {
-    squareSize = (MediaQuery.of(context).size.shortestSide - (2 * innerMargin * _maxNumberOfColumns) - (2 * _outerMargin)) / _maxNumberOfColumns;
+  void _initializeSize() {
+    int maxNumberOfColumns = 5;
+    _squareSize =
+        (MediaQuery.of(context).size.shortestSide - (2 * 5 * maxNumberOfColumns) - (2 * 30)) / maxNumberOfColumns;
   }
-
-  void getList() {}
 
   bool _hasFourthColumn() => items[3]?.isNotEmpty ?? false;
 
   bool _hasFifthColumn() => items[4]?.isNotEmpty ?? false;
 
-  Widget buildProficiency(int tier, int index) {
-    return EntryProficiency(
+  Widget _buildProficiency(int tier, int i) {
+    return WidgetProficiency<I>(
       helperPlanner: widget.helperPlanner,
-      size: squareSize,
+      size: _squareSize,
       availablePoints: widget.availablePoints,
-      proficiency: items[tier]!.elementAt(index),
-      refresh: widget.refresh,
+      proficiency: items[tier]!.elementAt(i),
+      rebuild: widget.rebuild,
       showDetail: widget.showDetail,
     );
   }
 
-  Widget _buildRow(int tier, int index) {
+  Widget _buildRow(int tier, int i) {
     bool render = false;
-    int realIndex = index;
+    int realIndex = i;
     int length = items[tier]!.length;
-    if (length == 1 && index == 1) {
+    if (length == 1 && i == 1) {
       render = true;
       realIndex = 0;
-    } else if (length == 2 && (index == 0 || index == 2)) {
+    } else if (length == 2 && (i == 0 || i == 2)) {
       render = true;
-      realIndex = index == 2 ? 1 : 0;
+      realIndex = i == 2 ? 1 : 0;
     } else if (length == 3) {
       render = true;
     }
-    return render
-        ? buildProficiency(tier, realIndex)
-        : Container(
-            margin: const EdgeInsets.all(innerMargin),
-            width: squareSize,
-            height: squareSize,
-          );
+    if (render) {
+      return _buildProficiency(tier, realIndex);
+    }
+    return Container(
+      margin: const EdgeInsets.all(5),
+      width: _squareSize,
+      height: _squareSize,
+    );
   }
 
   Widget _buildColumn(int tier) {
     return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildRow(tier, 0),
         _buildRow(tier, 1),
@@ -88,24 +95,19 @@ abstract class ListProficiencyState extends State<ListProficiency> {
   }
 
   Widget _buildWidgets() {
-    return OrientationBuilder(builder: (context, orientation) {
-      _getSquareSize(orientation);
-      getList();
-      return Container(
-          margin: EdgeInsets.all(_outerMargin),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildColumn(0),
-              _buildColumn(1),
-              _buildColumn(2),
-              if (_hasFourthColumn()) _buildColumn(3),
-              if (_hasFifthColumn()) _buildColumn(4),
-            ],
-          ));
-    });
+    if (_squareSize <= 0) _initializeSize();
+    return WidgetPadding.a30(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildColumn(0),
+          _buildColumn(1),
+          _buildColumn(2),
+          if (_hasFourthColumn()) _buildColumn(3),
+          if (_hasFifthColumn()) _buildColumn(4),
+        ],
+      ),
+    );
   }
 
   @override

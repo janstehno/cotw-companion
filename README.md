@@ -10,35 +10,31 @@ loadouts, counters, and other useful features.
 ### **Newest version**
 
 - [**android**](https://play.google.com/store/apps/details?id=com.toastyapps.cotwcompanion)
-- [**ios**](https://apps.apple.com/us/app/cotw-companion/id6443782494) (not available at this
-  moment)
+- [**ios**](https://apps.apple.com/us/app/cotw-companion/id6443782494)
 
 ### **History and staff**
 
-The app was released on **27th of November 2020** on Android's Google Play. It offered few base info
-about animals and that was it. During the year 2021 the app got a significantly more info, regarding
-reserves, weapons, callers, and options for changing theme or language. The app also got maps with
-hunting zones for each animal as well as locations of outposts and lookouts. Nowadays the app offers
-features like need zones changing over time, catch book and trophy lodge to log your hunting
-trophies, loadouts, offering you a way to see if you are able to shoot or lure the animal, skill
-and perk planner, list of missions, and counters to track your grind progress.
+The app was released on **27th of November 2020** on Android's Google Play. The app (1.4.6) was also
+released for iOS users on **13th of October 2022**. It offered few base info about animals and that
+was it. During the year 2021 the app got a significantly more info, regarding reserves, weapons,
+callers, and options for changing theme or language. The app also got maps with hunting zones for
+each animal as well as locations of outposts and lookouts. Nowadays the app offers features like
+need zones changing over time, catch book and trophy lodge to log your hunting trophies, loadouts,
+offering you a way to see if you are able to shoot or lure the animal, skill and perk planner, list
+of missions, and counters to track your grind progress.
 
 The app still is and I hope will be in development state so additional features will come
 eventually. I think the app is a good way to keep the game's data by your side at any time (it works
 offline). You also do not have to remember everything.
-
-The app (1.4.6) was also released for iOS users on **13th of October 2022** and was available for a
-whole year. However due to funding problems, the app is no longer available. Last iOS version
-(1.8.3) was released on **9th of November 2023**.
 
 ### **What about issues and features?**
 
 I would like to appeal to everyone that not everything will be correct and mistakes can happen. If
 you find anything wrong feel free to contact me about it through the email or message me on reddit
 or discord provided in the app. Everything about issues can be found
-[**here**](https://github.com/janstehno/cotwcompanion/issues).
+[**here**](https://github.com/janstehno/cotw-companion/issues).
 And you can share or view and upvote other's ideas of future app features
-[**here**](https://github.com/janstehno/cotwcompanion/discussions).
+[**here**](https://github.com/janstehno/cotw-companion/discussions).
 
 ### **What about updates?**
 

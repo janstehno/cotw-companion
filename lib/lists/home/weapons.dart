@@ -1,90 +1,79 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/lists/home/items.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/widgets/entries/weapon/weapon.dart';
-import 'package:cotwcompanion/widgets/filters/range_auto.dart';
-import 'package:cotwcompanion/widgets/filters/switch.dart';
-import 'package:cotwcompanion/widgets/filters/value_set.dart';
-import 'package:cotwcompanion/widgets/title_info_icon.dart';
+import 'package:cotwcompanion/model/translatable/weapon.dart';
+import 'package:cotwcompanion/widgets/filter/picker_auto.dart';
+import 'package:cotwcompanion/widgets/filter/switch.dart';
+import 'package:cotwcompanion/widgets/filter/value.dart';
+import 'package:cotwcompanion/widgets/parts/weapon/weapon.dart';
+import 'package:cotwcompanion/widgets/title/title_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListWeapons extends ListItems {
+class ListWeapons extends ListTranslatable {
   const ListWeapons({
     super.key,
-  }) : super(name: "weapons");
+  }) : super("WEAPONS");
 
   @override
   ListWeaponsState createState() => ListWeaponsState();
 }
 
-class ListWeaponsState extends ListItemsState {
+class ListWeaponsState extends ListTranslatableState<Weapon> {
   @override
-  void filter() {
-    setState(() {
-      items.clear();
-      items.addAll(HelperFilter.filterWeapons(controller.text, context));
-    });
-  }
+  List<Weapon> get items => HelperFilter.filterWeapons(controller.text);
 
   @override
   bool isFilterChanged() => HelperFilter.weaponFiltersChanged();
 
   @override
-  List<Widget> buildFilters() {
+  List<Widget> listFilter() {
     return [
-      WidgetTitleInfoIcon(
-        icon: "assets/graphics/icons/other.svg",
-        text: tr("type"),
+      WidgetTitleIcon(
+        tr("TYPE"),
+        icon: Assets.graphics.icons.weapon,
       ),
-      FilterSwitch(
-        text: tr("weapons_rifles"),
-        filterKey: FilterKey.weaponsRifles,
+      WidgetFilterSwitch(
+        FilterKey.weaponsRifles,
+        text: tr("WEAPONS_RIFLES"),
+        i: 0,
       ),
-      FilterSwitch(
-        text: tr("weapons_shotguns"),
-        filterKey: FilterKey.weaponsShotguns,
+      WidgetFilterSwitch(
+        FilterKey.weaponsShotguns,
+        text: tr("WEAPONS_SHOTGUNS"),
+        i: 1,
       ),
-      FilterSwitch(
-        text: tr("weapons_handguns"),
-        filterKey: FilterKey.weaponsHandguns,
+      WidgetFilterSwitch(
+        FilterKey.weaponsHandguns,
+        text: tr("WEAPONS_HANDGUNS"),
+        i: 2,
       ),
-      FilterSwitch(
-        text: tr("weapons_bows_crossbows"),
-        filterKey: FilterKey.weaponsBows,
+      WidgetFilterSwitch(
+        FilterKey.weaponsBows,
+        text: tr("WEAPONS_BOWS_CROSSBOWS"),
+        i: 3,
       ),
-      FilterValueSet(
-        text: tr("animal_class"),
-        icon: "assets/graphics/icons/level.svg",
-        decimal: false,
-        defaultValue: 0,
-        filterKey: FilterKey.weaponsAnimalClass,
-        filterKeyLower: FilterKey.weaponsClassMin,
-        filterKeyUpper: FilterKey.weaponsClassMax,
+      WidgetFilterPickerAuto(
+        FilterKey.weaponsAnimalClass,
+        text: tr("ANIMAL_CLASS"),
+        icon: Assets.graphics.icons.level,
       ),
-      FilterRangeAuto(
-        text: tr("animal_class"),
-        icon: "assets/graphics/icons/min_max.svg",
-        filterKeyLower: FilterKey.weaponsClassMin,
-        filterKeyUpper: FilterKey.weaponsClassMax,
-      ),
-      FilterRangeAuto(
-        text: tr("weapon_magazine"),
-        icon: "assets/graphics/icons/weapon_mag.svg",
-        filterKeyLower: FilterKey.weaponsMagMin,
-        filterKeyUpper: FilterKey.weaponsMagMax,
+      WidgetFilterValue(
+        FilterKey.weaponsMagMin,
+        FilterKey.weaponsMagMax,
+        text: tr("WEAPON_MAGAZINE"),
+        icon: Assets.graphics.icons.weaponMag,
       ),
     ];
   }
 
   @override
-  EntryWeapon buildItemEntry(int index) {
-    return EntryWeapon(
-      index: index,
-      weapon: items.elementAt(index),
-      callback: focus,
+  WidgetWeapon buildEntry(item) {
+    return WidgetWeapon(
+      item,
+      i: items.indexOf(item),
+      onTap: focus,
     );
   }
 }

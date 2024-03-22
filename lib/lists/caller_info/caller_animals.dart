@@ -1,57 +1,46 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:cotwcompanion/widgets/text_dlc.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/model/translatable/caller.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/text/text_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListCallerAnimals extends StatefulWidget {
-  final int callerId;
+class ListCallerAnimals extends StatelessWidget {
+  final Caller _caller;
 
-  const ListCallerAnimals({
-    Key? key,
-    required this.callerId,
-  }) : super(key: key);
+  const ListCallerAnimals(
+    Caller caller, {
+    super.key,
+  }) : _caller = caller;
 
-  @override
-  ListCallerAnimalsState createState() => ListCallerAnimalsState();
-}
+  List<Animal> get _animals => HelperJSON.getCallerAnimals(_caller.id);
 
-class ListCallerAnimalsState extends State<ListCallerAnimals> {
-  late final List<Animal> _animals = [];
-
-  void _getAnimals() {
-    _animals.clear();
-    for (IdtoId iti in HelperJSON.animalsCallers) {
-      if (iti.secondId == widget.callerId) {
-        for (Animal animal in HelperJSON.animals) {
-          if (animal.id == iti.firstId) {
-            _animals.add(animal);
-            break;
-          }
-        }
-      }
-    }
-    _animals.sort((a, b) => a.getNameByLocale(context.locale).compareTo(b.getNameByLocale(context.locale)));
+  Widget _buildAnimal(BuildContext context, Animal animal) {
+    return WidgetTextIndicator(
+      animal.getNameByLocale(context.locale),
+      indicatorColor: Interface.primary,
+      isShown: animal.isFromDlc,
+    );
   }
 
-  Widget _buildWidgets() {
-    _getAnimals();
-    return ListView.builder(
+  Widget _buildWidgets(BuildContext context) {
+    List<Animal> animals = _animals.sorted(Animal.sortByNameByLocale(context));
+
+    return WidgetPadding.a30(
+      child: ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: _animals.length,
-        itemBuilder: (context, index) {
-          Animal animal = _animals[index];
-          return WidgetTextDlc(
-            text: animal.getNameByLocale(context.locale),
-            dlc: animal.isFromDlc,
-          );
-        });
+        itemCount: animals.length,
+        itemBuilder: (context, i) {
+          return _buildAnimal(context, animals.elementAt(i));
+        },
+      ),
+    );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

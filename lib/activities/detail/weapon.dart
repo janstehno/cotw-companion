@@ -1,135 +1,102 @@
-// Copyright (c) 2023 Jan Stehno
-
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/lists/weapon_info/weapon_ammo.dart';
 import 'package:cotwcompanion/lists/weapon_info/weapon_animals.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/model/weapon.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/entries/parameter.dart';
-import 'package:cotwcompanion/widgets/entries/weapon/statistics.dart';
-import 'package:cotwcompanion/widgets/price.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/model/translatable/weapon.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/parts/stats/parameter.dart';
+import 'package:cotwcompanion/widgets/parts/stats/price.dart';
+import 'package:cotwcompanion/widgets/parts/weapon/statistics.dart';
+import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ActivityDetailWeapon extends StatefulWidget {
-  final Weapon weapon;
+class ActivityDetailWeapon extends StatelessWidget {
+  final Weapon _weapon;
 
-  const ActivityDetailWeapon({
-    Key? key,
-    required this.weapon,
-  }) : super(key: key);
-
-  @override
-  ActivityDetailWeaponState createState() => ActivityDetailWeaponState();
-}
-
-class ActivityDetailWeaponState extends State<ActivityDetailWeapon> {
-  Widget _buildStatistics() {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _buildType(),
-              _buildMagazine(),
-              EntryParameterPrice(price: widget.weapon.price),
-              _buildRequirements(),
-              _buildDlc(),
-            ],
-          ),
-        ),
-        EntryWeaponStatistics(
-          weapon: widget.weapon,
-        ),
-      ],
-    );
-  }
+  const ActivityDetailWeapon(
+    Weapon weapon, {
+    super.key,
+  }) : _weapon = weapon;
 
   Widget _buildType() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 7),
-      child: EntryParameter(
-        text: tr("type"),
-        value: widget.weapon.getTypeAsString(),
-      ),
+    return WidgetParameter(
+      text: tr("TYPE"),
+      value: _weapon.typeAsString,
     );
   }
 
   Widget _buildMagazine() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 7),
-      child: EntryParameter(
-        text: tr("weapon_magazine"),
-        value: widget.weapon.id == 21 ? "1/2" : widget.weapon.mag,
+    return WidgetParameter(
+      text: tr("WEAPON_MAGAZINE"),
+      value: _weapon.id == 21 ? "1/2" : _weapon.mag,
+    );
+  }
+
+  Widget _buildPrice() {
+    return WidgetParameterPrice(price: _weapon.price);
+  }
+
+  Widget _buildRequirements() {
+    return WidgetParameter(
+      text: tr("REQUIREMENT_SCORE"),
+      value: _weapon.score,
+    );
+  }
+
+  Widget _buildDlc() {
+    return WidgetParameter(
+      text: "DLC",
+      value: tr(HelperJSON.getWeaponDlc(_weapon.id)!.name),
+    );
+  }
+
+  Widget _buildStatistics() {
+    return WidgetPadding.a30(
+      child: Wrap(
+        spacing: 5,
+        runSpacing: 5,
+        children: [
+          _buildType(),
+          _buildMagazine(),
+          _buildPrice(),
+          if (_weapon.hasRequirements) _buildRequirements(),
+          if (_weapon.isFromDlc) _buildDlc(),
+        ],
       ),
     );
   }
 
-  Widget _buildRequirements() {
-    return widget.weapon.hasRequirements
-        ? Container(
-            margin: const EdgeInsets.only(top: 7),
-            child: EntryParameter(
-              text: tr("requirement_score"),
-              value: widget.weapon.score,
-            ),
-          )
-        : const SizedBox.shrink();
+  List<Widget> _listAmmo() {
+    return [
+      WidgetTitle(tr("WEAPON_AMMO")),
+      ListWeaponAmmo(_weapon),
+    ];
   }
 
-  Widget _buildDlc() {
-    return widget.weapon.isFromDlc
-        ? Container(
-            margin: const EdgeInsets.only(top: 7),
-            child: EntryParameter(
-              text: "DLC",
-              value: Utils.getWeaponDLC(widget.weapon.id),
-            ),
-          )
-        : const SizedBox.shrink();
+  List<Widget> _listAnimals() {
+    return [
+      WidgetTitle(tr("RECOMMENDED_ANIMALS")),
+      ..._weapon.levels.map((e) => ListWeaponAnimals(level: e)),
+    ];
   }
 
-  Widget _buildAmmo() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr("weapon_ammo"),
-      ),
-      ListWeaponAmmo(
-        weaponId: widget.weapon.id,
-      ),
-    ]);
-  }
-
-  Widget _buildAnimals() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr("recommended_animals"),
-      ),
-      ListWeaponAnimals(
-        min: widget.weapon.min,
-        max: widget.weapon.max,
-      ),
-    ]);
-  }
-
-  Widget _buildWidgets() {
+  Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
-        appBar: WidgetAppBar(
-          text: widget.weapon.getName(context.locale),
-          maxLines: widget.weapon.getName(context.locale).split(" ").length > 2 ? 2 : 1,
-          context: context,
-        ),
-        body: Column(children: [
-          _buildStatistics(),
-          _buildAmmo(),
-          _buildAnimals(),
-        ]));
+      appBar: WidgetAppBar(
+        _weapon.name,
+        context: context,
+      ),
+      children: [
+        _buildStatistics(),
+        WidgetPadding.h30v20(child: ListWeaponStatistics(_weapon)),
+        ..._listAmmo(),
+        ..._listAnimals(),
+      ],
+    );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

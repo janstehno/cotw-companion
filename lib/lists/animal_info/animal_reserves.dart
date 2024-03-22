@@ -1,54 +1,36 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:cotwcompanion/model/reserve.dart';
-import 'package:cotwcompanion/widgets/text_dlc.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/model/translatable/reserve.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/text/text_indicator.dart';
 import 'package:flutter/material.dart';
 
-class ListAnimalReserves extends StatefulWidget {
-  final int animalId;
+class ListAnimalReserves extends StatelessWidget {
+  final Animal _animal;
 
-  const ListAnimalReserves({
-    Key? key,
-    required this.animalId,
-  }) : super(key: key);
+  const ListAnimalReserves(
+    Animal animal, {
+    super.key,
+  }) : _animal = animal;
 
-  @override
-  ListAnimalReservesState createState() => ListAnimalReservesState();
-}
+  List<Reserve> get _reserves => HelperJSON.getAnimalReserves(_animal.id).sorted(Reserve.sortById);
 
-class ListAnimalReservesState extends State<ListAnimalReserves> {
-  late final List<Reserve> _reserves = [];
+  Widget _buildReserve(Reserve reserve) {
+    return WidgetTextIndicator(
+      reserve.name,
+      indicatorColor: Interface.primary,
+      isShown: reserve.isFromDlc,
+    );
+  }
 
-  void _getReserves() {
-    _reserves.clear();
-    for (IdtoId iti in HelperJSON.animalsReserves) {
-      if (iti.firstId == widget.animalId) {
-        for (Reserve reserve in HelperJSON.reserves) {
-          if (reserve.id == iti.secondId) {
-            _reserves.add(reserve);
-            break;
-          }
-        }
-      }
-    }
+  List<Widget> _listReserves() {
+    return _reserves.map((e) => _buildReserve(e)).toList();
   }
 
   Widget _buildWidgets() {
-    _getReserves();
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _reserves.length,
-        itemBuilder: (context, index) {
-          Reserve reserve = _reserves[index];
-          return WidgetTextDlc(
-            text: reserve.getName(context.locale),
-            dlc: reserve.isFromDlc,
-          );
-        });
+    return WidgetPadding.a30(child: Column(children: _listReserves()));
   }
 
   @override

@@ -1,73 +1,30 @@
-// Copyright (c) 2023 Jan Stehno
-
 import 'package:cotwcompanion/activities/entries/loadouts.dart';
 import 'package:cotwcompanion/activities/entries/logs.dart';
 import 'package:cotwcompanion/activities/need_zones.dart';
 import 'package:cotwcompanion/builders/enumerators.dart';
 import 'package:cotwcompanion/builders/planner.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/entries/menu.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/lists/home/items.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListTools extends StatefulWidget {
+class ListTools extends ListItems {
   const ListTools({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  }) : super("TOOLS");
 
   @override
   State<StatefulWidget> createState() => ListToolsState();
 }
 
-class ListToolsState extends State<ListTools> {
-  final List<List<dynamic>> _items = [
-    ["animal_need_zones", "need_zones", const ActivityNeedZones()],
-    ["trophy_lodge", "trophy_lodge", const ActivityLogs(trophyLodge: true)],
-    ["logbook", "catch_book", const ActivityLogs(trophyLodge: false)],
-    ["loadouts", "loadout", const ActivityLoadouts()],
-    ["counters", "number", const BuilderEnumerators()],
-    ["planner", "planner", const BuilderPlanner()],
-  ];
-
-  Widget _buildItem(int index, String text, String icon, Widget activity) {
-    return EntryMenu(
-      text: tr(text),
-      icon: "assets/graphics/icons/$icon.svg",
-      background: Utils.background(index),
-      onMenuTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => activity));
-      },
-    );
-  }
-
-  Widget _buildList() {
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _items.length,
-        itemBuilder: (context, index) {
-          List<dynamic> item = _items.elementAt(index);
-          return _buildItem(
-            index,
-            item[0],
-            item[1],
-            item[2],
-          );
-        });
-  }
-
-  Widget _buildWidgets() {
-    return WidgetScaffold(
-      appBar: WidgetAppBar(
-        text: tr("tools"),
-        context: context,
-      ),
-      body: _buildList(),
-    );
-  }
-
+class ListToolsState extends ListItemsState {
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  List<List<dynamic>> get items => [
+        [tr("ANIMAL_NEED_ZONES"), Assets.graphics.icons.needZones, const ActivityNeedZones()],
+        [tr("TROPHY_LODGE"), Assets.graphics.icons.trophyLodge, const ActivityLogs(trophyLodge: true)],
+        [tr("LOGBOOK"), Assets.graphics.icons.catchBook, const ActivityLogs(trophyLodge: false)],
+        [tr("LOADOUTS"), Assets.graphics.icons.loadout, const ActivityLoadouts()],
+        [tr("COUNTERS"), Assets.graphics.icons.number, const BuilderEnumerators()],
+        [tr("PLANNER"), Assets.graphics.icons.planner, const BuilderPlanner()],
+      ];
 }

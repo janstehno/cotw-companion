@@ -1,40 +1,32 @@
-// Copyright (c) 2023 Jan Stehno
-
 import 'package:cotwcompanion/activities/entries/enumerators.dart';
 import 'package:cotwcompanion/builders/builder.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/enumerator.dart';
-import 'package:cotwcompanion/model/enumerator.dart';
+import 'package:cotwcompanion/helpers/enumerator.dart';
+import 'package:cotwcompanion/model/exportable/enumerator.dart';
 import 'package:flutter/material.dart';
 
 class BuilderEnumerators extends BuilderBuilder {
   const BuilderEnumerators({
     super.key,
-  }) : super(builderId: "E");
+  }) : super("E");
 
   @override
   State<StatefulWidget> createState() => BuilderEnumeratorsState();
 }
 
 class BuilderEnumeratorsState extends BuilderBuilderState {
-  late final HelperEnumerator _helperEnumerator;
+  final HelperEnumerator _helperEnumerator = HelperEnumerator();
 
   @override
-  void initState() {
-    _helperEnumerator = HelperEnumerator();
-    loadedData = [null];
-    super.initState();
-  }
-
-  @override
-  void initializeData(AsyncSnapshot<List<dynamic>> snapshot, BuildContext context) {
-    List<Enumerator> enumerators = snapshot.data![0] ?? [];
+  void initializeData(AsyncSnapshot<Map<String, dynamic>> snapshot, BuildContext context) {
+    List<Enumerator> enumerators = snapshot.data!["enumerators"] ?? [];
     _helperEnumerator.setEnumerators(enumerators);
   }
 
   @override
-  Future<List<dynamic>> loadData(BuildContext context) async {
+  Future<Map<String, dynamic>> loadData() async {
     List<Enumerator> enumerators = await _helperEnumerator.readFile();
-    updateProgress(0, enumerators);
+    updateProgress("enumerators", enumerators);
+    await Future.delayed(const Duration(seconds: 1), () {});
     return loadedData;
   }
 

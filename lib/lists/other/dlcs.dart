@@ -1,67 +1,54 @@
-// Copyright (c) 2023 Jan Stehno
-
+import 'package:collection/collection.dart';
 import 'package:cotwcompanion/activities/detail/dlc.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/model/dlc.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/tap_text.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/model/describable/dlc.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/section/section_tap.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListDlcs extends StatefulWidget {
+class ListDlcs extends StatelessWidget {
   const ListDlcs({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
-  @override
-  ListDlcsState createState() => ListDlcsState();
-}
+  List<Dlc> get _dlcs => HelperJSON.dlcs.sorted(Dlc.sortByDate);
 
-class ListDlcsState extends State<ListDlcs> {
-  late final List<Dlc> _dlcs = [];
-
-  void _getData() {
-    _dlcs.addAll(HelperJSON.dlcs);
-    _dlcs.sort((a, b) => b.date.compareTo(a.date));
+  void onTap(BuildContext context, Dlc dlc) {
+    if (dlc.type != -1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (e) => ActivityDetailDlc(dlc)),
+      );
+    }
   }
 
-  Widget _buildList() {
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _dlcs.length,
-        itemBuilder: (context, index) {
-          Dlc dlc = _dlcs.elementAt(index);
-          return WidgetTapText(
-            text: dlc.en,
-            color: dlc.type == -1 ? Interface.disabled : Interface.dark,
-            background: Utils.background(index),
-            onTap: () {
-              if (dlc.type != -1) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ActivityDetailDlc(dlc: dlc)),
-                );
-              }
-            },
-          );
-        });
+  Widget _buildDlc(int i, Dlc dlc, BuildContext context) {
+    return WidgetSectionTap(
+      dlc.name,
+      color: dlc.type != -1 ? Interface.dark : Interface.disabled,
+      background: Utils.backgroundAt(i),
+      onTap: () => onTap(context, dlc),
+    );
   }
 
-  Widget _buildWidgets() {
-    _getData();
+  List<Widget> _listDlcs(BuildContext context) {
+    return _dlcs.mapIndexed((i, dlc) => _buildDlc(i, dlc, context)).toList();
+  }
+
+  Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr("content_downloadable_content"),
+        tr("CONTENT_DOWNLOADABLE_CONTENT"),
         context: context,
       ),
-      body: _buildList(),
+      children: _listDlcs(context),
     );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

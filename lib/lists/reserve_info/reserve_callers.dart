@@ -1,91 +1,70 @@
-// Copyright (c) 2023 Jan Stehno
-
+import 'package:collection/collection.dart';
 import 'package:cotwcompanion/activities/detail/caller.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/model/caller.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:cotwcompanion/widgets/entries/reserve/caller.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/model/translatable/caller.dart';
+import 'package:cotwcompanion/model/translatable/reserve.dart';
+import 'package:cotwcompanion/widgets/parts/reserve/caller.dart';
 import 'package:flutter/material.dart';
 
-class ListReserveCallers extends StatefulWidget {
-  final int reserveId;
+class ListReserveCallers extends StatelessWidget {
+  final Reserve _reserve;
 
-  const ListReserveCallers({
-    Key? key,
-    required this.reserveId,
-  }) : super(key: key);
+  const ListReserveCallers(
+    Reserve reserve, {
+    super.key,
+  }) : _reserve = reserve;
 
-  @override
-  ListReserveCallersState createState() => ListReserveCallersState();
-}
+  List<Animal> get _animals => HelperJSON.getReserveAnimals(_reserve.id);
 
-class ListReserveCallersState extends State<ListReserveCallers> {
-  late final List<Animal> _animals = [];
-  late final List<Caller> _callers = [];
+  void _onTap(BuildContext context, Caller caller) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (e) => ActivityDetailCaller(caller)),
+    );
+  }
 
-  void _getCallers() {
+  List<Caller> _initializeCallers() {
+    Set<Caller> callers = {};
     bool firstCallerAdded = false;
-    for (IdtoId ar in HelperJSON.animalsReserves) {
-      if (ar.secondId == widget.reserveId) {
-        for (Animal animal in HelperJSON.animals) {
-          if (animal.id == ar.firstId) {
-            _animals.add(animal);
-            break;
-          }
-        }
-      }
-    }
     for (Animal animal in _animals) {
-      for (IdtoId iti in HelperJSON.animalsCallers) {
-        if (animal.id == iti.firstId) {
-          for (Caller caller in HelperJSON.callers) {
-            if (caller.id == iti.secondId) {
-              if (!firstCallerAdded && !_callers.contains(caller)) {
-                _callers.add(caller);
-                firstCallerAdded = true;
-              } else {
-                if (_callers[_callers.length - 1].strength < caller.strength) {
-                  _callers.removeLast();
-                  if (!_callers.contains(caller)) _callers.add(caller);
-                }
-              }
-              break;
-            }
-          }
+      List<Caller> animalCallers = HelperJSON.getAnimalCallers(animal.id);
+      for (Caller caller in animalCallers) {
+        if (!firstCallerAdded) {
+          callers.add(caller);
+          firstCallerAdded = true;
+        } else if (callers.last.strength < caller.strength) {
+          callers.remove(callers.last);
+          callers.add(caller);
         }
+        break;
       }
       firstCallerAdded = false;
     }
-    _callers.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
+    return callers.sorted(Caller.sortByName);
   }
 
-  Widget _buildWidgets() {
-    _getCallers();
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _callers.length,
-        itemBuilder: (context, index) {
-          Caller caller = _callers[index];
-          return EntryReserveCaller(
-              callerId: caller.id,
-              color: Interface.dark,
-              background: Utils.background(index),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ActivityDetailCaller(
-                              caller: caller,
-                            )));
-              });
-        });
+  Widget _buildEntry(int i, Caller caller, BuildContext context) {
+    return WidgetReserveCaller(
+      caller,
+      background: Utils.backgroundAt(i),
+      indicatorColor: Interface.primary,
+      isShown: caller.isFromDlc,
+      onTap: () => _onTap(context, caller),
+    );
+  }
+
+  List<Widget> _listCallers(BuildContext context) {
+    List<Caller> callers = _initializeCallers();
+    return callers.mapIndexed((i, caller) => _buildEntry(i, caller, context)).toList();
+  }
+
+  Widget _buildWidgets(BuildContext context) {
+    return Column(children: _listCallers(context));
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

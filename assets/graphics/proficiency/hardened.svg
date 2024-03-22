@@ -1,7 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <path
-        d="M20.88,10.7H19.3V2.5H10.7v8.2H2.5v8.6h8.2v8.2h8.6V19.3h8.2V10.7Zm2.39,1H24v6.6h-.71Zm-1.2,6.6h-.53V11.7h.53Zm2.53-6.6h.74v6.6H24.6Zm2.26,6.6H26V11.7h.86Z"
-        fill="#212121" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path d="M20.88,10.7H19.3V2.5H10.7v8.2H2.5v8.6h8.2v8.2h8.6V19.3h8.2V10.7Zm2.39,1H24v6.6h-.71Zm-1.2,6.6h-.53V11.7h.53Zm2.53-6.6h.74v6.6H24.6Zm2.26,6.6H26V11.7h.86Z" fill="#212121"/><rect width="30" height="30" fill="none"/></svg>

@@ -1,89 +1,71 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/widgets/text_dlc.dart';
-import 'package:cotwcompanion/widgets/title_small.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/subtitle/subtitle.dart';
+import 'package:cotwcompanion/widgets/text/text_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ListWeaponAnimals extends StatefulWidget {
-  final int min, max;
+  final int _level;
 
   const ListWeaponAnimals({
-    Key? key,
-    required this.min,
-    required this.max,
-  }) : super(key: key);
+    super.key,
+    required int level,
+  }) : _level = level;
+
+  int get level => _level;
 
   @override
   ListWeaponAnimalsState createState() => ListWeaponAnimalsState();
 }
 
 class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
-  final List<List<Animal>> _splitAnimals = [[], [], [], [], [], [], [], [], []];
+  final Set<Animal> _animals = {};
 
-  late final List<Animal> _animals = [];
+  @override
+  void initState() {
+    _initializeAnimals();
+    super.initState();
+  }
 
-  void _getAnimals() {
-    _animals.clear();
+  void _initializeAnimals() {
     for (Animal animal in HelperJSON.animals) {
-      if (animal.level >= widget.min && animal.level <= widget.max) {
+      if (animal.level == widget.level) {
         _animals.add(animal);
       }
     }
-    _splitByLevel();
   }
 
-  List<List<Animal>> _reduceEmptyLists() {
-    List<List<Animal>> animals = [];
-    for (List<Animal> animalList in _splitAnimals) {
-      if (animalList.isNotEmpty) animals.add(animalList);
-    }
-    return animals;
+  Widget _buildAnimal(Animal animal) {
+    return WidgetTextIndicator(
+      animal.getNameByLocale(context.locale),
+      indicatorColor: Interface.primary,
+      isShown: animal.isFromDlc,
+    );
   }
 
-  void _splitByLevel() {
-    for (Animal animal in _animals) {
-      _splitAnimals[animal.level - 1].clear();
-    }
-    for (Animal animal in _animals) {
-      _splitAnimals[animal.level - 1].add(animal);
-    }
-  }
-
-  Widget _buildAnimals(List<Animal> animals) {
-    animals.sort((a, b) => a.getNameByLocale(context.locale).compareTo(b.getNameByLocale(context.locale)));
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      WidgetTitleSmall(
-        primaryText: "${tr("animal_class")} ${animals[0].level}",
+  Widget _buildAnimals() {
+    return WidgetPadding.a30(
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: _animals.length,
+        itemBuilder: (context, i) {
+          return _buildAnimal(_animals.elementAt(i));
+        },
       ),
-      Container(
-          padding: const EdgeInsets.all(30),
-          child: ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: animals.length,
-              itemBuilder: (context, index) {
-                Animal animal = animals[index];
-                return WidgetTextDlc(
-                  text: animal.getNameByLocale(context.locale),
-                  dlc: animal.isFromDlc,
-                );
-              }))
-    ]);
+    );
   }
 
   Widget _buildWidgets() {
-    _getAnimals();
-    List<List<Animal>> animals = _reduceEmptyLists();
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: animals.length,
-        itemBuilder: (context, index) {
-          return _buildAnimals(animals[index]);
-        });
+    return Column(
+      children: [
+        WidgetSubtitle("${tr("ANIMAL_CLASS")} ${widget.level}"),
+        _buildAnimals(),
+      ],
+    );
   }
 
   @override

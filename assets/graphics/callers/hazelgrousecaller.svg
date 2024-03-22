@@ -1,14 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
-    <title>hazelgrousecaller</title>
-    <g id="Layer_23" data-name="Layer 23">
-        <g id="hazelgrousecaller">
-            <path
-                d="M1.23,284l8.39,8.39a4.21,4.21,0,0,0,6,0L278.94,29s-1.9-3,2-6.87,6.56-1.68,6.56-1.68L299.67,8.28a1.1,1.1,0,0,0-1.13-1.82L259.87,19.39,203,76.28l1.6,10-5.77-5.78L1.23,278A4.21,4.21,0,0,0,1.23,284Z"
-                transform="translate(0)" fill="#212121" />
-        </g>
-    </g>
-    <g id="frame">
-        <rect width="300" height="300" fill="none" />
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path d="M.12,28.4l.84.84a.44.44,0,0,0,.6,0L27.89,2.9s-.19-.3.2-.69.66-.16.66-.16L30,.83a.11.11,0,0,0-.12-.18L26,1.94,20.3,7.63l.16,1-.58-.57L.12,27.8A.44.44,0,0,0,.12,28.4Z" transform="translate(0)" fill="#212121"/><rect width="30" height="30" fill="none"/></svg>

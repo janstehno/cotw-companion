@@ -1,39 +1,47 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/interface/search_controller.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/miscellaneous/search_controller.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/button_icon.dart';
-import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
-import 'package:cotwcompanion/widgets/menubar.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/scrollbar.dart';
-import 'package:cotwcompanion/widgets/searchbar.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:cotwcompanion/model/exportable/exportable.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/bar_scroll.dart';
+import 'package:cotwcompanion/widgets/app/bar_search.dart';
+import 'package:cotwcompanion/widgets/app/margin.dart';
+import 'package:cotwcompanion/widgets/bar/bar_menu.dart';
+import 'package:cotwcompanion/widgets/bar/bar_menu_item.dart';
+import 'package:cotwcompanion/widgets/button/button_icon.dart';
+import 'package:cotwcompanion/widgets/fullscreen/confirmation.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 abstract class ActivityEntries extends StatefulWidget {
-  final String name;
+  final String _title;
 
-  const ActivityEntries({
-    Key? key,
-    required this.name,
-  }) : super(key: key);
+  const ActivityEntries(
+    String title, {
+    super.key,
+  }) : _title = title;
+
+  String get title => _title;
 }
 
-abstract class ActivityEntriesState extends State<ActivityEntries> {
-  final TextEditingControllerWorkaround controller = TextEditingControllerWorkaround();
-  final List<dynamic> items = [];
-  final double menuHeight = 75;
-  final double _removeButtonSize = 60;
+abstract class ActivityEntriesState<I extends Exportable> extends State<ActivityEntries> {
+  final TextEditingControllerWorkaround _controller = TextEditingControllerWorkaround();
+  final double menuHeight = Values.menuBar;
 
   late ScaffoldMessengerState _scaffoldMessengerState;
 
+  bool _yesNoOpened = false;
   bool fileOptionsOpened = false;
-  bool yesNoOpened = false;
+
+  List<I> filteredItems = [];
+
+  List<I> get items;
+
+  TextEditingControllerWorkaround get controller => _controller;
 
   @override
   void initState() {
@@ -54,9 +62,13 @@ abstract class ActivityEntriesState extends State<ActivityEntries> {
     }
   }
 
-  void filter() {}
+  void filter() {
+    setState(() {
+      filteredItems = items;
+    });
+  }
 
-  void removeAll() {}
+  void removeAll();
 
   void showFileOptions() {
     setState(() {
@@ -74,15 +86,14 @@ abstract class ActivityEntriesState extends State<ActivityEntries> {
 
   void _buildLoaded(bool loaded) {
     if (loaded) {
-      filter();
       Utils.buildSnackBarMessage(
-        tr("file_imported"),
+        tr("FILE_IMPORTED"),
         Process.success,
         context,
       );
     } else {
       Utils.buildSnackBarMessage(
-        tr("file_not_imported"),
+        tr("FILE_NOT_IMPORTED"),
         Process.error,
         context,
       );
@@ -99,200 +110,252 @@ abstract class ActivityEntriesState extends State<ActivityEntries> {
   void _buildSaved(bool saved) {
     if (saved) {
       Utils.buildSnackBarMessage(
-        tr("file_exported"),
+        tr("FILE_EXPORTED"),
         Process.success,
         context,
       );
     } else {
       Utils.buildSnackBarMessage(
-        tr("file_not_exported"),
+        tr("FILE_NOT_EXPORTED"),
         Process.error,
         context,
       );
     }
   }
 
-  Widget _buildYesNo() {
-    return Center(
-        child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 200),
-            opacity: yesNoOpened ? 1 : 0,
-            child: yesNoOpened
-                ? Container(
-                    color: Interface.alwaysDark.withOpacity(0.8),
-                    child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                          padding: const EdgeInsets.all(30),
-                          alignment: Alignment.center,
-                          child: AutoSizeText(
-                            tr("remove_all_items"),
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                            style: Interface.s18w500n(Interface.alwaysLight),
-                          )),
-                      Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                        WidgetButtonIcon(
-                            buttonSize: _removeButtonSize,
-                            icon: "assets/graphics/icons/remove_bin.svg",
-                            color: Interface.alwaysDark,
-                            background: Interface.red,
-                            onTap: () {
-                              setState(() {
-                                focus();
-                                removeAll();
-                                yesNoOpened = false;
-                              });
-                            }),
-                        WidgetButtonIcon(
-                            buttonSize: _removeButtonSize,
-                            icon: "assets/graphics/icons/menu_close.svg",
-                            color: Interface.light,
-                            background: Interface.dark,
-                            onTap: () {
-                              setState(() {
-                                focus();
-                                yesNoOpened = false;
-                              });
-                            })
-                      ])
-                    ]))
-                : const SizedBox.shrink()));
+  WidgetMenuBarItem buildMenuAdd(Widget widget) {
+    return _buildMenuAdd(widget);
   }
 
-  Widget buildEntry(int index, dynamic item) => Container();
-
-  Widget buildItems() {
-    filter();
-    return WidgetScrollbar(
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  dynamic item = items.elementAt(index);
-                  return buildEntry(index, item);
-                }),
-          ),
-          SizedBox(height: menuHeight),
-        ],
+  WidgetMenuBarItem _buildMenuAdd(Widget widget) {
+    return WidgetMenuBarItem(
+      barButton: WidgetButtonIcon(
+        Assets.graphics.icons.plus,
+        color: Interface.alwaysDark,
+        background: Interface.primary,
+        onTap: () {
+          focus();
+          Navigator.push(context, MaterialPageRoute(builder: (e) => widget));
+        },
       ),
     );
   }
 
-  EntryMenuBarItem buildFileOptions() {
-    return EntryMenuBarItem(
+  WidgetMenuBarItem buildMenuDelete() {
+    return _buildMenuDelete();
+  }
+
+  WidgetMenuBarItem _buildMenuDelete() {
+    return WidgetMenuBarItem(
       barButton: WidgetButtonIcon(
-          icon: "assets/graphics/icons/file.svg",
-          color: Interface.light,
-          background: Interface.dark,
-          onTap: () {
-            setState(() {
-              focus();
-              showFileOptions();
-            });
-          }),
-      menuButtons: [
-        WidgetButtonIcon(
-            icon: "assets/graphics/icons/export.svg",
-            color: Interface.light,
-            background: Interface.dark,
-            onTap: () async {
-              _saveFile();
-              setState(() {
-                focus();
-                fileOptionsOpened = !fileOptionsOpened;
-              });
-            }),
-        WidgetButtonIcon(
-            icon: "assets/graphics/icons/import.svg",
-            color: Interface.light,
-            background: Interface.dark,
-            onTap: () async {
-              _loadFile();
-              setState(() {
-                focus();
-                fileOptionsOpened = !fileOptionsOpened;
-              });
-            }),
-        WidgetButtonIcon(
-            icon: "assets/graphics/icons/remove_bin.svg",
-            color: Interface.alwaysDark,
-            background: Interface.red,
-            onTap: () {
-              setState(() {
-                focus();
-                showFileOptions();
-                yesNoOpened = true;
-              });
-            }),
+        Assets.graphics.icons.removeBin,
+        color: Interface.alwaysDark,
+        background: Interface.red,
+        onTap: () {
+          setState(() {
+            focus();
+            _yesNoOpened = true;
+          });
+        },
+      ),
+    );
+  }
+
+  WidgetMenuBarItem buildMenuHelp(Widget widget) {
+    return _buildMenuHelp(widget);
+  }
+
+  WidgetMenuBarItem _buildMenuHelp(Widget widget) {
+    return WidgetMenuBarItem(
+      barButton: WidgetButtonIcon(
+        Assets.graphics.icons.about,
+        color: Interface.light,
+        background: Interface.dark,
+        onTap: () {
+          setState(() {
+            focus();
+            Navigator.push(context, MaterialPageRoute(builder: (e) => widget));
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildFileOptions() {
+    return WidgetButtonIcon(
+      Assets.graphics.icons.file,
+      color: Interface.light,
+      background: Interface.dark,
+      onTap: () {
+        setState(() {
+          focus();
+          showFileOptions();
+        });
+      },
+    );
+  }
+
+  Widget _buildFileOptionsExport() {
+    return WidgetButtonIcon(
+      Assets.graphics.icons.export,
+      color: Interface.light,
+      background: Interface.dark,
+      onTap: () async {
+        _saveFile();
+        setState(() {
+          focus();
+          fileOptionsOpened = !fileOptionsOpened;
+        });
+      },
+    );
+  }
+
+  Widget _buildFileOptionsImport() {
+    return WidgetButtonIcon(
+      Assets.graphics.icons.import,
+      color: Interface.light,
+      background: Interface.dark,
+      onTap: () async {
+        _loadFile();
+        setState(() {
+          focus();
+          fileOptionsOpened = !fileOptionsOpened;
+        });
+      },
+    );
+  }
+
+  Widget _buildFileOptionsDelete() {
+    return WidgetButtonIcon(
+      Assets.graphics.icons.removeBin,
+      color: Interface.alwaysDark,
+      background: Interface.red,
+      onTap: () {
+        setState(() {
+          focus();
+          showFileOptions();
+          _yesNoOpened = true;
+        });
+      },
+    );
+  }
+
+  WidgetMenuBarItem buildMenuFileOptions() {
+    return _buildMenuFileOptions();
+  }
+
+  WidgetMenuBarItem _buildMenuFileOptions() {
+    return WidgetMenuBarItem(
+      barButton: _buildFileOptions(),
+      subButtons: [
+        _buildFileOptionsExport(),
+        _buildFileOptionsImport(),
+        _buildFileOptionsDelete(),
       ],
-      menuHeight: menuHeight,
+      height: menuHeight,
       menuOpened: fileOptionsOpened,
     );
   }
 
-  List<EntryMenuBarItem> buildMenuBarItems() => [];
+  List<WidgetMenuBarItem> listMenuBarItems();
 
-  Widget _buildMenu() {
-    return WidgetMenuBar(
-      width: MediaQuery.of(context).size.width,
-      height: menuHeight,
-      items: buildMenuBarItems(),
-    );
+  WidgetMenuBar _buildMenu() {
+    return WidgetMenuBar(items: listMenuBarItems());
   }
 
-  List<Widget> buildFilters() => [];
+  Widget _buildConfirmation() {
+    if (_yesNoOpened) {
+      return WidgetConfirmation(
+        text: tr("REMOVE_ALL_ITEMS"),
+        onConfirm: () {
+          setState(() {
+            focus();
+            removeAll();
+            _yesNoOpened = false;
+          });
+        },
+        onCancel: () {
+          setState(() {
+            focus();
+            _yesNoOpened = false;
+          });
+        },
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
+  List<Widget> listFilters() => [];
 
   void buildFilter() {}
 
   WidgetAppBar buildAppBar() {
     return WidgetAppBar(
-      text: tr(widget.name),
+      tr(widget.title),
       context: context,
     );
   }
 
   WidgetSearchBar? buildSearchBar() => null;
 
+  Widget buildEntry(int i, dynamic item);
+
+  Widget _buildMenuBar() {
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        Container(
+          height: menuHeight,
+          width: MediaQuery.of(context).size.width,
+          color: Interface.search,
+        ),
+        _buildMenu(),
+      ],
+    );
+  }
+
+  List<Widget> listItems() {
+    if (filteredItems.isEmpty) filter();
+    return filteredItems.mapIndexed((i, item) => buildEntry(i, item)).toList();
+  }
+
+  Widget buildItems(List<Widget> widgets) {
+    return ListView.builder(
+      itemCount: 2 + filteredItems.length,
+      itemBuilder: (context, i) {
+        if (i == 0) return buildAppBar();
+        if (i == 1) return buildSearchBar() ?? const SizedBox.shrink();
+        return widgets.elementAt(i - 2);
+      },
+    );
+  }
+
   Widget _buildBody() {
+    List<Widget> widgets = listItems();
     return Stack(
       children: [
-        Column(mainAxisSize: MainAxisSize.max, children: [
-          buildAppBar(),
-          buildSearchBar() ?? const SizedBox.shrink(),
-          Expanded(
-            child: Stack(
-              children: [
-                buildItems(),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: Container(
-                    height: menuHeight,
-                    width: MediaQuery.of(context).size.width,
-                    color: Interface.search,
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: _buildMenu(),
-                ),
-              ],
-            ),
-          )
-        ]),
-        _buildYesNo(),
+        WidgetMargin.bottom(
+          Values.menuBar,
+          background: Interface.body,
+          alignment: Alignment.topCenter,
+          child: WidgetScrollBar(
+            child: buildItems(widgets),
+          ),
+        ),
+        Positioned(
+          left: 0,
+          bottom: 0,
+          child: _buildMenuBar(),
+        ),
+        _buildConfirmation(),
       ],
     );
   }
 
   Widget _buildWidgets() {
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
-    return WidgetScaffold(
-      customBody: true,
+    return Scaffold(
+      appBar: AppBar(),
       body: _buildBody(),
     );
   }

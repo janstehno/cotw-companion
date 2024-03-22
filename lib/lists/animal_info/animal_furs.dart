@@ -1,57 +1,36 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/model/animal_fur.dart';
-import 'package:cotwcompanion/widgets/entries/animal/fur.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/model/connect/animal_fur.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/widgets/parts/animal/fur/fur.dart';
 import 'package:flutter/material.dart';
 
-class ListAnimalFurs extends StatefulWidget {
-  final int animalId;
-  final int chosenRarity;
+class ListAnimalFurs extends StatelessWidget {
+  final Animal _animal;
+  final int _chosenRarity;
 
-  const ListAnimalFurs({Key? key, required this.animalId, required this.chosenRarity}) : super(key: key);
+  const ListAnimalFurs(
+    Animal animal, {
+    super.key,
+    required int chosenRarity,
+  })  : _animal = animal,
+        _chosenRarity = chosenRarity;
 
-  @override
-  ListAnimalFursState createState() => ListAnimalFursState();
-}
+  List<AnimalFur> get _furs => HelperJSON.getAnimalFurs(_animal.id).sorted(AnimalFur.sortByGenderRarityPercentName);
 
-class ListAnimalFursState extends State<ListAnimalFurs> {
-  late final List<AnimalFur> _furs = [];
+  Widget _buildAnimalFur(AnimalFur animalFur) {
+    return WidgetAnimalFur(
+      animalFur,
+      isChosen: animalFur.rarity == _chosenRarity,
+    );
+  }
 
-  void _getFurs() {
-    _furs.clear();
-    for (AnimalFur animalFur in HelperJSON.animalsFurs) {
-      if (animalFur.animalId == widget.animalId) {
-        _furs.add(animalFur);
-      }
-    }
+  List<Widget> _listFurs() {
+    return _furs.map((e) => _buildAnimalFur(e)).toList();
   }
 
   Widget _buildWidgets() {
-    _getFurs();
-    return _furs.isEmpty
-        ? Row(mainAxisSize: MainAxisSize.max, children: [
-            Expanded(
-                child: AutoSizeText(
-              tr("none"),
-              maxLines: 1,
-              style: Interface.s16w300n(Interface.dark),
-            ))
-          ])
-        : ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _furs.length,
-            itemBuilder: (context, index) {
-              AnimalFur animalFur = _furs[index];
-              return EntryAnimalFur(
-                animalFur: animalFur,
-                isChosen: animalFur.rarity == widget.chosenRarity,
-              );
-            });
+    return Column(children: _listFurs());
   }
 
   @override

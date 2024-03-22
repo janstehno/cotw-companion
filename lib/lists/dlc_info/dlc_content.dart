@@ -1,72 +1,55 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 
-class ListDlcContent extends StatefulWidget {
-  final List<dynamic> list;
-  final List<dynamic> reserves;
-  final int type;
+class ListDlcContent extends StatelessWidget {
+  final List<int> _list;
+  final ItemType _type;
 
   const ListDlcContent({
-    Key? key,
-    required this.list,
-    this.reserves = const [],
-    required this.type,
-  }) : super(key: key);
+    super.key,
+    required List<int> list,
+    required ItemType type,
+  })  : _list = list,
+        _type = type;
 
-  @override
-  ListDlcContentState createState() => ListDlcContentState();
-}
-
-class ListDlcContentState extends State<ListDlcContent> {
-  late final List<dynamic> _items = [];
-
-  void _getItems() {
-    List<dynamic> list = [];
-    switch (widget.type) {
-      case 1:
-        list.addAll(HelperJSON.animals);
-        break;
-      case 2:
-        list.addAll(HelperJSON.weapons);
-        break;
-      case 3:
-        list.addAll(HelperJSON.callers);
-        break;
+  String _getName(int i) {
+    switch (_type) {
+      case ItemType.reserve:
+        return HelperJSON.getReserve(i)!.name;
+      case ItemType.animal:
+        return HelperJSON.getAnimal(i)!.name;
+      case ItemType.weapon:
+        return HelperJSON.getWeapon(i)!.name;
+      case ItemType.caller:
+        return HelperJSON.getCaller(i)!.name;
       default:
-        list.addAll(HelperJSON.reserves);
-        break;
+        throw UnimplementedError();
     }
-    List<dynamic> result = [];
-    for (int index in widget.list) {
-      result.add(list[index - 1]);
-    }
-    _items.addAll(result);
-    widget.type == 1 && widget.reserves.isNotEmpty
-        ? _items.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserves[0]).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserves[0])))
-        : _items.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
+  }
+
+  Widget _buildItem(int i) {
+    return WidgetText(
+      _getName(i),
+      color: Interface.dark,
+      style: Style.normal.s16.w300,
+    );
+  }
+
+  List<Widget> _listItems() {
+    return _list.map((e) => _buildItem(e)).toList();
   }
 
   Widget _buildWidgets() {
-    _getItems();
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _items.length,
-        itemBuilder: (context, index) {
-          return Container(
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              child: AutoSizeText(
-                widget.type == 1 && widget.reserves.isNotEmpty
-                    ? _items.elementAt(index).getNameBasedOnReserve(context.locale, widget.reserves[0])
-                    : _items.elementAt(index).getName(context.locale),
-                style: Interface.s16w300n(Interface.dark),
-              ));
-        });
+    return Wrap(
+      spacing: 3,
+      runSpacing: 3,
+      direction: Axis.vertical,
+      children: _listItems(),
+    );
   }
 
   @override

@@ -1,56 +1,51 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/lists/home/items.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/widgets/entries/animal/animal.dart';
-import 'package:cotwcompanion/widgets/filters/picker_auto.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/widgets/filter/picker_auto.dart';
+import 'package:cotwcompanion/widgets/parts/animal/animal.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListWildlife extends ListItems {
+class ListWildlife extends ListTranslatable {
   const ListWildlife({
     super.key,
-  }) : super(name: "wildlife");
+  }) : super("WILDLIFE");
 
   @override
   ListWildlifeState createState() => ListWildlifeState();
 }
 
-class ListWildlifeState extends ListItemsState {
+class ListWildlifeState extends ListTranslatableState<Animal> {
   @override
-  void filter() {
-    setState(() {
-      items.clear();
-      items.addAll(HelperFilter.filterAnimals(controller.text, context));
-    });
-  }
+  List<Animal> get items => HelperFilter.filterAnimals(controller.text, context);
 
   @override
   bool isFilterChanged() => HelperFilter.animalFiltersChanged();
 
   @override
-  List<Widget> buildFilters() {
+  List<Widget> listFilter() {
     return [
-      FilterPickerAuto(
-        text: tr("animal_class"),
-        icon: "assets/graphics/icons/level.svg",
-        filterKey: FilterKey.animalsClass,
+      WidgetFilterPickerAuto(
+        FilterKey.animalsClass,
+        text: tr("ANIMAL_CLASS"),
+        icon: Assets.graphics.icons.level,
       ),
-      FilterPickerAuto(
-        text: tr("animal_difficulty"),
-        icon: "assets/graphics/icons/stats.svg",
-        filterKey: FilterKey.animalsDifficulty,
+      WidgetFilterPickerAuto(
+        FilterKey.animalsDifficulty,
+        text: tr("ANIMAL_DIFFICULTY"),
+        icon: Assets.graphics.icons.stats,
       ),
     ];
   }
 
   @override
-  EntryAnimal buildItemEntry(int index) {
-    return EntryAnimal(
-      index: index,
-      animal: items.elementAt(index),
-      callback: focus,
+  WidgetAnimal buildEntry(item) {
+    return WidgetAnimal(
+      item,
+      i: items.indexOf(item),
+      onTap: focus,
     );
   }
 }

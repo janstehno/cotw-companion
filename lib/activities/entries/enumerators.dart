@@ -1,44 +1,39 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/activities/edit/enumerators.dart';
 import 'package:cotwcompanion/activities/entries/entries_reorderable.dart';
 import 'package:cotwcompanion/activities/help/enumerators.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/enumerator.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/button_icon.dart';
-import 'package:cotwcompanion/widgets/entries/enumerators/enumerator.dart';
-import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
-import 'package:cotwcompanion/widgets/searchbar.dart';
+import 'package:cotwcompanion/activities/modify/add/enumerators.dart';
+import 'package:cotwcompanion/helpers/enumerator.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/model/exportable/enumerator.dart';
+import 'package:cotwcompanion/widgets/app/bar_search.dart';
+import 'package:cotwcompanion/widgets/bar/bar_menu_item.dart';
+import 'package:cotwcompanion/widgets/parts/enumerators/enumerator.dart';
 import 'package:flutter/material.dart';
 
 class ActivityEnumerators extends ActivityEntriesReorderable {
-  final HelperEnumerator helperEnumerator;
+  final HelperEnumerator _helperEnumerator;
 
   const ActivityEnumerators({
     super.key,
-    required this.helperEnumerator,
-  }) : super(name: "counters");
+    required HelperEnumerator helperEnumerator,
+  })  : _helperEnumerator = helperEnumerator,
+        super("COUNTERS");
+
+  HelperEnumerator get helperEnumerator => _helperEnumerator;
 
   @override
   ActivityEnumeratorsState createState() => ActivityEnumeratorsState();
 }
 
-class ActivityEnumeratorsState extends ActivityEntriesReorderableState {
+class ActivityEnumeratorsState extends ActivityEntriesReorderableState<Enumerator> {
   late final HelperEnumerator _helperEnumerator;
+
+  @override
+  List<Enumerator> get items => HelperFilter.filterEnumerators(controller.text, _helperEnumerator.enumerators);
 
   @override
   void initState() {
     _helperEnumerator = (widget as ActivityEnumerators).helperEnumerator;
     super.initState();
-  }
-
-  @override
-  void filter() {
-    setState(() {
-      items.clear();
-      items.addAll(HelperFilter.filterEnumerators(controller.text, _helperEnumerator.enumerators, context));
-    });
   }
 
   @override
@@ -51,53 +46,44 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState {
 
   @override
   void onReorder(int oldIndex, int newIndex) {
-    setState(() {
-      _helperEnumerator.changeIndexOfEnumerators(oldIndex, newIndex);
-      filter();
-    });
+    _helperEnumerator.changeOrderOfEnumerators(oldIndex, newIndex);
+    filter();
   }
 
   @override
-  Future<bool> fileLoaded() async => await _helperEnumerator.importFile();
+  Future<bool> fileLoaded() async {
+    bool imported = await _helperEnumerator.importFile();
+    if (imported) filter();
+    return imported;
+  }
 
   @override
   Future<bool> fileSaved() async => await _helperEnumerator.exportFile();
 
   @override
-  Widget buildEntry(int index, dynamic item) {
-    return EntryEnumerator(
-      key: Key(index.toString()),
-      index: index,
+  Widget buildEntry(int i, dynamic item) {
+    return WidgetEnumerator(
+      i,
+      key: Key(i.toString()),
       enumerator: item,
-      callback: filter,
       helperEnumerator: _helperEnumerator,
       context: context,
+      callback: filter,
     );
   }
 
   @override
-  List<EntryMenuBarItem> buildMenuBarItems() {
+  List<WidgetMenuBarItem> listMenuBarItems() {
     return [
-      EntryMenuBarItem(
-        barButton: WidgetButtonIcon(
-            icon: "assets/graphics/icons/about.svg",
-            color: Interface.light,
-            background: Interface.dark,
-            onTap: () {
-              setState(() {
-                focus();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityHelpEnumerators()));
-              });
-            }),
+      buildMenuHelp(
+        const ActivityHelpEnumerators(),
       ),
-      buildFileOptions(),
-      EntryMenuBarItem(
-        barButton: WidgetButtonIcon(
-            icon: "assets/graphics/icons/plus.svg",
-            onTap: () {
-              focus();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditEnumerators(helperEnumerator: _helperEnumerator, callback: filter)));
-            }),
+      buildMenuFileOptions(),
+      buildMenuAdd(
+        ActivityAddEnumerators(
+          helperEnumerator: _helperEnumerator,
+          onSuccess: filter,
+        ),
       ),
     ];
   }
@@ -106,7 +92,7 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState {
   WidgetSearchBar? buildSearchBar() {
     return WidgetSearchBar(
       controller: controller,
-      onFilter: null,
+      onFilterTap: null,
     );
   }
 }

@@ -1,207 +1,130 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/model/mission.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/tag.dart';
-import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/graphics.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/model/describable/mission.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/icon/icon.dart';
+import 'package:cotwcompanion/widgets/parts/stats/parameter.dart';
+import 'package:cotwcompanion/widgets/parts/stats/tag.dart';
+import 'package:cotwcompanion/widgets/text/text.dart';
+import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class ActivityDetailMission extends StatefulWidget {
-  final Mission mission;
+class ActivityDetailMission extends StatelessWidget {
+  final Mission _mission;
 
-  const ActivityDetailMission({
-    Key? key,
-    required this.mission,
-  }) : super(key: key);
+  const ActivityDetailMission(
+    Mission mission, {
+    super.key,
+  }) : _mission = mission;
 
-  @override
-  ActivityDetailMissionState createState() => ActivityDetailMissionState();
-}
-
-class ActivityDetailMissionState extends State<ActivityDetailMission> {
-  Widget _buildStatistics() {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _buildType(),
-              _buildDifficulty(),
-            ],
-          ),
-        ),
-      ],
+  Widget _buildDifficulty() {
+    return WidgetParameterTag(
+      text: tr("DIFFICULTY"),
+      value: _mission.difficultyAsString,
+      background: _mission.difficultyColor,
     );
   }
 
   Widget _buildType() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 30),
-              child: AutoSizeText(
-                tr("type"),
-                style: Interface.s16w300n(Interface.dark),
-              ),
-            ),
-          ),
-          AutoSizeText(
-            widget.mission.getTypeAsString(),
-            style: Interface.s16w500n(Interface.dark),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDifficulty() {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 30),
-            child: AutoSizeText(
-              tr("difficulty"),
-              style: Interface.s16w300n(Interface.dark),
-            ),
-          ),
-        ),
-        WidgetTag.small(
-          color: Interface.alwaysDark,
-          background: widget.mission.getDifficultyColor(),
-          value: widget.mission.getDifficultyAsString(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildReserve() {
-    return Column(
-      children: [
-        WidgetTitleBig(
-          primaryText: tr("reserve"),
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.fromLTRB(30, 25, 30, 30),
-          child: AutoSizeText(
-            HelperJSON.getReserve(widget.mission.reserveId).getName(context.locale),
-            style: Interface.s16w300n(Interface.dark),
-            maxLines: 1,
-          ),
-        )
-      ],
+    return WidgetParameter(
+      text: tr("TYPE"),
+      value: _mission.typeAsString,
     );
   }
 
   Widget _buildGiver() {
-    return Column(
-      children: [
-        WidgetTitleBig(
-          primaryText: tr("mission_giver"),
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.fromLTRB(30, 25, 30, 30),
-          child: AutoSizeText(
-            HelperJSON.getMissionGiver(widget.mission.giverId).getName(context.locale),
-            style: Interface.s16w300n(Interface.dark),
-            maxLines: 1,
-          ),
-        )
-      ],
+    return WidgetParameter(
+      text: tr("MISSION_GIVER"),
+      value: _mission.person,
     );
   }
 
-  Widget _buildObjective(String text, String icon, Color color) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 7),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+  Widget _buildReserve() {
+    return WidgetParameter(
+      text: tr("RESERVE"),
+      value: HelperJSON.getReserve(_mission.reserveId)!.name,
+    );
+  }
+
+  Widget _buildStatistics() {
+    return WidgetPadding.a30(
+      child: Wrap(
+        spacing: 5,
+        runSpacing: 5,
         children: [
-          Container(
-            width: 20,
-            height: 20,
-            padding: const EdgeInsets.all(3),
-            margin: const EdgeInsets.only(right: 10),
-            child: SvgPicture.asset(
-              "assets/graphics/icons/$icon.svg",
-              colorFilter: ColorFilter.mode(
-                color,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-          Expanded(
-            child: AutoSizeText(
-              text.replaceAll("[I]", "").replaceAll("[O]", ""),
-              style: Interface.s16w300n(Interface.dark),
-            ),
-          )
+          _buildDifficulty(),
+          _buildType(),
+          _buildGiver(),
+          _buildReserve(),
         ],
       ),
     );
   }
 
+  Widget _buildObjectiveIcon(String objective) {
+    return WidgetIcon(
+      Graphics.getObjectiveIcon(tr(objective)),
+      color: _mission.getObjectiveColor(tr(objective)),
+    );
+  }
+
+  Widget _buildObjectiveText(String objective) {
+    return WidgetText(
+      tr(objective).replaceAll("[I]", "").replaceAll("[O]", ""),
+      color: Interface.dark,
+      style: Style.normal.s16.w300,
+    );
+  }
+
+  Widget _buildObjective(String objective) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _buildObjectiveIcon(objective),
+        const SizedBox(width: 7),
+        Expanded(child: _buildObjectiveText(objective)),
+      ],
+    );
+  }
+
+  List<Widget> _listObjectives() {
+    return _mission.description.map((e) => _buildObjective(e)).toList();
+  }
+
   Widget _buildObjectives() {
-    List<dynamic> description = widget.mission.getDescription(context.locale);
     return Column(
       children: [
-        WidgetTitleBig(
-          primaryText: tr("mission_objectives"),
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.fromLTRB(30, 25, 30, 30),
-          child: ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: description.length,
-              itemBuilder: (context, index) {
-                String text = description.elementAt(index) as String;
-                return text.startsWith("[I]")
-                    ? _buildObjective(text, "about", Interface.oceanBlue)
-                    : text.startsWith("[O]")
-                        ? _buildObjective(text, "optional", Interface.disabled)
-                        : _buildObjective(text, "todo", Interface.green);
-              }),
+        WidgetTitle(tr("MISSION_OBJECTIVES")),
+        WidgetPadding.a30(
+          child: Wrap(
+            spacing: 5,
+            runSpacing: 5,
+            children: _listObjectives(),
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildWidgets() {
+  Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
-        appBar: WidgetAppBar(
-          text: widget.mission.getName(context.locale),
-          maxLines: widget.mission.getName(context.locale).split(" ").length > 2 ? 2 : 1,
-          context: context,
-        ),
-        body: Column(children: [
-          _buildStatistics(),
-          _buildReserve(),
-          _buildGiver(),
-          _buildObjectives(),
-        ]));
+      appBar: WidgetAppBar(
+        _mission.name,
+        context: context,
+      ),
+      children: [
+        _buildStatistics(),
+        _buildObjectives(),
+      ],
+    );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

@@ -1,57 +1,43 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/multimounts.dart';
-import 'package:cotwcompanion/model/multimount.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/entries/multimount.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/multimounts.dart';
+import 'package:cotwcompanion/model/translatable/multimount.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/parts/multimounts/multimount.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListMultimounts extends StatefulWidget {
-  final HelperMultimounts helperMultimounts;
+class ListMultimounts extends StatelessWidget {
+  final HelperMultimounts _helperMultimounts;
 
   const ListMultimounts({
-    Key? key,
-    required this.helperMultimounts,
-  }) : super(key: key);
+    super.key,
+    required HelperMultimounts helperMultimounts,
+  }) : _helperMultimounts = helperMultimounts;
 
-  @override
-  ListMultimountsState createState() => ListMultimountsState();
-}
+  List<Multimount> get _multimounts => _helperMultimounts.multimounts.sorted(Multimount.sortByName);
 
-class ListMultimountsState extends State<ListMultimounts> {
-  late final List<Multimount> _multimounts = [];
-
-  void _getData() {
-    _multimounts.addAll(widget.helperMultimounts.multimounts);
-    _multimounts.sort((a, b) => a.getName(context.locale).compareTo(b.getName(context.locale)));
+  Widget _buildMultimount(Multimount multimount) {
+    return WidgetMultimount(
+      multimount,
+      i: _multimounts.indexOf(multimount),
+    );
   }
 
-  Widget _buildList() {
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _multimounts.length,
-        itemBuilder: (context, index) {
-          return EntryMultimount(
-            index: index,
-            multimount: _multimounts.elementAt(index),
-          );
-        });
+  List<Widget> _listMultimounts() {
+    return _multimounts.map((e) => _buildMultimount(e)).toList();
   }
 
-  Widget _buildWidgets() {
-    _getData();
+  Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr("content_matmats_multimounts"),
+        tr("CONTENT_MATMATS_MULTIMOUNTS"),
         context: context,
       ),
-      body: _buildList(),
+      children: _listMultimounts(),
     );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

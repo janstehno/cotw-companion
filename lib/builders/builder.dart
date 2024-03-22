@@ -1,35 +1,91 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/error.dart';
-import 'package:cotwcompanion/widgets/progress_bar.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:cotwcompanion/widgets/app/error.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 abstract class BuilderBuilder extends StatefulWidget {
-  final String builderId;
+  final String _builderId;
 
-  const BuilderBuilder({
-    Key? key,
-    required this.builderId,
-  }) : super(key: key);
+  const BuilderBuilder(
+    String builderId, {
+    super.key,
+  }) : _builderId = builderId;
+
+  String get builderId => _builderId;
 }
 
 abstract class BuilderBuilderState extends State<BuilderBuilder> {
-  final GlobalKey<ProgressBarState> progressBarKey = GlobalKey<ProgressBarState>();
-  late final List<dynamic> loadedData;
+  final Map<String, dynamic> loadedData = {};
 
-  void updateProgress(int id, dynamic data) {
-    loadedData[id] = data;
-    progressBarKey.currentState?.rebuild(id);
+  void updateProgress(String key, dynamic data) {
+    loadedData.putIfAbsent(key, () => data);
   }
 
-  void initializeData(AsyncSnapshot<List<dynamic>> snapshot, BuildContext context) {}
+  void initializeData(AsyncSnapshot<Map<String, dynamic>> snapshot, BuildContext context);
 
-  loadData(BuildContext context) async {}
+  loadData();
 
-  buildFutureWidget(BuildContext context) {}
+  buildFutureWidget(BuildContext context);
 
-  Widget _buildLoadingWidget(AsyncSnapshot<List<dynamic>> snapshot, BuildContext context) {
+  Widget _buildLoadingBackground() {
+    ImageProvider background = AssetImage(Assets.graphics.images.cotw.path);
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: background,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingSpinKit() {
+    return const WidgetPadding.a30(
+      child: RotatedBox(
+        quarterTurns: 1,
+        child: SpinKitCubeGrid(
+          size: Values.tapSize,
+          color: Interface.alwaysLight,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildShadow() {
+    return Container(
+      color: Interface.alwaysDark.withOpacity(0.4),
+      alignment: Alignment.bottomRight,
+    );
+  }
+
+  Widget _buildLoadingWidget() {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                _buildLoadingBackground(),
+                _buildShadow(),
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: _buildLoadingSpinKit(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWidget(AsyncSnapshot<Map<String, dynamic>> snapshot, BuildContext context) {
     if (snapshot.hasError) {
       return WidgetError(
         code: "Ex${widget.builderId}001",
@@ -39,12 +95,14 @@ abstract class BuilderBuilderState extends State<BuilderBuilder> {
     } else if (!snapshot.hasData) {
       return WidgetError(
         code: "Ex${widget.builderId}002",
-        error: "Snapshot has no data.",
+        error: "${snapshot.error}",
+        stack: "${snapshot.stackTrace}",
       );
     } else if (snapshot.data!.length != loadedData.length) {
       return WidgetError(
         code: "Ex${widget.builderId}003",
-        error: "Snapshot data length is not correct.",
+        error: "${snapshot.error}",
+        stack: "${snapshot.stackTrace}",
       );
     } else {
       initializeData(snapshot, context);
@@ -53,25 +111,17 @@ abstract class BuilderBuilderState extends State<BuilderBuilder> {
   }
 
   Widget _buildWidgets(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          color: Interface.body,
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(30),
-          child: ProgressBar(key: progressBarKey, data: loadedData.length),
-        ),
-        FutureBuilder(
-          future: loadData(context),
-          builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return const SizedBox.shrink();
-            } else {
-              return _buildLoadingWidget(snapshot, context);
-            }
-          },
-        ),
-      ],
+    return FutureBuilder(
+      future: loadData(),
+      builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return _buildLoadingWidget();
+        } else if (snapshot.connectionState != ConnectionState.done) {
+          return const SizedBox.shrink();
+        } else {
+          return _buildWidget(snapshot, context);
+        }
+      },
     );
   }
 

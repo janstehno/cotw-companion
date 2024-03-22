@@ -1,6 +1,4 @@
-// Copyright (c) 2023 Jan Stehno
-
-enum Item {
+enum ItemType {
   reserve,
   animal,
   caller,
@@ -17,7 +15,7 @@ enum ProficiencyType {
   ambusher,
 }
 
-enum MapItem {
+enum MapLocationType {
   outpost,
   lookout,
   hide,
@@ -37,19 +35,34 @@ enum AnatomyPart {
   bones,
 }
 
-enum MultimountSize {
-  xs,
-  s,
-  m,
-  l,
-  xl,
-  xxl,
+enum SenseType {
+  sight,
+  hearing,
+  smell,
+}
+
+enum MissionType {
+  main,
+  side,
+}
+
+enum ModifyType {
+  add,
+  edit,
 }
 
 enum DateStructure {
   json,
   format,
   compare,
+}
+
+enum Change {
+  reserve,
+  animal,
+  gender,
+  fur,
+  other,
 }
 
 enum Process {
@@ -69,8 +82,6 @@ enum FilterKey {
   animalsClass,
   animalsDifficulty,
   weaponsAnimalClass,
-  weaponsClassMin,
-  weaponsClassMax,
   weaponsMagMin,
   weaponsMagMax,
   weaponsRifles,

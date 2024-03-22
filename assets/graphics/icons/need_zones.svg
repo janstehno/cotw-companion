@@ -1,17 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <polyline points="3.65 3.5 11.72 3.5 3.5 11.35 11.96 11.35" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-    <path
-        d="M22.1,15a3.29,3.29,0,0,0,1.4.22c1,0,2-.45,2.76-2.4S26,8.25,24.56,6.76A7.52,7.52,0,0,0,20.74,8C18.68,9.24,18,9.9,18,11.42s.82,2.05,2.12,2.88c0,0-.13.28-1.85,1.37"
-        fill="none" stroke="#212121" stroke-linecap="round" stroke-width="2" />
-    <path d="M22.85,10.57a7.21,7.21,0,0,1-2.69,3.73" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-width="2" />
-    <path d="M12,16.63s-4.23,3.64-4.23,6.21S9.27,26.5,12,26.5" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-width="2" />
-    <path d="M12,16.63s4.23,3.64,4.23,6.21S14.65,26.5,12,26.5" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-width="2" />
-    <path d="M10.26,22.94s-.21.36.25.74.67.28.67.28" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-width="2" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><polyline points="3.65 3.5 11.72 3.5 3.5 11.35 11.96 11.35" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M22.1,15a3.29,3.29,0,0,0,1.4.22c1,0,2-.45,2.76-2.4S26,8.25,24.56,6.76A7.52,7.52,0,0,0,20.74,8C18.68,9.24,18,9.9,18,11.42s.82,2.05,2.12,2.88c0,0-.13.28-1.85,1.37" fill="none" stroke="#212121" stroke-linecap="round" stroke-width="2"/><path d="M22.85,10.57a7.21,7.21,0,0,1-2.69,3.73" fill="none" stroke="#212121" stroke-linecap="round" stroke-width="2"/><path d="M12,16.63s-4.23,3.64-4.23,6.21S9.27,26.5,12,26.5" fill="none" stroke="#212121" stroke-linecap="round" stroke-width="2"/><path d="M12,16.63s4.23,3.64,4.23,6.21S14.65,26.5,12,26.5" fill="none" stroke="#212121" stroke-linecap="round" stroke-width="2"/><path d="M10.26,22.94s-.21.36.25.74.67.28.67.28" fill="none" stroke="#212121" stroke-linecap="round" stroke-width="2"/><rect width="30" height="30" fill="none"/></svg>

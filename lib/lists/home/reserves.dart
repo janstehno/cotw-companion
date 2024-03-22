@@ -1,52 +1,47 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/lists/home/items.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/widgets/entries/reserve/reserve.dart';
-import 'package:cotwcompanion/widgets/filters/range_auto.dart';
+import 'package:cotwcompanion/model/translatable/reserve.dart';
+import 'package:cotwcompanion/widgets/filter/value.dart';
+import 'package:cotwcompanion/widgets/parts/reserve/reserve.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListReserves extends ListItems {
+class ListReserves extends ListTranslatable {
   const ListReserves({
     super.key,
-  }) : super(name: "reserves");
+  }) : super("RESERVES");
 
   @override
   ListReservesState createState() => ListReservesState();
 }
 
-class ListReservesState extends ListItemsState {
+class ListReservesState extends ListTranslatableState<Reserve> {
   @override
-  void filter() {
-    setState(() {
-      items.clear();
-      items.addAll(HelperFilter.filterReserves(controller.text, context));
-    });
-  }
+  List<Reserve> get items => HelperFilter.filterReserves(controller.text);
 
   @override
   bool isFilterChanged() => HelperFilter.reserveFiltersChanged();
 
   @override
-  List<Widget> buildFilters() {
+  List<Widget> listFilter() {
     return [
-      FilterRangeAuto(
-        text: tr("wildlife"),
-        icon: "assets/graphics/icons/target.svg",
-        filterKeyLower: FilterKey.reservesCountMin,
-        filterKeyUpper: FilterKey.reservesCountMax,
+      WidgetFilterValue(
+        FilterKey.reservesCountMin,
+        FilterKey.reservesCountMax,
+        text: tr("WILDLIFE"),
+        icon: Assets.graphics.icons.target,
       )
     ];
   }
 
   @override
-  EntryReserve buildItemEntry(int index) {
-    return EntryReserve(
-      index: index,
-      reserve: items.elementAt(index),
-      callback: focus,
+  WidgetReserve buildEntry(item) {
+    return WidgetReserve(
+      item,
+      i: items.indexOf(item),
+      onTap: focus,
     );
   }
 }

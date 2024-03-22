@@ -1,8 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <polyline points="10 24.5 1.5 15 10 5.5" fill="none" stroke="#212121" stroke-linecap="round"
-        stroke-linejoin="round" stroke-width="3" />
-    <line x1="28.5" y1="15" x2="3.6" y2="15" fill="none" stroke="#212121" stroke-linecap="round"
-        stroke-linejoin="round" stroke-width="3" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><polyline points="10 24.5 1.5 15 10 5.5" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><line x1="28.5" y1="15" x2="3.6" y2="15" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><rect width="30" height="30" fill="none"/></svg>

@@ -1,77 +1,52 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/model/animal_fur.dart';
-import 'package:cotwcompanion/widgets/entries/fur.dart';
-import 'package:cotwcompanion/widgets/title_small.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:cotwcompanion/model/connect/animal_fur.dart';
+import 'package:cotwcompanion/model/translatable/fur.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/parts/fur/fur.dart';
+import 'package:cotwcompanion/widgets/subtitle/subtitle_indicator.dart';
 import 'package:flutter/material.dart';
 
-class ListFurAnimals extends StatefulWidget {
-  final int furId;
-  final int rarity;
+class ListFurAnimals extends StatelessWidget {
+  final Fur _fur;
+  final int _rarity;
 
-  const ListFurAnimals({
-    Key? key,
-    required this.furId,
-    required this.rarity,
-  }) : super(key: key);
+  const ListFurAnimals(
+    Fur fur, {
+    super.key,
+    required int rarity,
+  })  : _fur = fur,
+        _rarity = rarity;
 
-  @override
-  ListFurAnimalsState createState() => ListFurAnimalsState();
-}
+  List<AnimalFur> get _animalFurs => HelperJSON.getAnimalFursWithRarity(_fur.id, _rarity);
 
-class ListFurAnimalsState extends State<ListFurAnimals> {
-  late final List<AnimalFur> _animalFurs = [];
+  Widget _buildAnimalFurs() {
+    List<AnimalFur> animalFurs = _animalFurs.sorted(AnimalFur.sortByPercent);
 
-  String _getRarity() {
-    switch (widget.rarity) {
-      case 0:
-        return "rarity_common";
-      case 1:
-        return "rarity_uncommon";
-      case 2:
-        return "rarity_rare";
-      case 3:
-        return "rarity_very_rare";
-      default:
-        return "rarity_mission";
-    }
-  }
-
-  void _getAnimalFurs() {
-    for (AnimalFur animalFur in HelperJSON.animalsFurs) {
-      if (animalFur.furId == widget.furId && animalFur.rarity == widget.rarity) {
-        _animalFurs.add(animalFur);
-      }
-    }
-    _animalFurs.sort((a, b) => b.perCent.compareTo(a.perCent));
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: animalFurs.length,
+      itemBuilder: (context, i) {
+        return WidgetFur(animalFurs.elementAt(i));
+      },
+    );
   }
 
   Widget _buildWidgets() {
-    _getAnimalFurs();
-    return _animalFurs.isNotEmpty
-        ? Column(
-            children: [
-              WidgetTitleSmall(
-                primaryText: tr(_getRarity()),
-                dot: true,
-                dotColor: _animalFurs[0].color,
-              ),
-              Container(
-                  padding: const EdgeInsets.all(30),
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _animalFurs.length,
-                      itemBuilder: (context, index) {
-                        return EntryFur(
-                          animalFur: _animalFurs.elementAt(index),
-                        );
-                      }))
-            ],
-          )
-        : const SizedBox.shrink();
+    return Column(
+      children: [
+        if (_animalFurs.isNotEmpty) ...[
+          WidgetSubtitleIndicator(
+            AnimalFur.rarityName(_rarity),
+            indicatorSize: Values.dotSize,
+            indicatorColor: _animalFurs.first.color,
+          ),
+          WidgetPadding.a30(child: _buildAnimalFurs()),
+        ],
+      ],
+    );
   }
 
   @override

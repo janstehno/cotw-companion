@@ -1,92 +1,95 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/activities/edit/logs.dart';
 import 'package:cotwcompanion/activities/entries/entries.dart';
 import 'package:cotwcompanion/activities/filter.dart';
 import 'package:cotwcompanion/activities/help/logs.dart';
+import 'package:cotwcompanion/activities/modify/add/logs.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/helpers/log.dart';
+import 'package:cotwcompanion/interface/graphics.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/lists/logs/stats.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/log.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/miscellaneous/interface/values.dart';
-import 'package:cotwcompanion/widgets/button_icon.dart';
-import 'package:cotwcompanion/widgets/entries/logs/log.dart';
-import 'package:cotwcompanion/widgets/entries/menubar_item.dart';
-import 'package:cotwcompanion/widgets/filters/picker_icon.dart';
-import 'package:cotwcompanion/widgets/filters/picker_text.dart';
-import 'package:cotwcompanion/widgets/filters/range_set.dart';
-import 'package:cotwcompanion/widgets/filters/sorter_icon.dart';
-import 'package:cotwcompanion/widgets/searchbar.dart';
-import 'package:cotwcompanion/widgets/switch_icon.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:cotwcompanion/model/exportable/log.dart';
+import 'package:cotwcompanion/widgets/app/bar_search.dart';
+import 'package:cotwcompanion/widgets/bar/bar_menu_item.dart';
+import 'package:cotwcompanion/widgets/button/button_icon.dart';
+import 'package:cotwcompanion/widgets/button/switch_icon.dart';
+import 'package:cotwcompanion/widgets/filter/picker_icon.dart';
+import 'package:cotwcompanion/widgets/filter/picker_text.dart';
+import 'package:cotwcompanion/widgets/filter/range_set.dart';
+import 'package:cotwcompanion/widgets/filter/sorter.dart';
+import 'package:cotwcompanion/widgets/parts/logs/log.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ActivityLogs extends ActivityEntries {
-  final bool trophyLodge;
+  final bool _trophyLodge;
 
   const ActivityLogs({
     super.key,
-    required this.trophyLodge,
-  }) : super(name: trophyLodge ? "trophy_lodge" : "logbook");
+    required bool trophyLodge,
+  })  : _trophyLodge = trophyLodge,
+        super(trophyLodge ? "TROPHY_LODGE" : "LOGBOOK");
+
+  bool get trophyLodge => _trophyLodge;
 
   @override
   ActivityLogsState createState() => ActivityLogsState();
 }
 
-class ActivityLogsState extends ActivityEntriesState {
+class ActivityLogsState extends ActivityEntriesState<Log> {
   late final Settings _settings;
-  late final bool _trophyLodge;
 
   bool _viewOptionsOpened = false;
 
   @override
+  List<Log> get items => _filteredLogs;
+
+  @override
   void initState() {
     _settings = Provider.of<Settings>(context, listen: false);
-    _trophyLodge = (widget as ActivityLogs).trophyLodge;
-    HelperLog.reName();
     super.initState();
   }
 
-  @override
-  void filter() {
-    setState(() {
-      items.clear();
-      items.addAll(HelperFilter.filterLogs(controller.text, context));
-
-      if (!_trophyLodge && !_settings.trophyLodgeEntry) {
-        items.removeWhere((log) => log.isInLodge);
-      }
-      if (_trophyLodge) {
-        items.removeWhere((log) => !log.isInLodge);
-      }
-    });
+  List<Log> get _filteredLogs {
+    List<Log> filtered = HelperFilter.filterLogs(controller.text, context);
+    if (!(widget as ActivityLogs).trophyLodge && !_settings.trophyLodgeEntry) {
+      filtered.removeWhere((e) => e.isInLodge);
+    }
+    if ((widget as ActivityLogs).trophyLodge) {
+      filtered.removeWhere((e) => !e.isInLodge);
+    }
+    return filtered;
   }
 
   @override
   void removeAll() {
-    setState(() {
-      HelperLog.removeAll();
-      filter();
-    });
+    HelperLog.removeAll();
+    filter();
   }
 
   @override
-  Future<bool> fileLoaded() async => await HelperLog.importFile();
+  Future<bool> fileLoaded() async {
+    bool imported = await HelperLog.importFile();
+    if (imported) filter();
+    return imported;
+  }
 
   @override
   Future<bool> fileSaved() async => await HelperLog.exportFile();
 
   @override
-  Widget buildEntry(int index, dynamic item) {
-    return EntryLog(
-      index: index,
+  Widget buildEntry(int i, dynamic item) {
+    return WidgetLog(
+      i,
       log: item,
-      callback: filter,
+      trophyLodge: (widget as ActivityLogs).trophyLodge,
       context: context,
+      callback: filter,
     );
   }
 
@@ -112,135 +115,149 @@ class ActivityLogsState extends ActivityEntriesState {
     controller.setTextAndPosition(searchText);
   }
 
-  EntryMenuBarItem _buildViewOptions() {
-    return EntryMenuBarItem(
-      barButton: WidgetButtonIcon(
-          icon: "assets/graphics/icons/fullscreen.svg",
-          color: Interface.light,
-          background: Interface.dark,
-          onTap: () {
-            setState(() {
-              focus();
-              showViewOptions();
-            });
-          }),
-      menuButtons: [
-        WidgetButtonIcon(
-            icon: _settings.compactLogbook == 3
-                ? "assets/graphics/icons/view_semi_compact.svg"
-                : _settings.compactLogbook == 2
-                    ? "assets/graphics/icons/view_compact.svg"
-                    : "assets/graphics/icons/view_expanded.svg",
-            color: Interface.light,
-            background: Interface.dark,
-            onTap: () {
-              setState(() {
-                focus();
-                _settings.changeCompactLogbook();
-              });
-            }),
-        WidgetSwitchIcon(
-            icon: "assets/graphics/icons/sort_date.svg",
-            color: Interface.light,
-            background: Interface.dark,
-            isActive: _settings.entryDate,
-            onTap: () {
-              setState(() {
-                focus();
-                _settings.changeEntryDate();
-              });
-            }),
-        _trophyLodge
-            ? const SizedBox.shrink()
-            : WidgetSwitchIcon(
-                icon: "assets/graphics/icons/trophy_lodge.svg",
-                color: Interface.light,
-                background: Interface.dark,
-                isActive: _settings.trophyLodgeEntry,
-                onTap: () {
-                  setState(() {
-                    focus();
-                    _settings.changeTrophyLodgeEntry();
-                    filter();
-                  });
-                })
+  void onTapStats() {
+    setState(
+      () {
+        focus();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (e) => ListLogsStats(items, trophyLodge: (widget as ActivityLogs).trophyLodge),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildViewOptions() {
+    return WidgetButtonIcon(
+      Assets.graphics.icons.fullscreen,
+      color: Interface.light,
+      background: Interface.dark,
+      onTap: () {
+        setState(() {
+          focus();
+          showViewOptions();
+        });
+      },
+    );
+  }
+
+  Widget _buildViewOptionsCompact() {
+    return WidgetButtonIcon(
+      Graphics.getLogViewIcon(_settings.compactLogbook),
+      color: Interface.light,
+      background: Interface.dark,
+      onTap: () {
+        setState(() {
+          focus();
+          _settings.changeCompactLogbook();
+        });
+      },
+    );
+  }
+
+  Widget _buildViewOptionsDate() {
+    return WidgetSwitchIcon(
+      Assets.graphics.icons.sortDate,
+      color: Interface.light,
+      background: Interface.dark,
+      isActive: _settings.entryDate,
+      onTap: () {
+        setState(() {
+          focus();
+          _settings.changeEntryDate();
+        });
+      },
+    );
+  }
+
+  Widget _buildViewOptionsTrophyLodge() {
+    return WidgetSwitchIcon(
+      Assets.graphics.icons.trophyLodge,
+      color: Interface.light,
+      background: Interface.dark,
+      isActive: _settings.trophyLodgeEntry,
+      onTap: () {
+        setState(() {
+          focus();
+          _settings.changeTrophyLodgeEntry();
+          filter();
+        });
+      },
+    );
+  }
+
+  WidgetMenuBarItem _buildMenuViewOptions() {
+    return WidgetMenuBarItem(
+      barButton: _buildViewOptions(),
+      subButtons: [
+        _buildViewOptionsCompact(),
+        _buildViewOptionsDate(),
+        if (!(widget as ActivityLogs).trophyLodge) _buildViewOptionsTrophyLodge(),
       ],
-      menuHeight: menuHeight,
+      height: menuHeight,
       menuOpened: _viewOptionsOpened,
     );
   }
 
+  WidgetMenuBarItem _buildMenuStats() {
+    return WidgetMenuBarItem(
+      barButton: WidgetButtonIcon(
+        Assets.graphics.icons.stats,
+        color: Interface.light,
+        background: Interface.dark,
+        onTap: () => onTapStats(),
+      ),
+    );
+  }
+
+  WidgetMenuBarItem _buildMenuSeparator() {
+    return WidgetMenuBarItem(
+      barButton: WidgetButtonIcon(
+        Assets.graphics.icons.separator,
+        color: Interface.light,
+        background: Interface.dark,
+        onTap: () => addSeparator(),
+      ),
+    );
+  }
+
   @override
-  List<EntryMenuBarItem> buildMenuBarItems() {
+  List<WidgetMenuBarItem> listMenuBarItems() {
     return [
-      EntryMenuBarItem(
-        barButton: WidgetButtonIcon(
-            icon: "assets/graphics/icons/about.svg",
-            color: Interface.light,
-            background: Interface.dark,
-            onTap: () {
-              setState(() {
-                focus();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityHelpLogs()));
-              });
-            }),
-      ),
-      EntryMenuBarItem(
-        barButton: WidgetButtonIcon(
-            icon: "assets/graphics/icons/stats.svg",
-            color: Interface.light,
-            background: Interface.dark,
-            onTap: () {
-              setState(() {
-                focus();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ListLogsStats(logs: items, trophyLodge: _trophyLodge)));
-              });
-            }),
-      ),
-      buildFileOptions(),
-      _buildViewOptions(),
-      EntryMenuBarItem(
-        barButton: WidgetButtonIcon(
-            icon: "assets/graphics/icons/separator.svg",
-            color: Interface.light,
-            background: Interface.dark,
-            onTap: () {
-              addSeparator();
-            }),
-      ),
-      EntryMenuBarItem(
-        barButton: WidgetButtonIcon(
-            icon: "assets/graphics/icons/plus.svg",
-            onTap: () {
-              focus();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityEditLogs(fromTrophyLodge: _trophyLodge, callback: filter)));
-            }),
+      buildMenuHelp(const ActivityHelpLogs()),
+      _buildMenuStats(),
+      buildMenuFileOptions(),
+      _buildMenuViewOptions(),
+      _buildMenuSeparator(),
+      buildMenuAdd(
+        ActivityAddLogs(trophyLodgeOnly: (widget as ActivityLogs).trophyLodge, onSuccess: filter),
       ),
     ];
   }
 
   @override
-  List<Widget> buildFilters() {
-    String assets = "assets/graphics/icons/";
+  List<Widget> listFilters() {
     return [
-      FilterRangeSet(
-        icon: "${assets}stats.svg",
-        text: tr("animal_trophy"),
+      WidgetFilterRangeSet(
+        FilterKey.logsTrophyScoreMin,
+        FilterKey.logsTrophyScoreMax,
+        icon: Assets.graphics.icons.stats,
+        text: tr("ANIMAL_TROPHY"),
         decimal: true,
-        filterKeyLower: FilterKey.logsTrophyScoreMin,
-        filterKeyUpper: FilterKey.logsTrophyScoreMax,
       ),
-      FilterPickerIcon(
-        icon: "${assets}trophy_diamond.svg",
-        text: tr("trophy_rating"),
-        filterKey: FilterKey.logsTrophyRating,
+      WidgetFilterPickerIcon(
+        FilterKey.logsTrophyRating,
+        icon: Assets.graphics.icons.trophyDiamond,
+        text: tr("TROPHY_RATING"),
         labels: [
-          "${assets}trophy_none.svg",
-          "${assets}trophy_bronze.svg",
-          "${assets}trophy_silver.svg",
-          "${assets}trophy_gold.svg",
-          "${assets}trophy_diamond.svg",
-          "${assets}trophy_great_one.svg",
+          Assets.graphics.icons.trophyNone,
+          Assets.graphics.icons.trophyBronze,
+          Assets.graphics.icons.trophySilver,
+          Assets.graphics.icons.trophyGold,
+          Assets.graphics.icons.trophyDiamond,
+          Assets.graphics.icons.trophyGreatOne,
         ],
         colors: [
           Interface.light,
@@ -259,16 +276,17 @@ class ActivityLogsState extends ActivityEntriesState {
           Interface.trophyGreatOne,
         ],
       ),
-      FilterPickerText(
-        icon: "${assets}fur.svg",
-        text: tr("fur_rarity"),
+      WidgetFilterPickerText(
+        FilterKey.logsFurRarity,
+        icon: Assets.graphics.icons.fur,
+        text: tr("FUR_RARITY"),
         labels: [
-          tr("rarity_common"),
-          tr("rarity_uncommon"),
-          tr("rarity_rare"),
-          tr("rarity_very_rare"),
-          tr("rarity_mission"),
-          HelperJSON.getFur(Values.greatOneId).getName(context.locale),
+          tr("RARITY_COMMON"),
+          tr("RARITY_UNCOMMON"),
+          tr("RARITY_RARE"),
+          tr("RARITY_VERY_RARE"),
+          tr("RARITY_MISSION"),
+          HelperJSON.getFur(Values.greatOneId)!.name,
         ],
         colors: [
           Interface.light,
@@ -286,15 +304,14 @@ class ActivityLogsState extends ActivityEntriesState {
           Interface.rarityMission,
           Interface.rarityGreatOne,
         ],
-        filterKey: FilterKey.logsFurRarity,
       ),
-      FilterPickerIcon(
-        icon: "${assets}gender.svg",
-        text: tr("animal_gender"),
-        filterKey: FilterKey.logsGender,
+      WidgetFilterPickerIcon(
+        FilterKey.logsGender,
+        icon: Assets.graphics.icons.gender,
+        text: tr("ANIMAL_GENDER"),
         labels: [
-          "${assets}gender_male.svg",
-          "${assets}gender_female.svg",
+          Assets.graphics.icons.genderMale,
+          Assets.graphics.icons.genderFemale,
         ],
         colors: const [
           Interface.alwaysDark,
@@ -305,17 +322,17 @@ class ActivityLogsState extends ActivityEntriesState {
           Interface.genderFemale,
         ],
       ),
-      FilterSorterIcon(
-        icon: "${assets}sort.svg",
-        text: tr("sort"),
-        filterKey: FilterKey.logsSort,
+      WidgetFilterSorter(
+        FilterKey.logsSort,
+        icon: Assets.graphics.icons.sort,
+        text: tr("SORT"),
         icons: [
-          "${assets}sort_az.svg",
-          "${assets}sort_date.svg",
-          "${assets}sort_trophy_score.svg",
-          "${assets}trophy_diamond.svg",
-          "${assets}fur.svg",
-          "${assets}gender.svg",
+          Assets.graphics.icons.sortAz,
+          Assets.graphics.icons.sortDate,
+          Assets.graphics.icons.sortTrophyScore,
+          Assets.graphics.icons.trophyDiamond,
+          Assets.graphics.icons.fur,
+          Assets.graphics.icons.gender,
         ],
         criteria: const [
           true,
@@ -339,7 +356,12 @@ class ActivityLogsState extends ActivityEntriesState {
 
   @override
   void buildFilter() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityFilter(filters: buildFilters(), filter: filter)));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (e) => ActivityFilter(filters: listFilters(), filter: filter),
+      ),
+    );
   }
 
   @override
@@ -347,7 +369,7 @@ class ActivityLogsState extends ActivityEntriesState {
     return WidgetSearchBar(
       controller: controller,
       filterChanged: HelperFilter.logFiltersChanged(),
-      onFilter: buildFilter,
+      onFilterTap: buildFilter,
     );
   }
 }

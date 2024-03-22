@@ -1,62 +1,61 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/lists/home/items.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/widgets/entries/mission.dart';
-import 'package:cotwcompanion/widgets/filters/picker_text.dart';
+import 'package:cotwcompanion/model/describable/mission.dart';
+import 'package:cotwcompanion/model/translatable/reserve.dart';
+import 'package:cotwcompanion/widgets/filter/picker_text.dart';
+import 'package:cotwcompanion/widgets/parts/mission/mission.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListReserveMissions extends ListItems {
-  final int reserveId;
+class ListReserveMissions extends ListTranslatable {
+  final Reserve _reserve;
 
-  const ListReserveMissions({
+  const ListReserveMissions(
+    Reserve reserve, {
     super.key,
-    required this.reserveId,
-  }) : super(name: "missions");
+  })  : _reserve = reserve,
+        super("MISSIONS");
+
+  Reserve get reserve => _reserve;
 
   @override
   ListReserveMissionsState createState() => ListReserveMissionsState();
 }
 
-class ListReserveMissionsState extends ListItemsState {
+class ListReserveMissionsState extends ListTranslatableState<Mission> {
   @override
-  void filter() {
-    setState(() {
-      items.clear();
-      items.addAll(HelperFilter.filterMissions(controller.text, context));
-      List<dynamic> basedOnReserve = [];
-      basedOnReserve = items.where((mission) => mission.reserveId == (widget as ListReserveMissions).reserveId).toList();
-      items.clear();
-      items.addAll(basedOnReserve);
-    });
-  }
+  List<Mission> get items => HelperFilter.filterMissions(controller.text).where((mission) {
+        return mission.reserveId == (widget as ListReserveMissions).reserve.id;
+      }).sorted(Mission.sortByName);
 
   @override
   bool isFilterChanged() => HelperFilter.missionFiltersChanged();
 
   @override
-  List<Widget> buildFilters() {
+  List<Widget> listFilter() {
     return [
-      FilterPickerText(
-        text: tr("type"),
-        icon: "assets/graphics/icons/missions.svg",
+      WidgetFilterPickerText(
+        FilterKey.missionType,
+        text: tr("TYPE"),
+        icon: Assets.graphics.icons.missions,
         labels: [
-          tr("mission_main"),
-          tr("mission_side"),
+          tr("MISSION_MAIN"),
+          tr("MISSION_SIDE"),
         ],
-        filterKey: FilterKey.missionType,
       ),
-      FilterPickerText(
-        text: tr("difficulty"),
-        icon: "assets/graphics/icons/stats.svg",
+      WidgetFilterPickerText(
+        FilterKey.missionDifficulty,
+        text: tr("DIFFICULTY"),
+        icon: Assets.graphics.icons.stats,
         labels: [
-          tr("difficulty_easy"),
-          tr("difficulty_mediocre"),
-          tr("difficulty_hard"),
-          tr("difficulty_very_hard"),
+          tr("DIFFICULTY_EASY"),
+          tr("DIFFICULTY_MEDIOCRE"),
+          tr("DIFFICULTY_HARD"),
+          tr("DIFFICULTY_VERY_HARD"),
         ],
         colors: const [
           Interface.alwaysDark,
@@ -70,17 +69,16 @@ class ListReserveMissionsState extends ListItemsState {
           Interface.orange,
           Interface.red,
         ],
-        filterKey: FilterKey.missionDifficulty,
       ),
     ];
   }
 
   @override
-  EntryMission buildItemEntry(int index) {
-    return EntryMission(
-      index: index,
-      mission: items.elementAt(index),
-      callback: focus,
+  WidgetMission buildEntry(item) {
+    return WidgetMission(
+      item,
+      i: items.indexOf(item),
+      onTap: focus,
     );
   }
 }

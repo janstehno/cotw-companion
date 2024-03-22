@@ -1,22 +1,20 @@
-// Copyright (c) 2023 Jan Stehno
-
 import 'package:cotwcompanion/activities/map.dart';
 import 'package:cotwcompanion/builders/builder.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/map.dart';
-import 'package:cotwcompanion/miscellaneous/interface/graphics.dart';
-import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/map.dart';
+import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:flutter/material.dart';
 
 class BuilderMap extends BuilderBuilder {
-  final int reserveId;
+  final Reserve _reserve;
 
   const BuilderMap({
     super.key,
-    required this.reserveId,
-  }) : super(builderId: "M");
+    required Reserve reserve,
+  })  : _reserve = reserve,
+        super("M");
+
+  Reserve get reserve => _reserve;
 
   @override
   State<StatefulWidget> createState() => BuilderMapState();
@@ -25,44 +23,43 @@ class BuilderMap extends BuilderBuilder {
 class BuilderMapState extends BuilderBuilderState {
   late final HelperMap _helperMap;
 
+  final Map<String, String> _reserves = {
+    "RESERVE:SILVER_RIDGE_PEAKS": Assets.raw.maps.silverridgepeaks,
+    "RESERVE:NEW_ENGLAND_MOUNTAINS": Assets.raw.maps.newenglandmountains,
+    "RESERVE:LAYTON_LAKE_DISTRICT": Assets.raw.maps.laytonlakedistrict,
+    "RESERVE:TE_AWAROA_NATIONAL_PARK": Assets.raw.maps.teawaroanationalpark,
+    "RESERVE:CUATRO_COLINAS_GAME_RESERVE": Assets.raw.maps.cuatrocolinasgamereserve,
+    "RESERVE:PARQUE_FERNANDO": Assets.raw.maps.parquefernando,
+    "RESERVE:RANCHO_DEL_ARROYO": Assets.raw.maps.ranchodelarroyo,
+    "RESERVE:REVONTULI_COAST": Assets.raw.maps.revontulicoast,
+    "RESERVE:EMERALD_COAST_AUSTRALIA": Assets.raw.maps.emeraldcoastaustralia,
+    "RESERVE:VURHONGA_SAVANNA_RESERVE": Assets.raw.maps.vurhongasavannareserve,
+    "RESERVE:HIRSCHFELDEN_HUNTING_RESERVE": Assets.raw.maps.hirschfeldenhuntingreserve,
+    "RESERVE:MEDVED_TAIGA_NATIONAL_PARK": Assets.raw.maps.medvedtaiganationalpark,
+    "RESERVE:YUKON_VALLEY": Assets.raw.maps.yukonvalley,
+    "RESERVE:MISSISSIPPI_ACRES_PRESERVE": Assets.raw.maps.mississippiacrespreserve,
+  };
+
   @override
   void initState() {
-    _helperMap = HelperMap(reserveId: (widget as BuilderMap).reserveId);
-    loadedData = [null];
+    _helperMap = HelperMap(reserve: (widget as BuilderMap).reserve);
     super.initState();
   }
 
-  void _getAnimals(BuildContext context) {
-    for (IdtoId iti in HelperJSON.animalsReserves) {
-      if (iti.secondId == _helperMap.reserveId) {
-        for (Animal animal in HelperJSON.animals) {
-          if (animal.id == iti.firstId) {
-            _helperMap.addAnimal(animal);
-            break;
-          }
-        }
-      }
-    }
-    _helperMap.addNames(context.locale);
-  }
-
   @override
-  void initializeData(AsyncSnapshot<List<dynamic>> snapshot, BuildContext context) {
-    Map<String, dynamic> mapObjects = snapshot.data![0] ?? [];
+  void initializeData(AsyncSnapshot<Map<String, dynamic>> snapshot, BuildContext context) {
+    Map<String, dynamic> mapObjects = snapshot.data!["mapObjects"] ?? {};
     _helperMap.addObjects(mapObjects);
   }
 
   @override
-  Future<List<dynamic>> loadData(BuildContext context) async {
-    String reserveName = Graphics.getReserveName(_helperMap.reserveId);
-    Map<String, dynamic> mapObjects = await _helperMap.readMapObjects(reserveName);
-    updateProgress(0, mapObjects);
+  Future<Map<String, dynamic>> loadData() async {
+    Map<String, dynamic> mapObjects = await _helperMap.readMapObjects(_reserves[_helperMap.reserve.asset]!);
+    updateProgress("mapObjects", mapObjects);
+    await Future.delayed(const Duration(seconds: 1), () {});
     return loadedData;
   }
 
   @override
-  Widget buildFutureWidget(BuildContext context) {
-    _getAnimals(context);
-    return ActivityMap(helperMap: _helperMap);
-  }
+  Widget buildFutureWidget(BuildContext context) => ActivityMap(helperMap: _helperMap);
 }

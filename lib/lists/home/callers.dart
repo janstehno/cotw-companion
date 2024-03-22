@@ -1,75 +1,63 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/lists/home/items.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/interface/settings.dart';
+import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/widgets/entries/caller.dart';
-import 'package:cotwcompanion/widgets/filters/picker_text.dart';
+import 'package:cotwcompanion/model/translatable/caller.dart';
+import 'package:cotwcompanion/widgets/filter/picker_text.dart';
+import 'package:cotwcompanion/widgets/parts/caller/caller.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ListCallers extends ListItems {
+class ListCallers extends ListTranslatable {
   const ListCallers({
     super.key,
-  }) : super(name: "callers");
+  }) : super("CALLERS");
 
   @override
   ListCallersState createState() => ListCallersState();
 }
 
-class ListCallersState extends ListItemsState {
-  late final bool _imperials;
+class ListCallersState extends ListTranslatableState<Caller> {
+  bool get _imperialUnits => Provider.of<Settings>(context, listen: false).imperialUnits;
 
   @override
-  void initState() {
-    _imperials = Provider.of<Settings>(context, listen: false).imperialUnits;
-    controller.addListener(() => filter());
-    super.initState();
-  }
-
-  @override
-  void filter() {
-    setState(() {
-      items.clear();
-      items.addAll(HelperFilter.filterCallers(controller.text, context));
-    });
-  }
+  List<Caller> get items => HelperFilter.filterCallers(controller.text);
 
   @override
   bool isFilterChanged() => HelperFilter.callerFiltersChanged();
 
   @override
-  List<Widget> buildFilters() {
+  List<Widget> listFilter() {
     return [
-      FilterPickerText(
-        text: tr("caller_range"),
-        icon: "assets/graphics/icons/range.svg",
-        labels: _imperials
+      WidgetFilterPickerText(
+        FilterKey.callersEffectiveRange,
+        text: tr("CALLER_RANGE"),
+        icon: Assets.graphics.icons.range,
+        labels: _imperialUnits
             ? [
-                "164 ${tr("yards")}",
-                "218 ${tr("yards")}",
-                "273 ${tr("yards")}",
-                "546 ${tr("yards")}",
+                "164 ${tr("YARDS")}",
+                "218 ${tr("YARDS")}",
+                "273 ${tr("YARDS")}",
+                "546 ${tr("YARDS")}",
               ]
             : [
-                "150 ${tr("meters")}",
-                "200 ${tr("meters")}",
-                "250 ${tr("meters")}",
-                "500 ${tr("meters")}",
+                "150 ${tr("METERS")}",
+                "200 ${tr("METERS")}",
+                "250 ${tr("METERS")}",
+                "500 ${tr("METERS")}",
               ],
-        filterKey: FilterKey.callersEffectiveRange,
       ),
     ];
   }
 
   @override
-  EntryCaller buildItemEntry(int index) {
-    return EntryCaller(
-      index: index,
-      caller: items.elementAt(index),
-      callback: focus,
+  WidgetCaller buildEntry(item) {
+    return WidgetCaller(
+      item,
+      i: items.indexOf(item),
+      onTap: focus,
     );
   }
 }

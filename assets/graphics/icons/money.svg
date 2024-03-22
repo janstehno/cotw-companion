@@ -1,12 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <polyline points="3.5 2.98 11.86 2.98 11.86 27.02 3.5 27.02" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-    <polyline points="26.5 2.98 18.14 2.98 18.14 27.02 26.5 27.02" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-    <line x1="3.5" y1="13.2" x2="26.5" y2="13.2" fill="none" stroke="#212121" stroke-linecap="round"
-        stroke-linejoin="round" stroke-width="1.5" />
-    <line x1="3.5" y1="16.8" x2="26.5" y2="16.8" fill="none" stroke="#212121" stroke-linecap="round"
-        stroke-linejoin="round" stroke-width="1.5" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><polyline points="3.5 2.98 11.86 2.98 11.86 27.02 3.5 27.02" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><polyline points="26.5 2.98 18.14 2.98 18.14 27.02 26.5 27.02" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><line x1="3.5" y1="13.2" x2="26.5" y2="13.2" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><line x1="3.5" y1="16.8" x2="26.5" y2="16.8" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><rect width="30" height="30" fill="none"/></svg>

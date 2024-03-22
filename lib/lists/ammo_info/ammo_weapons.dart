@@ -1,49 +1,35 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:cotwcompanion/model/weapon.dart';
-import 'package:cotwcompanion/widgets/text_dlc.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/model/translatable/ammo.dart';
+import 'package:cotwcompanion/model/translatable/weapon.dart';
+import 'package:cotwcompanion/widgets/text/text_indicator.dart';
 import 'package:flutter/material.dart';
 
-class ListAmmoWeapons extends StatefulWidget {
-  final int ammoId;
+class ListAmmoWeapons extends StatelessWidget {
+  final Ammo _ammo;
 
-  const ListAmmoWeapons({
-    Key? key,
-    required this.ammoId,
-  }) : super(key: key);
+  const ListAmmoWeapons(
+    Ammo ammo, {
+    super.key,
+  }) : _ammo = ammo;
 
-  @override
-  ListAmmoWeaponsState createState() => ListAmmoWeaponsState();
-}
+  List<Weapon> get _weapons => HelperJSON.getAmmoWeapons(_ammo.id).sorted(Weapon.sortByTypeName);
 
-class ListAmmoWeaponsState extends State<ListAmmoWeapons> {
-  late final List<Weapon> _weapons = [];
+  Widget _buildWeapon(Weapon weapon) {
+    return WidgetTextIndicator(
+      weapon.name,
+      indicatorColor: Interface.primary,
+      isShown: weapon.isFromDlc,
+    );
+  }
 
-  void _getWeapons() {
-    for (IdtoId iti in HelperJSON.weaponsAmmo) {
-      if (iti.secondId == widget.ammoId) {
-        _weapons.add(HelperJSON.getWeapon(iti.firstId));
-      }
-    }
+  List<Widget> _listWeapons() {
+    return _weapons.map((e) => _buildWeapon(e)).toList();
   }
 
   Widget _buildWidgets() {
-    _getWeapons();
-    return Container(
-        padding: const EdgeInsets.all(30),
-        child: ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _weapons.length,
-            itemBuilder: (context, index) {
-              return WidgetTextDlc(
-                text: _weapons.elementAt(index).getName(context.locale),
-                dlc: _weapons.elementAt(index).isFromDlc,
-              );
-            }));
+    return Column(children: _listWeapons());
   }
 
   @override

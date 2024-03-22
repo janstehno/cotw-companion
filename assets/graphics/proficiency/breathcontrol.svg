@@ -1,9 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <circle cx="15" cy="15" r="2.85" fill="#212121" />
-    <polygon points="2.61 7.76 1.5 8.87 7.63 15 1.5 21.13 2.61 22.24 9.85 15 2.61 7.76"
-        fill="#212121" />
-    <polygon points="27.39 22.24 28.5 21.13 22.37 15 28.5 8.87 27.39 7.76 20.15 15 27.39 22.24"
-        fill="#212121" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><circle cx="15" cy="15" r="2.85" fill="#212121"/><polygon points="2.61 7.76 1.5 8.87 7.63 15 1.5 21.13 2.61 22.24 9.85 15 2.61 7.76" fill="#212121"/><polygon points="27.39 22.24 28.5 21.13 22.37 15 28.5 8.87 27.39 7.76 20.15 15 27.39 22.24" fill="#212121"/><rect width="30" height="30" fill="none"/></svg>

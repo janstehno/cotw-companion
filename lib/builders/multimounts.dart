@@ -1,45 +1,35 @@
-// Copyright (c) 2023 Jan Stehno
-
 import 'package:cotwcompanion/builders/builder.dart';
+import 'package:cotwcompanion/helpers/multimounts.dart';
 import 'package:cotwcompanion/lists/other/multimounts.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/multimounts.dart';
-import 'package:cotwcompanion/model/multimount.dart';
+import 'package:cotwcompanion/model/translatable/multimount.dart';
 import 'package:flutter/material.dart';
 
 class BuilderMultimounts extends BuilderBuilder {
   const BuilderMultimounts({
     super.key,
-  }) : super(builderId: "MM");
+  }) : super("MM");
 
   @override
   State<StatefulWidget> createState() => BuilderPlannerState();
 }
 
 class BuilderPlannerState extends BuilderBuilderState {
-  late final HelperMultimounts _helperMultimounts;
+  final HelperMultimounts _helperMultimounts = HelperMultimounts();
 
   @override
-  void initState() {
-    _helperMultimounts = HelperMultimounts();
-    loadedData = [null];
-    super.initState();
-  }
-
-  @override
-  void initializeData(AsyncSnapshot<List<dynamic>> snapshot, BuildContext context) {
-    List<Multimount> multimounts = snapshot.data![0] ?? [];
+  void initializeData(AsyncSnapshot<Map<String, dynamic>> snapshot, BuildContext context) {
+    List<Multimount> multimounts = snapshot.data!["multimounts"] ?? [];
     _helperMultimounts.setMultimounts(multimounts);
   }
 
   @override
-  Future<List<dynamic>> loadData(BuildContext context) async {
+  Future<Map<String, dynamic>> loadData() async {
     List<Multimount> multimounts = await _helperMultimounts.readMultimounts();
-    updateProgress(0, multimounts);
+    updateProgress("multimounts", multimounts);
+    await Future.delayed(const Duration(seconds: 1), () {});
     return loadedData;
   }
 
   @override
-  Widget buildFutureWidget(BuildContext context) {
-    return ListMultimounts(helperMultimounts: _helperMultimounts);
-  }
+  Widget buildFutureWidget(BuildContext context) => ListMultimounts(helperMultimounts: _helperMultimounts);
 }

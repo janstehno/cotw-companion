@@ -1,72 +1,45 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/activities/filter.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/section/section_tap_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 abstract class ListItems extends StatefulWidget {
-  final String name;
+  final String _title;
 
-  const ListItems({
-    Key? key,
-    required this.name,
-  }) : super(key: key);
+  const ListItems(
+    String title, {
+    super.key,
+  }) : _title = title;
+
+  String get title => _title;
 }
 
 abstract class ListItemsState extends State<ListItems> {
-  final TextEditingController controller = TextEditingController();
-  final List<dynamic> items = [];
+  List<List<dynamic>> get items;
 
-  @override
-  void initState() {
-    controller.addListener(() => filter());
-    super.initState();
+  Widget _buildEntry(int i, List<dynamic> item) {
+    return WidgetSectionTapIcon(
+      item.elementAt(0),
+      icon: item.elementAt(1),
+      background: Utils.backgroundAt(i),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (e) => item.elementAt(2))),
+    );
   }
 
-  void focus() {
-    FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
-  }
-
-  void filter() {}
-
-  bool isFilterChanged() {
-    return false;
-  }
-
-  buildFilters() {}
-
-  buildItemEntry(int index) {}
-
-  void _buildFilter() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ActivityFilter(filters: buildFilters(), filter: filter)));
-  }
-
-  Widget _buildList() {
-    filter();
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return buildItemEntry(index);
-        });
+  List<Widget> _listEntries() {
+    return items.mapIndexed((i, item) => _buildEntry(i, item)).toList();
   }
 
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr(widget.name),
+        tr(widget.title),
         context: context,
       ),
-      searchController: controller,
-      filterChanged: isFilterChanged(),
-      filter: _buildFilter,
-      body: _buildList(),
+      children: _listEntries(),
     );
   }
 

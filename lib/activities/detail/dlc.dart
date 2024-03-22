@@ -1,154 +1,112 @@
-// Copyright (c) 2023 Jan Stehno
-
 import 'package:cotwcompanion/lists/dlc_info/dlc_content.dart';
-import 'package:cotwcompanion/model/dlc.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/rich_text.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/title_big.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/model/describable/dlc.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/text/text_pattern.dart';
+import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ActivityDetailDlc extends StatefulWidget {
-  final Dlc dlc;
+class ActivityDetailDlc extends StatelessWidget {
+  final Dlc _dlc;
 
-  const ActivityDetailDlc({
-    Key? key,
-    required this.dlc,
-  }) : super(key: key);
+  const ActivityDetailDlc(
+    Dlc dlc, {
+    super.key,
+  }) : _dlc = dlc;
 
-  @override
-  ActivityDetailDlcState createState() => ActivityDetailDlcState();
-}
-
-class ActivityDetailDlcState extends State<ActivityDetailDlc> {
-  Widget _buildName() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: widget.dlc.date,
-      ),
-    ]);
+  List<Widget> _listDescriptionParts() {
+    return _dlc.description.map((e) => WidgetTextPattern(tr(e))).toList();
   }
 
   Widget _buildDescription() {
-    return Column(children: [
-      Container(
-          padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
-          child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: widget.dlc.getDescription(context.locale).length,
-              itemBuilder: (context, index) {
-                return Container(
-                    padding: index == widget.dlc.getDescription(context.locale).length - 1 ? const EdgeInsets.only(bottom: 30) : const EdgeInsets.only(bottom: 15),
-                    child: WidgetRichText(
-                      text: widget.dlc.getDescription(context.locale).elementAt(index),
-                    ));
-              }))
-    ]);
+    return Column(
+      children: [
+        WidgetTitle(_dlc.date),
+        WidgetPadding.a30(
+          child: Wrap(
+            spacing: 15,
+            runSpacing: 15,
+            children: _listDescriptionParts(),
+          ),
+        ),
+      ],
+    );
   }
 
-  Widget _buildRAWC() {
-    List<Widget> reserves = [const SizedBox.shrink()];
-    if (widget.dlc.reserve.isNotEmpty) {
-      reserves = [
-        WidgetTitleBig(
-          primaryText: tr("reserves"),
+  List<Widget> _listReserves() {
+    return [
+      WidgetTitle(tr("RESERVE")),
+      WidgetPadding.a30(
+        child: ListDlcContent(
+          list: _dlc.reserve,
+          type: ItemType.reserve,
         ),
-        Container(
-            padding: const EdgeInsets.only(top: 30, bottom: 30),
-            child: Column(children: [
-              ListDlcContent(
-                list: widget.dlc.reserve,
-                type: 0,
-              ),
-            ]))
-      ];
-    }
-    List<Widget> animals = [const SizedBox.shrink()];
-    if (widget.dlc.animals.isNotEmpty) {
-      animals = [
-        WidgetTitleBig(
-          primaryText: tr("wildlife"),
-        ),
-        Container(
-            padding: const EdgeInsets.only(top: 30, bottom: 30),
-            child: Column(children: [
-              ListDlcContent(
-                list: widget.dlc.animals,
-                type: 1,
-                reserves: widget.dlc.reserve,
-              ),
-            ]))
-      ];
-    }
-    List<Widget> weapons = [const SizedBox.shrink()];
-    if (widget.dlc.weapons.isNotEmpty) {
-      weapons = [
-        WidgetTitleBig(
-          primaryText: tr("weapons"),
-        ),
-        Container(
-            padding: const EdgeInsets.only(top: 30, bottom: 30),
-            child: Column(children: [
-              ListDlcContent(
-                list: widget.dlc.weapons,
-                type: 2,
-              ),
-            ]))
-      ];
-    }
-    List<Widget> callers = [const SizedBox.shrink()];
-    if (widget.dlc.callers.isNotEmpty) {
-      callers = [
-        WidgetTitleBig(
-          primaryText: tr("callers"),
-        ),
-        Container(
-            padding: const EdgeInsets.only(top: 30, bottom: 30),
-            child: Column(children: [
-              ListDlcContent(
-                list: widget.dlc.callers,
-                type: 3,
-              ),
-            ]))
-      ];
-    }
-    switch (widget.dlc.type) {
-      case 1:
-        return Column(children: [
-          Column(children: reserves),
-          Column(children: animals),
-          Column(children: weapons),
-          Column(children: callers),
-        ]);
-      case 2:
-        return Column(children: [
-          Column(children: weapons),
-        ]);
-      case 3:
-        return Column(children: [
-          Column(children: animals),
-          Column(children: callers),
-        ]);
-      default:
-        return const SizedBox.shrink();
-    }
+      ),
+    ];
   }
 
-  Widget _buildWidgets() {
+  List<Widget> _listAnimals() {
+    return [
+      WidgetTitle(tr("WILDLIFE")),
+      WidgetPadding.a30(
+        child: ListDlcContent(
+          list: _dlc.animals,
+          type: ItemType.animal,
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> _listWeapons() {
+    return [
+      WidgetTitle(tr("WEAPONS")),
+      WidgetPadding.a30(
+        child: ListDlcContent(
+          list: _dlc.weapons,
+          type: ItemType.weapon,
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> _listCallers() {
+    return [
+      WidgetTitle(tr("CALLERS")),
+      WidgetPadding.a30(
+        child: ListDlcContent(
+          list: _dlc.callers,
+          type: ItemType.caller,
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> _listContent() {
+    return [
+      if (_dlc.reserve.isNotEmpty) ..._listReserves(),
+      if (_dlc.animals.isNotEmpty) ..._listAnimals(),
+      if (_dlc.weapons.isNotEmpty) ..._listWeapons(),
+      if (_dlc.callers.isNotEmpty) ..._listCallers(),
+    ];
+  }
+
+  Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
-        appBar: WidgetAppBar(
-          text: widget.dlc.en,
-          maxLines: widget.dlc.en.split(" ").length > 2 ? 2 : 1,
-          context: context,
-        ),
-        body: Column(children: [
-          _buildName(),
-          _buildDescription(),
-          _buildRAWC(),
-        ]));
+      appBar: WidgetAppBar(
+        _dlc.name,
+        maxLines: _dlc.name.split(" ").length > 2 ? 2 : 1,
+        context: context,
+      ),
+      children: [
+        _buildDescription(),
+        ..._listContent(),
+      ],
+    );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

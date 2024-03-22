@@ -1,308 +1,256 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/settings.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/button_icon.dart';
-import 'package:cotwcompanion/widgets/drop_down.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/settings_double.dart';
-import 'package:cotwcompanion/widgets/tap_text_indicator.dart';
-import 'package:cotwcompanion/widgets/title_big.dart';
-import 'package:cotwcompanion/widgets/title_big_switch.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/interface/settings.dart';
+import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/handling/drop_down.dart';
+import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
+import 'package:cotwcompanion/widgets/section/section_indicator_tap_align.dart';
+import 'package:cotwcompanion/widgets/text/text.dart';
+import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ActivitySettings extends StatefulWidget {
-  final Function callback;
+  final Function _callback;
 
   const ActivitySettings({
-    Key? key,
-    required this.callback,
-  }) : super(key: key);
+    super.key,
+    required Function callback,
+  }) : _callback = callback;
+
+  Function get callback => _callback;
 
   @override
   ActivitySettingsState createState() => ActivitySettingsState();
 }
 
 class ActivitySettingsState extends State<ActivitySettings> {
-  late final Settings _settings;
+  Settings get _settings => Provider.of<Settings>(context, listen: false);
 
-  @override
-  void initState() {
-    _settings = Provider.of<Settings>(context, listen: false);
-    super.initState();
-  }
-
-  List<DropdownMenuItem> _buildDropDownLanguages() {
-    List<DropdownMenuItem> items = [];
-    for (int index = 0; index < _settings.languages.length; index++) {
-      items.add(DropdownMenuItem(
-          value: index,
-          child: Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              child: AutoSizeText(
-                _settings.getLocaleName(index),
-                maxLines: 1,
-                style: Interface.s16w300n(Interface.dark),
-              ))));
-    }
-    return items;
-  }
-
-  Widget _buildLanguage() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr("language"),
+  DropdownMenuItem _buildDropdownItem(String language) {
+    return DropdownMenuItem(
+      value: _settings.languages.indexOf(language),
+      child: WidgetPadding.h30(
+        background: Interface.dropDown,
+        child: WidgetText(
+          _settings.getLocaleName(_settings.languages.indexOf(language)),
+          color: Interface.dark,
+          style: Style.normal.s16.w300,
+        ),
       ),
+    );
+  }
+
+  List<DropdownMenuItem> _listLanguages() {
+    return _settings.languages.map((e) => _buildDropdownItem(e)).toList();
+  }
+
+  List<Widget> _listLanguage() {
+    return [
+      WidgetTitle(tr("LANGUAGE")),
       WidgetDropDown(
-          value: _settings.language,
-          items: _buildDropDownLanguages(),
-          onTap: (dynamic value) {
-            setState(() {
-              _settings.changeLanguage(value);
-              EasyLocalization.of(context)!.setLocale(_settings.getLocale(value));
-              widget.callback();
-            });
-          })
-    ]);
-  }
-
-  Widget _buildColorButton(Color color) {
-    return Container(
-        margin: const EdgeInsets.all(2.5),
-        child: WidgetButtonIcon(
-          background: color,
-          onTap: () {
+        value: _settings.language,
+        items: _listLanguages(),
+        onChange: (dynamic value) {
+          setState(() {
+            _settings.changeLanguage(value);
+            EasyLocalization.of(context)!.setLocale(_settings.getLocale(value));
             widget.callback();
-            setState(() {
-              _settings.changeColor(color);
-            });
-          },
-        ));
+          });
+        },
+      )
+    ];
   }
 
-  Widget _buildColor() {
+  Widget _buildLightMode() {
+    return WidgetSectionIndicatorTapAlign(
+      tr("LIGHT_MODE"),
+      indicatorLeft: true,
+      indicatorColor: !(_settings.darkMode) ? Interface.primary : Interface.disabled,
+      onTap: () {
+        setState(() {
+          _settings.changeTheme(false);
+        });
+      },
+    );
+  }
+
+  Widget _buildDarkMode() {
+    return WidgetSectionIndicatorTapAlign(
+      tr("DARK_MODE"),
+      indicatorColor: _settings.darkMode ? Interface.primary : Interface.disabled,
+      onTap: () {
+        setState(() {
+          _settings.changeTheme(true);
+        });
+      },
+    );
+  }
+
+  List<Widget> _listInterface() {
+    return [
+      WidgetTitle(tr("INTERFACE")),
+      Row(
+        children: [
+          Expanded(child: _buildLightMode()),
+          Expanded(child: _buildDarkMode()),
+        ],
+      ),
+    ];
+  }
+
+  Widget _buildMetricUnits() {
+    return WidgetSectionIndicatorTapAlign(
+      tr("METRIC_UNITS"),
+      indicatorLeft: true,
+      indicatorColor: !(_settings.imperialUnits) ? Interface.primary : Interface.disabled,
+      onTap: () {
+        setState(() {
+          _settings.changeUnits(false);
+        });
+      },
+    );
+  }
+
+  Widget _buildImperialUnits() {
+    return WidgetSectionIndicatorTapAlign(
+      tr("IMPERIAL_UNITS"),
+      indicatorColor: _settings.imperialUnits ? Interface.primary : Interface.disabled,
+      onTap: () {
+        setState(() {
+          _settings.changeUnits(true);
+        });
+      },
+    );
+  }
+
+  List<Widget> _listUnits() {
+    return [
+      WidgetTitle(tr("UNITS")),
+      Row(
+        children: [
+          Expanded(child: _buildMetricUnits()),
+          Expanded(child: _buildImperialUnits()),
+        ],
+      ),
+    ];
+  }
+
+  Widget _buildPerformanceMode() {
+    return WidgetSectionIndicatorTap(
+      tr("MAP_PERFORMANCE_MODE"),
+      indicatorColor: _settings.mapPerformanceMode ? Interface.primary : Interface.disabled,
+      onTap: () {
+        setState(() {
+          _settings.changeMapPerformanceMode();
+        });
+      },
+    );
+  }
+
+  Widget _buildFurPercent() {
+    return WidgetSectionIndicatorTap(
+      tr("MAP_ZONES_COUNT"),
+      indicatorColor: _settings.mapZonesCount ? Interface.primary : Interface.disabled,
+      onTap: () {
+        setState(() {
+          _settings.changeMapZonesAccuracy();
+        });
+      },
+    );
+  }
+
+  Widget _buildBestWeapons() {
+    return WidgetSectionIndicatorTap(
+      tr("BEST_WEAPONS"),
+      indicatorColor: _settings.bestWeaponsForAnimal ? Interface.primary : Interface.disabled,
+      onTap: () {
+        setState(() {
+          _settings.changeBestWeaponsForAnimal();
+        });
+      },
+    );
+  }
+
+  List<Widget> _listOther() {
+    return [
+      WidgetTitle(tr("OTHER")),
+      _buildPerformanceMode(),
+      _buildFurPercent(),
+      _buildBestWeapons(),
+    ];
+  }
+
+  Widget _buildFurPercentSubtitle() {
+    return WidgetSectionIndicatorTap(
+      tr("FUR_RARITY_PER_CENT"),
+      indicatorColor: _settings.furRarityPerCent ? Interface.primary : Interface.disabled,
+      background: Interface.title,
+      onTap: () {
+        setState(() {
+          _settings.changeFurRarityPerCent();
+        });
+      },
+    );
+  }
+
+  Widget _buildFurPercentAuthor() {
+    return WidgetText(
+      "by Ramalamadingdong7",
+      color: Interface.dark,
+      style: Style.normal.s14.w500,
+    );
+  }
+
+  Widget _buildFurPercentWarning() {
+    return WidgetText(
+      tr("FUR_RARITY_WARNING"),
+      color: Interface.red,
+      style: Style.normal.s12.w300,
+      autoSize: false,
+    );
+  }
+
+  Widget _buildFurPercentageChange() {
     return Column(
       children: [
-        WidgetTitleBig(
-          primaryText: tr("color"),
-        ),
-        Container(
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildColorButton(Interface.purple),
-                    _buildColorButton(Interface.darkPink),
-                    _buildColorButton(Interface.pink),
-                    _buildColorButton(Interface.red),
-                    _buildColorButton(Interface.redOrange),
-                    _buildColorButton(Interface.orange),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildColorButton(Interface.teal),
-                    _buildColorButton(Interface.green),
-                    _buildColorButton(Interface.lightGreen),
-                    _buildColorButton(Interface.grassGreen),
-                    _buildColorButton(Interface.lightYellow),
-                    _buildColorButton(Interface.yellow),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildColorButton(Interface.lightBlue),
-                    _buildColorButton(Interface.blue),
-                    _buildColorButton(Interface.oceanBlue),
-                    _buildColorButton(Interface.darkBlue),
-                    _buildColorButton(Interface.grey),
-                    _buildColorButton(Interface.brown),
-                  ],
-                )
-              ],
-            )),
+        _buildFurPercentSubtitle(),
+        WidgetPadding.fromLTRB(
+          30,
+          10,
+          30,
+          30,
+          background: Interface.title,
+          child: Wrap(
+            spacing: 5,
+            runSpacing: 5,
+            children: [
+              _buildFurPercentAuthor(),
+              _buildFurPercentWarning(),
+            ],
+          ),
+        )
       ],
     );
   }
 
-  Widget _buildInterface() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr("interface"),
-      ),
-      Container(
-          padding: const EdgeInsets.only(left: 30, right: 30),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: WidgetSettingsDouble(
-                    text: tr("light_mode"),
-                    isActive: !(_settings.darkMode),
-                    onTap: () {
-                      setState(() {
-                        _settings.changeTheme(false);
-                        widget.callback();
-                      });
-                    }),
-              ),
-              Expanded(
-                child: WidgetSettingsDouble(
-                    text: tr("dark_mode"),
-                    alignRight: true,
-                    isActive: _settings.darkMode,
-                    onTap: () {
-                      setState(() {
-                        _settings.changeTheme(true);
-                        widget.callback();
-                      });
-                    }),
-              ),
-            ],
-          ))
-    ]);
-  }
-
-  Widget _buildUnits() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr("units"),
-      ),
-      Container(
-          padding: const EdgeInsets.only(left: 30, right: 30),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: WidgetSettingsDouble(
-                    text: tr("metric_units"),
-                    isActive: !(_settings.imperialUnits),
-                    onTap: () {
-                      setState(() {
-                        _settings.changeUnits(false);
-                        widget.callback();
-                      });
-                    }),
-              ),
-              Expanded(
-                child: WidgetSettingsDouble(
-                    text: tr("imperial_units"),
-                    alignRight: true,
-                    isActive: _settings.imperialUnits,
-                    onTap: () {
-                      setState(() {
-                        _settings.changeUnits(true);
-                        widget.callback();
-                      });
-                    }),
-              )
-            ],
-          ))
-    ]);
-  }
-
-  Widget _buildFurPercentageChange() {
-    return Column(children: [
-      Container(
-          padding: const EdgeInsets.only(top: 10),
-          color: Interface.title,
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            WidgetTitleBigSwitch(
-                primaryText: tr("fur_rarity_per_cent"),
-                maxLines: 2,
-                isActive: _settings.furRarityPerCent,
-                onTap: () {
-                  setState(() {
-                    _settings.changeFurRarityPerCent();
-                    widget.callback();
-                  });
-                }),
-            Container(
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                child: AutoSizeText(
-                  "by Ramalamadingdong7",
-                  style: Interface.s14w500n(Interface.dark),
-                )),
-            Container(
-                padding: const EdgeInsets.fromLTRB(30, 5, 30, 25),
-                child: Text(
-                  tr("fur_rarity_warning"),
-                  style: Interface.s12w300n(Interface.red),
-                ))
-          ]))
-    ]);
-  }
-
-  Widget _buildOther() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr("other"),
-      ),
-      WidgetTapTextIndicator(
-          text: tr("map_performance_mode"),
-          maxLines: 2,
-          isActive: _settings.mapPerformanceMode,
-          onTap: () {
-            setState(() {
-              _settings.changeMapPerformanceMode();
-              widget.callback();
-            });
-          }),
-      WidgetTapTextIndicator(
-          text: tr("map_zones_count"),
-          maxLines: 2,
-          isActive: _settings.mapZonesCount,
-          onTap: () {
-            setState(() {
-              _settings.changeMapZonesAccuracy();
-              widget.callback();
-            });
-          }),
-      WidgetTapTextIndicator(
-          text: tr("best_weapons"),
-          maxLines: 2,
-          isActive: _settings.bestWeaponsForAnimal,
-          onTap: () {
-            setState(() {
-              _settings.changeBestWeaponsForAnimal();
-              widget.callback();
-            });
-          })
-    ]);
-  }
-
   Widget _buildWidgets() {
     return WidgetScaffold(
-        appBar: WidgetAppBar(
-          text: tr("settings"),
-          context: context,
-        ),
-        body: Column(children: [
-          _buildLanguage(),
-          _buildColor(),
-          _buildInterface(),
-          _buildUnits(),
-          _buildOther(),
-          _buildFurPercentageChange(),
-        ]));
+      appBar: WidgetAppBar(
+        tr("SETTINGS"),
+        context: context,
+      ),
+      children: [
+        ..._listLanguage(),
+        ..._listInterface(),
+        ..._listUnits(),
+        ..._listOther(),
+        _buildFurPercentageChange(),
+      ],
+    );
   }
 
   @override

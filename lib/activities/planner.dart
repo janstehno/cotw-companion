@@ -1,29 +1,30 @@
-// Copyright (c) 2023 Jan Stehno
-
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/planner.dart';
+import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/lists/planner/perks.dart';
 import 'package:cotwcompanion/lists/planner/skills.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/planner.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/values.dart';
-import 'package:cotwcompanion/model/proficiency.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/proficiency_detail.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
-import 'package:cotwcompanion/widgets/scrollbar.dart';
-import 'package:cotwcompanion/widgets/text_field.dart';
-import 'package:cotwcompanion/widgets/title_big.dart';
-import 'package:cotwcompanion/widgets/title_big_button.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:cotwcompanion/model/describable/proficiency.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/bar_scroll.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/fullscreen/proficiency_detail.dart';
+import 'package:cotwcompanion/widgets/text/text_field.dart';
+import 'package:cotwcompanion/widgets/title/title.dart';
+import 'package:cotwcompanion/widgets/title/title_button_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivityPlanner extends StatefulWidget {
-  final HelperPlanner helperPlanner;
+  final HelperPlanner _helperPlanner;
 
-  const ActivityPlanner({
-    Key? key,
-    required this.helperPlanner,
-  }) : super(key: key);
+  const ActivityPlanner(
+    HelperPlanner helperPlanner, {
+    super.key,
+  }) : _helperPlanner = helperPlanner;
+
+  HelperPlanner get helperPlanner => _helperPlanner;
 
   @override
   ActivityPlannerState createState() => ActivityPlannerState();
@@ -31,7 +32,6 @@ class ActivityPlanner extends StatefulWidget {
 
 class ActivityPlannerState extends State<ActivityPlanner> {
   final TextEditingController _controller = TextEditingController(text: "60");
-
   final int _criticalLevel = 37;
 
   late Proficiency _proficiency;
@@ -39,6 +39,7 @@ class ActivityPlannerState extends State<ActivityPlanner> {
   int _level = 60;
   int _availableSkillPoints = 0;
   int _availablePerkPoints = 0;
+
   bool _showDetail = false;
 
   @override
@@ -56,27 +57,21 @@ class ActivityPlannerState extends State<ActivityPlanner> {
   }
 
   void _hideDetailedInformation() {
-    setState(() {
-      _showDetail = false;
-    });
+    setState(() => _showDetail = false);
   }
 
   void _resetSkillPoints(ProficiencyType type) {
-    setState(() {
-      widget.helperPlanner.resetSkillsFor(type);
-    });
+    setState(() => widget.helperPlanner.resetSkillsFor(type));
   }
 
   void _resetPerkPoints(ProficiencyType type) {
-    setState(() {
-      widget.helperPlanner.resetPerksFor(type);
-    });
+    setState(() => widget.helperPlanner.resetPerksFor(type));
   }
 
   void _initializePoints() {
     _level = int.parse(_controller.text.isEmpty ? "0" : _controller.text);
     setState(() {
-      if (_level == Values.maxLevel) {
+      if (_level >= Values.maxLevel) {
         _availableSkillPoints = Values.skillPoints;
         _availablePerkPoints = Values.perkPoints;
       } else if (_level <= _criticalLevel && _level >= 0) {
@@ -93,134 +88,130 @@ class ActivityPlannerState extends State<ActivityPlanner> {
   }
 
   Widget _buildDetailedInformation() {
-    return Center(
-      child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 200),
-        opacity: _showDetail ? 1 : 0,
-        child: _showDetail
-            ? WidgetProficiencyDetail(
-                proficiency: _proficiency,
-                callback: _hideDetailedInformation,
-              )
-            : const SizedBox.shrink(),
-      ),
+    return WidgetProficiencyDetail(
+      proficiency: _proficiency,
+      context: context,
+      onClose: _hideDetailedInformation,
     );
+  }
+
+  String _pointsForSkill(ProficiencyType type) {
+    return "${widget.helperPlanner.getSkillPointsFor(type, true)}/${widget.helperPlanner.getSkillPointsFor(type, false)}";
   }
 
   Widget _buildSkillTree(String name, ProficiencyType type) {
     return Column(
       children: [
-        WidgetTitleBigButton(
-          primaryText: tr(name),
-          secondaryText: "${widget.helperPlanner.getSkillPointsFor(type, true)}/${widget.helperPlanner.getSkillPointsFor(type, false)}",
-          icon: "assets/graphics/icons/reload.svg",
-          buttonColor: Interface.dark,
-          buttonBackground: Colors.transparent,
-          onTap: () {
-            _resetSkillPoints(type);
-          },
+        WidgetTitleButtonIcon(
+          name,
+          subtext: _pointsForSkill(type),
+          icon: Assets.graphics.icons.reload,
+          alignRight: true,
+          onTap: () => _resetSkillPoints(type),
         ),
         ListSkills(
-          type: type,
+          type,
           helperPlanner: widget.helperPlanner,
           availablePoints: _availableSkillPoints,
-          refresh: () {
-            setState(() {});
-          },
           showDetail: _showDetailedInformation,
+          rebuild: () => setState(() {}),
         ),
       ],
     );
+  }
+
+  String _pointsForPerk(ProficiencyType type) {
+    return "${widget.helperPlanner.getPerkPointsFor(type, true)}/${widget.helperPlanner.getPerkPointsFor(type, false)}";
   }
 
   Widget _buildPerkTree(String name, ProficiencyType type) {
     return Column(
       children: [
-        WidgetTitleBigButton(
-          primaryText: tr(name),
-          secondaryText: "${widget.helperPlanner.getPerkPointsFor(type, true)}/${widget.helperPlanner.getPerkPointsFor(type, false)}",
-          icon: "assets/graphics/icons/reload.svg",
-          buttonColor: Interface.dark,
-          buttonBackground: Colors.transparent,
-          onTap: () {
-            _resetPerkPoints(type);
-          },
+        WidgetTitleButtonIcon(
+          name,
+          subtext: _pointsForPerk(type),
+          icon: Assets.graphics.icons.reload,
+          alignRight: true,
+          onTap: () => _resetPerkPoints(type),
         ),
         ListPerks(
-          type: type,
+          type,
           helperPlanner: widget.helperPlanner,
           availablePoints: _availablePerkPoints,
-          refresh: () {
-            setState(() {});
-          },
           showDetail: _showDetailedInformation,
+          rebuild: () => setState(() {}),
         ),
       ],
     );
   }
 
-  Widget _buildPlanner() {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _buildSkillTree("skills_stalker", ProficiencyType.stalker),
-        _buildSkillTree("skills_ambusher", ProficiencyType.ambusher),
-        _buildPerkTree("weapons_rifles", ProficiencyType.rifle),
-        _buildPerkTree("weapons_shotguns", ProficiencyType.shotgun),
-        _buildPerkTree("weapons_handguns", ProficiencyType.handgun),
-        _buildPerkTree("weapons_bows_crossbows", ProficiencyType.archery),
-      ],
-    );
+  List<Widget> _listPlanner() {
+    return [
+      _buildSkillTree(tr("SKILLS_STALKER"), ProficiencyType.stalker),
+      _buildSkillTree(tr("SKILLS_AMBUSHER"), ProficiencyType.ambusher),
+      _buildPerkTree(tr("WEAPONS_RIFLES"), ProficiencyType.rifle),
+      _buildPerkTree(tr("WEAPONS_SHOTGUNS"), ProficiencyType.shotgun),
+      _buildPerkTree(tr("WEAPONS_HANDGUNS"), ProficiencyType.handgun),
+      _buildPerkTree(tr("WEAPONS_BOWS_CROSSBOWS"), ProficiencyType.archery),
+    ];
   }
 
-  Widget _buildLevel() {
-    return Column(children: [
-      WidgetTitleBig(
-        primaryText: tr("player_level"),
-        secondaryText: "${tr("points_skills")}: $_availableSkillPoints/${Values.perkPoints} ${tr("points_perks")}: $_availablePerkPoints/${Values.perkPoints}",
+  String _pointsForPerksSkills() {
+    return "${tr("POINTS_SKILLS")}: $_availableSkillPoints/${Values.perkPoints} ${tr("POINTS_PERKS")}: $_availablePerkPoints/${Values.perkPoints}";
+  }
+
+  List<Widget> _listLevel() {
+    return [
+      WidgetTitle(
+        tr("PLAYER_LEVEL"),
+        subtext: _pointsForPerksSkills(),
       ),
-      Container(
-          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+      SizedBox(
+        height: Values.textField,
+        child: WidgetPadding.h30(
           child: WidgetTextField(
-            controller: _controller,
+            textController: _controller,
             numberOnly: true,
-          )),
-    ]);
+          ),
+        ),
+      ),
+    ];
   }
 
   Widget _buildBody() {
-    return Stack(
-      children: [
-        WidgetScrollbar(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                WidgetAppBar(
-                  text: tr("planner"),
-                  context: context,
-                ),
-                _buildLevel(),
-                _buildPlanner(),
-              ],
-            ),
+    return WidgetScrollBar(
+      child: SingleChildScrollView(
+        child: Container(
+          color: Interface.body,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              WidgetAppBar(
+                tr("PLANNER"),
+                context: context,
+              ),
+              ..._listLevel(),
+              ..._listPlanner(),
+            ],
           ),
         ),
-        Positioned(
-          top: 0,
-          left: 0,
-          child: _buildDetailedInformation(),
-        ),
+      ),
+    );
+  }
+
+  Widget _buildStack() {
+    return Stack(
+      children: [
+        _buildBody(),
+        if (_showDetail) _buildDetailedInformation(),
       ],
     );
   }
 
   Widget _buildWidgets() {
-    return WidgetScaffold(
-      customBody: true,
-      body: _buildBody(),
+    return Scaffold(
+      appBar: AppBar(),
+      body: _buildStack(),
     );
   }
 

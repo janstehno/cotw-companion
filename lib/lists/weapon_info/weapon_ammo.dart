@@ -1,50 +1,36 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/model/ammo.dart';
-import 'package:cotwcompanion/widgets/entries/weapon/ammo.dart';
-import 'package:cotwcompanion/widgets/title_small.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/model/translatable/ammo.dart';
+import 'package:cotwcompanion/model/translatable/weapon.dart';
+import 'package:cotwcompanion/widgets/parts/weapon/ammo.dart';
+import 'package:cotwcompanion/widgets/subtitle/subtitle.dart';
 import 'package:flutter/material.dart';
 
-class ListWeaponAmmo extends StatefulWidget {
-  final int weaponId;
+class ListWeaponAmmo extends StatelessWidget {
+  final Weapon _weapon;
 
-  const ListWeaponAmmo({
-    Key? key,
-    required this.weaponId,
-  }) : super(key: key);
+  const ListWeaponAmmo(
+    Weapon weapon, {
+    super.key,
+  }) : _weapon = weapon;
 
-  @override
-  ListWeaponAmmoState createState() => ListWeaponAmmoState();
-}
+  List<Ammo> get _ammo => HelperJSON.getWeaponsAmmo(_weapon.id).sorted(Ammo.sortByName);
 
-class ListWeaponAmmoState extends State<ListWeaponAmmo> {
-  late final List<dynamic> _ammo = [];
+  Widget _buildAmmo(Ammo ammo) {
+    return Column(
+      children: [
+        WidgetSubtitle(ammo.name),
+        WidgetWeaponAmmo(ammo),
+      ],
+    );
+  }
 
-  void _getWeapon() {
-    _ammo.addAll(HelperJSON.getWeapon(widget.weaponId).ammo);
+  List<Widget> _listAmmo() {
+    return _ammo.map((e) => _buildAmmo(e)).toList();
   }
 
   Widget _buildWidgets() {
-    _getWeapon();
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _ammo.length,
-        itemBuilder: (context, index) {
-          Ammo ammo = HelperJSON.getAmmo(_ammo[index]);
-          return Column(
-            children: [
-              WidgetTitleSmall(
-                primaryText: ammo.getName(context.locale),
-              ),
-              EntryWeaponAmmo(
-                ammo: ammo,
-              ),
-            ],
-          );
-        });
+    return Column(children: _listAmmo());
   }
 
   @override

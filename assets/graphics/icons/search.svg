@@ -1,8 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <line x1="1.5" y1="28.5" x2="13.99" y2="16.01" fill="none" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-    <circle cx="20.15" cy="9.85" r="8.35" fill="none" stroke="#212121" stroke-linecap="round"
-        stroke-linejoin="round" stroke-width="3" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><line x1="1.5" y1="28.5" x2="13.99" y2="16.01" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><circle cx="20.15" cy="9.85" r="8.35" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><rect width="30" height="30" fill="none"/></svg>

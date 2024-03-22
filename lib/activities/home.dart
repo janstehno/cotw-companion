@@ -1,318 +1,263 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cotwcompanion/activities/about.dart';
-import 'package:cotwcompanion/activities/patch_notes.dart';
 import 'package:cotwcompanion/activities/search.dart';
 import 'package:cotwcompanion/activities/settings.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/lists/home/callers.dart';
 import 'package:cotwcompanion/lists/home/other.dart';
 import 'package:cotwcompanion/lists/home/reserves.dart';
 import 'package:cotwcompanion/lists/home/tools.dart';
 import 'package:cotwcompanion/lists/home/weapons.dart';
 import 'package:cotwcompanion/lists/home/wildlife.dart';
-import 'package:cotwcompanion/miscellaneous/interface/interface.dart';
-import 'package:cotwcompanion/miscellaneous/interface/utils.dart';
-import 'package:cotwcompanion/miscellaneous/interface/values.dart';
-import 'package:cotwcompanion/widgets/button_icon.dart';
-import 'package:cotwcompanion/widgets/button_icon_text.dart';
-import 'package:cotwcompanion/widgets/entries/menu.dart';
-import 'package:cotwcompanion/widgets/scrollbar.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:cotwcompanion/widgets/app/bar_scroll.dart';
+import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/icon/icon.dart';
+import 'package:cotwcompanion/widgets/parts/home/menu.dart';
+import 'package:cotwcompanion/widgets/text/text.dart';
+import 'package:cotwcompanion/widgets/text/text_pattern.dart';
+import 'package:cotwcompanion/widgets/text/text_tap.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ActivityHome extends StatefulWidget {
-  const ActivityHome({Key? key}) : super(key: key);
+  const ActivityHome({
+    super.key,
+  });
 
   @override
   ActivityHomeState createState() => ActivityHomeState();
 }
 
 class ActivityHomeState extends State<ActivityHome> {
-  final double _titleHeight = 35;
-  final double _footerLeftButtonSize = 20;
-  final double _footerRightButtonHeight = 30;
-  final double _menuTopBarHeight = 95;
   final List<List<dynamic>> _menuItems = [
-    ["reserves", "reserve", const ListReserves()],
-    ["wildlife", "wildlife", const ListWildlife()],
-    ["weapons", "weapon", const ListWeapons()],
-    ["callers", "caller", const ListCallers()],
-    ["tools", "hammer", const ListTools()],
-    ["other", "other", const ListOther()],
+    ["RESERVES", Assets.graphics.icons.reserve, const ListReserves()],
+    ["WILDLIFE", Assets.graphics.icons.wildlife, const ListWildlife()],
+    ["WEAPONS", Assets.graphics.icons.weapon, const ListWeapons()],
+    ["CALLERS", Assets.graphics.icons.caller, const ListCallers()],
+    ["TOOLS", Assets.graphics.icons.hammer, const ListTools()],
+    ["OTHER", Assets.graphics.icons.other, const ListOther()],
+    ["SEARCH", Assets.graphics.icons.search, const ActivitySearch()],
   ];
 
-  late Orientation _orientation;
-  late double _screenWidth, _screenHeight;
-
-  bool _menuOpened = false;
-
-  void _callback() {
-    setState(() {});
-  }
-
-  void _getScreenSizes() {
-    _screenWidth = MediaQuery.of(context).size.width;
-    _screenHeight = MediaQuery.of(context).size.height - 1;
-  }
-
   Widget _buildName() {
-    return Container(
-        padding: const EdgeInsets.all(30),
-        alignment: Alignment.center,
-        child: Column(children: [
-          Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Expanded(
-                child: Container(
-                    alignment: Alignment.topLeft,
-                    child: Column(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Container(
-                          height: _titleHeight,
-                          alignment: Alignment.centerLeft,
-                          child: AutoSizeText(
-                            "COTW COMPANION",
-                            maxLines: 1,
-                            style: Interface.s24w600c(Interface.alwaysLight),
-                          )),
-                      AutoSizeText(Values.version,
-                          maxLines: 1,
-                          style: Interface.s18w400c(
-                            Interface.alwaysLight.withOpacity(0.5),
-                          )),
-                    ]))),
-            Column(children: [
-              WidgetButtonIcon(
-                  icon: "assets/graphics/icons/menu_open.svg",
-                  onTap: () {
-                    setState(() {
-                      _menuOpened = true;
-                    });
-                  }),
-              Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: WidgetButtonIcon(
-                      icon: "assets/graphics/icons/search.svg",
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivitySearch()));
-                      })),
-              Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: WidgetButtonIcon(
-                      icon: "assets/graphics/icons/settings.svg",
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ActivitySettings(callback: _callback)));
-                      }))
-            ])
-          ]),
-        ]));
-  }
-
-  Widget _buildMenuItem(int index, String text, String icon, Widget activity) {
-    return EntryMenu(
-      text: tr(text),
-      icon: "assets/graphics/icons/$icon.svg",
-      background: Utils.background(index),
-      onMenuTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => activity));
-      },
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        WidgetText(
+          "COTW COMPANION",
+          color: Interface.alwaysDark,
+          style: Style.condensed.s24.w600,
+        ),
+        WidgetText(
+          tr("NOT_OFFICIAL").toUpperCase(),
+          color: Interface.alwaysDark.withOpacity(0.6),
+          style: Style.normal.s8.w300,
+        ),
+        WidgetText(
+          Values.version,
+          color: Interface.alwaysDark.withOpacity(0.6),
+          style: Style.normal.s12.w300,
+        ),
+      ],
     );
   }
 
-  Widget _buildMenu() {
-    return AnimatedPositioned(
-        duration: const Duration(milliseconds: 200),
-        left: _menuOpened ? _screenWidth / (_orientation == Orientation.portrait ? 5 : 1.75) : _screenWidth,
-        width: _screenWidth - _screenWidth / (_orientation == Orientation.portrait ? 5 : 1.75),
-        height: _screenHeight,
-        child: Container(
-            color: Interface.body,
-            child: Stack(children: [
-              WidgetScrollbar(
-                  child: SingleChildScrollView(
-                      child: Padding(
-                          padding: EdgeInsets.only(top: _menuTopBarHeight, bottom: 30),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: _menuItems.length,
-                                  itemBuilder: (context, index) {
-                                    List<dynamic> menuItem = _menuItems.elementAt(index);
-                                    return _buildMenuItem(
-                                      index,
-                                      menuItem[0],
-                                      menuItem[1],
-                                      menuItem[2],
-                                    );
-                                  })
-                            ],
-                          )))),
-              Container(
-                  height: _menuTopBarHeight,
-                  color: Interface.title,
-                  padding: const EdgeInsets.only(left: 30, right: 30),
-                  alignment: Alignment.centerRight,
-                  child: WidgetButtonIcon(
-                      icon: "assets/graphics/icons/menu_close.svg",
-                      onTap: () {
-                        setState(() {
-                          _menuOpened = false;
-                        });
-                      }))
-            ])));
-  }
-
-  Widget _buildLink(String icon, String host, String path) {
+  Widget _buildLink(String icon, [Function? onTap]) {
     return GestureDetector(
-        onTap: () {
-          Utils.redirectTo(host, path);
-        },
-        child: Container(
-            padding: const EdgeInsets.only(right: 15),
-            child: SvgPicture.asset(
-              "assets/graphics/icons/$icon.svg",
-              width: _footerLeftButtonSize,
-              height: _footerLeftButtonSize,
-              colorFilter: const ColorFilter.mode(
-                Interface.alwaysLight,
-                BlendMode.srcIn,
-              ),
-            )));
+      onTap: () {
+        if (onTap != null) onTap();
+      },
+      child: WidgetIcon.withSize(
+        icon,
+        size: 17,
+        color: Interface.alwaysDark,
+      ),
+    );
   }
 
   Widget _buildLinks() {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildLink("github", "github.com", "/janstehno"),
-        _buildLink("reddit", "reddit.com", "/user/Toastovac"),
+        _buildLink(Assets.graphics.icons.post, () => Utils.mailTo()),
+        const SizedBox(width: 10),
+        _buildLink(
+          Assets.graphics.icons.reddit,
+          () => Utils.redirectTo(
+            Uri.parse("https://www.reddit.com/user/Toastovac/"),
+          ),
+        ),
+        const SizedBox(width: 10),
+        _buildLink(
+          Assets.graphics.icons.github,
+          () => Utils.redirectTo(
+            Uri.parse("https://github.com/janstehno/cotw-companion?tab=readme-ov-file#cotw-companion"),
+          ),
+        ),
       ],
     );
   }
 
-  List<Widget> _buildButtons() {
-    EdgeInsets margin = EdgeInsets.only(bottom: _orientation == Orientation.portrait ? 7 : 0, right: _orientation == Orientation.portrait ? 0 : 7);
-    return [
-      Container(
-          margin: margin,
-          child: WidgetButtonIconText(
-            icon: "assets/graphics/icons/about.svg",
-            text: tr("about"),
-            color: Interface.alwaysDark,
-            background: Interface.alwaysLight,
-            buttonHeight: _footerRightButtonHeight,
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityAbout()));
-            },
-          )),
-      Container(
-          margin: margin,
-          child: WidgetButtonIconText(
-            icon: "assets/graphics/icons/issue.svg",
-            text: tr("issues"),
-            color: Interface.alwaysDark,
-            background: Interface.red,
-            buttonHeight: _footerRightButtonHeight,
-            isExternalLink: true,
-            onTap: () {
-              Utils.redirectTo("github.com", "/janstehno/cotwcompanion/issues");
-            },
-          )),
-      Container(
-          margin: margin,
-          child: WidgetButtonIconText(
-            icon: "assets/graphics/icons/idea.svg",
-            text: tr("ideas"),
-            color: Interface.alwaysDark,
-            background: Interface.yellow,
-            buttonHeight: _footerRightButtonHeight,
-            isExternalLink: true,
-            onTap: () {
-              Utils.redirectTo("github.com", "/janstehno/cotwcompanion/discussions");
-            },
-          )),
-      WidgetButtonIconText(
-        icon: "assets/graphics/icons/repair.svg",
-        text: tr("patch_notes"),
-        color: Interface.alwaysDark,
-        background: Interface.blue,
-        buttonHeight: _footerRightButtonHeight,
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityPatchNotes()));
-        },
-      ),
-    ];
-  }
-
-  Widget _buildFooterMenu() {
-    return _orientation == Orientation.portrait
-        ? Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: _buildButtons(),
-          )
-        : Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: _buildButtons(),
-          );
-  }
-
-  Widget _buildFooter() {
-    return Container(
-      padding: const EdgeInsets.all(30),
+  Widget _buildHeader() {
+    return WidgetPadding.a30(
+      background: Interface.primary,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Expanded(child: _buildName()),
           _buildLinks(),
-          _buildFooterMenu(),
         ],
       ),
     );
   }
 
-  Widget _buildWidgets() {
-    _getScreenSizes();
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Interface.primary,
-          toolbarHeight: 0.1,
+  Widget _buildMenuItem(String text, String icon, Widget activity) {
+    return WidgetSectionMenu(tr(text), icon: icon, onTap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (e) => activity));
+    });
+  }
+
+  List<Widget> _listMenuItems() {
+    return _menuItems.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2))).toList();
+  }
+
+  List<Widget> _listMenu() {
+    return [
+      ..._listMenuItems(),
+      _buildMenuItem(
+        "SETTINGS",
+        Assets.graphics.icons.settings,
+        ActivitySettings(callback: () => setState(() {})),
+      ),
+      _buildMenuItem(
+        "ABOUT",
+        Assets.graphics.icons.about,
+        const ActivityAbout(),
+      ),
+    ];
+  }
+
+  Widget _buildMenu() {
+    return WidgetPadding.h30v20(
+      alignment: Alignment.bottomLeft,
+      child: WidgetScrollBar(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: _listMenu(),
+          ),
         ),
-        body: OrientationBuilder(builder: (context, orientation) {
-          _orientation = orientation;
-          return Stack(children: [
-            SizedBox(
-                height: _screenHeight - 0.1,
-                width: _screenWidth,
-                child: Image.asset(
-                  "assets/graphics/images/cotw.jpg",
-                  fit: orientation == Orientation.portrait ? BoxFit.fitHeight : BoxFit.fitWidth,
-                  alignment: Alignment.center,
-                )),
-            Container(
-              height: _screenHeight - 0.1,
-              width: _screenWidth,
-              color: Interface.alwaysDark.withOpacity(0.5),
-            ),
-            Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              _buildName(),
-              _buildFooter(),
-            ]),
-            _buildMenu(),
-          ]);
-        }));
+      ),
+    );
+  }
+
+  List<Widget> _listOther() {
+    return [
+      WidgetTextTap(
+        tr("WIKI").toUpperCase(),
+        color: Interface.alwaysLight.withOpacity(0.8),
+        style: Style.normal.s8.w500,
+        onTap: () => Utils.redirectTo(
+          Uri.parse("https://github.com/janstehno/cotw-companion/wiki"),
+        ),
+      ),
+      const SizedBox(width: 10),
+      WidgetTextTap(
+        tr("PATCH_NOTES").toUpperCase(),
+        color: Interface.alwaysLight.withOpacity(0.8),
+        style: Style.normal.s8.w500,
+        onTap: () => Utils.redirectTo(
+          Uri.parse("https://github.com/janstehno/cotw-companion/wiki/Patch-notes"),
+        ),
+      ),
+      const SizedBox(width: 10),
+      WidgetTextTap(
+        tr("IDEAS").toUpperCase(),
+        color: Interface.alwaysLight.withOpacity(0.8),
+        style: Style.normal.s8.w500,
+        onTap: () => Utils.redirectTo(
+          Uri.parse("https://github.com/janstehno/cotw-companion/discussions"),
+        ),
+      ),
+      const SizedBox(width: 10),
+      WidgetTextTap(
+        tr("ISSUES").toUpperCase(),
+        color: Interface.alwaysLight.withOpacity(0.8),
+        style: Style.normal.s8.w500,
+        onTap: () => Utils.redirectTo(
+          Uri.parse("https://github.com/janstehno/cotw-companion/issues"),
+        ),
+      ),
+    ];
+  }
+
+  Widget _buildOther() {
+    return Container(
+      color: Interface.alwaysDark.withOpacity(0.8),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: _listOther(),
+      ),
+    );
+  }
+
+  Widget _buildDisclaimer() {
+    return WidgetPadding.h30v20(
+      background: Interface.alwaysDark.withOpacity(0.6),
+      child: WidgetTextPattern(
+        tr("DISCLAIMER"),
+        color: Interface.alwaysLight.withOpacity(0.4),
+        normalStyle: Style.normal.s10.w300,
+        patternStyle: Style.normal.s10.w500,
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  Widget _buildBackground() {
+    return Image.asset(
+      Assets.graphics.images.cotw.path,
+      fit: BoxFit.cover,
+      alignment: Alignment.center,
+    );
+  }
+
+  Widget _buildShadow() {
+    return Container(color: Interface.alwaysDark.withOpacity(0.4));
+  }
+
+  Widget _buildWidgets() {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          _buildBackground(),
+          _buildShadow(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildHeader(),
+              Expanded(child: _buildMenu()),
+              _buildDisclaimer(),
+              _buildOther(),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   @override

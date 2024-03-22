@@ -1,5 +1,3 @@
-// Copyright (c) 2023 Jan Stehno
-
 import 'package:cotwcompanion/activities/detail/ammo.dart';
 import 'package:cotwcompanion/activities/detail/animal.dart';
 import 'package:cotwcompanion/activities/detail/caller.dart';
@@ -7,23 +5,26 @@ import 'package:cotwcompanion/activities/detail/fur.dart';
 import 'package:cotwcompanion/activities/detail/mission.dart';
 import 'package:cotwcompanion/activities/detail/reserve.dart';
 import 'package:cotwcompanion/activities/detail/weapon.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/filter.dart';
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/model/ammo.dart';
-import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/model/caller.dart';
-import 'package:cotwcompanion/model/fur.dart';
-import 'package:cotwcompanion/model/mission.dart';
-import 'package:cotwcompanion/model/reserve.dart';
-import 'package:cotwcompanion/model/weapon.dart';
-import 'package:cotwcompanion/widgets/appbar.dart';
-import 'package:cotwcompanion/widgets/entries/item_search.dart';
-import 'package:cotwcompanion/widgets/scaffold.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:cotwcompanion/model/describable/mission.dart';
+import 'package:cotwcompanion/model/translatable/ammo.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/model/translatable/caller.dart';
+import 'package:cotwcompanion/model/translatable/fur.dart';
+import 'package:cotwcompanion/model/translatable/reserve.dart';
+import 'package:cotwcompanion/model/translatable/weapon.dart';
+import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/parts/items/item_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ActivitySearch extends StatefulWidget {
-  const ActivitySearch({Key? key}) : super(key: key);
+  const ActivitySearch({
+    super.key,
+  });
 
   @override
   ActivitySearchState createState() => ActivitySearchState();
@@ -31,16 +32,23 @@ class ActivitySearch extends StatefulWidget {
 
 class ActivitySearchState extends State<ActivitySearch> {
   final TextEditingController _controller = TextEditingController();
-  final List<Reserve> _reserves = [];
-  final List<Animal> _animals = [];
-  final List<Fur> _furs = [];
-  final List<Weapon> _weapons = [];
-  final List<Ammo> _ammo = [];
-  final List<Caller> _callers = [];
-  final List<Mission> _missions = [];
 
-  int _itemIndex = -1;
-  int _itemLimit = 5;
+  List<Reserve> get _reserves => HelperFilter.filterReserves(_controller.text);
+
+  List<Animal> get _animals => HelperFilter.filterAnimals(_controller.text, context);
+
+  List<Fur> get _furs => HelperFilter.filterFurs(_controller.text);
+
+  List<Weapon> get _weapons => HelperFilter.filterWeapons(_controller.text);
+
+  List<Ammo> get _ammo => HelperFilter.filterAmmo(_controller.text);
+
+  List<Caller> get _callers => HelperFilter.filterCallers(_controller.text);
+
+  List<Mission> get _missions => HelperFilter.filterMissions(_controller.text);
+
+  int _itemIndex = 0;
+  int _itemLimit = 0;
 
   @override
   void initState() {
@@ -50,147 +58,135 @@ class ActivitySearchState extends State<ActivitySearch> {
 
   void _focus() {
     FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
+    if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
   }
 
   void _filter() {
     setState(() {
-      _itemIndex = -1;
+      _itemIndex = 0;
       _itemLimit = _controller.text.length * 2;
-      _reserves.clear();
-      _animals.clear();
-      _furs.clear();
-      _weapons.clear();
-      _ammo.clear();
-      _callers.clear();
-      _missions.clear();
-      _reserves.addAll(HelperFilter.filterReserves(_controller.text, context));
-      _animals.addAll(HelperFilter.filterAnimals(_controller.text, context));
-      _furs.addAll(HelperFilter.filterFurs(_controller.text, context));
-      _weapons.addAll(HelperFilter.filterWeapons(_controller.text, context));
-      _ammo.addAll(HelperFilter.filterAmmo(_controller.text, context));
-      _callers.addAll(HelperFilter.filterCallers(_controller.text, context));
-      _missions.addAll(HelperFilter.filterMissions(_controller.text, context));
     });
   }
 
-  Widget _buildList() {
-    _filter();
-    return Column(
-      children: [
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _reserves.length < _itemLimit ? _reserves.length : _itemLimit,
-            itemBuilder: (context, index) {
-              _itemIndex++;
-              return EntryFastSearch(
-                index: _itemIndex,
-                icon: "assets/graphics/icons/reserve.svg",
-                text: _reserves.elementAt(index).getName(context.locale),
-                activity: ActivityDetailReserve(reserve: _reserves[index]),
-                callback: _focus,
-              );
-            }),
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _animals.length < _itemLimit ? _animals.length : _itemLimit,
-            itemBuilder: (context, index) {
-              _itemIndex++;
-              return EntryFastSearch(
-                index: _itemIndex,
-                icon: "assets/graphics/icons/wildlife.svg",
-                text: _animals.elementAt(index).getNameByLocale(context.locale),
-                activity: ActivityDetailAnimal(animalId: _animals.elementAt(index).id),
-                callback: _focus,
-              );
-            }),
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _furs.length < _itemLimit ? _furs.length : _itemLimit,
-            itemBuilder: (context, index) {
-              _itemIndex++;
-              return EntryFastSearch(
-                index: _itemIndex,
-                icon: "assets/graphics/icons/fur.svg",
-                text: _furs.elementAt(index).getName(context.locale),
-                activity: ActivityDetailFur(fur: _furs[index]),
-                callback: _focus,
-              );
-            }),
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _weapons.length < _itemLimit ? _weapons.length : _itemLimit,
-            itemBuilder: (context, index) {
-              _itemIndex++;
-              return EntryFastSearch(
-                index: _itemIndex,
-                icon: "assets/graphics/icons/weapon.svg",
-                text: _weapons.elementAt(index).getName(context.locale),
-                activity: ActivityDetailWeapon(weapon: _weapons[index]),
-                callback: _focus,
-              );
-            }),
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _ammo.length < _itemLimit ? _ammo.length : _itemLimit,
-            itemBuilder: (context, index) {
-              _itemIndex++;
-              return EntryFastSearch(
-                index: _itemIndex,
-                icon: "assets/graphics/icons/harvest_correct_ammo.svg",
-                text: _ammo.elementAt(index).getName(context.locale),
-                activity: ActivityDetailAmmo(ammo: _ammo[index]),
-                callback: _focus,
-              );
-            }),
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _callers.length < _itemLimit ? _callers.length : _itemLimit,
-            itemBuilder: (context, index) {
-              _itemIndex++;
-              return EntryFastSearch(
-                index: _itemIndex,
-                icon: "assets/graphics/icons/caller.svg",
-                text: _callers.elementAt(index).getName(context.locale),
-                activity: ActivityDetailCaller(caller: _callers[index]),
-                callback: _focus,
-              );
-            }),
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _missions.length < _itemLimit ? _missions.length : _itemLimit,
-            itemBuilder: (context, index) {
-              _itemIndex++;
-              return EntryFastSearch(
-                index: _itemIndex,
-                icon: "assets/graphics/icons/missions.svg",
-                text: _missions.elementAt(index).getName(context.locale),
-                subText: HelperJSON.getMissionGiver(_missions.elementAt(index).giverId).getName(context.locale),
-                activity: ActivityDetailMission(mission: _missions[index]),
-                callback: _focus,
-              );
-            }),
-      ],
+  Widget _buildReserve(Reserve reserve) {
+    return WidgetItemSearch(
+      _itemIndex++,
+      icon: Assets.graphics.icons.reserve,
+      text: reserve.name,
+      activity: ActivityDetailReserve(reserve),
+      onTap: _focus,
     );
+  }
+
+  List<Widget> _listReserves() {
+    return _reserves.map((e) => _buildReserve(e)).take(_itemLimit).toList();
+  }
+
+  Widget _buildAnimal(Animal animal) {
+    return WidgetItemSearch(
+      _itemIndex++,
+      icon: Assets.graphics.icons.wildlife,
+      text: animal.getNameByLocale(context.locale),
+      activity: ActivityDetailAnimal(animal),
+      onTap: _focus,
+    );
+  }
+
+  List<Widget> _listAnimals() {
+    return _animals.map((e) => _buildAnimal(e)).take(_itemLimit).toList();
+  }
+
+  Widget _buildFur(Fur fur) {
+    return WidgetItemSearch(
+      _itemIndex++,
+      icon: Assets.graphics.icons.fur,
+      text: fur.name,
+      activity: ActivityDetailFur(fur),
+      onTap: _focus,
+    );
+  }
+
+  List<Widget> _listFurs() {
+    return _furs.skipWhile((e) => e.id == Values.greatOneId).map((e) => _buildFur(e)).take(_itemLimit).toList();
+  }
+
+  Widget _buildWeapon(Weapon weapon) {
+    return WidgetItemSearch(
+      _itemIndex++,
+      icon: Assets.graphics.icons.weapon,
+      text: weapon.name,
+      activity: ActivityDetailWeapon(weapon),
+      onTap: _focus,
+    );
+  }
+
+  List<Widget> _listWeapons() {
+    return _weapons.map((e) => _buildWeapon(e)).take(_itemLimit).toList();
+  }
+
+  Widget _buildAmmo(Ammo ammo) {
+    return WidgetItemSearch(
+      _itemIndex++,
+      icon: Assets.graphics.icons.harvestCorrectAmmo,
+      text: ammo.name,
+      activity: ActivityDetailAmmo(ammo),
+      onTap: _focus,
+    );
+  }
+
+  List<Widget> _listAmmo() {
+    return _ammo.map((e) => _buildAmmo(e)).take(_itemLimit).toList();
+  }
+
+  Widget _buildCaller(Caller caller) {
+    return WidgetItemSearch(
+      _itemIndex++,
+      icon: Assets.graphics.icons.caller,
+      text: caller.name,
+      activity: ActivityDetailCaller(caller),
+      onTap: _focus,
+    );
+  }
+
+  List<Widget> _listCallers() {
+    return _callers.map((e) => _buildCaller(e)).take(_itemLimit).toList();
+  }
+
+  Widget _buildMission(Mission mission) {
+    return WidgetItemSearch(
+      _itemIndex++,
+      icon: Assets.graphics.icons.missions,
+      text: mission.name,
+      subtext: mission.person,
+      activity: ActivityDetailMission(mission),
+      onTap: _focus,
+    );
+  }
+
+  List<Widget> _listMissions() {
+    return _missions.map((e) => _buildMission(e)).take(_itemLimit).toList();
+  }
+
+  List<Widget> _listFiltered() {
+    return [
+      ..._listReserves(),
+      ..._listAnimals(),
+      ..._listFurs(),
+      ..._listWeapons(),
+      ..._listAmmo(),
+      ..._listCallers(),
+      ..._listMissions(),
+    ];
   }
 
   Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        text: tr("search"),
+        tr("SEARCH"),
         context: context,
       ),
       searchController: _controller,
-      body: _buildList(),
+      children: _listFiltered(),
     );
   }
 

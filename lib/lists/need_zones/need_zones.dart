@@ -1,68 +1,59 @@
-// Copyright (c) 2023 Jan Stehno
-
-import 'package:cotwcompanion/miscellaneous/helpers/json.dart';
-import 'package:cotwcompanion/model/animal.dart';
-import 'package:cotwcompanion/model/idtoid.dart';
-import 'package:cotwcompanion/model/zone.dart';
-import 'package:cotwcompanion/widgets/entries/need_zone.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/model/connect/animal_zone.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
+import 'package:cotwcompanion/model/translatable/reserve.dart';
+import 'package:cotwcompanion/widgets/parts/need_zones/need_zone.dart';
 import 'package:flutter/material.dart';
 
-class ListNeedZones extends StatefulWidget {
-  final int reserveId;
-  final int hour;
-  final List<bool> classes;
-  final bool compact, classSwitches;
+class ListNeedZones extends StatelessWidget {
+  final Reserve _reserve;
+  final Map<int, bool> _classes;
+  final int _hour;
+  final bool _compact, _classSwitches;
 
-  const ListNeedZones({
-    Key? key,
-    required this.reserveId,
-    required this.hour,
-    required this.classes,
-    required this.compact,
-    required this.classSwitches,
-  }) : super(key: key);
+  const ListNeedZones(
+    Reserve reserve, {
+    super.key,
+    required Map<int, bool> classes,
+    required int hour,
+    required bool compact,
+    required bool classSwitches,
+  })  : _reserve = reserve,
+        _classes = classes,
+        _hour = hour,
+        _compact = compact,
+        _classSwitches = classSwitches;
 
-  @override
-  ListNeedZonesState createState() => ListNeedZonesState();
-}
+  List<Animal> get _animals =>
+      HelperJSON.getReserveAnimals(_reserve.id).where((e) => _classes[e.level - 1]!).toList();
 
-class ListNeedZonesState extends State<ListNeedZones> {
-  late final List<Animal> _animals = [];
+  Widget _buildEntry(int i, Animal animal) {
+    List<AnimalZone> zones = HelperJSON.getAnimalZones(animal.id, _reserve.id);
 
-  void _getAnimals() {
-    _animals.clear();
-    for (IdtoId iti in HelperJSON.animalsReserves) {
-      if (iti.secondId == widget.reserveId) {
-        Animal animal = HelperJSON.getAnimal(iti.firstId);
-        if (widget.classes.elementAt(animal.level - 1)) _animals.add(animal);
-      }
-    }
-    _animals.sort((a, b) => a.getNameBasedOnReserve(context.locale, widget.reserveId).compareTo(b.getNameBasedOnReserve(context.locale, widget.reserveId)));
-    _animals.sort((a, b) => a.level.compareTo(b.level));
+    return WidgetNeedZone(
+      i,
+      animal: animal,
+      reserve: _reserve,
+      hour: _hour,
+      count: _animals.length,
+      compact: _compact,
+      classSwitches: _classSwitches,
+      zones: zones,
+    );
   }
 
-  Widget _buildWidgets() {
-    _getAnimals();
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _animals.length,
-        itemBuilder: (context, index) {
-          List<Zone> zones = Zone.animalZones(_animals.elementAt(index).id, widget.reserveId);
-          return EntryNeedZone(
-            index: index,
-            animal: _animals.elementAt(index),
-            reserveId: widget.reserveId,
-            hour: widget.hour,
-            count: _animals.length,
-            compact: widget.compact,
-            classSwitches: widget.classSwitches,
-            zones: zones,
-          );
-        });
+  List<Widget> _listNeedZones(BuildContext context) {
+    return _animals
+        .sorted(Animal.sortByLevelNameByReserve(context, _reserve))
+        .mapIndexed((i, animal) => _buildEntry(i, animal))
+        .toList();
+  }
+
+  Widget _buildWidgets(BuildContext context) {
+    return Column(children: _listNeedZones(context));
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

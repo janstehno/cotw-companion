@@ -1,5 +1,3 @@
-// Copyright (c) 2023 Jan Stehno
-
 import 'package:cotwcompanion/activities/help/help.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +7,14 @@ class ActivityHelpEnumerators extends ActivityHelp {
   });
 
   @override
-  Widget buildBody() {
-    return Column(children: [
+  List<Widget> listHelp() {
+    return [
       buildSearch(),
       buildAdd(),
-      buildEdit(),
-      buildMove(),
-      buildDeleteSwipeLeft(),
-      buildImportExport(),
-    ]);
+      ...listEdit(),
+      ...listReorder(),
+      ...listDeleteSwipeLeft(),
+      ...listImportExport(),
+    ];
   }
 }

@@ -1,10 +1,1 @@
-<!-- Copyright (c) 2023 Jan Stehno -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-    <polyline points="1.5 13.31 9.38 13.31 15 18.94 20.63 13.31 28.5 13.31" fill="none"
-        stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-    <polyline points="3.75 17.53 7.69 17.53 15 24.56 22.31 17.53 26.25 17.53" fill="none"
-        stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-    <polygon points="10.5 8.81 15 13.31 19.5 8.81 15 5.44 10.5 8.81" fill="#212121" stroke="#212121"
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-    <rect width="30" height="30" fill="none" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><polyline points="1.5 13.31 9.38 13.31 15 18.94 20.63 13.31 28.5 13.31" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><polyline points="3.75 17.53 7.69 17.53 15 24.56 22.31 17.53 26.25 17.53" fill="none" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><polygon points="10.5 8.81 15 13.31 19.5 8.81 15 5.44 10.5 8.81" fill="#212121" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect width="30" height="30" fill="none"/></svg>

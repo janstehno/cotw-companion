@@ -136,7 +136,9 @@ class ActivityHomeState extends State<ActivityHome> {
       _buildMenuItem(
         "SETTINGS",
         Assets.graphics.icons.settings,
-        ActivitySettings(callback: () => setState(() {})),
+        ActivitySettings(callback: () {
+          setState(() {});
+        }),
       ),
       _buildMenuItem(
         "ABOUT",

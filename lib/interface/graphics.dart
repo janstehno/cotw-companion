@@ -525,7 +525,7 @@ class Graphics {
     }
 
     int i = (y + correction) * gridSize + (x + correction);
-    return "assets/graphics/maps/${reserve.name.replaceAll(" ", "").toLowerCase()}/$z/$i.png";
+    return "assets/graphics/maps/${reserve.asset.replaceAll(RegExp(r'\S+:'), "").replaceAll("_", "").toLowerCase()}/$z/$i.png";
   }
 
   static String getMapObjectIcon(MapLocationType type) {

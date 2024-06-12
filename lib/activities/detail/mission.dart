@@ -78,6 +78,7 @@ class ActivityDetailMission extends StatelessWidget {
       tr(objective).replaceAll("[I]", "").replaceAll("[O]", ""),
       color: Interface.dark,
       style: Style.normal.s16.w300,
+      autoSize: false,
     );
   }
 

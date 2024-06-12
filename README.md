@@ -79,4 +79,4 @@ already did or will do. You can do so by using one of the following platforms:
 ## Patch notes
 
 Version history can be found
-at [cotw-companion/wiki/patch-notes](https://github.com/janstehno/cotw-companion/wiki/patch%E2%80%90notes)
+at [cotw-companion/wiki/patch-notes](https://github.com/janstehno/cotw-companion/wiki/Patch-notes)

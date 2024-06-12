@@ -31,14 +31,17 @@ class WidgetAnimalHeader extends StatelessWidget {
   }
 
   Widget _buildAnimalHead() {
-    return SimpleShadow(
-      color: Interface.shadow,
-      sigma: 2,
-      opacity: 1,
-      offset: const Offset(-0.4, -0.4),
-      child: Image.asset(
-        Graphics.getAnimalHead(_animal),
-        alignment: Alignment.bottomRight,
+    return Container(
+      alignment: Alignment.bottomRight,
+      child: SimpleShadow(
+        color: Interface.shadow,
+        sigma: 2,
+        opacity: 1,
+        offset: const Offset(-0.4, -0.4),
+        child: Image.asset(
+          Graphics.getAnimalHead(_animal),
+          fit: BoxFit.fitWidth,
+        ),
       ),
     );
   }
@@ -51,14 +54,9 @@ class WidgetAnimalHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.bottomLeft,
-              child: _buildAnimalIcon(),
-            ),
-          ),
+          _buildAnimalIcon(),
           const SizedBox(width: 30),
-          _buildAnimalHead(),
+          Expanded(child: _buildAnimalHead()),
         ],
       ),
     );

@@ -371,9 +371,13 @@ class HelperFilter {
     return callers.sorted(Caller.sortByName);
   }
 
-  static List<Mission> filterMissions(String searchText) {
+  static List<Mission> filterReserveMissions(String searchText, [int? reserveId]) {
     List<Mission> missions = [];
-    missions.addAll(HelperJSON.missions);
+    if (reserveId != null) {
+      missions.addAll(HelperJSON.getReserveMissions(reserveId));
+    } else {
+      missions.addAll(HelperJSON.missions);
+    }
     if (searchText.isNotEmpty || missionFiltersChanged()) {
       missions = missions
           .where((e) =>
@@ -383,6 +387,10 @@ class HelperFilter {
           .toList();
     }
     return missions.sorted(Mission.sortByReserveName);
+  }
+
+  static List<Mission> filterMissions(String searchText) {
+    return filterReserveMissions(searchText, null);
   }
 
   static List<Enumerator> filterEnumerators(String searchText, List<Enumerator> allEnumerators) {

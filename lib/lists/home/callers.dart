@@ -23,7 +23,7 @@ class ListCallersState extends ListTranslatableState<Caller> {
   bool get _imperialUnits => Provider.of<Settings>(context, listen: false).imperialUnits;
 
   @override
-  List<Caller> get items => HelperFilter.filterCallers(controller.text);
+  List<Caller> get getItems => HelperFilter.filterCallers(controller.text);
 
   @override
   bool isFilterChanged() => HelperFilter.callerFiltersChanged();

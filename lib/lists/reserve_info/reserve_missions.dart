@@ -28,9 +28,9 @@ class ListReserveMissions extends ListTranslatable {
 
 class ListReserveMissionsState extends ListTranslatableState<Mission> {
   @override
-  List<Mission> get items => HelperFilter.filterMissions(controller.text).where((mission) {
-        return mission.reserveId == (widget as ListReserveMissions).reserve.id;
-      }).sorted(Mission.sortByName);
+  List<Mission> get getItems =>
+      HelperFilter.filterReserveMissions(controller.text, (widget as ListReserveMissions).reserve.id)
+          .sorted(Mission.sortByName);
 
   @override
   bool isFilterChanged() => HelperFilter.missionFiltersChanged();

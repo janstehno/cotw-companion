@@ -19,7 +19,7 @@ class ListWildlife extends ListTranslatable {
 
 class ListWildlifeState extends ListTranslatableState<Animal> {
   @override
-  List<Animal> get items => HelperFilter.filterAnimals(controller.text, context);
+  List<Animal> get getItems => HelperFilter.filterAnimals(controller.text, context);
 
   @override
   bool isFilterChanged() => HelperFilter.animalFiltersChanged();

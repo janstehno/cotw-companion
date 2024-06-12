@@ -22,7 +22,7 @@ class ListWeapons extends ListTranslatable {
 
 class ListWeaponsState extends ListTranslatableState<Weapon> {
   @override
-  List<Weapon> get items => HelperFilter.filterWeapons(controller.text);
+  List<Weapon> get getItems => HelperFilter.filterWeapons(controller.text);
 
   @override
   bool isFilterChanged() => HelperFilter.weaponFiltersChanged();

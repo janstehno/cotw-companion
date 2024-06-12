@@ -19,7 +19,7 @@ class ListReserves extends ListTranslatable {
 
 class ListReservesState extends ListTranslatableState<Reserve> {
   @override
-  List<Reserve> get items => HelperFilter.filterReserves(controller.text);
+  List<Reserve> get getItems => HelperFilter.filterReserves(controller.text);
 
   @override
   bool isFilterChanged() => HelperFilter.reserveFiltersChanged();

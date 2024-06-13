@@ -129,7 +129,7 @@ class WidgetNeedZone extends StatelessWidget {
         _animal.getNameByReserve(context.locale, _reserve),
         color: Interface.dark,
         style: Style.normal.s16.w300,
-        maxLines: _animal.getNameByReserve(context.locale, _reserve).split(" ").length == 1 ? 1 : 2,
+        maxLines: _animal.getNameByReserve(context.locale, _reserve).split(RegExp(r'[ -]')).length > 2 ? 2 : 1,
         textAlign: TextAlign.start,
       ),
     );

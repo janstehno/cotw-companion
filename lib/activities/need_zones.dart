@@ -356,7 +356,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
 
   Widget _buildPortraitView() {
     return WidgetScaffold(
-      appBar: _buildAppBar(),
+      appBar: (!_compact) ? _buildAppBar() : null,
       children: [
         _buildTimeAndSelectors(true),
         _buildNeedZones(),

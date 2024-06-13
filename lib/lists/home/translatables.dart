@@ -19,11 +19,11 @@ abstract class ListTranslatable extends StatefulWidget {
 abstract class ListTranslatableState<I extends Translatable> extends State<ListTranslatable> {
   final TextEditingController controller = TextEditingController();
 
-  List<I> items = [];
+  List<I> _initialItems = [];
 
   List<I> _filteredItems = [];
 
-  List<I> get getItems;
+  List<I> get items => _initialItems;
 
   @override
   void initState() {
@@ -31,13 +31,17 @@ abstract class ListTranslatableState<I extends Translatable> extends State<ListT
     super.initState();
   }
 
-  void _getItems() {
-    items = getItems;
+  List<I> initialItems();
+
+  List<I> filteredItems();
+
+  void _initialize() {
+    _initialItems = initialItems();
   }
 
   void _filter() {
     setState(() {
-      _filteredItems = items;
+      _filteredItems = filteredItems();
     });
   }
 
@@ -60,7 +64,7 @@ abstract class ListTranslatableState<I extends Translatable> extends State<ListT
   Widget buildEntry(I item);
 
   List<Widget> _listEntries() {
-    if (items.isEmpty) _getItems();
+    if (_initialItems.isEmpty) _initialize();
     if (_filteredItems.isEmpty) _filter();
     return _filteredItems.map((e) => buildEntry(e)).toList();
   }

@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
 import 'package:cotwcompanion/helpers/json.dart';
@@ -22,7 +21,14 @@ class ListLoadoutAmmo extends ListLoadoutItems<WeaponAmmo> {
 
 class ListLoadoutAmmoState extends ListLoadoutItemsState<WeaponAmmo> {
   @override
-  List<WeaponAmmo> get items => HelperFilter.filterLoadoutAmmo(controller.text).sorted(WeaponAmmo.sortByWeaponName);
+  List<WeaponAmmo> initialItems() {
+    return HelperJSON.weaponsAmmo;
+  }
+
+  @override
+  List<WeaponAmmo> filteredItems() {
+    return HelperFilter.filterLoadoutAmmo(items, controller.text);
+  }
 
   @override
   bool contains(WeaponAmmo item) {

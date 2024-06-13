@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
@@ -19,7 +20,14 @@ class ListReserves extends ListTranslatable {
 
 class ListReservesState extends ListTranslatableState<Reserve> {
   @override
-  List<Reserve> get getItems => HelperFilter.filterReserves(controller.text);
+  List<Reserve> initialItems() {
+    return HelperJSON.reserves;
+  }
+
+  @override
+  List<Reserve> filteredItems() {
+    return HelperFilter.filterReserves(items, controller.text);
+  }
 
   @override
   bool isFilterChanged() => HelperFilter.reserveFiltersChanged();

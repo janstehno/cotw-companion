@@ -28,7 +28,14 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState<Enumerato
   late final HelperEnumerator _helperEnumerator;
 
   @override
-  List<Enumerator> get items => HelperFilter.filterEnumerators(controller.text, _helperEnumerator.enumerators);
+  List<Enumerator> initialItems() {
+    return _helperEnumerator.enumerators;
+  }
+
+  @override
+  List<Enumerator> filteredItems() {
+    return HelperFilter.filterEnumerators(items, controller.text);
+  }
 
   @override
   void initState() {

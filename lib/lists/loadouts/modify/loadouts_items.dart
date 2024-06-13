@@ -28,9 +28,11 @@ abstract class ListLoadoutItemsState<I> extends State<ListLoadoutItems<I>> {
   final controller = TextEditingController();
   final List<I> selectedItems = [];
 
+  List<I> _initialItems = [];
+
   List<I> _filteredItems = [];
 
-  List<I> get items;
+  List<I> get items => _initialItems;
 
   @override
   void initState() {
@@ -39,8 +41,18 @@ abstract class ListLoadoutItemsState<I> extends State<ListLoadoutItems<I>> {
     super.initState();
   }
 
+  List<I> initialItems();
+
+  List<I> filteredItems();
+
+  void _initialize() {
+    _initialItems = initialItems();
+  }
+
   void _filter() {
-    setState(() => _filteredItems = items);
+    setState(() {
+      _filteredItems = filteredItems();
+    });
   }
 
   bool contains(I item);
@@ -56,6 +68,7 @@ abstract class ListLoadoutItemsState<I> extends State<ListLoadoutItems<I>> {
   Widget buildItemSwitch(I item);
 
   List<Widget> _listItems() {
+    if (_initialItems.isEmpty) _initialize();
     if (_filteredItems.isEmpty) _filter();
     return _filteredItems.map((e) => buildItemSwitch(e)).toList();
   }

@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/weapon.dart';
@@ -22,7 +23,14 @@ class ListWeapons extends ListTranslatable {
 
 class ListWeaponsState extends ListTranslatableState<Weapon> {
   @override
-  List<Weapon> get getItems => HelperFilter.filterWeapons(controller.text);
+  List<Weapon> initialItems() {
+    return HelperJSON.weapons;
+  }
+
+  @override
+  List<Weapon> filteredItems() {
+    return HelperFilter.filterWeapons(items, controller.text);
+  }
 
   @override
   bool isFilterChanged() => HelperFilter.weaponFiltersChanged();

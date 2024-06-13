@@ -1,6 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/lists/loadouts/modify/loadouts_items.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
@@ -21,7 +21,14 @@ class ListLoadoutCallers extends ListLoadoutItems<Caller> {
 
 class ListLoadoutCallersState extends ListLoadoutItemsState<Caller> {
   @override
-  List<Caller> get items => HelperFilter.filterLoadoutCallers(controller.text).sorted(Caller.sortByName);
+  List<Caller> initialItems() {
+    return HelperJSON.callers;
+  }
+
+  @override
+  List<Caller> filteredItems() {
+    return HelperFilter.filterLoadoutCallers(items, controller.text);
+  }
 
   @override
   bool contains(Caller item) {

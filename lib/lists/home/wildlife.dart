@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
@@ -19,7 +20,14 @@ class ListWildlife extends ListTranslatable {
 
 class ListWildlifeState extends ListTranslatableState<Animal> {
   @override
-  List<Animal> get getItems => HelperFilter.filterAnimals(controller.text, context);
+  List<Animal> initialItems() {
+    return HelperJSON.animals;
+  }
+
+  @override
+  List<Animal> filteredItems() {
+    return HelperFilter.filterAnimals(items, controller.text, context);
+  }
 
   @override
   bool isFilterChanged() => HelperFilter.animalFiltersChanged();

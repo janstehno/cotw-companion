@@ -37,9 +37,13 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
   bool _yesNoOpened = false;
   bool fileOptionsOpened = false;
 
-  List<I> filteredItems = [];
+  List<I> _initialItems = [];
 
-  List<I> get items;
+  List<I> _filteredItems = [];
+
+  List<I> get items => _initialItems;
+
+  List<I> get filtered => _filteredItems;
 
   TextEditingControllerWorkaround get controller => _controller;
 
@@ -62,9 +66,17 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     }
   }
 
+  List<I> initialItems();
+
+  List<I> filteredItems();
+
+  void _initialize() {
+    _initialItems = initialItems();
+  }
+
   void filter() {
     setState(() {
-      filteredItems = items;
+      _filteredItems = filteredItems();
     });
   }
 
@@ -315,13 +327,14 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
   }
 
   List<Widget> listItems() {
-    if (filteredItems.isEmpty) filter();
-    return filteredItems.mapIndexed((i, item) => buildEntry(i, item)).toList();
+    if (_initialItems.isEmpty) _initialize();
+    if (_filteredItems.isEmpty) filter();
+    return _filteredItems.mapIndexed((i, item) => buildEntry(i, item)).toList();
   }
 
   Widget buildItems(List<Widget> widgets) {
     return ListView.builder(
-      itemCount: 2 + filteredItems.length,
+      itemCount: 2 + _filteredItems.length,
       itemBuilder: (context, i) {
         if (i == 0) return buildAppBar();
         if (i == 1) return buildSearchBar() ?? const SizedBox.shrink();

@@ -1,7 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/helpers/json.dart';
-import 'package:cotwcompanion/helpers/loadout.dart';
-import 'package:cotwcompanion/helpers/log.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/logger.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
@@ -215,9 +213,9 @@ class HelperFilter {
     _filters.update(filterKey, (v) => value);
   }
 
-  static List<Reserve> filterReserves(String searchText) {
+  static List<Reserve> filterReserves(List<Reserve> list, String searchText) {
     List<Reserve> reserves = [];
-    reserves.addAll(HelperJSON.reserves);
+    reserves.addAll(list);
     if (searchText.isNotEmpty || reserveFiltersChanged()) {
       reserves = reserves
           .where((e) =>
@@ -229,9 +227,9 @@ class HelperFilter {
     return reserves.sorted(Reserve.sortById);
   }
 
-  static List<Animal> filterAnimals(String searchText, BuildContext context) {
+  static List<Animal> filterAnimals(List<Animal> list, String searchText, BuildContext context) {
     List<Animal> animals = [];
-    animals.addAll(HelperJSON.animals);
+    animals.addAll(list);
     if (searchText.isNotEmpty || animalFiltersChanged()) {
       animals = animals
           .where((e) =>
@@ -249,18 +247,18 @@ class HelperFilter {
     return animals.sorted(Animal.sortByNameByLocale(context));
   }
 
-  static List<Fur> filterFurs(String searchText) {
+  static List<Fur> filterFurs(List<Fur> list, String searchText) {
     List<Fur> animalFurs = [];
-    animalFurs.addAll(HelperJSON.furs);
+    animalFurs.addAll(list);
     if (searchText.isNotEmpty) {
       animalFurs = animalFurs.where((e) => (e.name.toLowerCase().contains(searchText.toLowerCase()))).toList();
     }
     return animalFurs.sorted(Fur.sortByName);
   }
 
-  static List<Weapon> filterWeapons(String searchText) {
+  static List<Weapon> filterWeapons(List<Weapon> list, String searchText) {
     List<Weapon> weapons = [];
-    weapons.addAll(HelperJSON.weapons);
+    weapons.addAll(list);
     if (searchText.isNotEmpty || weaponFiltersChanged()) {
       weapons = weapons
           .where((e) =>
@@ -274,18 +272,18 @@ class HelperFilter {
     return weapons.sorted(Weapon.sortByTypeName);
   }
 
-  static List<Ammo> filterAmmo(String searchText) {
+  static List<Ammo> filterAmmo(List<Ammo> list, String searchText) {
     List<Ammo> ammo = [];
-    ammo.addAll(HelperJSON.ammo);
+    ammo.addAll(list);
     if (searchText.isNotEmpty) {
       ammo = ammo.where((e) => (e.name.toLowerCase().contains(searchText.toLowerCase()))).toList();
     }
     return ammo.sorted(Ammo.sortByName);
   }
 
-  static List<Caller> filterCallers(String searchText) {
+  static List<Caller> filterCallers(List<Caller> list, String searchText) {
     List<Caller> callers = [];
-    callers.addAll(HelperJSON.callers);
+    callers.addAll(list);
     if (searchText.isNotEmpty || callerFiltersChanged()) {
       callers = callers
           .where((e) =>
@@ -296,11 +294,11 @@ class HelperFilter {
     return callers.sorted(Caller.sortByName);
   }
 
-  static List<Log> filterLogs(String searchText, BuildContext context) {
+  static List<Log> filterLogs(List<Log> list, String searchText, BuildContext context) {
     List<Log> logs = [];
-    logs.addAll(HelperLog.logs);
+    logs.addAll(list);
     if (searchText.isNotEmpty) {
-      for (Log log in HelperLog.logs) {
+      for (Log log in list) {
         bool add = false;
         for (String search in searchText.split("|")) {
           if (search.isNotEmpty &&
@@ -328,9 +326,9 @@ class HelperFilter {
     return logs;
   }
 
-  static List<Loadout> filterLoadouts(String searchText) {
+  static List<Loadout> filterLoadouts(List<Loadout> list, String searchText) {
     List<Loadout> loadouts = [];
-    loadouts.addAll(HelperLoadout.loadouts);
+    loadouts.addAll(list);
     if (searchText.isNotEmpty || loadoutFiltersChanged()) {
       loadouts = loadouts
           .where((e) =>
@@ -348,9 +346,9 @@ class HelperFilter {
     return loadouts;
   }
 
-  static List<WeaponAmmo> filterLoadoutAmmo(String searchText) {
+  static List<WeaponAmmo> filterLoadoutAmmo(List<WeaponAmmo> list, String searchText) {
     List<WeaponAmmo> filtered = [];
-    for (WeaponAmmo weaponAmmo in HelperJSON.weaponsAmmo) {
+    for (WeaponAmmo weaponAmmo in list) {
       Weapon weapon = HelperJSON.getWeapon(weaponAmmo.weaponId)!;
       Ammo ammo = HelperJSON.getAmmo(weaponAmmo.ammoId)!;
       if ((weapon.name.toLowerCase().contains(searchText.toLowerCase())) ||
@@ -361,9 +359,9 @@ class HelperFilter {
     return filtered.sorted(WeaponAmmo.sortByAmmoName);
   }
 
-  static List<Caller> filterLoadoutCallers(String searchText) {
+  static List<Caller> filterLoadoutCallers(List<Caller> list, String searchText) {
     List<Caller> callers = [];
-    for (Caller caller in HelperJSON.callers) {
+    for (Caller caller in list) {
       if (caller.name.toLowerCase().contains(searchText.toLowerCase())) {
         callers.add(caller);
       }
@@ -371,13 +369,9 @@ class HelperFilter {
     return callers.sorted(Caller.sortByName);
   }
 
-  static List<Mission> filterReserveMissions(String searchText, [int? reserveId]) {
+  static List<Mission> filterMissions(List<Mission> list, String searchText) {
     List<Mission> missions = [];
-    if (reserveId != null) {
-      missions.addAll(HelperJSON.getReserveMissions(reserveId));
-    } else {
-      missions.addAll(HelperJSON.missions);
-    }
+    missions.addAll(list);
     if (searchText.isNotEmpty || missionFiltersChanged()) {
       missions = missions
           .where((e) =>
@@ -386,16 +380,12 @@ class HelperFilter {
               getBoolValueList(FilterKey.missionDifficulty, e.difficulty))
           .toList();
     }
-    return missions.sorted(Mission.sortByReserveName);
+    return missions.sorted(Mission.sortByName);
   }
 
-  static List<Mission> filterMissions(String searchText) {
-    return filterReserveMissions(searchText, null);
-  }
-
-  static List<Enumerator> filterEnumerators(String searchText, List<Enumerator> allEnumerators) {
+  static List<Enumerator> filterEnumerators(List<Enumerator> list, String searchText) {
     List<Enumerator> enumerators = [];
-    enumerators.addAll(allEnumerators);
+    enumerators.addAll(list);
     if (searchText.isNotEmpty) {
       enumerators = enumerators.where((e) => (e.name.toLowerCase().contains(searchText.toLowerCase()))).toList();
     }

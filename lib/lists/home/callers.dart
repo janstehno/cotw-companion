@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
@@ -23,7 +24,14 @@ class ListCallersState extends ListTranslatableState<Caller> {
   bool get _imperialUnits => Provider.of<Settings>(context, listen: false).imperialUnits;
 
   @override
-  List<Caller> get getItems => HelperFilter.filterCallers(controller.text);
+  List<Caller> initialItems() {
+    return HelperJSON.callers;
+  }
+
+  @override
+  List<Caller> filteredItems() {
+    return HelperFilter.filterCallers(items, controller.text);
+  }
 
   @override
   bool isFilterChanged() => HelperFilter.callerFiltersChanged();

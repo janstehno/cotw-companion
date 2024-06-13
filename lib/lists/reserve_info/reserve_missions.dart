@@ -1,6 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/lists/home/translatables.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
@@ -28,9 +28,14 @@ class ListReserveMissions extends ListTranslatable {
 
 class ListReserveMissionsState extends ListTranslatableState<Mission> {
   @override
-  List<Mission> get getItems =>
-      HelperFilter.filterReserveMissions(controller.text, (widget as ListReserveMissions).reserve.id)
-          .sorted(Mission.sortByName);
+  List<Mission> initialItems() {
+    return HelperJSON.getReserveMissions((widget as ListReserveMissions).reserve.id);
+  }
+
+  @override
+  List<Mission> filteredItems() {
+    return HelperFilter.filterMissions(items, controller.text);
+  }
 
   @override
   bool isFilterChanged() => HelperFilter.missionFiltersChanged();

@@ -22,7 +22,7 @@ abstract class ActivityEntriesReorderableState<I extends Exportable> extends Act
           buildSearchBar() ?? const SizedBox.shrink(),
         ],
       ),
-      itemCount: filteredItems.length,
+      itemCount: filtered.length,
       itemBuilder: (context, i) {
         return widgets.elementAt(i);
       },

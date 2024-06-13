@@ -7,6 +7,7 @@ import 'package:cotwcompanion/activities/detail/reserve.dart';
 import 'package:cotwcompanion/activities/detail/weapon.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
 import 'package:cotwcompanion/model/translatable/ammo.dart';
@@ -33,19 +34,19 @@ class ActivitySearch extends StatefulWidget {
 class ActivitySearchState extends State<ActivitySearch> {
   final TextEditingController _controller = TextEditingController();
 
-  List<Reserve> get _reserves => HelperFilter.filterReserves(_controller.text);
+  List<Reserve> get _reserves => HelperFilter.filterReserves(HelperJSON.reserves, _controller.text);
 
-  List<Animal> get _animals => HelperFilter.filterAnimals(_controller.text, context);
+  List<Animal> get _animals => HelperFilter.filterAnimals(HelperJSON.animals, _controller.text, context);
 
-  List<Fur> get _furs => HelperFilter.filterFurs(_controller.text);
+  List<Fur> get _furs => HelperFilter.filterFurs(HelperJSON.furs, _controller.text);
 
-  List<Weapon> get _weapons => HelperFilter.filterWeapons(_controller.text);
+  List<Weapon> get _weapons => HelperFilter.filterWeapons(HelperJSON.weapons, _controller.text);
 
-  List<Ammo> get _ammo => HelperFilter.filterAmmo(_controller.text);
+  List<Ammo> get _ammo => HelperFilter.filterAmmo(HelperJSON.ammo, _controller.text);
 
-  List<Caller> get _callers => HelperFilter.filterCallers(_controller.text);
+  List<Caller> get _callers => HelperFilter.filterCallers(HelperJSON.callers, _controller.text);
 
-  List<Mission> get _missions => HelperFilter.filterMissions(_controller.text);
+  List<Mission> get _missions => HelperFilter.filterMissions(HelperJSON.missions, _controller.text);
 
   int _itemIndex = 0;
   int _itemLimit = 0;

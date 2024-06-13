@@ -47,16 +47,19 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
   bool _viewOptionsOpened = false;
 
   @override
-  List<Log> get items => _filteredLogs;
-
-  @override
   void initState() {
     _settings = Provider.of<Settings>(context, listen: false);
     super.initState();
   }
 
-  List<Log> get _filteredLogs {
-    List<Log> filtered = HelperFilter.filterLogs(controller.text, context);
+  @override
+  List<Log> initialItems() {
+    return HelperLog.logs;
+  }
+
+  @override
+  List<Log> filteredItems() {
+    List<Log> filtered = HelperFilter.filterLogs(items, controller.text, context);
     if (!(widget as ActivityLogs).trophyLodge && !_settings.trophyLodgeEntry) {
       filtered.removeWhere((e) => e.isInLodge);
     }

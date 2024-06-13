@@ -33,7 +33,14 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
   late final HelperEnumerator _helperEnumerator;
 
   @override
-  List<Counter> get items => (widget as ActivityCounters).enumerator.counters.sorted(Counter.sortByOrder);
+  List<Counter> initialItems() {
+    return (widget as ActivityCounters).enumerator.counters.sorted(Counter.sortByOrder);
+  }
+
+  @override
+  List<Counter> filteredItems() {
+    return items;
+  }
 
   @override
   void initState() {

@@ -24,7 +24,14 @@ class ActivityLoadouts extends ActivityEntries {
 
 class ActivityLoadoutsState extends ActivityEntriesState<Loadout> {
   @override
-  List<Loadout> get items => HelperFilter.filterLoadouts(controller.text);
+  List<Loadout> initialItems() {
+    return HelperLoadout.loadouts;
+  }
+
+  @override
+  List<Loadout> filteredItems() {
+    return HelperFilter.filterLoadouts(items, controller.text);
+  }
 
   @override
   void removeAll() {

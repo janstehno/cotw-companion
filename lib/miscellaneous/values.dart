@@ -15,7 +15,7 @@ class Values {
   static const double title = 75;
   static const double subtitle = 65;
   static const double section = 65;
-  static const double menu = 35;
+  static const double menu = 45;
   static const double entry = 22;
 
   static const double dropDown = 65;

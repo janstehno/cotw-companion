@@ -59,8 +59,7 @@ class $AssetsRawGen {
 
   String get weaponsammo => 'assets/raw/weaponsammo.json';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         ammo,
         animals,
         animalscallers,
@@ -319,8 +318,7 @@ class $AssetsGraphicsAnatomyGen {
 
   String get wildboarOrgans => 'assets/graphics/anatomy/wildboar_organs.svg';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         americanalligatorBody,
         americanalligatorOrgans,
         axisdeerBody,
@@ -621,8 +619,7 @@ class $AssetsGraphicsAnimalsGen {
 
   String get willowptarmigan => 'assets/graphics/animals/willowptarmigan.svg';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         americanalligator,
         antelopejackrabbit,
         axisdeer,
@@ -765,8 +762,7 @@ class $AssetsGraphicsCallersGen {
 
   String get wildturkeymouthcaller => 'assets/graphics/callers/wildturkeymouthcaller.svg';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         antlerrattler,
         axisdeerscreamercaller,
         beacondeluxebeangoosecaller,
@@ -969,8 +965,7 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get willowptarmigan => const AssetGenImage('assets/graphics/heads/willowptarmigan.png');
 
-  List<AssetGenImage> get values =>
-      [
+  List<AssetGenImage> get values => [
         americanalligator,
         antelopejackrabbit,
         axisdeer,
@@ -1225,6 +1220,8 @@ class $AssetsGraphicsIconsGen {
 
   String get stop => 'assets/graphics/icons/stop.svg';
 
+  String get swipeRight => 'assets/graphics/icons/swipe_right.svg';
+
   String get target => 'assets/graphics/icons/target.svg';
 
   String get todo => 'assets/graphics/icons/todo.svg';
@@ -1279,8 +1276,7 @@ class $AssetsGraphicsIconsGen {
 
   String get zoneRest => 'assets/graphics/icons/zone_rest.svg';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         about,
         accept,
         back,
@@ -1362,6 +1358,7 @@ class $AssetsGraphicsIconsGen {
         sortTrophyScore,
         stats,
         stop,
+        swipeRight,
         target,
         todo,
         trophyBronze,
@@ -1503,8 +1500,7 @@ class $AssetsGraphicsProficiencyGen {
 
   String get zeroing => 'assets/graphics/proficiency/zeroing.svg';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         bodycontrol,
         boomstick,
         botheyesopen,
@@ -1589,8 +1585,7 @@ class $AssetsGraphicsReservesGen {
 
   String get yukonvalley => 'assets/graphics/reserves/yukonvalley.svg';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         cuatrocolinasgamereserve,
         emeraldcoastaustralia,
         hirschfeldenhuntingreserve,
@@ -1717,8 +1712,7 @@ class $AssetsGraphicsWeaponsGen {
 
   String get zarza1522lr => 'assets/graphics/weapons/zarza1522lr.svg';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         a10mmdavani,
         a223docent,
         a243ranger,
@@ -1806,8 +1800,7 @@ class $AssetsRawMapsGen {
 
   String get yukonvalley => 'assets/raw/maps/yukonvalley.json';
 
-  List<String> get values =>
-      [
+  List<String> get values => [
         cuatrocolinasgamereserve,
         emeraldcoastaustralia,
         hirschfeldenhuntingreserve,
@@ -1833,7 +1826,7 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName, {this.size});
+  const AssetGenImage(this._assetName, {this.size = null});
 
   final String _assetName;
 

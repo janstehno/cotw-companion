@@ -73,6 +73,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
       onTap: () {
         setState(() {
           _settings.changeTheme(false);
+          widget.callback();
         });
       },
     );
@@ -85,6 +86,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
       onTap: () {
         setState(() {
           _settings.changeTheme(true);
+          widget.callback();
         });
       },
     );

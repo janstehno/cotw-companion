@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
@@ -56,8 +58,16 @@ abstract class BuilderBuilderState extends State<BuilderBuilder> {
 
   Widget _buildShadow() {
     return Container(
-      color: Interface.alwaysDark.withOpacity(0.4),
-      alignment: Alignment.bottomRight,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          transform: const GradientRotation(pi / 2),
+          colors: [
+            Interface.ff06.withOpacity(0.1),
+            Interface.ff06.withOpacity(0.4),
+            Interface.ff06.withOpacity(0.6),
+          ],
+        ),
+      ),
     );
   }
 

@@ -51,8 +51,8 @@ class Loadout extends Exportable {
   factory Loadout.fromJson(Map<String, dynamic> json) {
     return Loadout(
       name: json['NAME'],
-      ammo: json['AMMO'].map((e) => e).toList(),
-      callers: json['CALLERS'].map((e) => e).toList(),
+      ammo: (json['AMMO'] ?? []).map((e) => e).toList(),
+      callers: (json['CALLERS'] ?? []).map((e) => e).toList(),
     );
   }
 

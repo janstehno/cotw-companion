@@ -6,16 +6,15 @@ import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/section/section_tap.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_shadow/simple_shadow.dart';
 
 class WidgetSectionMenu extends WidgetSectionTap {
-  final String _icon;
+  final String? _icon;
   final Color _color;
 
   const WidgetSectionMenu(
     super.text, {
     super.key,
-    required String icon,
+    String? icon,
     Color? color,
     required super.onTap,
   })  : _icon = icon,
@@ -23,40 +22,31 @@ class WidgetSectionMenu extends WidgetSectionTap {
         super(background: Interface.transparent);
 
   @override
-  double get height => Values.menu;
+  double get height => _icon == null ? Values.menu - 10 : Values.menu;
 
   Widget _buildIcon() {
-    return SimpleShadow(
-      sigma: 0.5,
-      offset: const Offset(1.4, 1.4),
-      child: WidgetIcon(
-        _icon,
-        color: _color,
-      ),
+    return WidgetIcon.withSize(
+      _icon!,
+      color: _color,
+      size: Values.indicatorSize,
     );
   }
 
   Widget _buildText() {
     return WidgetText(
       super.text,
-      color: Interface.alwaysLight,
-      style: Style.normal.s16.w500,
+      color: Interface.dark.withOpacity(0.8),
+      style: Style.normal.s16.w300,
     );
   }
 
   @override
   Widget buildCenter() {
-    return SimpleShadow(
-      sigma: 4,
-      child: Row(
-        children: [
-          WidgetMargin.right(
-            15,
-            child: _buildIcon(),
-          ),
-          Expanded(child: _buildText()),
-        ],
-      ),
+    return Row(
+      children: [
+        if (_icon != null) WidgetMargin.right(15, child: _buildIcon()),
+        Expanded(child: _buildText()),
+      ],
     );
   }
 }

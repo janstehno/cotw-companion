@@ -1,24 +1,16 @@
-import 'package:cotwcompanion/activities/about.dart';
-import 'package:cotwcompanion/activities/search.dart';
-import 'package:cotwcompanion/activities/settings.dart';
+import 'dart:math';
+
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
-import 'package:cotwcompanion/lists/home/callers.dart';
-import 'package:cotwcompanion/lists/home/other.dart';
-import 'package:cotwcompanion/lists/home/reserves.dart';
-import 'package:cotwcompanion/lists/home/tools.dart';
-import 'package:cotwcompanion/lists/home/weapons.dart';
-import 'package:cotwcompanion/lists/home/wildlife.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
-import 'package:cotwcompanion/widgets/app/bar_scroll.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/button/button_swipe.dart';
+import 'package:cotwcompanion/widgets/fullscreen/home_menu.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
-import 'package:cotwcompanion/widgets/parts/home/menu.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/text/text_pattern.dart';
-import 'package:cotwcompanion/widgets/text/text_tap.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -32,15 +24,7 @@ class ActivityHome extends StatefulWidget {
 }
 
 class ActivityHomeState extends State<ActivityHome> {
-  final List<List<dynamic>> _menuItems = [
-    ["RESERVES", Assets.graphics.icons.reserve, const ListReserves()],
-    ["WILDLIFE", Assets.graphics.icons.wildlife, const ListWildlife()],
-    ["WEAPONS", Assets.graphics.icons.weapon, const ListWeapons()],
-    ["CALLERS", Assets.graphics.icons.caller, const ListCallers()],
-    ["TOOLS", Assets.graphics.icons.hammer, const ListTools()],
-    ["OTHER", Assets.graphics.icons.other, const ListOther()],
-    ["SEARCH", Assets.graphics.icons.search, const ActivitySearch()],
-  ];
+  bool _menuOpened = false;
 
   Widget _buildName() {
     return Column(
@@ -55,13 +39,13 @@ class ActivityHomeState extends State<ActivityHome> {
         ),
         WidgetText(
           tr("NOT_OFFICIAL").toUpperCase(),
-          color: Interface.alwaysDark.withOpacity(0.6),
+          color: Interface.alwaysDark.withOpacity(0.8),
           style: Style.normal.s8.w300,
         ),
         WidgetText(
           Values.version,
-          color: Interface.alwaysDark.withOpacity(0.6),
-          style: Style.normal.s12.w300,
+          color: Interface.alwaysDark,
+          style: Style.normal.s14.w500,
         ),
       ],
     );
@@ -120,107 +104,28 @@ class ActivityHomeState extends State<ActivityHome> {
     );
   }
 
-  Widget _buildMenuItem(String text, String icon, Widget activity) {
-    return WidgetSectionMenu(tr(text), icon: icon, onTap: () {
-      Navigator.push(context, MaterialPageRoute(builder: (e) => activity));
-    });
-  }
-
-  List<Widget> _listMenuItems() {
-    return _menuItems.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2))).toList();
-  }
-
-  List<Widget> _listMenu() {
-    return [
-      ..._listMenuItems(),
-      _buildMenuItem(
-        "SETTINGS",
-        Assets.graphics.icons.settings,
-        ActivitySettings(callback: () {
-          setState(() {});
-        }),
-      ),
-      _buildMenuItem(
-        "ABOUT",
-        Assets.graphics.icons.about,
-        const ActivityAbout(),
-      ),
-    ];
-  }
-
-  Widget _buildMenu() {
-    return WidgetPadding.h30v20(
-      alignment: Alignment.bottomLeft,
-      child: WidgetScrollBar(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: _listMenu(),
-          ),
+  Widget _buildSwipe() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        WidgetButtonSwipe(
+          Assets.graphics.icons.tap,
+          background: Interface.transparent,
+          onTap: () {
+            setState(() {
+              _menuOpened = true;
+            });
+          },
         ),
-      ),
-    );
-  }
-
-  List<Widget> _listOther() {
-    return [
-      WidgetTextTap(
-        tr("WIKI").toUpperCase(),
-        color: Interface.alwaysLight.withOpacity(0.8),
-        style: Style.normal.s8.w500,
-        onTap: () => Utils.redirectTo(
-          Uri.parse("https://github.com/janstehno/cotw-companion/wiki"),
-        ),
-      ),
-      const SizedBox(width: 10),
-      WidgetTextTap(
-        tr("PATCH_NOTES").toUpperCase(),
-        color: Interface.alwaysLight.withOpacity(0.8),
-        style: Style.normal.s8.w500,
-        onTap: () => Utils.redirectTo(
-          Uri.parse("https://github.com/janstehno/cotw-companion/wiki/Patch-notes"),
-        ),
-      ),
-      const SizedBox(width: 10),
-      WidgetTextTap(
-        tr("IDEAS").toUpperCase(),
-        color: Interface.alwaysLight.withOpacity(0.8),
-        style: Style.normal.s8.w500,
-        onTap: () => Utils.redirectTo(
-          Uri.parse("https://github.com/janstehno/cotw-companion/discussions"),
-        ),
-      ),
-      const SizedBox(width: 10),
-      WidgetTextTap(
-        tr("ISSUES").toUpperCase(),
-        color: Interface.alwaysLight.withOpacity(0.8),
-        style: Style.normal.s8.w500,
-        onTap: () => Utils.redirectTo(
-          Uri.parse("https://github.com/janstehno/cotw-companion/issues"),
-        ),
-      ),
-    ];
-  }
-
-  Widget _buildOther() {
-    return Container(
-      color: Interface.alwaysDark.withOpacity(0.8),
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: _listOther(),
-      ),
+      ],
     );
   }
 
   Widget _buildDisclaimer() {
-    return WidgetPadding.h30v20(
-      background: Interface.alwaysDark.withOpacity(0.6),
+    return WidgetPadding.a30(
       child: WidgetTextPattern(
         tr("DISCLAIMER"),
-        color: Interface.alwaysLight.withOpacity(0.4),
+        color: Interface.alwaysLight.withOpacity(0.8),
         normalStyle: Style.normal.s10.w300,
         patternStyle: Style.normal.s10.w500,
         textAlign: TextAlign.center,
@@ -237,27 +142,66 @@ class ActivityHomeState extends State<ActivityHome> {
   }
 
   Widget _buildShadow() {
-    return Container(color: Interface.alwaysDark.withOpacity(0.4));
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          transform: const GradientRotation(pi / 2),
+          colors: [
+            Interface.ff06.withOpacity(0.1),
+            Interface.ff06.withOpacity(0.4),
+            Interface.ff06.withOpacity(0.6),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCenter() {
+    Size screenSize = MediaQuery.of(context).size;
+    double menuWidth = screenSize.width > 500 ? 0.6 * screenSize.width : screenSize.width;
+
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        _buildBackground(),
+        _buildShadow(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildHeader(),
+            Expanded(child: _buildSwipe()),
+            _buildDisclaimer(),
+          ],
+        ),
+        AnimatedPositioned(
+          width: menuWidth,
+          height: screenSize.height,
+          left: _menuOpened ? 0 : -menuWidth,
+          duration: const Duration(milliseconds: 400),
+          child: WidgetHomeMenu(callback: () {
+            setState(() {
+              _menuOpened = false;
+            });
+          }),
+        ),
+      ],
+    );
   }
 
   Widget _buildWidgets() {
     return Scaffold(
       appBar: AppBar(),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          _buildBackground(),
-          _buildShadow(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildHeader(),
-              Expanded(child: _buildMenu()),
-              _buildDisclaimer(),
-              _buildOther(),
-            ],
-          ),
-        ],
+      body: GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          setState(() {
+            if (details.delta.direction > 1) {
+              _menuOpened = false;
+            } else {
+              _menuOpened = true;
+            }
+          });
+        },
+        child: _buildCenter(),
       ),
     );
   }

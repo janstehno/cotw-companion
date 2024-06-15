@@ -14,11 +14,14 @@ class WidgetButtonIcon extends WidgetButton {
     super.key,
     Color? color,
     double? size,
+    super.width,
     super.background,
     required super.onTap,
   })  : _icon = icon,
         _color = color,
         _size = size;
+
+  String get icon => _icon;
 
   double get iconSize => _size ?? Values.indicatorSize;
 

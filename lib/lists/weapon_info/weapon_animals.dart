@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
@@ -47,13 +48,15 @@ class ListWeaponAnimalsState extends State<ListWeaponAnimals> {
   }
 
   Widget _buildAnimals() {
+    List<Animal> sortedAnimals = _animals.sorted(Animal.sortByNameByLocale(context));
+
     return WidgetPadding.a30(
       child: ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: _animals.length,
+        itemCount: sortedAnimals.length,
         itemBuilder: (context, i) {
-          return _buildAnimal(_animals.elementAt(i));
+          return _buildAnimal(sortedAnimals.elementAt(i));
         },
       ),
     );

@@ -177,7 +177,7 @@ class ActivityHomeState extends State<ActivityHome> {
           width: menuWidth,
           height: screenSize.height,
           left: _menuOpened ? 0 : -menuWidth,
-          duration: const Duration(milliseconds: 400),
+          duration: const Duration(milliseconds: 200),
           child: WidgetHomeMenu(callback: () {
             setState(() {
               _menuOpened = false;

@@ -262,7 +262,7 @@ class EntryLogState extends WidgetLogsDismissibleState {
   Widget _buildHarvestCheckTrophy() {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if ((widget as WidgetLogsDismissible).log.reserve != null) Expanded(child: _buildHarvestCheck()),

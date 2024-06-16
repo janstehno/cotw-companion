@@ -1222,6 +1222,8 @@ class $AssetsGraphicsIconsGen {
 
   String get swipeRight => 'assets/graphics/icons/swipe_right.svg';
 
+  String get tap => 'assets/graphics/icons/tap.svg';
+
   String get target => 'assets/graphics/icons/target.svg';
 
   String get todo => 'assets/graphics/icons/todo.svg';
@@ -1359,6 +1361,7 @@ class $AssetsGraphicsIconsGen {
         stats,
         stop,
         swipeRight,
+        tap,
         target,
         todo,
         trophyBronze,

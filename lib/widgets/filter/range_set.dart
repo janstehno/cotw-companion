@@ -40,75 +40,79 @@ class WidgetFilterRangeSet extends StatefulWidget {
 }
 
 class WidgetFilterRangeSetState extends State<WidgetFilterRangeSet> {
+  final TextEditingController _controllerMin = TextEditingController();
+  final TextEditingController _controllerMax = TextEditingController();
+
   num get min => HelperFilter.getDefaultValue(widget.filterKeyLower);
 
   num get max => HelperFilter.getDefaultValue(widget.filterKeyUpper);
 
-  TextEditingController _initializeMinController() {
-    final TextEditingController controllerMin = TextEditingController();
+  @override
+  void initState() {
+    _initializeMinController();
+    _initializeMaxController();
+    super.initState();
+  }
+
+  void _initializeMinController() {
     double minValue = HelperFilter.getDoubleValue(widget.filterKeyLower);
     int minIntValue = HelperFilter.getIntValue(widget.filterKeyLower);
     if (widget.decimal) {
-      controllerMin.text = minValue == min ? "" : minValue.toString().replaceFirst(".0", "");
+      _controllerMin.text = minValue == min ? "" : minValue.toString().replaceFirst(".0", "");
     } else {
-      controllerMin.text = minIntValue == min ? "" : minIntValue.toString();
+      _controllerMin.text = minIntValue == min ? "" : minIntValue.toString();
     }
-    controllerMin.addListener(() => _changeMinValue(controllerMin));
-    return controllerMin;
+    _controllerMin.addListener(() => _changeMinValue());
   }
 
-  TextEditingController _initializeMaxController() {
-    final TextEditingController controllerMax = TextEditingController();
+  void _initializeMaxController() {
     double maxValue = HelperFilter.getDoubleValue(widget.filterKeyUpper);
     int maxIntValue = HelperFilter.getIntValue(widget.filterKeyUpper);
     if (widget.decimal) {
-      controllerMax.text = maxValue == max ? "" : maxValue.toString().replaceFirst(".0", "");
+      _controllerMax.text = maxValue == max ? "" : maxValue.toString().replaceFirst(".0", "");
     } else {
-      controllerMax.text = maxIntValue == max ? "" : maxIntValue.toString();
+      _controllerMax.text = maxIntValue == max ? "" : maxIntValue.toString();
     }
-    controllerMax.addListener(() => _changeMaxValue(controllerMax));
-    return controllerMax;
+    _controllerMax.addListener(() => _changeMaxValue());
   }
 
-  void _changeMinValue(TextEditingController controllerMin) {
+  void _changeMinValue() {
     num newMin;
     if (widget.decimal) {
-      newMin = controllerMin.text.isEmpty ? min.toDouble() : double.tryParse(controllerMin.text) ?? min.toDouble();
+      newMin = _controllerMin.text.isEmpty ? min.toDouble() : double.tryParse(_controllerMin.text) ?? min.toDouble();
     } else {
-      newMin = controllerMin.text.isEmpty ? min.toInt() : int.tryParse(controllerMin.text) ?? min.toInt();
+      newMin = _controllerMin.text.isEmpty ? min.toInt() : int.tryParse(_controllerMin.text) ?? min.toInt();
     }
     setState(() => HelperFilter.changeNumValue(widget.filterKeyLower, newMin));
   }
 
-  void _changeMaxValue(TextEditingController controllerMax) {
+  void _changeMaxValue() {
     num newMax;
     if (widget.decimal) {
-      newMax = controllerMax.text.isEmpty ? max.toDouble() : double.tryParse(controllerMax.text) ?? max.toDouble();
+      newMax = _controllerMax.text.isEmpty ? max.toDouble() : double.tryParse(_controllerMax.text) ?? max.toDouble();
     } else {
-      newMax = controllerMax.text.isEmpty ? max.toInt() : int.tryParse(controllerMax.text) ?? max.toInt();
+      newMax = _controllerMax.text.isEmpty ? max.toInt() : int.tryParse(_controllerMax.text) ?? max.toInt();
     }
     setState(() => HelperFilter.changeNumValue(widget.filterKeyUpper, newMax));
   }
 
-  Widget _buildMinTextField(TextEditingController controllerMin) {
+  Widget _buildMinTextField() {
     return WidgetTextFieldIndicator(
       icon: Assets.graphics.icons.rangeMin,
-      textController: controllerMin,
-      correct: controllerMin.text.isNotEmpty ? (double.tryParse(controllerMin.text) ?? min - 1) >= min : true,
+      textController: _controllerMin,
+      correct: _controllerMin.text.isNotEmpty ? (double.tryParse(_controllerMin.text) ?? min - 1) >= min : true,
     );
   }
 
-  Widget _buildMaxTextField(TextEditingController controllerMax) {
+  Widget _buildMaxTextField() {
     return WidgetTextFieldIndicator(
       icon: Assets.graphics.icons.rangeMax,
-      textController: controllerMax,
-      correct: controllerMax.text.isNotEmpty ? (double.tryParse(controllerMax.text) ?? max + 1) <= max : true,
+      textController: _controllerMax,
+      correct: _controllerMax.text.isNotEmpty ? (double.tryParse(_controllerMax.text) ?? max + 1) <= max : true,
     );
   }
 
   Widget _buildWidgets() {
-    final TextEditingController controllerMin = _initializeMinController();
-    final TextEditingController controllerMax = _initializeMaxController();
     return Column(
       children: [
         WidgetTitleIcon(
@@ -117,8 +121,8 @@ class WidgetFilterRangeSetState extends State<WidgetFilterRangeSet> {
         ),
         Row(
           children: [
-            Expanded(child: _buildMinTextField(controllerMin)),
-            Expanded(child: _buildMaxTextField(controllerMax)),
+            Expanded(child: _buildMinTextField()),
+            Expanded(child: _buildMaxTextField()),
           ],
         ),
       ],

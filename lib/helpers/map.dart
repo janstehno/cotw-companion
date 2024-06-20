@@ -170,7 +170,8 @@ class HelperMap {
     return !settings.mapPerformanceMode || (settings.mapPerformanceMode && level == 3);
   }
 
-  Future<Map<String, dynamic>> readMapObjects(String asset) async {
+  Future<Map<String, dynamic>> readMapObjects(String? asset) async {
+    if (asset == null) return {};
     try {
       final data = await HelperJSON.getData(asset);
       final Map<String, dynamic> mapObjects = Map.castFrom(json.decode(data));

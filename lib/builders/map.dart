@@ -54,7 +54,7 @@ class BuilderMapState extends BuilderBuilderState {
 
   @override
   Future<Map<String, dynamic>> loadData() async {
-    Map<String, dynamic> mapObjects = await _helperMap.readMapObjects(_reserves[_helperMap.reserve.asset]!);
+    Map<String, dynamic> mapObjects = await _helperMap.readMapObjects(_reserves[_helperMap.reserve.asset]);
     updateProgress("mapObjects", mapObjects);
     await Future.delayed(const Duration(seconds: 1), () {});
     return loadedData;

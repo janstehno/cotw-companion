@@ -111,6 +111,9 @@ flutter:
     - assets/graphics/maps/emeraldcoastaustralia/1/
     - assets/graphics/maps/emeraldcoastaustralia/2/
     - assets/graphics/maps/emeraldcoastaustralia/3/
+    - assets/graphics/maps/sundarpatanhuntingreserve/1/
+    - assets/graphics/maps/sundarpatanhuntingreserve/2/
+    - assets/graphics/maps/sundarpatanhuntingreserve/3/
   fonts:
     - family: Normal
       fonts:

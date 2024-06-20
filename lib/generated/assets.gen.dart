@@ -94,9 +94,17 @@ class $AssetsGraphicsAnatomyGen {
 
   String get bantengOrgans => 'assets/graphics/anatomy/banteng_organs.svg';
 
+  String get barasinghaBody => 'assets/graphics/anatomy/barasingha_body.svg';
+
+  String get barasinghaOrgans => 'assets/graphics/anatomy/barasingha_organs.svg';
+
   String get beceiteibexBody => 'assets/graphics/anatomy/beceiteibex_body.svg';
 
   String get beceiteibexOrgans => 'assets/graphics/anatomy/beceiteibex_organs.svg';
+
+  String get bengaltigerBody => 'assets/graphics/anatomy/bengaltiger_body.svg';
+
+  String get bengaltigerOrgans => 'assets/graphics/anatomy/bengaltiger_organs.svg';
 
   String get bighornsheepBody => 'assets/graphics/anatomy/bighornsheep_body.svg';
 
@@ -113,6 +121,10 @@ class $AssetsGraphicsAnatomyGen {
   String get blacktaildeerBody => 'assets/graphics/anatomy/blacktaildeer_body.svg';
 
   String get blacktaildeerOrgans => 'assets/graphics/anatomy/blacktaildeer_organs.svg';
+
+  String get bluesheepBody => 'assets/graphics/anatomy/bluesheep_body.svg';
+
+  String get bluesheepOrgans => 'assets/graphics/anatomy/bluesheep_organs.svg';
 
   String get bluewildebeestBody => 'assets/graphics/anatomy/bluewildebeest_body.svg';
 
@@ -230,6 +242,14 @@ class $AssetsGraphicsAnatomyGen {
 
   String get muledeerOrgans => 'assets/graphics/anatomy/muledeer_organs.svg';
 
+  String get nilgaiBody => 'assets/graphics/anatomy/nilgai_body.svg';
+
+  String get nilgaiOrgans => 'assets/graphics/anatomy/nilgai_organs.svg';
+
+  String get northernredmuntjacBody => 'assets/graphics/anatomy/northernredmuntjac_body.svg';
+
+  String get northernredmuntjacOrgans => 'assets/graphics/anatomy/northernredmuntjac_organs.svg';
+
   String get plainsbisonBody => 'assets/graphics/anatomy/plainsbison_body.svg';
 
   String get plainsbisonOrgans => 'assets/graphics/anatomy/plainsbison_organs.svg';
@@ -294,6 +314,10 @@ class $AssetsGraphicsAnatomyGen {
 
   String get sikadeerOrgans => 'assets/graphics/anatomy/sikadeer_organs.svg';
 
+  String get snowleopardBody => 'assets/graphics/anatomy/snowleopard_body.svg';
+
+  String get snowleopardOrgans => 'assets/graphics/anatomy/snowleopard_organs.svg';
+
   String get southeasternspanishibexBody => 'assets/graphics/anatomy/southeasternspanishibex_body.svg';
 
   String get southeasternspanishibexOrgans => 'assets/graphics/anatomy/southeasternspanishibex_organs.svg';
@@ -301,6 +325,14 @@ class $AssetsGraphicsAnatomyGen {
   String get springbokBody => 'assets/graphics/anatomy/springbok_body.svg';
 
   String get springbokOrgans => 'assets/graphics/anatomy/springbok_organs.svg';
+
+  String get tahrBody => 'assets/graphics/anatomy/tahr_body.svg';
+
+  String get tahrOrgans => 'assets/graphics/anatomy/tahr_organs.svg';
+
+  String get tibetanfoxBody => 'assets/graphics/anatomy/tibetanfox_body.svg';
+
+  String get tibetanfoxOrgans => 'assets/graphics/anatomy/tibetanfox_organs.svg';
 
   String get warthogBody => 'assets/graphics/anatomy/warthog_body.svg';
 
@@ -318,6 +350,10 @@ class $AssetsGraphicsAnatomyGen {
 
   String get wildboarOrgans => 'assets/graphics/anatomy/wildboar_organs.svg';
 
+  String get wildyakBody => 'assets/graphics/anatomy/wildyak_body.svg';
+
+  String get wildyakOrgans => 'assets/graphics/anatomy/wildyak_organs.svg';
+
   List<String> get values => [
         americanalligatorBody,
         americanalligatorOrgans,
@@ -325,8 +361,12 @@ class $AssetsGraphicsAnatomyGen {
         axisdeerOrgans,
         bantengBody,
         bantengOrgans,
+        barasinghaBody,
+        barasinghaOrgans,
         beceiteibexBody,
         beceiteibexOrgans,
+        bengaltigerBody,
+        bengaltigerOrgans,
         bighornsheepBody,
         bighornsheepOrgans,
         blackbearBody,
@@ -335,6 +375,8 @@ class $AssetsGraphicsAnatomyGen {
         blackbuckOrgans,
         blacktaildeerBody,
         blacktaildeerOrgans,
+        bluesheepBody,
+        bluesheepOrgans,
         bluewildebeestBody,
         bluewildebeestOrgans,
         brownbearBody,
@@ -393,6 +435,10 @@ class $AssetsGraphicsAnatomyGen {
         mountaingoatOrgans,
         muledeerBody,
         muledeerOrgans,
+        nilgaiBody,
+        nilgaiOrgans,
+        northernredmuntjacBody,
+        northernredmuntjacOrgans,
         plainsbisonBody,
         plainsbisonOrgans,
         pronghornBody,
@@ -425,10 +471,16 @@ class $AssetsGraphicsAnatomyGen {
         sidestripedjackalOrgans,
         sikadeerBody,
         sikadeerOrgans,
+        snowleopardBody,
+        snowleopardOrgans,
         southeasternspanishibexBody,
         southeasternspanishibexOrgans,
         springbokBody,
         springbokOrgans,
+        tahrBody,
+        tahrOrgans,
+        tibetanfoxBody,
+        tibetanfoxOrgans,
         warthogBody,
         warthogOrgans,
         waterbuffaloBody,
@@ -436,7 +488,9 @@ class $AssetsGraphicsAnatomyGen {
         whitetaildeerBody,
         whitetaildeerOrgans,
         wildboarBody,
-        wildboarOrgans
+        wildboarOrgans,
+        wildyakBody,
+        wildyakOrgans
       ];
 }
 
@@ -451,7 +505,11 @@ class $AssetsGraphicsAnimalsGen {
 
   String get banteng => 'assets/graphics/animals/banteng.svg';
 
+  String get barasingha => 'assets/graphics/animals/barasingha.svg';
+
   String get beceiteibex => 'assets/graphics/animals/beceiteibex.svg';
+
+  String get bengaltiger => 'assets/graphics/animals/bengaltiger.svg';
 
   String get bighornsheep => 'assets/graphics/animals/bighornsheep.svg';
 
@@ -462,6 +520,8 @@ class $AssetsGraphicsAnimalsGen {
   String get blackgrouse => 'assets/graphics/animals/blackgrouse.svg';
 
   String get blacktaildeer => 'assets/graphics/animals/blacktaildeer.svg';
+
+  String get bluesheep => 'assets/graphics/animals/bluesheep.svg';
 
   String get bluewildebeest => 'assets/graphics/animals/bluewildebeest.svg';
 
@@ -553,6 +613,10 @@ class $AssetsGraphicsAnimalsGen {
 
   String get muledeer => 'assets/graphics/animals/muledeer.svg';
 
+  String get nilgai => 'assets/graphics/animals/nilgai.svg';
+
+  String get northernredmuntjac => 'assets/graphics/animals/northernredmuntjac.svg';
+
   String get plainsbison => 'assets/graphics/animals/plainsbison.svg';
 
   String get pronghorn => 'assets/graphics/animals/pronghorn.svg';
@@ -591,11 +655,17 @@ class $AssetsGraphicsAnimalsGen {
 
   String get sikadeer => 'assets/graphics/animals/sikadeer.svg';
 
+  String get snowleopard => 'assets/graphics/animals/snowleopard.svg';
+
   String get southeasternspanishibex => 'assets/graphics/animals/southeasternspanishibex.svg';
 
   String get springbok => 'assets/graphics/animals/springbok.svg';
 
   String get stubblequail => 'assets/graphics/animals/stubblequail.svg';
+
+  String get tahr => 'assets/graphics/animals/tahr.svg';
+
+  String get tibetanfox => 'assets/graphics/animals/tibetanfox.svg';
 
   String get tuftedduck => 'assets/graphics/animals/tuftedduck.svg';
 
@@ -617,19 +687,26 @@ class $AssetsGraphicsAnimalsGen {
 
   String get wildhog => 'assets/graphics/animals/wildhog.svg';
 
+  String get wildyak => 'assets/graphics/animals/wildyak.svg';
+
   String get willowptarmigan => 'assets/graphics/animals/willowptarmigan.svg';
+
+  String get woollyhare => 'assets/graphics/animals/woollyhare.svg';
 
   List<String> get values => [
         americanalligator,
         antelopejackrabbit,
         axisdeer,
         banteng,
+        barasingha,
         beceiteibex,
+        bengaltiger,
         bighornsheep,
         blackbear,
         blackbuck,
         blackgrouse,
         blacktaildeer,
+        bluesheep,
         bluewildebeest,
         bobwhitequail,
         brownbear,
@@ -675,6 +752,8 @@ class $AssetsGraphicsAnimalsGen {
         mountainhare,
         mountainlion,
         muledeer,
+        nilgai,
+        northernredmuntjac,
         plainsbison,
         pronghorn,
         puma,
@@ -694,9 +773,12 @@ class $AssetsGraphicsAnimalsGen {
         siberianmuskdeer,
         sidestripedjackal,
         sikadeer,
+        snowleopard,
         southeasternspanishibex,
         springbok,
         stubblequail,
+        tahr,
+        tibetanfox,
         tuftedduck,
         tundrabeangoose,
         turkey,
@@ -707,7 +789,9 @@ class $AssetsGraphicsAnimalsGen {
         whitetailedjackrabbit,
         wildboar,
         wildhog,
-        willowptarmigan
+        wildyak,
+        willowptarmigan,
+        woollyhare
       ];
 }
 
@@ -801,7 +885,11 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get banteng => const AssetGenImage('assets/graphics/heads/banteng.png');
 
+  AssetGenImage get barasingha => const AssetGenImage('assets/graphics/heads/barasingha.png');
+
   AssetGenImage get beceiteibex => const AssetGenImage('assets/graphics/heads/beceiteibex.png');
+
+  AssetGenImage get bengaltiger => const AssetGenImage('assets/graphics/heads/bengaltiger.png');
 
   AssetGenImage get bighornsheep => const AssetGenImage('assets/graphics/heads/bighornsheep.png');
 
@@ -812,6 +900,8 @@ class $AssetsGraphicsHeadsGen {
   AssetGenImage get blackgrouse => const AssetGenImage('assets/graphics/heads/blackgrouse.png');
 
   AssetGenImage get blacktaildeer => const AssetGenImage('assets/graphics/heads/blacktaildeer.png');
+
+  AssetGenImage get bluesheep => const AssetGenImage('assets/graphics/heads/bluesheep.png');
 
   AssetGenImage get bluewildebeest => const AssetGenImage('assets/graphics/heads/bluewildebeest.png');
 
@@ -901,6 +991,10 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get muledeer => const AssetGenImage('assets/graphics/heads/muledeer.png');
 
+  AssetGenImage get nilgai => const AssetGenImage('assets/graphics/heads/nilgai.png');
+
+  AssetGenImage get northernredmuntjac => const AssetGenImage('assets/graphics/heads/northernredmuntjac.png');
+
   AssetGenImage get plainsbison => const AssetGenImage('assets/graphics/heads/plainsbison.png');
 
   AssetGenImage get pronghorn => const AssetGenImage('assets/graphics/heads/pronghorn.png');
@@ -939,11 +1033,17 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get sikadeer => const AssetGenImage('assets/graphics/heads/sikadeer.png');
 
+  AssetGenImage get snowleopard => const AssetGenImage('assets/graphics/heads/snowleopard.png');
+
   AssetGenImage get southeasternspanishibex => const AssetGenImage('assets/graphics/heads/southeasternspanishibex.png');
 
   AssetGenImage get springbok => const AssetGenImage('assets/graphics/heads/springbok.png');
 
   AssetGenImage get stubblequail => const AssetGenImage('assets/graphics/heads/stubblequail.png');
+
+  AssetGenImage get tahr => const AssetGenImage('assets/graphics/heads/tahr.png');
+
+  AssetGenImage get tibetanfox => const AssetGenImage('assets/graphics/heads/tibetanfox.png');
 
   AssetGenImage get tuftedduck => const AssetGenImage('assets/graphics/heads/tuftedduck.png');
 
@@ -963,19 +1063,26 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get wildboar => const AssetGenImage('assets/graphics/heads/wildboar.png');
 
+  AssetGenImage get wildyak => const AssetGenImage('assets/graphics/heads/wildyak.png');
+
   AssetGenImage get willowptarmigan => const AssetGenImage('assets/graphics/heads/willowptarmigan.png');
+
+  AssetGenImage get woollyhare => const AssetGenImage('assets/graphics/heads/woollyhare.png');
 
   List<AssetGenImage> get values => [
         americanalligator,
         antelopejackrabbit,
         axisdeer,
         banteng,
+        barasingha,
         beceiteibex,
+        bengaltiger,
         bighornsheep,
         blackbear,
         blackbuck,
         blackgrouse,
         blacktaildeer,
+        bluesheep,
         bluewildebeest,
         bobwhitequail,
         brownbear,
@@ -1020,6 +1127,8 @@ class $AssetsGraphicsHeadsGen {
         mountaingoat,
         mountainhare,
         muledeer,
+        nilgai,
+        northernredmuntjac,
         plainsbison,
         pronghorn,
         puma,
@@ -1039,9 +1148,12 @@ class $AssetsGraphicsHeadsGen {
         siberianmuskdeer,
         sidestripedjackal,
         sikadeer,
+        snowleopard,
         southeasternspanishibex,
         springbok,
         stubblequail,
+        tahr,
+        tibetanfox,
         tuftedduck,
         tundrabeangoose,
         turkey,
@@ -1051,7 +1163,9 @@ class $AssetsGraphicsHeadsGen {
         whitetaildeer,
         whitetailedjackrabbit,
         wildboar,
-        willowptarmigan
+        wildyak,
+        willowptarmigan,
+        woollyhare
       ];
 }
 
@@ -1582,6 +1696,8 @@ class $AssetsGraphicsReservesGen {
 
   String get silverridgepeaks => 'assets/graphics/reserves/silverridgepeaks.svg';
 
+  String get sundarpatanhuntingreserve => 'assets/graphics/reserves/sundarpatanhuntingreserve.svg';
+
   String get teawaroanationalpark => 'assets/graphics/reserves/teawaroanationalpark.svg';
 
   String get vurhongasavannareserve => 'assets/graphics/reserves/vurhongasavannareserve.svg';
@@ -1600,6 +1716,7 @@ class $AssetsGraphicsReservesGen {
         ranchodelarroyo,
         revontulicoast,
         silverridgepeaks,
+        sundarpatanhuntingreserve,
         teawaroanationalpark,
         vurhongasavannareserve,
         yukonvalley
@@ -1654,6 +1771,8 @@ class $AssetsGraphicsWeaponsGen {
   String get eckers3006 => 'assets/graphics/weapons/eckers3006.svg';
 
   String get focoso357 => 'assets/graphics/weapons/focoso357.svg';
+
+  String get gandharerifle => 'assets/graphics/weapons/gandharerifle.svg';
 
   String get grelckdrillingrifle => 'assets/graphics/weapons/grelckdrillingrifle.svg';
 
@@ -1739,6 +1858,7 @@ class $AssetsGraphicsWeaponsGen {
         curman50inline,
         eckers3006,
         focoso357,
+        gandharerifle,
         grelckdrillingrifle,
         hawkedgecb70,
         houyirecurvebow,

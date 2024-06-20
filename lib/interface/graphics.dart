@@ -97,6 +97,16 @@ class Graphics {
     "ANIMAL:WESTERN_CAPERCAILLIE": Assets.graphics.animals.westerncapercaillie,
     "ANIMAL:ROCKY_MOUNTAIN_ELK": Assets.graphics.animals.rockymountainelk,
     "ANIMAL:BIGHORN_SHEEP": Assets.graphics.animals.bighornsheep,
+    "ANIMAL:WOOLLY_HARE": Assets.graphics.animals.woollyhare,
+    "ANIMAL:TIBETAN_FOX": Assets.graphics.animals.tibetanfox,
+    "ANIMAL:NORTHERN_RED_MUNTJAC": Assets.graphics.animals.northernredmuntjac,
+    "ANIMAL:BLUE_SHEEP": Assets.graphics.animals.bluesheep,
+    "ANIMAL:TAHR": Assets.graphics.animals.tahr,
+    "ANIMAL:SNOW_LEOPARD": Assets.graphics.animals.snowleopard,
+    "ANIMAL:BARASINGHA": Assets.graphics.animals.barasingha,
+    "ANIMAL:NILGAI": Assets.graphics.animals.nilgai,
+    "ANIMAL:WILD_YAK": Assets.graphics.animals.wildyak,
+    "ANIMAL:BENGAL_TIGER": Assets.graphics.animals.bengaltiger,
   };
 
   static final Map<String, String> _heads = {
@@ -189,6 +199,16 @@ class Graphics {
     "ANIMAL:WESTERN_CAPERCAILLIE": Assets.graphics.heads.westerncapercaillie.path,
     "ANIMAL:ROCKY_MOUNTAIN_ELK": Assets.graphics.heads.rockymountainelk.path,
     "ANIMAL:BIGHORN_SHEEP": Assets.graphics.heads.bighornsheep.path,
+    "ANIMAL:WOOLLY_HARE": Assets.graphics.heads.woollyhare.path,
+    "ANIMAL:TIBETAN_FOX": Assets.graphics.heads.tibetanfox.path,
+    "ANIMAL:NORTHERN_RED_MUNTJAC": Assets.graphics.heads.northernredmuntjac.path,
+    "ANIMAL:BLUE_SHEEP": Assets.graphics.heads.bluesheep.path,
+    "ANIMAL:TAHR": Assets.graphics.heads.tahr.path,
+    "ANIMAL:SNOW_LEOPARD": Assets.graphics.heads.snowleopard.path,
+    "ANIMAL:BARASINGHA": Assets.graphics.heads.barasingha.path,
+    "ANIMAL:NILGAI": Assets.graphics.heads.nilgai.path,
+    "ANIMAL:WILD_YAK": Assets.graphics.heads.wildyak.path,
+    "ANIMAL:BENGAL_TIGER": Assets.graphics.heads.bengaltiger.path,
   };
 
   static final Map<String, String> _anatomyBody = {
@@ -251,6 +271,15 @@ class Graphics {
     "ANIMAL:WATER_BUFFALO": Assets.graphics.anatomy.waterbuffaloBody,
     "ANIMAL:ROCKY_MOUNTAIN_ELK": Assets.graphics.anatomy.rockymountainelkBody,
     "ANIMAL:BIGHORN_SHEEP": Assets.graphics.anatomy.bighornsheepBody,
+    "ANIMAL:TIBETAN_FOX": Assets.graphics.anatomy.tibetanfoxBody,
+    "ANIMAL:NORTHERN_RED_MUNTJAC": Assets.graphics.anatomy.northernredmuntjacBody,
+    "ANIMAL:BLUE_SHEEP": Assets.graphics.anatomy.bluesheepBody,
+    "ANIMAL:TAHR": Assets.graphics.anatomy.tahrBody,
+    "ANIMAL:SNOW_LEOPARD": Assets.graphics.anatomy.snowleopardBody,
+    "ANIMAL:BARASINGHA": Assets.graphics.anatomy.barasinghaBody,
+    "ANIMAL:NILGAI": Assets.graphics.anatomy.nilgaiBody,
+    "ANIMAL:WILD_YAK": Assets.graphics.anatomy.wildyakBody,
+    "ANIMAL:BENGAL_TIGER": Assets.graphics.anatomy.bengaltigerBody,
   };
 
   static final Map<String, String> _anatomyOrgans = {
@@ -313,6 +342,15 @@ class Graphics {
     "ANIMAL:WATER_BUFFALO": Assets.graphics.anatomy.waterbuffaloOrgans,
     "ANIMAL:ROCKY_MOUNTAIN_ELK": Assets.graphics.anatomy.rockymountainelkOrgans,
     "ANIMAL:BIGHORN_SHEEP": Assets.graphics.anatomy.bighornsheepOrgans,
+    "ANIMAL:TIBETAN_FOX": Assets.graphics.anatomy.tibetanfoxOrgans,
+    "ANIMAL:NORTHERN_RED_MUNTJAC": Assets.graphics.anatomy.northernredmuntjacOrgans,
+    "ANIMAL:BLUE_SHEEP": Assets.graphics.anatomy.bluesheepOrgans,
+    "ANIMAL:TAHR": Assets.graphics.anatomy.tahrOrgans,
+    "ANIMAL:SNOW_LEOPARD": Assets.graphics.anatomy.snowleopardOrgans,
+    "ANIMAL:BARASINGHA": Assets.graphics.anatomy.barasinghaOrgans,
+    "ANIMAL:NILGAI": Assets.graphics.anatomy.nilgaiOrgans,
+    "ANIMAL:WILD_YAK": Assets.graphics.anatomy.wildyakOrgans,
+    "ANIMAL:BENGAL_TIGER": Assets.graphics.anatomy.bengaltigerOrgans,
   };
 
   static final Map<String, String> _reserves = {
@@ -330,6 +368,7 @@ class Graphics {
     "RESERVE:MEDVED_TAIGA_NATIONAL_PARK": Assets.graphics.reserves.medvedtaiganationalpark,
     "RESERVE:YUKON_VALLEY": Assets.graphics.reserves.yukonvalley,
     "RESERVE:MISSISSIPPI_ACRES_PRESERVE": Assets.graphics.reserves.mississippiacrespreserve,
+    "RESERVE:SUNDARPATAN_HUNTING_RESERVE": Assets.graphics.reserves.sundarpatanhuntingreserve,
   };
 
   static final Map<String, String> _weapons = {
@@ -386,6 +425,7 @@ class Graphics {
     "WEAPON:223_DOCENT": Assets.graphics.weapons.a223docent,
     "WEAPON:45_ROLLESTON": Assets.graphics.weapons.a45rolleston,
     "WEAPON:HOUYI_RECURVE_BOW": Assets.graphics.weapons.houyirecurvebow,
+    "WEAPON:GANDHARE_RIFLE": Assets.graphics.weapons.gandharerifle
   };
 
   static final Map<String, String> _callers = {

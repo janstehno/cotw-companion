@@ -260,8 +260,8 @@ class Log extends Exportable {
       "DATE": Utils.dateTimeAs(DateStructure.compare, _dateTime),
       "TROPHY": _trophy,
       "TROPHY_RATING": isGreatOne() ? 5 : _trophyRating,
-      "FUR_RARITY": HelperJSON.getAnimalFur(_furId)!.rarity,
-      "GENDER": _gender,
+      "FUR_RARITY": animalFur!.rarity,
+      "GENDER": _gender ? 1 : 0,
     };
   }
 

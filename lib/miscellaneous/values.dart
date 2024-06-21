@@ -48,6 +48,7 @@ class Values {
     "Julian Barlog": ["30.01.2022"],
     "Adam Burk": ["14.04.2023"],
     "Anton Djordic": ["11.04.2024"],
+    "Helen Stephanie Miller": ["20.06.2024"],
     "Valérie Bouchard": ["28.07.2022", "06.01.2024"],
     "Martin Åström": ["06.07.2022"],
     "Victoria L Mason": ["30.12.2021"],

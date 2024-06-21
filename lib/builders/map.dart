@@ -38,6 +38,7 @@ class BuilderMapState extends BuilderBuilderState {
     "RESERVE:MEDVED_TAIGA_NATIONAL_PARK": Assets.raw.maps.medvedtaiganationalpark,
     "RESERVE:YUKON_VALLEY": Assets.raw.maps.yukonvalley,
     "RESERVE:MISSISSIPPI_ACRES_PRESERVE": Assets.raw.maps.mississippiacrespreserve,
+    "RESERVE:SUNDARPATAN_HUNTING_RESERVE": Assets.raw.maps.sundarpatanhuntingreserve,
   };
 
   @override

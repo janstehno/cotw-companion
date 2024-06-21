@@ -1917,6 +1917,8 @@ class $AssetsRawMapsGen {
 
   String get silverridgepeaks => 'assets/raw/maps/silverridgepeaks.json';
 
+  String get sundarpatanhuntingreserve => 'assets/raw/maps/sundarpatanhuntingreserve.json';
+
   String get teawaroanationalpark => 'assets/raw/maps/teawaroanationalpark.json';
 
   String get vurhongasavannareserve => 'assets/raw/maps/vurhongasavannareserve.json';
@@ -1935,6 +1937,7 @@ class $AssetsRawMapsGen {
         ranchodelarroyo,
         revontulicoast,
         silverridgepeaks,
+        sundarpatanhuntingreserve,
         teawaroanationalpark,
         vurhongasavannareserve,
         yukonvalley

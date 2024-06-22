@@ -4,6 +4,7 @@ import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/miscellaneous/logger.dart';
 import 'package:cotwcompanion/widgets/app/bar_snack.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
@@ -86,19 +87,22 @@ class Utils {
   }
 
   static Future<bool> exportFile(String content, String name) async {
+    HelperLogger logger = HelperLogger(identifier: "[UTILS] [EXPORT]");
     PermissionStatus status = PermissionStatus.granted;
+
     if (Platform.isAndroid) {
       AndroidDeviceInfo device = await DeviceInfoPlugin().androidInfo;
-      if (int.parse(device.version.release) < 13) {
-        status = await Permission.storage.request();
-      }
+      if (int.parse(device.version.release) < 13) status = await Permission.storage.request();
     }
+
+    logger.d("Permission granted: ${status.isGranted}");
+
     if (status.isGranted) {
       final String? path = await FilePicker.platform.getDirectoryPath();
-      if (path == null || content == "[]") {
-        return false;
-      }
+      logger.d("Chosen folder: $path");
+      if (path == null || content == "[]") return false;
       try {
+        logger.d("Creating file $name");
         final File file = File("$path/$name");
         await file.writeAsString(content);
       } on Exception {
@@ -106,6 +110,7 @@ class Utils {
       }
       return true;
     }
+
     return false;
   }
 

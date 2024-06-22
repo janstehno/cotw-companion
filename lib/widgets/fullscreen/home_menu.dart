@@ -221,7 +221,6 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
 
   Widget _buildWidgets(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
       alignment: Alignment.topLeft,
       child: SingleChildScrollView(
         child: WidgetPadding.all(

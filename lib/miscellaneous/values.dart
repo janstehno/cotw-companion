@@ -62,6 +62,7 @@ class Values {
     "Fernando Lupiañez Calero": ["10.12.2021"],
     "Steven Liddicoat": ["09.12.2023"],
     "Dirk Luchs": ["26.11.2023"],
+    "Steven Oyler": ["22.06.2024"],
     "Tomas Psika": ["21.02.2022"],
     "Alex Leslie": ["18.02.2022"],
     "Steven De Vries": ["28.04.2024"],
@@ -97,7 +98,8 @@ class Values {
     "Franco Sanchez": ["07.03.2022"],
     "Márk Komáromi": ["17.02.2023"],
     "Firmin Houche": ["06.02.2022"],
-    "Maik Schubert": ["07.12.2021"]
+    "Maik Schubert": ["07.12.2021"],
+    "Mateusz 'Materacyk' Czerniak": ["Patreon"]
   };
   static const Map<String, List<String>> translationSupporters = {
     "Русский": ["Vełeş"],

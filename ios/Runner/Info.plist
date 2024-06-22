@@ -49,5 +49,7 @@
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Export/import files to/from your device from/to the app.</string>
+	<key>FLTEnableImpeller</key>
+    <false/>
 </dict>
 </plist>

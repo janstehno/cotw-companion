@@ -78,7 +78,7 @@ class Log extends Exportable {
 
   int get trophyRating => _trophyRating;
 
-  int get trophyRatingWithGO => isGreatOne() ? 5 : trophyRating;
+  int get trophyRatingWithGO => isGreatOne ? 5 : trophyRating;
 
   bool get lodge => _lodge;
 
@@ -101,6 +101,8 @@ class Log extends Exportable {
   bool get harvestCheckPassed => correctAmmo && twoShots && vitalOrgan && trophyOrgan;
 
   bool get isCorrupted => _corrupted;
+
+  bool get isGreatOne => animalFur!.furId == Values.greatOneId;
 
   set setDate(DateTime value) => _dateTime = value;
 
@@ -132,10 +134,6 @@ class Log extends Exportable {
 
   set setCorrupted(bool value) => _corrupted = value;
 
-  bool isGreatOne() {
-    return HelperJSON.getAnimalFur(_furId)!.furId == Values.greatOneId;
-  }
-
   String getTrophyRatingIcon() {
     switch (_trophyRating) {
       case 1:
@@ -145,7 +143,7 @@ class Log extends Exportable {
       case 3:
         return Assets.graphics.icons.trophyGold;
       case 4:
-        return isGreatOne() ? Assets.graphics.icons.trophyGreatOne : Assets.graphics.icons.trophyDiamond;
+        return isGreatOne ? Assets.graphics.icons.trophyGreatOne : Assets.graphics.icons.trophyDiamond;
       default:
         return Assets.graphics.icons.trophyNone;
     }
@@ -160,7 +158,7 @@ class Log extends Exportable {
       case 3:
         return Interface.trophyGold;
       case 4:
-        return isGreatOne() ? Interface.trophyGreatOne : Interface.trophyDiamond;
+        return isGreatOne ? Interface.trophyGreatOne : Interface.trophyDiamond;
       default:
         return Interface.trophyNone;
     }
@@ -259,7 +257,7 @@ class Log extends Exportable {
       "NAME": HelperJSON.getAnimal(_animalId)!.getNameByReserve(context.locale, HelperJSON.getReserve(_reserveId)),
       "DATE": Utils.dateTimeAs(DateStructure.compare, _dateTime),
       "TROPHY": _trophy,
-      "TROPHY_RATING": isGreatOne() ? 5 : _trophyRating,
+      "TROPHY_RATING": isGreatOne ? 5 : _trophyRating,
       "FUR_RARITY": animalFur!.rarity,
       "GENDER": _gender ? 1 : 0,
     };

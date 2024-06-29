@@ -52,6 +52,8 @@ class Ammo extends Translatable {
 
   String get classRange => _min == _max ? _min.toString() : "$_min - $_max";
 
+  double range(bool units) => units ? _rangeYD : _rangeM.toDouble();
+
   String getRange(bool units) => units ? "$_rangeYD ${tr("YARDS")}" : "$_rangeM ${tr("METERS")}";
 
   List<int> get levels {

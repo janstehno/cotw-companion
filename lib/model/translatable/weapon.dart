@@ -123,4 +123,14 @@ class Weapon extends Translatable {
     if (a.type.index == b.type.index) return a.name.compareTo(b.name);
     return a.type.index.compareTo(b.type.index);
   };
+
+  static Comparator<Weapon> sortByMinMax = (a, b) {
+    int minA = a.levels.isNotEmpty ? a.levels.min : 0;
+    int minB = b.levels.isNotEmpty ? b.levels.min : 0;
+    if (minA != minB) return minA.compareTo(minB);
+
+    int maxA = a.levels.isNotEmpty ? a.levels.max : 0;
+    int maxB = b.levels.isNotEmpty ? b.levels.max : 0;
+    return maxA.compareTo(maxB);
+  };
 }

@@ -236,8 +236,7 @@ class EntryLogState extends WidgetLogsDismissibleState {
         Expanded(
           child: Row(
             children: [
-              if ((widget as WidgetLogsDismissible).log.isInLodge) buildLodge(),
-              const SizedBox(width: 5),
+              if ((widget as WidgetLogsDismissible).log.isInLodge) ...[buildLodge(), const SizedBox(width: 5)],
               Expanded(child: buildName()),
             ],
           ),
@@ -307,8 +306,7 @@ class EntryLogState extends WidgetLogsDismissibleState {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if ((widget as WidgetLogsDismissible).log.isInLodge) buildLodge(),
-          const SizedBox(width: 5),
+          if ((widget as WidgetLogsDismissible).log.isInLodge) ...[buildLodge(), const SizedBox(width: 5)],
           Expanded(child: buildName()),
           buildGender(),
         ],

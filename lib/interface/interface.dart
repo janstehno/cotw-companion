@@ -74,9 +74,9 @@ class Interface {
 
   static const Color ffff = Color(0xFFFFFFFF);
   static const Color fffe = Color(0xFFFEFEFE); //odd, body
-  static const Color fff5 = Color(0xFFF5F5F5); //even, dark, light, sectionTitle
-  static const Color ffef = Color(0xFFEFEFEF); //title
-  static const Color ffee = Color(0xFFEEEEEE); //dropDown, search, nothing, other, common
+  static const Color fff5 = Color(0xFFF5F5F5); //even, dark, light
+  static const Color ffef = Color(0xFFEFEFEF); //subtitle
+  static const Color ffee = Color(0xFFEEEEEE); //dropDown, search, nothing, other, common, title
   static const Color ffe0 = Color(0xFFE0E0E0);
   static const Color ffcc = Color(0xFFCCCCCC); //tag
   static const Color ffbd = Color(0xFFBDBDBD); //anatomy
@@ -86,9 +86,9 @@ class Interface {
   static const Color ff42 = Color(0xFF424242); //anatomy, shadow
   static const Color ff23 = Color(0xFF232323); //tag
   static const Color ff21 = Color(0xFF212121);
-  static const Color ff17 = Color(0xFF171717); //dropDown, search, nothing, other, common, accent
-  static const Color ff12 = Color(0xFF121212); //title
-  static const Color ff0d = Color(0xFF0D0D0D); //even, dark, light, sectionTitle
+  static const Color ff17 = Color(0xFF171717); //dropDown, search, nothing, other, common, accent, title
+  static const Color ff12 = Color(0xFF121212); //subtitle
+  static const Color ff0d = Color(0xFF0D0D0D); //even, dark, light
   static const Color ff06 = Color(0xFF060606); //odd, body
   static const Color ff00 = Color(0xFF000000);
 
@@ -97,8 +97,8 @@ class Interface {
       body = ff06;
       odd = ff0d;
       even = ff06;
-      title = ff12;
-      subtitle = ff0d;
+      title = ff17;
+      subtitle = ff12;
       light = ff0d;
       dark = fff5;
       search = ff17;
@@ -130,8 +130,8 @@ class Interface {
       body = fffe;
       odd = fff5;
       even = fffe;
-      title = ffef;
-      subtitle = fff5;
+      title = ffee;
+      subtitle = ffef;
       light = fff5;
       dark = ff0d;
       search = ffee;

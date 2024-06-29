@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/ammo.dart';
@@ -66,7 +67,7 @@ class Weapon extends Translatable {
     for (Ammo a in ammo) {
       levels.addAll(a.levels);
     }
-    return levels.toList();
+    return levels.sorted((a, b) => a.compareTo(b));
   }
 
   FilterKey typeToFilterKey() {

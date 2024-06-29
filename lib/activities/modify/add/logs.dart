@@ -78,7 +78,7 @@ class ActivityAddLogsState extends ActivityModifyState {
 
   List<AnimalFur> get animalFurs => HelperJSON.getAnimalFursWithGender(selectedAnimal.id, isMale, !isMale).toList();
 
-  List<Log> get trophyLodgeLogs => HelperLog.logs.where((e) => e.animal == selectedAnimal).toList();
+  List<Log> get trophyLodgeLogs => HelperLog.logs.where((e) => e.animal == selectedAnimal && e.lodge).toList();
 
   @override
   void initState() {

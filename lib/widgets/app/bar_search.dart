@@ -15,7 +15,7 @@ class WidgetSearchBar extends StatelessWidget {
   const WidgetSearchBar({
     super.key,
     required TextEditingController controller,
-    required Function? onFilterTap,
+    Function? onFilterTap,
     bool filterChanged = false,
   })  : _controller = controller,
         _onFilter = onFilterTap,

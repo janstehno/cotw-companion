@@ -36,6 +36,7 @@ class Values {
   static const String logbook = "logbook";
   static const String loadouts = "loadouts";
   static const String enumerators = "enumerators";
+  static const String huntingPassFilter = "hunting-pass-filter";
 
   static const Map<String, List<String>> donationSupporters = {
     "Coty Rogers": ["29.05.2022"],

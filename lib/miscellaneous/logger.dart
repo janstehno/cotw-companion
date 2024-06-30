@@ -35,6 +35,8 @@ class HelperLogger {
 
   HelperLogger.loadingLogs() : _identifier = "[LOADING] [LOGS]";
 
+  HelperLogger.loadingHuntingPass() : _identifier = "[LOADING] [HUNTING PASS]";
+
   HelperLogger.editLogs() : _identifier = "[EDIT] [LOGS]";
 
   void t(String message) => _logger.d("[🛠️ Developer] $_identifier $message");

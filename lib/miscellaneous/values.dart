@@ -99,7 +99,9 @@ class Values {
     "Márk Komáromi": ["17.02.2023"],
     "Firmin Houche": ["06.02.2022"],
     "Maik Schubert": ["07.12.2021"],
-    "Mateusz 'Materacyk' Czerniak": ["Patreon"]
+    "Mateusz 'Materacyk' Czerniak": ["Patreon"],
+    "Steppinrazor": ["Patreon"],
+    "McMarduk": ["Patreon"]
   };
   static const Map<String, List<String>> translationSupporters = {
     "Русский": ["Vełeş"],
@@ -110,6 +112,6 @@ class Values {
     "Français": ["BlocusEnergy"],
     "Magyar": ["Marcopolo"],
     "Türkçe": ["Ali Yahya Say"],
-    "Português (Brasil)": ["RECRUTA", "DI ÂNGELO"],
+    "Português (Brasil)": ["Recruta", "Di Ângelo", "Luis F. Di Carlo"],
   };
 }

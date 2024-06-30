@@ -1176,6 +1176,8 @@ class $AssetsGraphicsIconsGen {
 
   String get accept => 'assets/graphics/icons/accept.svg';
 
+  String get atv => 'assets/graphics/icons/atv.svg';
+
   String get back => 'assets/graphics/icons/back.svg';
 
   String get caller => 'assets/graphics/icons/caller.svg';
@@ -1185,6 +1187,8 @@ class $AssetsGraphicsIconsGen {
   String get coffee => 'assets/graphics/icons/coffee.svg';
 
   String get dlc => 'assets/graphics/icons/dlc.svg';
+
+  String get dog => 'assets/graphics/icons/dog.svg';
 
   String get edit => 'assets/graphics/icons/edit.svg';
 
@@ -1280,6 +1284,8 @@ class $AssetsGraphicsIconsGen {
 
   String get outpost => 'assets/graphics/icons/outpost.svg';
 
+  String get pass => 'assets/graphics/icons/pass.svg';
+
   String get patreon => 'assets/graphics/icons/patreon.svg';
 
   String get paypal => 'assets/graphics/icons/paypal.svg';
@@ -1305,6 +1311,8 @@ class $AssetsGraphicsIconsGen {
   String get removeBin => 'assets/graphics/icons/remove_bin.svg';
 
   String get reserve => 'assets/graphics/icons/reserve.svg';
+
+  String get scope => 'assets/graphics/icons/scope.svg';
 
   String get search => 'assets/graphics/icons/search.svg';
 
@@ -1395,11 +1403,13 @@ class $AssetsGraphicsIconsGen {
   List<String> get values => [
         about,
         accept,
+        atv,
         back,
         caller,
         catchBook,
         coffee,
         dlc,
+        dog,
         edit,
         empty,
         environmentFields,
@@ -1447,6 +1457,7 @@ class $AssetsGraphicsIconsGen {
         optional,
         other,
         outpost,
+        pass,
         patreon,
         paypal,
         planner,
@@ -1460,6 +1471,7 @@ class $AssetsGraphicsIconsGen {
         reload,
         removeBin,
         reserve,
+        scope,
         search,
         senseHearing,
         senseSight,

@@ -35,7 +35,11 @@ class WidgetFilterSwitchState extends State<WidgetFilterSwitch> {
       widget.text,
       background: Utils.backgroundAt(widget.i),
       indicatorColor: HelperFilter.getBoolValue(widget.filterKey) ? Interface.primary : Interface.disabled,
-      onTap: () => setState(() => HelperFilter.switchValue(widget.filterKey)),
+      onTap: () {
+        setState(() {
+          HelperFilter.switchValue(widget.filterKey);
+        });
+      },
     );
   }
 

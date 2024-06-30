@@ -5,6 +5,7 @@ import 'package:cotwcompanion/activities/need_zones.dart';
 import 'package:cotwcompanion/activities/search.dart';
 import 'package:cotwcompanion/activities/settings.dart';
 import 'package:cotwcompanion/builders/enumerators.dart';
+import 'package:cotwcompanion/builders/hunting_pass.dart';
 import 'package:cotwcompanion/builders/multimounts.dart';
 import 'package:cotwcompanion/builders/planner.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
@@ -56,6 +57,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
     ["LOGBOOK", Assets.graphics.icons.catchBook, const ActivityLogs(trophyLodge: false)],
     ["LOADOUTS", Assets.graphics.icons.loadout, const ActivityLoadouts()],
     ["COUNTERS", Assets.graphics.icons.number, const BuilderEnumerators()],
+    ["HUNTING_PASS", Assets.graphics.icons.pass, const BuilderHuntingPass()],
     ["PLANNER", Assets.graphics.icons.planner, const BuilderPlanner()],
   ];
 

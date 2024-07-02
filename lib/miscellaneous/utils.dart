@@ -131,14 +131,13 @@ class Utils {
     return after(content);
   }
 
-  static Future<String> readFile(String name) async {
+  static Future<String?> readFile(String name) async {
     try {
       final file = await _localFile(name);
-      final String contents;
-      await file.exists() ? contents = await file.readAsString() : contents = "[]";
-      return contents;
+      if (await file.exists()) return await file.readAsString();
+      return null;
     } catch (e) {
-      return e.toString();
+      throw e.toString();
     }
   }
 

@@ -131,8 +131,8 @@ class HelperEnumerator {
 
   Future<List<Enumerator>> readFile() async {
     try {
-      final data = await Utils.readFile(Values.enumerators);
-      final list = json.decode(data) as List<dynamic>;
+      final String? data = await Utils.readFile(Values.enumerators);
+      final List<dynamic> list = json.decode(data ?? "[]") as List<dynamic>;
       final List<Enumerator> enumerators = list.map((e) => Enumerator.fromJson(e)).toList();
       _logger.t("${enumerators.length} enumerators loaded");
       return enumerators;

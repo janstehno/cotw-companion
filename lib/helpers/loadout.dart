@@ -124,8 +124,8 @@ class HelperLoadout {
 
   static Future<List<Loadout>> readFile() async {
     try {
-      final data = await Utils.readFile(Values.loadouts);
-      final list = json.decode(data) as List<dynamic>;
+      final String? data = await Utils.readFile(Values.loadouts);
+      final List<dynamic> list = json.decode(data ?? "[]") as List<dynamic>;
       final List<Loadout> loadouts = list.map((e) => Loadout.fromJson(e)).toList();
       _logger.t("${loadouts.length} loadouts loaded");
       return loadouts;

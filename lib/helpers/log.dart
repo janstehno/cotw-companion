@@ -136,8 +136,8 @@ class HelperLog {
 
   static Future<List<Log>> readFile() async {
     try {
-      final data = await Utils.readFile(Values.logbook);
-      final list = json.decode(data) as List<dynamic>;
+      final String? data = await Utils.readFile(Values.logbook);
+      final List<dynamic> list = json.decode(data ?? "[]") as List<dynamic>;
       final List<Log> logs = list.map((e) => Log.fromJson(e)).toList();
       _logger.t("${logs.length} logs loaded");
       return logs;

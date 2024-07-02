@@ -162,8 +162,8 @@ class HelperHuntingPass {
 
   Future<Map<String, dynamic>> readFilterFile() async {
     try {
-      final data = await Utils.readFile(Values.huntingPassFilter);
-      final list = json.decode(data) as Map<String, dynamic>;
+      final String? data = await Utils.readFile(Values.huntingPassFilter);
+      final Map<String, dynamic> list = json.decode(data ?? "{}") as Map<String, dynamic>;
       _logger.t("${list.length} hunting pass filters loaded");
       return list;
     } catch (e) {

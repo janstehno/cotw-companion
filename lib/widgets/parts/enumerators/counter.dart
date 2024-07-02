@@ -23,10 +23,10 @@ class WidgetCounter extends WidgetEnumeratorDismissible {
   Counter get counter => _counter;
 
   @override
-  State<StatefulWidget> createState() => EntryCounterState();
+  State<StatefulWidget> createState() => WidgetCounterState();
 }
 
-class EntryCounterState extends WidgetEnumeratorEntryState {
+class WidgetCounterState extends WidgetEnumeratorEntryState {
   @override
   void startToEnd() {
     Navigator.push(

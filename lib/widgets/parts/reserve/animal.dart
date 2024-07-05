@@ -49,6 +49,22 @@ class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
     );
   }
 
+  Widget _buildLoadout() {
+    if (HelperLoadout.isLoadoutActivated) return WidgetLoadoutIndicator(animal: _animal);
+    return const SizedBox(width: Values.dotSize);
+  }
+
+  Widget _buildGreatOne() {
+    if (_animal.hasGO) {
+      return WidgetIcon.withSize(
+        Assets.graphics.icons.trophyGreatOne,
+        color: Interface.dark,
+        size: Values.dotSize + 5,
+      );
+    }
+    return const SizedBox(width: Values.dotSize + 5);
+  }
+
   @override
   Widget buildRow() {
     return Row(
@@ -56,7 +72,12 @@ class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
         _buildLevel(),
         const SizedBox(width: 15),
         Expanded(child: super.buildTitle()),
-        if (HelperLoadout.isLoadoutActivated) WidgetLoadoutIndicator(animal: _animal),
+        const SizedBox(width: 15),
+        _buildGreatOne(),
+        if (HelperLoadout.isLoadoutActivated) ...[
+          const SizedBox(width: 15),
+          _buildLoadout(),
+        ],
         const SizedBox(width: 15),
         buildIndicator(),
       ],

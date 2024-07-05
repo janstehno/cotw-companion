@@ -191,6 +191,8 @@ class Animal extends Translatable {
 
   static Comparator<Animal> sortById = (a, b) => a.id.compareTo(b.id);
 
+  static Comparator<Animal> sortByLevel = (a, b) => a.level.compareTo(b.level);
+
   static Comparator<Animal> sortByNameByLocale(BuildContext context) =>
       (a, b) => a.getNameByLocale(context.locale).compareTo(b.getNameByLocale(context.locale));
 

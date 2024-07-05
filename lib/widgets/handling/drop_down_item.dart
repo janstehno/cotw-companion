@@ -5,28 +5,38 @@ import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 
-class WidgetDropDownItem extends DropdownMenuItem {
-  WidgetDropDownItem({
+class WidgetDropDownItem extends StatelessWidget {
+  final String _text;
+
+  const WidgetDropDownItem({
     super.key,
-    required super.value,
     required String text,
-  }) : super(child: _buildWidgets(text));
+  }) : _text = text;
 
-  static Color get _background => Interface.dropDown;
+  Color get _background => Interface.dropDown;
 
-  static double get _height => Values.dropDown;
+  double get _height => Values.dropDown;
 
-  static Widget _buildWidgets(String text) {
+  String get text => _text;
+
+  Widget buildCenter() {
+    return WidgetText(
+      _text,
+      color: Interface.dark,
+      style: Style.normal.s16.w300,
+    );
+  }
+
+  Widget _buildWidgets() {
     return SizedBox(
       height: _height,
       child: WidgetPadding.h30(
         background: _background,
-        child: WidgetText(
-          text,
-          color: Interface.dark,
-          style: Style.normal.s16.w300,
-        ),
+        child: buildCenter(),
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) => _buildWidgets();
 }

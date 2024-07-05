@@ -18,6 +18,8 @@ import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down_item.dart';
+import 'package:cotwcompanion/widgets/handling/drop_down_item_animal.dart';
+import 'package:cotwcompanion/widgets/handling/drop_down_item_fur.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/text/text_field_indicator.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
@@ -70,13 +72,15 @@ class ActivityAddLogsState extends ActivityModifyState {
 
   bool get usesImperials => Provider.of<Settings>(context, listen: false).imperialUnits;
 
-  List<Reserve> get reserves => HelperJSON.reserves.toList();
+  List<Reserve> get reserves => HelperJSON.reserves.sorted(Reserve.sortById);
 
-  List<Animal> get reserveAnimals => (widget as ActivityAddLogs).fromTrophyLodge
-      ? HelperJSON.animals
-      : HelperJSON.getReserveAnimals(selectedReserve!.id).toList().sorted(Animal.sortById);
+  List<Animal> get reserveAnimals => ((widget as ActivityAddLogs).fromTrophyLodge
+          ? HelperJSON.animals
+          : HelperJSON.getReserveAnimals(selectedReserve!.id))
+      .sorted(Animal.sortByLevel);
 
-  List<AnimalFur> get animalFurs => HelperJSON.getAnimalFursWithGender(selectedAnimal.id, isMale, !isMale).toList();
+  List<AnimalFur> get animalFurs =>
+      HelperJSON.getAnimalFursWithGender(selectedAnimal.id, isMale, !isMale).sorted(AnimalFur.sortByRarityFurName);
 
   List<Log> get trophyLodgeLogs => HelperLog.logs.where((e) => e.animal == selectedAnimal && e.lodge).toList();
 
@@ -186,12 +190,20 @@ class ActivityAddLogsState extends ActivityModifyState {
     );
   }
 
+  DropdownMenuItem _buildReserveItem(Reserve reserve) {
+    return DropdownMenuItem(
+      value: reserves.indexOf(reserve),
+      child: WidgetDropDownItem(
+        text: reserve.name,
+      ),
+    );
+  }
+
   List<DropdownMenuItem> _listReserves() {
-    return reserves.map((e) => WidgetDropDownItem(value: reserves.indexOf(e), text: e.name)).toList();
+    return reserves.map((e) => _buildReserveItem(e)).toList();
   }
 
   List<Widget> _listReserve() {
-    reserves.sort(Reserve.sortById);
     return [
       WidgetTitle(tr("RESERVE")),
       WidgetDropDown(
@@ -205,12 +217,21 @@ class ActivityAddLogsState extends ActivityModifyState {
     ];
   }
 
+  DropdownMenuItem _buildAnimalItem(Animal animal) {
+    return DropdownMenuItem(
+      value: reserveAnimals.indexOf(animal),
+      child: WidgetDropDownItemAnimal(
+        text: animal.name,
+        level: animal.level,
+      ),
+    );
+  }
+
   List<DropdownMenuItem> _listAnimals() {
-    return reserveAnimals.map((e) => WidgetDropDownItem(value: reserveAnimals.indexOf(e), text: e.name)).toList();
+    return reserveAnimals.map((e) => _buildAnimalItem(e)).toList();
   }
 
   List<Widget> _listAnimal() {
-    reserveAnimals.sort(Animal.sortByNameByReserve(context, selectedReserve));
     return [
       WidgetTitle(tr("ANIMAL")),
       WidgetDropDown(
@@ -243,12 +264,21 @@ class ActivityAddLogsState extends ActivityModifyState {
     );
   }
 
+  DropdownMenuItem _buildAnimalFurItem(AnimalFur animalFur) {
+    return DropdownMenuItem(
+      value: animalFurs.indexOf(animalFur),
+      child: WidgetDropDownItemFur(
+        text: animalFur.furName,
+        color: animalFur.color,
+      ),
+    );
+  }
+
   List<DropdownMenuItem> _listAnimalFurs() {
-    return animalFurs.map((e) => WidgetDropDownItem(value: animalFurs.indexOf(e), text: e.furName)).toList();
+    return animalFurs.map((e) => _buildAnimalFurItem(e)).toList();
   }
 
   List<Widget> _listFur() {
-    animalFurs.sort(AnimalFur.sortByFurName);
     return [
       WidgetTitle(tr("ANIMAL_FUR")),
       WidgetDropDown(

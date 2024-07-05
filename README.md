@@ -57,21 +57,21 @@ at [cotw-companion/discussions](https://github.com/janstehno/cotw-companion/disc
 The updates usually take me **1-3 days** or even **3 weeks** to process. Do not forget that I am
 alone. New weapon pack or small updates will not take so long. However new map will. I have to
 recreate whole map background. Find all outposts, lookouts and hides. Find all the information about
-animals (trophy scores, weights, locations, need zones) as well as make screenshots of them and
-create their heads for the app. Translate everything into 10 languages and make sure that everything
-is as correct as it can be.
+animals like trophy scores, weights, locations, furs, need zones. As well as make screenshots of them to
+create their head images and anatomy. Then translate everything into at least 10 languages and make sure
+that everything is as correct as it can be.
 
 ## Thank you!
 
-For those who at least mentioned the app anywhere and especially for those who regularly use my app:
-Thank you very much for your support and reviews you gave me. I appreciate it a lot. To this day,
-the app was used at least once by almost **50K** users on Android and almost **25K** users on iOS.
-Which is totally awesome and I did not think this could be possible.
+For those who at least mentioned the app anywhere and especially for those who regularly use my app - Thank
+you very much for your support and reviews you gave me. I appreciate it a lot. To this day, the app was
+used at least once by almost **50K** users on both Android and iOS. Which is totally awesome and I
+did not think this could be possible.
 
 ## Support Me
 
-It will be appreciated a lot. It also encourages me to update the app. Thank you everyone who
-already did or will do. You can do so by using one of the following platforms:
+If you consider to support me and my work it will be appreciated a lot. It also encourages me to update
+the app. Thank you everyone who already did or will do. You can do so by using one of the following platforms:
 [Paypal](https://paypal.me/toastovac) -
 [Buy me a coffee](https://www.buymeacoffee.com/toastovac) -
 [Patreon](https://www.patreon.com/Toastovac)

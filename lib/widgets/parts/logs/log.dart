@@ -87,7 +87,7 @@ class EntryLogState extends WidgetLogsDismissibleState {
   void endToStart() {
     if ((widget as WidgetLog).log.reserve != null) {
       Utils.buildSnackBarMessage(
-        (widget as WidgetLogsDismissible).log.isInLodge ? tr("ITEM_MOVED_TO_LODGE") : tr("ITEM_REMOVED_FROM_LODGE"),
+        (widget as WidgetLogsDismissible).log.isInLodge ? tr("ITEM_REMOVED_FROM_LODGE") : tr("ITEM_MOVED_TO_LODGE"),
         Process.info,
         (widget as WidgetLog).context,
       );

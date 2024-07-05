@@ -15,6 +15,7 @@ class WidgetAnimalFur extends WidgetFur {
     super.animalFur, {
     super.key,
     required bool isChosen,
+    required super.showPerCent,
   }) : _isChosen = isChosen;
 
   double get _indicatorSize => _isChosen ? Values.dotSize * 2 : Values.dotSize;
@@ -31,9 +32,9 @@ class WidgetAnimalFur extends WidgetFur {
     );
   }
 
-  Widget _buildName(BuildContext context) {
+  Widget _buildName() {
     return WidgetPadding.fromLTRB(
-      showPerCent(context) ? 0 : 20,
+      showPerCent ? 0 : 20,
       0,
       20,
       0,
@@ -45,28 +46,28 @@ class WidgetAnimalFur extends WidgetFur {
     );
   }
 
-  Widget _buildRow(BuildContext context) {
+  Widget _buildRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildIndicator(),
-        if (showPerCent(context)) buildPercent(),
-        Expanded(child: _buildName(context)),
+        if (showPerCent) buildPercent(),
+        Expanded(child: _buildName()),
         buildGender(),
       ],
     );
   }
 
-  Widget _buildWidgets(BuildContext context) {
+  Widget _buildWidgets() {
     return Column(
       children: [
-        if (animalFur.furId != Values.greatOneId) WidgetMargin.bottom(3, child: _buildRow(context)),
+        if (animalFur.furId != Values.greatOneId) WidgetMargin.bottom(3, child: _buildRow()),
       ],
     );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets(context);
+  Widget build(BuildContext context) => _buildWidgets();
 }

@@ -1,7 +1,6 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
-import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
@@ -12,21 +11,23 @@ import 'package:cotwcompanion/widgets/parts/animal/fur/fur_percent.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class WidgetFur extends StatelessWidget {
   final AnimalFur _animalFur;
+  final bool _showPerCent;
 
   const WidgetFur(
     AnimalFur animalFur, {
     super.key,
-  }) : _animalFur = animalFur;
+    required showPerCent,
+  })  : _animalFur = animalFur,
+        _showPerCent = showPerCent;
 
   AnimalFur get animalFur => _animalFur;
 
-  Animal? get _animal => HelperJSON.getAnimal(_animalFur.animalId);
+  bool get showPerCent => _showPerCent;
 
-  bool showPerCent(BuildContext context) => Provider.of<Settings>(context, listen: false).furRarityPerCent;
+  Animal? get _animal => HelperJSON.getAnimal(_animalFur.animalId);
 
   Widget _buildName(BuildContext context) {
     return WidgetMargin.right(
@@ -78,7 +79,7 @@ class WidgetFur extends StatelessWidget {
         children: [
           if (_animal != null) Expanded(child: _buildName(context)),
           buildGender(),
-          if (showPerCent(context)) buildPercent(),
+          if (_showPerCent) buildPercent(),
         ],
       ),
     );

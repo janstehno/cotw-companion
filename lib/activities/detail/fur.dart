@@ -1,3 +1,4 @@
+import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/lists/fur_info/fur_animals.dart';
 import 'package:cotwcompanion/model/translatable/fur.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
@@ -5,6 +6,7 @@ import 'package:cotwcompanion/widgets/app/scaffold.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ActivityDetailFur extends StatelessWidget {
   final Fur _fur;
@@ -14,13 +16,14 @@ class ActivityDetailFur extends StatelessWidget {
     super.key,
   }) : _fur = fur;
 
-  List<Widget> _listFurAnimals() {
+  List<Widget> _listFurAnimals(BuildContext context) {
+    bool showPerCent = Provider.of<Settings>(context, listen: false).furRarityPerCent;
     return [
-      ListFurAnimals(_fur, rarity: 0),
-      ListFurAnimals(_fur, rarity: 1),
-      ListFurAnimals(_fur, rarity: 2),
-      ListFurAnimals(_fur, rarity: 3),
-      ListFurAnimals(_fur, rarity: 4),
+      ListFurAnimals(_fur, rarity: 0, showPerCent: showPerCent),
+      ListFurAnimals(_fur, rarity: 1, showPerCent: showPerCent),
+      ListFurAnimals(_fur, rarity: 2, showPerCent: showPerCent),
+      ListFurAnimals(_fur, rarity: 3, showPerCent: showPerCent),
+      ListFurAnimals(_fur, rarity: 4, showPerCent: showPerCent),
     ];
   }
 
@@ -32,7 +35,7 @@ class ActivityDetailFur extends StatelessWidget {
       ),
       children: [
         WidgetTitle(tr("FUR_RARITY")),
-        ..._listFurAnimals(),
+        ..._listFurAnimals(context),
       ],
     );
   }

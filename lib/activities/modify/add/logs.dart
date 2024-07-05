@@ -248,7 +248,7 @@ class ActivityAddLogsState extends ActivityModifyState {
   }
 
   List<Widget> _listFur() {
-    animalFurs.sort(AnimalFur.sortByPercent);
+    animalFurs.sort(AnimalFur.sortByFurName);
     return [
       WidgetTitle(tr("ANIMAL_FUR")),
       WidgetDropDown(

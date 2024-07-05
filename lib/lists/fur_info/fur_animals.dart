@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
@@ -11,25 +10,29 @@ import 'package:flutter/material.dart';
 class ListFurAnimals extends StatelessWidget {
   final Fur _fur;
   final int _rarity;
+  final bool _showPerCent;
 
   const ListFurAnimals(
     Fur fur, {
     super.key,
     required int rarity,
+    required bool showPerCent,
   })  : _fur = fur,
-        _rarity = rarity;
+        _rarity = rarity,
+        _showPerCent = showPerCent;
 
   List<AnimalFur> get _animalFurs => HelperJSON.getAnimalFursWithRarity(_fur.id, _rarity);
 
   Widget _buildAnimalFurs() {
-    List<AnimalFur> animalFurs = _animalFurs.sorted(AnimalFur.sortByPercent);
+    List<AnimalFur> animalFurs = _animalFurs;
+    _showPerCent ? animalFurs.sort(AnimalFur.sortByPercentAnimalName) : animalFurs.sort(AnimalFur.sortByAnimalName);
 
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: animalFurs.length,
       itemBuilder: (context, i) {
-        return WidgetFur(animalFurs.elementAt(i));
+        return WidgetFur(animalFurs.elementAt(i), showPerCent: _showPerCent);
       },
     );
   }

@@ -77,8 +77,12 @@ class AnimalFur {
     }
   }
 
+  String get animalName {
+    return HelperJSON.getAnimal(_animalId)!.name;
+  }
+
   String get furName {
-    return _rarity == 5 ? HelperJSON.getFur(_furId)!.name : HelperJSON.getFur(_furId)!.name;
+    return HelperJSON.getFur(_furId)!.name;
   }
 
   factory AnimalFur.fromJson(Map<String, dynamic> json) {
@@ -94,9 +98,21 @@ class AnimalFur {
     );
   }
 
-  static Comparator<AnimalFur> sortByPercent = (a, b) => a.perCent.compareTo(b.perCent);
+  static Comparator<AnimalFur> sortByAnimalName = (a, b) => a.animalName.compareTo(b.animalName);
 
-  static Comparator<AnimalFur> sortByGenderRarityPercentName = (a, b) {
+  static Comparator<AnimalFur> sortByFurName = (a, b) => a.furName.compareTo(b.furName);
+
+  static Comparator<AnimalFur> sortByRarityFurName = (a, b) {
+    if (a.rarity == b.rarity) return a.furName.compareTo(b.furName);
+    return a.rarity.compareTo(b.rarity);
+  };
+
+  static Comparator<AnimalFur> sortByPercentAnimalName = (a, b) {
+    if (a.perCent == b.perCent) return a.animalName.compareTo(b.animalName);
+    return b.perCent.compareTo(a.perCent);
+  };
+
+  static Comparator<AnimalFur> sortByGenderRarityPercentFurName = (a, b) {
     if (a.male && a.female && (!b.male || !b.female)) return 1;
     if (!a.male && !a.female && (b.male || b.female)) return -1;
     if (a.male && !b.male) return -1;

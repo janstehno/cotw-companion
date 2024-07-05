@@ -38,7 +38,7 @@ class WidgetLoadoutIndicator extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (HelperLoadout.isAmmoEligible(_animal)) _buildAmmo(),
-        if (HelperLoadout.isAmmoEligible(_animal) && HelperLoadout.isCallerEligible(_animal)) const SizedBox(height: 3),
+        if (HelperLoadout.isAmmoEligible(_animal) && HelperLoadout.isCallerEligible(_animal)) const SizedBox(height: 5),
         if (HelperLoadout.isCallerEligible(_animal)) _buildCaller(),
       ],
     );

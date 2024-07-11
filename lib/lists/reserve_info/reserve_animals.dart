@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/activities/detail/animal.dart';
-import 'package:cotwcompanion/activities/modify/add/logs_source.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
@@ -26,16 +25,6 @@ class ListReserveAnimals extends StatelessWidget {
     );
   }
 
-  bool _onDismiss(BuildContext context, Animal animal) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (e) => ActivityAddLogsSource(animal: animal, reserve: _reserve, onSuccess: () {}),
-      ),
-    );
-    return false;
-  }
-
   Widget _buildEntry(int i, Animal animal, BuildContext context) {
     return WidgetReserveAnimal(
       animal,
@@ -45,7 +34,6 @@ class ListReserveAnimals extends StatelessWidget {
       indicatorColor: Interface.primary,
       isShown: animal.isFromDlc,
       onTap: () => _onTap(context, animal),
-      onDismiss: () => _onDismiss(context, animal),
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:cotwcompanion/activities/modify/add/logs_source.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/loadout.dart';
 import 'package:cotwcompanion/interface/interface.dart';
@@ -15,21 +16,39 @@ import 'package:flutter/material.dart';
 
 class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
   final Animal _animal;
-  final Function _onDismiss;
+  final Reserve _reserve;
+  final BuildContext _context;
 
   WidgetReserveAnimal(
     Animal animal, {
     super.key,
     required BuildContext context,
     required Reserve reserve,
-    required Function onDismiss,
     required super.background,
     required super.indicatorColor,
+    super.indicatorSize = Values.dotSize,
     required super.isShown,
     required super.onTap,
   })  : _animal = animal,
-        _onDismiss = onDismiss,
-        super(animal.getNameByReserve(context.locale, reserve), indicatorSize: Values.dotSize);
+        _reserve = reserve,
+        _context = context,
+        super(animal.getNameByReserve(context.locale, reserve));
+
+  Animal get animal => _animal;
+
+  Reserve get reserve => _reserve;
+
+  BuildContext get context => _context;
+
+  bool onDismiss() {
+    Navigator.push(
+      _context,
+      MaterialPageRoute(
+        builder: (e) => ActivityAddLogsSource(animal: _animal, reserve: _reserve, onSuccess: () {}),
+      ),
+    );
+    return false;
+  }
 
   Widget _buildEditBackground() {
     return WidgetPadding.h30(
@@ -90,7 +109,7 @@ class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
       key: Key(key.toString()),
       direction: DismissDirection.startToEnd,
       confirmDismiss: (direction) async {
-        _onDismiss();
+        onDismiss();
         return false;
       },
       background: _buildEditBackground(),

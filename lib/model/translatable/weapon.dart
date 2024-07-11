@@ -115,7 +115,7 @@ class Weapon extends Translatable {
       hipshot: json['HIPSHOT'],
       price: json['PRICE'],
       score: json['SCORE'],
-      dlc: json['DLC'] == 1,
+      dlc: json['DLC'],
     );
   }
 

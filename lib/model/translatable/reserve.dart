@@ -4,28 +4,28 @@ import 'package:cotwcompanion/model/translatable/translatable.dart';
 
 class Reserve extends Translatable {
   final int _count;
-  final int _summer;
-  final int _winter;
-  final int _plains;
-  final int _fields;
-  final int _lowlands;
-  final int _hills;
-  final int _mountains;
-  final int _forest;
+  final bool _summer;
+  final bool _winter;
+  final bool _plains;
+  final bool _fields;
+  final bool _lowlands;
+  final bool _hills;
+  final bool _mountains;
+  final bool _forest;
   final bool _dlc;
 
   Reserve({
     required super.id,
     required super.name,
     required int count,
-    required int summer,
-    required int winter,
-    required int plains,
-    required int fields,
-    required int lowlands,
-    required int hills,
-    required int mountains,
-    required int forest,
+    required bool summer,
+    required bool winter,
+    required bool plains,
+    required bool fields,
+    required bool lowlands,
+    required bool hills,
+    required bool mountains,
+    required bool forest,
     required bool dlc,
   })  : _count = count,
         _summer = summer,
@@ -42,21 +42,21 @@ class Reserve extends Translatable {
 
   bool get isFromDlc => _dlc;
 
-  bool get hasSummer => _summer == 1;
+  bool get hasSummer => _summer;
 
-  bool get hasWinter => _winter == 1;
+  bool get hasWinter => _winter;
 
-  bool get hasPlains => _plains == 1;
+  bool get hasPlains => _plains;
 
-  bool get hasFields => _fields == 1;
+  bool get hasFields => _fields;
 
-  bool get hasLowlands => _lowlands == 1;
+  bool get hasLowlands => _lowlands;
 
-  bool get hasHills => _hills == 1;
+  bool get hasHills => _hills;
 
-  bool get hasMountains => _mountains == 1;
+  bool get hasMountains => _mountains;
 
-  bool get hasForest => _forest == 1;
+  bool get hasForest => _forest;
 
   List<int> get allClasses {
     List<int> classes = [];
@@ -84,7 +84,7 @@ class Reserve extends Translatable {
       hills: json["ENVIRONMENT"]["HILLS"],
       mountains: json["ENVIRONMENT"]["MOUNTAINS"],
       forest: json["ENVIRONMENT"]["FOREST"],
-      dlc: json["DLC"] == 1,
+      dlc: json["DLC"],
     );
   }
 

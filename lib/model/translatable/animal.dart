@@ -117,9 +117,9 @@ class Animal extends Translatable {
       sight: json['SIGHT'],
       hearing: json['HEARING'],
       smell: json['SMELL'],
-      diamondFemale: (json['DIAMOND_FEMALE'] ?? 0) == 1,
-      grounded: (json['GROUNDED'] ?? 0) == 1,
-      dlc: json['DLC'] == 1,
+      diamondFemale: json['DIAMOND_FEMALE'] ?? false,
+      grounded: json['GROUNDED'] ?? false,
+      dlc: json['DLC'],
     );
   }
 

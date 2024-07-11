@@ -40,7 +40,7 @@ class Perk extends Proficiency {
       tier: json['TIER'],
       parent: json['PARENT'],
       type: ProficiencyType.values.elementAt(json['TYPE']),
-      ability: json['ABILITY'] == 1,
+      ability: json['ABILITY'],
       description: json['DESCRIPTION'],
     );
   }

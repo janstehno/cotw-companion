@@ -47,7 +47,6 @@ class WidgetTitle extends StatelessWidget {
           upperCase ? _text.toUpperCase() : _text,
           color: titleColor,
           style: Style.condensed.s20.w600,
-          maxLines: _maxLines,
         );
       }
       return WidgetText(

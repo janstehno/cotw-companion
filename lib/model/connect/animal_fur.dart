@@ -92,8 +92,8 @@ class AnimalFur {
       furId: json['FUR_ID'],
       rarity: json['RARITY'],
       perCent: json['PERCENT'],
-      male: json['MALE'] == 1,
-      female: json['FEMALE'] == 1,
+      male: json['MALE'],
+      female: json['FEMALE'],
       chosen: false,
     );
   }

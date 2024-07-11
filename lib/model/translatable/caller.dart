@@ -56,7 +56,7 @@ class Caller extends Translatable {
       strength: json['STRENGTH'],
       price: json['PRICE'],
       level: json['LEVEL'],
-      dlc: json['DLC'] == 1,
+      dlc: json['DLC'],
     );
   }
 

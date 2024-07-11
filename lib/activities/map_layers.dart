@@ -4,11 +4,12 @@ import 'package:cotwcompanion/helpers/map.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
 import 'package:cotwcompanion/widgets/button/switch_icon.dart';
-import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
+import 'package:cotwcompanion/widgets/parts/map_layers/animal.dart';
 import 'package:cotwcompanion/widgets/title/title_switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -109,29 +110,26 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
     );
   }
 
-  List<Widget> _listAnimals() {
-    return widget.helperMap.zones.entries.mapIndexed((i, zone) {
-      return WidgetSectionIndicatorTap(
-        widget.helperMap.getAnimal(widget.helperMap.zonesKeys(context).elementAt(i))!.name,
-        background: Utils.backgroundAt(i),
-        indicatorColor: widget.helperMap.isAnimalActive(i) ? widget.helperMap.getAnimalColor(i) : Interface.disabled,
-        onTap: () {
-          setState(() {
-            widget.helperMap.activateAnimal(i);
-            widget.callback();
-          });
-        },
-      );
-    }).toList();
+  Widget _buildAnimal(int i) {
+    Animal animal = widget.helperMap.getAnimal(widget.helperMap.zonesKeys(context).elementAt(i))!;
+    return WidgetMapLayerAnimal(
+      animal,
+      context: context,
+      reserve: widget.helperMap.reserve,
+      background: Utils.backgroundAt(i),
+      indicatorColor: widget.helperMap.isAnimalActive(i) ? widget.helperMap.getAnimalColor(i) : Interface.disabled,
+      isShown: true,
+      onTap: () {
+        setState(() {
+          widget.helperMap.activateAnimal(i);
+          widget.callback();
+        });
+      },
+    );
   }
 
-  Widget _buildAnimals() {
-    return Column(
-      children: [
-        _buildAnimalsTitle(),
-        ..._listAnimals(),
-      ],
-    );
+  List<Widget> _listAnimals() {
+    return widget.helperMap.zones.entries.mapIndexed((i, zone) => _buildAnimal(i)).toList();
   }
 
   Widget _buildWidgets() {
@@ -142,7 +140,8 @@ class ActivityMapLayersState extends State<ActivityMapLayers> {
       ),
       children: [
         _buildEnvironment(),
-        _buildAnimals(),
+        _buildAnimalsTitle(),
+        ..._listAnimals(),
       ],
     );
   }

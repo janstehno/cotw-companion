@@ -40,22 +40,22 @@ class Multimount extends Translatable {
 
 class MultimountAnimal {
   final int _id;
-  final bool _gender;
+  final bool _male;
   final int _count;
 
   MultimountAnimal({
     required id,
-    required gender,
+    required male,
     required count,
   })  : _id = id,
-        _gender = gender,
+        _male = male,
         _count = count;
 
   int get id => _id;
 
-  bool get isFemale => !_gender;
+  bool get isFemale => !_male;
 
-  bool get isMale => _gender;
+  bool get isMale => _male;
 
   int get count => _count;
 
@@ -71,7 +71,7 @@ class MultimountAnimal {
   factory MultimountAnimal.fromJson(Map<String, dynamic> json) {
     return MultimountAnimal(
       id: json['ID'],
-      gender: json['GENDER'] == 1,
+      male: json['MALE'],
       count: json['COUNT'],
     );
   }

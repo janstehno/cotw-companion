@@ -76,7 +76,7 @@ class Ammo extends Translatable {
       expansion: json['EXPANSION'],
       price: json['PRICE'],
       score: json['SCORE'],
-      dlc: json['DLC'] == 1,
+      dlc: json['DLC'],
     );
   }
 

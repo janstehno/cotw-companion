@@ -48,7 +48,7 @@ class ActivityAddLogs extends ActivityModify {
 }
 
 class ActivityAddLogsState extends ActivityModifyState {
-  final RegExp rxDouble = RegExp(r"^\d{1,4}(\.\d{1,3})?$");
+  final RegExp rxDouble = RegExp(r"^\d{1,4}([.,]\d{1,3})?$");
   final TextEditingController trophyController = TextEditingController(text: "0");
   final TextEditingController weightController = TextEditingController(text: "0");
 
@@ -127,7 +127,7 @@ class ActivityAddLogsState extends ActivityModifyState {
     setState(() {
       if (rxDouble.hasMatch(trophyController.text)) {
         correctTrophy = true;
-        trophy = double.parse(trophyController.text);
+        trophy = double.parse(trophyController.text.replaceAll(",", "."));
       } else {
         if (trophyController.text.isEmpty) {
           correctTrophy = true;
@@ -144,7 +144,7 @@ class ActivityAddLogsState extends ActivityModifyState {
     setState(() {
       if (rxDouble.hasMatch(weightController.text)) {
         correctWeight = true;
-        weight = double.parse(weightController.text);
+        weight = double.parse(weightController.text.replaceAll(",", "."));
       } else {
         if (weightController.text.isEmpty) {
           correctWeight = true;

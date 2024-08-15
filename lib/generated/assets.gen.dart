@@ -1523,7 +1523,9 @@ class $AssetsGraphicsImagesGen {
 
   AssetGenImage get cotw => const AssetGenImage('assets/graphics/images/cotw.jpg');
 
-  List<AssetGenImage> get values => [cotw];
+  AssetGenImage get hunting => const AssetGenImage('assets/graphics/images/hunting.jpg');
+
+  List<AssetGenImage> get values => [cotw, hunting];
 }
 
 class $AssetsGraphicsProficiencyGen {

@@ -14,6 +14,8 @@ class WidgetTitleTap extends WidgetTitle {
   })  : _content = content,
         _onTap = onTap;
 
+  Function get onTap => _onTap;
+
   @override
   Widget? buildAfter() {
     if (_content != null) return _content!;

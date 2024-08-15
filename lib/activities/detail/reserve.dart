@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/builders/map.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/interface/graphics.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_animals.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_callers.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_environment.dart';
@@ -11,7 +12,7 @@ import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
 import 'package:cotwcompanion/widgets/subtitle/subtitle.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
-import 'package:cotwcompanion/widgets/title/title_button_icon.dart';
+import 'package:cotwcompanion/widgets/title/title_image_tap.dart';
 import 'package:cotwcompanion/widgets/title/title_switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -40,30 +41,37 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
   }
 
   Widget _buildMap(BuildContext context) {
-    return WidgetTitleButtonIcon(
+    return WidgetTitleImageTap(
       tr("MAP"),
-      icon: Assets.graphics.icons.map,
-      alignRight: true,
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (e) => BuilderMap(reserve: widget.reserve)),
         );
       },
-    );
-  }
-
-  Widget _buildMissions(BuildContext context) {
-    return WidgetTitleButtonIcon(
-      tr("MISSIONS"),
-      icon: Assets.graphics.icons.missions,
-      alignRight: true,
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (e) => ListReserveMissions(widget.reserve)),
-        );
-      },
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            child: Image.asset(
+              Graphics.getTile(widget.reserve, -1, 2, 2),
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          Expanded(
+            child: Image.asset(
+              Graphics.getTile(widget.reserve, 0, 2, 2),
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          Expanded(
+            child: Image.asset(
+              Graphics.getTile(widget.reserve, 1, 2, 2),
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -72,6 +80,22 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
       WidgetTitle(tr("ENVIRONMENT")),
       ListReserveEnvironment(widget.reserve),
     ];
+  }
+
+  Widget _buildMissions(BuildContext context) {
+    return WidgetTitleImageTap(
+      tr("MISSIONS"),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (e) => ListReserveMissions(widget.reserve)),
+        );
+      },
+      child: Image.asset(
+        Assets.graphics.images.hunting.path,
+        fit: BoxFit.fitWidth,
+      ),
+    );
   }
 
   List<Widget> _listAnimals() {

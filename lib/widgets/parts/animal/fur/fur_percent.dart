@@ -37,7 +37,7 @@ class WidgetFurPercent extends StatelessWidget {
   }
 
   Widget _buildWidgets() {
-    if (_animalFur.furId != Values.greatOneId && _animalFur.perCent != 100.0) {
+    if (_animalFur.furId != Values.greatOneId && _animalFur.perCent > 0.0 && _animalFur.perCent < 100.0) {
       String left = _animalFur.perCent.toString().split(".")[0];
       String right = _animalFur.perCent.toString().split(".")[1];
       return Row(

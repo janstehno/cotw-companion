@@ -107,33 +107,37 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
     }
   }
 
-  bool _contains(WeaponAmmo item, List<WeaponAmmo> items) {
+  bool _isBetter(WeaponAmmo item, List<WeaponAmmo> items) {
     for (WeaponAmmo wa in items) {
       if (widget.weaponType == WeaponType.shotgun || widget.weaponType == WeaponType.bow) {
-        if (HelperJSON.getAmmo(wa.ammoId)!.name == HelperJSON.getAmmo(item.ammoId)!.name) {
-          return true;
+        if (item.ammoId == wa.ammoId) {
+          if (HelperJSON.getWeapon(item.weaponId)!.accuracy < HelperJSON.getWeapon(wa.weaponId)!.accuracy) {
+            return false;
+          }
         }
-      } else {
-        if (wa.weaponId == item.weaponId) return true;
+      } else if (item.weaponId == wa.weaponId) {
+        if (HelperJSON.getAmmo(item.ammoId)!.penetration < HelperJSON.getAmmo(wa.ammoId)!.penetration) {
+          return false;
+        }
       }
     }
-    return false;
+    return true;
   }
 
-  List<WeaponAmmo> _removeDuplicates(List<WeaponAmmo> items) {
+  List<WeaponAmmo> _removeWorse(List<WeaponAmmo> items) {
     if (_bestOnly) {
       return items;
     } else {
       List<WeaponAmmo> reduced = [];
       for (WeaponAmmo item in items) {
-        if (!_contains(item, reduced)) reduced.add(item);
+        if (_isBetter(item, items)) reduced.add(item);
       }
       return reduced;
     }
   }
 
   List<Widget> _listWeapons(List<WeaponAmmo> items) {
-    return _removeDuplicates(items).map((e) {
+    return _removeWorse(items).map((e) {
       Weapon weapon = HelperJSON.getWeapon(e.weaponId)!;
       Ammo ammo = HelperJSON.getAmmo(e.ammoId)!;
       bool dlc = weapon.isFromDlc;

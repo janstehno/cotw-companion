@@ -19,7 +19,7 @@ dependencies:
   easy_rich_text: ^2.1.0
   equatable: 2.0.5
   file_picker: ^8.0.3
-  fl_chart: 0.68.0
+  fl_chart: ^0.69.0
   flutter:
     sdk: flutter
   flutter_gen: ^5.6.0
@@ -37,7 +37,7 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.2.3
   simple_shadow: 0.3.1
-  smooth_page_indicator: 1.1.0
+  smooth_page_indicator: ^1.2.0+3
   url_launcher: ^6.2.6
 
 dev_dependencies:

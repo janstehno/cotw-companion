@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_callers.dart';
+import 'package:cotwcompanion/lists/animal_info/animal_furs_go.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_reserves.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_senses.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_trophy_scores.dart';
@@ -100,6 +101,16 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
     ];
   }
 
+  List<Widget> _listFursGO() {
+    return [
+      WidgetTitle(
+        "${tr("ANIMAL_FURS")} (${tr("FUR:GREAT_ONE")})",
+        subtext: tr("SUBJECT_TO_CHANGE"),
+      ),
+      ListAnimalFursGO(widget.animal),
+    ];
+  }
+
   List<Widget> _listZones() {
     return [
       WidgetTitle(tr("ANIMAL_NEED_ZONES")),
@@ -143,6 +154,7 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
         ..._listTrophyScores(),
         ..._listTrophyScoresMaximum(),
         ..._listFurs(),
+        if (widget.animal.hasGO) ..._listFursGO(),
         ..._listZones(),
         if (widget.animal.level > 1) ..._listAnatomy(),
         if (widget.animal.hasSenses) ..._listSenses(),

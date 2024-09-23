@@ -18,6 +18,7 @@ class Animal extends Translatable {
   final double _trophyGO;
   final double _weightGOKG;
   final double _weightGOLB;
+  final List<dynamic> _furGO;
   final int _sight;
   final int _hearing;
   final int _smell;
@@ -39,6 +40,7 @@ class Animal extends Translatable {
     required double trophyGO,
     required double weightGOKG,
     required double weightGOLB,
+    required List<dynamic> furGO,
     required int sight,
     required int hearing,
     required int smell,
@@ -56,6 +58,7 @@ class Animal extends Translatable {
         _trophyGO = trophyGO,
         _weightGOKG = weightGOKG,
         _weightGOLB = weightGOLB,
+        _furGO = furGO,
         _sight = sight,
         _hearing = hearing,
         _smell = smell,
@@ -89,6 +92,8 @@ class Animal extends Translatable {
 
   double weightGO(bool units) => units ? _weightGOLB : _weightGOKG;
 
+  List<dynamic> get furGO => _furGO;
+
   bool get femaleDiamond => _diamondFemale;
 
   bool get grounded => _grounded;
@@ -114,6 +119,7 @@ class Animal extends Translatable {
       trophyGO: json['TROPHY_GO'] ?? -1.0,
       weightGOKG: json['WEIGHT_GO_KG'] ?? -1.0,
       weightGOLB: json['WEIGHT_GO_LB'] ?? -1.0,
+      furGO: json["FUR_GO"] ?? [],
       sight: json['SIGHT'],
       hearing: json['HEARING'],
       smell: json['SMELL'],

@@ -44,10 +44,10 @@ class Dlc extends Describable {
       date: json['DATE'],
       type: json['TYPE'],
       description: json['DESCRIPTION'] ?? [],
-      reserve: json['CONTENT']['RESERVE'] ?? [],
-      animals: json['CONTENT']['ANIMALS'] ?? [],
-      weapons: json['CONTENT']['WEAPONS'] ?? [],
-      callers: json['CONTENT']['CALLERS'] ?? [],
+      reserve: json['CONTENT']?['RESERVE'] ?? [],
+      animals: json['CONTENT']?['ANIMALS'] ?? [],
+      weapons: json['CONTENT']?['WEAPONS'] ?? [],
+      callers: json['CONTENT']?['CALLERS'] ?? [],
     );
   }
 

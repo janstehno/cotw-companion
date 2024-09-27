@@ -125,7 +125,7 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (e) => ListLogsStats(items, trophyLodge: (widget as ActivityLogs).trophyLodge),
+            builder: (e) => ListLogsStats(filtered, trophyLodge: (widget as ActivityLogs).trophyLodge),
           ),
         );
       },

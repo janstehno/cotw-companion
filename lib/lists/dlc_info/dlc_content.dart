@@ -2,6 +2,7 @@ import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/widgets/app/margin.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 
@@ -32,10 +33,13 @@ class ListDlcContent extends StatelessWidget {
   }
 
   Widget _buildItem(int i) {
-    return WidgetText(
-      _getName(i),
-      color: Interface.dark,
-      style: Style.normal.s16.w300,
+    return WidgetMargin.bottom(
+      3,
+      child: WidgetText(
+        _getName(i),
+        color: Interface.dark,
+        style: Style.normal.s16.w300,
+      ),
     );
   }
 
@@ -44,10 +48,8 @@ class ListDlcContent extends StatelessWidget {
   }
 
   Widget _buildWidgets() {
-    return Wrap(
-      spacing: 3,
-      runSpacing: 3,
-      direction: Axis.vertical,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: _listItems(),
     );
   }

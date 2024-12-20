@@ -10,10 +10,10 @@ class BuilderMultimounts extends BuilderBuilder {
   }) : super("MM");
 
   @override
-  State<StatefulWidget> createState() => BuilderPlannerState();
+  State<StatefulWidget> createState() => BuilderMultimountsState();
 }
 
-class BuilderPlannerState extends BuilderBuilderState {
+class BuilderMultimountsState extends BuilderBuilderState {
   final HelperMultimounts _helperMultimounts = HelperMultimounts();
 
   @override

@@ -11,7 +11,7 @@ class HelperLogger {
       noBoxingByDefault: true,
       colors: true,
       printEmojis: false,
-      printTime: false,
+      dateTimeFormat: DateTimeFormat.none,
     ),
   );
 

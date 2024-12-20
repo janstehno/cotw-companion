@@ -115,3 +115,8 @@ enum FilterKey {
   huntingPassRandomAllowedAtv,
   huntingPassRandomAllowedDayTime,
 }
+
+enum RepositoryData {
+  issues,
+  discussions,
+}

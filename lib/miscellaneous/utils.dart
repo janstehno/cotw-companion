@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cotwcompanion/generated/assets.gen.dart';
@@ -9,6 +10,7 @@ import 'package:cotwcompanion/widgets/app/bar_snack.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -72,6 +74,25 @@ class Utils {
     String text = value.toString();
     List<String> split = text.split(".");
     return (split.length == 2 && split[1] == "0") ? split[0] : text;
+  }
+
+  static Future<List<dynamic>> _getDataFrom(RepositoryData data) async {
+    final url = Uri.parse("https://api.github.com/repos/janstehno/cotw-companion/${data.name}?state=open");
+    final response = await get(url);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return [];
+    }
+  }
+
+  static Future<List<dynamic>> getOpenIssues() async {
+    return _getDataFrom(RepositoryData.issues);
+  }
+
+  static Future<List<dynamic>> getOpenDiscussions() async {
+    return _getDataFrom(RepositoryData.discussions);
   }
 
   static void redirectTo(Uri uri) async {

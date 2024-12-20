@@ -4,8 +4,10 @@ import 'package:cotwcompanion/activities/entries/logs.dart';
 import 'package:cotwcompanion/activities/need_zones.dart';
 import 'package:cotwcompanion/activities/search.dart';
 import 'package:cotwcompanion/activities/settings.dart';
+import 'package:cotwcompanion/builders/discussions.dart';
 import 'package:cotwcompanion/builders/enumerators.dart';
 import 'package:cotwcompanion/builders/hunting_pass.dart';
+import 'package:cotwcompanion/builders/issues.dart';
 import 'package:cotwcompanion/builders/multimounts.dart';
 import 'package:cotwcompanion/builders/planner.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
@@ -21,10 +23,10 @@ import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/widgets/app/margin.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/button/button_icon.dart';
+import 'package:cotwcompanion/widgets/button/button_link_indicator.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/parts/home/menu.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
-import 'package:cotwcompanion/widgets/text/text_tap.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -66,6 +68,10 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
     ["CONTENT_DOWNLOADABLE_CONTENT", Assets.graphics.icons.dlc, const ListDlcs()],
   ];
 
+  final List<List<dynamic>> _app = [
+    ["ABOUT", Assets.graphics.icons.about, const ActivityAbout()],
+  ];
+
   Widget _buildMenuItem(String text, String icon, Widget activity, BuildContext context) {
     return WidgetSectionMenu(tr(text), icon: icon, onTap: () {
       Navigator.push(context, MaterialPageRoute(builder: (e) => activity));
@@ -103,8 +109,8 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         10,
         child: WidgetText(
           tr("GENERAL").toUpperCase(),
-          color: Interface.dark,
-          style: Style.condensed.s24.w600,
+          color: Interface.disabled,
+          style: Style.normal.s16.w700,
         ),
       ),
       ..._general.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2), context)),
@@ -120,8 +126,8 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         10,
         child: WidgetText(
           tr("TOOLS").toUpperCase(),
-          color: Interface.dark,
-          style: Style.condensed.s24.w600,
+          color: Interface.disabled,
+          style: Style.normal.s16.w700,
         ),
       ),
       ..._tools.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2), context)),
@@ -137,74 +143,84 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         10,
         child: WidgetText(
           tr("OTHER").toUpperCase(),
-          color: Interface.dark,
-          style: Style.condensed.s24.w600,
+          color: Interface.disabled,
+          style: Style.normal.s16.w700,
         ),
       ),
       ..._other.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2), context)),
     ];
   }
 
-  List<Widget> _listUncategorized() {
+  List<Widget> _listApp() {
     return [
-      WidgetSectionMenu(tr("SETTINGS"), onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (e) => ActivitySettings(callback: () {
-              setState(() {});
-            }),
-          ),
-        );
-      }),
-      WidgetSectionMenu(tr("ABOUT"), onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (e) => const ActivityAbout()));
-      }),
+      WidgetMargin.fromLTRB(
+        0,
+        30,
+        0,
+        10,
+        child: WidgetText(
+          tr("APP").toUpperCase(),
+          color: Interface.disabled,
+          style: Style.normal.s16.w700,
+        ),
+      ),
+      WidgetSectionMenu(
+        tr("SETTINGS"),
+        icon: Assets.graphics.icons.settings,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (e) => ActivitySettings(callback: () {
+                      setState(() {});
+                    })),
+          );
+        },
+      ),
+      ..._app.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2), context)),
     ];
   }
 
-  Widget _buildFooter() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        WidgetTextTap(
-          tr("WIKI").toUpperCase(),
-          color: Interface.dark.withOpacity(0.8),
-          style: Style.normal.s8.w500,
-          onTap: () => Utils.redirectTo(
+  List<Widget> _listFooter() {
+    return [
+      WidgetButtonLinkIndicator(
+        tr("WIKI"),
+        color: Interface.dark,
+        onTap: () {
+          Utils.redirectTo(
             Uri.parse("https://github.com/janstehno/cotw-companion/wiki"),
-          ),
-        ),
-        const SizedBox(width: 10),
-        WidgetTextTap(
-          tr("PATCH_NOTES").toUpperCase(),
-          color: Interface.dark.withOpacity(0.8),
-          style: Style.normal.s8.w500,
-          onTap: () => Utils.redirectTo(
+          );
+        },
+      ),
+      const SizedBox(height: 5),
+      WidgetButtonLinkIndicator(
+        tr("PATCH_NOTES"),
+        color: Interface.green,
+        onTap: () {
+          Utils.redirectTo(
             Uri.parse("https://github.com/janstehno/cotw-companion/wiki/Patch-notes"),
-          ),
-        ),
-        const SizedBox(width: 10),
-        WidgetTextTap(
-          tr("IDEAS").toUpperCase(),
-          color: Interface.dark.withOpacity(0.8),
-          style: Style.normal.s8.w500,
-          onTap: () => Utils.redirectTo(
-            Uri.parse("https://github.com/janstehno/cotw-companion/discussions"),
-          ),
-        ),
-        const SizedBox(width: 10),
-        WidgetTextTap(
-          tr("ISSUES").toUpperCase(),
-          color: Interface.dark.withOpacity(0.8),
-          style: Style.normal.s8.w500,
-          onTap: () => Utils.redirectTo(
-            Uri.parse("https://github.com/janstehno/cotw-companion/issues"),
-          ),
-        ),
-      ],
-    );
+          );
+        },
+      ),
+      const SizedBox(height: 5),
+      WidgetButtonLinkIndicator(
+        tr("REPO:DISCUSSIONS"),
+        showIcon: false,
+        color: Interface.blue,
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (e) => const BuilderDiscussions()));
+        },
+      ),
+      const SizedBox(height: 5),
+      WidgetButtonLinkIndicator(
+        tr("REPO:ISSUES"),
+        color: Interface.primary,
+        showIcon: false,
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (e) => const BuilderIssues()));
+        },
+      )
+    ];
   }
 
   List<Widget> _listItems(BuildContext context) {
@@ -213,10 +229,9 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
       ..._listGeneral(),
       ..._listTools(),
       ..._listOther(),
+      ..._listApp(),
       const SizedBox(height: 30),
-      ..._listUncategorized(),
-      const SizedBox(height: 30),
-      _buildFooter(),
+      ..._listFooter(),
       const SizedBox(height: 15),
     ];
   }

@@ -8,6 +8,7 @@ class Values {
   static const int perkPoints = 22;
 
   static const double tapSize = 32;
+  static const double iconSize = 20;
   static const double indicatorSize = 16;
   static const double dotSize = 8;
 
@@ -15,7 +16,7 @@ class Values {
   static const double title = 75;
   static const double subtitle = 65;
   static const double section = 65;
-  static const double menu = 45;
+  static const double menu = 40;
   static const double entry = 22;
 
   static const double dropDown = 65;

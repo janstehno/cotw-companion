@@ -83,6 +83,8 @@ class $StyleNormalSize16 {
       );
 
   TextStyle get w500 => w300.copyWith(fontWeight: FontWeight.w500);
+
+  TextStyle get w700 => w300.copyWith(fontWeight: FontWeight.w700);
 }
 
 class $StyleNormalSize18 {

@@ -9,26 +9,23 @@ import 'package:flutter/material.dart';
 
 class WidgetSectionMenu extends WidgetSectionTap {
   final String? _icon;
-  final Color _color;
 
   const WidgetSectionMenu(
     super.text, {
     super.key,
     String? icon,
-    Color? color,
     required super.onTap,
   })  : _icon = icon,
-        _color = color ?? Interface.primary,
         super(background: Interface.transparent);
 
   @override
-  double get height => _icon == null ? Values.menu - 10 : Values.menu;
+  double get height => Values.menu;
 
   Widget _buildIcon() {
     return WidgetIcon.withSize(
       _icon!,
-      color: _color,
-      size: Values.indicatorSize,
+      color: Interface.dark,
+      size: Values.iconSize,
     );
   }
 

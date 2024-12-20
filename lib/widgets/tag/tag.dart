@@ -35,6 +35,19 @@ class WidgetTag extends StatelessWidget {
         _color = color,
         _background = background;
 
+  WidgetTag.mini({
+    super.key,
+    String? icon,
+    String? value,
+    required Color color,
+    required Color background,
+  })  : assert((icon != null && icon.isNotEmpty) || (value != null && value.isNotEmpty)),
+        _height = Values.miniTag,
+        _left = icon,
+        _right = value,
+        _color = color,
+        _background = background;
+
   double get height => _height;
 
   Color get color => _color;
@@ -81,6 +94,15 @@ class WidgetTag extends StatelessWidget {
             value,
             color: color,
             style: Style.normal.s12.w500,
+          ),
+        );
+      } else if (height == Values.miniTag) {
+        return Container(
+          margin: rightMargin,
+          child: WidgetText(
+            value,
+            color: color,
+            style: Style.normal.s10.w500,
           ),
         );
       }

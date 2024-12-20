@@ -28,6 +28,7 @@ class Values {
 
   static const double bigTag = 27;
   static const double smallTag = 23;
+  static const double miniTag = 17;
 
   static const double smallLineHeight = 1.1;
   static const double normalLineHeight = 1.4;

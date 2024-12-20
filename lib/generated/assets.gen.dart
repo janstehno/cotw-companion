@@ -1254,6 +1254,8 @@ class $AssetsGraphicsIconsGen {
 
   String get level => 'assets/graphics/icons/level.svg';
 
+  String get link => 'assets/graphics/icons/link.svg';
+
   String get loadout => 'assets/graphics/icons/loadout.svg';
 
   String get lock => 'assets/graphics/icons/lock.svg';
@@ -1442,6 +1444,7 @@ class $AssetsGraphicsIconsGen {
         import,
         info,
         level,
+        link,
         loadout,
         lock,
         lookout,

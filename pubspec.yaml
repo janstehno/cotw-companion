@@ -14,10 +14,10 @@ dependencies:
   auto_size_text: 3.0.0
   blurrycontainer: 2.1.0
   collection: ^1.18.0
-  device_info_plus: ^10.1.0
+  device_info_plus: ^11.2.0
   easy_localization: ^3.0.7
   easy_rich_text: ^2.1.0
-  equatable: 2.0.5
+  equatable: ^2.0.7
   file_picker: ^8.0.3
   fl_chart: ^0.69.0
   flutter:
@@ -27,7 +27,7 @@ dependencies:
   flutter_lints: 4.0.0
   flutter_spinkit: ^5.2.1
   flutter_svg: ^2.0.10+1
-  http: ^1.2.1
+  http: ^1.2.2
   latlng: 2.0.7
   logger: ^2.3.0
   map: 2.0.2

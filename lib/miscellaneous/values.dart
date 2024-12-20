@@ -102,6 +102,7 @@ class Values {
     "Alena Polášková": ["21.08.2024"],
     "Jose Ricardo Garcia": ["28.07.2022"],
     "Aldair Rufatto": ["10.01.2023"],
+    "Sandikcibaki": ["11.12.2024"],
     "Abraham Barrera": ["07.07.2022"],
     "Franco Sanchez": ["07.03.2022"],
     "Martin Pikora": ["21.08.2024"],

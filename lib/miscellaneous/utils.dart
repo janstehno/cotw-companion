@@ -77,14 +77,14 @@ class Utils {
   }
 
   static Future<List<dynamic>> _getDataFrom(RepositoryData data) async {
-    final url = Uri.parse("https://api.github.com/repos/janstehno/cotw-companion/${data.name}?state=open");
-    final response = await get(url);
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
+    try {
+      final url = Uri.parse("https://api.github.com/repos/janstehno/cotw-companion/${data.name}?state=open");
+      final response = await get(url);
+      if (response.statusCode == 200) return jsonDecode(response.body);
+    } catch (e) {
       return [];
     }
+    return [];
   }
 
   static Future<List<dynamic>> getOpenIssues() async {

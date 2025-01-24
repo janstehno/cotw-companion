@@ -520,8 +520,6 @@ class Graphics {
         return _anatomyOrgans[animal.asset]!;
       case AnatomyPart.bones:
         throw UnimplementedError();
-      default:
-        throw Exception("This image asset does not exist");
     }
   }
 

@@ -98,8 +98,6 @@ class Weapon extends Translatable {
         return tr("HANDGUN");
       case (WeaponType.bow):
         return tr("BOW_CROSSBOW");
-      default:
-        throw UnimplementedError();
     }
   }
 

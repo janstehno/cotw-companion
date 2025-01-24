@@ -54,7 +54,7 @@ class WidgetConfirmation extends StatelessWidget {
   Widget _buildWidgets() {
     return Center(
       child: Container(
-        color: Interface.body.withOpacity(0.8),
+        color: Interface.body.withValues(alpha: 0.8),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,

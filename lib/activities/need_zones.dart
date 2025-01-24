@@ -193,7 +193,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
       child: WidgetSwitchText(
         "${i + 1}",
         color: Interface.disabledForeground,
-        background: Interface.disabled.withOpacity(_disabledClasses[i]! ? 0.5 : 1),
+        background: Interface.disabled.withValues(alpha: _disabledClasses[i]! ? 0.5 : 1),
         activeColor: Interface.alwaysDark,
         activeBackground: Interface.primary,
         isActive: _shownClasses[i]!,

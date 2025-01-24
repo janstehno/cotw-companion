@@ -111,7 +111,7 @@ class WidgetNeedZoneTime extends StatelessWidget {
     return SizedBox(
       height: _height,
       child: WidgetPadding.h30(
-        background: Interface.primary.withOpacity(0.6),
+        background: Interface.primary.withValues(alpha: 0.6),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

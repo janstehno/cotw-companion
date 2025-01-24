@@ -38,7 +38,7 @@ class WidgetTitleImageTap extends WidgetTitleTap {
               blur: 3,
               elevation: 0,
               padding: EdgeInsets.zero,
-              color: Interface.alwaysDark.withOpacity(0.6),
+              color: Interface.alwaysDark.withValues(alpha: 0.6),
               shadowColor: Interface.transparent,
               borderRadius: BorderRadius.circular(0),
             ),

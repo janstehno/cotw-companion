@@ -7,8 +7,8 @@ plugins {
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
+    localPropertiesFile.withInputStream { stream ->
+        localProperties.load(stream)
     }
 }
 
@@ -31,12 +31,20 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "com.toastyapps.cotwcompanion"
     compileSdk flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
-    ndkVersion "25.1.8937393"
+
+    String systemNdkPath = System.getenv("ANDROID_NDK_PATH")
+    if (systemNdkPath != null) {
+        ndkVersion = flutter.ndkVersion
+        ndkPath = systemNdkPath
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     defaultConfig {

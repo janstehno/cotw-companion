@@ -97,7 +97,7 @@ class WidgetNeedZone extends StatelessWidget {
       AnimalZone.iconFor(zoneAfter),
       size: zoneIconSize - 5,
       color: AnimalZone.iconColorFor(zoneAfter),
-      background: AnimalZone.colorFor(zoneAfter).withOpacity(0.6),
+      background: AnimalZone.colorFor(zoneAfter).withValues(alpha: 0.6),
     );
   }
 
@@ -106,7 +106,7 @@ class WidgetNeedZone extends StatelessWidget {
       AnimalZone.iconFor(zoneAfterAfter),
       size: zoneIconSize - 10,
       color: AnimalZone.iconColorFor(zoneAfterAfter),
-      background: AnimalZone.colorFor(zoneAfterAfter).withOpacity(0.4),
+      background: AnimalZone.colorFor(zoneAfterAfter).withValues(alpha: 0.4),
     );
   }
 

@@ -63,7 +63,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.menuOpen,
           value: widget.logs.length.toString(),
-          color: Interface.light.withOpacity(0.8),
+          color: Interface.light.withValues(alpha: 0.8),
           background: Interface.dark,
           withIcon: true,
         ),
@@ -71,7 +71,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.trophyLodge,
           value: _trophyLodgeCount.toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.primary,
           withIcon: true,
         )
@@ -84,7 +84,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.trophyNone,
           value: _trophyCount[0].toString(),
-          color: Interface.light.withOpacity(0.8),
+          color: Interface.light.withValues(alpha: 0.8),
           background: Interface.trophyNone,
           withIcon: true,
         ),
@@ -92,7 +92,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.trophyBronze,
           value: _trophyCount[1].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.trophyBronze,
           withIcon: true,
         ),
@@ -100,7 +100,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.trophySilver,
           value: _trophyCount[2].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.trophySilver,
           withIcon: true,
         ),
@@ -108,7 +108,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.trophyGold,
           value: _trophyCount[3].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.trophyGold,
           withIcon: true,
         ),
@@ -116,7 +116,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.trophyDiamond,
           value: _trophyCount[4].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.trophyDiamond,
           withIcon: true,
         ),
@@ -124,7 +124,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.trophyGreatOne,
           value: _trophyCount[5].toString(),
-          color: Interface.light.withOpacity(0.8),
+          color: Interface.light.withValues(alpha: 0.8),
           background: Interface.trophyGreatOne,
           withIcon: true,
         )
@@ -137,42 +137,42 @@ class ListLogsStatsState extends State<ListLogsStats> {
         WidgetTagSpecial(
           identifier: tr("RARITY_COMMON"),
           value: _furCount[0].toString(),
-          color: Interface.light.withOpacity(0.8),
+          color: Interface.light.withValues(alpha: 0.8),
           background: Interface.rarityCommon,
         ),
       if (_furCount[1]! > 0)
         WidgetTagSpecial(
           identifier: tr("RARITY_UNCOMMON"),
           value: _furCount[1].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.rarityUncommon,
         ),
       if (_furCount[2]! > 0)
         WidgetTagSpecial(
           identifier: tr("RARITY_RARE"),
           value: _furCount[2].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.rarityRare,
         ),
       if (_furCount[3]! > 0)
         WidgetTagSpecial(
           identifier: tr("RARITY_VERY_RARE"),
           value: _furCount[3].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.rarityVeryRare,
         ),
       if (_furCount[4]! > 0)
         WidgetTagSpecial(
           identifier: tr("RARITY_MISSION"),
           value: _furCount[4].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.rarityMission,
         ),
       if (_furCount[5]! > 0)
         WidgetTagSpecial(
           identifier: HelperJSON.getFur(Values.greatOneId)!.name,
           value: _furCount[5].toString(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.rarityGreatOne,
         ),
     ];

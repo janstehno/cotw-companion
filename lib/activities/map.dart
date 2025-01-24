@@ -122,7 +122,9 @@ class ActivityMapState extends State<ActivityMap> {
 
   bool _inView(double left, double top, double right, double bottom) {
     if ((right >= 0 && left <= MediaQuery.of(context).size.width) &&
-        (bottom >= 0 && top <= MediaQuery.of(context).size.height)) return true;
+        (bottom >= 0 && top <= MediaQuery.of(context).size.height)) {
+      return true;
+    }
     return false;
   }
 
@@ -258,7 +260,7 @@ class ActivityMapState extends State<ActivityMap> {
           child: Stack(
             children: [
               _buildTileLayer(),
-              Container(color: Interface.alwaysDark.withOpacity(0.4)),
+              Container(color: Interface.alwaysDark.withValues(alpha: 0.4)),
               ..._listHides(),
               ..._listLookouts(),
               ..._listOutposts(),

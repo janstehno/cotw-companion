@@ -39,7 +39,7 @@ class ActivityHomeState extends State<ActivityHome> {
         ),
         WidgetText(
           tr("NOT_OFFICIAL").toUpperCase(),
-          color: Interface.alwaysDark.withOpacity(0.8),
+          color: Interface.alwaysDark.withValues(alpha: 0.8),
           style: Style.normal.s8.w300,
         ),
         WidgetText(
@@ -125,7 +125,7 @@ class ActivityHomeState extends State<ActivityHome> {
     return WidgetPadding.a30(
       child: WidgetTextPattern(
         tr("DISCLAIMER"),
-        color: Interface.alwaysLight.withOpacity(0.8),
+        color: Interface.alwaysLight.withValues(alpha: 0.8),
         normalStyle: Style.normal.s10.w300,
         patternStyle: Style.normal.s10.w500,
         textAlign: TextAlign.center,
@@ -147,9 +147,9 @@ class ActivityHomeState extends State<ActivityHome> {
         gradient: LinearGradient(
           transform: const GradientRotation(pi / 2),
           colors: [
-            Interface.ff06.withOpacity(0.1),
-            Interface.ff06.withOpacity(0.4),
-            Interface.ff06.withOpacity(0.6),
+            Interface.ff06.withValues(alpha: 0.1),
+            Interface.ff06.withValues(alpha: 0.4),
+            Interface.ff06.withValues(alpha: 0.6),
           ],
         ),
       ),

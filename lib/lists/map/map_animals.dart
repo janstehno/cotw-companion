@@ -51,7 +51,7 @@ class ListMapAnimals extends StatelessWidget {
     return WidgetPadding.all(
       15,
       alignment: Alignment.topLeft,
-      background: Interface.alwaysDark.withOpacity(0.6),
+      background: Interface.alwaysDark.withValues(alpha: 0.6),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

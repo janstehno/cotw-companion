@@ -62,9 +62,9 @@ abstract class BuilderBuilderState extends State<BuilderBuilder> {
         gradient: LinearGradient(
           transform: const GradientRotation(pi / 2),
           colors: [
-            Interface.ff06.withOpacity(0.1),
-            Interface.ff06.withOpacity(0.4),
-            Interface.ff06.withOpacity(0.6),
+            Interface.ff06.withValues(alpha: 0.1),
+            Interface.ff06.withValues(alpha: 0.4),
+            Interface.ff06.withValues(alpha: 0.6),
           ],
         ),
       ),

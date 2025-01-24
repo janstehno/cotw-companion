@@ -102,10 +102,10 @@ class Interface {
       light = ff0d;
       dark = fff5;
       search = ff17;
-      dropDown = ff06.withOpacity(0.8);
+      dropDown = ff06.withValues(alpha: 0.8);
       tag = ff23;
       disabled = ff61;
-      disabledForeground = alwaysLight.withOpacity(0.5);
+      disabledForeground = alwaysLight.withValues(alpha: 0.5);
       anatomyBones = ffbd;
       anatomyBody = ff42;
       zoneOther = ffee;
@@ -135,10 +135,10 @@ class Interface {
       light = fff5;
       dark = ff0d;
       search = ffee;
-      dropDown = fffe.withOpacity(0.8);
+      dropDown = fffe.withValues(alpha: 0.8);
       tag = ffcc;
       disabled = ff9e;
-      disabledForeground = alwaysDark.withOpacity(0.5);
+      disabledForeground = alwaysDark.withValues(alpha: 0.5);
       anatomyBones = ff42;
       anatomyBody = ffbd;
       zoneOther = ff17;

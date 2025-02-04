@@ -61,24 +61,26 @@ class WidgetNeedZone extends StatelessWidget {
   }
 
   List<int> _initializeZones() {
-    List<int> zones = [];
+    List<int> zones = List.filled(3, 4, growable: false);
     if (_zones.length != 1) {
       int hourNow = _hour;
-      int hourAfter = hourNow + 1 == 24 ? 0 : hourNow + 1;
-      int hourAfterAfter = hourAfter + 1 == 24 ? 0 : hourAfter + 1;
+      int hourAfter = (hourNow + 1) % 24;
+      int hourAfterAfter = (hourAfter + 1) % 24;
       for (AnimalZone zone in _zones) {
         if ((hourNow >= zone.from && hourNow < zone.to) ||
             (hourAfter >= zone.from && hourAfter < zone.to) ||
             (hourAfterAfter >= zone.from && hourAfterAfter < zone.to)) {
           for (int hour = zone.from; hour < zone.to; hour++) {
-            if (hour == hourNow || hour == hourAfter || hour == hourAfterAfter) {
-              zones.add(zone.zone);
+            if (hour == hourNow) {
+              zones[0] = zone.zone;
+            } else if (hour == hourAfter) {
+              zones[1] = zone.zone;
+            } else if (hour == hourAfterAfter) {
+              zones[2] = zone.zone;
             }
           }
         }
       }
-    } else {
-      zones.addAll([4, 4, 4]);
     }
     return zones;
   }
@@ -101,7 +103,7 @@ class WidgetNeedZone extends StatelessWidget {
     );
   }
 
-  Widget _buildAfterAfter(int zoneAfter, int zoneAfterAfter) {
+  Widget _buildAfterAfter(int zoneAfterAfter) {
     return WidgetIconBackground(
       AnimalZone.iconFor(zoneAfterAfter),
       size: zoneIconSize - 10,
@@ -117,7 +119,7 @@ class WidgetNeedZone extends StatelessWidget {
       children: [
         _buildNow(zones.elementAt(0)),
         _buildAfter(zones.elementAt(1)),
-        _buildAfterAfter(zones.elementAt(1), zones.elementAt(2)),
+        _buildAfterAfter(zones.elementAt(2)),
       ],
     );
   }

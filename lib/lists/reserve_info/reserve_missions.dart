@@ -79,10 +79,10 @@ class ListReserveMissionsState extends ListTranslatableState<Mission> {
   }
 
   @override
-  WidgetMission buildEntry(item) {
+  WidgetMission buildEntry(index, item) {
     return WidgetMission(
       item,
-      i: items.indexOf(item),
+      i: index,
       onTap: focus,
     );
   }

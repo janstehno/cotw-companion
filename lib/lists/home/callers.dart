@@ -61,10 +61,10 @@ class ListCallersState extends ListTranslatableState<Caller> {
   }
 
   @override
-  WidgetCaller buildEntry(item) {
+  WidgetCaller buildEntry(index, item) {
     return WidgetCaller(
       item,
-      i: items.indexOf(item),
+      i: index,
       onTap: focus,
     );
   }

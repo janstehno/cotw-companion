@@ -45,10 +45,10 @@ class ListReservesState extends ListTranslatableState<Reserve> {
   }
 
   @override
-  WidgetReserve buildEntry(item) {
+  WidgetReserve buildEntry(index, item) {
     return WidgetReserve(
       item,
-      i: items.indexOf(item),
+      i: index,
       onTap: focus,
     );
   }

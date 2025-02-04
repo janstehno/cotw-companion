@@ -49,10 +49,10 @@ class ListWildlifeState extends ListTranslatableState<Animal> {
   }
 
   @override
-  WidgetAnimal buildEntry(item) {
+  WidgetAnimal buildEntry(index, item) {
     return WidgetAnimal(
       item,
-      i: items.indexOf(item),
+      i: index,
       onTap: focus,
     );
   }

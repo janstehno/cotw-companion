@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
@@ -15,7 +16,7 @@ class ListAnimalFursGO extends StatelessWidget {
     super.key,
   }) : _animal = animal;
 
-  List<Fur> get _furs => _animal.furGO.map((e) => HelperJSON.getFur(e)!).toList();
+  List<Fur> get _furs => _animal.furGO.map((e) => HelperJSON.getFur(e)!).sorted(Fur.sortByName);
 
   Widget _buildAnimalFur(Fur fur) {
     return WidgetText(

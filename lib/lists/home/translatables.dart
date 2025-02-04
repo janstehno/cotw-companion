@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:cotwcompanion/activities/filter.dart';
 import 'package:cotwcompanion/model/translatable/translatable.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
@@ -61,12 +62,12 @@ abstract class ListTranslatableState<I extends Translatable> extends State<ListT
     );
   }
 
-  Widget buildEntry(I item);
+  Widget buildEntry(int index, I item);
 
   List<Widget> _listEntries() {
     if (_initialItems.isEmpty) _initialize();
     if (_filteredItems.isEmpty) _filter();
-    return _filteredItems.map((e) => buildEntry(e)).toList();
+    return _filteredItems.mapIndexed((i, e) => buildEntry(i, e)).toList();
   }
 
   Widget _buildWidgets() {

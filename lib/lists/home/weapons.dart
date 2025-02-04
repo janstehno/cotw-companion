@@ -77,10 +77,10 @@ class ListWeaponsState extends ListTranslatableState<Weapon> {
   }
 
   @override
-  WidgetWeapon buildEntry(item) {
+  WidgetWeapon buildEntry(index, item) {
     return WidgetWeapon(
       item,
-      i: items.indexOf(item),
+      i: index,
       onTap: focus,
     );
   }

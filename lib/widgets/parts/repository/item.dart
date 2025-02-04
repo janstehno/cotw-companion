@@ -44,8 +44,8 @@ class WidgetRepositoryItem extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: WidgetButtonLink(
         tr("DETAILS"),
-        color: Interface.disabledForeground,
-        background: Interface.search,
+        color: Interface.alwaysDark,
+        background: Interface.primary,
         onTap: () => Utils.redirectTo(Uri.parse(_url)),
       ),
     );

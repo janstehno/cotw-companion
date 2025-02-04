@@ -1,9 +1,12 @@
 import 'package:collection/collection.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/parts/repository/item.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,11 +25,11 @@ class ListItems extends StatelessWidget {
 
   Widget _buildEmpty() {
     return WidgetPadding.h30v20(
-      child: WidgetText(
-        tr("REPO:EMPTY"),
-        color: Interface.dark,
-        style: Style.normal.s12.w300,
-        autoSize: false,
+      alignment: Alignment.center,
+      child: WidgetIcon.withSize(
+        Assets.graphics.icons.noInternetConnection,
+        color: Interface.disabled,
+        size: Values.smallTag,
       ),
     );
   }

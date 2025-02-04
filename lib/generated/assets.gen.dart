@@ -1278,6 +1278,8 @@ class $AssetsGraphicsIconsGen {
 
   String get needZones => 'assets/graphics/icons/need_zones.svg';
 
+  String get noInternetConnection => 'assets/graphics/icons/no_internet_connection.svg';
+
   String get number => 'assets/graphics/icons/number.svg';
 
   String get optional => 'assets/graphics/icons/optional.svg';
@@ -1291,6 +1293,8 @@ class $AssetsGraphicsIconsGen {
   String get patreon => 'assets/graphics/icons/patreon.svg';
 
   String get paypal => 'assets/graphics/icons/paypal.svg';
+
+  String get placeholder => 'assets/graphics/icons/placeholder.svg';
 
   String get planner => 'assets/graphics/icons/planner.svg';
 
@@ -1456,6 +1460,7 @@ class $AssetsGraphicsIconsGen {
         missions,
         money,
         needZones,
+        noInternetConnection,
         number,
         optional,
         other,
@@ -1463,6 +1468,7 @@ class $AssetsGraphicsIconsGen {
         pass,
         patreon,
         paypal,
+        placeholder,
         planner,
         play,
         plus,
@@ -1528,7 +1534,9 @@ class $AssetsGraphicsImagesGen {
 
   AssetGenImage get hunting => const AssetGenImage('assets/graphics/images/hunting.jpg');
 
-  List<AssetGenImage> get values => [cotw, hunting];
+  AssetGenImage get placeholder => const AssetGenImage('assets/graphics/images/placeholder.png');
+
+  List<AssetGenImage> get values => [cotw, hunting, placeholder];
 }
 
 class $AssetsGraphicsProficiencyGen {
@@ -1969,11 +1977,16 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName, {this.size = null});
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
 
   final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -1993,7 +2006,7 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = false,
+    bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
     FilterQuality filterQuality = FilterQuality.low,

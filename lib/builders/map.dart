@@ -39,6 +39,7 @@ class BuilderMapState extends BuilderBuilderState {
     "RESERVE:YUKON_VALLEY": Assets.raw.maps.yukonvalley,
     "RESERVE:MISSISSIPPI_ACRES_PRESERVE": Assets.raw.maps.mississippiacrespreserve,
     "RESERVE:SUNDARPATAN_HUNTING_RESERVE": Assets.raw.maps.sundarpatanhuntingreserve,
+    "RESERVE:SALZWIESEN_PARK": Assets.raw.maps.salzwiesenpark,
   };
 
   @override

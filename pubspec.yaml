@@ -115,6 +115,9 @@ flutter:
     - assets/graphics/maps/sundarpatanhuntingreserve/1/
     - assets/graphics/maps/sundarpatanhuntingreserve/2/
     - assets/graphics/maps/sundarpatanhuntingreserve/3/
+    - assets/graphics/maps/salzwiesenpark/1/
+    - assets/graphics/maps/salzwiesenpark/2/
+    - assets/graphics/maps/salzwiesenpark/3/
   fonts:
     - family: Normal
       fonts:

@@ -567,6 +567,10 @@ class $AssetsGraphicsAnimalsGen {
 
   String get feralpig => 'assets/graphics/animals/feralpig.svg';
 
+  String get ferruginousduck => 'assets/graphics/animals/ferruginousduck.svg';
+
+  String get gadwall => 'assets/graphics/animals/gadwall.svg';
+
   String get gemsbok => 'assets/graphics/animals/gemsbok.svg';
 
   String get goldeneye => 'assets/graphics/animals/goldeneye.svg';
@@ -729,6 +733,8 @@ class $AssetsGraphicsAnimalsGen {
         fallowdeer,
         feralgoat,
         feralpig,
+        ferruginousduck,
+        gadwall,
         gemsbok,
         goldeneye,
         grayfox,
@@ -820,6 +826,8 @@ class $AssetsGraphicsCallersGen {
 
   String get elkcaller => 'assets/graphics/callers/elkcaller.svg';
 
+  String get gadwallcaller => 'assets/graphics/callers/gadwallcaller.svg';
+
   String get hazelgrousecaller => 'assets/graphics/callers/hazelgrousecaller.svg';
 
   String get magpiegoosecaller => 'assets/graphics/callers/magpiegoosecaller.svg';
@@ -858,6 +866,7 @@ class $AssetsGraphicsCallersGen {
         deerbleatcaller,
         deergruntcaller,
         elkcaller,
+        gadwallcaller,
         hazelgrousecaller,
         magpiegoosecaller,
         moosecaller,
@@ -946,6 +955,10 @@ class $AssetsGraphicsHeadsGen {
   AssetGenImage get feralgoat => const AssetGenImage('assets/graphics/heads/feralgoat.png');
 
   AssetGenImage get feralpig => const AssetGenImage('assets/graphics/heads/feralpig.png');
+
+  AssetGenImage get ferruginousduck => const AssetGenImage('assets/graphics/heads/ferruginousduck.png');
+
+  AssetGenImage get gadwall => const AssetGenImage('assets/graphics/heads/gadwall.png');
 
   AssetGenImage get gemsbok => const AssetGenImage('assets/graphics/heads/gemsbok.png');
 
@@ -1105,6 +1118,8 @@ class $AssetsGraphicsHeadsGen {
         fallowdeer,
         feralgoat,
         feralpig,
+        ferruginousduck,
+        gadwall,
         gemsbok,
         goldeneye,
         grayfox,
@@ -1719,6 +1734,8 @@ class $AssetsGraphicsReservesGen {
 
   String get revontulicoast => 'assets/graphics/reserves/revontulicoast.svg';
 
+  String get salzwiesenpark => 'assets/graphics/reserves/salzwiesenpark.svg';
+
   String get silverridgepeaks => 'assets/graphics/reserves/silverridgepeaks.svg';
 
   String get sundarpatanhuntingreserve => 'assets/graphics/reserves/sundarpatanhuntingreserve.svg';
@@ -1740,6 +1757,7 @@ class $AssetsGraphicsReservesGen {
         parquefernando,
         ranchodelarroyo,
         revontulicoast,
+        salzwiesenpark,
         silverridgepeaks,
         sundarpatanhuntingreserve,
         teawaroanationalpark,
@@ -1797,7 +1815,11 @@ class $AssetsGraphicsWeaponsGen {
 
   String get focoso357 => 'assets/graphics/weapons/focoso357.svg';
 
+  String get forselite300 => 'assets/graphics/weapons/forselite300.svg';
+
   String get gandharerifle => 'assets/graphics/weapons/gandharerifle.svg';
+
+  String get gopi10ggrand => 'assets/graphics/weapons/gopi10ggrand.svg';
 
   String get grelckdrillingrifle => 'assets/graphics/weapons/grelckdrillingrifle.svg';
 
@@ -1806,6 +1828,8 @@ class $AssetsGraphicsWeaponsGen {
   String get houyirecurvebow => 'assets/graphics/weapons/houyirecurvebow.svg';
 
   String get hudzik50caplock => 'assets/graphics/weapons/hudzik50caplock.svg';
+
+  String get johansson450 => 'assets/graphics/weapons/johansson450.svg';
 
   String get king470db => 'assets/graphics/weapons/king470db.svg';
 
@@ -1845,6 +1869,8 @@ class $AssetsGraphicsWeaponsGen {
 
   String get tsurugilrr338 => 'assets/graphics/weapons/tsurugilrr338.svg';
 
+  String get vallgarda375 => 'assets/graphics/weapons/vallgarda375.svg';
+
   String get vasquezcyclone45 => 'assets/graphics/weapons/vasquezcyclone45.svg';
 
   String get virant22lr => 'assets/graphics/weapons/virant22lr.svg';
@@ -1883,11 +1909,14 @@ class $AssetsGraphicsWeaponsGen {
         curman50inline,
         eckers3006,
         focoso357,
+        forselite300,
         gandharerifle,
+        gopi10ggrand,
         grelckdrillingrifle,
         hawkedgecb70,
         houyirecurvebow,
         hudzik50caplock,
+        johansson450,
         king470db,
         kotercb65,
         kullman22h,
@@ -1907,6 +1936,7 @@ class $AssetsGraphicsWeaponsGen {
         strandberg10saexecutive,
         streckersxs20g,
         tsurugilrr338,
+        vallgarda375,
         vasquezcyclone45,
         virant22lr,
         whitlockmodel86,
@@ -1940,6 +1970,8 @@ class $AssetsRawMapsGen {
 
   String get revontulicoast => 'assets/raw/maps/revontulicoast.json';
 
+  String get salzwiesenpark => 'assets/raw/maps/salzwiesenpark.json';
+
   String get silverridgepeaks => 'assets/raw/maps/silverridgepeaks.json';
 
   String get sundarpatanhuntingreserve => 'assets/raw/maps/sundarpatanhuntingreserve.json';
@@ -1961,6 +1993,7 @@ class $AssetsRawMapsGen {
         parquefernando,
         ranchodelarroyo,
         revontulicoast,
+        salzwiesenpark,
         silverridgepeaks,
         sundarpatanhuntingreserve,
         teawaroanationalpark,

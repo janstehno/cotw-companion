@@ -107,6 +107,8 @@ class Graphics {
     "ANIMAL:NILGAI": Assets.graphics.animals.nilgai,
     "ANIMAL:WILD_YAK": Assets.graphics.animals.wildyak,
     "ANIMAL:BENGAL_TIGER": Assets.graphics.animals.bengaltiger,
+    "ANIMAL:FERRUGINOUS_DUCK": Assets.graphics.animals.ferruginousduck,
+    "ANIMAL:GADWALL": Assets.graphics.animals.gadwall,
   };
 
   static final Map<String, String> _heads = {
@@ -209,6 +211,8 @@ class Graphics {
     "ANIMAL:NILGAI": Assets.graphics.heads.nilgai.path,
     "ANIMAL:WILD_YAK": Assets.graphics.heads.wildyak.path,
     "ANIMAL:BENGAL_TIGER": Assets.graphics.heads.bengaltiger.path,
+    "ANIMAL:FERRUGINOUS_DUCK": Assets.graphics.heads.ferruginousduck.path,
+    "ANIMAL:GADWALL": Assets.graphics.heads.gadwall.path,
   };
 
   static final Map<String, String> _anatomyBody = {
@@ -369,6 +373,7 @@ class Graphics {
     "RESERVE:YUKON_VALLEY": Assets.graphics.reserves.yukonvalley,
     "RESERVE:MISSISSIPPI_ACRES_PRESERVE": Assets.graphics.reserves.mississippiacrespreserve,
     "RESERVE:SUNDARPATAN_HUNTING_RESERVE": Assets.graphics.reserves.sundarpatanhuntingreserve,
+    "RESERVE:SALZWIESEN_PARK": Assets.graphics.reserves.salzwiesenpark,
   };
 
   static final Map<String, String> _weapons = {
@@ -425,7 +430,11 @@ class Graphics {
     "WEAPON:223_DOCENT": Assets.graphics.weapons.a223docent,
     "WEAPON:45_ROLLESTON": Assets.graphics.weapons.a45rolleston,
     "WEAPON:HOUYI_RECURVE_BOW": Assets.graphics.weapons.houyirecurvebow,
-    "WEAPON:GANDHARE_RIFLE": Assets.graphics.weapons.gandharerifle
+    "WEAPON:GANDHARE_RIFLE": Assets.graphics.weapons.gandharerifle,
+    "WEAPON:GOPI_10G_GRAND": Assets.graphics.weapons.gopi10ggrand,
+    "WEAPON:FORS_ELITE_300": Assets.graphics.weapons.forselite300,
+    "WEAPON:JOHANSSON_450": Assets.graphics.weapons.johansson450,
+    "WEAPON:VALLGARDA_375": Assets.graphics.weapons.vallgarda375
   };
 
   static final Map<String, String> _callers = {
@@ -453,6 +462,7 @@ class Graphics {
     "CALLER:SHORT_REED_CANADA_GOOSE_CALLER": Assets.graphics.callers.shortreedcanadagoosecaller,
     "CALLER:PREDATOR_DISTRESSED_FAWN_CALLER": Assets.graphics.callers.predatordistressedfawncaller,
     "CALLER:WILD_TURKEY_MOUTH_CALLER": Assets.graphics.callers.wildturkeymouthcaller,
+    "CALLER:GADWALL_CALLER": Assets.graphics.callers.gadwallcaller,
   };
 
   static final Map<String, String> _proficiency = {
@@ -508,16 +518,19 @@ class Graphics {
     "PERK:HAGGLE": Assets.graphics.proficiency.haggle,
   };
 
-  static String getAnimalIcon(Animal animal) => _animals[animal.asset]!;
+  static final _svgPlaceholder = Assets.graphics.icons.placeholder;
+  static final _pngPlaceholder = Assets.graphics.images.placeholder.path;
 
-  static String getAnimalHead(Animal animal) => _heads[animal.asset]!;
+  static String getAnimalIcon(Animal animal) => _animals[animal.asset] ?? _svgPlaceholder;
+
+  static String getAnimalHead(Animal animal) => _heads[animal.asset] ?? _pngPlaceholder;
 
   static String getAnatomyAsset(Animal animal, AnatomyPart part) {
     switch (part) {
       case AnatomyPart.body:
-        return _anatomyBody[animal.asset]!;
+        return _anatomyBody[animal.asset] ?? _svgPlaceholder;
       case AnatomyPart.organs:
-        return _anatomyOrgans[animal.asset]!;
+        return _anatomyOrgans[animal.asset] ?? _svgPlaceholder;
       case AnatomyPart.bones:
         throw UnimplementedError();
     }
@@ -534,13 +547,13 @@ class Graphics {
     }
   }
 
-  static String getReserveIcon(Reserve reserve) => _reserves[reserve.asset]!;
+  static String getReserveIcon(Reserve reserve) => _reserves[reserve.asset] ?? _svgPlaceholder;
 
-  static String getWeaponIcon(Weapon weapon) => _weapons[weapon.asset]!;
+  static String getWeaponIcon(Weapon weapon) => _weapons[weapon.asset] ?? _svgPlaceholder;
 
-  static String getCallerIcon(Caller caller) => _callers[caller.asset]!;
+  static String getCallerIcon(Caller caller) => _callers[caller.asset] ?? _svgPlaceholder;
 
-  static String getProficiencyIcon(Proficiency proficiency) => _proficiency[proficiency.asset]!;
+  static String getProficiencyIcon(Proficiency proficiency) => _proficiency[proficiency.asset] ?? _svgPlaceholder;
 
   static String getTile(Reserve reserve, int x, int y, int z) {
     int gridSize, correction;
@@ -575,7 +588,7 @@ class Graphics {
       case MapLocationType.hide:
         return Assets.graphics.icons.hide;
       case MapLocationType.zone:
-        throw Exception("This image asset does not exist");
+        return _svgPlaceholder;
     }
   }
 
@@ -594,7 +607,7 @@ class Graphics {
       case (1):
         return Assets.graphics.icons.viewExpanded;
       default:
-        throw Exception("This image asset does not exist");
+        return _svgPlaceholder;
     }
   }
 

@@ -9,6 +9,7 @@ import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/button/button_swipe.dart';
 import 'package:cotwcompanion/widgets/fullscreen/home_menu.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
+import 'package:cotwcompanion/widgets/other/survey_banner.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/text/text_pattern.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -104,6 +105,10 @@ class ActivityHomeState extends State<ActivityHome> {
     );
   }
 
+  Widget _buildSurvey() {
+    return WidgetSurveyBanner();
+  }
+
   Widget _buildSwipe() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -170,7 +175,9 @@ class ActivityHomeState extends State<ActivityHome> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildHeader(),
-            Expanded(child: _buildSwipe()),
+            _buildSurvey(),
+            Spacer(),
+            _buildSwipe(),
             _buildDisclaimer(),
           ],
         ),

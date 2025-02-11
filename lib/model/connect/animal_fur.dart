@@ -39,9 +39,9 @@ class AnimalFur {
 
   double get perCent => _perCent;
 
-  bool get male => _male;
+  bool get male => _male && !_female;
 
-  bool get female => _female;
+  bool get female => _female && !_male;
 
   Color get color {
     switch (_rarity) {

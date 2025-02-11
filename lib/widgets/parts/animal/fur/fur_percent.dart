@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
 import 'package:cotwcompanion/widgets/app/margin.dart';
@@ -22,15 +23,15 @@ class WidgetFurPercent extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(String left, String right) {
+  Widget _buildRow(String left, String? right) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildText(left),
-        _buildText("."),
-        _buildText(right),
+        if (right != null) _buildText("."),
+        if (right != null) _buildText(right),
         WidgetMargin.left(2, child: _buildText("%")),
       ],
     );
@@ -38,8 +39,10 @@ class WidgetFurPercent extends StatelessWidget {
 
   Widget _buildWidgets() {
     if (_animalFur.furId != Values.greatOneId && _animalFur.perCent > 0.0 && _animalFur.perCent < 100.0) {
-      String left = _animalFur.perCent.toString().split(".")[0];
-      String right = _animalFur.perCent.toString().split(".")[1];
+      String percent = Utils.removePointZero(_animalFur.perCent);
+      List<String> split = percent.split(".");
+      String left = split.first;
+      String? right = split.length > 1 ? split.last : null;
       return Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

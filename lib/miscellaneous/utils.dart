@@ -71,9 +71,8 @@ class Utils {
   }
 
   static String removePointZero(double value) {
-    String text = value.toString();
-    List<String> split = text.split(".");
-    return (split.length == 2 && split[1] == "0") ? split[0] : text;
+    String text = value.toStringAsFixed(3);
+    return text.replaceAll(RegExp(r'(\.0+|0+)$'), '');
   }
 
   static Future<List<dynamic>> _getDataFrom(RepositoryData data) async {

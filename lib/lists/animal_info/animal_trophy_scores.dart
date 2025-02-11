@@ -3,7 +3,7 @@ import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
-import 'package:cotwcompanion/widgets/parts/animal/animal_trophy_score.dart';
+import 'package:cotwcompanion/widgets/parts/animal/animal_value.dart';
 import 'package:flutter/material.dart';
 
 class ListAnimalTrophyScores extends StatelessWidget {
@@ -15,7 +15,7 @@ class ListAnimalTrophyScores extends StatelessWidget {
   }) : _animal = animal;
 
   Widget _buildTrophySilver() {
-    return WidgetAnimalTrophyScore(
+    return WidgetAnimalValue(
       icon: Assets.graphics.icons.trophySilver,
       value: _animal.trophyAsString(_animal.silver),
       color: Interface.alwaysDark,
@@ -24,7 +24,7 @@ class ListAnimalTrophyScores extends StatelessWidget {
   }
 
   Widget _buildTrophyGold() {
-    return WidgetAnimalTrophyScore(
+    return WidgetAnimalValue(
       icon: Assets.graphics.icons.trophyGold,
       value: _animal.trophyAsString(_animal.gold),
       color: Interface.alwaysDark,
@@ -33,38 +33,38 @@ class ListAnimalTrophyScores extends StatelessWidget {
   }
 
   Widget _buildTrophyDiamond() {
-    return WidgetAnimalTrophyScore(
-      icon: Assets.graphics.icons.trophyDiamond,
-      value: _animal.trophyAsString(_animal.diamond),
-      color: Interface.alwaysDark,
-      background: Interface.trophyDiamond,
+    return Row(
+      spacing: 15,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: WidgetAnimalValue(
+            icon: Assets.graphics.icons.trophyDiamond,
+            value: _animal.trophyAsString(_animal.diamond),
+            color: Interface.alwaysDark,
+            background: Interface.trophyDiamond,
+          ),
+        ),
+        if (_animal.femaleDiamond) _buildTrophyDiamondFemale(),
+      ],
     );
   }
 
   Widget _buildTrophyDiamondFemale() {
     return WidgetIcon.withSize(
       Assets.graphics.icons.genderFemale,
-      color: Interface.alwaysDark,
-      size: 13,
+      color: Interface.disabledForeground,
+      size: 12,
     );
   }
 
   Widget _buildTrophyScores() {
-    return Wrap(
+    return Column(
       spacing: 5,
-      runSpacing: 5,
       children: [
         _buildTrophySilver(),
         _buildTrophyGold(),
-        Row(
-          children: [
-            _buildTrophyDiamond(),
-            if (_animal.femaleDiamond) ...[
-              const SizedBox(width: 15),
-              _buildTrophyDiamondFemale(),
-            ],
-          ],
-        ),
+        _buildTrophyDiamond(),
       ],
     );
   }

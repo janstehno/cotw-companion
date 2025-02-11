@@ -1,10 +1,12 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_callers.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_furs_go.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_reserves.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_senses.dart';
+import 'package:cotwcompanion/lists/animal_info/animal_trophy_score_distribution.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_trophy_scores.dart';
-import 'package:cotwcompanion/lists/animal_info/animal_trophy_scores_maximum.dart';
+import 'package:cotwcompanion/lists/animal_info/animal_weight_distribution.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
@@ -19,6 +21,7 @@ import 'package:cotwcompanion/widgets/title/title_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ActivityDetailAnimal extends StatefulWidget {
   final Animal _animal;
@@ -40,6 +43,8 @@ class ActivityDetailAnimal extends StatefulWidget {
 }
 
 class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
+  Settings get _settings => Provider.of<Settings>(context, listen: false);
+
   int _toggledRarity = -1;
 
   void _toggleRarity(int rarity) {
@@ -77,13 +82,24 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
     ];
   }
 
-  List<Widget> _listTrophyScoresMaximum() {
+  List<Widget> _listWeightDistribution() {
     return [
       WidgetTitle(
-        tr("ANIMAL_MAXIMUM_TROPHY"),
-        subtext: tr("SUBJECT_TO_CHANGE"),
+        _settings.trophyWeightDistribution ? tr("ANIMAL_WEIGHT_DISTRIBUTION") : tr("ANIMAL_WEIGHT"),
       ),
-      ListAnimalTrophyScoresMaximum(widget.animal),
+      ListAnimalWeightDistribution(
+        widget.animal,
+        showDistribution: _settings.trophyWeightDistribution,
+      ),
+    ];
+  }
+
+  List<Widget> _listTrophyScoreDistribution() {
+    return [
+      WidgetTitle(
+        tr("ANIMAL_TROPHY_DISTRIBUTION"),
+      ),
+      ListAnimalTrophyScoreDistribution(widget.animal),
     ];
   }
 
@@ -91,7 +107,6 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
     return [
       WidgetTitle(
         tr("ANIMAL_FURS"),
-        subtext: tr("SUBJECT_TO_CHANGE"),
       ),
       WidgetAnimalFurs(
         widget.animal,
@@ -104,8 +119,8 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
   List<Widget> _listFursGO() {
     return [
       WidgetTitle(
-        "${tr("ANIMAL_FURS")} (${tr("FUR:GREAT_ONE")})",
-        subtext: tr("SUBJECT_TO_CHANGE"),
+        tr("ANIMAL_FURS"),
+        subtext: tr("FUR:GREAT_ONE").toUpperCase(),
       ),
       ListAnimalFursGO(widget.animal),
     ];
@@ -152,7 +167,8 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
         WidgetAnimalHeader(widget.animal),
         ..._listReserves(),
         ..._listTrophyScores(),
-        ..._listTrophyScoresMaximum(),
+        ..._listWeightDistribution(),
+        if (_settings.trophyWeightDistribution) ..._listTrophyScoreDistribution(),
         ..._listFurs(),
         if (widget.animal.hasGO) ..._listFursGO(),
         ..._listZones(),

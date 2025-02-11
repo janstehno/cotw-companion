@@ -25,6 +25,7 @@ void main() async {
   bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
   bool entryDate = sharedPreferences.getBool("entryDate") ?? true;
   bool trophyLodgeEntry = sharedPreferences.getBool("trophyLodgeEntry") ?? false;
+  bool trophyWeightDistribution = sharedPreferences.getBool("trophyWeightDistribution") ?? false;
   bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
   Interface.setColors(darkMode);
   runApp(
@@ -48,6 +49,7 @@ void main() async {
           bestWeaponsForAnimal: bestWeaponsForAnimal,
           entryDate: entryDate,
           trophyLodgeEntry: trophyLodgeEntry,
+          trophyWeightDistribution: trophyWeightDistribution,
           furRarityPerCent: furRarityPerCent,
         ),
         child: const App(),

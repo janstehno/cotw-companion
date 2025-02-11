@@ -46,6 +46,7 @@ class Settings extends ChangeNotifier {
   late bool _bestWeaponsForAnimal;
   late bool _entryDate;
   late bool _trophyLodgeEntry;
+  late bool _trophyWeightDistribution;
   late bool _furRarityPerCent;
   late SharedPreferences _sharedPreferences;
 
@@ -61,6 +62,7 @@ class Settings extends ChangeNotifier {
     required bestWeaponsForAnimal,
     required entryDate,
     required trophyLodgeEntry,
+    required trophyWeightDistribution,
     required furRarityPerCent,
   }) {
     _language = language;
@@ -74,6 +76,7 @@ class Settings extends ChangeNotifier {
     _bestWeaponsForAnimal = bestWeaponsForAnimal;
     _entryDate = entryDate;
     _trophyLodgeEntry = trophyLodgeEntry;
+    _trophyWeightDistribution = trophyWeightDistribution;
     _furRarityPerCent = furRarityPerCent;
   }
 
@@ -96,6 +99,8 @@ class Settings extends ChangeNotifier {
   bool get entryDate => _entryDate;
 
   bool get trophyLodgeEntry => _trophyLodgeEntry;
+
+  bool get trophyWeightDistribution => _trophyWeightDistribution;
 
   bool get furRarityPerCent => _furRarityPerCent;
 
@@ -223,6 +228,18 @@ class Settings extends ChangeNotifier {
     } else {
       _trophyLodgeEntry = true;
       await _sharedPreferences.setBool("trophyLodgeEntry", true);
+    }
+    notifyListeners();
+  }
+
+  Future<void> changeTrophyWeightDistribution() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    if (_trophyWeightDistribution == true) {
+      _trophyWeightDistribution = false;
+      await _sharedPreferences.setBool("trophyWeightDistribution", false);
+    } else {
+      _trophyWeightDistribution = true;
+      await _sharedPreferences.setBool("trophyWeightDistribution", true);
     }
     notifyListeners();
   }

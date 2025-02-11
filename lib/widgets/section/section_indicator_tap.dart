@@ -19,6 +19,10 @@ class WidgetSectionIndicatorTap extends WidgetSectionIndicator {
   })  : _isShown = isShown,
         _onTap = onTap;
 
+  Function get onTap => _onTap;
+
+  bool get isShown => _isShown;
+
   @override
   Widget buildContainer() {
     return GestureDetector(

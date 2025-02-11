@@ -293,11 +293,12 @@ class ActivityAddLogsState extends ActivityModifyState {
   }
 
   List<Widget> _listTrophy() {
-    double maxTrophy = selectedAnimal.trophy;
+    double maxTrophy = selectedAnimal.trophy(
+        ThresholdType.max, selectedAnimalFur.id == Values.greatOneId ? CategoryType.go : CategoryType.male);
     return [
       WidgetTitleButtonIcon(
         tr("ANIMAL_TROPHY"),
-        subtext: "${tr("MAX")}: ${maxTrophy == 0 ? "?" : maxTrophy.toString()}",
+        subtext: "${tr("MAX")}: ${maxTrophy == 0 ? "?" : Utils.removePointZero(maxTrophy)}",
         icon: Assets.graphics.icons.menuOpen,
         alignRight: true,
         onTap: () {
@@ -318,13 +319,14 @@ class ActivityAddLogsState extends ActivityModifyState {
   }
 
   List<Widget> _listWeight() {
-    double maxWeight = selectedAnimalFur.id == Values.greatOneId
-        ? selectedAnimal.weightGO(usesImperials)
-        : selectedAnimal.weight(usesImperials);
+    double maxWeight = selectedAnimal.weight(
+        ThresholdType.max,
+        selectedAnimalFur.id == Values.greatOneId ? CategoryType.go : CategoryType.male,
+        usesImperials ? UnitType.imperial : UnitType.metric);
     return [
       WidgetTitle(
         tr("ANIMAL_WEIGHT"),
-        subtext: "${tr("MAX")}: ${maxWeight == 0 ? "?" : maxWeight.toString()}",
+        subtext: "${tr("MAX")}: ${maxWeight == 0 ? "?" : Utils.removePointZero(maxWeight)}",
       ),
       WidgetTextFieldIndicator(
         icon: Assets.graphics.icons.weight,
@@ -416,8 +418,8 @@ class ActivityAddLogsState extends ActivityModifyState {
         ..._listAnimal(),
         _buildGender(),
         ..._listFur(),
-        ..._listTrophy(),
         if (!(widget as ActivityAddLogs).fromTrophyLodge) ..._listWeight(),
+        ..._listTrophy(),
         ..._listTrophyRating(),
         if (!(widget as ActivityAddLogs).fromTrophyLodge) ..._listHarvestCheck(),
       ],

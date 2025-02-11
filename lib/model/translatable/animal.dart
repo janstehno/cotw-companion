@@ -12,12 +12,22 @@ class Animal extends Translatable {
   final double _silver;
   final double _gold;
   final double _diamond;
-  final double _trophy;
-  final double _weightKG;
-  final double _weightLB;
-  final double _trophyGO;
-  final double _weightGOKG;
-  final double _weightGOLB;
+
+  final double _maxTrophyMale;
+  final double _minTrophyMale;
+  final double _maxWeightMale;
+  final double _minWeightMale;
+
+  final double _maxTrophyFemale;
+  final double _minTrophyFemale;
+  final double _maxWeightFemale;
+  final double _minWeightFemale;
+
+  final double _maxTrophyGO;
+  final double _minTrophyGO;
+  final double _maxWeightGO;
+  final double _minWeightGO;
+
   final List<dynamic> _furGO;
   final int _sight;
   final int _hearing;
@@ -34,12 +44,18 @@ class Animal extends Translatable {
     required double silver,
     required double gold,
     required double diamond,
-    required double trophy,
-    required double weightKG,
-    required double weightLB,
-    required double trophyGO,
-    required double weightGOKG,
-    required double weightGOLB,
+    required double maxTrophyMale,
+    required double minTrophyMale,
+    required double maxWeightMale,
+    required double minWeightMale,
+    required double maxTrophyFemale,
+    required double minTrophyFemale,
+    required double maxWeightFemale,
+    required double minWeightFemale,
+    required double maxTrophyGO,
+    required double minTrophyGO,
+    required double maxWeightGO,
+    required double minWeightGO,
     required List<dynamic> furGO,
     required int sight,
     required int hearing,
@@ -52,12 +68,18 @@ class Animal extends Translatable {
         _silver = silver,
         _gold = gold,
         _diamond = diamond,
-        _trophy = trophy,
-        _weightKG = weightKG,
-        _weightLB = weightLB,
-        _trophyGO = trophyGO,
-        _weightGOKG = weightGOKG,
-        _weightGOLB = weightGOLB,
+        _maxTrophyMale = maxTrophyMale,
+        _minTrophyMale = minTrophyMale,
+        _maxWeightMale = maxWeightMale,
+        _minWeightMale = minWeightMale,
+        _maxTrophyFemale = maxTrophyFemale,
+        _minTrophyFemale = minTrophyFemale,
+        _maxWeightFemale = maxWeightFemale,
+        _minWeightFemale = minWeightFemale,
+        _maxTrophyGO = maxTrophyGO,
+        _minTrophyGO = minTrophyGO,
+        _maxWeightGO = maxWeightGO,
+        _minWeightGO = minWeightGO,
         _furGO = furGO,
         _sight = sight,
         _hearing = hearing,
@@ -76,21 +98,69 @@ class Animal extends Translatable {
 
   double get diamond => _diamond;
 
-  double get trophy => _trophy;
+  double trophy(ThresholdType threshold, CategoryType category) {
+    switch (threshold) {
+      case ThresholdType.min:
+        return _minTrophy(category);
+      case ThresholdType.max:
+        return _maxTrophy(category);
+    }
+  }
 
-  double get trophyGO => _trophyGO;
+  double _minTrophy(CategoryType category) {
+    switch (category) {
+      case CategoryType.male:
+        return _minTrophyMale;
+      case CategoryType.female:
+        return _minTrophyFemale;
+      case CategoryType.go:
+        return _minTrophyGO;
+    }
+  }
 
-  double get weightKG => _weightKG;
+  double _maxTrophy(CategoryType category) {
+    switch (category) {
+      case CategoryType.male:
+        return _maxTrophyMale;
+      case CategoryType.female:
+        return _maxTrophyFemale;
+      case CategoryType.go:
+        return _maxTrophyGO;
+    }
+  }
 
-  double get weightLB => _weightLB;
+  bool get femaleTrophy => _maxTrophyFemale != 0.0;
 
-  double weight(bool units) => units ? _weightLB : _weightKG;
+  double weight(ThresholdType threshold, CategoryType category, UnitType units) {
+    switch (threshold) {
+      case ThresholdType.min:
+        return _minWeight(category, units);
+      case ThresholdType.max:
+        return _maxWeight(category, units);
+    }
+  }
 
-  double get weightGOKG => _weightGOKG;
+  double _minWeight(CategoryType category, UnitType units) {
+    switch (category) {
+      case CategoryType.male:
+        return units == UnitType.metric ? _minWeightMale : _minWeightMale * 2.2046;
+      case CategoryType.female:
+        return units == UnitType.metric ? _minWeightFemale : _minWeightFemale * 2.2046;
+      case CategoryType.go:
+        return units == UnitType.metric ? _minWeightGO : _minWeightGO * 2.2046;
+    }
+  }
 
-  double get weightGOLB => _weightGOLB;
-
-  double weightGO(bool units) => units ? _weightGOLB : _weightGOKG;
+  double _maxWeight(CategoryType category, UnitType units) {
+    switch (category) {
+      case CategoryType.male:
+        return units == UnitType.metric ? _maxWeightMale : _maxWeightMale * 2.2046;
+      case CategoryType.female:
+        return units == UnitType.metric ? _maxWeightFemale : _maxWeightFemale * 2.2046;
+      case CategoryType.go:
+        return units == UnitType.metric ? _maxWeightGO : _maxWeightGO * 2.2046;
+    }
+  }
 
   List<dynamic> get furGO => _furGO;
 
@@ -100,7 +170,7 @@ class Animal extends Translatable {
 
   bool get isFromDlc => _dlc;
 
-  bool get hasGO => _trophyGO != -1;
+  bool get hasGO => _maxTrophyGO != 0.0;
 
   bool get hasSenses => _sight > 0 || _hearing > 0 || _smell > 0;
 
@@ -113,12 +183,18 @@ class Animal extends Translatable {
       silver: json['SILVER'],
       gold: json['GOLD'],
       diamond: json['DIAMOND'],
-      trophy: json['TROPHY'],
-      weightKG: json['WEIGHT_KG'],
-      weightLB: json['WEIGHT_LB'],
-      trophyGO: json['TROPHY_GO'] ?? -1.0,
-      weightGOKG: json['WEIGHT_GO_KG'] ?? -1.0,
-      weightGOLB: json['WEIGHT_GO_LB'] ?? -1.0,
+      maxTrophyMale: json['MAX_TROPHY_MALE'] ?? 0.0,
+      minTrophyMale: json['MIN_TROPHY_MALE'] ?? 0.0,
+      maxWeightMale: json['MAX_WEIGHT_MALE'] ?? 0.0,
+      minWeightMale: json['MIN_WEIGHT_MALE'] ?? 0.0,
+      maxTrophyFemale: json['MAX_TROPHY_FEMALE'] ?? 0.0,
+      minTrophyFemale: json['MIN_TROPHY_FEMALE'] ?? 0.0,
+      maxWeightFemale: json['MAX_WEIGHT_FEMALE'] ?? 0.0,
+      minWeightFemale: json['MIN_WEIGHT_FEMALE'] ?? 0.0,
+      maxTrophyGO: json['MAX_TROPHY_GO'] ?? 0.0,
+      minTrophyGO: json['MIN_TROPHY_GO'] ?? 0.0,
+      maxWeightGO: json['MAX_WEIGHT_GO'] ?? 0.0,
+      minWeightGO: json['MIN_WEIGHT_GO'] ?? 0.0,
       furGO: json["FUR_GO"] ?? [],
       sight: json['SIGHT'],
       hearing: json['HEARING'],
@@ -189,11 +265,8 @@ class Animal extends Translatable {
 
   String trophyAsString(double trophy) => Utils.removePointZero(trophy);
 
-  String weightAsString(bool units) =>
-      "${Utils.removePointZero(weight(units))} ${units ? tr("POUNDS") : tr("KILOGRAMS")}";
-
-  String weightGOAsString(bool units) =>
-      "${Utils.removePointZero(weightGO(units))} ${units ? tr("POUNDS") : tr("KILOGRAMS")}";
+  String weightAsString(ThresholdType threshold, CategoryType category, UnitType units) =>
+      "${Utils.removePointZero(weight(threshold, category, units))} ${units == UnitType.metric ? tr("KILOGRAMS") : tr("POUNDS")}";
 
   static Comparator<Animal> sortById = (a, b) => a.id.compareTo(b.id);
 

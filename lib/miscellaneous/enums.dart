@@ -46,6 +46,22 @@ enum MissionType {
   side,
 }
 
+enum UnitType {
+  metric,
+  imperial,
+}
+
+enum ThresholdType {
+  min,
+  max,
+}
+
+enum CategoryType {
+  go,
+  male,
+  female,
+}
+
 enum ModifyType {
   add,
   edit,

@@ -5,8 +5,8 @@ import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down.dart';
-import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
 import 'package:cotwcompanion/widgets/section/section_indicator_tap_align.dart';
+import 'package:cotwcompanion/widgets/section/section_indicator_tap_settings.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -142,7 +142,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   }
 
   Widget _buildPerformanceMode() {
-    return WidgetSectionIndicatorTap(
+    return WidgetSectionIndicatorTapSettings(
       tr("MAP_PERFORMANCE_MODE"),
       indicatorColor: _settings.mapPerformanceMode ? Interface.primary : Interface.disabled,
       onTap: () {
@@ -154,7 +154,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   }
 
   Widget _buildFurPercent() {
-    return WidgetSectionIndicatorTap(
+    return WidgetSectionIndicatorTapSettings(
       tr("MAP_ZONES_COUNT"),
       indicatorColor: _settings.mapZonesCount ? Interface.primary : Interface.disabled,
       onTap: () {
@@ -166,7 +166,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   }
 
   Widget _buildBestWeapons() {
-    return WidgetSectionIndicatorTap(
+    return WidgetSectionIndicatorTapSettings(
       tr("BEST_WEAPONS"),
       indicatorColor: _settings.bestWeaponsForAnimal ? Interface.primary : Interface.disabled,
       onTap: () {
@@ -186,11 +186,26 @@ class ActivitySettingsState extends State<ActivitySettings> {
     ];
   }
 
-  Widget _buildFurPercentSubtitle() {
-    return WidgetSectionIndicatorTap(
+  Widget _buildDistributionSubtitle(Color background) {
+    return WidgetSectionIndicatorTapSettings(
+      "${tr("ANIMAL_TROPHY_DISTRIBUTION")} & ${tr("ANIMAL_WEIGHT_DISTRIBUTION").toLowerCase()}",
+      indicatorColor: _settings.trophyWeightDistribution ? Interface.primary : Interface.disabled,
+      background: background,
+      needsWarning: true,
+      onTap: () {
+        setState(() {
+          _settings.changeTrophyWeightDistribution();
+        });
+      },
+    );
+  }
+
+  Widget _buildFurPercentSubtitle(Color background) {
+    return WidgetSectionIndicatorTapSettings(
       tr("FUR_RARITY_PER_CENT"),
       indicatorColor: _settings.furRarityPerCent ? Interface.primary : Interface.disabled,
-      background: Interface.title,
+      background: background,
+      needsWarning: true,
       onTap: () {
         setState(() {
           _settings.changeFurRarityPerCent();
@@ -199,42 +214,11 @@ class ActivitySettingsState extends State<ActivitySettings> {
     );
   }
 
-  Widget _buildFurPercentAuthor() {
-    return WidgetText(
-      "by Ramalamadingdong7",
-      color: Interface.dark,
-      style: Style.normal.s14.w500,
-    );
-  }
-
-  Widget _buildFurPercentWarning() {
-    return WidgetText(
-      tr("FUR_RARITY_WARNING"),
-      color: Interface.red,
-      style: Style.normal.s12.w300,
-      autoSize: false,
-    );
-  }
-
   Widget _buildFurPercentageChange() {
     return Column(
       children: [
-        _buildFurPercentSubtitle(),
-        WidgetPadding.fromLTRB(
-          30,
-          10,
-          30,
-          30,
-          background: Interface.title,
-          child: Wrap(
-            spacing: 5,
-            runSpacing: 5,
-            children: [
-              _buildFurPercentAuthor(),
-              _buildFurPercentWarning(),
-            ],
-          ),
-        )
+        _buildDistributionSubtitle(Interface.subtitle),
+        _buildFurPercentSubtitle(Interface.odd),
       ],
     );
   }

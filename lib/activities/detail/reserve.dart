@@ -1,6 +1,7 @@
 import 'package:cotwcompanion/builders/map.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/graphics.dart';
+import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_animals.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_callers.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_environment.dart';
@@ -43,6 +44,7 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
   Widget _buildMap(BuildContext context) {
     return WidgetTitleImageTap(
       tr("MAP"),
+      titleColor: Interface.alwaysLight,
       onTap: () {
         Navigator.push(
           context,
@@ -85,6 +87,7 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
   Widget _buildMissions(BuildContext context) {
     return WidgetTitleImageTap(
       tr("MISSIONS"),
+      titleColor: Interface.alwaysLight,
       onTap: () {
         Navigator.push(
           context,

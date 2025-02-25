@@ -8,13 +8,19 @@ import 'package:flutter/material.dart';
 
 class WidgetTitleImageTap extends WidgetTitleTap {
   final Widget _child;
+  final Color? _titleColor;
 
   const WidgetTitleImageTap(
     super.text, {
     super.key,
+    Color? titleColor,
     required Widget child,
     required super.onTap,
-  }) : _child = child;
+  })  : _titleColor = titleColor,
+        _child = child;
+
+  @override
+  Color get titleColor => _titleColor ?? super.titleColor;
 
   @override
   Widget buildContainer() {

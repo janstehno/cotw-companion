@@ -96,18 +96,14 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
 
   List<Widget> _listTrophyScoreDistribution() {
     return [
-      WidgetTitle(
-        tr("ANIMAL_TROPHY_DISTRIBUTION"),
-      ),
+      WidgetTitle(tr("ANIMAL_TROPHY_DISTRIBUTION")),
       ListAnimalTrophyScoreDistribution(widget.animal),
     ];
   }
 
   List<Widget> _listFurs() {
     return [
-      WidgetTitle(
-        tr("ANIMAL_FURS"),
-      ),
+      WidgetTitle(tr("ANIMAL_FURS")),
       WidgetAnimalFurs(
         widget.animal,
         toggledRarity: _toggledRarity,
@@ -167,8 +163,11 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
         WidgetAnimalHeader(widget.animal),
         ..._listReserves(),
         ..._listTrophyScores(),
-        ..._listWeightDistribution(),
-        if (_settings.trophyWeightDistribution) ..._listTrophyScoreDistribution(),
+        if (!_settings.trophyWeightDistribution) ..._listWeightDistribution(),
+        if (_settings.trophyWeightDistribution) ...[
+          ..._listTrophyScoreDistribution(),
+          ..._listWeightDistribution(),
+        ],
         ..._listFurs(),
         if (widget.animal.hasGO) ..._listFursGO(),
         ..._listZones(),

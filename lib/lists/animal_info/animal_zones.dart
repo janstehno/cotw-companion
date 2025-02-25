@@ -48,9 +48,6 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
   final double _pieInnerDegree = -90;
   final double _pieOuterDegree = -97.5;
 
-  final List<PieChartSectionData> _data = [];
-  final List<PieChartSectionData> _numberData = [];
-
   late final PageController _pageController;
 
   @override
@@ -111,43 +108,40 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
     );
   }
 
-  void _getPieSections(int i, AnimalZone zone, List<AnimalZone> zoneList) {
-    for (int hour = zone.from; hour < zone.to; hour++) {
-      if ((i == 0 && zone.zone == zoneList[zoneList.length - 1].zone) || hour != zone.from) {
-        _data.add(_buildZoneSection(zone));
-      } else {
-        _data.add(_buildZoneSectionChange(zone));
-      }
-      _numberData.add(_buildNumberSection(hour));
-    }
-  }
-
   Widget _buildZoneChart(List<AnimalZone> zoneList) {
-    _data.clear();
-    _numberData.clear();
+    final List<PieChartSectionData> data = [];
+    final List<PieChartSectionData> numberData = [];
+
     String reserveName = HelperJSON.getReserve(zoneList[0].reserveId)!.name;
-    for (AnimalZone a in zoneList) {
-      _getPieSections(zoneList.indexOf(a), a, zoneList);
+    for (AnimalZone zone in zoneList) {
+      for (int hour = zone.from; hour < zone.to; hour++) {
+        if ((zoneList.indexOf(zone) == 0 && zone.zone == zoneList[zoneList.length - 1].zone) || hour != zone.from) {
+          data.add(_buildZoneSection(zone));
+        } else {
+          data.add(_buildZoneSectionChange(zone));
+        }
+        numberData.add(_buildNumberSection(hour));
+      }
     }
-    return _buildPieChartReserve(reserveName);
+    return _buildPieChartReserve(reserveName, data, numberData);
   }
 
-  Widget _buildPieChartZones() {
+  Widget _buildPieChartZones(List<PieChartSectionData> data) {
     return PieChart(PieChartData(
       startDegreeOffset: _pieInnerDegree,
       borderData: FlBorderData(show: false),
       sectionsSpace: _pieSectionSpace,
       centerSpaceRadius: _pieInnerCenterSpaceRadius,
-      sections: _data,
+      sections: data,
     ));
   }
 
-  Widget _buildPieChartNumbers() {
+  Widget _buildPieChartNumbers(List<PieChartSectionData> numberData) {
     return PieChart(PieChartData(
       startDegreeOffset: _pieOuterDegree,
       borderData: FlBorderData(show: false),
       centerSpaceRadius: _pieOuterCenterSpaceRadius,
-      sections: _numberData,
+      sections: numberData,
     ));
   }
 
@@ -165,24 +159,25 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
     );
   }
 
-  Widget _buildPieChart() {
+  Widget _buildPieChart(List<PieChartSectionData> data, List<PieChartSectionData> numberData) {
     return SizedBox(
       height: _pageHeight,
       child: Stack(
         children: [
-          _buildPieChartZones(),
-          _buildPieChartNumbers(),
+          _buildPieChartZones(data),
+          _buildPieChartNumbers(numberData),
         ],
       ),
     );
   }
 
-  Widget _buildPieChartReserve(String reserveName) {
+  Widget _buildPieChartReserve(
+      String reserveName, List<PieChartSectionData> data, List<PieChartSectionData> numberData) {
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        _buildPieChart(),
+        _buildPieChart(data, numberData),
         _buildReserve(reserveName),
       ],
     );

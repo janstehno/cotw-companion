@@ -89,13 +89,11 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     setState(() {
       if (!_stopped) {
         _timer.reset();
-        _second += 1;
-        if (_second == 15) {
+        if (++_second == 15) {
           _second = 0;
-          _minute += 1;
-          if (_minute == 60) {
+          if (++_minute == 60) {
             _minute = 0;
-            _hour == 24 ? _hour = 0 : _hour += 1;
+            _hour = ++_hour % 24;
             _adjustSecond();
           }
         }

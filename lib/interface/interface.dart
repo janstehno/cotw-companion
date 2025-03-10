@@ -1,3 +1,7 @@
+import 'package:board_datetime_picker/board_datetime_picker.dart';
+import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Interface {
@@ -102,7 +106,7 @@ class Interface {
       light = ff0d;
       dark = fff5;
       search = ff17;
-      dropDown = ff06.withValues(alpha: 0.8);
+      dropDown = ff06;
       tag = ff23;
       disabled = ff61;
       disabledForeground = alwaysLight.withValues(alpha: 0.5);
@@ -113,19 +117,6 @@ class Interface {
       trophyNone = ffee;
       trophyGreatOne = ffee;
       rarityCommon = ffee;
-      datePickerScheme = ColorScheme(
-        brightness: Brightness.dark,
-        primary: primary,
-        onPrimary: alwaysDark,
-        secondary: body,
-        onSecondary: dark,
-        surface: subtitle,
-        onSurface: dark,
-        surfaceContainerHighest: dark,
-        surfaceTint: disabled,
-        error: body,
-        onError: red,
-      );
     } else {
       body = fffe;
       odd = fff5;
@@ -135,7 +126,7 @@ class Interface {
       light = fff5;
       dark = ff0d;
       search = ffee;
-      dropDown = fffe.withValues(alpha: 0.8);
+      dropDown = fffe;
       tag = ffcc;
       disabled = ff9e;
       disabledForeground = alwaysDark.withValues(alpha: 0.5);
@@ -146,19 +137,29 @@ class Interface {
       trophyNone = ff17;
       trophyGreatOne = ff17;
       rarityCommon = ff17;
-      datePickerScheme = ColorScheme(
-        brightness: Brightness.light,
-        primary: primary,
-        onPrimary: alwaysDark,
-        secondary: body,
-        onSecondary: dark,
-        surface: subtitle,
-        onSurface: dark,
-        surfaceContainerHighest: dark,
-        surfaceTint: disabled,
-        error: body,
-        onError: red,
-      );
     }
+  }
+
+  static BoardDateTimeOptions boardDatePickerOptions(BuildContext context) {
+    return BoardDateTimeOptions(
+      pickerFormat: PickerFormat.dmy,
+      backgroundColor: Interface.body,
+      foregroundColor: Interface.odd,
+      activeColor: Interface.primary,
+      textColor: Interface.dark,
+      activeTextColor: Interface.alwaysDark,
+      withSecond: false,
+      inputable: false,
+      actionButtonTypes: [],
+      calendarSelectionRadius: Values.tapSize / 2,
+      startDayOfWeek: 1,
+      weekend: BoardPickerWeekendOptions(
+        saturdayColor: Interface.dark,
+        sundayColor: Interface.dark,
+      ),
+      boardTitle: tr("TIME").toUpperCase(),
+      boardTitleTextStyle: Style.condensed.s16.w600.copyWith(color: Interface.dark),
+      languages: BoardPickerLanguages(locale: context.locale.languageCode),
+    );
   }
 }

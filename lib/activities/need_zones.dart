@@ -160,7 +160,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
 
   Widget _buildReserves() {
     if (!_compact) {
-      return WidgetDropDown(
+      return WidgetDropDown<int>(
         value: _reserve.id,
         items: _listReserves(),
         onChange: (dynamic value) {

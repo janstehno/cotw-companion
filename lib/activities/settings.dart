@@ -1,13 +1,11 @@
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/settings.dart';
-import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
-import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down.dart';
+import 'package:cotwcompanion/widgets/handling/drop_down_item.dart';
 import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
 import 'package:cotwcompanion/widgets/section/section_indicator_tap_align.dart';
-import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +31,8 @@ class ActivitySettingsState extends State<ActivitySettings> {
   DropdownMenuItem _buildDropdownItem(String language) {
     return DropdownMenuItem(
       value: _settings.languages.indexOf(language),
-      child: WidgetPadding.h30(
-        background: Interface.dropDown,
-        child: WidgetText(
-          _settings.getLocaleName(_settings.languages.indexOf(language)),
-          color: Interface.dark,
-          style: Style.normal.s16.w300,
-        ),
+      child: WidgetDropDownItem(
+        text: _settings.getLocaleName(_settings.languages.indexOf(language)),
       ),
     );
   }
@@ -51,7 +44,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
   List<Widget> _listLanguage() {
     return [
       WidgetTitle(tr("LANGUAGE")),
-      WidgetDropDown(
+      WidgetDropDown<int>(
         value: _settings.language,
         items: _listLanguages(),
         onChange: (dynamic value) {

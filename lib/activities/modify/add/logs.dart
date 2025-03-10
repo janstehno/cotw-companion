@@ -1,3 +1,4 @@
+import 'package:board_datetime_picker/board_datetime_picker.dart';
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/activities/modify/modify.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
@@ -16,6 +17,7 @@ import 'package:cotwcompanion/model/connect/animal_fur.dart';
 import 'package:cotwcompanion/model/exportable/log.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
+import 'package:cotwcompanion/widgets/button/button_icon.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down_item.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down_item_animal.dart';
@@ -28,7 +30,6 @@ import 'package:cotwcompanion/widgets/title/title_switch_icon.dart';
 import 'package:cotwcompanion/widgets/title/title_tap.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:provider/provider.dart';
 
 class ActivityAddLogs extends ActivityModify {
@@ -90,6 +91,13 @@ class ActivityAddLogsState extends ActivityModifyState {
     trophyController.addListener(() => _trophyListener());
     weightController.addListener(() => _weightListener());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    weightController.dispose();
+    trophyController.dispose();
+    super.dispose();
   }
 
   void initializeData() {
@@ -157,21 +165,29 @@ class ActivityAddLogsState extends ActivityModifyState {
     });
   }
 
-  Future<DateTime?> _buildDatePicker() async {
-    return await showOmniDateTimePicker(
-      context: context,
-      theme: ThemeData(
-        focusColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        colorScheme: Interface.datePickerScheme,
+  Widget _buildDatePickerConfirm(Function onClose) {
+    return Container(
+      margin: EdgeInsets.only(right: 15),
+      child: WidgetButtonIcon(
+        Assets.graphics.icons.accept,
+        onTap: () {
+          onClose();
+        },
       ),
-      is24HourMode: true,
-      isShowSeconds: false,
+    );
+  }
+
+  Future<DateTime?> _buildDatePicker() async {
+    return await showBoardDateTimePicker(
+      context: context,
+      useSafeArea: true,
+      radius: 0,
+      options: Interface.boardDatePickerOptions(context),
+      customCloseButtonBuilder: (context, isModal, onClose) => _buildDatePickerConfirm(onClose),
       initialDate: dateTime,
-      firstDate: DateTime(2017),
-      lastDate: DateTime(2030, 12, 31),
-      borderRadius: BorderRadius.circular(10),
+      minimumDate: DateTime(2017),
+      maximumDate: DateTime(2030, 12, 31),
+      pickerType: DateTimePickerType.datetime,
     );
   }
 
@@ -206,7 +222,7 @@ class ActivityAddLogsState extends ActivityModifyState {
   List<Widget> _listReserve() {
     return [
       WidgetTitle(tr("RESERVE")),
-      WidgetDropDown(
+      WidgetDropDown<int>(
         value: reserves.indexOf(selectedReserve!),
         items: _listReserves(),
         onChange: (dynamic value) {
@@ -234,7 +250,7 @@ class ActivityAddLogsState extends ActivityModifyState {
   List<Widget> _listAnimal() {
     return [
       WidgetTitle(tr("ANIMAL")),
-      WidgetDropDown(
+      WidgetDropDown<int>(
         value: reserveAnimals.indexOf(selectedAnimal),
         items: _listAnimals(),
         onChange: (dynamic value) {
@@ -281,7 +297,7 @@ class ActivityAddLogsState extends ActivityModifyState {
   List<Widget> _listFur() {
     return [
       WidgetTitle(tr("ANIMAL_FUR")),
-      WidgetDropDown(
+      WidgetDropDown<int>(
         value: animalFurs.indexOf(selectedAnimalFur),
         items: _listAnimalFurs(),
         onChange: (dynamic value) {

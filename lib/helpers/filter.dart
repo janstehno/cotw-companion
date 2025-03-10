@@ -4,6 +4,7 @@ import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/logger.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
 import 'package:cotwcompanion/model/exportable/enumerator.dart';
@@ -251,7 +252,9 @@ class HelperFilter {
     List<Fur> animalFurs = [];
     animalFurs.addAll(list);
     if (searchText.isNotEmpty) {
-      animalFurs = animalFurs.where((e) => (e.name.toLowerCase().contains(searchText.toLowerCase()))).toList();
+      animalFurs = animalFurs
+          .where((e) => (e.id < Values.greatOneId && e.name.toLowerCase().contains(searchText.toLowerCase())))
+          .toList();
     }
     return animalFurs.sorted(Fur.sortByName);
   }

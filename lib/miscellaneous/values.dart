@@ -1,5 +1,5 @@
 class Values {
-  static const String version = "1.10.10";
+  static const String version = "1.10.11";
 
   static const int greatOneId = 100;
 

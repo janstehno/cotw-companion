@@ -6,6 +6,7 @@ import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/miscellaneous/logger.dart';
 import 'package:cotwcompanion/model/connect/animal_caller.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
+import 'package:cotwcompanion/model/connect/animal_fur_image.dart';
 import 'package:cotwcompanion/model/connect/animal_reserve.dart';
 import 'package:cotwcompanion/model/connect/animal_zone.dart';
 import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
@@ -26,6 +27,7 @@ class HelperJSON {
   static final List<Animal> animals = [];
   static final List<AnimalCaller> animalsCallers = [];
   static final List<AnimalFur> animalsFurs = [];
+  static final List<AnimalFurImage> animalsFursImages = [];
   static final List<AnimalReserve> animalsReserves = [];
   static final List<AnimalZone> animalsZones = [];
   static final List<Caller> callers = [];
@@ -41,6 +43,7 @@ class HelperJSON {
     List<Animal> b,
     List<AnimalCaller> c,
     List<AnimalFur> d,
+    List<AnimalFurImage> n,
     List<AnimalReserve> e,
     List<AnimalZone> f,
     List<Caller> g,
@@ -57,6 +60,7 @@ class HelperJSON {
     animals.addAll(b);
     animalsCallers.addAll(c);
     animalsFurs.addAll(d);
+    animalsFursImages.addAll(n);
     animalsReserves.addAll(e);
     animalsZones.addAll(f);
     callers.addAll(g);
@@ -74,6 +78,7 @@ class HelperJSON {
     animals.clear();
     animalsCallers.clear();
     animalsFurs.clear();
+    animalsFursImages.clear();
     animalsReserves.clear();
     animalsZones.clear();
     callers.clear();
@@ -216,6 +221,9 @@ class HelperJSON {
     }
   }
 
+  static List<AnimalFurImage> getAnimalsFursImages(int animalId) =>
+      animalsFursImages.where((e) => e.animalId == animalId).toList();
+
   static Reserve? getReserve(int reserveId) {
     try {
       return reserves.firstWhereOrNull((e) => e.id == reserveId);
@@ -320,6 +328,19 @@ class HelperJSON {
       return animalsFurs;
     } catch (e) {
       _logger.w("Animal's furs not loaded");
+      rethrow;
+    }
+  }
+
+  static Future<List<AnimalFurImage>> readAnimalsFursImages() async {
+    try {
+      final data = await getData(Assets.raw.animalsfursimages);
+      final list = json.decode(data) as List<dynamic>;
+      final List<AnimalFurImage> animalsFursImages = list.map((e) => AnimalFurImage.fromJson(e)).toList();
+      _logger.t("${animalsFursImages.length} animal's fur's images loaded");
+      return animalsFursImages;
+    } catch (e) {
+      _logger.w("Animal's fur's images not loaded");
       rethrow;
     }
   }

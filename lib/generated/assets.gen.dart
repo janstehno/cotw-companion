@@ -33,6 +33,8 @@ class $AssetsRawGen {
 
   String get animalsfurs => 'assets/raw/animalsfurs.json';
 
+  String get animalsfursimages => 'assets/raw/animalsfursimages.json';
+
   String get animalsreserves => 'assets/raw/animalsreserves.json';
 
   String get animalszones => 'assets/raw/animalszones.json';
@@ -64,6 +66,7 @@ class $AssetsRawGen {
         animals,
         animalscallers,
         animalsfurs,
+        animalsfursimages,
         animalsreserves,
         animalszones,
         callers,

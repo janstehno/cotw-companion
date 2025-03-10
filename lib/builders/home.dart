@@ -8,6 +8,7 @@ import 'package:cotwcompanion/helpers/loadout.dart';
 import 'package:cotwcompanion/helpers/log.dart';
 import 'package:cotwcompanion/model/connect/animal_caller.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
+import 'package:cotwcompanion/model/connect/animal_fur_image.dart';
 import 'package:cotwcompanion/model/connect/animal_reserve.dart';
 import 'package:cotwcompanion/model/connect/animal_zone.dart';
 import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
@@ -39,6 +40,7 @@ class BuilderHomeState extends BuilderBuilderState {
     List<Animal> animals = snapshot.data!["animals"] ?? [];
     List<AnimalCaller> animalsCallers = snapshot.data!["animalsCallers"] ?? [];
     List<AnimalFur> animalsFurs = snapshot.data!["animalsFurs"] ?? [];
+    List<AnimalFurImage> animalsFursImages = snapshot.data!["animalsFursImages"] ?? [];
     List<AnimalReserve> animalsReserves = snapshot.data!["animalsReserves"] ?? [];
     List<AnimalZone> animalsZones = snapshot.data!["animalsZones"] ?? [];
     List<Caller> callers = snapshot.data!["callers"] ?? [];
@@ -48,8 +50,8 @@ class BuilderHomeState extends BuilderBuilderState {
     List<Weapon> weapons = snapshot.data!["weapons"] ?? [];
     List<WeaponAmmo> weaponsAmmo = snapshot.data!["weaponsAmmo"] ?? [];
     List<Mission> missions = snapshot.data!["missions"] ?? [];
-    HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsReserves, animalsZones, callers, dlcs, furs,
-        reserves, weapons, weaponsAmmo, missions);
+    HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsFursImages, animalsReserves, animalsZones,
+        callers, dlcs, furs, reserves, weapons, weaponsAmmo, missions);
     List<Log> logs = snapshot.data!["logs"] ?? [];
     List<Loadout> loadouts = snapshot.data!["loadouts"] ?? [];
     HelperLog.setLogs(logs);
@@ -67,6 +69,8 @@ class BuilderHomeState extends BuilderBuilderState {
     updateProgress("animalsCallers", animalsCallers);
     List<AnimalFur> animalsFurs = await HelperJSON.readAnimalsFurs();
     updateProgress("animalsFurs", animalsFurs);
+    List<AnimalFurImage> animalsFursImages = await HelperJSON.readAnimalsFursImages();
+    updateProgress("animalsFursImages", animalsFursImages);
     List<AnimalReserve> animalsReserves = await HelperJSON.readAnimalsReserves();
     updateProgress("animalsReserves", animalsReserves);
     List<AnimalZone> animalsZones = await HelperJSON.readAnimalsZones();

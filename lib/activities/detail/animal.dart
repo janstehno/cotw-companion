@@ -12,6 +12,7 @@ import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
 import 'package:cotwcompanion/widgets/parts/animal/animal_anatomy.dart';
+import 'package:cotwcompanion/widgets/parts/animal/animal_fur_images.dart';
 import 'package:cotwcompanion/widgets/parts/animal/animal_header.dart';
 import 'package:cotwcompanion/widgets/parts/animal/animal_weapons.dart';
 import 'package:cotwcompanion/widgets/parts/animal/animal_zones.dart';
@@ -101,6 +102,16 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
     ];
   }
 
+  List<Widget> _listZones() {
+    return [
+      WidgetTitle(tr("ANIMAL_NEED_ZONES")),
+      WidgetAnimalZones(
+        widget.animal,
+        reserve: widget.reserve,
+      ),
+    ];
+  }
+
   List<Widget> _listFurs() {
     return [
       WidgetTitle(tr("ANIMAL_FURS")),
@@ -116,19 +127,16 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
     return [
       WidgetTitle(
         tr("ANIMAL_FURS"),
-        subtext: tr("FUR:GREAT_ONE").toUpperCase(),
+        subtext: tr("FUR:GREAT_ONE"),
       ),
       ListAnimalFursGO(widget.animal),
     ];
   }
 
-  List<Widget> _listZones() {
+  List<Widget> _listFursImages() {
     return [
-      WidgetTitle(tr("ANIMAL_NEED_ZONES")),
-      WidgetAnimalZones(
-        widget.animal,
-        reserve: widget.reserve,
-      ),
+      WidgetTitle(tr("ANIMAL_FURS_VISUALIZATION")),
+      WidgetAnimalFurImages(widget.animal),
     ];
   }
 
@@ -168,9 +176,10 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
           ..._listTrophyScoreDistribution(),
           ..._listWeightDistribution(),
         ],
+        ..._listZones(),
         ..._listFurs(),
         if (widget.animal.hasGO) ..._listFursGO(),
-        ..._listZones(),
+        ..._listFursImages(),
         if (widget.animal.level > 1) ..._listAnatomy(),
         if (widget.animal.hasSenses) ..._listSenses(),
         ListAnimalCallers(widget.animal),

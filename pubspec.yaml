@@ -52,6 +52,7 @@ flutter_gen:
     exclude:
       - assets/fonts/*
       - assets/translations/*
+      - assets/graphics/furs/*
       - assets/graphics/maps/**/*
 
 flutter:
@@ -69,6 +70,7 @@ flutter:
     - assets/graphics/callers/
     - assets/graphics/anatomy/
     - assets/graphics/heads/
+    - assets/graphics/furs/
     - assets/graphics/proficiency/
     - assets/graphics/maps/hirschfeldenhuntingreserve/1/
     - assets/graphics/maps/hirschfeldenhuntingreserve/2/

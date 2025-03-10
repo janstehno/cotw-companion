@@ -111,7 +111,7 @@ class App extends StatelessWidget {
         return _scrollConfiguration(widget);
       },
       theme: _themeData,
-      home: const BuilderHome(),
+      home: SafeArea(child: const BuilderHome()),
     );
   }
 

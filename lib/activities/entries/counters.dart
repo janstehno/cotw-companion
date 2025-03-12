@@ -39,7 +39,7 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
 
   @override
   List<Counter> filteredItems() {
-    return items;
+    return initialItems();
   }
 
   @override

@@ -82,415 +82,212 @@ class $AssetsRawGen {
 class $AssetsGraphicsAnatomyGen {
   const $AssetsGraphicsAnatomyGen();
 
-  String get americanalligatorBody => 'assets/graphics/anatomy/americanalligator_body.svg';
+  AssetGenImage get americanAlligator => const AssetGenImage('assets/graphics/anatomy/american_alligator.png');
 
-  String get americanalligatorOrgans => 'assets/graphics/anatomy/americanalligator_organs.svg';
+  AssetGenImage get axisDeer => const AssetGenImage('assets/graphics/anatomy/axis_deer.png');
 
-  String get axisdeerBody => 'assets/graphics/anatomy/axisdeer_body.svg';
+  AssetGenImage get banteng => const AssetGenImage('assets/graphics/anatomy/banteng.png');
 
-  String get axisdeerOrgans => 'assets/graphics/anatomy/axisdeer_organs.svg';
+  AssetGenImage get barasingha => const AssetGenImage('assets/graphics/anatomy/barasingha.png');
 
-  String get bantengBody => 'assets/graphics/anatomy/banteng_body.svg';
+  AssetGenImage get beceiteIbex => const AssetGenImage('assets/graphics/anatomy/beceite_ibex.png');
 
-  String get bantengOrgans => 'assets/graphics/anatomy/banteng_organs.svg';
+  AssetGenImage get bengalTiger => const AssetGenImage('assets/graphics/anatomy/bengal_tiger.png');
 
-  String get barasinghaBody => 'assets/graphics/anatomy/barasingha_body.svg';
+  AssetGenImage get bighornSheep => const AssetGenImage('assets/graphics/anatomy/bighorn_sheep.png');
 
-  String get barasinghaOrgans => 'assets/graphics/anatomy/barasingha_organs.svg';
+  AssetGenImage get blackBear => const AssetGenImage('assets/graphics/anatomy/black_bear.png');
 
-  String get beceiteibexBody => 'assets/graphics/anatomy/beceiteibex_body.svg';
+  AssetGenImage get blackbuck => const AssetGenImage('assets/graphics/anatomy/blackbuck.png');
 
-  String get beceiteibexOrgans => 'assets/graphics/anatomy/beceiteibex_organs.svg';
+  AssetGenImage get blacktailDeer => const AssetGenImage('assets/graphics/anatomy/blacktail_deer.png');
 
-  String get bengaltigerBody => 'assets/graphics/anatomy/bengaltiger_body.svg';
+  AssetGenImage get blueSheep => const AssetGenImage('assets/graphics/anatomy/blue_sheep.png');
 
-  String get bengaltigerOrgans => 'assets/graphics/anatomy/bengaltiger_organs.svg';
+  AssetGenImage get blueWildebeest => const AssetGenImage('assets/graphics/anatomy/blue_wildebeest.png');
 
-  String get bighornsheepBody => 'assets/graphics/anatomy/bighornsheep_body.svg';
+  AssetGenImage get brownBear => const AssetGenImage('assets/graphics/anatomy/brown_bear.png');
 
-  String get bighornsheepOrgans => 'assets/graphics/anatomy/bighornsheep_organs.svg';
+  AssetGenImage get capeBuffalo => const AssetGenImage('assets/graphics/anatomy/cape_buffalo.png');
 
-  String get blackbearBody => 'assets/graphics/anatomy/blackbear_body.svg';
+  AssetGenImage get caribou => const AssetGenImage('assets/graphics/anatomy/caribou.png');
 
-  String get blackbearOrgans => 'assets/graphics/anatomy/blackbear_organs.svg';
+  AssetGenImage get chamois => const AssetGenImage('assets/graphics/anatomy/chamois.png');
 
-  String get blackbuckBody => 'assets/graphics/anatomy/blackbuck_body.svg';
+  AssetGenImage get collaredPeccary => const AssetGenImage('assets/graphics/anatomy/collared_peccary.png');
 
-  String get blackbuckOrgans => 'assets/graphics/anatomy/blackbuck_organs.svg';
+  AssetGenImage get commonRaccoon => const AssetGenImage('assets/graphics/anatomy/common_raccoon.png');
 
-  String get blacktaildeerBody => 'assets/graphics/anatomy/blacktaildeer_body.svg';
+  AssetGenImage get coyote => const AssetGenImage('assets/graphics/anatomy/coyote.png');
 
-  String get blacktaildeerOrgans => 'assets/graphics/anatomy/blacktaildeer_organs.svg';
+  AssetGenImage get easternGrayKangaroo => const AssetGenImage('assets/graphics/anatomy/eastern_gray_kangaroo.png');
 
-  String get bluesheepBody => 'assets/graphics/anatomy/bluesheep_body.svg';
+  AssetGenImage get eurasianLynx => const AssetGenImage('assets/graphics/anatomy/eurasian_lynx.png');
 
-  String get bluesheepOrgans => 'assets/graphics/anatomy/bluesheep_organs.svg';
+  AssetGenImage get europeanBison => const AssetGenImage('assets/graphics/anatomy/european_bison.png');
 
-  String get bluewildebeestBody => 'assets/graphics/anatomy/bluewildebeest_body.svg';
+  AssetGenImage get fallowDeer => const AssetGenImage('assets/graphics/anatomy/fallow_deer.png');
 
-  String get bluewildebeestOrgans => 'assets/graphics/anatomy/bluewildebeest_organs.svg';
+  AssetGenImage get feralGoat => const AssetGenImage('assets/graphics/anatomy/feral_goat.png');
 
-  String get brownbearBody => 'assets/graphics/anatomy/brownbear_body.svg';
+  AssetGenImage get feralPig => const AssetGenImage('assets/graphics/anatomy/feral_pig.png');
 
-  String get brownbearOrgans => 'assets/graphics/anatomy/brownbear_organs.svg';
+  AssetGenImage get gemsbok => const AssetGenImage('assets/graphics/anatomy/gemsbok.png');
 
-  String get capebuffaloBody => 'assets/graphics/anatomy/capebuffalo_body.svg';
+  AssetGenImage get grayFox => const AssetGenImage('assets/graphics/anatomy/gray_fox.png');
 
-  String get capebuffaloOrgans => 'assets/graphics/anatomy/capebuffalo_organs.svg';
+  AssetGenImage get grayWolf => const AssetGenImage('assets/graphics/anatomy/gray_wolf.png');
 
-  String get caribouBody => 'assets/graphics/anatomy/caribou_body.svg';
+  AssetGenImage get gredosIbex => const AssetGenImage('assets/graphics/anatomy/gredos_ibex.png');
 
-  String get caribouOrgans => 'assets/graphics/anatomy/caribou_organs.svg';
+  AssetGenImage get grizzlyBear => const AssetGenImage('assets/graphics/anatomy/grizzly_bear.png');
 
-  String get chamoisBody => 'assets/graphics/anatomy/chamois_body.svg';
+  AssetGenImage get hogDeer => const AssetGenImage('assets/graphics/anatomy/hog_deer.png');
 
-  String get chamoisOrgans => 'assets/graphics/anatomy/chamois_organs.svg';
+  AssetGenImage get iberianMouflon => const AssetGenImage('assets/graphics/anatomy/iberian_mouflon.png');
 
-  String get collaredpeccaryBody => 'assets/graphics/anatomy/collaredpeccary_body.svg';
+  AssetGenImage get iberianWolf => const AssetGenImage('assets/graphics/anatomy/iberian_wolf.png');
 
-  String get collaredpeccaryOrgans => 'assets/graphics/anatomy/collaredpeccary_organs.svg';
+  AssetGenImage get javanRusa => const AssetGenImage('assets/graphics/anatomy/javan_rusa.png');
 
-  String get commonraccoonBody => 'assets/graphics/anatomy/commonraccoon_body.svg';
+  AssetGenImage get lesserKudu => const AssetGenImage('assets/graphics/anatomy/lesser_kudu.png');
 
-  String get commonraccoonOrgans => 'assets/graphics/anatomy/commonraccoon_organs.svg';
+  AssetGenImage get lion => const AssetGenImage('assets/graphics/anatomy/lion.png');
 
-  String get coyoteBody => 'assets/graphics/anatomy/coyote_body.svg';
+  AssetGenImage get mexicanBobcat => const AssetGenImage('assets/graphics/anatomy/mexican_bobcat.png');
 
-  String get coyoteOrgans => 'assets/graphics/anatomy/coyote_organs.svg';
+  AssetGenImage get moose => const AssetGenImage('assets/graphics/anatomy/moose.png');
 
-  String get easterngraykangarooBody => 'assets/graphics/anatomy/easterngraykangaroo_body.svg';
+  AssetGenImage get mountainGoat => const AssetGenImage('assets/graphics/anatomy/mountain_goat.png');
 
-  String get easterngraykangarooOrgans => 'assets/graphics/anatomy/easterngraykangaroo_organs.svg';
+  AssetGenImage get muleDeer => const AssetGenImage('assets/graphics/anatomy/mule_deer.png');
 
-  String get eurasianlynxBody => 'assets/graphics/anatomy/eurasianlynx_body.svg';
+  AssetGenImage get nilgai => const AssetGenImage('assets/graphics/anatomy/nilgai.png');
 
-  String get eurasianlynxOrgans => 'assets/graphics/anatomy/eurasianlynx_organs.svg';
+  AssetGenImage get northernRedMuntjac => const AssetGenImage('assets/graphics/anatomy/northern_red_muntjac.png');
 
-  String get europeanbisonBody => 'assets/graphics/anatomy/europeanbison_body.svg';
+  AssetGenImage get plainsBison => const AssetGenImage('assets/graphics/anatomy/plains_bison.png');
 
-  String get europeanbisonOrgans => 'assets/graphics/anatomy/europeanbison_organs.svg';
+  AssetGenImage get pronghorn => const AssetGenImage('assets/graphics/anatomy/pronghorn.png');
 
-  String get fallowdeerBody => 'assets/graphics/anatomy/fallowdeer_body.svg';
+  AssetGenImage get puma => const AssetGenImage('assets/graphics/anatomy/puma.png');
 
-  String get fallowdeerOrgans => 'assets/graphics/anatomy/fallowdeer_organs.svg';
+  AssetGenImage get raccoonDog => const AssetGenImage('assets/graphics/anatomy/raccoon_dog.png');
 
-  String get feralgoatBody => 'assets/graphics/anatomy/feralgoat_body.svg';
+  AssetGenImage get redDeer => const AssetGenImage('assets/graphics/anatomy/red_deer.png');
 
-  String get feralgoatOrgans => 'assets/graphics/anatomy/feralgoat_organs.svg';
+  AssetGenImage get redFox => const AssetGenImage('assets/graphics/anatomy/red_fox.png');
 
-  String get feralpigBody => 'assets/graphics/anatomy/feralpig_body.svg';
+  AssetGenImage get reindeer => const AssetGenImage('assets/graphics/anatomy/reindeer.png');
 
-  String get feralpigOrgans => 'assets/graphics/anatomy/feralpig_organs.svg';
+  AssetGenImage get rockyMountainElk => const AssetGenImage('assets/graphics/anatomy/rocky_mountain_elk.png');
 
-  String get gemsbokBody => 'assets/graphics/anatomy/gemsbok_body.svg';
-
-  String get gemsbokOrgans => 'assets/graphics/anatomy/gemsbok_organs.svg';
-
-  String get grayfoxBody => 'assets/graphics/anatomy/grayfox_body.svg';
-
-  String get grayfoxOrgans => 'assets/graphics/anatomy/grayfox_organs.svg';
-
-  String get graywolfBody => 'assets/graphics/anatomy/graywolf_body.svg';
-
-  String get graywolfOrgans => 'assets/graphics/anatomy/graywolf_organs.svg';
-
-  String get gredosibexBody => 'assets/graphics/anatomy/gredosibex_body.svg';
-
-  String get gredosibexOrgans => 'assets/graphics/anatomy/gredosibex_organs.svg';
-
-  String get grizzlybearBody => 'assets/graphics/anatomy/grizzlybear_body.svg';
-
-  String get grizzlybearOrgans => 'assets/graphics/anatomy/grizzlybear_organs.svg';
-
-  String get hogdeerBody => 'assets/graphics/anatomy/hogdeer_body.svg';
-
-  String get hogdeerOrgans => 'assets/graphics/anatomy/hogdeer_organs.svg';
-
-  String get iberianmouflonBody => 'assets/graphics/anatomy/iberianmouflon_body.svg';
-
-  String get iberianmouflonOrgans => 'assets/graphics/anatomy/iberianmouflon_organs.svg';
-
-  String get iberianwolfBody => 'assets/graphics/anatomy/iberianwolf_body.svg';
-
-  String get iberianwolfOrgans => 'assets/graphics/anatomy/iberianwolf_organs.svg';
-
-  String get javanrusaBody => 'assets/graphics/anatomy/javanrusa_body.svg';
-
-  String get javanrusaOrgans => 'assets/graphics/anatomy/javanrusa_organs.svg';
-
-  String get lesserkuduBody => 'assets/graphics/anatomy/lesserkudu_body.svg';
-
-  String get lesserkuduOrgans => 'assets/graphics/anatomy/lesserkudu_organs.svg';
-
-  String get lionBody => 'assets/graphics/anatomy/lion_body.svg';
-
-  String get lionOrgans => 'assets/graphics/anatomy/lion_organs.svg';
-
-  String get mexicanbobcatBody => 'assets/graphics/anatomy/mexicanbobcat_body.svg';
-
-  String get mexicanbobcatOrgans => 'assets/graphics/anatomy/mexicanbobcat_organs.svg';
-
-  String get mooseBody => 'assets/graphics/anatomy/moose_body.svg';
-
-  String get mooseOrgans => 'assets/graphics/anatomy/moose_organs.svg';
-
-  String get mountaingoatBody => 'assets/graphics/anatomy/mountaingoat_body.svg';
-
-  String get mountaingoatOrgans => 'assets/graphics/anatomy/mountaingoat_organs.svg';
-
-  String get muledeerBody => 'assets/graphics/anatomy/muledeer_body.svg';
-
-  String get muledeerOrgans => 'assets/graphics/anatomy/muledeer_organs.svg';
-
-  String get nilgaiBody => 'assets/graphics/anatomy/nilgai_body.svg';
-
-  String get nilgaiOrgans => 'assets/graphics/anatomy/nilgai_organs.svg';
-
-  String get northernredmuntjacBody => 'assets/graphics/anatomy/northernredmuntjac_body.svg';
-
-  String get northernredmuntjacOrgans => 'assets/graphics/anatomy/northernredmuntjac_organs.svg';
-
-  String get plainsbisonBody => 'assets/graphics/anatomy/plainsbison_body.svg';
-
-  String get plainsbisonOrgans => 'assets/graphics/anatomy/plainsbison_organs.svg';
-
-  String get pronghornBody => 'assets/graphics/anatomy/pronghorn_body.svg';
-
-  String get pronghornOrgans => 'assets/graphics/anatomy/pronghorn_organs.svg';
-
-  String get pumaBody => 'assets/graphics/anatomy/puma_body.svg';
-
-  String get pumaOrgans => 'assets/graphics/anatomy/puma_organs.svg';
-
-  String get raccoondogBody => 'assets/graphics/anatomy/raccoondog_body.svg';
-
-  String get raccoondogOrgans => 'assets/graphics/anatomy/raccoondog_organs.svg';
-
-  String get reddeerBody => 'assets/graphics/anatomy/reddeer_body.svg';
-
-  String get reddeerOrgans => 'assets/graphics/anatomy/reddeer_organs.svg';
-
-  String get redfoxBody => 'assets/graphics/anatomy/redfox_body.svg';
-
-  String get redfoxOrgans => 'assets/graphics/anatomy/redfox_organs.svg';
-
-  String get reindeerBody => 'assets/graphics/anatomy/reindeer_body.svg';
-
-  String get reindeerOrgans => 'assets/graphics/anatomy/reindeer_organs.svg';
-
-  String get rockymountainelkBody => 'assets/graphics/anatomy/rockymountainelk_body.svg';
-
-  String get rockymountainelkOrgans => 'assets/graphics/anatomy/rockymountainelk_organs.svg';
-
-  String get roedeerBody => 'assets/graphics/anatomy/roedeer_body.svg';
-
-  String get roedeerOrgans => 'assets/graphics/anatomy/roedeer_organs.svg';
-
-  String get rondaibexBody => 'assets/graphics/anatomy/rondaibex_body.svg';
-
-  String get rondaibexOrgans => 'assets/graphics/anatomy/rondaibex_organs.svg';
-
-  String get rooseveltelkBody => 'assets/graphics/anatomy/rooseveltelk_body.svg';
-
-  String get rooseveltelkOrgans => 'assets/graphics/anatomy/rooseveltelk_organs.svg';
-
-  String get saltwatercrocodileBody => 'assets/graphics/anatomy/saltwatercrocodile_body.svg';
-
-  String get saltwatercrocodileOrgans => 'assets/graphics/anatomy/saltwatercrocodile_organs.svg';
-
-  String get sambarBody => 'assets/graphics/anatomy/sambar_body.svg';
-
-  String get sambarOrgans => 'assets/graphics/anatomy/sambar_organs.svg';
-
-  String get siberianmuskdeerBody => 'assets/graphics/anatomy/siberianmuskdeer_body.svg';
-
-  String get siberianmuskdeerOrgans => 'assets/graphics/anatomy/siberianmuskdeer_organs.svg';
-
-  String get sidestripedjackalBody => 'assets/graphics/anatomy/sidestripedjackal_body.svg';
-
-  String get sidestripedjackalOrgans => 'assets/graphics/anatomy/sidestripedjackal_organs.svg';
-
-  String get sikadeerBody => 'assets/graphics/anatomy/sikadeer_body.svg';
-
-  String get sikadeerOrgans => 'assets/graphics/anatomy/sikadeer_organs.svg';
-
-  String get snowleopardBody => 'assets/graphics/anatomy/snowleopard_body.svg';
-
-  String get snowleopardOrgans => 'assets/graphics/anatomy/snowleopard_organs.svg';
-
-  String get southeasternspanishibexBody => 'assets/graphics/anatomy/southeasternspanishibex_body.svg';
-
-  String get southeasternspanishibexOrgans => 'assets/graphics/anatomy/southeasternspanishibex_organs.svg';
-
-  String get springbokBody => 'assets/graphics/anatomy/springbok_body.svg';
-
-  String get springbokOrgans => 'assets/graphics/anatomy/springbok_organs.svg';
-
-  String get tahrBody => 'assets/graphics/anatomy/tahr_body.svg';
-
-  String get tahrOrgans => 'assets/graphics/anatomy/tahr_organs.svg';
-
-  String get tibetanfoxBody => 'assets/graphics/anatomy/tibetanfox_body.svg';
-
-  String get tibetanfoxOrgans => 'assets/graphics/anatomy/tibetanfox_organs.svg';
-
-  String get warthogBody => 'assets/graphics/anatomy/warthog_body.svg';
-
-  String get warthogOrgans => 'assets/graphics/anatomy/warthog_organs.svg';
-
-  String get waterbuffaloBody => 'assets/graphics/anatomy/waterbuffalo_body.svg';
-
-  String get waterbuffaloOrgans => 'assets/graphics/anatomy/waterbuffalo_organs.svg';
-
-  String get whitetaildeerBody => 'assets/graphics/anatomy/whitetaildeer_body.svg';
-
-  String get whitetaildeerOrgans => 'assets/graphics/anatomy/whitetaildeer_organs.svg';
-
-  String get wildboarBody => 'assets/graphics/anatomy/wildboar_body.svg';
-
-  String get wildboarOrgans => 'assets/graphics/anatomy/wildboar_organs.svg';
-
-  String get wildyakBody => 'assets/graphics/anatomy/wildyak_body.svg';
-
-  String get wildyakOrgans => 'assets/graphics/anatomy/wildyak_organs.svg';
-
-  List<String> get values => [
-        americanalligatorBody,
-        americanalligatorOrgans,
-        axisdeerBody,
-        axisdeerOrgans,
-        bantengBody,
-        bantengOrgans,
-        barasinghaBody,
-        barasinghaOrgans,
-        beceiteibexBody,
-        beceiteibexOrgans,
-        bengaltigerBody,
-        bengaltigerOrgans,
-        bighornsheepBody,
-        bighornsheepOrgans,
-        blackbearBody,
-        blackbearOrgans,
-        blackbuckBody,
-        blackbuckOrgans,
-        blacktaildeerBody,
-        blacktaildeerOrgans,
-        bluesheepBody,
-        bluesheepOrgans,
-        bluewildebeestBody,
-        bluewildebeestOrgans,
-        brownbearBody,
-        brownbearOrgans,
-        capebuffaloBody,
-        capebuffaloOrgans,
-        caribouBody,
-        caribouOrgans,
-        chamoisBody,
-        chamoisOrgans,
-        collaredpeccaryBody,
-        collaredpeccaryOrgans,
-        commonraccoonBody,
-        commonraccoonOrgans,
-        coyoteBody,
-        coyoteOrgans,
-        easterngraykangarooBody,
-        easterngraykangarooOrgans,
-        eurasianlynxBody,
-        eurasianlynxOrgans,
-        europeanbisonBody,
-        europeanbisonOrgans,
-        fallowdeerBody,
-        fallowdeerOrgans,
-        feralgoatBody,
-        feralgoatOrgans,
-        feralpigBody,
-        feralpigOrgans,
-        gemsbokBody,
-        gemsbokOrgans,
-        grayfoxBody,
-        grayfoxOrgans,
-        graywolfBody,
-        graywolfOrgans,
-        gredosibexBody,
-        gredosibexOrgans,
-        grizzlybearBody,
-        grizzlybearOrgans,
-        hogdeerBody,
-        hogdeerOrgans,
-        iberianmouflonBody,
-        iberianmouflonOrgans,
-        iberianwolfBody,
-        iberianwolfOrgans,
-        javanrusaBody,
-        javanrusaOrgans,
-        lesserkuduBody,
-        lesserkuduOrgans,
-        lionBody,
-        lionOrgans,
-        mexicanbobcatBody,
-        mexicanbobcatOrgans,
-        mooseBody,
-        mooseOrgans,
-        mountaingoatBody,
-        mountaingoatOrgans,
-        muledeerBody,
-        muledeerOrgans,
-        nilgaiBody,
-        nilgaiOrgans,
-        northernredmuntjacBody,
-        northernredmuntjacOrgans,
-        plainsbisonBody,
-        plainsbisonOrgans,
-        pronghornBody,
-        pronghornOrgans,
-        pumaBody,
-        pumaOrgans,
-        raccoondogBody,
-        raccoondogOrgans,
-        reddeerBody,
-        reddeerOrgans,
-        redfoxBody,
-        redfoxOrgans,
-        reindeerBody,
-        reindeerOrgans,
-        rockymountainelkBody,
-        rockymountainelkOrgans,
-        roedeerBody,
-        roedeerOrgans,
-        rondaibexBody,
-        rondaibexOrgans,
-        rooseveltelkBody,
-        rooseveltelkOrgans,
-        saltwatercrocodileBody,
-        saltwatercrocodileOrgans,
-        sambarBody,
-        sambarOrgans,
-        siberianmuskdeerBody,
-        siberianmuskdeerOrgans,
-        sidestripedjackalBody,
-        sidestripedjackalOrgans,
-        sikadeerBody,
-        sikadeerOrgans,
-        snowleopardBody,
-        snowleopardOrgans,
-        southeasternspanishibexBody,
-        southeasternspanishibexOrgans,
-        springbokBody,
-        springbokOrgans,
-        tahrBody,
-        tahrOrgans,
-        tibetanfoxBody,
-        tibetanfoxOrgans,
-        warthogBody,
-        warthogOrgans,
-        waterbuffaloBody,
-        waterbuffaloOrgans,
-        whitetaildeerBody,
-        whitetaildeerOrgans,
-        wildboarBody,
-        wildboarOrgans,
-        wildyakBody,
-        wildyakOrgans
+  AssetGenImage get roeDeer => const AssetGenImage('assets/graphics/anatomy/roe_deer.png');
+
+  AssetGenImage get rondaIbex => const AssetGenImage('assets/graphics/anatomy/ronda_ibex.png');
+
+  AssetGenImage get rooseveltElk => const AssetGenImage('assets/graphics/anatomy/roosevelt_elk.png');
+
+  AssetGenImage get saltwaterCrocodile => const AssetGenImage('assets/graphics/anatomy/saltwater_crocodile.png');
+
+  AssetGenImage get sambar => const AssetGenImage('assets/graphics/anatomy/sambar.png');
+
+  AssetGenImage get siberianMuskDeer => const AssetGenImage('assets/graphics/anatomy/siberian_musk_deer.png');
+
+  AssetGenImage get sideStripedJackal => const AssetGenImage('assets/graphics/anatomy/side_striped_jackal.png');
+
+  AssetGenImage get sikaDeer => const AssetGenImage('assets/graphics/anatomy/sika_deer.png');
+
+  AssetGenImage get snowLeopard => const AssetGenImage('assets/graphics/anatomy/snow_leopard.png');
+
+  AssetGenImage get southeasternSpanishIbex =>
+      const AssetGenImage('assets/graphics/anatomy/southeastern_spanish_ibex.png');
+
+  AssetGenImage get springbok => const AssetGenImage('assets/graphics/anatomy/springbok.png');
+
+  AssetGenImage get tahr => const AssetGenImage('assets/graphics/anatomy/tahr.png');
+
+  AssetGenImage get tibetanFox => const AssetGenImage('assets/graphics/anatomy/tibetan_fox.png');
+
+  AssetGenImage get warthog => const AssetGenImage('assets/graphics/anatomy/warthog.png');
+
+  AssetGenImage get waterBuffalo => const AssetGenImage('assets/graphics/anatomy/water_buffalo.png');
+
+  AssetGenImage get whitetailDeer => const AssetGenImage('assets/graphics/anatomy/whitetail_deer.png');
+
+  AssetGenImage get wildBoar => const AssetGenImage('assets/graphics/anatomy/wild_boar.png');
+
+  AssetGenImage get wildYak => const AssetGenImage('assets/graphics/anatomy/wild_yak.png');
+
+  List<AssetGenImage> get values => [
+        americanAlligator,
+        axisDeer,
+        banteng,
+        barasingha,
+        beceiteIbex,
+        bengalTiger,
+        bighornSheep,
+        blackBear,
+        blackbuck,
+        blacktailDeer,
+        blueSheep,
+        blueWildebeest,
+        brownBear,
+        capeBuffalo,
+        caribou,
+        chamois,
+        collaredPeccary,
+        commonRaccoon,
+        coyote,
+        easternGrayKangaroo,
+        eurasianLynx,
+        europeanBison,
+        fallowDeer,
+        feralGoat,
+        feralPig,
+        gemsbok,
+        grayFox,
+        grayWolf,
+        gredosIbex,
+        grizzlyBear,
+        hogDeer,
+        iberianMouflon,
+        iberianWolf,
+        javanRusa,
+        lesserKudu,
+        lion,
+        mexicanBobcat,
+        moose,
+        mountainGoat,
+        muleDeer,
+        nilgai,
+        northernRedMuntjac,
+        plainsBison,
+        pronghorn,
+        puma,
+        raccoonDog,
+        redDeer,
+        redFox,
+        reindeer,
+        rockyMountainElk,
+        roeDeer,
+        rondaIbex,
+        rooseveltElk,
+        saltwaterCrocodile,
+        sambar,
+        siberianMuskDeer,
+        sideStripedJackal,
+        sikaDeer,
+        snowLeopard,
+        southeasternSpanishIbex,
+        springbok,
+        tahr,
+        tibetanFox,
+        warthog,
+        waterBuffalo,
+        whitetailDeer,
+        wildBoar,
+        wildYak
       ];
 }
 

@@ -1,6 +1,7 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/connect/animal_fur_image.dart';
@@ -10,6 +11,8 @@ import 'package:cotwcompanion/widgets/button/switch_icon.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down_item.dart';
 import 'package:cotwcompanion/widgets/indicator/page_indicator.dart';
+import 'package:cotwcompanion/widgets/text/text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class WidgetAnimalFurImages extends StatefulWidget {
@@ -195,7 +198,7 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
     );
   }
 
-  Widget _buildStack() {
+  Widget _buildBody() {
     return Container(
       color: Interface.body,
       child: Column(
@@ -213,12 +216,25 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
     );
   }
 
+  Widget _buildDisclaimer() {
+    return WidgetPadding.h30v20(
+      child: WidgetText(
+        tr("DISCLAIMER_MODEL"),
+        autoSize: false,
+        textAlign: TextAlign.center,
+        color: Interface.disabled,
+        style: Style.normal.s8.w300,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         _buildDropdown(),
-        _buildStack(),
+        _buildBody(),
+        _buildDisclaimer(),
       ],
     );
   }

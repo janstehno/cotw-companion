@@ -48,7 +48,7 @@ class ActivityDetailWeapon extends StatelessWidget {
   Widget _buildDlc() {
     return WidgetParameter(
       text: "DLC",
-      value: tr(HelperJSON.getWeaponDlc(_weapon.id)!.name),
+      value: HelperJSON.getWeaponDlc(_weapon.id)!.name,
     );
   }
 

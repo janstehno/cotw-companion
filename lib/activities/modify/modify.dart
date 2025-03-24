@@ -118,7 +118,9 @@ abstract class ActivityModifyState extends State<ActivityModify> {
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
     return Scaffold(
       appBar: AppBar(),
-      body: _buildStack(),
+      body: SafeArea(
+        child: _buildStack(),
+      ),
     );
   }
 

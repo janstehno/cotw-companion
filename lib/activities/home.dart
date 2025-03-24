@@ -193,17 +193,19 @@ class ActivityHomeState extends State<ActivityHome> {
   Widget _buildWidgets() {
     return Scaffold(
       appBar: AppBar(),
-      body: GestureDetector(
-        onHorizontalDragUpdate: (details) {
-          setState(() {
-            if (details.delta.direction > 1) {
-              _menuOpened = false;
-            } else {
-              _menuOpened = true;
-            }
-          });
-        },
-        child: _buildCenter(),
+      body: SafeArea(
+        child: GestureDetector(
+          onHorizontalDragUpdate: (details) {
+            setState(() {
+              if (details.delta.direction > 1) {
+                _menuOpened = false;
+              } else {
+                _menuOpened = true;
+              }
+            });
+          },
+          child: _buildCenter(),
+        ),
       ),
     );
   }

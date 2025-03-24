@@ -338,15 +338,17 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   Widget _buildLandscapeView() {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        color: Interface.body,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(flex: 2, child: _buildLeft()),
-            Flexible(flex: 3, child: _buildRight()),
-          ],
+      body: SafeArea(
+        child: Container(
+          color: Interface.body,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(flex: 2, child: _buildLeft()),
+              Flexible(flex: 3, child: _buildRight()),
+            ],
+          ),
         ),
       ),
     );

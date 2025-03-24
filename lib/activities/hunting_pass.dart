@@ -158,7 +158,9 @@ class ActivityHuntingPassState extends State<ActivityHuntingPass> {
   Widget _buildWidgets() {
     return Scaffold(
       appBar: AppBar(),
-      body: _buildBody(),
+      body: SafeArea(
+        child: _buildBody(),
+      ),
     );
   }
 

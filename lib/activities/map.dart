@@ -437,9 +437,11 @@ class ActivityMapState extends State<ActivityMap> {
   Widget _buildWidgets() {
     return Scaffold(
       appBar: AppBar(),
-      body: GestureDetector(
-        onLongPress: () => _onLongPress(),
-        child: _buildStack(),
+      body: SafeArea(
+        child: GestureDetector(
+          onLongPress: () => _onLongPress(),
+          child: _buildStack(),
+        ),
       ),
     );
   }

@@ -211,7 +211,9 @@ class ActivityPlannerState extends State<ActivityPlanner> {
   Widget _buildWidgets() {
     return Scaffold(
       appBar: AppBar(),
-      body: _buildStack(),
+      body: SafeArea(
+        child: _buildStack(),
+      ),
     );
   }
 

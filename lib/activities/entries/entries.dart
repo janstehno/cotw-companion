@@ -369,7 +369,9 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     _scaffoldMessengerState = ScaffoldMessenger.of(context);
     return Scaffold(
       appBar: AppBar(),
-      body: _buildBody(),
+      body: SafeArea(
+        child: _buildBody(),
+      ),
     );
   }
 

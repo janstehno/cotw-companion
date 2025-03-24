@@ -70,8 +70,8 @@ class Utils {
     }
   }
 
-  static String removePointZero(double value) {
-    String text = value.toStringAsFixed(3);
+  static String removePointZero(double value, int digits) {
+    String text = value.toStringAsFixed(digits);
     return text.replaceAll(RegExp(r'(\.0+|0+)$'), '');
   }
 

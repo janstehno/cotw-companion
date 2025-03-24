@@ -263,10 +263,10 @@ class Animal extends Translatable {
     }
   }
 
-  String trophyAsString(double trophy) => Utils.removePointZero(trophy);
+  String trophyAsString(double trophy) => Utils.removePointZero(trophy, 2);
 
   String weightAsString(ThresholdType threshold, CategoryType category, UnitType units) =>
-      "${Utils.removePointZero(weight(threshold, category, units))} ${units == UnitType.metric ? tr("KILOGRAMS") : tr("POUNDS")}";
+      "${Utils.removePointZero(weight(threshold, category, units), 2)} ${units == UnitType.metric ? tr("KILOGRAMS") : tr("POUNDS")}";
 
   static Comparator<Animal> sortById = (a, b) => a.id.compareTo(b.id);
 

@@ -314,7 +314,7 @@ class ActivityAddLogsState extends ActivityModifyState {
     return [
       WidgetTitleButtonIcon(
         tr("ANIMAL_TROPHY"),
-        subtext: "${tr("MAX")}: ${maxTrophy == 0 ? "?" : Utils.removePointZero(maxTrophy)}",
+        subtext: "${tr("MAX")}: ${Utils.removePointZero(maxTrophy, 2)}",
         icon: Assets.graphics.icons.menuOpen,
         alignRight: true,
         onTap: () {
@@ -342,7 +342,7 @@ class ActivityAddLogsState extends ActivityModifyState {
     return [
       WidgetTitle(
         tr("ANIMAL_WEIGHT"),
-        subtext: "${tr("MAX")}: ${maxWeight == 0 ? "?" : Utils.removePointZero(maxWeight)}",
+        subtext: "${tr("MAX")}: ${Utils.removePointZero(maxWeight, 2)}",
       ),
       WidgetTextFieldIndicator(
         icon: Assets.graphics.icons.weight,

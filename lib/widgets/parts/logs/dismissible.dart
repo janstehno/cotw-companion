@@ -149,7 +149,7 @@ abstract class WidgetLogsDismissibleState extends WidgetDismissibleState {
       height: _trophyHeight,
       alignment: Alignment.centerRight,
       child: WidgetText(
-        Utils.removePointZero((widget as WidgetLogsDismissible).log.trophy),
+        Utils.removePointZero((widget as WidgetLogsDismissible).log.trophy, 2),
         color: Interface.dark,
         style: Style.normal.s18.w500,
       ),
@@ -184,7 +184,7 @@ abstract class WidgetLogsDismissibleState extends WidgetDismissibleState {
   }
 
   Widget _buildWeightValue() {
-    String number = Utils.removePointZero((widget as WidgetLogsDismissible).log.weight);
+    String number = Utils.removePointZero((widget as WidgetLogsDismissible).log.weight, 2);
     String units = (widget as WidgetLogsDismissible).log.usesImperials ? tr("POUNDS") : tr("KILOGRAMS");
     return WidgetMargin.left(
       10,

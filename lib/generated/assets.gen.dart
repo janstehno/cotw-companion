@@ -1623,6 +1623,8 @@ class $AssetsGraphicsWeaponsGen {
 
   String get grelckdrillingrifle => 'assets/graphics/weapons/grelckdrillingrifle.svg';
 
+  String get hansson3006 => 'assets/graphics/weapons/hansson3006.svg';
+
   String get hawkedgecb70 => 'assets/graphics/weapons/hawkedgecb70.svg';
 
   String get houyirecurvebow => 'assets/graphics/weapons/houyirecurvebow.svg';
@@ -1652,6 +1654,10 @@ class $AssetsGraphicsWeaponsGen {
   String get nordin20sa => 'assets/graphics/weapons/nordin20sa.svg';
 
   String get olssonmodel23308 => 'assets/graphics/weapons/olssonmodel23308.svg';
+
+  String get perry308 => 'assets/graphics/weapons/perry308.svg';
+
+  String get quistreaper762x39 => 'assets/graphics/weapons/quistreaper762x39.svg';
 
   String get rangemaster338 => 'assets/graphics/weapons/rangemaster338.svg';
 
@@ -1713,6 +1719,7 @@ class $AssetsGraphicsWeaponsGen {
         gandharerifle,
         gopi10ggrand,
         grelckdrillingrifle,
+        hansson3006,
         hawkedgecb70,
         houyirecurvebow,
         hudzik50caplock,
@@ -1728,6 +1735,8 @@ class $AssetsGraphicsWeaponsGen {
         mRtensson65mm,
         nordin20sa,
         olssonmodel23308,
+        perry308,
+        quistreaper762x39,
         rangemaster338,
         razorbacklitecb60,
         rhino454,

@@ -363,7 +363,10 @@ class Graphics {
     "WEAPON:GOPI_10G_GRAND": Assets.graphics.weapons.gopi10ggrand,
     "WEAPON:FORS_ELITE_300": Assets.graphics.weapons.forselite300,
     "WEAPON:JOHANSSON_450": Assets.graphics.weapons.johansson450,
-    "WEAPON:VALLGARDA_375": Assets.graphics.weapons.vallgarda375
+    "WEAPON:VALLGARDA_375": Assets.graphics.weapons.vallgarda375,
+    "WEAPON:PERRY_308": Assets.graphics.weapons.perry308,
+    "WEAPON:HANSSON_3006": Assets.graphics.weapons.hansson3006,
+    "WEAPON:QUIST_REAPER_762X39": Assets.graphics.weapons.quistreaper762x39,
   };
 
   static final Map<String, String> _callers = {

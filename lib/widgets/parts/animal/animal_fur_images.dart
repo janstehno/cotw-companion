@@ -36,7 +36,6 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
   late AnimalFurImage _selectedFur;
   late List<String> _selectedFurImages;
 
-  int _selectedImageIndex = 0;
   CategoryType _selectedCategory = CategoryType.male;
 
   @override
@@ -57,7 +56,6 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
   void _updateSelectedFur(AnimalFurImage furImage) {
     setState(() {
       _selectedFur = furImage;
-      _selectedImageIndex = 0;
       _selectedCategory = furImage.hasBoth
           ? CategoryType.male
           : furImage.hasMale
@@ -83,12 +81,6 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
     setState(() {
       _selectedCategory = _selectedCategory == CategoryType.male ? CategoryType.female : CategoryType.male;
       _updateSelectedFurImages();
-    });
-  }
-
-  void _selectVersion(int index) {
-    setState(() {
-      _selectedImageIndex = index;
     });
   }
 
@@ -162,9 +154,9 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
     );
   }
 
-  Widget _buildImage() {
+  Widget _buildImage(int index) {
     return Image.asset(
-      _selectedFurImages[_selectedImageIndex],
+      _selectedFurImages[index],
       height: 320,
       alignment: Alignment.center,
       fit: BoxFit.contain,
@@ -178,8 +170,7 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
       child: PageView.builder(
         controller: _pageController,
         itemCount: _selectedFurImages.length,
-        onPageChanged: (index) => _selectVersion(index),
-        itemBuilder: (context, index) => _buildImage(),
+        itemBuilder: (context, index) => _buildImage(index),
       ),
     );
   }

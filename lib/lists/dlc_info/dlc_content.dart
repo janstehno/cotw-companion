@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
@@ -44,7 +45,7 @@ class ListDlcContent extends StatelessWidget {
   }
 
   List<Widget> _listItems() {
-    return _list.map((e) => _buildItem(e)).toList();
+    return _list.sorted((a, b) => _getName(a).compareTo(_getName(b))).map((e) => _buildItem(e)).toList();
   }
 
   Widget _buildWidgets() {

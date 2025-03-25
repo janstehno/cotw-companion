@@ -38,11 +38,6 @@ class ActivityHomeState extends State<ActivityHome> {
           style: Style.condensed.s24.w600,
         ),
         WidgetText(
-          tr("NOT_OFFICIAL").toUpperCase(),
-          color: Interface.alwaysDark.withValues(alpha: 0.8),
-          style: Style.normal.s8.w300,
-        ),
-        WidgetText(
           Values.version,
           color: Interface.alwaysDark,
           style: Style.normal.s14.w500,
@@ -100,6 +95,19 @@ class ActivityHomeState extends State<ActivityHome> {
           Expanded(child: _buildName()),
           _buildLinks(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildUnofficial() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+      alignment: Alignment.centerRight,
+      color: Interface.alwaysDark.withAlpha(128),
+      child: WidgetText(
+        tr("NOT_OFFICIAL").toUpperCase(),
+        color: Interface.primary,
+        style: Style.normal.s8.w500,
       ),
     );
   }
@@ -170,6 +178,7 @@ class ActivityHomeState extends State<ActivityHome> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildHeader(),
+            _buildUnofficial(),
             Spacer(),
             _buildSwipe(),
             _buildDisclaimer(),

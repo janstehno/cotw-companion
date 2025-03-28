@@ -32,30 +32,27 @@ class WidgetAnimalFurs extends StatelessWidget {
           background: Interface.rarityCommon,
           onTap: () => _onToggled(0),
         ),
-        WidgetTagTap.small(
-          value: tr("RARITY_UNCOMMON"),
-          color: Interface.alwaysDark,
-          background: Interface.rarityUncommon,
-          onTap: () => _onToggled(1),
-        ),
-        WidgetTagTap.small(
-          value: tr("RARITY_RARE"),
-          color: Interface.alwaysDark,
-          background: Interface.rarityRare,
-          onTap: () => _onToggled(2),
-        ),
-        WidgetTagTap.small(
-          value: tr("RARITY_VERY_RARE"),
-          color: Interface.alwaysDark,
-          background: Interface.rarityVeryRare,
-          onTap: () => _onToggled(3),
-        ),
-        WidgetTagTap.small(
-          value: tr("RARITY_MISSION"),
-          color: Interface.alwaysDark,
-          background: Interface.rarityMission,
-          onTap: () => _onToggled(4),
-        ),
+        if (_animal.hasUncommonFurs)
+          WidgetTagTap.small(
+            value: tr("RARITY_UNCOMMON"),
+            color: Interface.alwaysDark,
+            background: Interface.rarityUncommon,
+            onTap: () => _onToggled(1),
+          ),
+        if (_animal.hasRareFurs)
+          WidgetTagTap.small(
+            value: tr("RARITY_RARE"),
+            color: Interface.alwaysDark,
+            background: Interface.rarityRare,
+            onTap: () => _onToggled(2),
+          ),
+        if (_animal.hasMissionFurs)
+          WidgetTagTap.small(
+            value: tr("RARITY_MISSION"),
+            color: Interface.alwaysDark,
+            background: Interface.rarityMission,
+            onTap: () => _onToggled(3),
+          ),
       ],
     );
   }

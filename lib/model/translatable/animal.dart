@@ -1,3 +1,4 @@
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
@@ -170,7 +171,21 @@ class Animal extends Translatable {
 
   bool get isFromDlc => _dlc;
 
-  bool get hasGO => _maxTrophyGO != 0.0;
+  bool get hasUncommonFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == 1);
+
+  bool get hasRareFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == 2);
+
+  bool get hasMissionFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == 3);
+
+  bool get hasGO => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == 4);
+
+  bool get hasFeedZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 0));
+
+  bool get hasDrinkZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 1));
+
+  bool get hasRestZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 2));
+
+  bool get hasOtherZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 4));
 
   bool get hasSenses => _sight > 0 || _hearing > 0 || _smell > 0;
 

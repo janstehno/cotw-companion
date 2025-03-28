@@ -37,7 +37,7 @@ class HelperFilter {
     FilterKey.callersEffectiveRange: {150: true, 200: true, 250: true, 500: true},
     FilterKey.logsGender: {1: true, 0: true},
     FilterKey.logsTrophyRating: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
-    FilterKey.logsFurRarity: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true},
+    FilterKey.logsFurRarity: {0: true, 1: true, 2: true, 3: true, 4: true},
     FilterKey.logsTrophyScoreMin: 0.0,
     FilterKey.logsTrophyScoreMax: 9999.999,
     FilterKey.logsSort: {

@@ -156,22 +156,15 @@ class ListLogsStatsState extends State<ListLogsStats> {
         ),
       if (_furCount[3]! > 0)
         WidgetTagSpecial(
-          identifier: tr("RARITY_VERY_RARE"),
-          value: _furCount[3].toString(),
-          color: Interface.alwaysDark.withValues(alpha: 0.8),
-          background: Interface.rarityVeryRare,
-        ),
-      if (_furCount[4]! > 0)
-        WidgetTagSpecial(
           identifier: tr("RARITY_MISSION"),
-          value: _furCount[4].toString(),
+          value: _furCount[3].toString(),
           color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.rarityMission,
         ),
-      if (_furCount[5]! > 0)
+      if (_furCount[4]! > 0)
         WidgetTagSpecial(
           identifier: HelperJSON.getFur(Values.greatOneId)!.name,
-          value: _furCount[5].toString(),
+          value: _furCount[4].toString(),
           color: Interface.alwaysDark.withValues(alpha: 0.8),
           background: Interface.rarityGreatOne,
         ),

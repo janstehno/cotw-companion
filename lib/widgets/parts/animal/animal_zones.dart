@@ -27,26 +27,30 @@ class WidgetAnimalZones extends StatelessWidget {
         runSpacing: 5,
         alignment: WrapAlignment.center,
         children: [
-          WidgetTag.small(
-            value: tr("ANIMAL_OTHER"),
-            color: Interface.light,
-            background: Interface.zoneOther,
-          ),
-          WidgetTag.small(
-            value: tr("ANIMAL_FEED"),
-            color: Interface.alwaysDark,
-            background: Interface.zoneFeed,
-          ),
-          WidgetTag.small(
-            value: tr("ANIMAL_DRINK"),
-            color: Interface.alwaysDark,
-            background: Interface.zoneDrink,
-          ),
-          WidgetTag.small(
-            value: tr("ANIMAL_REST"),
-            color: Interface.alwaysDark,
-            background: Interface.zoneRest,
-          )
+          if (_animal.hasOtherZones)
+            WidgetTag.small(
+              value: tr("ANIMAL_OTHER"),
+              color: Interface.light,
+              background: Interface.zoneOther,
+            ),
+          if (_animal.hasFeedZones)
+            WidgetTag.small(
+              value: tr("ANIMAL_FEED"),
+              color: Interface.alwaysDark,
+              background: Interface.zoneFeed,
+            ),
+          if (_animal.hasDrinkZones)
+            WidgetTag.small(
+              value: tr("ANIMAL_DRINK"),
+              color: Interface.alwaysDark,
+              background: Interface.zoneDrink,
+            ),
+          if (_animal.hasRestZones)
+            WidgetTag.small(
+              value: tr("ANIMAL_REST"),
+              color: Interface.alwaysDark,
+              background: Interface.zoneRest,
+            )
         ],
       ),
     );

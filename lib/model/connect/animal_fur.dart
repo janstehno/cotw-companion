@@ -52,10 +52,8 @@ class AnimalFur {
       case 2:
         return Interface.rarityRare;
       case 3:
-        return Interface.rarityVeryRare;
-      case 4:
         return Interface.rarityMission;
-      case 5:
+      case 4:
         return Interface.rarityGreatOne;
       default:
         return Interface.disabled;
@@ -64,16 +62,14 @@ class AnimalFur {
 
   static String rarityName(int rarity) {
     switch (rarity) {
-      case 0:
-        return tr("RARITY_COMMON");
-      case 1:
-        return tr("RARITY_UNCOMMON");
+      case 3:
+        return tr("RARITY_MISSION");
       case 2:
         return tr("RARITY_RARE");
-      case 3:
-        return tr("RARITY_VERY_RARE");
+      case 1:
+        return tr("RARITY_UNCOMMON");
       default:
-        return tr("RARITY_MISSION");
+        return tr("RARITY_COMMON");
     }
   }
 

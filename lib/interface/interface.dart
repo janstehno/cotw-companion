@@ -59,7 +59,6 @@ class Interface {
   static const Color trophyDiamond = blue;
   static const Color rarityUncommon = lightGreen;
   static const Color rarityRare = blue;
-  static const Color rarityVeryRare = purple;
   static const Color rarityMission = red;
   static const Color rarityGreatOne = orange;
   static const Color zoneFeed = lightGreen;

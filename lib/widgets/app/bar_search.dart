@@ -7,16 +7,19 @@ import 'package:cotwcompanion/widgets/text/text_field.dart';
 import 'package:flutter/material.dart';
 
 class WidgetSearchBar extends StatelessWidget {
+  final String? _hintText;
   final TextEditingController _controller;
   final Function? _onFilter;
   final bool _filterChanged;
 
   const WidgetSearchBar({
     super.key,
+    String? hintText,
     required TextEditingController controller,
     Function? onFilterTap,
     bool filterChanged = false,
-  })  : _controller = controller,
+  })  : _hintText = hintText,
+        _controller = controller,
         _onFilter = onFilterTap,
         _filterChanged = filterChanged;
 
@@ -26,7 +29,7 @@ class WidgetSearchBar extends StatelessWidget {
     return Container(
       color: Colors.transparent,
       padding: const EdgeInsets.only(right: 15),
-      child: WidgetTextField(textController: _controller),
+      child: WidgetTextField(textController: _controller, hintText: _hintText),
     );
   }
 

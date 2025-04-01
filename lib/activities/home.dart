@@ -9,6 +9,7 @@ import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/button/button_swipe.dart';
 import 'package:cotwcompanion/widgets/fullscreen/home_menu.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
+import 'package:cotwcompanion/widgets/parts/home/search.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/text/text_pattern.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -103,10 +104,10 @@ class ActivityHomeState extends State<ActivityHome> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
       alignment: Alignment.centerRight,
-      color: Interface.alwaysDark.withAlpha(128),
+      color: Interface.primaryDark,
       child: WidgetText(
         tr("NOT_OFFICIAL").toUpperCase(),
-        color: Interface.primary,
+        color: Interface.alwaysDark,
         style: Style.normal.s8.w500,
       ),
     );
@@ -164,11 +165,43 @@ class ActivityHomeState extends State<ActivityHome> {
     );
   }
 
-  Widget _buildCenter() {
+  Widget _buildMenu() {
     Size screenSize = MediaQuery.of(context).size;
     EdgeInsets screenPadding = MediaQuery.of(context).padding;
     double menuWidth = screenSize.width > 500 ? 0.6 * screenSize.width : screenSize.width;
 
+    return AnimatedPositioned(
+      width: menuWidth,
+      height: screenSize.height - screenPadding.bottom,
+      left: _menuOpened ? 0 : -menuWidth,
+      duration: const Duration(milliseconds: 200),
+      child: WidgetHomeMenu(callback: () {
+        setState(() {
+          _menuOpened = false;
+        });
+      }),
+    );
+  }
+
+  Widget _buildInnerStack() {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Spacer(),
+            _buildSwipe(),
+            _buildDisclaimer(),
+          ],
+        ),
+        WidgetHomeSearch(),
+      ],
+    );
+  }
+
+  Widget _buildStack() {
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -179,28 +212,17 @@ class ActivityHomeState extends State<ActivityHome> {
           children: [
             _buildHeader(),
             _buildUnofficial(),
-            Spacer(),
-            _buildSwipe(),
-            _buildDisclaimer(),
+            Expanded(child: _buildInnerStack()),
           ],
         ),
-        AnimatedPositioned(
-          width: menuWidth,
-          height: screenSize.height - screenPadding.bottom,
-          left: _menuOpened ? 0 : -menuWidth,
-          duration: const Duration(milliseconds: 200),
-          child: WidgetHomeMenu(callback: () {
-            setState(() {
-              _menuOpened = false;
-            });
-          }),
-        ),
+        _buildMenu(),
       ],
     );
   }
 
   Widget _buildWidgets() {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: SafeArea(
         child: GestureDetector(
@@ -213,7 +235,7 @@ class ActivityHomeState extends State<ActivityHome> {
               }
             });
           },
-          child: _buildCenter(),
+          child: _buildStack(),
         ),
       ),
     );

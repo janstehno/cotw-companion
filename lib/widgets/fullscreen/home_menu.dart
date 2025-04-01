@@ -2,7 +2,6 @@ import 'package:cotwcompanion/activities/about.dart';
 import 'package:cotwcompanion/activities/entries/logs.dart';
 import 'package:cotwcompanion/activities/hunting_pass.dart';
 import 'package:cotwcompanion/activities/need_zones.dart';
-import 'package:cotwcompanion/activities/search.dart';
 import 'package:cotwcompanion/activities/settings.dart';
 import 'package:cotwcompanion/builders/discussions.dart';
 import 'package:cotwcompanion/builders/enumerators.dart';
@@ -49,7 +48,6 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
     ["WILDLIFE", Assets.graphics.icons.wildlife, const ListAnimals()],
     ["WEAPONS", Assets.graphics.icons.weapon, const ListWeapons()],
     ["CALLERS", Assets.graphics.icons.caller, const ListCallers()],
-    ["SEARCH", Assets.graphics.icons.search, const ActivitySearch()],
   ];
 
   final List<List<dynamic>> _tools = [
@@ -108,7 +106,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         child: WidgetText(
           tr("GENERAL").toUpperCase(),
           color: Interface.disabled,
-          style: Style.normal.s16.w700,
+          style: Style.condensed.s16.w600,
         ),
       ),
       ..._general.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2), context)),
@@ -125,7 +123,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         child: WidgetText(
           tr("TOOLS").toUpperCase(),
           color: Interface.disabled,
-          style: Style.normal.s16.w700,
+          style: Style.condensed.s16.w600,
         ),
       ),
       ..._tools.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2), context)),
@@ -142,7 +140,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         child: WidgetText(
           tr("OTHER").toUpperCase(),
           color: Interface.disabled,
-          style: Style.normal.s16.w700,
+          style: Style.condensed.s16.w600,
         ),
       ),
       ..._other.map((e) => _buildMenuItem(e.elementAt(0), e.elementAt(1), e.elementAt(2), context)),
@@ -159,7 +157,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         child: WidgetText(
           tr("APP").toUpperCase(),
           color: Interface.disabled,
-          style: Style.normal.s16.w700,
+          style: Style.condensed.s16.w600,
         ),
       ),
       WidgetSectionMenu(

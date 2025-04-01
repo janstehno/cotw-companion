@@ -16,11 +16,11 @@ class Values {
   static const double title = 75;
   static const double subtitle = 65;
   static const double section = 65;
+  static const double searchItem = 45;
   static const double menu = 40;
   static const double entry = 22;
 
   static const double dropDown = 65;
-  static const double searchItem = 65;
   static const double textField = 65;
 
   static const double searchBar = 40;

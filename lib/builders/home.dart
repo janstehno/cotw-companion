@@ -51,8 +51,9 @@ class BuilderHomeState extends BuilderBuilderState {
     HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsFursImages, animalsReserves, animalsZones,
         callers, dlcs, furs, reserves, weapons, weaponsAmmo, missions);
     List<Log> logs = snapshot.data!["logs"] ?? [];
+    Map<String, dynamic> filters = snapshot.data!["filters"] ?? [];
     HelperLog.setLogs(logs);
-    HelperFilter.initializeFilters();
+    HelperFilter.setFilters(filters);
   }
 
   @override

@@ -3,8 +3,10 @@ import 'package:cotwcompanion/activities/entries/entries_reorderable.dart';
 import 'package:cotwcompanion/activities/help/counters.dart';
 import 'package:cotwcompanion/activities/modify/add/counters.dart';
 import 'package:cotwcompanion/helpers/enumerator.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
 import 'package:cotwcompanion/model/exportable/enumerator.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
+import 'package:cotwcompanion/widgets/app/bar_search.dart';
 import 'package:cotwcompanion/widgets/bar/bar_menu_item.dart';
 import 'package:cotwcompanion/widgets/parts/enumerators/counter.dart';
 import 'package:flutter/material.dart';
@@ -33,33 +35,27 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
   late final HelperEnumerator _helperEnumerator;
 
   @override
+  void initState() {
+    _helperEnumerator = (widget as ActivityCounters).helperEnumerator;
+    filter = HelperFilter.filterCounters;
+    super.initState();
+  }
+
+  @override
   List<Counter> initialItems() {
     return (widget as ActivityCounters).enumerator.counters.sorted(Counter.sortByOrder);
   }
 
   @override
-  List<Counter> filteredItems() {
-    return initialItems();
-  }
-
-  @override
-  void initState() {
-    _helperEnumerator = (widget as ActivityCounters).helperEnumerator;
-    super.initState();
-  }
-
-  @override
   void removeAll() {
-    setState(() {
-      _helperEnumerator.removeAllCounters((widget as ActivityCounters).enumerator);
-      filter();
-    });
+    _helperEnumerator.removeAllCounters((widget as ActivityCounters).enumerator);
+    filterItems();
   }
 
   @override
   void onReorder(int oldIndex, int newIndex) {
     _helperEnumerator.changeOrderOfCounters((widget as ActivityCounters).enumerator, oldIndex, newIndex);
-    filter();
+    filterItems();
   }
 
   @override
@@ -71,7 +67,7 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
       enumerator: (widget as ActivityCounters).enumerator,
       helperEnumerator: _helperEnumerator,
       context: context,
-      callback: filter,
+      callback: filterItems,
     );
   }
 
@@ -84,11 +80,14 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
         ActivityAddCounters(
           helperEnumerator: (widget as ActivityCounters).helperEnumerator,
           enumerator: (widget as ActivityCounters).enumerator,
-          onSuccess: filter,
+          onSuccess: filterItems,
         ),
       ),
     ];
   }
+
+  @override
+  WidgetSearchBar? buildSearchBar() => null;
 
   @override
   WidgetAppBar buildAppBar() {

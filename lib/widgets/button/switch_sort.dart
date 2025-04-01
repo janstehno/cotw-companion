@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 
 class WidgetSwitchSort extends WidgetSwitchIcon {
   final bool _isAscended;
-  final int _orderNumber;
+  final int? _orderNumber;
 
   const WidgetSwitchSort(
     super.icon, {
     super.key,
     required bool isAscended,
-    required int orderNumber,
+    int? orderNumber,
     super.color,
     super.background,
     super.activeColor,
@@ -36,7 +36,7 @@ class WidgetSwitchSort extends WidgetSwitchIcon {
 
   Widget _buildOrderNumber() {
     return WidgetText(
-      _orderNumber.toString(),
+      ((_orderNumber ?? -1) + 1).toString(),
       color: iconColor,
       style: Style.normal.s14.w500,
       textAlign: TextAlign.center,
@@ -46,7 +46,7 @@ class WidgetSwitchSort extends WidgetSwitchIcon {
   Widget _buildSortIcon() {
     return WidgetIcon.withSize(
       icon,
-      size: (Values.tapSize / 5) * 2 - 2,
+      size: (Values.tapSize / 5) * 2 - 4,
       color: iconColor,
     );
   }

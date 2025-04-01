@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class Mission extends Describable {
   final int _reserveId;
   final MissionType _type;
-  final int _difficulty;
+  final MissionDifficulty _difficulty;
   final String _person;
 
   Mission({
@@ -16,7 +16,7 @@ class Mission extends Describable {
     required super.description,
     required int reserveId,
     required MissionType type,
-    required int difficulty,
+    required MissionDifficulty difficulty,
     required String person,
   })  : _reserveId = reserveId,
         _type = type,
@@ -25,43 +25,44 @@ class Mission extends Describable {
 
   MissionType get type => _type;
 
-  int get difficulty => _difficulty;
+  MissionDifficulty get difficulty => _difficulty;
 
   String get person => tr(_person);
 
   int get reserveId => _reserveId;
 
   String get typeAsString {
-    return _type == MissionType.main ? tr("MISSION_MAIN") : tr("MISSION_SIDE");
+    switch (_type) {
+      case MissionType.main:
+        return tr("MISSION_MAIN");
+      case MissionType.side:
+        return tr("MISSION_SIDE");
+    }
   }
 
   String get difficultyAsString {
     switch (_difficulty) {
-      case 1:
+      case MissionDifficulty.easy:
         return tr("DIFFICULTY_EASY");
-      case 2:
+      case MissionDifficulty.mediocre:
         return tr("DIFFICULTY_MEDIOCRE");
-      case 3:
+      case MissionDifficulty.hard:
         return tr("DIFFICULTY_HARD");
-      case 4:
+      case MissionDifficulty.veryHard:
         return tr("DIFFICULTY_VERY_HARD");
-      default:
-        return tr("NONE");
     }
   }
 
   Color get difficultyColor {
     switch (_difficulty) {
-      case 1:
+      case MissionDifficulty.easy:
         return Interface.green;
-      case 2:
+      case MissionDifficulty.mediocre:
         return Interface.yellow;
-      case 3:
+      case MissionDifficulty.hard:
         return Interface.orange;
-      case 4:
+      case MissionDifficulty.veryHard:
         return Interface.red;
-      default:
-        return Colors.transparent;
     }
   }
 
@@ -78,7 +79,7 @@ class Mission extends Describable {
       type: MissionType.values.elementAt(json['TYPE']),
       person: json['PERSON'],
       reserveId: json['RESERVE_ID'],
-      difficulty: json['DIFFICULTY'],
+      difficulty: MissionDifficulty.values.elementAt(json['DIFFICULTY']),
       description: json['OBJECTIVES'],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/lists/fur_info/fur_animals.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/fur.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
@@ -19,11 +20,9 @@ class ActivityDetailFur extends StatelessWidget {
   List<Widget> _listFurAnimals(BuildContext context) {
     bool showPerCent = Provider.of<Settings>(context, listen: false).furRarityPerCent;
     return [
-      ListFurAnimals(_fur, rarity: 0, showPerCent: showPerCent),
-      ListFurAnimals(_fur, rarity: 1, showPerCent: showPerCent),
-      ListFurAnimals(_fur, rarity: 2, showPerCent: showPerCent),
-      ListFurAnimals(_fur, rarity: 3, showPerCent: showPerCent),
-      ListFurAnimals(_fur, rarity: 4, showPerCent: showPerCent),
+      ListFurAnimals(_fur, rarity: FurRarity.common, showPerCent: showPerCent),
+      ListFurAnimals(_fur, rarity: FurRarity.uncommon, showPerCent: showPerCent),
+      ListFurAnimals(_fur, rarity: FurRarity.rare, showPerCent: showPerCent),
     ];
   }
 

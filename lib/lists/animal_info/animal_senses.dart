@@ -12,7 +12,7 @@ class ListAnimalSenses extends StatelessWidget {
     super.key,
   }) : _animal = animal;
 
-  Widget _buildSense(SenseType sense) {
+  Widget _buildSense(Sense sense) {
     return WidgetAnimalSense(
       _animal,
       sense: sense,
@@ -26,9 +26,9 @@ class ListAnimalSenses extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (_animal.senseStrength(SenseType.sight) > 0) _buildSense(SenseType.sight),
-          if (_animal.senseStrength(SenseType.hearing) > 0) _buildSense(SenseType.hearing),
-          if (_animal.senseStrength(SenseType.smell) > 0) _buildSense(SenseType.smell),
+          if (_animal.senseStrength(Sense.sight) > 0) _buildSense(Sense.sight),
+          if (_animal.senseStrength(Sense.hearing) > 0) _buildSense(Sense.hearing),
+          if (_animal.senseStrength(Sense.smell) > 0) _buildSense(Sense.smell),
         ],
       ),
     );

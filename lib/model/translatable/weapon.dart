@@ -70,19 +70,6 @@ class Weapon extends Translatable {
     return levels.sorted((a, b) => a.compareTo(b));
   }
 
-  FilterKey typeToFilterKey() {
-    switch (type) {
-      case WeaponType.rifle:
-        return FilterKey.weaponsRifles;
-      case WeaponType.shotgun:
-        return FilterKey.weaponsShotguns;
-      case WeaponType.handgun:
-        return FilterKey.weaponsHandguns;
-      case WeaponType.bow:
-        return FilterKey.weaponsBows;
-    }
-  }
-
   String getNameForRecommendedWeaponsList(Locale locale, int? ammoId) =>
       type == WeaponType.shotgun || type == WeaponType.bow ? getNameAmmo(locale, ammoId) : name;
 

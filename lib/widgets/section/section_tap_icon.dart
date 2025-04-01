@@ -10,7 +10,7 @@ class WidgetSectionTapIcon extends WidgetSectionTap {
     super.text, {
     super.key,
     required String icon,
-    Color? color,
+    super.color,
     super.background,
     required super.onTap,
   })  : _icon = icon,

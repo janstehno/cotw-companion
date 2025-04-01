@@ -126,9 +126,7 @@ class ActivityAddLogsState extends ActivityModifyState {
 
   void _focus() {
     FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
+    if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
   }
 
   void _trophyListener() {
@@ -310,7 +308,7 @@ class ActivityAddLogsState extends ActivityModifyState {
 
   List<Widget> _listTrophy() {
     double maxTrophy = selectedAnimal.trophy(
-        ThresholdType.max, selectedAnimalFur.id == Values.greatOneId ? CategoryType.go : CategoryType.male);
+        ThresholdLevel.max, selectedAnimalFur.id == Values.greatOneId ? CategoryType.go : CategoryType.male);
     return [
       WidgetTitleButtonIcon(
         tr("ANIMAL_TROPHY"),
@@ -336,9 +334,9 @@ class ActivityAddLogsState extends ActivityModifyState {
 
   List<Widget> _listWeight() {
     double maxWeight = selectedAnimal.weight(
-        ThresholdType.max,
+        ThresholdLevel.max,
         selectedAnimalFur.id == Values.greatOneId ? CategoryType.go : CategoryType.male,
-        usesImperials ? UnitType.imperial : UnitType.metric);
+        usesImperials ? Units.imperial : Units.metric);
     return [
       WidgetTitle(
         tr("ANIMAL_WEIGHT"),

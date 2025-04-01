@@ -36,7 +36,6 @@ class Settings extends ChangeNotifier {
   ];
 
   late int _language;
-  late int _compactLogbook;
   late bool _darkMode;
   late bool _imperialUnits;
   late bool _mapZonesType;
@@ -44,15 +43,12 @@ class Settings extends ChangeNotifier {
   late bool _mapZonesCount;
   late bool _mapPerformanceMode;
   late bool _bestWeaponsForAnimal;
-  late bool _entryDate;
-  late bool _trophyLodgeEntry;
   late bool _trophyWeightDistribution;
   late bool _furRarityPerCent;
   late SharedPreferences _sharedPreferences;
 
   Settings({
     required language,
-    required compactLogbook,
     required bool darkMode,
     required imperialUnits,
     required mapZonesType,
@@ -60,13 +56,10 @@ class Settings extends ChangeNotifier {
     required mapZonesCount,
     required mapPerformanceMode,
     required bestWeaponsForAnimal,
-    required entryDate,
-    required trophyLodgeEntry,
     required trophyWeightDistribution,
     required furRarityPerCent,
   }) {
     _language = language;
-    _compactLogbook = compactLogbook;
     _darkMode = darkMode;
     _imperialUnits = imperialUnits;
     _mapZonesType = mapZonesType;
@@ -74,13 +67,9 @@ class Settings extends ChangeNotifier {
     _mapZonesCount = mapZonesCount;
     _mapPerformanceMode = mapPerformanceMode;
     _bestWeaponsForAnimal = bestWeaponsForAnimal;
-    _entryDate = entryDate;
-    _trophyLodgeEntry = trophyLodgeEntry;
     _trophyWeightDistribution = trophyWeightDistribution;
     _furRarityPerCent = furRarityPerCent;
   }
-
-  int get compactLogbook => _compactLogbook;
 
   bool get darkMode => _darkMode;
 
@@ -95,10 +84,6 @@ class Settings extends ChangeNotifier {
   bool get mapPerformanceMode => _mapPerformanceMode;
 
   bool get bestWeaponsForAnimal => _bestWeaponsForAnimal;
-
-  bool get entryDate => _entryDate;
-
-  bool get trophyLodgeEntry => _trophyLodgeEntry;
 
   bool get trophyWeightDistribution => _trophyWeightDistribution;
 
@@ -133,18 +118,6 @@ class Settings extends ChangeNotifier {
     _sharedPreferences = await SharedPreferences.getInstance();
     _language = languageId;
     await _sharedPreferences.setInt("language", languageId);
-    notifyListeners();
-  }
-
-  Future<void> changeCompactLogbook() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    _compactLogbook--;
-    if (_compactLogbook == 0) {
-      _compactLogbook = 3;
-      await _sharedPreferences.setInt("compactLogbook", _compactLogbook);
-    } else {
-      await _sharedPreferences.setInt("compactLogbook", _compactLogbook);
-    }
     notifyListeners();
   }
 
@@ -204,30 +177,6 @@ class Settings extends ChangeNotifier {
     } else {
       _bestWeaponsForAnimal = true;
       await _sharedPreferences.setBool("bestWeaponsForAnimal", true);
-    }
-    notifyListeners();
-  }
-
-  Future<void> changeEntryDate() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    if (_entryDate == true) {
-      _entryDate = false;
-      await _sharedPreferences.setBool("entryDate", false);
-    } else {
-      _entryDate = true;
-      await _sharedPreferences.setBool("entryDate", true);
-    }
-    notifyListeners();
-  }
-
-  Future<void> changeTrophyLodgeEntry() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    if (_trophyLodgeEntry == true) {
-      _trophyLodgeEntry = false;
-      await _sharedPreferences.setBool("trophyLodgeEntry", false);
-    } else {
-      _trophyLodgeEntry = true;
-      await _sharedPreferences.setBool("trophyLodgeEntry", true);
     }
     notifyListeners();
   }

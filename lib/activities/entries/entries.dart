@@ -1,4 +1,6 @@
 import 'package:collection/collection.dart';
+import 'package:cotwcompanion/activities/filter/filter.dart';
+import 'package:cotwcompanion/filters/filter.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/search_controller.dart';
@@ -30,26 +32,27 @@ abstract class ActivityEntries extends StatefulWidget {
 
 abstract class ActivityEntriesState<I extends Exportable> extends State<ActivityEntries> {
   final TextEditingControllerWorkaround _controller = TextEditingControllerWorkaround();
-  final double menuHeight = Values.menuBar;
+
+  late final Filter<I> filter;
 
   late ScaffoldMessengerState _scaffoldMessengerState;
+
+  List<I> _initialItems = [];
+
+  List<I> filteredItems = [];
 
   bool _yesNoOpened = false;
   bool fileOptionsOpened = false;
 
-  List<I> _initialItems = [];
-
-  List<I> _filteredItems = [];
-
   List<I> get items => _initialItems;
 
-  List<I> get filtered => _filteredItems;
+  ActivityFilter<I>? get activityFilter => null;
 
   TextEditingControllerWorkaround get controller => _controller;
 
   @override
   void initState() {
-    controller.addListener(() => filter());
+    controller.addListener(() => filterItems());
     super.initState();
   }
 
@@ -61,23 +64,31 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
 
   void focus() {
     FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
+    if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
   }
 
   List<I> initialItems();
-
-  List<I> filteredItems();
 
   void _initialize() {
     _initialItems = initialItems();
   }
 
-  void filter() {
+  void filterItems() {
     setState(() {
-      _filteredItems = filteredItems();
+      filteredItems = filter.filter(items, controller.text, context);
     });
+  }
+
+  void buildFilter() {
+    Navigator.push(context, MaterialPageRoute(builder: (e) => activityFilter!));
+  }
+
+  Widget buildEntry(int i, I item);
+
+  List<Widget> _listEntries() {
+    if (_initialItems.isEmpty) _initialize();
+    if (filteredItems.isEmpty) filterItems();
+    return filteredItems.mapIndexed((i, e) => buildEntry(i, e)).toList();
   }
 
   void removeAll();
@@ -264,7 +275,7 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
         _buildFileOptionsImport(),
         _buildFileOptionsDelete(),
       ],
-      height: menuHeight,
+      height: Values.menuBar,
       menuOpened: fileOptionsOpened,
     );
   }
@@ -297,10 +308,6 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     return const SizedBox.shrink();
   }
 
-  List<Widget> listFilters() => [];
-
-  void buildFilter() {}
-
   WidgetAppBar buildAppBar() {
     return WidgetAppBar(
       tr(widget.title),
@@ -308,16 +315,14 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     );
   }
 
-  WidgetSearchBar? buildSearchBar() => null;
-
-  Widget buildEntry(int i, dynamic item);
+  WidgetSearchBar? buildSearchBar();
 
   Widget _buildMenuBar() {
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
         Container(
-          height: menuHeight,
+          height: Values.menuBar,
           width: MediaQuery.of(context).size.width,
           color: Interface.search,
         ),
@@ -326,25 +331,23 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     );
   }
 
-  List<Widget> listItems() {
-    if (_initialItems.isEmpty) _initialize();
-    if (_filteredItems.isEmpty) filter();
-    return _filteredItems.mapIndexed((i, item) => buildEntry(i, item)).toList();
+  List<Widget> buildBars() {
+    return [
+      buildAppBar(),
+      buildSearchBar() ?? const SizedBox.shrink(),
+    ];
   }
 
   Widget buildItems(List<Widget> widgets) {
     return ListView.builder(
-      itemCount: 2 + _filteredItems.length,
+      itemCount: filteredItems.length,
       itemBuilder: (context, i) {
-        if (i == 0) return buildAppBar();
-        if (i == 1) return buildSearchBar() ?? const SizedBox.shrink();
-        return widgets.elementAt(i - 2);
+        return widgets.elementAt(i);
       },
     );
   }
 
   Widget _buildBody() {
-    List<Widget> widgets = listItems();
     return Stack(
       children: [
         WidgetMargin.bottom(
@@ -352,7 +355,14 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
           background: Interface.body,
           alignment: Alignment.topCenter,
           child: WidgetScrollBar(
-            child: buildItems(widgets),
+            child: Column(
+              children: [
+                ...buildBars(),
+                Expanded(
+                  child: buildItems(_listEntries()),
+                ),
+              ],
+            ),
           ),
         ),
         Positioned(

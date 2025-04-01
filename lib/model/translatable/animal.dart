@@ -99,11 +99,11 @@ class Animal extends Translatable {
 
   double get diamond => _diamond;
 
-  double trophy(ThresholdType threshold, CategoryType category) {
+  double trophy(ThresholdLevel threshold, CategoryType category) {
     switch (threshold) {
-      case ThresholdType.min:
+      case ThresholdLevel.min:
         return _minTrophy(category);
-      case ThresholdType.max:
+      case ThresholdLevel.max:
         return _maxTrophy(category);
     }
   }
@@ -132,34 +132,34 @@ class Animal extends Translatable {
 
   bool get femaleTrophy => _maxTrophyFemale != 0.0;
 
-  double weight(ThresholdType threshold, CategoryType category, UnitType units) {
+  double weight(ThresholdLevel threshold, CategoryType category, Units units) {
     switch (threshold) {
-      case ThresholdType.min:
+      case ThresholdLevel.min:
         return _minWeight(category, units);
-      case ThresholdType.max:
+      case ThresholdLevel.max:
         return _maxWeight(category, units);
     }
   }
 
-  double _minWeight(CategoryType category, UnitType units) {
+  double _minWeight(CategoryType category, Units units) {
     switch (category) {
       case CategoryType.male:
-        return units == UnitType.metric ? _minWeightMale : _minWeightMale * 2.2046;
+        return units == Units.metric ? _minWeightMale : _minWeightMale * 2.2046;
       case CategoryType.female:
-        return units == UnitType.metric ? _minWeightFemale : _minWeightFemale * 2.2046;
+        return units == Units.metric ? _minWeightFemale : _minWeightFemale * 2.2046;
       case CategoryType.go:
-        return units == UnitType.metric ? _minWeightGO : _minWeightGO * 2.2046;
+        return units == Units.metric ? _minWeightGO : _minWeightGO * 2.2046;
     }
   }
 
-  double _maxWeight(CategoryType category, UnitType units) {
+  double _maxWeight(CategoryType category, Units units) {
     switch (category) {
       case CategoryType.male:
-        return units == UnitType.metric ? _maxWeightMale : _maxWeightMale * 2.2046;
+        return units == Units.metric ? _maxWeightMale : _maxWeightMale * 2.2046;
       case CategoryType.female:
-        return units == UnitType.metric ? _maxWeightFemale : _maxWeightFemale * 2.2046;
+        return units == Units.metric ? _maxWeightFemale : _maxWeightFemale * 2.2046;
       case CategoryType.go:
-        return units == UnitType.metric ? _maxWeightGO : _maxWeightGO * 2.2046;
+        return units == Units.metric ? _maxWeightGO : _maxWeightGO * 2.2046;
     }
   }
 
@@ -171,13 +171,13 @@ class Animal extends Translatable {
 
   bool get isFromDlc => _dlc;
 
-  bool get hasUncommonFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == 1);
+  bool get hasUncommonFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == FurRarity.uncommon);
 
-  bool get hasRareFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == 2);
+  bool get hasRareFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == FurRarity.rare);
 
-  bool get hasMissionFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == 3);
+  bool get hasMissionFurs => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == FurRarity.mission);
 
-  bool get hasGO => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == 4);
+  bool get hasGO => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == FurRarity.greatOne);
 
   bool get hasFeedZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 0));
 
@@ -252,13 +252,13 @@ class Animal extends Translatable {
     }
   }
 
-  int senseStrength(SenseType sense) {
+  int senseStrength(Sense sense) {
     switch (sense) {
-      case SenseType.sight:
+      case Sense.sight:
         return _sight;
-      case SenseType.hearing:
+      case Sense.hearing:
         return _hearing;
-      case SenseType.smell:
+      case Sense.smell:
         return _smell;
     }
   }
@@ -280,8 +280,8 @@ class Animal extends Translatable {
 
   String trophyAsString(double trophy) => Utils.removePointZero(trophy, 2);
 
-  String weightAsString(ThresholdType threshold, CategoryType category, UnitType units) =>
-      "${Utils.removePointZero(weight(threshold, category, units), 2)} ${units == UnitType.metric ? tr("KILOGRAMS") : tr("POUNDS")}";
+  String weightAsString(ThresholdLevel threshold, CategoryType category, Units units) =>
+      "${Utils.removePointZero(weight(threshold, category, units), 2)} ${units == Units.metric ? tr("KILOGRAMS") : tr("POUNDS")}";
 
   static Comparator<Animal> sortById = (a, b) => a.id.compareTo(b.id);
 

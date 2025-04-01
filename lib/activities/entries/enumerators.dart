@@ -28,39 +28,33 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState<Enumerato
   late final HelperEnumerator _helperEnumerator;
 
   @override
+  void initState() {
+    _helperEnumerator = (widget as ActivityEnumerators).helperEnumerator;
+    filter = HelperFilter.filterEnumerators;
+    super.initState();
+  }
+
+  @override
   List<Enumerator> initialItems() {
     return _helperEnumerator.enumerators;
   }
 
   @override
-  List<Enumerator> filteredItems() {
-    return HelperFilter.filterEnumerators(items, controller.text);
-  }
-
-  @override
-  void initState() {
-    _helperEnumerator = (widget as ActivityEnumerators).helperEnumerator;
-    super.initState();
-  }
-
-  @override
   void removeAll() {
-    setState(() {
-      _helperEnumerator.removeAllEnumerators();
-      filter();
-    });
+    _helperEnumerator.removeAllEnumerators();
+    filterItems();
   }
 
   @override
   void onReorder(int oldIndex, int newIndex) {
     _helperEnumerator.changeOrderOfEnumerators(oldIndex, newIndex);
-    filter();
+    filterItems();
   }
 
   @override
   Future<bool> fileLoaded() async {
     bool imported = await _helperEnumerator.importFile();
-    if (imported) filter();
+    if (imported) filterItems();
     return imported;
   }
 
@@ -75,21 +69,19 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState<Enumerato
       enumerator: item,
       helperEnumerator: _helperEnumerator,
       context: context,
-      callback: filter,
+      callback: filterItems,
     );
   }
 
   @override
   List<WidgetMenuBarItem> listMenuBarItems() {
     return [
-      buildMenuHelp(
-        const ActivityHelpEnumerators(),
-      ),
+      buildMenuHelp(const ActivityHelpEnumerators()),
       buildMenuFileOptions(),
       buildMenuAdd(
         ActivityAddEnumerators(
           helperEnumerator: _helperEnumerator,
-          onSuccess: filter,
+          onSuccess: filterItems,
         ),
       ),
     ];

@@ -1,9 +1,10 @@
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/describable/describable.dart';
 
 class Dlc extends Describable {
-  final int _type;
+  final DlcType _type;
   final String _date;
-  List<dynamic> _reserve;
+  int? _reserve;
   List<dynamic> _animals;
   List<dynamic> _weapons;
   List<dynamic> _callers;
@@ -12,9 +13,9 @@ class Dlc extends Describable {
     required super.id,
     required super.name,
     required super.description,
-    required int type,
+    required DlcType type,
     required String date,
-    required List<dynamic> reserve,
+    required int? reserve,
     required List<dynamic> animals,
     required List<dynamic> weapons,
     required List<dynamic> callers,
@@ -27,9 +28,9 @@ class Dlc extends Describable {
 
   String get date => _date;
 
-  int get type => _type;
+  DlcType get type => _type;
 
-  List<int> get reserve => _reserve.cast();
+  int? get reserve => _reserve;
 
   List<int> get animals => _animals.cast();
 
@@ -42,14 +43,16 @@ class Dlc extends Describable {
       id: json['ID'],
       name: json['NAME'],
       date: json['DATE'],
-      type: json['TYPE'],
+      type: DlcType.values.elementAt(json['TYPE']),
       description: json['DESCRIPTION'] ?? [],
-      reserve: json['CONTENT']?['RESERVE'] ?? [],
+      reserve: json['CONTENT']?['RESERVE'],
       animals: json['CONTENT']?['ANIMALS'] ?? [],
       weapons: json['CONTENT']?['WEAPONS'] ?? [],
       callers: json['CONTENT']?['CALLERS'] ?? [],
     );
   }
+
+  static Comparator<Dlc> sortById = (a, b) => a.id.compareTo(b.id);
 
   static Comparator<Dlc> sortByDate = (a, b) => b.date.compareTo(a.date);
 }

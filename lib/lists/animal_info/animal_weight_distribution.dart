@@ -21,8 +21,8 @@ class ListAnimalWeightDistribution extends StatelessWidget {
   })  : _animal = animal,
         _showDistribution = showDistribution;
 
-  Widget _buildMaleMaxWeight(UnitType units) {
-    String max = _animal.weightAsString(ThresholdType.max, CategoryType.male, units);
+  Widget _buildMaleMaxWeight(Units units) {
+    String max = _animal.weightAsString(ThresholdLevel.max, CategoryType.male, units);
 
     return WidgetAnimalValue(
       icon: Assets.graphics.icons.genderMale,
@@ -32,9 +32,9 @@ class ListAnimalWeightDistribution extends StatelessWidget {
     );
   }
 
-  Widget _buildMaleWeight(UnitType units) {
-    String min = _animal.weightAsString(ThresholdType.min, CategoryType.male, units);
-    String max = _animal.weightAsString(ThresholdType.max, CategoryType.male, units);
+  Widget _buildMaleWeight(Units units) {
+    String min = _animal.weightAsString(ThresholdLevel.min, CategoryType.male, units);
+    String max = _animal.weightAsString(ThresholdLevel.max, CategoryType.male, units);
 
     return WidgetAnimalValueRange(
       icon: Assets.graphics.icons.genderMale,
@@ -45,8 +45,8 @@ class ListAnimalWeightDistribution extends StatelessWidget {
     );
   }
 
-  Widget _buildFemaleMaxWeight(UnitType units) {
-    String max = _animal.weightAsString(ThresholdType.max, CategoryType.female, units);
+  Widget _buildFemaleMaxWeight(Units units) {
+    String max = _animal.weightAsString(ThresholdLevel.max, CategoryType.female, units);
 
     return WidgetAnimalValue(
       icon: Assets.graphics.icons.genderFemale,
@@ -56,9 +56,9 @@ class ListAnimalWeightDistribution extends StatelessWidget {
     );
   }
 
-  Widget _buildFemaleWeight(UnitType units) {
-    String min = _animal.weightAsString(ThresholdType.min, CategoryType.female, units);
-    String max = _animal.weightAsString(ThresholdType.max, CategoryType.female, units);
+  Widget _buildFemaleWeight(Units units) {
+    String min = _animal.weightAsString(ThresholdLevel.min, CategoryType.female, units);
+    String max = _animal.weightAsString(ThresholdLevel.max, CategoryType.female, units);
 
     return WidgetAnimalValueRange(
       icon: Assets.graphics.icons.genderFemale,
@@ -69,9 +69,9 @@ class ListAnimalWeightDistribution extends StatelessWidget {
     );
   }
 
-  Widget _buildGOWeight(UnitType units) {
-    String min = _animal.weightAsString(ThresholdType.min, CategoryType.go, units);
-    String max = _animal.weightAsString(ThresholdType.max, CategoryType.go, units);
+  Widget _buildGOWeight(Units units) {
+    String min = _animal.weightAsString(ThresholdLevel.min, CategoryType.go, units);
+    String max = _animal.weightAsString(ThresholdLevel.max, CategoryType.go, units);
 
     return WidgetAnimalValueRange(
       icon: Assets.graphics.icons.trophyGreatOne,
@@ -82,7 +82,7 @@ class ListAnimalWeightDistribution extends StatelessWidget {
     );
   }
 
-  List<Widget> _listWidgets(UnitType units) {
+  List<Widget> _listWidgets(Units units) {
     if (_showDistribution) {
       return [
         if (_animal.hasGO) _buildGOWeight(units),
@@ -98,7 +98,7 @@ class ListAnimalWeightDistribution extends StatelessWidget {
 
   Widget _buildWidgets(BuildContext context) {
     bool imperialUnits = Provider.of<Settings>(context, listen: false).imperialUnits;
-    UnitType units = imperialUnits ? UnitType.imperial : UnitType.metric;
+    Units units = imperialUnits ? Units.imperial : Units.metric;
 
     return WidgetPadding.a30(
       child: Column(

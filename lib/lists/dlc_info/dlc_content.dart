@@ -9,24 +9,24 @@ import 'package:flutter/material.dart';
 
 class ListDlcContent extends StatelessWidget {
   final List<int> _list;
-  final ItemType _type;
+  final Item _type;
 
   const ListDlcContent({
     super.key,
     required List<int> list,
-    required ItemType type,
+    required Item type,
   })  : _list = list,
         _type = type;
 
   String _getName(int i) {
     switch (_type) {
-      case ItemType.reserve:
+      case Item.reserve:
         return HelperJSON.getReserve(i)!.name;
-      case ItemType.animal:
+      case Item.animal:
         return HelperJSON.getAnimal(i)!.name;
-      case ItemType.weapon:
+      case Item.weapon:
         return HelperJSON.getWeapon(i)!.name;
-      case ItemType.caller:
+      case Item.caller:
         return HelperJSON.getCaller(i)!.name;
       default:
         throw UnimplementedError();

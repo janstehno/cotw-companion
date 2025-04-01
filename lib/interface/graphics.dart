@@ -459,13 +459,13 @@ class Graphics {
 
   static String getAnimalAnatomy(Animal animal) => _anatomy[animal.asset] ?? _svgPlaceholder;
 
-  static String getSenseIcon(SenseType sense) {
+  static String getSenseIcon(Sense sense) {
     switch (sense) {
-      case SenseType.sight:
+      case Sense.sight:
         return Assets.graphics.icons.senseSight;
-      case SenseType.smell:
+      case Sense.smell:
         return Assets.graphics.icons.senseSmell;
-      case SenseType.hearing:
+      case Sense.hearing:
         return Assets.graphics.icons.senseHearing;
     }
   }

@@ -1,21 +1,21 @@
 import 'package:cotwcompanion/activities/about.dart';
 import 'package:cotwcompanion/activities/entries/logs.dart';
+import 'package:cotwcompanion/activities/hunting_pass.dart';
 import 'package:cotwcompanion/activities/need_zones.dart';
 import 'package:cotwcompanion/activities/search.dart';
 import 'package:cotwcompanion/activities/settings.dart';
 import 'package:cotwcompanion/builders/discussions.dart';
 import 'package:cotwcompanion/builders/enumerators.dart';
-import 'package:cotwcompanion/builders/hunting_pass.dart';
 import 'package:cotwcompanion/builders/issues.dart';
 import 'package:cotwcompanion/builders/multimounts.dart';
 import 'package:cotwcompanion/builders/planner.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
-import 'package:cotwcompanion/lists/home/callers.dart';
-import 'package:cotwcompanion/lists/home/reserves.dart';
-import 'package:cotwcompanion/lists/home/weapons.dart';
-import 'package:cotwcompanion/lists/home/wildlife.dart';
+import 'package:cotwcompanion/lists/general/animals.dart';
+import 'package:cotwcompanion/lists/general/callers.dart';
+import 'package:cotwcompanion/lists/general/reserves.dart';
+import 'package:cotwcompanion/lists/general/weapons.dart';
 import 'package:cotwcompanion/lists/other/dlcs.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
@@ -46,7 +46,7 @@ class WidgetHomeMenu extends StatefulWidget {
 class WidgetHomeMenuState extends State<WidgetHomeMenu> {
   final List<List<dynamic>> _general = [
     ["RESERVES", Assets.graphics.icons.reserve, const ListReserves()],
-    ["WILDLIFE", Assets.graphics.icons.wildlife, const ListWildlife()],
+    ["WILDLIFE", Assets.graphics.icons.wildlife, const ListAnimals()],
     ["WEAPONS", Assets.graphics.icons.weapon, const ListWeapons()],
     ["CALLERS", Assets.graphics.icons.caller, const ListCallers()],
     ["SEARCH", Assets.graphics.icons.search, const ActivitySearch()],
@@ -57,7 +57,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
     ["TROPHY_LODGE", Assets.graphics.icons.trophyLodge, const ActivityLogs(trophyLodge: true)],
     ["LOGBOOK", Assets.graphics.icons.catchBook, const ActivityLogs(trophyLodge: false)],
     ["COUNTERS", Assets.graphics.icons.number, const BuilderEnumerators()],
-    ["HUNTING_PASS", Assets.graphics.icons.pass, const BuilderHuntingPass()],
+    ["HUNTING_PASS", Assets.graphics.icons.pass, const ActivityHuntingPass()],
     ["PLANNER", Assets.graphics.icons.planner, const BuilderPlanner()],
   ];
 

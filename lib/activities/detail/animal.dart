@@ -7,6 +7,7 @@ import 'package:cotwcompanion/lists/animal_info/animal_senses.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_trophy_score_distribution.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_trophy_scores.dart';
 import 'package:cotwcompanion/lists/animal_info/animal_weight_distribution.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
@@ -46,12 +47,12 @@ class ActivityDetailAnimal extends StatefulWidget {
 class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
   Settings get _settings => Provider.of<Settings>(context, listen: false);
 
-  int _toggledRarity = -1;
+  FurRarity? _toggledRarity;
 
-  void _toggleRarity(int rarity) {
+  void _toggleRarity(FurRarity rarity) {
     setState(() {
       if (_toggledRarity == rarity) {
-        _toggledRarity = -1;
+        _toggledRarity = null;
       } else {
         _toggledRarity = rarity;
       }

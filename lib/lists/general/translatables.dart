@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:cotwcompanion/activities/filter.dart';
+import 'package:cotwcompanion/activities/filter/filter.dart';
+import 'package:cotwcompanion/filters/filter.dart';
 import 'package:cotwcompanion/model/translatable/translatable.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
@@ -20,30 +21,20 @@ abstract class ListTranslatable extends StatefulWidget {
 abstract class ListTranslatableState<I extends Translatable> extends State<ListTranslatable> {
   final TextEditingController controller = TextEditingController();
 
+  late final Filter<I> filter;
+
   List<I> _initialItems = [];
 
   List<I> _filteredItems = [];
 
   List<I> get items => _initialItems;
 
+  ActivityFilter<I>? get activityFilter => null;
+
   @override
   void initState() {
-    controller.addListener(() => _filter());
+    controller.addListener(() => filterItems());
     super.initState();
-  }
-
-  List<I> initialItems();
-
-  List<I> filteredItems();
-
-  void _initialize() {
-    _initialItems = initialItems();
-  }
-
-  void _filter() {
-    setState(() {
-      _filteredItems = filteredItems();
-    });
   }
 
   void focus() {
@@ -51,22 +42,27 @@ abstract class ListTranslatableState<I extends Translatable> extends State<ListT
     if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
   }
 
-  bool isFilterChanged();
+  List<I> initialItems();
 
-  List<Widget> listFilter();
+  void _initialize() {
+    _initialItems = initialItems();
+  }
+
+  void filterItems() {
+    setState(() {
+      _filteredItems = filter.filter(items, controller.text, context);
+    });
+  }
 
   void _buildFilter() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (e) => ActivityFilter(filters: listFilter(), filter: _filter)),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (e) => activityFilter!));
   }
 
   Widget buildEntry(int index, I item);
 
   List<Widget> _listEntries() {
     if (_initialItems.isEmpty) _initialize();
-    if (_filteredItems.isEmpty) _filter();
+    if (_filteredItems.isEmpty) filterItems();
     return _filteredItems.mapIndexed((i, e) => buildEntry(i, e)).toList();
   }
 
@@ -77,8 +73,8 @@ abstract class ListTranslatableState<I extends Translatable> extends State<ListT
         context: context,
       ),
       searchController: controller,
-      filterChanged: isFilterChanged(),
-      onFilterTap: _buildFilter,
+      filterChanged: filter.isActive(),
+      onFilterTap: activityFilter != null ? _buildFilter : null,
       children: _listEntries(),
     );
   }

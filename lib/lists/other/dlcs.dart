@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:cotwcompanion/activities/detail/dlc.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/model/describable/dlc.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
@@ -18,7 +19,7 @@ class ListDlcs extends StatelessWidget {
   List<Dlc> get _dlcs => HelperJSON.dlcs.sorted(Dlc.sortByDate);
 
   void onTap(BuildContext context, Dlc dlc) {
-    if (dlc.type != -1) {
+    if (dlc.type != DlcType.general) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (e) => ActivityDetailDlc(dlc)),
@@ -29,7 +30,7 @@ class ListDlcs extends StatelessWidget {
   Widget _buildDlc(int i, Dlc dlc, BuildContext context) {
     return WidgetSectionTap(
       dlc.name,
-      color: dlc.type != -1 ? Interface.dark : Interface.disabled,
+      color: dlc.type == DlcType.general ? Interface.disabled : Interface.dark,
       background: Utils.backgroundAt(i),
       onTap: () => onTap(context, dlc),
     );

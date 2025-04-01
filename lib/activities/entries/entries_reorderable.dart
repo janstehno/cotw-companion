@@ -16,13 +16,7 @@ abstract class ActivityEntriesReorderableState<I extends Exportable> extends Act
   Widget buildItems(List<Widget> widgets) {
     return ReorderableListView.builder(
       key: GlobalKey(),
-      header: Column(
-        children: [
-          buildAppBar(),
-          buildSearchBar() ?? const SizedBox.shrink(),
-        ],
-      ),
-      itemCount: filtered.length,
+      itemCount: filteredItems.length,
       itemBuilder: (context, i) {
         return widgets.elementAt(i);
       },

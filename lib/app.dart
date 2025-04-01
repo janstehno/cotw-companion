@@ -15,7 +15,6 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   int language = sharedPreferences.getInt("language") ?? 0;
-  int compactLogbook = sharedPreferences.getInt("compactLogbook") ?? 3;
   bool darkMode = sharedPreferences.getBool("darkMode") ?? false;
   bool imperialUnits = sharedPreferences.getBool("imperialUnits") ?? false;
   bool mapZonesType = sharedPreferences.getBool("mapZonesType") ?? false;
@@ -23,8 +22,6 @@ void main() async {
   bool mapZonesCount = sharedPreferences.getBool("mapZonesCount") ?? false;
   bool mapPerformanceMode = sharedPreferences.getBool("mapPerformanceMode") ?? false;
   bool bestWeaponsForAnimal = sharedPreferences.getBool("bestWeaponsForAnimal") ?? false;
-  bool entryDate = sharedPreferences.getBool("entryDate") ?? true;
-  bool trophyLodgeEntry = sharedPreferences.getBool("trophyLodgeEntry") ?? false;
   bool trophyWeightDistribution = sharedPreferences.getBool("trophyWeightDistribution") ?? false;
   bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
   Interface.setColors(darkMode);
@@ -39,7 +36,6 @@ void main() async {
       child: ChangeNotifierProvider(
         create: (BuildContext context) => Settings(
           language: language,
-          compactLogbook: compactLogbook,
           darkMode: darkMode,
           imperialUnits: imperialUnits,
           mapZonesType: mapZonesType,
@@ -47,8 +43,6 @@ void main() async {
           mapZonesCount: mapZonesCount,
           mapPerformanceMode: mapPerformanceMode,
           bestWeaponsForAnimal: bestWeaponsForAnimal,
-          entryDate: entryDate,
-          trophyLodgeEntry: trophyLodgeEntry,
           trophyWeightDistribution: trophyWeightDistribution,
           furRarityPerCent: furRarityPerCent,
         ),

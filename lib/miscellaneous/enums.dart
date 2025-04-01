@@ -1,4 +1,4 @@
-enum ItemType {
+enum Item {
   reserve,
   animal,
   caller,
@@ -29,13 +29,15 @@ enum WeaponType {
   bow,
 }
 
-enum AnatomyPart {
-  body,
-  organs,
-  bones,
+enum DlcType {
+  reserve,
+  weapon,
+  equipment,
+  species,
+  general,
 }
 
-enum SenseType {
+enum Sense {
   sight,
   hearing,
   smell,
@@ -46,12 +48,19 @@ enum MissionType {
   side,
 }
 
-enum UnitType {
+enum MissionDifficulty {
+  easy,
+  mediocre,
+  hard,
+  veryHard,
+}
+
+enum Units {
   metric,
   imperial,
 }
 
-enum ThresholdType {
+enum ThresholdLevel {
   min,
   max,
 }
@@ -93,43 +102,96 @@ enum Supporter {
 }
 
 enum FilterKey {
-  reservesCountMin,
-  reservesCountMax,
-  animalsClass,
-  animalsDifficulty,
-  weaponsAnimalClass,
-  weaponsMagMin,
-  weaponsMagMax,
-  weaponsRifles,
-  weaponsShotguns,
-  weaponsHandguns,
-  weaponsBows,
-  callersEffectiveRange,
+  animalClass,
+  animalDifficulty,
+  weaponType,
+  weaponAnimalClass,
+  weaponMagMin,
+  weaponMagMax,
+  missionType,
+  missionDifficulty,
   logsGender,
   logsTrophyRating,
   logsFurRarity,
   logsTrophyScoreMin,
   logsTrophyScoreMax,
-  logsSort,
-  loadoutsAmmoMin,
-  loadoutsAmmoMax,
-  loadoutsCallersMin,
-  loadoutsCallersMax,
-  missionType,
-  missionDifficulty,
-  huntingPassRandomReserve,
-  huntingPassRandomAnimal,
-  huntingPassRandomWeapon,
-  huntingPassRandomAmmo,
-  huntingPassRandomDistance,
-  huntingPassRandomAllowedDlc,
-  huntingPassRandomAllowedDog,
-  huntingPassRandomAllowedCallers,
-  huntingPassRandomAllowedScopes,
-  huntingPassRandomAllowedStructures,
-  huntingPassRandomAllowedFastTravel,
-  huntingPassRandomAllowedAtv,
-  huntingPassRandomAllowedDayTime,
+  huntingPassGeneral,
+  huntingPassWeapons,
+  huntingPassReserveDlcs,
+  huntingPassWeaponDlcs,
+  logsTrophyLodge,
+  logsView,
+  logsDate,
+  logsInformation,
+  logsViewEntry,
+}
+
+enum TrophyRating {
+  none,
+  bronze,
+  silver,
+  gold,
+  diamond,
+  greatOne,
+}
+
+enum FurRarity {
+  common,
+  uncommon,
+  rare,
+  mission,
+  greatOne,
+}
+
+enum Gender {
+  male,
+  female,
+}
+
+enum HuntingPassOption {
+  randomReserve,
+  randomAnimal,
+  randomWeapon,
+  randomAmmo,
+  randomDistance,
+  randomAllowedDog,
+  randomAllowedCallers,
+  randomAllowedScopes,
+  randomAllowedStructures,
+  randomAllowedAtv,
+  randomAllowedFastTravel,
+  randomAllowedDayTime,
+}
+
+enum FilterOperation {
+  or,
+  and,
+  not,
+}
+
+enum FilterType {
+  animals,
+  weapons,
+  huntingPass,
+  logs,
+  reserves,
+  callers,
+  enumerators,
+  counters,
+}
+
+enum LogsView {
+  trophyLodge,
+  date,
+}
+
+enum SortKey {
+  az,
+  date,
+  trophyScore,
+  trophyRating,
+  furRarity,
+  gender,
 }
 
 enum RepositoryData {

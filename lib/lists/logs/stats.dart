@@ -49,7 +49,7 @@ class ListLogsStatsState extends State<ListLogsStats> {
     for (Log log in widget.logs) {
       if (log.isInLodge) _trophyLodgeCount += 1;
       _updateTrophy(log.trophyRatingWithGO);
-      _updateFur(log.animalFur!.rarity);
+      _updateFur(log.animalFur!.rarity.index);
     }
   }
 

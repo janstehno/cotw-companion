@@ -5,16 +5,15 @@ import 'package:cotwcompanion/activities/detail/fur.dart';
 import 'package:cotwcompanion/activities/detail/mission.dart';
 import 'package:cotwcompanion/activities/detail/reserve.dart';
 import 'package:cotwcompanion/activities/detail/weapon.dart';
+import 'package:cotwcompanion/filters/search.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
-import 'package:cotwcompanion/helpers/filter.dart';
-import 'package:cotwcompanion/helpers/json.dart';
-import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
 import 'package:cotwcompanion/model/translatable/ammo.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/caller.dart';
 import 'package:cotwcompanion/model/translatable/fur.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
+import 'package:cotwcompanion/model/translatable/translatable.dart';
 import 'package:cotwcompanion/model/translatable/weapon.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
@@ -33,27 +32,14 @@ class ActivitySearch extends StatefulWidget {
 
 class ActivitySearchState extends State<ActivitySearch> {
   final TextEditingController _controller = TextEditingController();
-
-  List<Reserve> get _reserves => HelperFilter.filterReserves(HelperJSON.reserves, _controller.text);
-
-  List<Animal> get _animals => HelperFilter.filterAnimals(HelperJSON.animals, _controller.text, context);
-
-  List<Fur> get _furs => HelperFilter.filterFurs(HelperJSON.furs, _controller.text);
-
-  List<Weapon> get _weapons => HelperFilter.filterWeapons(HelperJSON.weapons, _controller.text);
-
-  List<Ammo> get _ammo => HelperFilter.filterAmmo(HelperJSON.ammo, _controller.text);
-
-  List<Caller> get _callers => HelperFilter.filterCallers(HelperJSON.callers, _controller.text);
-
-  List<Mission> get _missions => HelperFilter.filterMissions(HelperJSON.missions, _controller.text);
+  final FilterSearch _filter = FilterSearch();
 
   int _itemIndex = 0;
   int _itemLimit = 0;
 
   @override
   void initState() {
-    _controller.addListener(() => _filter());
+    _controller.addListener(() => _filterItems());
     super.initState();
   }
 
@@ -62,10 +48,10 @@ class ActivitySearchState extends State<ActivitySearch> {
     if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
   }
 
-  void _filter() {
+  void _filterItems() {
     setState(() {
       _itemIndex = 0;
-      _itemLimit = _controller.text.length * 2;
+      _itemLimit = 1;
     });
   }
 
@@ -80,7 +66,8 @@ class ActivitySearchState extends State<ActivitySearch> {
   }
 
   List<Widget> _listReserves() {
-    return _reserves.map((e) => _buildReserve(e)).take(_itemLimit).toList();
+    List<Translatable> reserves = _filter.filterReserves(_controller.text);
+    return reserves.map((e) => _buildReserve(e as Reserve)).take(_itemLimit).toList();
   }
 
   Widget _buildAnimal(Animal animal) {
@@ -94,7 +81,8 @@ class ActivitySearchState extends State<ActivitySearch> {
   }
 
   List<Widget> _listAnimals() {
-    return _animals.map((e) => _buildAnimal(e)).take(_itemLimit).toList();
+    List<Translatable> animals = _filter.filterAnimals(_controller.text);
+    return animals.map((e) => _buildAnimal(e as Animal)).take(_itemLimit).toList();
   }
 
   Widget _buildFur(Fur fur) {
@@ -108,7 +96,12 @@ class ActivitySearchState extends State<ActivitySearch> {
   }
 
   List<Widget> _listFurs() {
-    return _furs.skipWhile((e) => e.id == Values.greatOneId).map((e) => _buildFur(e)).take(_itemLimit).toList();
+    List<Translatable> furs = _filter.filterFurs(_controller.text);
+    return furs
+        .skipWhile((e) => (e as Fur).isMission || e.isGreatOne)
+        .map((e) => _buildFur(e as Fur))
+        .take(_itemLimit)
+        .toList();
   }
 
   Widget _buildWeapon(Weapon weapon) {
@@ -122,7 +115,8 @@ class ActivitySearchState extends State<ActivitySearch> {
   }
 
   List<Widget> _listWeapons() {
-    return _weapons.map((e) => _buildWeapon(e)).take(_itemLimit).toList();
+    List<Translatable> weapons = _filter.filterWeapons(_controller.text);
+    return weapons.map((e) => _buildWeapon(e as Weapon)).take(_itemLimit).toList();
   }
 
   Widget _buildAmmo(Ammo ammo) {
@@ -136,7 +130,8 @@ class ActivitySearchState extends State<ActivitySearch> {
   }
 
   List<Widget> _listAmmo() {
-    return _ammo.map((e) => _buildAmmo(e)).take(_itemLimit).toList();
+    List<Translatable> ammo = _filter.filterAmmo(_controller.text);
+    return ammo.map((e) => _buildAmmo(e as Ammo)).take(_itemLimit).toList();
   }
 
   Widget _buildCaller(Caller caller) {
@@ -150,7 +145,8 @@ class ActivitySearchState extends State<ActivitySearch> {
   }
 
   List<Widget> _listCallers() {
-    return _callers.map((e) => _buildCaller(e)).take(_itemLimit).toList();
+    List<Translatable> callers = _filter.filterCallers(_controller.text);
+    return callers.map((e) => _buildCaller(e as Caller)).take(_itemLimit).toList();
   }
 
   Widget _buildMission(Mission mission) {
@@ -165,7 +161,8 @@ class ActivitySearchState extends State<ActivitySearch> {
   }
 
   List<Widget> _listMissions() {
-    return _missions.map((e) => _buildMission(e)).take(_itemLimit).toList();
+    List<Translatable> missions = _filter.filterMissions(_controller.text);
+    return missions.map((e) => _buildMission(e as Mission)).take(_itemLimit).toList();
   }
 
   List<Widget> _listFiltered() {

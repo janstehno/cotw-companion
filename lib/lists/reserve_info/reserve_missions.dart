@@ -1,15 +1,11 @@
-import 'package:cotwcompanion/generated/assets.gen.dart';
-import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/activities/filter/filter.dart';
+import 'package:cotwcompanion/activities/filter/missions.dart';
+import 'package:cotwcompanion/filters/missions.dart';
 import 'package:cotwcompanion/helpers/json.dart';
-import 'package:cotwcompanion/interface/interface.dart';
-import 'package:cotwcompanion/lists/home/translatables.dart';
-import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/lists/general/translatables.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
-import 'package:cotwcompanion/widgets/filter/picker_text.dart';
 import 'package:cotwcompanion/widgets/parts/mission/mission.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 
 class ListReserveMissions extends ListTranslatable {
   final Reserve _reserve;
@@ -28,54 +24,20 @@ class ListReserveMissions extends ListTranslatable {
 
 class ListReserveMissionsState extends ListTranslatableState<Mission> {
   @override
+  void initState() {
+    filter = FilterMissions();
+    super.initState();
+  }
+
+  @override
+  ActivityFilter<Mission> get activityFilter => ActivityFilterMissions(
+        filter: filter as FilterMissions,
+        onConfirm: filterItems,
+      );
+
+  @override
   List<Mission> initialItems() {
     return HelperJSON.getReserveMissions((widget as ListReserveMissions).reserve.id);
-  }
-
-  @override
-  List<Mission> filteredItems() {
-    return HelperFilter.filterMissions(items, controller.text);
-  }
-
-  @override
-  bool isFilterChanged() => HelperFilter.missionFiltersChanged();
-
-  @override
-  List<Widget> listFilter() {
-    return [
-      WidgetFilterPickerText(
-        FilterKey.missionType,
-        text: tr("TYPE"),
-        icon: Assets.graphics.icons.missions,
-        labels: [
-          tr("MISSION_MAIN"),
-          tr("MISSION_SIDE"),
-        ],
-      ),
-      WidgetFilterPickerText(
-        FilterKey.missionDifficulty,
-        text: tr("DIFFICULTY"),
-        icon: Assets.graphics.icons.stats,
-        labels: [
-          tr("DIFFICULTY_EASY"),
-          tr("DIFFICULTY_MEDIOCRE"),
-          tr("DIFFICULTY_HARD"),
-          tr("DIFFICULTY_VERY_HARD"),
-        ],
-        colors: const [
-          Interface.alwaysDark,
-          Interface.alwaysDark,
-          Interface.alwaysDark,
-          Interface.alwaysDark,
-        ],
-        backgrounds: const [
-          Interface.green,
-          Interface.yellow,
-          Interface.orange,
-          Interface.red,
-        ],
-      ),
-    ];
   }
 
   @override

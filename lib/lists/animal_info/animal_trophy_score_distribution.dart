@@ -15,8 +15,8 @@ class ListAnimalTrophyScoreDistribution extends StatelessWidget {
   }) : _animal = animal;
 
   Widget _buildMaleTrophyScore() {
-    String min = _animal.trophyAsString(_animal.trophy(ThresholdType.min, CategoryType.male));
-    String max = _animal.trophyAsString(_animal.trophy(ThresholdType.max, CategoryType.male));
+    String min = _animal.trophyAsString(_animal.trophy(ThresholdLevel.min, CategoryType.male));
+    String max = _animal.trophyAsString(_animal.trophy(ThresholdLevel.max, CategoryType.male));
 
     return WidgetAnimalValueRange(
       icon: Assets.graphics.icons.genderMale,
@@ -28,8 +28,8 @@ class ListAnimalTrophyScoreDistribution extends StatelessWidget {
   }
 
   Widget _buildFemaleTrophyScore() {
-    String min = _animal.trophyAsString(_animal.trophy(ThresholdType.min, CategoryType.female));
-    String max = _animal.trophyAsString(_animal.trophy(ThresholdType.max, CategoryType.female));
+    String min = _animal.trophyAsString(_animal.trophy(ThresholdLevel.min, CategoryType.female));
+    String max = _animal.trophyAsString(_animal.trophy(ThresholdLevel.max, CategoryType.female));
 
     return WidgetAnimalValueRange(
       icon: Assets.graphics.icons.genderFemale,
@@ -41,8 +41,8 @@ class ListAnimalTrophyScoreDistribution extends StatelessWidget {
   }
 
   Widget _buildGOTrophyScore() {
-    String min = _animal.trophyAsString(_animal.trophy(ThresholdType.min, CategoryType.go));
-    String max = _animal.trophyAsString(_animal.trophy(ThresholdType.max, CategoryType.go));
+    String min = _animal.trophyAsString(_animal.trophy(ThresholdLevel.min, CategoryType.go));
+    String max = _animal.trophyAsString(_animal.trophy(ThresholdLevel.max, CategoryType.go));
 
     return WidgetAnimalValueRange(
       icon: Assets.graphics.icons.trophyGreatOne,

@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 
 class WidgetAnimalSense extends StatelessWidget {
   final Animal _animal;
-  final SenseType _sense;
+  final Sense _sense;
 
   const WidgetAnimalSense(
     Animal animal, {
     super.key,
-    required SenseType sense,
+    required Sense sense,
   })  : _animal = animal,
         _sense = sense;
 

@@ -41,8 +41,8 @@ class ActivityDetailDlc extends StatelessWidget {
       WidgetTitle(tr("RESERVE")),
       WidgetPadding.a30(
         child: ListDlcContent(
-          list: _dlc.reserve,
-          type: ItemType.reserve,
+          list: List.filled(1, _dlc.reserve!),
+          type: Item.reserve,
         ),
       ),
     ];
@@ -54,7 +54,7 @@ class ActivityDetailDlc extends StatelessWidget {
       WidgetPadding.a30(
         child: ListDlcContent(
           list: _dlc.animals,
-          type: ItemType.animal,
+          type: Item.animal,
         ),
       ),
     ];
@@ -66,7 +66,7 @@ class ActivityDetailDlc extends StatelessWidget {
       WidgetPadding.a30(
         child: ListDlcContent(
           list: _dlc.weapons,
-          type: ItemType.weapon,
+          type: Item.weapon,
         ),
       ),
     ];
@@ -78,7 +78,7 @@ class ActivityDetailDlc extends StatelessWidget {
       WidgetPadding.a30(
         child: ListDlcContent(
           list: _dlc.callers,
-          type: ItemType.caller,
+          type: Item.caller,
         ),
       ),
     ];
@@ -86,7 +86,7 @@ class ActivityDetailDlc extends StatelessWidget {
 
   List<Widget> _listContent() {
     return [
-      if (_dlc.reserve.isNotEmpty) ..._listReserves(),
+      if (_dlc.reserve != null) ..._listReserves(),
       if (_dlc.animals.isNotEmpty) ..._listAnimals(),
       if (_dlc.weapons.isNotEmpty) ..._listWeapons(),
       if (_dlc.callers.isNotEmpty) ..._listCallers(),

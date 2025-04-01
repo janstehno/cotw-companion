@@ -1,6 +1,7 @@
 import 'package:cotwcompanion/activities/detail/animal.dart';
 import 'package:cotwcompanion/activities/modify/edit/logs.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
 import 'package:cotwcompanion/helpers/log.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
@@ -36,6 +37,10 @@ class EntryLogState extends WidgetLogsDismissibleState {
   final double _iconSize = 15;
   final double _harvestWidth = 30;
   final double _harvestHeight = 30;
+
+  bool get _showEntryDate => HelperFilter.filterLogs.isEnabled(FilterKey.logsView, LogsView.date.index);
+
+  int get _entryView => HelperFilter.filterLogs.valueOf(FilterKey.logsViewEntry) as int;
 
   @override
   void undo() {
@@ -273,7 +278,7 @@ class EntryLogState extends WidgetLogsDismissibleState {
   List<Widget> _listLogCompact() {
     return [
       _buildNameTrophy(),
-      if (settings.entryDate) _buildDate(),
+      if (_showEntryDate) _buildDate(),
     ];
   }
 
@@ -288,7 +293,7 @@ class EntryLogState extends WidgetLogsDismissibleState {
           Expanded(
             child: Column(
               children: [
-                if (settings.entryDate) _buildDate(),
+                if (_showEntryDate) _buildDate(),
                 buildFur(),
               ],
             ),
@@ -311,11 +316,23 @@ class EntryLogState extends WidgetLogsDismissibleState {
           buildGender(),
         ],
       ),
-      if (settings.entryDate) _buildDate(),
+      if (_showEntryDate) _buildDate(),
       if ((widget as WidgetLogsDismissible).log.reserve != null) _buildReserve(),
       buildFur(),
       _buildHarvestCheckTrophy(),
     ];
+  }
+
+  List<Widget> _buildLogContent() {
+    switch (_entryView) {
+      case 0:
+        return _listLogCompact();
+      case 1:
+        return _listLogSemiCompact();
+      case 2:
+      default:
+        return _listLogNonCompact();
+    }
   }
 
   @override
@@ -325,11 +342,7 @@ class EntryLogState extends WidgetLogsDismissibleState {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (settings.compactLogbook == 1) ..._listLogCompact(),
-          if (settings.compactLogbook == 2) ..._listLogSemiCompact(),
-          if (settings.compactLogbook == 3) ..._listLogNonCompact(),
-        ],
+        children: [..._buildLogContent()],
       ),
     );
   }

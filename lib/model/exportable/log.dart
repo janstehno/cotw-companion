@@ -273,6 +273,6 @@ class Log extends Exportable {
 
   static Comparator<Log> sortByTrophy = (a, b) => a.trophy.compareTo(b.trophy);
 
-  static Comparator<Log> sortByDate = (a, b) => Utils.dateTimeAs(DateStructure.compare, a.dateTime)
-      .compareTo(Utils.dateTimeAs(DateStructure.compare, b.dateTime));
+  static Comparator<Log> sortByDate = (a, b) => Utils.dateTimeAs(DateStructure.compare, b.dateTime)
+      .compareTo(Utils.dateTimeAs(DateStructure.compare, a.dateTime));
 }

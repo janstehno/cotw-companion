@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/logger.dart';
 import 'package:cotwcompanion/model/connect/animal_caller.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
@@ -132,7 +133,7 @@ class HelperJSON {
     }).toList();
   }
 
-  static List<AnimalFur> getAnimalFursWithRarity(int furId, int rarity) {
+  static List<AnimalFur> getAnimalFursWithRarity(int furId, FurRarity rarity) {
     return animalsFurs.where((e) => e.furId == furId && e.rarity == rarity).toList();
   }
 
@@ -190,6 +191,8 @@ class HelperJSON {
       throw Exception("Dlc with ID: $dlcId does not exist");
     }
   }
+
+  static List<Dlc> getDlcs(DlcType type) => dlcs.where((e) => e.type == type).toList();
 
   static Dlc? getWeaponDlc(int weaponId) => dlcs.firstWhereOrNull((e) => e.weapons.contains(weaponId));
 

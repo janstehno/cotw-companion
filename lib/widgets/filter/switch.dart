@@ -1,45 +1,61 @@
-import 'package:cotwcompanion/helpers/filter.dart';
+import 'package:cotwcompanion/filters/filter.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
 import 'package:flutter/material.dart';
 
-class WidgetFilterSwitch extends StatefulWidget {
+class WidgetFilterSwitch<E extends Enum> extends StatefulWidget {
+  final Filter _filter;
   final FilterKey _filterKey;
-  final int _index;
+  final E _bitKey;
   final String _text;
+  final bool _enabled;
 
-  const WidgetFilterSwitch(
-    FilterKey filterKey, {
+  const WidgetFilterSwitch({
     super.key,
-    required int i,
+    required Filter filter,
+    required FilterKey filterKey,
+    required E bitKey,
     required String text,
-  })  : _filterKey = filterKey,
-        _index = i,
-        _text = text;
+    bool enabled = true,
+  })  : _filter = filter,
+        _filterKey = filterKey,
+        _bitKey = bitKey,
+        _text = text,
+        _enabled = enabled;
+
+  Filter get filter => _filter;
 
   FilterKey get filterKey => _filterKey;
 
-  int get i => _index;
+  E get bitKey => _bitKey;
 
   String get text => _text;
+
+  bool get enabled => _enabled;
 
   @override
   State<StatefulWidget> createState() => WidgetFilterSwitchState();
 }
 
 class WidgetFilterSwitchState extends State<WidgetFilterSwitch> {
+  void _toggleFilter() {
+    setState(() {
+      widget.filter.toggle(widget.filterKey, widget.bitKey.index);
+    });
+  }
+
   Widget _buildWidgets() {
     return WidgetSectionIndicatorTap(
       widget.text,
-      background: Utils.backgroundAt(widget.i),
-      indicatorColor: HelperFilter.getBoolValue(widget.filterKey) ? Interface.primary : Interface.disabled,
+      color: widget.enabled ? Interface.dark : Interface.disabled,
+      background: Utils.backgroundAt(widget.bitKey.index),
+      indicatorColor: widget.filter.indicatorColor(widget.filterKey, widget.bitKey.index),
       onTap: () {
-        setState(() {
-          HelperFilter.switchValue(widget.filterKey);
-        });
+        if (widget.enabled) _toggleFilter();
       },
+      isShown: widget.enabled,
     );
   }
 

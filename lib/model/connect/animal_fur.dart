@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class AnimalFur {
   final int _id;
   final int _animalId;
   final int _furId;
-  final int _rarity;
+  final FurRarity _rarity;
   final double _perCent;
   final bool _male;
   final bool _female;
@@ -16,7 +17,7 @@ class AnimalFur {
     required int id,
     required int animalId,
     required int furId,
-    required int rarity,
+    required FurRarity rarity,
     required double perCent,
     required bool male,
     required bool female,
@@ -35,7 +36,7 @@ class AnimalFur {
 
   int get furId => _furId;
 
-  int get rarity => _rarity;
+  FurRarity get rarity => _rarity;
 
   double get perCent => _perCent;
 
@@ -45,29 +46,26 @@ class AnimalFur {
 
   Color get color {
     switch (_rarity) {
-      case 0:
+      case FurRarity.common:
         return Interface.rarityCommon;
-      case 1:
+      case FurRarity.uncommon:
         return Interface.rarityUncommon;
-      case 2:
+      case FurRarity.rare:
         return Interface.rarityRare;
-      case 3:
+      case FurRarity.mission:
         return Interface.rarityMission;
-      case 4:
+      case FurRarity.greatOne:
         return Interface.rarityGreatOne;
-      default:
-        return Interface.disabled;
     }
   }
 
-  static String rarityName(int rarity) {
+  static String rarityName(FurRarity rarity) {
     switch (rarity) {
-      case 3:
-        return tr("RARITY_MISSION");
-      case 2:
+      case FurRarity.rare:
         return tr("RARITY_RARE");
-      case 1:
+      case FurRarity.uncommon:
         return tr("RARITY_UNCOMMON");
+      case FurRarity.common:
       default:
         return tr("RARITY_COMMON");
     }
@@ -86,7 +84,7 @@ class AnimalFur {
       id: json['ID'],
       animalId: json['ANIMAL_ID'],
       furId: json['FUR_ID'],
-      rarity: json['RARITY'],
+      rarity: FurRarity.values.elementAt(json['RARITY']),
       perCent: json['PERCENT'],
       male: json['MALE'],
       female: json['FEMALE'],
@@ -100,7 +98,7 @@ class AnimalFur {
 
   static Comparator<AnimalFur> sortByRarityFurName = (a, b) {
     if (a.rarity == b.rarity) return a.furName.compareTo(b.furName);
-    return a.rarity.compareTo(b.rarity);
+    return a.rarity.index.compareTo(b.rarity.index);
   };
 
   static Comparator<AnimalFur> sortByPercentAnimalName = (a, b) {
@@ -113,7 +111,7 @@ class AnimalFur {
     if (!a.male && !a.female && (b.male || b.female)) return -1;
     if (a.male && !b.male) return -1;
     if (a.female && !b.female) return -1;
-    if (a.rarity != b.rarity) return b.rarity.compareTo(a.rarity);
+    if (a.rarity != b.rarity) return b.rarity.index.compareTo(a.rarity.index);
     if (a.perCent != b.perCent) return a.perCent.compareTo(b.perCent);
     return a.furName.compareTo(b.furName);
   };

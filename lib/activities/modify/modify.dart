@@ -54,9 +54,7 @@ abstract class ActivityModifyState extends State<ActivityModify> {
 
   void focus() {
     FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
+    if (!currentFocus.hasPrimaryFocus) currentFocus.unfocus();
   }
 
   void onConfirm();

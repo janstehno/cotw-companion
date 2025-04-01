@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/settings.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/widgets/parts/animal/fur/fur.dart';
@@ -9,12 +10,12 @@ import 'package:provider/provider.dart';
 
 class ListAnimalFurs extends StatelessWidget {
   final Animal _animal;
-  final int _chosenRarity;
+  final FurRarity? _chosenRarity;
 
   const ListAnimalFurs(
     Animal animal, {
     super.key,
-    required int chosenRarity,
+    required FurRarity? chosenRarity,
   })  : _animal = animal,
         _chosenRarity = chosenRarity;
 

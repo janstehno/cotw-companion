@@ -1,17 +1,24 @@
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:flutter/material.dart';
 
 class WidgetTextField extends StatelessWidget {
+  final String? _icon;
+  final String? _hintText;
   final bool _numberOnly, _decimal;
   final TextEditingController _textController;
 
   const WidgetTextField({
     super.key,
+    String? icon,
+    String? hintText,
     bool numberOnly = false,
     bool decimal = true,
     required TextEditingController textController,
-  })  : _numberOnly = numberOnly,
+  })  : _icon = icon,
+        _hintText = hintText,
+        _numberOnly = numberOnly,
         _decimal = decimal,
         _textController = textController;
 
@@ -26,6 +33,12 @@ class WidgetTextField extends StatelessWidget {
       );
     }
     return TextInputType.text;
+  }
+
+  Widget _buildIcon() {
+    return _icon != null
+        ? WidgetIcon(_icon!, color: Interface.disabled)
+        : Transform.flip(flipX: true, child: Icon(Icons.search_rounded, color: Interface.dark));
   }
 
   Widget _buildWidgets() {
@@ -45,6 +58,9 @@ class WidgetTextField extends StatelessWidget {
         focusedBorder: _textFieldBorder,
         errorBorder: _textFieldBorder,
         focusedErrorBorder: _textFieldBorder,
+        icon: _buildIcon(),
+        hintText: _hintText ?? "",
+        hintStyle: Style.normal.s16.w300.copyWith(color: Interface.disabled),
       ),
       style: Style.normal.s16.w300.copyWith(color: Interface.dark),
     );

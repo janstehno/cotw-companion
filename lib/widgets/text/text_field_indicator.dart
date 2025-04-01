@@ -1,9 +1,7 @@
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
-import 'package:cotwcompanion/widgets/app/margin.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
-import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/indicator/indicator.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/text/text_field.dart';
@@ -36,20 +34,11 @@ class WidgetTextFieldIndicator extends StatelessWidget {
 
   Color get _color => _correct ? Interface.green : Interface.disabled;
 
-  Widget _buildIcon() {
-    return WidgetMargin.right(
-      15,
-      child: WidgetIcon(
-        _icon,
-        color: Interface.disabled,
-      ),
-    );
-  }
-
   Widget _buildTextField() {
     return Container(
       alignment: Alignment.centerLeft,
       child: WidgetTextField(
+        icon: _icon,
         decimal: _decimal,
         numberOnly: _numberOnly,
         textController: _textController,
@@ -90,7 +79,6 @@ class WidgetTextFieldIndicator extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _buildIcon(),
             Expanded(child: _buildTextField()),
             if (_length != null) _buildLength(),
             if (!_noIndicator)

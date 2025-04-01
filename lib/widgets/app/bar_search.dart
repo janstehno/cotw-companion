@@ -3,7 +3,6 @@ import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/button/button_icon.dart';
-import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/text/text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -23,21 +22,10 @@ class WidgetSearchBar extends StatelessWidget {
 
   double get _height => Values.searchBar;
 
-  Widget _buildSearchIcon() {
-    return Container(
-      width: 25,
-      alignment: Alignment.center,
-      child: WidgetIcon(
-        Assets.graphics.icons.search,
-        color: Interface.dark,
-      ),
-    );
-  }
-
   Widget _buildTextField() {
     return Container(
       color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.only(right: 15),
       child: WidgetTextField(textController: _controller),
     );
   }
@@ -78,7 +66,6 @@ class WidgetSearchBar extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _buildSearchIcon(),
             Expanded(child: _buildTextField()),
             _buildRemoveIcon(),
             if (_onFilter != null) _buildFilterIcon(),

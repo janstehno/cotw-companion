@@ -4,7 +4,6 @@ import 'package:cotwcompanion/activities/home.dart';
 import 'package:cotwcompanion/builders/builder.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
 import 'package:cotwcompanion/helpers/json.dart';
-import 'package:cotwcompanion/helpers/loadout.dart';
 import 'package:cotwcompanion/helpers/log.dart';
 import 'package:cotwcompanion/model/connect/animal_caller.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
@@ -14,7 +13,6 @@ import 'package:cotwcompanion/model/connect/animal_zone.dart';
 import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
 import 'package:cotwcompanion/model/describable/dlc.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
-import 'package:cotwcompanion/model/exportable/loadout.dart';
 import 'package:cotwcompanion/model/exportable/log.dart';
 import 'package:cotwcompanion/model/translatable/ammo.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
@@ -53,9 +51,7 @@ class BuilderHomeState extends BuilderBuilderState {
     HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsFursImages, animalsReserves, animalsZones,
         callers, dlcs, furs, reserves, weapons, weaponsAmmo, missions);
     List<Log> logs = snapshot.data!["logs"] ?? [];
-    List<Loadout> loadouts = snapshot.data!["loadouts"] ?? [];
     HelperLog.setLogs(logs);
-    HelperLoadout.setLoadouts(loadouts);
     HelperFilter.initializeFilters();
   }
 
@@ -91,8 +87,8 @@ class BuilderHomeState extends BuilderBuilderState {
     updateProgress("missions", missions);
     List<Log> logs = await HelperLog.readFile();
     updateProgress("logs", logs);
-    List<Loadout> loadouts = await HelperLoadout.readFile();
-    updateProgress("loadouts", loadouts);
+    Map<String, dynamic> filters = await HelperFilter.readFile();
+    updateProgress("filters", filters);
 
     await Future.delayed(const Duration(seconds: 1), () {});
     return loadedData;

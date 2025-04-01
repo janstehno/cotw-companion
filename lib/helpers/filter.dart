@@ -1,11 +1,9 @@
 import 'package:collection/collection.dart';
-import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/logger.dart';
 import 'package:cotwcompanion/miscellaneous/multi_sort.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
-import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
 import 'package:cotwcompanion/model/exportable/enumerator.dart';
 import 'package:cotwcompanion/model/exportable/loadout.dart';
@@ -48,10 +46,6 @@ class HelperFilter {
       5: {"order": 0, "active": false, "ascended": true, "key": ""},
       6: {"order": 0, "active": false, "ascended": true, "key": ""},
     },
-    FilterKey.loadoutsAmmoMin: 1,
-    FilterKey.loadoutsAmmoMax: 120,
-    FilterKey.loadoutsCallersMin: 1,
-    FilterKey.loadoutsCallersMax: 30,
     FilterKey.missionType: {0: true, 1: true},
     FilterKey.missionDifficulty: {1: true, 2: true, 3: true, 4: true},
   };
@@ -108,13 +102,6 @@ class HelperFilter {
         _defaultFilters[FilterKey.logsTrophyScoreMin] == _filters[FilterKey.logsTrophyScoreMin] &&
         _defaultFilters[FilterKey.logsTrophyScoreMax] == _filters[FilterKey.logsTrophyScoreMax] &&
         const DeepCollectionEquality().equals(_defaultFilters[FilterKey.logsSort], _filters[FilterKey.logsSort]));
-  }
-
-  static bool loadoutFiltersChanged() {
-    return !(_defaultFilters[FilterKey.loadoutsAmmoMin] == _filters[FilterKey.loadoutsAmmoMin] &&
-        _defaultFilters[FilterKey.loadoutsAmmoMax] == _filters[FilterKey.loadoutsAmmoMax] &&
-        _defaultFilters[FilterKey.loadoutsCallersMin] == _filters[FilterKey.loadoutsCallersMin] &&
-        _defaultFilters[FilterKey.loadoutsCallersMax] == _filters[FilterKey.loadoutsCallersMax]);
   }
 
   static bool missionFiltersChanged() {
@@ -327,49 +314,6 @@ class HelperFilter {
         .compareTo(Utils.dateTimeAs(DateStructure.compare, a.dateTime)));
     logs.multiSort(context, getSortCriteria(FilterKey.logsSort), getSortPreferences(FilterKey.logsSort));
     return logs;
-  }
-
-  static List<Loadout> filterLoadouts(List<Loadout> list, String searchText) {
-    List<Loadout> loadouts = [];
-    loadouts.addAll(list);
-    if (searchText.isNotEmpty || loadoutFiltersChanged()) {
-      loadouts = loadouts
-          .where((e) =>
-              (searchText.isNotEmpty ? e.name.toLowerCase().contains(searchText.toLowerCase()) : true) &&
-              (e.ammo.isNotEmpty
-                  ? (e.ammo.length >= getIntValue(FilterKey.loadoutsAmmoMin) &&
-                      e.ammo.length <= getIntValue(FilterKey.loadoutsAmmoMax))
-                  : true) &&
-              (e.callers.isNotEmpty
-                  ? (e.callers.length >= getIntValue(FilterKey.loadoutsCallersMin) &&
-                      e.callers.length <= getIntValue(FilterKey.loadoutsCallersMax))
-                  : true))
-          .toList();
-    }
-    return loadouts;
-  }
-
-  static List<WeaponAmmo> filterLoadoutAmmo(List<WeaponAmmo> list, String searchText) {
-    List<WeaponAmmo> filtered = [];
-    for (WeaponAmmo weaponAmmo in list) {
-      Weapon weapon = HelperJSON.getWeapon(weaponAmmo.weaponId)!;
-      Ammo ammo = HelperJSON.getAmmo(weaponAmmo.ammoId)!;
-      if ((weapon.name.toLowerCase().contains(searchText.toLowerCase())) ||
-          (ammo.name.toLowerCase().contains(searchText.toLowerCase()))) {
-        filtered.add(weaponAmmo);
-      }
-    }
-    return filtered.sorted(WeaponAmmo.sortByAmmoName);
-  }
-
-  static List<Caller> filterLoadoutCallers(List<Caller> list, String searchText) {
-    List<Caller> callers = [];
-    for (Caller caller in list) {
-      if (caller.name.toLowerCase().contains(searchText.toLowerCase())) {
-        callers.add(caller);
-      }
-    }
-    return callers.sorted(Caller.sortByName);
   }
 
   static List<Mission> filterMissions(List<Mission> list, String searchText) {

@@ -1,7 +1,6 @@
 import 'package:cotwcompanion/activities/detail/animal.dart';
 import 'package:cotwcompanion/activities/modify/add/logs_source.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
-import 'package:cotwcompanion/helpers/loadout.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
@@ -12,7 +11,6 @@ import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/icon/icon_background.dart';
-import 'package:cotwcompanion/widgets/indicator/loadout_indicator.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -165,7 +163,6 @@ class WidgetNeedZone extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(child: _buildLevelName(context)),
-            if (HelperLoadout.isLoadoutActivated) WidgetLoadoutIndicator(animal: _animal),
             Container(
               width: zoneIconSize + zoneIconSize - 5 + zoneIconSize - 10 + 20,
               margin: const EdgeInsets.only(left: 15),

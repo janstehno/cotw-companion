@@ -1,6 +1,5 @@
 import 'package:cotwcompanion/activities/modify/add/logs_source.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
-import 'package:cotwcompanion/helpers/loadout.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
@@ -8,7 +7,6 @@ import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
-import 'package:cotwcompanion/widgets/indicator/loadout_indicator.dart';
 import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -68,11 +66,6 @@ class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
     );
   }
 
-  Widget _buildLoadout() {
-    if (HelperLoadout.isLoadoutActivated) return WidgetLoadoutIndicator(animal: _animal);
-    return const SizedBox(width: Values.dotSize);
-  }
-
   Widget _buildGreatOne() {
     if (_animal.hasGO) {
       return WidgetIcon.withSize(
@@ -93,10 +86,6 @@ class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
         Expanded(child: super.buildTitle()),
         const SizedBox(width: 15),
         _buildGreatOne(),
-        if (HelperLoadout.isLoadoutActivated) ...[
-          const SizedBox(width: 15),
-          _buildLoadout(),
-        ],
         const SizedBox(width: 15),
         buildIndicator(),
       ],

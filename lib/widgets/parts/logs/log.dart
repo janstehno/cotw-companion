@@ -16,18 +16,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class WidgetLog extends WidgetLogsDismissible {
-  final bool _trophyLodge;
-
   const WidgetLog(
     super.i, {
     super.key,
-    required bool trophyLodge,
     required super.log,
     required super.callback,
     required super.context,
-  }) : _trophyLodge = trophyLodge;
-
-  bool get trophyLodge => _trophyLodge;
+  });
 
   @override
   EntryLogState createState() => EntryLogState();
@@ -81,7 +76,7 @@ class EntryLogState extends WidgetLogsDismissibleState {
       MaterialPageRoute(
         builder: (e) => ActivityEditLogs(
           log: (widget as WidgetLogsDismissible).log,
-          trophyLodgeOnly: (widget as WidgetLog).log.reserve == null,
+          context: context,
           onSuccess: (widget as WidgetLog).callback ?? () {},
         ),
       ),

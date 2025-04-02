@@ -20,7 +20,6 @@ import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/button/button_icon.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down_item.dart';
-import 'package:cotwcompanion/widgets/handling/drop_down_item_animal.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down_item_fur.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/text/text_field_indicator.dart';
@@ -33,16 +32,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ActivityAddLogs extends ActivityModify {
-  final bool _trophyLodgeOnly;
+  final BuildContext _context;
 
   const ActivityAddLogs({
     super.key,
     super.type = ModifyType.add,
-    required trophyLodgeOnly,
+    required BuildContext context,
     required super.onSuccess,
-  }) : _trophyLodgeOnly = trophyLodgeOnly;
+  }) : _context = context;
 
-  bool get fromTrophyLodge => _trophyLodgeOnly;
+  BuildContext get context => _context;
 
   @override
   State<StatefulWidget> createState() => ActivityAddLogsState();
@@ -75,10 +74,10 @@ class ActivityAddLogsState extends ActivityModifyState {
 
   List<Reserve> get reserves => HelperJSON.reserves.sorted(Reserve.sortById);
 
-  List<Animal> get reserveAnimals => ((widget as ActivityAddLogs).fromTrophyLodge
-          ? HelperJSON.animals
-          : HelperJSON.getReserveAnimals(selectedReserve!.id))
-      .sorted(Animal.sortByLevel);
+  List<Animal> get reserveAnimals => selectedReserve == null
+      ? HelperJSON.animals.sorted(Animal.sortByNameByLocale((widget as ActivityAddLogs).context))
+      : HelperJSON.getReserveAnimals(selectedReserve!.id)
+          .sorted(Animal.sortByNameByReserve((widget as ActivityAddLogs).context, selectedReserve));
 
   List<AnimalFur> get animalFurs =>
       HelperJSON.getAnimalFursWithGender(selectedAnimal.id, isMale, !isMale).sorted(AnimalFur.sortByRarityFurName);
@@ -219,25 +218,48 @@ class ActivityAddLogsState extends ActivityModifyState {
 
   List<Widget> _listReserve() {
     return [
-      WidgetTitle(tr("RESERVE")),
-      WidgetDropDown<int>(
-        value: reserves.indexOf(selectedReserve!),
-        items: _listReserves(),
-        onChange: (dynamic value) {
-          selectedReserve = reserves.elementAt(value);
-          _updateData(Change.reserve);
+      WidgetTitleSwitchIcon(
+        tr("RESERVE"),
+        icon: Assets.graphics.icons.reserveUnknown,
+        activeIcon: Assets.graphics.icons.reserveKnown,
+        buttonColor: Interface.alwaysDark,
+        buttonBackground: Interface.red,
+        activeButtonColor: Interface.alwaysDark,
+        activeButtonBackground: Interface.green,
+        isActive: selectedReserve == null,
+        alignRight: true,
+        onTap: () {
+          setState(() {
+            if (selectedReserve == null) {
+              if (widget.type == ModifyType.edit) {
+                selectedReserve = HelperJSON.getAnimalReserves(selectedAnimal.id).first;
+              } else {
+                selectedReserve = reserves.first;
+              }
+            } else {
+              selectedReserve = null;
+            }
+            if (widget.type == ModifyType.add) _updateData(Change.reserve);
+          });
         },
       ),
+      if (selectedReserve != null)
+        WidgetDropDown<int>(
+          value: reserves.indexOf(selectedReserve!),
+          items: _listReserves(),
+          onChange: (dynamic value) {
+            selectedReserve = reserves.elementAt(value);
+            _updateData(Change.reserve);
+          },
+        ),
+      if (selectedReserve == null) WidgetDropDownItem(text: tr("UNKNOWN")),
     ];
   }
 
   DropdownMenuItem _buildAnimalItem(Animal animal) {
     return DropdownMenuItem(
       value: reserveAnimals.indexOf(animal),
-      child: WidgetDropDownItemAnimal(
-        text: animal.name,
-        level: animal.level,
-      ),
+      child: WidgetDropDownItem(text: animal.name),
     );
   }
 
@@ -396,13 +418,13 @@ class ActivityAddLogsState extends ActivityModifyState {
     return Log.create(
       dateTime,
       selectedAnimal,
-      (widget as ActivityAddLogs).fromTrophyLodge ? null : selectedReserve,
+      selectedReserve,
       selectedAnimalFur,
       trophyRating,
       trophy,
       weight,
       usesImperials,
-      (widget as ActivityAddLogs).fromTrophyLodge ? true : false,
+      false,
       isMale,
       correctAmmo,
       twoShots,
@@ -428,14 +450,14 @@ class ActivityAddLogsState extends ActivityModifyState {
     return Column(
       children: [
         _buildDate(),
-        if ((!(widget as ActivityAddLogs).fromTrophyLodge) && selectedReserve != null) ..._listReserve(),
+        ..._listReserve(),
         ..._listAnimal(),
         _buildGender(),
         ..._listFur(),
-        if (!(widget as ActivityAddLogs).fromTrophyLodge) ..._listWeight(),
+        ..._listWeight(),
         ..._listTrophy(),
         ..._listTrophyRating(),
-        if (!(widget as ActivityAddLogs).fromTrophyLodge) ..._listHarvestCheck(),
+        ..._listHarvestCheck(),
       ],
     );
   }

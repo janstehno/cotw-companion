@@ -183,6 +183,7 @@ enum FilterType {
 enum LogsView {
   trophyLodge,
   date,
+  notTrophyLodge,
 }
 
 enum SortKey {

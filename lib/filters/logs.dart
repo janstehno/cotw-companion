@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 class FilterLogs extends Filter<Log> {
   @override
   Map<FilterKey, num> get defaultFilters => {
-        FilterKey.logsView: 0x3,
+        FilterKey.logsView: 0x7,
         FilterKey.logsViewEntry: 2,
         FilterKey.logsTrophyScoreMin: 0.0,
         FilterKey.logsTrophyScoreMax: double.maxFinite,
@@ -37,6 +37,7 @@ class FilterLogs extends Filter<Log> {
               return not ? !(condition) : condition;
             });
         final matchTrophyLodge = log.isInLodge && isEnabled(FilterKey.logsView, LogsView.trophyLodge.index);
+        final matchNotTrophyLodge = !log.isInLodge && isEnabled(FilterKey.logsView, LogsView.notTrophyLodge.index);
         final matchTrophyScore =
             log.trophy >= valueOf(FilterKey.logsTrophyScoreMin) && log.trophy <= valueOf(FilterKey.logsTrophyScoreMax);
         final matchTrophyRating = isEnabled(FilterKey.logsTrophyRating, log.trophyRating);
@@ -44,7 +45,7 @@ class FilterLogs extends Filter<Log> {
         final matchGender = isEnabled(FilterKey.logsGender, log.isMale ? Gender.male.index : Gender.female.index);
 
         return matchSearch &&
-            matchTrophyLodge &&
+            (matchTrophyLodge || matchNotTrophyLodge) &&
             matchTrophyScore &&
             matchTrophyRating &&
             matchFurRarity &&

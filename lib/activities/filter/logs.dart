@@ -34,10 +34,12 @@ class ActivityFilterLogsState extends ActivityFilterState<Log> {
         filter: widget.filter,
         filterKey: FilterKey.logsView,
         bitKeys: [
+          LogsView.notTrophyLodge,
           LogsView.trophyLodge,
           LogsView.date,
         ],
         labels: [
+          Assets.graphics.icons.catchBook,
           Assets.graphics.icons.trophyLodge,
           Assets.graphics.icons.sortDate,
         ],

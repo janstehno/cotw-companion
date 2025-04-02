@@ -42,7 +42,7 @@ class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
     Navigator.push(
       _context,
       MaterialPageRoute(
-        builder: (e) => ActivityAddLogsSource(animal: _animal, reserve: _reserve, onSuccess: () {}),
+        builder: (e) => ActivityAddLogsSource(animal: _animal, reserve: _reserve, context: context, onSuccess: () {}),
       ),
     );
     return false;

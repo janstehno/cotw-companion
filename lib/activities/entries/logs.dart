@@ -18,15 +18,9 @@ import 'package:cotwcompanion/widgets/parts/logs/log.dart';
 import 'package:flutter/material.dart';
 
 class ActivityLogs extends ActivityEntries {
-  final bool _trophyLodge;
-
   const ActivityLogs({
     super.key,
-    required bool trophyLodge,
-  })  : _trophyLodge = trophyLodge,
-        super(trophyLodge ? "TROPHY_LODGE" : "LOGBOOK");
-
-  bool get trophyLodge => _trophyLodge;
+  }) : super("LOGBOOK");
 
   @override
   ActivityLogsState createState() => ActivityLogsState();
@@ -71,7 +65,6 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
     return WidgetLog(
       i,
       log: item,
-      trophyLodge: (widget as ActivityLogs).trophyLodge,
       context: context,
       callback: filterItems,
     );
@@ -94,12 +87,7 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
     setState(
       () {
         focus();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (e) => ListLogsStats(filteredItems, trophyLodge: (widget as ActivityLogs).trophyLodge),
-          ),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (e) => ListLogsStats(filteredItems)));
       },
     );
   }
@@ -153,8 +141,8 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
       _buildMenuSeparator(),
       buildMenuAdd(
         ActivityAddLogs(
-          trophyLodgeOnly: (widget as ActivityLogs).trophyLodge,
           onSuccess: filterItems,
+          context: context,
         ),
       ),
     ];

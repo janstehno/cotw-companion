@@ -10,7 +10,7 @@ class ActivityEditLogs extends ActivityAddLogs {
   const ActivityEditLogs({
     super.key,
     required Log log,
-    required super.trophyLodgeOnly,
+    required super.context,
     required super.onSuccess,
   })  : _log = log,
         super(type: ModifyType.edit);

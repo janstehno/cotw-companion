@@ -64,7 +64,9 @@ class Utils {
       case DateStructure.compare:
         return dateTime;
       case DateStructure.format:
-        return "${dateTime.day}. ${dateTime.month}. ${dateTime.year}  ${dateTime.hour}:${dateTime.minute}";
+        return "${dateTime.day}. ${dateTime.month}. ${dateTime.year} "
+            "${dateTime.hour.toString().padLeft(2, '0')}:"
+            "${dateTime.minute.toString().padLeft(2, '0')}";
       case DateStructure.json:
         return "${dateTime.year}-${dateTime.month}-${dateTime.day}-${dateTime.hour}-${dateTime.minute}";
     }

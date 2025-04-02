@@ -1,7 +1,9 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/exportable/log.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
@@ -16,18 +18,13 @@ import 'package:flutter/material.dart';
 
 class ListLogsStats extends StatefulWidget {
   final List<dynamic> _logs;
-  final bool _trophyLodge;
 
   const ListLogsStats(
     List<dynamic> logs, {
     super.key,
-    required bool trophyLodge,
-  })  : _logs = logs,
-        _trophyLodge = trophyLodge;
+  }) : _logs = logs;
 
   List<dynamic> get logs => _logs;
-
-  bool get trophyLodge => _trophyLodge;
 
   @override
   ListLogsStatsState createState() => ListLogsStatsState();
@@ -35,8 +32,9 @@ class ListLogsStats extends StatefulWidget {
 
 class ListLogsStatsState extends State<ListLogsStats> {
   final Map<int, int> _trophyCount = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
-  final Map<int, int> _furCount = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+  final Map<int, int> _furCount = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0};
 
+  int _notTrophyLodgeCount = 0;
   int _trophyLodgeCount = 0;
 
   @override
@@ -47,7 +45,11 @@ class ListLogsStatsState extends State<ListLogsStats> {
 
   void _initializeStats() {
     for (Log log in widget.logs) {
-      if (log.isInLodge) _trophyLodgeCount += 1;
+      if (log.isInLodge) {
+        _trophyLodgeCount++;
+      } else {
+        _notTrophyLodgeCount++;
+      }
       _updateTrophy(log.trophyRatingWithGO);
       _updateFur(log.animalFur!.rarity.index);
     }
@@ -59,15 +61,15 @@ class ListLogsStatsState extends State<ListLogsStats> {
 
   List<WidgetTag> _listGeneralTags() {
     return [
-      if (!widget.trophyLodge)
+      if (HelperFilter.filterLogs.isEnabled(FilterKey.logsView, LogsView.notTrophyLodge.index))
         WidgetTagSpecial(
-          identifier: Assets.graphics.icons.menuOpen,
-          value: widget.logs.length.toString(),
+          identifier: Assets.graphics.icons.catchBook,
+          value: _notTrophyLodgeCount.toString(),
           color: Interface.light.withValues(alpha: 0.8),
           background: Interface.dark,
           withIcon: true,
         ),
-      if (_trophyLodgeCount > 0)
+      if (HelperFilter.filterLogs.isEnabled(FilterKey.logsView, LogsView.trophyLodge.index))
         WidgetTagSpecial(
           identifier: Assets.graphics.icons.trophyLodge,
           value: _trophyLodgeCount.toString(),

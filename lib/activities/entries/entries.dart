@@ -339,11 +339,13 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
   }
 
   Widget buildItems(List<Widget> widgets) {
-    return ListView.builder(
-      itemCount: filteredItems.length,
-      itemBuilder: (context, i) {
-        return widgets.elementAt(i);
-      },
+    return WidgetScrollBar(
+      child: ListView.builder(
+        itemCount: filteredItems.length,
+        itemBuilder: (context, i) {
+          return widgets.elementAt(i);
+        },
+      ),
     );
   }
 
@@ -354,15 +356,13 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
           Values.menuBar,
           background: Interface.body,
           alignment: Alignment.topCenter,
-          child: WidgetScrollBar(
-            child: Column(
-              children: [
-                ...buildBars(),
-                Expanded(
-                  child: buildItems(_listEntries()),
-                ),
-              ],
-            ),
+          child: Column(
+            children: [
+              ...buildBars(),
+              Expanded(
+                child: buildItems(_listEntries()),
+              ),
+            ],
           ),
         ),
         Positioned(

@@ -11,10 +11,10 @@ class ActivityAddLogsSource extends ActivityAddLogs {
     super.key,
     required Reserve reserve,
     required Animal animal,
+    required super.context,
     required super.onSuccess,
   })  : _animal = animal,
-        _reserve = reserve,
-        super(trophyLodgeOnly: false);
+        _reserve = reserve;
 
   Reserve get reserve => _reserve;
 

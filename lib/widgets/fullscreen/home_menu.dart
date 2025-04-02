@@ -52,8 +52,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
 
   final List<List<dynamic>> _tools = [
     ["ANIMAL_NEED_ZONES", Assets.graphics.icons.needZones, const ActivityNeedZones()],
-    ["TROPHY_LODGE", Assets.graphics.icons.trophyLodge, const ActivityLogs(trophyLodge: true)],
-    ["LOGBOOK", Assets.graphics.icons.catchBook, const ActivityLogs(trophyLodge: false)],
+    ["LOGBOOK", Assets.graphics.icons.catchBook, const ActivityLogs()],
     ["COUNTERS", Assets.graphics.icons.number, const BuilderEnumerators()],
     ["HUNTING_PASS", Assets.graphics.icons.pass, const ActivityHuntingPass()],
     ["PLANNER", Assets.graphics.icons.planner, const BuilderPlanner()],

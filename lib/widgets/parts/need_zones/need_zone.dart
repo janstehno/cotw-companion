@@ -45,7 +45,7 @@ class WidgetNeedZone extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (e) => ActivityAddLogsSource(animal: _animal, reserve: _reserve, onSuccess: () {}),
+        builder: (e) => ActivityAddLogsSource(animal: _animal, reserve: _reserve, context: context, onSuccess: () {}),
       ),
     );
     return false;

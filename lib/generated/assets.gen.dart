@@ -1133,6 +1133,10 @@ class $AssetsGraphicsIconsGen {
 
   String get reserve => 'assets/graphics/icons/reserve.svg';
 
+  String get reserveKnown => 'assets/graphics/icons/reserve_known.svg';
+
+  String get reserveUnknown => 'assets/graphics/icons/reserve_unknown.svg';
+
   String get scope => 'assets/graphics/icons/scope.svg';
 
   String get search => 'assets/graphics/icons/search.svg';
@@ -1295,6 +1299,8 @@ class $AssetsGraphicsIconsGen {
         reload,
         removeBin,
         reserve,
+        reserveKnown,
+        reserveUnknown,
         scope,
         search,
         senseHearing,

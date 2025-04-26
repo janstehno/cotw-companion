@@ -1,4 +1,3 @@
-import 'package:cotwcompanion/activities/help/map.dart';
 import 'package:cotwcompanion/activities/map_layers.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/map.dart';
@@ -13,18 +12,15 @@ import 'package:provider/provider.dart';
 
 class WidgetMapMenuBar extends StatelessWidget {
   final HelperMap _helperMap;
-  final bool _showInterface;
   final int _level;
   final Function _onChange;
 
   const WidgetMapMenuBar({
     super.key,
     required HelperMap helperMap,
-    required bool showInterface,
     required int level,
     required Function onChange,
   })  : _helperMap = helperMap,
-        _showInterface = showInterface,
         _level = level,
         _onChange = onChange;
 
@@ -48,22 +44,6 @@ class WidgetMapMenuBar extends StatelessWidget {
         background: Interface.primary,
         onTap: () {
           Navigator.pop(context);
-        },
-      ),
-    );
-  }
-
-  WidgetMenuBarItem _buildMenuHelp(BuildContext context) {
-    return WidgetMenuBarItem(
-      barButton: WidgetButtonIcon(
-        Assets.graphics.icons.about,
-        color: Interface.alwaysDark,
-        background: Interface.alwaysLight,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (e) => const ActivityHelpMap()),
-          );
         },
       ),
     );
@@ -116,18 +96,14 @@ class WidgetMapMenuBar extends StatelessWidget {
   }
 
   Widget _buildWidgets(BuildContext context) {
-    if (_showInterface) {
-      return WidgetMenuBar(
-        items: [
-          _buildMenuBack(context),
-          _buildMenuHelp(context),
-          _buildMenuZone(context),
-          _buildMenuCircles(context),
-          _buildMenuFilter(context),
-        ],
-      );
-    }
-    return const SizedBox.shrink();
+    return WidgetMenuBar(
+      items: [
+        _buildMenuBack(context),
+        _buildMenuZone(context),
+        _buildMenuCircles(context),
+        _buildMenuFilter(context),
+      ],
+    );
   }
 
   @override

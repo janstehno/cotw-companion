@@ -107,19 +107,19 @@ class ActivityAbout extends StatelessWidget {
         Assets.graphics.icons.paypal,
         color: Interface.alwaysDark,
         background: Interface.primary,
-        onTap: () => Utils.redirectTo(Uri.parse("https://paypal.me/toastovac")),
+        onTap: () => Utils.redirectTo("https://paypal.me/toastovac"),
       ),
       WidgetButtonIcon(
         Assets.graphics.icons.coffee,
         color: Interface.alwaysDark,
         background: Interface.primary,
-        onTap: () => Utils.redirectTo(Uri.parse("https://buymeacoffee.com/toastovac")),
+        onTap: () => Utils.redirectTo("https://buymeacoffee.com/toastovac"),
       ),
       WidgetButtonIcon(
         Assets.graphics.icons.patreon,
         color: Interface.alwaysDark,
         background: Interface.primary,
-        onTap: () => Utils.redirectTo(Uri.parse("https://patreon.com/Toastovac")),
+        onTap: () => Utils.redirectTo("https://patreon.com/Toastovac"),
       ),
     ];
   }

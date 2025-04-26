@@ -7,10 +7,13 @@ import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/lists/map/map_animals.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/projection.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/model/connect/animal_zone.dart';
 import 'package:cotwcompanion/model/map/map_location.dart';
 import 'package:cotwcompanion/model/map/map_zone.dart';
+import 'package:cotwcompanion/widgets/button/button_link.dart';
 import 'package:cotwcompanion/widgets/map/map_bar_menu.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:latlng/latlng.dart';
@@ -410,7 +413,17 @@ class ActivityMapState extends State<ActivityMap> {
     return ListMapAnimals(
       helperMap: widget.helperMap,
       zones: _zones,
-      showInterface: _showInterface,
+    );
+  }
+
+  Widget _buildHelp() {
+    return WidgetButtonLink(
+      tr("HELP"),
+      color: Interface.alwaysDark,
+      background: Interface.alwaysLight,
+      onTap: () {
+        Utils.redirectTo("https://github.com/janstehno/cotw-companion/wiki/Map");
+      },
     );
   }
 
@@ -418,7 +431,6 @@ class ActivityMapState extends State<ActivityMap> {
     return WidgetMapMenuBar(
       helperMap: widget.helperMap,
       level: _level,
-      showInterface: _showInterface,
       onChange: _updateMap,
     );
   }
@@ -428,8 +440,28 @@ class ActivityMapState extends State<ActivityMap> {
     return Stack(
       children: [
         _buildMap(orientation),
-        Positioned(left: 0, top: 0, child: _buildAnimalList()),
-        Positioned(right: 0, bottom: 0, child: _buildMenu()),
+        if (_showInterface)
+          Positioned(
+            left: 0,
+            top: 0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildAnimalList(),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: _buildHelp(),
+                ),
+              ],
+            ),
+          ),
+        if (_showInterface)
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: _buildMenu(),
+          ),
       ],
     );
   }

@@ -6,6 +6,7 @@ abstract class ActivityEntriesReorderable extends ActivityEntries {
   const ActivityEntriesReorderable(
     super.title, {
     super.key,
+    super.helpUrl,
   });
 }
 

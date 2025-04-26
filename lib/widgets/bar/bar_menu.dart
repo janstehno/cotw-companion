@@ -21,10 +21,7 @@ class WidgetMenuBar extends StatelessWidget {
 
   double width(BuildContext context) {
     Orientation orientation = MediaQuery.orientationOf(context);
-    double max =
-        orientation == Orientation.portrait ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
-    double itemLength = (_buttonSize * _items.length) + (_spacing * (_items.length - 1));
-    return max > (rowMargin * 2 + itemLength) ? (rowMargin * 2 + itemLength) : max;
+    return orientation == Orientation.portrait ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
   }
 
   double height() {
@@ -63,7 +60,7 @@ class WidgetMenuBar extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: _listItems(),
         ),

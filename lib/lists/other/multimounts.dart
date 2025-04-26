@@ -33,6 +33,7 @@ class ListMultimounts extends StatelessWidget {
       appBar: WidgetAppBar(
         tr("CONTENT_MATMATS_MULTIMOUNTS"),
         context: context,
+        helpUrl: "https://github.com/janstehno/cotw-companion/wiki/Matmat's-multi-trophy-mounts",
       ),
       children: _listMultimounts(),
     );

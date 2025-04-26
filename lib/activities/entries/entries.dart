@@ -21,13 +21,18 @@ import 'package:flutter/material.dart';
 
 abstract class ActivityEntries extends StatefulWidget {
   final String _title;
+  final String? _helpUrl;
 
   const ActivityEntries(
     String title, {
     super.key,
-  }) : _title = title;
+    String? helpUrl,
+  })  : _title = title,
+        _helpUrl = helpUrl;
 
   String get title => _title;
+
+  String? get helpUrl => _helpUrl;
 }
 
 abstract class ActivityEntriesState<I extends Exportable> extends State<ActivityEntries> {
@@ -184,26 +189,6 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     );
   }
 
-  WidgetMenuBarItem buildMenuHelp(Widget widget) {
-    return _buildMenuHelp(widget);
-  }
-
-  WidgetMenuBarItem _buildMenuHelp(Widget widget) {
-    return WidgetMenuBarItem(
-      barButton: WidgetButtonIcon(
-        Assets.graphics.icons.about,
-        color: Interface.light,
-        background: Interface.dark,
-        onTap: () {
-          setState(() {
-            focus();
-            Navigator.push(context, MaterialPageRoute(builder: (e) => widget));
-          });
-        },
-      ),
-    );
-  }
-
   Widget _buildFileOptions() {
     return WidgetButtonIcon(
       Assets.graphics.icons.file,
@@ -312,6 +297,7 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     return WidgetAppBar(
       tr(widget.title),
       context: context,
+      helpUrl: widget.helpUrl,
     );
   }
 

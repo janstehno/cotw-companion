@@ -51,7 +51,7 @@ class WidgetTextPattern extends StatelessWidget {
           ),
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              Utils.redirectTo(Uri.parse(text));
+              Utils.redirectTo(text);
             },
         );
       },

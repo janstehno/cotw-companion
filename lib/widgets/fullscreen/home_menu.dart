@@ -182,9 +182,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         tr("WIKI"),
         color: Interface.dark,
         onTap: () {
-          Utils.redirectTo(
-            Uri.parse("https://github.com/janstehno/cotw-companion/wiki"),
-          );
+          Utils.redirectTo("https://github.com/janstehno/cotw-companion/wiki");
         },
       ),
       const SizedBox(height: 5),
@@ -192,9 +190,7 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
         tr("PATCH_NOTES"),
         color: Interface.green,
         onTap: () {
-          Utils.redirectTo(
-            Uri.parse("https://github.com/janstehno/cotw-companion/wiki/Patch-notes"),
-          );
+          Utils.redirectTo("https://github.com/janstehno/cotw-companion/wiki/Patch-notes");
         },
       ),
       const SizedBox(height: 5),

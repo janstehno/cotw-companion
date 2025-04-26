@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/activities/entries/entries_reorderable.dart';
-import 'package:cotwcompanion/activities/help/counters.dart';
 import 'package:cotwcompanion/activities/modify/add/counters.dart';
 import 'package:cotwcompanion/helpers/enumerator.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
@@ -21,7 +20,7 @@ class ActivityCounters extends ActivityEntriesReorderable {
     required Enumerator enumerator,
   })  : _helperEnumerator = helperEnumerator,
         _enumerator = enumerator,
-        super(enumerator.name);
+        super(enumerator.name, helpUrl: "https://github.com/janstehno/cotw-companion/wiki/Counters");
 
   HelperEnumerator get helperEnumerator => _helperEnumerator;
 
@@ -74,7 +73,6 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
   @override
   List<WidgetMenuBarItem> listMenuBarItems() {
     return [
-      buildMenuHelp(const ActivityHelpCounters()),
       buildMenuDelete(),
       buildMenuAdd(
         ActivityAddCounters(

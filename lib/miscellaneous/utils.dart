@@ -96,8 +96,8 @@ class Utils {
     return _getDataFrom(RepositoryData.discussions);
   }
 
-  static void redirectTo(Uri uri) async {
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+  static void redirectTo(String url) async {
+    if (!await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication)) {
       throw Exception("Unfortunately the link could not be launched. Please, go back or restart the application.");
     }
   }

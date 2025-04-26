@@ -70,16 +70,12 @@ class ActivityHomeState extends State<ActivityHome> {
         const SizedBox(width: 10),
         _buildLink(
           Assets.graphics.icons.reddit,
-          () => Utils.redirectTo(
-            Uri.parse("https://www.reddit.com/user/Toastovac/"),
-          ),
+          () => Utils.redirectTo("https://www.reddit.com/user/Toastovac/"),
         ),
         const SizedBox(width: 10),
         _buildLink(
           Assets.graphics.icons.github,
-          () => Utils.redirectTo(
-            Uri.parse("https://github.com/janstehno/cotw-companion?tab=readme-ov-file#cotw-companion"),
-          ),
+          () => Utils.redirectTo("https://github.com/janstehno/cotw-companion?tab=readme-ov-file#cotw-companion"),
         ),
       ],
     );

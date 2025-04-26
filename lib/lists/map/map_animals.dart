@@ -9,16 +9,13 @@ import 'package:flutter/material.dart';
 class ListMapAnimals extends StatelessWidget {
   final HelperMap _helperMap;
   final Map<int, Set<MapZone>?> _zones;
-  final bool _showInterface;
 
   const ListMapAnimals({
     super.key,
     required HelperMap helperMap,
     required Map<int, Set<MapZone>?> zones,
-    required bool showInterface,
   })  : _helperMap = helperMap,
-        _zones = zones,
-        _showInterface = showInterface;
+        _zones = zones;
 
   Widget _buildAnimal(BuildContext context, int key, int drinkZones, int feedZones, int restZones) {
     return WidgetPadding.all(
@@ -64,7 +61,7 @@ class ListMapAnimals extends StatelessWidget {
   }
 
   Widget _buildWidgets(BuildContext context) {
-    if (_zones.isNotEmpty && _showInterface) {
+    if (_zones.isNotEmpty) {
       Orientation orientation = MediaQuery.orientationOf(context);
       return SizedBox(
         width: orientation == Orientation.portrait ? MediaQuery.of(context).size.width : null,

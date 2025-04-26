@@ -12,6 +12,7 @@ class WidgetButtonLink extends WidgetButton {
   final String _text;
   final Color? _color;
   final bool _showIcon;
+  final bool _small;
 
   const WidgetButtonLink(
     String text, {
@@ -20,15 +21,17 @@ class WidgetButtonLink extends WidgetButton {
     super.background,
     required super.onTap,
     bool? showIcon,
+    bool? small,
   })  : _text = text,
         _color = color,
         _showIcon = showIcon ?? true,
+        _small = small ?? true,
         super(width: 0);
 
   Color get color => _color ?? Interface.alwaysDark;
 
   @override
-  double get buttonHeight => Values.smallTag;
+  double get buttonHeight => _small ? Values.smallTag : Values.tapSize;
 
   Widget _buildText() {
     return WidgetText(

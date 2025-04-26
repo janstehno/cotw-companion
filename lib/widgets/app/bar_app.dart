@@ -1,14 +1,18 @@
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
+import 'package:cotwcompanion/widgets/button/button_link.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class WidgetAppBar extends StatelessWidget {
   final String _text;
   final String? _icon;
+  final String? _helpUrl;
   final int _maxLines;
   final Function? _onTap;
   final BuildContext _context;
@@ -17,11 +21,13 @@ class WidgetAppBar extends StatelessWidget {
     String text, {
     super.key,
     String? icon,
+    String? helpUrl,
     int maxLines = 2,
     Function? onTap,
     required BuildContext context,
   })  : _text = text,
         _icon = icon,
+        _helpUrl = helpUrl,
         _maxLines = maxLines,
         _onTap = onTap,
         _context = context;
@@ -73,16 +79,41 @@ class WidgetAppBar extends StatelessWidget {
     );
   }
 
+  Widget _buildHelp() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      color: Interface.primaryDark,
+      child: Row(
+        children: [
+          Spacer(),
+          WidgetButtonLink(
+            tr("HELP"),
+            color: Interface.alwaysDark,
+            background: Interface.transparent,
+            onTap: () {
+              Utils.redirectTo(_helpUrl!);
+            },
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _buildWidgets() {
     return Container(
       color: Interface.primary,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
         children: [
-          _buildLeft(),
-          Expanded(child: _buildRight()),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildLeft(),
+              Expanded(child: _buildRight()),
+            ],
+          ),
+          _buildHelp(),
         ],
       ),
     );

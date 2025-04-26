@@ -307,6 +307,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     return WidgetAppBar(
       tr("ANIMAL_NEED_ZONES"),
       context: context,
+      helpUrl: "https://github.com/janstehno/cotw-companion/wiki/Need-zones",
     );
   }
 

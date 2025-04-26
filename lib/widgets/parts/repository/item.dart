@@ -46,7 +46,7 @@ class WidgetRepositoryItem extends StatelessWidget {
         tr("DETAILS"),
         color: Interface.alwaysDark,
         background: Interface.primary,
-        onTap: () => Utils.redirectTo(Uri.parse(_url)),
+        onTap: () => Utils.redirectTo(_url),
       ),
     );
   }

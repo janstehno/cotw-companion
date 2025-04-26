@@ -93,15 +93,20 @@ class ActivityHuntingPassState extends State<ActivityHuntingPass> {
     );
   }
 
+  WidgetAppBar _buildAppBar() {
+    return WidgetAppBar(
+      tr("HUNTING_PASS"),
+      context: context,
+      helpUrl: "https://github.com/janstehno/cotw-companion/wiki/Hunting-pass",
+    );
+  }
+
   Widget _buildBody() {
     return Container(
       color: Interface.body,
       child: Column(
         children: [
-          WidgetAppBar(
-            tr("HUNTING_PASS"),
-            context: context,
-          ),
+          _buildAppBar(),
           if (_helperHuntingPass.huntingPass != null)
             Expanded(child: WidgetHuntingPass(huntingPass: _helperHuntingPass.huntingPass!))
           else

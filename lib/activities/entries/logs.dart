@@ -1,7 +1,6 @@
 import 'package:cotwcompanion/activities/entries/entries.dart';
 import 'package:cotwcompanion/activities/filter/filter.dart';
 import 'package:cotwcompanion/activities/filter/logs.dart';
-import 'package:cotwcompanion/activities/help/logs.dart';
 import 'package:cotwcompanion/activities/modify/add/logs.dart';
 import 'package:cotwcompanion/filters/logs.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
@@ -20,7 +19,7 @@ import 'package:flutter/material.dart';
 class ActivityLogs extends ActivityEntries {
   const ActivityLogs({
     super.key,
-  }) : super("LOGBOOK");
+  }) : super("LOGBOOK", helpUrl: "https://github.com/janstehno/cotw-companion/wiki/Catch-book");
 
   @override
   ActivityLogsState createState() => ActivityLogsState();
@@ -134,7 +133,6 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
   @override
   List<WidgetMenuBarItem> listMenuBarItems() {
     return [
-      buildMenuHelp(const ActivityHelpLogs()),
       _buildMenuStats(),
       buildMenuFileOptions(),
       _buildMenuEntryView(),

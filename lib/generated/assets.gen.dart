@@ -85,142 +85,142 @@ class $AssetsRawGen {
 class $AssetsGraphicsAnatomyGen {
   const $AssetsGraphicsAnatomyGen();
 
-  AssetGenImage get americanAlligator => const AssetGenImage('assets/graphics/anatomy/american_alligator.png');
+  AssetGenImage get americanAlligator => const AssetGenImage('assets/graphics/anatomy/american_alligator.webp');
 
-  AssetGenImage get axisDeer => const AssetGenImage('assets/graphics/anatomy/axis_deer.png');
+  AssetGenImage get axisDeer => const AssetGenImage('assets/graphics/anatomy/axis_deer.webp');
 
-  AssetGenImage get banteng => const AssetGenImage('assets/graphics/anatomy/banteng.png');
+  AssetGenImage get banteng => const AssetGenImage('assets/graphics/anatomy/banteng.webp');
 
-  AssetGenImage get barasingha => const AssetGenImage('assets/graphics/anatomy/barasingha.png');
+  AssetGenImage get barasingha => const AssetGenImage('assets/graphics/anatomy/barasingha.webp');
 
-  AssetGenImage get beceiteIbex => const AssetGenImage('assets/graphics/anatomy/beceite_ibex.png');
+  AssetGenImage get beceiteIbex => const AssetGenImage('assets/graphics/anatomy/beceite_ibex.webp');
 
-  AssetGenImage get bengalTiger => const AssetGenImage('assets/graphics/anatomy/bengal_tiger.png');
+  AssetGenImage get bengalTiger => const AssetGenImage('assets/graphics/anatomy/bengal_tiger.webp');
 
-  AssetGenImage get bighornSheep => const AssetGenImage('assets/graphics/anatomy/bighorn_sheep.png');
+  AssetGenImage get bighornSheep => const AssetGenImage('assets/graphics/anatomy/bighorn_sheep.webp');
 
-  AssetGenImage get blackBear => const AssetGenImage('assets/graphics/anatomy/black_bear.png');
+  AssetGenImage get blackBear => const AssetGenImage('assets/graphics/anatomy/black_bear.webp');
 
-  AssetGenImage get blackbuck => const AssetGenImage('assets/graphics/anatomy/blackbuck.png');
+  AssetGenImage get blackbuck => const AssetGenImage('assets/graphics/anatomy/blackbuck.webp');
 
-  AssetGenImage get blacktailDeer => const AssetGenImage('assets/graphics/anatomy/blacktail_deer.png');
+  AssetGenImage get blacktailDeer => const AssetGenImage('assets/graphics/anatomy/blacktail_deer.webp');
 
-  AssetGenImage get blueSheep => const AssetGenImage('assets/graphics/anatomy/blue_sheep.png');
+  AssetGenImage get blueSheep => const AssetGenImage('assets/graphics/anatomy/blue_sheep.webp');
 
-  AssetGenImage get blueWildebeest => const AssetGenImage('assets/graphics/anatomy/blue_wildebeest.png');
+  AssetGenImage get blueWildebeest => const AssetGenImage('assets/graphics/anatomy/blue_wildebeest.webp');
 
-  AssetGenImage get brownBear => const AssetGenImage('assets/graphics/anatomy/brown_bear.png');
+  AssetGenImage get brownBear => const AssetGenImage('assets/graphics/anatomy/brown_bear.webp');
 
-  AssetGenImage get capeBuffalo => const AssetGenImage('assets/graphics/anatomy/cape_buffalo.png');
+  AssetGenImage get capeBuffalo => const AssetGenImage('assets/graphics/anatomy/cape_buffalo.webp');
 
-  AssetGenImage get caribou => const AssetGenImage('assets/graphics/anatomy/caribou.png');
+  AssetGenImage get caribou => const AssetGenImage('assets/graphics/anatomy/caribou.webp');
 
-  AssetGenImage get chamois => const AssetGenImage('assets/graphics/anatomy/chamois.png');
+  AssetGenImage get chamois => const AssetGenImage('assets/graphics/anatomy/chamois.webp');
 
-  AssetGenImage get collaredPeccary => const AssetGenImage('assets/graphics/anatomy/collared_peccary.png');
+  AssetGenImage get collaredPeccary => const AssetGenImage('assets/graphics/anatomy/collared_peccary.webp');
 
-  AssetGenImage get commonRaccoon => const AssetGenImage('assets/graphics/anatomy/common_raccoon.png');
+  AssetGenImage get commonRaccoon => const AssetGenImage('assets/graphics/anatomy/common_raccoon.webp');
 
-  AssetGenImage get coyote => const AssetGenImage('assets/graphics/anatomy/coyote.png');
+  AssetGenImage get coyote => const AssetGenImage('assets/graphics/anatomy/coyote.webp');
 
-  AssetGenImage get easternGrayKangaroo => const AssetGenImage('assets/graphics/anatomy/eastern_gray_kangaroo.png');
+  AssetGenImage get easternGrayKangaroo => const AssetGenImage('assets/graphics/anatomy/eastern_gray_kangaroo.webp');
 
-  AssetGenImage get eurasianLynx => const AssetGenImage('assets/graphics/anatomy/eurasian_lynx.png');
+  AssetGenImage get eurasianLynx => const AssetGenImage('assets/graphics/anatomy/eurasian_lynx.webp');
 
-  AssetGenImage get europeanBison => const AssetGenImage('assets/graphics/anatomy/european_bison.png');
+  AssetGenImage get europeanBison => const AssetGenImage('assets/graphics/anatomy/european_bison.webp');
 
-  AssetGenImage get fallowDeer => const AssetGenImage('assets/graphics/anatomy/fallow_deer.png');
+  AssetGenImage get fallowDeer => const AssetGenImage('assets/graphics/anatomy/fallow_deer.webp');
 
-  AssetGenImage get feralGoat => const AssetGenImage('assets/graphics/anatomy/feral_goat.png');
+  AssetGenImage get feralGoat => const AssetGenImage('assets/graphics/anatomy/feral_goat.webp');
 
-  AssetGenImage get feralPig => const AssetGenImage('assets/graphics/anatomy/feral_pig.png');
+  AssetGenImage get feralPig => const AssetGenImage('assets/graphics/anatomy/feral_pig.webp');
 
-  AssetGenImage get gemsbok => const AssetGenImage('assets/graphics/anatomy/gemsbok.png');
+  AssetGenImage get gemsbok => const AssetGenImage('assets/graphics/anatomy/gemsbok.webp');
 
-  AssetGenImage get grayFox => const AssetGenImage('assets/graphics/anatomy/gray_fox.png');
+  AssetGenImage get grayFox => const AssetGenImage('assets/graphics/anatomy/gray_fox.webp');
 
-  AssetGenImage get grayWolf => const AssetGenImage('assets/graphics/anatomy/gray_wolf.png');
+  AssetGenImage get grayWolf => const AssetGenImage('assets/graphics/anatomy/gray_wolf.webp');
 
-  AssetGenImage get gredosIbex => const AssetGenImage('assets/graphics/anatomy/gredos_ibex.png');
+  AssetGenImage get gredosIbex => const AssetGenImage('assets/graphics/anatomy/gredos_ibex.webp');
 
-  AssetGenImage get grizzlyBear => const AssetGenImage('assets/graphics/anatomy/grizzly_bear.png');
+  AssetGenImage get grizzlyBear => const AssetGenImage('assets/graphics/anatomy/grizzly_bear.webp');
 
-  AssetGenImage get hogDeer => const AssetGenImage('assets/graphics/anatomy/hog_deer.png');
+  AssetGenImage get hogDeer => const AssetGenImage('assets/graphics/anatomy/hog_deer.webp');
 
-  AssetGenImage get iberianMouflon => const AssetGenImage('assets/graphics/anatomy/iberian_mouflon.png');
+  AssetGenImage get iberianMouflon => const AssetGenImage('assets/graphics/anatomy/iberian_mouflon.webp');
 
-  AssetGenImage get iberianWolf => const AssetGenImage('assets/graphics/anatomy/iberian_wolf.png');
+  AssetGenImage get iberianWolf => const AssetGenImage('assets/graphics/anatomy/iberian_wolf.webp');
 
-  AssetGenImage get javanRusa => const AssetGenImage('assets/graphics/anatomy/javan_rusa.png');
+  AssetGenImage get javanRusa => const AssetGenImage('assets/graphics/anatomy/javan_rusa.webp');
 
-  AssetGenImage get lesserKudu => const AssetGenImage('assets/graphics/anatomy/lesser_kudu.png');
+  AssetGenImage get lesserKudu => const AssetGenImage('assets/graphics/anatomy/lesser_kudu.webp');
 
-  AssetGenImage get lion => const AssetGenImage('assets/graphics/anatomy/lion.png');
+  AssetGenImage get lion => const AssetGenImage('assets/graphics/anatomy/lion.webp');
 
-  AssetGenImage get mexicanBobcat => const AssetGenImage('assets/graphics/anatomy/mexican_bobcat.png');
+  AssetGenImage get mexicanBobcat => const AssetGenImage('assets/graphics/anatomy/mexican_bobcat.webp');
 
-  AssetGenImage get moose => const AssetGenImage('assets/graphics/anatomy/moose.png');
+  AssetGenImage get moose => const AssetGenImage('assets/graphics/anatomy/moose.webp');
 
-  AssetGenImage get mountainGoat => const AssetGenImage('assets/graphics/anatomy/mountain_goat.png');
+  AssetGenImage get mountainGoat => const AssetGenImage('assets/graphics/anatomy/mountain_goat.webp');
 
-  AssetGenImage get muleDeer => const AssetGenImage('assets/graphics/anatomy/mule_deer.png');
+  AssetGenImage get muleDeer => const AssetGenImage('assets/graphics/anatomy/mule_deer.webp');
 
-  AssetGenImage get nilgai => const AssetGenImage('assets/graphics/anatomy/nilgai.png');
+  AssetGenImage get nilgai => const AssetGenImage('assets/graphics/anatomy/nilgai.webp');
 
-  AssetGenImage get northernRedMuntjac => const AssetGenImage('assets/graphics/anatomy/northern_red_muntjac.png');
+  AssetGenImage get northernRedMuntjac => const AssetGenImage('assets/graphics/anatomy/northern_red_muntjac.webp');
 
-  AssetGenImage get plainsBison => const AssetGenImage('assets/graphics/anatomy/plains_bison.png');
+  AssetGenImage get plainsBison => const AssetGenImage('assets/graphics/anatomy/plains_bison.webp');
 
-  AssetGenImage get pronghorn => const AssetGenImage('assets/graphics/anatomy/pronghorn.png');
+  AssetGenImage get pronghorn => const AssetGenImage('assets/graphics/anatomy/pronghorn.webp');
 
-  AssetGenImage get puma => const AssetGenImage('assets/graphics/anatomy/puma.png');
+  AssetGenImage get puma => const AssetGenImage('assets/graphics/anatomy/puma.webp');
 
-  AssetGenImage get raccoonDog => const AssetGenImage('assets/graphics/anatomy/raccoon_dog.png');
+  AssetGenImage get raccoonDog => const AssetGenImage('assets/graphics/anatomy/raccoon_dog.webp');
 
-  AssetGenImage get redDeer => const AssetGenImage('assets/graphics/anatomy/red_deer.png');
+  AssetGenImage get redDeer => const AssetGenImage('assets/graphics/anatomy/red_deer.webp');
 
-  AssetGenImage get redFox => const AssetGenImage('assets/graphics/anatomy/red_fox.png');
+  AssetGenImage get redFox => const AssetGenImage('assets/graphics/anatomy/red_fox.webp');
 
-  AssetGenImage get reindeer => const AssetGenImage('assets/graphics/anatomy/reindeer.png');
+  AssetGenImage get reindeer => const AssetGenImage('assets/graphics/anatomy/reindeer.webp');
 
-  AssetGenImage get rockyMountainElk => const AssetGenImage('assets/graphics/anatomy/rocky_mountain_elk.png');
+  AssetGenImage get rockyMountainElk => const AssetGenImage('assets/graphics/anatomy/rocky_mountain_elk.webp');
 
-  AssetGenImage get roeDeer => const AssetGenImage('assets/graphics/anatomy/roe_deer.png');
+  AssetGenImage get roeDeer => const AssetGenImage('assets/graphics/anatomy/roe_deer.webp');
 
-  AssetGenImage get rondaIbex => const AssetGenImage('assets/graphics/anatomy/ronda_ibex.png');
+  AssetGenImage get rondaIbex => const AssetGenImage('assets/graphics/anatomy/ronda_ibex.webp');
 
-  AssetGenImage get rooseveltElk => const AssetGenImage('assets/graphics/anatomy/roosevelt_elk.png');
+  AssetGenImage get rooseveltElk => const AssetGenImage('assets/graphics/anatomy/roosevelt_elk.webp');
 
-  AssetGenImage get saltwaterCrocodile => const AssetGenImage('assets/graphics/anatomy/saltwater_crocodile.png');
+  AssetGenImage get saltwaterCrocodile => const AssetGenImage('assets/graphics/anatomy/saltwater_crocodile.webp');
 
-  AssetGenImage get sambar => const AssetGenImage('assets/graphics/anatomy/sambar.png');
+  AssetGenImage get sambar => const AssetGenImage('assets/graphics/anatomy/sambar.webp');
 
-  AssetGenImage get siberianMuskDeer => const AssetGenImage('assets/graphics/anatomy/siberian_musk_deer.png');
+  AssetGenImage get siberianMuskDeer => const AssetGenImage('assets/graphics/anatomy/siberian_musk_deer.webp');
 
-  AssetGenImage get sideStripedJackal => const AssetGenImage('assets/graphics/anatomy/side_striped_jackal.png');
+  AssetGenImage get sideStripedJackal => const AssetGenImage('assets/graphics/anatomy/side_striped_jackal.webp');
 
-  AssetGenImage get sikaDeer => const AssetGenImage('assets/graphics/anatomy/sika_deer.png');
+  AssetGenImage get sikaDeer => const AssetGenImage('assets/graphics/anatomy/sika_deer.webp');
 
-  AssetGenImage get snowLeopard => const AssetGenImage('assets/graphics/anatomy/snow_leopard.png');
+  AssetGenImage get snowLeopard => const AssetGenImage('assets/graphics/anatomy/snow_leopard.webp');
 
   AssetGenImage get southeasternSpanishIbex =>
-      const AssetGenImage('assets/graphics/anatomy/southeastern_spanish_ibex.png');
+      const AssetGenImage('assets/graphics/anatomy/southeastern_spanish_ibex.webp');
 
-  AssetGenImage get springbok => const AssetGenImage('assets/graphics/anatomy/springbok.png');
+  AssetGenImage get springbok => const AssetGenImage('assets/graphics/anatomy/springbok.webp');
 
-  AssetGenImage get tahr => const AssetGenImage('assets/graphics/anatomy/tahr.png');
+  AssetGenImage get tahr => const AssetGenImage('assets/graphics/anatomy/tahr.webp');
 
-  AssetGenImage get tibetanFox => const AssetGenImage('assets/graphics/anatomy/tibetan_fox.png');
+  AssetGenImage get tibetanFox => const AssetGenImage('assets/graphics/anatomy/tibetan_fox.webp');
 
-  AssetGenImage get warthog => const AssetGenImage('assets/graphics/anatomy/warthog.png');
+  AssetGenImage get warthog => const AssetGenImage('assets/graphics/anatomy/warthog.webp');
 
-  AssetGenImage get waterBuffalo => const AssetGenImage('assets/graphics/anatomy/water_buffalo.png');
+  AssetGenImage get waterBuffalo => const AssetGenImage('assets/graphics/anatomy/water_buffalo.webp');
 
-  AssetGenImage get whitetailDeer => const AssetGenImage('assets/graphics/anatomy/whitetail_deer.png');
+  AssetGenImage get whitetailDeer => const AssetGenImage('assets/graphics/anatomy/whitetail_deer.webp');
 
-  AssetGenImage get wildBoar => const AssetGenImage('assets/graphics/anatomy/wild_boar.png');
+  AssetGenImage get wildBoar => const AssetGenImage('assets/graphics/anatomy/wild_boar.webp');
 
-  AssetGenImage get wildYak => const AssetGenImage('assets/graphics/anatomy/wild_yak.png');
+  AssetGenImage get wildYak => const AssetGenImage('assets/graphics/anatomy/wild_yak.webp');
 
   List<AssetGenImage> get values => [
         americanAlligator,
@@ -686,201 +686,203 @@ class $AssetsGraphicsCallersGen {
 class $AssetsGraphicsHeadsGen {
   const $AssetsGraphicsHeadsGen();
 
-  AssetGenImage get americanalligator => const AssetGenImage('assets/graphics/heads/americanalligator.png');
+  AssetGenImage get americanalligator => const AssetGenImage('assets/graphics/heads/americanalligator.webp');
 
-  AssetGenImage get antelopejackrabbit => const AssetGenImage('assets/graphics/heads/antelopejackrabbit.png');
+  AssetGenImage get antelopejackrabbit => const AssetGenImage('assets/graphics/heads/antelopejackrabbit.webp');
 
-  AssetGenImage get axisdeer => const AssetGenImage('assets/graphics/heads/axisdeer.png');
+  AssetGenImage get axisdeer => const AssetGenImage('assets/graphics/heads/axisdeer.webp');
 
-  AssetGenImage get banteng => const AssetGenImage('assets/graphics/heads/banteng.png');
+  AssetGenImage get banteng => const AssetGenImage('assets/graphics/heads/banteng.webp');
 
-  AssetGenImage get barasingha => const AssetGenImage('assets/graphics/heads/barasingha.png');
+  AssetGenImage get barasingha => const AssetGenImage('assets/graphics/heads/barasingha.webp');
 
-  AssetGenImage get beceiteibex => const AssetGenImage('assets/graphics/heads/beceiteibex.png');
+  AssetGenImage get beceiteibex => const AssetGenImage('assets/graphics/heads/beceiteibex.webp');
 
-  AssetGenImage get bengaltiger => const AssetGenImage('assets/graphics/heads/bengaltiger.png');
+  AssetGenImage get bengaltiger => const AssetGenImage('assets/graphics/heads/bengaltiger.webp');
 
-  AssetGenImage get bighornsheep => const AssetGenImage('assets/graphics/heads/bighornsheep.png');
+  AssetGenImage get bighornsheep => const AssetGenImage('assets/graphics/heads/bighornsheep.webp');
 
-  AssetGenImage get blackbear => const AssetGenImage('assets/graphics/heads/blackbear.png');
+  AssetGenImage get blackbear => const AssetGenImage('assets/graphics/heads/blackbear.webp');
 
-  AssetGenImage get blackbuck => const AssetGenImage('assets/graphics/heads/blackbuck.png');
+  AssetGenImage get blackbuck => const AssetGenImage('assets/graphics/heads/blackbuck.webp');
 
-  AssetGenImage get blackgrouse => const AssetGenImage('assets/graphics/heads/blackgrouse.png');
+  AssetGenImage get blackgrouse => const AssetGenImage('assets/graphics/heads/blackgrouse.webp');
 
-  AssetGenImage get blacktaildeer => const AssetGenImage('assets/graphics/heads/blacktaildeer.png');
+  AssetGenImage get blacktaildeer => const AssetGenImage('assets/graphics/heads/blacktaildeer.webp');
 
-  AssetGenImage get bluesheep => const AssetGenImage('assets/graphics/heads/bluesheep.png');
+  AssetGenImage get bluesheep => const AssetGenImage('assets/graphics/heads/bluesheep.webp');
 
-  AssetGenImage get bluewildebeest => const AssetGenImage('assets/graphics/heads/bluewildebeest.png');
+  AssetGenImage get bluewildebeest => const AssetGenImage('assets/graphics/heads/bluewildebeest.webp');
 
-  AssetGenImage get bobwhitequail => const AssetGenImage('assets/graphics/heads/bobwhitequail.png');
+  AssetGenImage get bobwhitequail => const AssetGenImage('assets/graphics/heads/bobwhitequail.webp');
 
-  AssetGenImage get brownbear => const AssetGenImage('assets/graphics/heads/brownbear.png');
+  AssetGenImage get brownbear => const AssetGenImage('assets/graphics/heads/brownbear.webp');
 
-  AssetGenImage get canadagoose => const AssetGenImage('assets/graphics/heads/canadagoose.png');
+  AssetGenImage get canadagoose => const AssetGenImage('assets/graphics/heads/canadagoose.webp');
 
-  AssetGenImage get capebuffalo => const AssetGenImage('assets/graphics/heads/capebuffalo.png');
+  AssetGenImage get capebuffalo => const AssetGenImage('assets/graphics/heads/capebuffalo.webp');
 
-  AssetGenImage get caribou => const AssetGenImage('assets/graphics/heads/caribou.png');
+  AssetGenImage get caribou => const AssetGenImage('assets/graphics/heads/caribou.webp');
 
-  AssetGenImage get chamois => const AssetGenImage('assets/graphics/heads/chamois.png');
+  AssetGenImage get chamois => const AssetGenImage('assets/graphics/heads/chamois.webp');
 
-  AssetGenImage get cinnamonteal => const AssetGenImage('assets/graphics/heads/cinnamonteal.png');
+  AssetGenImage get cinnamonteal => const AssetGenImage('assets/graphics/heads/cinnamonteal.webp');
 
-  AssetGenImage get collaredpeccary => const AssetGenImage('assets/graphics/heads/collaredpeccary.png');
+  AssetGenImage get collaredpeccary => const AssetGenImage('assets/graphics/heads/collaredpeccary.webp');
 
-  AssetGenImage get commonraccoon => const AssetGenImage('assets/graphics/heads/commonraccoon.png');
+  AssetGenImage get commonraccoon => const AssetGenImage('assets/graphics/heads/commonraccoon.webp');
 
-  AssetGenImage get coyote => const AssetGenImage('assets/graphics/heads/coyote.png');
+  AssetGenImage get coyote => const AssetGenImage('assets/graphics/heads/coyote.webp');
 
-  AssetGenImage get easterncottontailrabbit => const AssetGenImage('assets/graphics/heads/easterncottontailrabbit.png');
+  AssetGenImage get easterncottontailrabbit =>
+      const AssetGenImage('assets/graphics/heads/easterncottontailrabbit.webp');
 
-  AssetGenImage get easterngraykangaroo => const AssetGenImage('assets/graphics/heads/easterngraykangaroo.png');
+  AssetGenImage get easterngraykangaroo => const AssetGenImage('assets/graphics/heads/easterngraykangaroo.webp');
 
-  AssetGenImage get eurasianlynx => const AssetGenImage('assets/graphics/heads/eurasianlynx.png');
+  AssetGenImage get eurasianlynx => const AssetGenImage('assets/graphics/heads/eurasianlynx.webp');
 
-  AssetGenImage get eurasianteal => const AssetGenImage('assets/graphics/heads/eurasianteal.png');
+  AssetGenImage get eurasianteal => const AssetGenImage('assets/graphics/heads/eurasianteal.webp');
 
-  AssetGenImage get eurasianwigeon => const AssetGenImage('assets/graphics/heads/eurasianwigeon.png');
+  AssetGenImage get eurasianwigeon => const AssetGenImage('assets/graphics/heads/eurasianwigeon.webp');
 
-  AssetGenImage get europeanbison => const AssetGenImage('assets/graphics/heads/europeanbison.png');
+  AssetGenImage get europeanbison => const AssetGenImage('assets/graphics/heads/europeanbison.webp');
 
-  AssetGenImage get europeanhare => const AssetGenImage('assets/graphics/heads/europeanhare.png');
+  AssetGenImage get europeanhare => const AssetGenImage('assets/graphics/heads/europeanhare.webp');
 
-  AssetGenImage get europeanrabbit => const AssetGenImage('assets/graphics/heads/europeanrabbit.png');
+  AssetGenImage get europeanrabbit => const AssetGenImage('assets/graphics/heads/europeanrabbit.webp');
 
-  AssetGenImage get fallowdeer => const AssetGenImage('assets/graphics/heads/fallowdeer.png');
+  AssetGenImage get fallowdeer => const AssetGenImage('assets/graphics/heads/fallowdeer.webp');
 
-  AssetGenImage get feralgoat => const AssetGenImage('assets/graphics/heads/feralgoat.png');
+  AssetGenImage get feralgoat => const AssetGenImage('assets/graphics/heads/feralgoat.webp');
 
-  AssetGenImage get feralpig => const AssetGenImage('assets/graphics/heads/feralpig.png');
+  AssetGenImage get feralpig => const AssetGenImage('assets/graphics/heads/feralpig.webp');
 
-  AssetGenImage get ferruginousduck => const AssetGenImage('assets/graphics/heads/ferruginousduck.png');
+  AssetGenImage get ferruginousduck => const AssetGenImage('assets/graphics/heads/ferruginousduck.webp');
 
-  AssetGenImage get gadwall => const AssetGenImage('assets/graphics/heads/gadwall.png');
+  AssetGenImage get gadwall => const AssetGenImage('assets/graphics/heads/gadwall.webp');
 
-  AssetGenImage get gemsbok => const AssetGenImage('assets/graphics/heads/gemsbok.png');
+  AssetGenImage get gemsbok => const AssetGenImage('assets/graphics/heads/gemsbok.webp');
 
-  AssetGenImage get goldeneye => const AssetGenImage('assets/graphics/heads/goldeneye.png');
+  AssetGenImage get goldeneye => const AssetGenImage('assets/graphics/heads/goldeneye.webp');
 
-  AssetGenImage get grayfox => const AssetGenImage('assets/graphics/heads/grayfox.png');
+  AssetGenImage get grayfox => const AssetGenImage('assets/graphics/heads/grayfox.webp');
 
-  AssetGenImage get graywolf => const AssetGenImage('assets/graphics/heads/graywolf.png');
+  AssetGenImage get graywolf => const AssetGenImage('assets/graphics/heads/graywolf.webp');
 
-  AssetGenImage get gredosibex => const AssetGenImage('assets/graphics/heads/gredosibex.png');
+  AssetGenImage get gredosibex => const AssetGenImage('assets/graphics/heads/gredosibex.webp');
 
-  AssetGenImage get greylaggoose => const AssetGenImage('assets/graphics/heads/greylaggoose.png');
+  AssetGenImage get greylaggoose => const AssetGenImage('assets/graphics/heads/greylaggoose.webp');
 
-  AssetGenImage get grizzlybear => const AssetGenImage('assets/graphics/heads/grizzlybear.png');
+  AssetGenImage get grizzlybear => const AssetGenImage('assets/graphics/heads/grizzlybear.webp');
 
-  AssetGenImage get harlequinduck => const AssetGenImage('assets/graphics/heads/harlequinduck.png');
+  AssetGenImage get harlequinduck => const AssetGenImage('assets/graphics/heads/harlequinduck.webp');
 
-  AssetGenImage get hazelgrouse => const AssetGenImage('assets/graphics/heads/hazelgrouse.png');
+  AssetGenImage get hazelgrouse => const AssetGenImage('assets/graphics/heads/hazelgrouse.webp');
 
-  AssetGenImage get hogdeer => const AssetGenImage('assets/graphics/heads/hogdeer.png');
+  AssetGenImage get hogdeer => const AssetGenImage('assets/graphics/heads/hogdeer.webp');
 
-  AssetGenImage get iberianmouflon => const AssetGenImage('assets/graphics/heads/iberianmouflon.png');
+  AssetGenImage get iberianmouflon => const AssetGenImage('assets/graphics/heads/iberianmouflon.webp');
 
-  AssetGenImage get iberianwolf => const AssetGenImage('assets/graphics/heads/iberianwolf.png');
+  AssetGenImage get iberianwolf => const AssetGenImage('assets/graphics/heads/iberianwolf.webp');
 
-  AssetGenImage get javanrusa => const AssetGenImage('assets/graphics/heads/javanrusa.png');
+  AssetGenImage get javanrusa => const AssetGenImage('assets/graphics/heads/javanrusa.webp');
 
-  AssetGenImage get lesserkudu => const AssetGenImage('assets/graphics/heads/lesserkudu.png');
+  AssetGenImage get lesserkudu => const AssetGenImage('assets/graphics/heads/lesserkudu.webp');
 
-  AssetGenImage get lion => const AssetGenImage('assets/graphics/heads/lion.png');
+  AssetGenImage get lion => const AssetGenImage('assets/graphics/heads/lion.webp');
 
-  AssetGenImage get magpiegoose => const AssetGenImage('assets/graphics/heads/magpiegoose.png');
+  AssetGenImage get magpiegoose => const AssetGenImage('assets/graphics/heads/magpiegoose.webp');
 
-  AssetGenImage get mallard => const AssetGenImage('assets/graphics/heads/mallard.png');
+  AssetGenImage get mallard => const AssetGenImage('assets/graphics/heads/mallard.webp');
 
-  AssetGenImage get mexicanbobcat => const AssetGenImage('assets/graphics/heads/mexicanbobcat.png');
+  AssetGenImage get mexicanbobcat => const AssetGenImage('assets/graphics/heads/mexicanbobcat.webp');
 
-  AssetGenImage get moose => const AssetGenImage('assets/graphics/heads/moose.png');
+  AssetGenImage get moose => const AssetGenImage('assets/graphics/heads/moose.webp');
 
-  AssetGenImage get mountaingoat => const AssetGenImage('assets/graphics/heads/mountaingoat.png');
+  AssetGenImage get mountaingoat => const AssetGenImage('assets/graphics/heads/mountaingoat.webp');
 
-  AssetGenImage get mountainhare => const AssetGenImage('assets/graphics/heads/mountainhare.png');
+  AssetGenImage get mountainhare => const AssetGenImage('assets/graphics/heads/mountainhare.webp');
 
-  AssetGenImage get muledeer => const AssetGenImage('assets/graphics/heads/muledeer.png');
+  AssetGenImage get muledeer => const AssetGenImage('assets/graphics/heads/muledeer.webp');
 
-  AssetGenImage get nilgai => const AssetGenImage('assets/graphics/heads/nilgai.png');
+  AssetGenImage get nilgai => const AssetGenImage('assets/graphics/heads/nilgai.webp');
 
-  AssetGenImage get northernredmuntjac => const AssetGenImage('assets/graphics/heads/northernredmuntjac.png');
+  AssetGenImage get northernredmuntjac => const AssetGenImage('assets/graphics/heads/northernredmuntjac.webp');
 
-  AssetGenImage get plainsbison => const AssetGenImage('assets/graphics/heads/plainsbison.png');
+  AssetGenImage get plainsbison => const AssetGenImage('assets/graphics/heads/plainsbison.webp');
 
-  AssetGenImage get pronghorn => const AssetGenImage('assets/graphics/heads/pronghorn.png');
+  AssetGenImage get pronghorn => const AssetGenImage('assets/graphics/heads/pronghorn.webp');
 
-  AssetGenImage get puma => const AssetGenImage('assets/graphics/heads/puma.png');
+  AssetGenImage get puma => const AssetGenImage('assets/graphics/heads/puma.webp');
 
-  AssetGenImage get raccoondog => const AssetGenImage('assets/graphics/heads/raccoondog.png');
+  AssetGenImage get raccoondog => const AssetGenImage('assets/graphics/heads/raccoondog.webp');
 
-  AssetGenImage get reddeer => const AssetGenImage('assets/graphics/heads/reddeer.png');
+  AssetGenImage get reddeer => const AssetGenImage('assets/graphics/heads/reddeer.webp');
 
-  AssetGenImage get redfox => const AssetGenImage('assets/graphics/heads/redfox.png');
+  AssetGenImage get redfox => const AssetGenImage('assets/graphics/heads/redfox.webp');
 
-  AssetGenImage get reindeer => const AssetGenImage('assets/graphics/heads/reindeer.png');
+  AssetGenImage get reindeer => const AssetGenImage('assets/graphics/heads/reindeer.webp');
 
-  AssetGenImage get ringneckedpheasant => const AssetGenImage('assets/graphics/heads/ringneckedpheasant.png');
+  AssetGenImage get ringneckedpheasant => const AssetGenImage('assets/graphics/heads/ringneckedpheasant.webp');
 
-  AssetGenImage get rockptarmigan => const AssetGenImage('assets/graphics/heads/rockptarmigan.png');
+  AssetGenImage get rockptarmigan => const AssetGenImage('assets/graphics/heads/rockptarmigan.webp');
 
-  AssetGenImage get rockymountainelk => const AssetGenImage('assets/graphics/heads/rockymountainelk.png');
+  AssetGenImage get rockymountainelk => const AssetGenImage('assets/graphics/heads/rockymountainelk.webp');
 
-  AssetGenImage get roedeer => const AssetGenImage('assets/graphics/heads/roedeer.png');
+  AssetGenImage get roedeer => const AssetGenImage('assets/graphics/heads/roedeer.webp');
 
-  AssetGenImage get rondaibex => const AssetGenImage('assets/graphics/heads/rondaibex.png');
+  AssetGenImage get rondaibex => const AssetGenImage('assets/graphics/heads/rondaibex.webp');
 
-  AssetGenImage get rooseveltelk => const AssetGenImage('assets/graphics/heads/rooseveltelk.png');
+  AssetGenImage get rooseveltelk => const AssetGenImage('assets/graphics/heads/rooseveltelk.webp');
 
-  AssetGenImage get saltwatercrocodile => const AssetGenImage('assets/graphics/heads/saltwatercrocodile.png');
+  AssetGenImage get saltwatercrocodile => const AssetGenImage('assets/graphics/heads/saltwatercrocodile.webp');
 
-  AssetGenImage get sambar => const AssetGenImage('assets/graphics/heads/sambar.png');
+  AssetGenImage get sambar => const AssetGenImage('assets/graphics/heads/sambar.webp');
 
-  AssetGenImage get scrubhare => const AssetGenImage('assets/graphics/heads/scrubhare.png');
+  AssetGenImage get scrubhare => const AssetGenImage('assets/graphics/heads/scrubhare.webp');
 
-  AssetGenImage get siberianmuskdeer => const AssetGenImage('assets/graphics/heads/siberianmuskdeer.png');
+  AssetGenImage get siberianmuskdeer => const AssetGenImage('assets/graphics/heads/siberianmuskdeer.webp');
 
-  AssetGenImage get sidestripedjackal => const AssetGenImage('assets/graphics/heads/sidestripedjackal.png');
+  AssetGenImage get sidestripedjackal => const AssetGenImage('assets/graphics/heads/sidestripedjackal.webp');
 
-  AssetGenImage get sikadeer => const AssetGenImage('assets/graphics/heads/sikadeer.png');
+  AssetGenImage get sikadeer => const AssetGenImage('assets/graphics/heads/sikadeer.webp');
 
-  AssetGenImage get snowleopard => const AssetGenImage('assets/graphics/heads/snowleopard.png');
+  AssetGenImage get snowleopard => const AssetGenImage('assets/graphics/heads/snowleopard.webp');
 
-  AssetGenImage get southeasternspanishibex => const AssetGenImage('assets/graphics/heads/southeasternspanishibex.png');
+  AssetGenImage get southeasternspanishibex =>
+      const AssetGenImage('assets/graphics/heads/southeasternspanishibex.webp');
 
-  AssetGenImage get springbok => const AssetGenImage('assets/graphics/heads/springbok.png');
+  AssetGenImage get springbok => const AssetGenImage('assets/graphics/heads/springbok.webp');
 
-  AssetGenImage get stubblequail => const AssetGenImage('assets/graphics/heads/stubblequail.png');
+  AssetGenImage get stubblequail => const AssetGenImage('assets/graphics/heads/stubblequail.webp');
 
-  AssetGenImage get tahr => const AssetGenImage('assets/graphics/heads/tahr.png');
+  AssetGenImage get tahr => const AssetGenImage('assets/graphics/heads/tahr.webp');
 
-  AssetGenImage get tibetanfox => const AssetGenImage('assets/graphics/heads/tibetanfox.png');
+  AssetGenImage get tibetanfox => const AssetGenImage('assets/graphics/heads/tibetanfox.webp');
 
-  AssetGenImage get tuftedduck => const AssetGenImage('assets/graphics/heads/tuftedduck.png');
+  AssetGenImage get tuftedduck => const AssetGenImage('assets/graphics/heads/tuftedduck.webp');
 
-  AssetGenImage get tundrabeangoose => const AssetGenImage('assets/graphics/heads/tundrabeangoose.png');
+  AssetGenImage get tundrabeangoose => const AssetGenImage('assets/graphics/heads/tundrabeangoose.webp');
 
-  AssetGenImage get turkey => const AssetGenImage('assets/graphics/heads/turkey.png');
+  AssetGenImage get turkey => const AssetGenImage('assets/graphics/heads/turkey.webp');
 
-  AssetGenImage get warthog => const AssetGenImage('assets/graphics/heads/warthog.png');
+  AssetGenImage get warthog => const AssetGenImage('assets/graphics/heads/warthog.webp');
 
-  AssetGenImage get waterbuffalo => const AssetGenImage('assets/graphics/heads/waterbuffalo.png');
+  AssetGenImage get waterbuffalo => const AssetGenImage('assets/graphics/heads/waterbuffalo.webp');
 
-  AssetGenImage get westerncapercaillie => const AssetGenImage('assets/graphics/heads/westerncapercaillie.png');
+  AssetGenImage get westerncapercaillie => const AssetGenImage('assets/graphics/heads/westerncapercaillie.webp');
 
-  AssetGenImage get whitetaildeer => const AssetGenImage('assets/graphics/heads/whitetaildeer.png');
+  AssetGenImage get whitetaildeer => const AssetGenImage('assets/graphics/heads/whitetaildeer.webp');
 
-  AssetGenImage get whitetailedjackrabbit => const AssetGenImage('assets/graphics/heads/whitetailedjackrabbit.png');
+  AssetGenImage get whitetailedjackrabbit => const AssetGenImage('assets/graphics/heads/whitetailedjackrabbit.webp');
 
-  AssetGenImage get wildboar => const AssetGenImage('assets/graphics/heads/wildboar.png');
+  AssetGenImage get wildboar => const AssetGenImage('assets/graphics/heads/wildboar.webp');
 
-  AssetGenImage get wildyak => const AssetGenImage('assets/graphics/heads/wildyak.png');
+  AssetGenImage get wildyak => const AssetGenImage('assets/graphics/heads/wildyak.webp');
 
-  AssetGenImage get willowptarmigan => const AssetGenImage('assets/graphics/heads/willowptarmigan.png');
+  AssetGenImage get willowptarmigan => const AssetGenImage('assets/graphics/heads/willowptarmigan.webp');
 
-  AssetGenImage get woollyhare => const AssetGenImage('assets/graphics/heads/woollyhare.png');
+  AssetGenImage get woollyhare => const AssetGenImage('assets/graphics/heads/woollyhare.webp');
 
   List<AssetGenImage> get values => [
         americanalligator,
@@ -1351,11 +1353,11 @@ class $AssetsGraphicsIconsGen {
 class $AssetsGraphicsImagesGen {
   const $AssetsGraphicsImagesGen();
 
-  AssetGenImage get cotw => const AssetGenImage('assets/graphics/images/cotw.jpg');
+  AssetGenImage get cotw => const AssetGenImage('assets/graphics/images/cotw.webp');
 
-  AssetGenImage get hunting => const AssetGenImage('assets/graphics/images/hunting.jpg');
+  AssetGenImage get hunting => const AssetGenImage('assets/graphics/images/hunting.webp');
 
-  AssetGenImage get placeholder => const AssetGenImage('assets/graphics/images/placeholder.png');
+  AssetGenImage get placeholder => const AssetGenImage('assets/graphics/images/placeholder.webp');
 
   List<AssetGenImage> get values => [cotw, hunting, placeholder];
 }

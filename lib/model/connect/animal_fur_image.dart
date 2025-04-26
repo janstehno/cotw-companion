@@ -49,7 +49,7 @@ class AnimalFurImage {
   List<String> imagesFor(CategoryType category) {
     String key = category.name.toUpperCase();
     if (!_images.containsKey(key)) return [];
-    return (_images[key]! as List).map((e) => "assets/graphics/furs/${e.toString()}.png").toList();
+    return (_images[key]! as List).map((e) => "assets/graphics/furs/${e.toString()}.webp").toList();
   }
 
   factory AnimalFurImage.fromJson(Map<String, dynamic> json) {

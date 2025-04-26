@@ -7,11 +7,14 @@ import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/widgets/app/error.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
   await EasyLocalization.ensureInitialized();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   int language = sharedPreferences.getInt("language") ?? 0;
@@ -25,6 +28,7 @@ void main() async {
   bool trophyWeightDistribution = sharedPreferences.getBool("trophyWeightDistribution") ?? false;
   bool furRarityPerCent = sharedPreferences.getBool("furRarityPerCent") ?? false;
   Interface.setColors(darkMode);
+
   runApp(
     EasyLocalization(
       path: "assets/translations",

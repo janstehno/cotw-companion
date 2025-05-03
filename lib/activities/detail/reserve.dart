@@ -6,15 +6,11 @@ import 'package:cotwcompanion/lists/reserve_info/reserve_animals.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_callers.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_environment.dart';
 import 'package:cotwcompanion/lists/reserve_info/reserve_missions.dart';
-import 'package:cotwcompanion/lists/reserve_info/reserve_weapons.dart';
-import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
-import 'package:cotwcompanion/widgets/subtitle/subtitle.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:cotwcompanion/widgets/title/title_image_tap.dart';
-import 'package:cotwcompanion/widgets/title/title_switch_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -33,14 +29,6 @@ class ActivityDetailReserve extends StatefulWidget {
 }
 
 class ActivityDetailReserveState extends State<ActivityDetailReserve> {
-  bool _withDlc = false;
-
-  void _toggleDlc() {
-    setState(() {
-      _withDlc = !_withDlc;
-    });
-  }
-
   Widget _buildMap(BuildContext context) {
     return WidgetTitleImageTap(
       tr("MAP"),
@@ -118,27 +106,6 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
     ];
   }
 
-  List<Widget> _listWeapons() {
-    return [
-      WidgetTitleSwitchIcon(
-        tr("RECOMMENDED_WEAPONS"),
-        subtext: "${tr("WEAPON_EFFECTIVE_RANGE")} & ${tr("WEAPON_PENETRATION")} ",
-        icon: Assets.graphics.icons.dlc,
-        isActive: _withDlc,
-        alignRight: true,
-        onTap: _toggleDlc,
-      ),
-      WidgetSubtitle(tr("WEAPONS_RIFLES")),
-      ListReserveWeapons(widget.reserve, weaponType: WeaponType.rifle, withDlc: _withDlc),
-      WidgetSubtitle(tr("WEAPONS_SHOTGUNS")),
-      ListReserveWeapons(widget.reserve, weaponType: WeaponType.shotgun, withDlc: _withDlc),
-      WidgetSubtitle(tr("WEAPONS_HANDGUNS")),
-      ListReserveWeapons(widget.reserve, weaponType: WeaponType.handgun, withDlc: _withDlc),
-      WidgetSubtitle(tr("WEAPONS_BOWS_CROSSBOWS")),
-      ListReserveWeapons(widget.reserve, weaponType: WeaponType.bow, withDlc: _withDlc),
-    ];
-  }
-
   Widget _buildWidgets(BuildContext context) {
     return WidgetScaffold(
       appBar: WidgetAppBar(
@@ -151,7 +118,6 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
         _buildMissions(context),
         ..._listAnimals(),
         ..._listCallers(),
-        ..._listWeapons(),
       ],
     );
   }

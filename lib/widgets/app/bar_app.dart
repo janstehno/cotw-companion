@@ -113,7 +113,7 @@ class WidgetAppBar extends StatelessWidget {
               Expanded(child: _buildRight()),
             ],
           ),
-          _buildHelp(),
+          if (_helpUrl != null) _buildHelp(),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/helpers/json.dart';
@@ -109,31 +110,41 @@ class Utils {
   }
 
   static Future<bool> exportFile(String content, String name) async {
-    HelperLogger logger = HelperLogger(identifier: "[UTILS] [EXPORT]");
+    final logger = HelperLogger(identifier: "[UTILS] [EXPORT]");
+
     PermissionStatus status = PermissionStatus.granted;
 
     if (Platform.isAndroid) {
       AndroidDeviceInfo device = await DeviceInfoPlugin().androidInfo;
-      if (int.parse(device.version.release) < 13) status = await Permission.storage.request();
+      if (int.parse(device.version.release) < 13) {
+        status = await Permission.storage.request();
+      }
     }
 
     logger.d("Permission granted: ${status.isGranted}");
 
-    if (status.isGranted) {
-      final String? path = await FilePicker.platform.getDirectoryPath();
-      logger.d("Chosen folder: $path");
-      if (path == null || content == "[]") return false;
-      try {
-        logger.d("Creating file $name");
-        final File file = File("$path/$name");
-        await file.writeAsString(content);
-      } on Exception {
+    if (!status.isGranted || content == "[]") return false;
+
+    try {
+      Uint8List bytes = Uint8List.fromList(utf8.encode(content));
+
+      final String? result = await FilePicker.platform.saveFile(
+        dialogTitle: 'Export Data',
+        fileName: name,
+        bytes: bytes,
+      );
+
+      if (result == null) {
+        logger.d("User canceled the export");
         return false;
       }
-      return true;
-    }
 
-    return false;
+      logger.d("File saved to: $result");
+      return true;
+    } catch (e) {
+      logger.e("Error while saving the file: $e");
+      return false;
+    }
   }
 
   static Future<bool> importFile(Function after) async {

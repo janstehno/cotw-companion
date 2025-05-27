@@ -47,9 +47,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Export/import files to/from your device from/to the app.</string>
 	<key>FLTEnableImpeller</key>
     <false/>
+	<key>UISupportsDocumentBrowser</key>
+    <true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App needs an access to files to properly export or import them.</string>
 </dict>
 </plist>

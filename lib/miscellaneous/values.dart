@@ -61,6 +61,7 @@ class Values {
     "Peter Bakic": ["03.11.2022"],
     "John Hines": ["11.02.2025"],
     "Michael Sturm": ["20.09.2024"],
+    "Ringo Deckert": ["12.04.2025"],
     "Michael McCleland": ["08.09.2023"],
     "Yan-Philippe Jacob": ["20.09.2023"],
     "Karsten Holst": ["18.01.2022"],
@@ -117,6 +118,7 @@ class Values {
     "Xdust5": ["Patreon"],
     "Mateusz 'Materacyk' Czerniak": ["Patreon"],
     "Steppinrazor": ["Patreon"],
+    "OnyxWulf": ["Patreon"],
     "McMarduk": ["Patreon"]
   };
   static const Map<String, List<String>> translationSupporters = {

@@ -9,11 +9,14 @@ import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/button/button_swipe.dart';
 import 'package:cotwcompanion/widgets/fullscreen/home_menu.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
+import 'package:cotwcompanion/widgets/parts/home/changelog.dart';
 import 'package:cotwcompanion/widgets/parts/home/search.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/text/text_pattern.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ActivityHome extends StatefulWidget {
   const ActivityHome({
@@ -25,7 +28,34 @@ class ActivityHome extends StatefulWidget {
 }
 
 class ActivityHomeState extends State<ActivityHome> {
+  int _currentBuildNumber = 0;
+  bool _showChangelog = false;
   bool _menuOpened = false;
+
+  @override
+  void initState() {
+    _checkVersion();
+    super.initState();
+  }
+
+  Future<void> _checkVersion() async {
+    final prefs = await SharedPreferences.getInstance();
+    final packageInfo = await PackageInfo.fromPlatform();
+    _currentBuildNumber = int.parse(packageInfo.buildNumber);
+    final storedVersion = prefs.getInt('lastBuildNumber') ?? 0;
+
+    if (_currentBuildNumber > storedVersion) {
+      setState(() {
+        _showChangelog = true;
+      });
+    }
+  }
+
+  Future<void> _dismiss() async {
+    setState(() {
+      _showChangelog = false;
+    });
+  }
 
   Widget _buildName() {
     return Column(
@@ -179,6 +209,15 @@ class ActivityHomeState extends State<ActivityHome> {
     );
   }
 
+  Widget _buildChangelog() {
+    return Center(
+      child: WidgetChangelog(
+        currentBuildNumber: _currentBuildNumber,
+        onDismiss: _dismiss,
+      ),
+    );
+  }
+
   Widget _buildInnerStack() {
     return Stack(
       fit: StackFit.expand,
@@ -211,6 +250,7 @@ class ActivityHomeState extends State<ActivityHome> {
             Expanded(child: _buildInnerStack()),
           ],
         ),
+        if (_showChangelog) _buildChangelog(),
         _buildMenu(),
       ],
     );
@@ -223,6 +263,7 @@ class ActivityHomeState extends State<ActivityHome> {
       body: SafeArea(
         child: GestureDetector(
           onHorizontalDragUpdate: (details) {
+            _dismiss();
             setState(() {
               if (details.delta.direction > 1) {
                 _menuOpened = false;

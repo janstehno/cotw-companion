@@ -10,6 +10,7 @@ class FilterAnimals extends Filter<Animal> {
   Map<FilterKey, int> get defaultFilters => {
         FilterKey.animalClass: 0x1FF,
         FilterKey.animalDifficulty: 0x7,
+        FilterKey.animalGreatOne: 0x0,
       };
 
   @override
@@ -24,8 +25,10 @@ class FilterAnimals extends Filter<Animal> {
             animal.getNameByLocale(context!.locale).toLowerCase().contains(searchText.toLowerCase());
         final matchAnimalClass = isEnabled(FilterKey.animalClass, animal.level - 1);
         final matchAnimalDifficulty = isEnabled(FilterKey.animalDifficulty, [3, 5, 9].indexOf(animal.difficulty));
+        final matchAnimalGreatOne = !isEnabled(FilterKey.animalGreatOne, AnimalOther.greatOne.index) ||
+            (isEnabled(FilterKey.animalGreatOne, AnimalOther.greatOne.index) && animal.hasGO);
 
-        return matchSearch && matchAnimalClass && matchAnimalDifficulty;
+        return matchSearch && matchAnimalClass && matchAnimalDifficulty && matchAnimalGreatOne;
       }).toList();
     }
 

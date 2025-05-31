@@ -4,6 +4,7 @@ import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/widgets/filter/picker_auto.dart';
+import 'package:cotwcompanion/widgets/filter/picker_text.dart';
 import 'package:cotwcompanion/widgets/title/title_icon.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -48,9 +49,27 @@ class ActivityFilterAnimalsState extends ActivityFilterState<Animal> {
     ];
   }
 
+  List<Widget> _listAnimalGreatOne() {
+    return [
+      WidgetTitleIcon(
+        tr("OTHER"),
+        icon: Assets.graphics.icons.other,
+      ),
+      WidgetFilterPickerText(
+        filter: widget.filter,
+        filterKey: FilterKey.animalGreatOne,
+        bitKeys: AnimalOther.values,
+        labels: [
+          tr("FUR:GREAT_ONE"),
+        ],
+      ),
+    ];
+  }
+
   @override
   List<Widget> get filters => [
         ..._listAnimalClass(),
         ..._listAnimalDifficulty(),
+        ..._listAnimalGreatOne(),
       ];
 }

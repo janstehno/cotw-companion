@@ -104,6 +104,7 @@ enum Supporter {
 enum FilterKey {
   animalClass,
   animalDifficulty,
+  animalGreatOne,
   weaponType,
   weaponAnimalClass,
   weaponMagMin,
@@ -146,6 +147,10 @@ enum FurRarity {
 enum Gender {
   male,
   female,
+}
+
+enum AnimalOther {
+  greatOne,
 }
 
 enum HuntingPassOption {

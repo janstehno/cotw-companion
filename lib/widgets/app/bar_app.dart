@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 class WidgetAppBar extends StatelessWidget {
   final String _text;
+  final String? _subtext;
   final String? _icon;
   final String? _helpUrl;
   final int _maxLines;
@@ -20,12 +21,14 @@ class WidgetAppBar extends StatelessWidget {
   const WidgetAppBar(
     String text, {
     super.key,
+    String? subtext,
     String? icon,
     String? helpUrl,
     int maxLines = 2,
     Function? onTap,
     required BuildContext context,
   })  : _text = text,
+        _subtext = subtext,
         _icon = icon,
         _helpUrl = helpUrl,
         _maxLines = maxLines,
@@ -61,12 +64,27 @@ class WidgetAppBar extends StatelessWidget {
   }
 
   Widget _buildText() {
-    return WidgetText(
-      _text.toUpperCase(),
-      color: Interface.alwaysDark,
-      style: _maxLines == 1 ? Style.condensed.s28.w600 : Style.condensed.s26.w600,
-      maxLines: _maxLines,
-      textAlign: TextAlign.right,
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        WidgetText(
+          _text.toUpperCase(),
+          color: Interface.alwaysDark,
+          style: _maxLines == 1 ? Style.condensed.s28.w600 : Style.condensed.s26.w600,
+          maxLines: _subtext != null ? 1 : _maxLines,
+          textAlign: TextAlign.right,
+        ),
+        if (_subtext != null)
+          WidgetText(
+            _subtext!,
+            color: Interface.alwaysDark,
+            style: Style.normal.s12.w300.copyWith(fontStyle: FontStyle.italic),
+            maxLines: 1,
+            textAlign: TextAlign.right,
+          ),
+      ],
     );
   }
 

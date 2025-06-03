@@ -48,7 +48,7 @@ class _WidgetChangelogState extends State<WidgetChangelog> {
     final settings = Provider.of<Settings>(context, listen: false);
     final languageCode = settings.getLocale(settings.language).languageCode;
 
-    final String jsonString = await rootBundle.loadString('assets/raw/changelog.json');
+    final String jsonString = await rootBundle.loadString(Assets.raw.changelog);
     final Map<String, dynamic> changelog = json.decode(jsonString);
 
     final List<dynamic>? localized = changelog[languageCode] ?? changelog['en'];

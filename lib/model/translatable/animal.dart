@@ -8,6 +8,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 class Animal extends Translatable {
+  final List<dynamic> _reserves;
+  final List<dynamic> _callers;
+
   final int _level;
   final int _difficulty;
   final double _silver;
@@ -40,6 +43,8 @@ class Animal extends Translatable {
   Animal({
     required super.id,
     required super.name,
+    required List<dynamic> reserves,
+    required List<dynamic> callers,
     required int level,
     required int difficulty,
     required double silver,
@@ -64,7 +69,9 @@ class Animal extends Translatable {
     required bool diamondFemale,
     required bool grounded,
     required bool dlc,
-  })  : _level = level,
+  })  : _reserves = reserves,
+        _callers = callers,
+        _level = level,
         _difficulty = difficulty,
         _silver = silver,
         _gold = gold,
@@ -88,6 +95,10 @@ class Animal extends Translatable {
         _diamondFemale = diamondFemale,
         _grounded = grounded,
         _dlc = dlc;
+
+  List<int> get reserves => _reserves.cast();
+
+  List<int> get callers => _callers.cast();
 
   int get level => _level;
 
@@ -179,13 +190,13 @@ class Animal extends Translatable {
 
   bool get hasGO => HelperJSON.getAnimalFurs(id).any((e) => e.rarity == FurRarity.greatOne);
 
-  bool get hasFeedZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 0));
+  bool get hasFeedZones => HelperJSON.getAnimalZonesFor(this).entries.any((e) => e.value.any((z) => z.zone == 0));
 
-  bool get hasDrinkZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 1));
+  bool get hasDrinkZones => HelperJSON.getAnimalZonesFor(this).entries.any((e) => e.value.any((z) => z.zone == 1));
 
-  bool get hasRestZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 2));
+  bool get hasRestZones => HelperJSON.getAnimalZonesFor(this).entries.any((e) => e.value.any((z) => z.zone == 2));
 
-  bool get hasOtherZones => HelperJSON.getAnimalZonesFor(id).entries.any((e) => e.value.any((z) => z.zone == 4));
+  bool get hasOtherZones => HelperJSON.getAnimalZonesFor(this).entries.any((e) => e.value.any((z) => z.zone == 4));
 
   bool get hasSenses => _sight > 0 || _hearing > 0 || _smell > 0;
 
@@ -193,6 +204,8 @@ class Animal extends Translatable {
     return Animal(
       id: json['ID'],
       name: json['NAME'],
+      reserves: json["RESERVES"] ?? [],
+      callers: json["CALLERS"] ?? [],
       level: json['LEVEL'],
       difficulty: json['DIFFICULTY'],
       silver: json['SILVER'],

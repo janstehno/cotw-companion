@@ -17,7 +17,7 @@ class ListAnimalCallers extends StatelessWidget {
     super.key,
   }) : _animal = animal;
 
-  List<Caller> get _callers => HelperJSON.getAnimalCallers(_animal.id).sorted(Caller.sortByName);
+  List<Caller> get _callers => HelperJSON.getAnimalCallers(_animal).sorted(Caller.sortByName);
 
   Widget _buildCaller(Caller caller) {
     return WidgetTextIndicator(

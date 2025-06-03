@@ -5,10 +5,8 @@ import 'package:collection/collection.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/logger.dart';
-import 'package:cotwcompanion/model/connect/animal_caller.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
 import 'package:cotwcompanion/model/connect/animal_fur_image.dart';
-import 'package:cotwcompanion/model/connect/animal_reserve.dart';
 import 'package:cotwcompanion/model/connect/animal_zone.dart';
 import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
 import 'package:cotwcompanion/model/describable/dlc.dart';
@@ -26,10 +24,8 @@ class HelperJSON {
 
   static final List<Ammo> ammo = [];
   static final List<Animal> animals = [];
-  static final List<AnimalCaller> animalsCallers = [];
   static final List<AnimalFur> animalsFurs = [];
   static final List<AnimalFurImage> animalsFursImages = [];
-  static final List<AnimalReserve> animalsReserves = [];
   static final List<AnimalZone> animalsZones = [];
   static final List<Caller> callers = [];
   static final List<Dlc> dlcs = [];
@@ -40,47 +36,41 @@ class HelperJSON {
   static final List<Mission> missions = [];
 
   static void setLists(
-    List<Ammo> a,
-    List<Animal> b,
-    List<AnimalCaller> c,
-    List<AnimalFur> d,
-    List<AnimalFurImage> n,
-    List<AnimalReserve> e,
-    List<AnimalZone> f,
-    List<Caller> g,
-    List<Dlc> h,
-    List<Fur> i,
-    List<Reserve> j,
-    List<Weapon> k,
-    List<WeaponAmmo> l,
-    List<Mission> m,
+    List<Ammo> sAmmo,
+    List<Animal> sAnimals,
+    List<AnimalFur> sAnimalsFurs,
+    List<AnimalFurImage> sAnimalsFursImages,
+    List<AnimalZone> sAnimalsZones,
+    List<Caller> sCallers,
+    List<Dlc> sDlcs,
+    List<Fur> sFurs,
+    List<Reserve> sReserves,
+    List<Weapon> sWeapons,
+    List<WeaponAmmo> sWeaponsAmmo,
+    List<Mission> sMissions,
   ) {
     _logger.i("Initializing sets in HelperJSON...");
     _clearLists();
-    ammo.addAll(a);
-    animals.addAll(b);
-    animalsCallers.addAll(c);
-    animalsFurs.addAll(d);
-    animalsFursImages.addAll(n);
-    animalsReserves.addAll(e);
-    animalsZones.addAll(f);
-    callers.addAll(g);
-    dlcs.addAll(h);
-    furs.addAll(i);
-    reserves.addAll(j);
-    weapons.addAll(k);
-    weaponsAmmo.addAll(l);
-    missions.addAll(m);
+    ammo.addAll(sAmmo);
+    animals.addAll(sAnimals);
+    animalsFurs.addAll(sAnimalsFurs);
+    animalsFursImages.addAll(sAnimalsFursImages);
+    animalsZones.addAll(sAnimalsZones);
+    callers.addAll(sCallers);
+    dlcs.addAll(sDlcs);
+    furs.addAll(sFurs);
+    reserves.addAll(sReserves);
+    weapons.addAll(sWeapons);
+    weaponsAmmo.addAll(sWeaponsAmmo);
+    missions.addAll(sMissions);
     _logger.t("Sets initialized");
   }
 
   static void _clearLists() {
     ammo.clear();
     animals.clear();
-    animalsCallers.clear();
     animalsFurs.clear();
     animalsFursImages.clear();
-    animalsReserves.clear();
     animalsZones.clear();
     callers.clear();
     dlcs.clear();
@@ -115,12 +105,8 @@ class HelperJSON {
     }
   }
 
-  static List<Caller> getAnimalCallers(int animalId) {
-    return callers.where((caller) {
-      return animalsCallers.where((animalCaller) {
-        return animalCaller.animalId == animalId && animalCaller.callerId == caller.id;
-      }).isNotEmpty;
-    }).toList();
+  static List<Caller> getAnimalCallers(Animal animal) {
+    return animal.callers.map((caller) => getCaller(caller)).whereType<Caller>().toList();
   }
 
   static List<AnimalFur> getAnimalFurs(int animalId) {
@@ -137,12 +123,8 @@ class HelperJSON {
     return animalsFurs.where((e) => e.furId == furId && e.rarity == rarity).toList();
   }
 
-  static List<Reserve> getAnimalReserves(int animalId) {
-    return reserves.where((reserve) {
-      return animalsReserves.where((animalReserve) {
-        return animalReserve.animalId == animalId && animalReserve.reserveId == reserve.id;
-      }).isNotEmpty;
-    }).toList();
+  static List<Reserve> getAnimalReserves(Animal animal) {
+    return animal.reserves.map((reserve) => getReserve(reserve)).whereType<Reserve>().toList();
   }
 
   static List<AnimalZone> getAnimalZones(int animalId, int reserveId) {
@@ -157,12 +139,12 @@ class HelperJSON {
     return animalZones;
   }
 
-  static Map<int, List<AnimalZone>> getAnimalZonesFor(int animalId) {
+  static Map<int, List<AnimalZone>> getAnimalZonesFor(Animal animal) {
     Map<int, List<AnimalZone>> allAnimalZones = {};
-    List<Reserve> animalReserves = getAnimalReserves(animalId);
+    List<Reserve> animalReserves = getAnimalReserves(animal);
 
     animalReserves.map((e) {
-      return allAnimalZones.putIfAbsent(e.id, () => getAnimalZones(animalId, e.id));
+      return allAnimalZones.putIfAbsent(e.id, () => getAnimalZones(animal.id, e.id));
     }).toList();
 
     return allAnimalZones;
@@ -177,11 +159,7 @@ class HelperJSON {
   }
 
   static List<Animal> getCallerAnimals(int callerId) {
-    return animals.where((animal) {
-      return animalsCallers.where((animalCaller) {
-        return animalCaller.animalId == animal.id && animalCaller.callerId == callerId;
-      }).isNotEmpty;
-    }).toList();
+    return animals.where((animal) => animal.callers.contains(callerId)).toList();
   }
 
   static Dlc? getDlc(int dlcId) {
@@ -236,11 +214,7 @@ class HelperJSON {
   }
 
   static List<Animal> getReserveAnimals(int reserveId) {
-    return animals.where((animal) {
-      return animalsReserves.where((animalReserve) {
-        return animalReserve.reserveId == reserveId && animalReserve.animalId == animal.id;
-      }).isNotEmpty;
-    }).toList();
+    return animals.where((animal) => animal.reserves.contains(reserveId)).toList();
   }
 
   static Weapon? getWeapon(int weaponId) {
@@ -309,19 +283,6 @@ class HelperJSON {
     }
   }
 
-  static Future<List<AnimalCaller>> readAnimalsCallers() async {
-    try {
-      final data = await getData(Assets.raw.animalscallers);
-      final list = json.decode(data) as List<dynamic>;
-      final List<AnimalCaller> animalsCallers = list.map((e) => AnimalCaller.fromJson(e)).toList();
-      _logger.t("${list.length} animal's callers loaded");
-      return animalsCallers;
-    } catch (e) {
-      _logger.w("Animal's callers not loaded");
-      rethrow;
-    }
-  }
-
   static Future<List<AnimalFur>> readAnimalsFurs() async {
     try {
       final data = await getData(Assets.raw.animalsfurs);
@@ -344,19 +305,6 @@ class HelperJSON {
       return animalsFursImages;
     } catch (e) {
       _logger.w("Animal's fur's images not loaded");
-      rethrow;
-    }
-  }
-
-  static Future<List<AnimalReserve>> readAnimalsReserves() async {
-    try {
-      final data = await getData(Assets.raw.animalsreserves);
-      final list = json.decode(data) as List<dynamic>;
-      final List<AnimalReserve> animalsReserves = list.map((e) => AnimalReserve.fromJson(e)).toList();
-      _logger.t("${animalsReserves.length} animal's reserves loaded");
-      return animalsReserves;
-    } catch (e) {
-      _logger.w("Animal's reserves not loaded");
       rethrow;
     }
   }

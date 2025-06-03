@@ -33,7 +33,7 @@ class ListAnimalZones extends StatefulWidget {
 }
 
 class ListAnimalZonesState extends State<ListAnimalZones> {
-  Map<int, List<AnimalZone>> get _zones => HelperJSON.getAnimalZonesFor(widget.animal.id);
+  Map<int, List<AnimalZone>> get _zones => HelperJSON.getAnimalZonesFor(widget.animal);
 
   final double _pageHeight = 350;
   final double _reserveHeight = 30;
@@ -57,7 +57,7 @@ class ListAnimalZonesState extends State<ListAnimalZones> {
   }
 
   void _initializeController() {
-    List<Reserve> reserves = HelperJSON.getAnimalReserves(widget.animal.id).sorted(Reserve.sortById);
+    List<Reserve> reserves = HelperJSON.getAnimalReserves(widget.animal).sorted(Reserve.sortById);
 
     _pageController = PageController(
       viewportFraction: 1,

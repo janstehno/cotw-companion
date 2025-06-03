@@ -15,7 +15,7 @@ class HelperMultimounts {
   Multimount getMultimount(int id) => _multimounts.elementAt(id - 1);
 
   void setMultimounts(List<Multimount> multimounts) {
-    _logger.i("Initializing multimounts in HelperPlanner...");
+    _logger.i("Initializing multimounts in HelperMultimounts...");
     _multimounts.clear();
     _multimounts.addAll(multimounts);
     _logger.t("Multimounts initialized");

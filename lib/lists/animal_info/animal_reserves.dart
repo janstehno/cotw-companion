@@ -15,7 +15,7 @@ class ListAnimalReserves extends StatelessWidget {
     super.key,
   }) : _animal = animal;
 
-  List<Reserve> get _reserves => HelperJSON.getAnimalReserves(_animal.id).sorted(Reserve.sortById);
+  List<Reserve> get _reserves => HelperJSON.getAnimalReserves(_animal).sorted(Reserve.sortById);
 
   Widget _buildReserve(Reserve reserve) {
     return WidgetTextIndicator(

@@ -30,7 +30,7 @@ class ListReserveCallers extends StatelessWidget {
     Set<Caller> callers = {};
     bool firstCallerAdded = false;
     for (Animal animal in _animals) {
-      List<Caller> animalCallers = HelperJSON.getAnimalCallers(animal.id);
+      List<Caller> animalCallers = HelperJSON.getAnimalCallers(animal);
       for (Caller caller in animalCallers) {
         if (!firstCallerAdded) {
           callers.add(caller);

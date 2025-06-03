@@ -1,5 +1,5 @@
 import 'package:cotwcompanion/helpers/json.dart';
-import 'package:cotwcompanion/model/connect/animal_reserve.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/translatable.dart';
 
 class Reserve extends Translatable {
@@ -60,9 +60,9 @@ class Reserve extends Translatable {
 
   List<int> get allClasses {
     List<int> classes = [];
-    for (AnimalReserve ar in HelperJSON.animalsReserves) {
-      if (ar.reserveId == id) {
-        int level = HelperJSON.getAnimal(ar.animalId)!.level;
+    for (Animal animal in HelperJSON.getReserveAnimals(id)) {
+      if (animal.reserves.contains(id)) {
+        int level = animal.level;
         if (!classes.contains(level)) {
           classes.add(level);
         }

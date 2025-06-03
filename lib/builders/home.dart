@@ -5,10 +5,8 @@ import 'package:cotwcompanion/builders/builder.dart';
 import 'package:cotwcompanion/helpers/filter.dart';
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/helpers/log.dart';
-import 'package:cotwcompanion/model/connect/animal_caller.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
 import 'package:cotwcompanion/model/connect/animal_fur_image.dart';
-import 'package:cotwcompanion/model/connect/animal_reserve.dart';
 import 'package:cotwcompanion/model/connect/animal_zone.dart';
 import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
 import 'package:cotwcompanion/model/describable/dlc.dart';
@@ -36,10 +34,8 @@ class BuilderHomeState extends BuilderBuilderState {
   void initializeData(AsyncSnapshot<Map<String, dynamic>> snapshot, BuildContext context) {
     List<Ammo> ammo = snapshot.data!["ammo"] ?? [];
     List<Animal> animals = snapshot.data!["animals"] ?? [];
-    List<AnimalCaller> animalsCallers = snapshot.data!["animalsCallers"] ?? [];
     List<AnimalFur> animalsFurs = snapshot.data!["animalsFurs"] ?? [];
     List<AnimalFurImage> animalsFursImages = snapshot.data!["animalsFursImages"] ?? [];
-    List<AnimalReserve> animalsReserves = snapshot.data!["animalsReserves"] ?? [];
     List<AnimalZone> animalsZones = snapshot.data!["animalsZones"] ?? [];
     List<Caller> callers = snapshot.data!["callers"] ?? [];
     List<Dlc> dlcs = snapshot.data!["dlcs"] ?? [];
@@ -48,8 +44,8 @@ class BuilderHomeState extends BuilderBuilderState {
     List<Weapon> weapons = snapshot.data!["weapons"] ?? [];
     List<WeaponAmmo> weaponsAmmo = snapshot.data!["weaponsAmmo"] ?? [];
     List<Mission> missions = snapshot.data!["missions"] ?? [];
-    HelperJSON.setLists(ammo, animals, animalsCallers, animalsFurs, animalsFursImages, animalsReserves, animalsZones,
-        callers, dlcs, furs, reserves, weapons, weaponsAmmo, missions);
+    HelperJSON.setLists(ammo, animals, animalsFurs, animalsFursImages, animalsZones, callers, dlcs, furs, reserves,
+        weapons, weaponsAmmo, missions);
     List<Log> logs = snapshot.data!["logs"] ?? [];
     Map<String, dynamic> filters = snapshot.data!["filters"] ?? [];
     HelperLog.setLogs(logs);
@@ -62,14 +58,10 @@ class BuilderHomeState extends BuilderBuilderState {
     updateProgress("ammo", ammo);
     List<Animal> animals = await HelperJSON.readAnimals();
     updateProgress("animals", animals);
-    List<AnimalCaller> animalsCallers = await HelperJSON.readAnimalsCallers();
-    updateProgress("animalsCallers", animalsCallers);
     List<AnimalFur> animalsFurs = await HelperJSON.readAnimalsFurs();
     updateProgress("animalsFurs", animalsFurs);
     List<AnimalFurImage> animalsFursImages = await HelperJSON.readAnimalsFursImages();
     updateProgress("animalsFursImages", animalsFursImages);
-    List<AnimalReserve> animalsReserves = await HelperJSON.readAnimalsReserves();
-    updateProgress("animalsReserves", animalsReserves);
     List<AnimalZone> animalsZones = await HelperJSON.readAnimalsZones();
     updateProgress("animalsZones", animalsZones);
     List<Caller> callers = await HelperJSON.readCallers();

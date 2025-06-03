@@ -232,7 +232,7 @@ class ActivityAddLogsState extends ActivityModifyState {
           setState(() {
             if (selectedReserve == null) {
               if (widget.type == ModifyType.edit) {
-                selectedReserve = HelperJSON.getAnimalReserves(selectedAnimal.id).first;
+                selectedReserve = HelperJSON.getAnimalReserves(selectedAnimal).first;
               } else {
                 selectedReserve = reserves.first;
               }

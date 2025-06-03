@@ -29,17 +29,15 @@ class $AssetsRawGen {
 
   String get animals => 'assets/raw/animals.json';
 
-  String get animalscallers => 'assets/raw/animalscallers.json';
-
   String get animalsfurs => 'assets/raw/animalsfurs.json';
 
   String get animalsfursimages => 'assets/raw/animalsfursimages.json';
 
-  String get animalsreserves => 'assets/raw/animalsreserves.json';
-
   String get animalszones => 'assets/raw/animalszones.json';
 
   String get callers => 'assets/raw/callers.json';
+
+  String get changelog => 'assets/raw/changelog.json';
 
   String get dlcs => 'assets/raw/dlcs.json';
 
@@ -64,12 +62,11 @@ class $AssetsRawGen {
   List<String> get values => [
         ammo,
         animals,
-        animalscallers,
         animalsfurs,
         animalsfursimages,
-        animalsreserves,
         animalszones,
         callers,
+        changelog,
         dlcs,
         furs,
         missions,

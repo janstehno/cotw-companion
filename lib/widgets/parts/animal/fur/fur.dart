@@ -27,7 +27,7 @@ class WidgetAnimalFur extends WidgetFur {
       child: WidgetIndicator.withSize(
         height: Values.dotSize,
         width: _indicatorSize,
-        color: animalFur.color,
+        color: animalFur.rarity.color,
       ),
     );
   }

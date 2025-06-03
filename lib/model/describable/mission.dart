@@ -31,41 +31,6 @@ class Mission extends Describable {
 
   int get reserveId => _reserveId;
 
-  String get typeAsString {
-    switch (_type) {
-      case MissionType.main:
-        return tr("MISSION_MAIN");
-      case MissionType.side:
-        return tr("MISSION_SIDE");
-    }
-  }
-
-  String get difficultyAsString {
-    switch (_difficulty) {
-      case MissionDifficulty.easy:
-        return tr("DIFFICULTY_EASY");
-      case MissionDifficulty.mediocre:
-        return tr("DIFFICULTY_MEDIOCRE");
-      case MissionDifficulty.hard:
-        return tr("DIFFICULTY_HARD");
-      case MissionDifficulty.veryHard:
-        return tr("DIFFICULTY_VERY_HARD");
-    }
-  }
-
-  Color get difficultyColor {
-    switch (_difficulty) {
-      case MissionDifficulty.easy:
-        return Interface.green;
-      case MissionDifficulty.mediocre:
-        return Interface.yellow;
-      case MissionDifficulty.hard:
-        return Interface.orange;
-      case MissionDifficulty.veryHard:
-        return Interface.red;
-    }
-  }
-
   Color getObjectiveColor(String objective) {
     if (objective.startsWith("[I]")) return Interface.oceanBlue;
     if (objective.startsWith("[O]")) return Interface.disabled;
@@ -76,10 +41,10 @@ class Mission extends Describable {
     return Mission(
       id: json['ID'],
       name: json['NAME'],
-      type: MissionType.values.elementAt(json['TYPE']),
+      type: MissionType.values.firstWhere((e) => e.id == json['TYPE']),
       person: json['PERSON'],
       reserveId: json['RESERVE_ID'],
-      difficulty: MissionDifficulty.values.elementAt(json['DIFFICULTY']),
+      difficulty: MissionDifficulty.values.firstWhere((e) => e.id == json['DIFFICULTY']),
       description: json['OBJECTIVES'],
     );
   }

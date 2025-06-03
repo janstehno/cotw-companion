@@ -1,8 +1,5 @@
 import 'package:cotwcompanion/helpers/json.dart';
-import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 
 class AnimalFur {
   final int _id;
@@ -44,33 +41,6 @@ class AnimalFur {
 
   bool get female => _female && !_male;
 
-  Color get color {
-    switch (_rarity) {
-      case FurRarity.common:
-        return Interface.rarityCommon;
-      case FurRarity.uncommon:
-        return Interface.rarityUncommon;
-      case FurRarity.rare:
-        return Interface.rarityRare;
-      case FurRarity.mission:
-        return Interface.rarityMission;
-      case FurRarity.greatOne:
-        return Interface.rarityGreatOne;
-    }
-  }
-
-  static String rarityName(FurRarity rarity) {
-    switch (rarity) {
-      case FurRarity.rare:
-        return tr("RARITY_RARE");
-      case FurRarity.uncommon:
-        return tr("RARITY_UNCOMMON");
-      case FurRarity.common:
-      default:
-        return tr("RARITY_COMMON");
-    }
-  }
-
   String get animalName {
     return HelperJSON.getAnimal(_animalId)!.name;
   }
@@ -84,7 +54,7 @@ class AnimalFur {
       id: json['ID'],
       animalId: json['ANIMAL_ID'],
       furId: json['FUR_ID'],
-      rarity: FurRarity.values.elementAt(json['RARITY']),
+      rarity: FurRarity.values.firstWhere((e) => e.id == json['RARITY']),
       perCent: json['PERCENT'],
       male: json['MALE'],
       female: json['FEMALE'],

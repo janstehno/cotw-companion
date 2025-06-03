@@ -6,6 +6,7 @@ import 'package:cotwcompanion/model/translatable/fur.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/parts/fur/fur.dart';
 import 'package:cotwcompanion/widgets/subtitle/subtitle_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ListFurAnimals extends StatelessWidget {
@@ -43,9 +44,9 @@ class ListFurAnimals extends StatelessWidget {
       children: [
         if (_animalFurs.isNotEmpty) ...[
           WidgetSubtitleIndicator(
-            AnimalFur.rarityName(_rarity),
+            tr(_rarity.key),
             indicatorSize: Values.dotSize,
-            indicatorColor: _animalFurs.first.color,
+            indicatorColor: _animalFurs.first.rarity.color,
           ),
           WidgetPadding.a30(child: _buildAnimalFurs()),
         ],

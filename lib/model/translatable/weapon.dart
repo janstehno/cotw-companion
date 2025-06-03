@@ -5,7 +5,6 @@ import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/translatable/ammo.dart';
 import 'package:cotwcompanion/model/translatable/translatable.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 class Weapon extends Translatable {
@@ -75,24 +74,11 @@ class Weapon extends Translatable {
 
   String getNameAmmo(Locale locale, int? ammoId) => ammoId == null ? "" : HelperJSON.getAmmo(ammoId)!.name;
 
-  String get typeAsString {
-    switch (type) {
-      case (WeaponType.rifle):
-        return tr("RIFLE");
-      case (WeaponType.shotgun):
-        return tr("SHOTGUN");
-      case (WeaponType.handgun):
-        return tr("HANDGUN");
-      case (WeaponType.bow):
-        return tr("BOW_CROSSBOW");
-    }
-  }
-
   factory Weapon.fromJson(Map<String, dynamic> json) {
     return Weapon(
       id: json['ID'],
       name: json['NAME'],
-      type: WeaponType.values.elementAt(json['TYPE']),
+      type: WeaponType.values.firstWhere((e) => e.id == json['TYPE']),
       mag: json['MAG'],
       accuracy: json['ACCURACY'],
       recoil: json['RECOIL'],
@@ -105,8 +91,8 @@ class Weapon extends Translatable {
   }
 
   static Comparator<Weapon> sortByTypeName = (a, b) {
-    if (a.type.index == b.type.index) return a.name.compareTo(b.name);
-    return a.type.index.compareTo(b.type.index);
+    if (a.type.id == b.type.id) return a.name.compareTo(b.name);
+    return a.type.id.compareTo(b.type.id);
   };
 
   static Comparator<Weapon> sortByMinMax = (a, b) {

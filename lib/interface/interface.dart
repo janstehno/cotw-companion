@@ -13,6 +13,7 @@ class Interface {
   static const Color alwaysDark = ff0d;
   static const Color alwaysLight = fff5;
   static const Color shadow = ff42;
+  static const Color disabled = ff75;
 
   static Color dark = Colors.transparent;
   static Color light = Colors.transparent;
@@ -25,7 +26,6 @@ class Interface {
   static Color subtitle = Colors.transparent;
   static Color search = Colors.transparent;
   static Color tag = Colors.transparent;
-  static Color disabled = Colors.transparent;
   static Color disabledForeground = Colors.transparent;
 
   static Color anatomyBody = Colors.transparent;
@@ -34,7 +34,6 @@ class Interface {
   static Color zoneNothing = Colors.transparent;
   static Color trophyNone = Colors.transparent;
   static Color trophyGreatOne = Colors.transparent;
-  static Color rarityCommon = Colors.transparent;
 
   static ColorScheme datePickerScheme = const ColorScheme.dark();
 
@@ -57,6 +56,7 @@ class Interface {
   static const Color trophySilver = grey;
   static const Color trophyGold = orange;
   static const Color trophyDiamond = blue;
+  static const Color rarityCommon = ff75;
   static const Color rarityUncommon = lightGreen;
   static const Color rarityRare = blue;
   static const Color rarityMission = red;
@@ -83,9 +83,9 @@ class Interface {
   static const Color ffe0 = Color(0xFFE0E0E0);
   static const Color ffcc = Color(0xFFCCCCCC); //tag
   static const Color ffbd = Color(0xFFBDBDBD); //anatomy
-  static const Color ff9e = Color(0xFF9E9E9E); //disabled
-  static const Color ff75 = Color(0xFF757575);
-  static const Color ff61 = Color(0xFF616161); //disabled
+  static const Color ff9e = Color(0xFF9E9E9E);
+  static const Color ff75 = Color(0xFF757575); //disabled
+  static const Color ff61 = Color(0xFF616161);
   static const Color ff42 = Color(0xFF424242); //anatomy, shadow
   static const Color ff23 = Color(0xFF232323); //tag
   static const Color ff21 = Color(0xFF212121);
@@ -107,7 +107,6 @@ class Interface {
       search = ff17;
       dropDown = ff06;
       tag = ff23;
-      disabled = ff61;
       disabledForeground = alwaysLight.withValues(alpha: 0.5);
       anatomyBones = ffbd;
       anatomyBody = ff42;
@@ -115,7 +114,6 @@ class Interface {
       zoneNothing = ff17;
       trophyNone = ffee;
       trophyGreatOne = ffee;
-      rarityCommon = ffee;
     } else {
       body = fffe;
       odd = fff5;
@@ -127,7 +125,6 @@ class Interface {
       search = ffee;
       dropDown = fffe;
       tag = ffcc;
-      disabled = ff9e;
       disabledForeground = alwaysDark.withValues(alpha: 0.5);
       anatomyBones = ff42;
       anatomyBody = ffbd;
@@ -135,7 +132,6 @@ class Interface {
       zoneNothing = ffee;
       trophyNone = ff17;
       trophyGreatOne = ff17;
-      rarityCommon = ff17;
     }
   }
 

@@ -104,7 +104,7 @@ abstract class WidgetLogsDismissibleState extends WidgetDismissibleState {
       width: _furHeight,
       alignment: Alignment.center,
       child: WidgetIndicator(
-        (widget as WidgetLogsDismissible).log.animalFur!.color,
+        (widget as WidgetLogsDismissible).log.animalFur!.rarity.color,
         size: _furDotSize,
       ),
     );

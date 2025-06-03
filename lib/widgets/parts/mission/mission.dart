@@ -3,6 +3,7 @@ import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
 import 'package:cotwcompanion/widgets/parts/items/item.dart';
 import 'package:cotwcompanion/widgets/tag/tag.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class WidgetMission extends StatelessWidget {
@@ -22,14 +23,14 @@ class WidgetMission extends StatelessWidget {
   List<WidgetTag> _listTags() {
     return [
       WidgetTag.small(
-        value: _mission.typeAsString,
+        value: tr(_mission.type.key),
         color: Interface.dark,
         background: Interface.tag,
       ),
       WidgetTag.small(
-        value: _mission.difficultyAsString,
+        value: tr(_mission.difficulty.key),
         color: Interface.alwaysDark,
-        background: _mission.difficultyColor,
+        background: _mission.difficulty.color,
       ),
     ];
   }

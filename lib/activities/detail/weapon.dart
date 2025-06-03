@@ -23,7 +23,7 @@ class ActivityDetailWeapon extends StatelessWidget {
   Widget _buildType() {
     return WidgetParameter(
       text: tr("TYPE"),
-      value: _weapon.typeAsString,
+      value: tr(_weapon.type.key),
     );
   }
 

@@ -43,7 +43,7 @@ class Dlc extends Describable {
       id: json['ID'],
       name: json['NAME'],
       date: json['DATE'],
-      type: DlcType.values.elementAt(json['TYPE']),
+      type: DlcType.values.firstWhere((e) => e.id == json['TYPE']),
       description: json['DESCRIPTION'] ?? [],
       reserve: json['CONTENT']?['RESERVE'],
       animals: json['CONTENT']?['ANIMALS'] ?? [],

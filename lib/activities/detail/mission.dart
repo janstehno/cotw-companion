@@ -25,15 +25,15 @@ class ActivityDetailMission extends StatelessWidget {
   Widget _buildDifficulty() {
     return WidgetParameterTag(
       text: tr("DIFFICULTY"),
-      value: _mission.difficultyAsString,
-      background: _mission.difficultyColor,
+      value: tr(_mission.difficulty.key),
+      background: _mission.difficulty.color,
     );
   }
 
   Widget _buildType() {
     return WidgetParameter(
       text: tr("TYPE"),
-      value: _mission.typeAsString,
+      value: tr(_mission.type.key),
     );
   }
 

@@ -305,7 +305,7 @@ class ActivityAddLogsState extends ActivityModifyState {
       value: animalFurs.indexOf(animalFur),
       child: WidgetDropDownItemFur(
         text: animalFur.furName,
-        color: animalFur.color,
+        color: animalFur.rarity.color,
       ),
     );
   }

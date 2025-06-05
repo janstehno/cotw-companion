@@ -219,14 +219,20 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildDropdown(),
-        _buildBody(),
-        _buildDisclaimer(),
-      ],
-    );
+  Widget _buildWidgets() {
+    if (_furImages.isNotEmpty) {
+      return Column(
+        children: [
+          _buildDropdown(),
+          _buildBody(),
+          _buildDisclaimer(),
+        ],
+      );
+    }
+    ;
+    return SizedBox.shrink();
   }
+
+  @override
+  Widget build(BuildContext context) => _buildWidgets();
 }

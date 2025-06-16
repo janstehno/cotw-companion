@@ -78,10 +78,14 @@ class WidgetCounterState extends WidgetEnumeratorEntryState {
   }
 
   Widget _buildName() {
-    return WidgetText(
-      (widget as WidgetCounter).counter.name,
-      color: Interface.dark,
-      style: Style.normal.s16.w300,
+    return Container(
+      margin: const EdgeInsets.only(right: 30),
+      child: WidgetText(
+        (widget as WidgetCounter).counter.name,
+        color: Interface.dark,
+        style: Style.normal.s16.w300,
+        maxLines: 2,
+      ),
     );
   }
 

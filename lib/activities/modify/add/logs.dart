@@ -12,7 +12,6 @@ import 'package:cotwcompanion/lists/logs/modify/trophy_lodge_logs.dart';
 import 'package:cotwcompanion/lists/logs/modify/trophy_rating.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
-import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
 import 'package:cotwcompanion/model/exportable/log.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
@@ -48,9 +47,9 @@ class ActivityAddLogs extends ActivityModify {
 }
 
 class ActivityAddLogsState extends ActivityModifyState {
-  final RegExp rxDouble = RegExp(r"^\d{1,4}([.,]\d{1,3})?$");
-  final TextEditingController trophyController = TextEditingController(text: "0");
-  final TextEditingController weightController = TextEditingController(text: "0");
+  final RegExp rxDouble = RegExp(r"^\d{1,4}([.,]\d{0,3})?$");
+  final TextEditingController trophyController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
 
   late Reserve? selectedReserve;
   late Animal selectedAnimal;
@@ -135,9 +134,11 @@ class ActivityAddLogsState extends ActivityModifyState {
         trophy = double.parse(trophyController.text.replaceAll(",", "."));
       } else {
         if (trophyController.text.isEmpty) {
+          trophyController.clear();
           correctTrophy = true;
           trophy = 0;
         } else {
+          trophyController.clear();
           correctTrophy = false;
           trophy = 0;
         }
@@ -152,9 +153,11 @@ class ActivityAddLogsState extends ActivityModifyState {
         weight = double.parse(weightController.text.replaceAll(",", "."));
       } else {
         if (weightController.text.isEmpty) {
+          weightController.clear();
           correctWeight = true;
           weight = 0;
         } else {
+          weightController.clear();
           correctWeight = false;
           weight = 0;
         }
@@ -329,12 +332,9 @@ class ActivityAddLogsState extends ActivityModifyState {
   }
 
   List<Widget> _listTrophy() {
-    double maxTrophy = selectedAnimal.trophy(
-        ThresholdLevel.max, selectedAnimalFur.id == Values.greatOneId ? CategoryType.go : CategoryType.male);
     return [
       WidgetTitleButtonIcon(
         tr("ANIMAL_TROPHY"),
-        subtext: "${tr("MAX")}: ${Utils.removePointZero(maxTrophy, 2)}",
         icon: Assets.graphics.icons.menuOpen,
         alignRight: true,
         onTap: () {
@@ -355,15 +355,8 @@ class ActivityAddLogsState extends ActivityModifyState {
   }
 
   List<Widget> _listWeight() {
-    double maxWeight = selectedAnimal.weight(
-        ThresholdLevel.max,
-        selectedAnimalFur.id == Values.greatOneId ? CategoryType.go : CategoryType.male,
-        usesImperials ? Units.imperial : Units.metric);
     return [
-      WidgetTitle(
-        tr("ANIMAL_WEIGHT"),
-        subtext: "${tr("MAX")}: ${Utils.removePointZero(maxWeight, 2)}",
-      ),
+      WidgetTitle(tr("ANIMAL_WEIGHT")),
       WidgetTextFieldIndicator(
         icon: Assets.graphics.icons.weight,
         correct: correctWeight,

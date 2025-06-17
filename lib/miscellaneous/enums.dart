@@ -131,6 +131,7 @@ enum Supporter {
 enum FilterKey {
   animalClass,
   animalDifficulty,
+  animalTaxonomy,
   animalGreatOne,
   weaponType,
   weaponAnimalClass,
@@ -180,6 +181,41 @@ enum FurRarity {
 enum Gender {
   male,
   female,
+}
+
+enum AnimalTaxonomy {
+  mammals(0, "TAXONOMY_MAMMALS"),
+  reptiles(1, "TAXONOMY_REPTILES"),
+  antlered(2, "TAXONOMY_ANTLERED"),
+  deer(3, "TAXONOMY_DEER"),
+  tusked(4, "TAXONOMY_TUSKED"),
+  pigs(5, "TAXONOMY_PIGS"),
+  antelopes(6, "TAXONOMY_ANTELOPES"),
+  bovids(7, "TAXONOMY_BOVIDS"),
+  bison(8, "TAXONOMY_BISON"),
+  predators(9, "TAXONOMY_PREDATORS"),
+  bears(10, "TAXONOMY_BEARS"),
+  canines(11, "TAXONOMY_CANINES"),
+  wolves(12, "TAXONOMY_WOLVES"),
+  felids(13, "TAXONOMY_FELIDS"),
+  foxes(14, "TAXONOMY_FOXES"),
+  birds(15, "TAXONOMY_BIRDS"),
+  waterfowl(16, "TAXONOMY_WATERFOWL"),
+  ducks(17, "TAXONOMY_DUCKS"),
+  geese(18, "TAXONOMY_GEESE"),
+  grouse(19, "TAXONOMY_GROUSE"),
+  upland(20, "TAXONOMY_UPLAND_GAME_BIRDS"),
+  quails(21, "TAXONOMY_QUAILS"),
+  turkeys(22, "TAXONOMY_TURKEYS"),
+  hares(23, "TAXONOMY_HARES"),
+  horned(24, "TAXONOMY_HORNED"),
+  sheep(25, "TAXONOMY_SHEEP"),
+  rabbits(26, "TAXONOMY_RABBITS");
+
+  final int id;
+  final String key;
+
+  const AnimalTaxonomy(this.id, this.key);
 }
 
 enum AnimalOther {

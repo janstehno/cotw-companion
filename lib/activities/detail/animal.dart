@@ -166,6 +166,7 @@ class ActivityDetailAnimalState extends State<ActivityDetailAnimal> {
     return WidgetScaffold(
       appBar: WidgetAppBar(
         widget.animal.getNameByLocale(context.locale),
+        subtext: widget.animal.latin,
         context: context,
       ),
       children: [

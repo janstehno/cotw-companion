@@ -8,6 +8,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 class Animal extends Translatable {
+  final String _latin;
+
   final List<dynamic> _reserves;
   final List<dynamic> _callers;
 
@@ -32,6 +34,7 @@ class Animal extends Translatable {
   final double _maxWeightGO;
   final double _minWeightGO;
 
+  final List<dynamic> _taxonomy;
   final List<dynamic> _furGO;
   final int _sight;
   final int _hearing;
@@ -43,6 +46,7 @@ class Animal extends Translatable {
   Animal({
     required super.id,
     required super.name,
+    required String latin,
     required List<dynamic> reserves,
     required List<dynamic> callers,
     required int level,
@@ -62,6 +66,7 @@ class Animal extends Translatable {
     required double minTrophyGO,
     required double maxWeightGO,
     required double minWeightGO,
+    required List<dynamic> taxonomy,
     required List<dynamic> furGO,
     required int sight,
     required int hearing,
@@ -69,7 +74,8 @@ class Animal extends Translatable {
     required bool diamondFemale,
     required bool grounded,
     required bool dlc,
-  })  : _reserves = reserves,
+  })  : _latin = latin,
+        _reserves = reserves,
         _callers = callers,
         _level = level,
         _difficulty = difficulty,
@@ -88,6 +94,7 @@ class Animal extends Translatable {
         _minTrophyGO = minTrophyGO,
         _maxWeightGO = maxWeightGO,
         _minWeightGO = minWeightGO,
+        _taxonomy = taxonomy,
         _furGO = furGO,
         _sight = sight,
         _hearing = hearing,
@@ -95,6 +102,8 @@ class Animal extends Translatable {
         _diamondFemale = diamondFemale,
         _grounded = grounded,
         _dlc = dlc;
+
+  String get latin => _latin;
 
   List<int> get reserves => _reserves.cast();
 
@@ -174,6 +183,8 @@ class Animal extends Translatable {
     }
   }
 
+  List<dynamic> get taxonomy => _taxonomy;
+
   List<dynamic> get furGO => _furGO;
 
   bool get femaleDiamond => _diamondFemale;
@@ -204,6 +215,7 @@ class Animal extends Translatable {
     return Animal(
       id: json['ID'],
       name: json['NAME'],
+      latin: json['LATIN'],
       reserves: json["RESERVES"] ?? [],
       callers: json["CALLERS"] ?? [],
       level: json['LEVEL'],
@@ -223,6 +235,7 @@ class Animal extends Translatable {
       minTrophyGO: json['MIN_TROPHY_GO'] ?? 0.0,
       maxWeightGO: json['MAX_WEIGHT_GO'] ?? 0.0,
       minWeightGO: json['MIN_WEIGHT_GO'] ?? 0.0,
+      taxonomy: json["TAXONOMY"] ?? [],
       furGO: json["FUR_GO"] ?? [],
       sight: json['SIGHT'],
       hearing: json['HEARING'],

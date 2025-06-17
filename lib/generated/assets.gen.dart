@@ -1172,6 +1172,8 @@ class $AssetsGraphicsIconsGen {
 
   String get target => 'assets/graphics/icons/target.svg';
 
+  String get taxonomy => 'assets/graphics/icons/taxonomy.svg';
+
   String get todo => 'assets/graphics/icons/todo.svg';
 
   String get trophyBronze => 'assets/graphics/icons/trophy_bronze.svg';
@@ -1318,6 +1320,7 @@ class $AssetsGraphicsIconsGen {
         swipeRight,
         tap,
         target,
+        taxonomy,
         todo,
         trophyBronze,
         trophyDiamond,

@@ -167,25 +167,31 @@ class Utils {
   static Future<String?> readFile(String name) async {
     try {
       final file = await _localFile(name);
-      if (await file.exists()) return await file.readAsString();
+      if (file != null && await file.exists()) return await file.readAsString();
       return null;
     } catch (e) {
       throw e.toString();
     }
   }
 
-  static Future<File> writeFile(String content, String name) async {
+  static Future<File?> writeFile(String content, String name) async {
     final file = await _localFile(name);
+    if (file == null) return null;
     return file.writeAsString(content);
   }
 
-  static Future<File> _localFile(String name) async {
+  static Future<File?> _localFile(String name) async {
     final path = await _localPath;
+    if (path == null) return null;
     return File("$path/$name.json");
   }
 
-  static Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
+  static Future<String?> get _localPath async {
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      return directory.path;
+    } catch (e) {
+      return null;
+    }
   }
 }

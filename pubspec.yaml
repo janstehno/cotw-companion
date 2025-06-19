@@ -121,6 +121,9 @@ flutter:
     - assets/graphics/maps/salzwiesenpark/1/
     - assets/graphics/maps/salzwiesenpark/2/
     - assets/graphics/maps/salzwiesenpark/3/
+    - assets/graphics/maps/askiyridgehuntingpreserve/1/
+    - assets/graphics/maps/askiyridgehuntingpreserve/2/
+    - assets/graphics/maps/askiyridgehuntingpreserve/3/
   fonts:
     - family: Normal
       fonts:

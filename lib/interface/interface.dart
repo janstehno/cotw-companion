@@ -30,7 +30,6 @@ class Interface {
 
   static Color anatomyBody = Colors.transparent;
   static Color anatomyBones = Colors.transparent;
-  static Color zoneOther = Colors.transparent;
   static Color zoneNothing = Colors.transparent;
   static Color trophyNone = Colors.transparent;
   static Color trophyGreatOne = Colors.transparent;
@@ -64,6 +63,7 @@ class Interface {
   static const Color zoneFeed = lightGreen;
   static const Color zoneDrink = blue;
   static const Color zoneRest = orange;
+  static const Color zoneOther = ff75;
   static const Color genderMale = blue;
   static const Color genderFemale = red;
   static const Color environmentSummer = yellow;
@@ -110,7 +110,6 @@ class Interface {
       disabledForeground = alwaysLight.withValues(alpha: 0.5);
       anatomyBones = ffbd;
       anatomyBody = ff42;
-      zoneOther = ffee;
       zoneNothing = ff17;
       trophyNone = ffee;
       trophyGreatOne = ffee;
@@ -128,7 +127,6 @@ class Interface {
       disabledForeground = alwaysDark.withValues(alpha: 0.5);
       anatomyBones = ff42;
       anatomyBody = ffbd;
-      zoneOther = ff17;
       zoneNothing = ffee;
       trophyNone = ff17;
       trophyGreatOne = ff17;

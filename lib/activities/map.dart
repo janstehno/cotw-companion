@@ -327,8 +327,8 @@ class ActivityMapState extends State<ActivityMap> {
     double my = 0;
 
     if (!widget.helperMap.showZoneStyle(_settings, _level) && !widget.helperMap.showZoneType(_settings, _level)) {
-      mx = cos(((360 / widget.helperMap.zones.length) / widget.helperMap.zones.length) * i) * (7);
-      my = sin(((360 / widget.helperMap.zones.length) / widget.helperMap.zones.length) * i) * (7);
+      mx = cos(((360 / widget.helperMap.activatedCount) / widget.helperMap.activatedCount) * i) * (2 * _level);
+      my = sin(((360 / widget.helperMap.activatedCount) / widget.helperMap.activatedCount) * i) * (2 * _level);
     }
 
     double size = widget.helperMap.showZoneStyle(_settings, _level) ? _circleSize : _dotSize;

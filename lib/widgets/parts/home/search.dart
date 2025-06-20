@@ -188,7 +188,7 @@ class WidgetHomeSearchState extends State<WidgetHomeSearch> {
     List<Translatable> furs =
         _filter.filterFurs(_controller.text).sorted((a, b) => a.name.length.compareTo(b.name.length));
     return furs
-        .skipWhile((e) => (e as Fur).isMission || e.isGreatOne)
+        .where((e) => !(e as Fur).isMission && !e.isGreatOne)
         .take(_itemLimit)
         .map((e) => _buildFur(e as Fur))
         .toList();

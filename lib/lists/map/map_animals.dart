@@ -48,7 +48,7 @@ class ListMapAnimals extends StatelessWidget {
     return WidgetPadding.all(
       15,
       alignment: Alignment.topLeft,
-      background: Interface.alwaysDark.withValues(alpha: 0.6),
+      background: Interface.alwaysDark.withValues(alpha: 0.7),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,9 +63,10 @@ class ListMapAnimals extends StatelessWidget {
   Widget _buildWidgets(BuildContext context) {
     if (_zones.isNotEmpty) {
       Orientation orientation = MediaQuery.orientationOf(context);
+      Size size = MediaQuery.of(context).size;
       return SizedBox(
-        width: orientation == Orientation.portrait ? MediaQuery.of(context).size.width : null,
-        height: orientation == Orientation.landscape ? MediaQuery.of(context).size.height : null,
+        width: orientation == Orientation.portrait ? size.width : null,
+        height: orientation == Orientation.landscape ? size.height : null,
         child: LayoutBuilder(
           builder: (context, constraints) {
             return _buildAnimals(context, constraints, orientation);

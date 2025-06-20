@@ -1,7 +1,7 @@
 class Values {
   static const String version = "1.11.3";
 
-  static const int greatOneId = 100;
+  static const int greatOneId = 1000;
 
   static const int maxLevel = 60;
   static const int skillPoints = 22;

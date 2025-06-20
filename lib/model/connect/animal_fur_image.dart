@@ -1,5 +1,6 @@
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 
 class AnimalFurImage {
@@ -25,7 +26,7 @@ class AnimalFurImage {
   bool get isGO {
     Animal? animal = HelperJSON.getAnimal(_animalId);
     if (animal == null || !animal.hasGO) return false;
-    return animal.furGO.contains(_furId) && _furId >= 100;
+    return animal.furGO.contains(_furId) && _furId >= Values.greatOneId;
   }
 
   bool get shared => _shared;

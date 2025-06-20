@@ -27,12 +27,6 @@ class WidgetAnimalZones extends StatelessWidget {
         runSpacing: 5,
         alignment: WrapAlignment.center,
         children: [
-          if (_animal.hasOtherZones)
-            WidgetTag.small(
-              value: tr("ANIMAL_OTHER"),
-              color: Interface.light,
-              background: Interface.zoneOther,
-            ),
           if (_animal.hasFeedZones)
             WidgetTag.small(
               value: tr("ANIMAL_FEED"),
@@ -50,7 +44,13 @@ class WidgetAnimalZones extends StatelessWidget {
               value: tr("ANIMAL_REST"),
               color: Interface.alwaysDark,
               background: Interface.zoneRest,
-            )
+            ),
+          if (_animal.hasOtherZones)
+            WidgetTag.small(
+              value: tr("ANIMAL_OTHER"),
+              color: Interface.light,
+              background: Interface.zoneOther,
+            ),
         ],
       ),
     );

@@ -90,6 +90,8 @@ class HelperMap {
 
   Map<int, Set<MapZone>> get zones => _zones;
 
+  int get activatedCount => _activeAnimals.where((e) => e).length;
+
   List<int> zonesKeys(BuildContext context) {
     return _zones.keys.sorted(
       (a, b) => getAnimal(a)!

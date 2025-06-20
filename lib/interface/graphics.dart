@@ -51,7 +51,7 @@ class Graphics {
     "ANIMAL:EURASIAN_TEAL": Assets.graphics.animals.eurasianteal,
     "ANIMAL:MOUNTAIN_GOAT": Assets.graphics.animals.mountaingoat,
     "ANIMAL:PRONGHORN": Assets.graphics.animals.pronghorn,
-    "ANIMAL:ROOSEVELT_ELK": Assets.graphics.animals.rooseveltelk,
+    "ANIMAL:ROOSEVELT_ELK": Assets.graphics.animals.elk,
     "ANIMAL:RIO_GRANDE_TURKEY": Assets.graphics.animals.turkey,
     "ANIMAL:RINGNECKED_PHEASANT": Assets.graphics.animals.ringneckedpheasant,
     "ANIMAL:BOBWHITE_QUAIL": Assets.graphics.animals.bobwhitequail,
@@ -95,7 +95,7 @@ class Graphics {
     "ANIMAL:REINDEER": Assets.graphics.animals.reindeer,
     "ANIMAL:WATER_BUFFALO": Assets.graphics.animals.waterbuffalo,
     "ANIMAL:WESTERN_CAPERCAILLIE": Assets.graphics.animals.westerncapercaillie,
-    "ANIMAL:ROCKY_MOUNTAIN_ELK": Assets.graphics.animals.rockymountainelk,
+    "ANIMAL:ROCKY_MOUNTAIN_ELK": Assets.graphics.animals.elk,
     "ANIMAL:BIGHORN_SHEEP": Assets.graphics.animals.bighornsheep,
     "ANIMAL:WOOLLY_HARE": Assets.graphics.animals.woollyhare,
     "ANIMAL:TIBETAN_FOX": Assets.graphics.animals.tibetanfox,
@@ -109,6 +109,14 @@ class Graphics {
     "ANIMAL:BENGAL_TIGER": Assets.graphics.animals.bengaltiger,
     "ANIMAL:FERRUGINOUS_DUCK": Assets.graphics.animals.ferruginousduck,
     "ANIMAL:GADWALL": Assets.graphics.animals.gadwall,
+    "ANIMAL:DUSKY_GROUSE": Assets.graphics.animals.duskygrouse,
+    "ANIMAL:NORTHERN_PINTAIL": Assets.graphics.animals.northernpintail,
+    "ANIMAL:WOOD_DUCK": Assets.graphics.animals.woodduck,
+    "ANIMAL:SNOW_GOOSE": Assets.graphics.animals.snowgoose,
+    "ANIMAL:NORTH_AMERICAN_BEAVER": Assets.graphics.animals.northamericanbeaver,
+    "ANIMAL:WOODLAND_CARIBOU": Assets.graphics.animals.caribou,
+    "ANIMAL:MANITOBAN_ELK": Assets.graphics.animals.elk,
+    "ANIMAL:WOOD_BISON": Assets.graphics.animals.woodbison,
   };
 
   static final Map<String, String> _heads = {
@@ -213,6 +221,14 @@ class Graphics {
     "ANIMAL:BENGAL_TIGER": Assets.graphics.heads.bengaltiger.path,
     "ANIMAL:FERRUGINOUS_DUCK": Assets.graphics.heads.ferruginousduck.path,
     "ANIMAL:GADWALL": Assets.graphics.heads.gadwall.path,
+    "ANIMAL:DUSKY_GROUSE": Assets.graphics.heads.duskygrouse.path,
+    "ANIMAL:NORTHERN_PINTAIL": Assets.graphics.heads.northernpintail.path,
+    "ANIMAL:WOOD_DUCK": Assets.graphics.heads.woodduck.path,
+    "ANIMAL:SNOW_GOOSE": Assets.graphics.heads.snowgoose.path,
+    "ANIMAL:NORTH_AMERICAN_BEAVER": Assets.graphics.heads.northamericanbeaver.path,
+    "ANIMAL:WOODLAND_CARIBOU": Assets.graphics.heads.caribou.path,
+    "ANIMAL:MANITOBAN_ELK": Assets.graphics.heads.manitobanelk.path,
+    "ANIMAL:WOOD_BISON": Assets.graphics.heads.woodbison.path,
   };
 
   static final Map<String, String> _anatomy = {
@@ -284,6 +300,10 @@ class Graphics {
     "ANIMAL:NILGAI": Assets.graphics.anatomy.nilgai.path,
     "ANIMAL:WILD_YAK": Assets.graphics.anatomy.wildYak.path,
     "ANIMAL:BENGAL_TIGER": Assets.graphics.anatomy.bengalTiger.path,
+    "ANIMAL:NORTH_AMERICAN_BEAVER": Assets.graphics.anatomy.northAmericanBeaver.path,
+    "ANIMAL:WOODLAND_CARIBOU": Assets.graphics.anatomy.caribou.path,
+    "ANIMAL:MANITOBAN_ELK": Assets.graphics.anatomy.manitobanElk.path,
+    "ANIMAL:WOOD_BISON": Assets.graphics.anatomy.woodBison.path,
   };
 
   static final Map<String, String> _reserves = {
@@ -303,6 +323,7 @@ class Graphics {
     "RESERVE:MISSISSIPPI_ACRES_PRESERVE": Assets.graphics.reserves.mississippiacrespreserve,
     "RESERVE:SUNDARPATAN_HUNTING_RESERVE": Assets.graphics.reserves.sundarpatanhuntingreserve,
     "RESERVE:SALZWIESEN_PARK": Assets.graphics.reserves.salzwiesenpark,
+    "RESERVE:ASKIY_RIDGE_HUNTING_PRESERVE": Assets.graphics.reserves.askiyridgehuntingpreserve,
   };
 
   static final Map<String, String> _weapons = {
@@ -367,6 +388,7 @@ class Graphics {
     "WEAPON:PERRY_308": Assets.graphics.weapons.perry308,
     "WEAPON:HANSSON_3006": Assets.graphics.weapons.hansson3006,
     "WEAPON:QUIST_REAPER_762X39": Assets.graphics.weapons.quistreaper762x39,
+    "WEAPON:LAPERRIERE_OUTRIDER_3030": Assets.graphics.weapons.laperriereoutrider3030,
   };
 
   static final Map<String, String> _callers = {
@@ -395,6 +417,9 @@ class Graphics {
     "CALLER:PREDATOR_DISTRESSED_FAWN_CALLER": Assets.graphics.callers.predatordistressedfawncaller,
     "CALLER:WILD_TURKEY_MOUTH_CALLER": Assets.graphics.callers.wildturkeymouthcaller,
     "CALLER:GADWALL_CALLER": Assets.graphics.callers.gadwallcaller,
+    "CALLER:NORTHERN_PINTAIL_CALLER": Assets.graphics.callers.northenpintailcaller,
+    "CALLER:WOOD_DUCK_CALLER": Assets.graphics.callers.woodduckcaller,
+    "CALLER:SNOW_GOOSE_CALLER": Assets.graphics.callers.snowgoosecaller,
   };
 
   static final Map<String, String> _proficiency = {

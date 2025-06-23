@@ -45,11 +45,11 @@ class WidgetAnimalZones extends StatelessWidget {
               color: Interface.alwaysDark,
               background: Interface.zoneRest,
             ),
-          if (_animal.hasOtherZones)
+          if (_animal.hasActiveZones)
             WidgetTag.small(
-              value: tr("ANIMAL_OTHER"),
-              color: Interface.light,
-              background: Interface.zoneOther,
+              value: tr("ANIMAL_ACTIVE"),
+              color: Interface.alwaysDark,
+              background: Interface.zoneActive,
             ),
         ],
       ),

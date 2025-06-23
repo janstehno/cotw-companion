@@ -1270,13 +1270,13 @@ class $AssetsGraphicsIconsGen {
 
   String get wildlife => 'assets/graphics/icons/wildlife.svg';
 
+  String get zoneActive => 'assets/graphics/icons/zone_active.svg';
+
   String get zoneDrink => 'assets/graphics/icons/zone_drink.svg';
 
   String get zoneFeed => 'assets/graphics/icons/zone_feed.svg';
 
   String get zoneNothing => 'assets/graphics/icons/zone_nothing.svg';
-
-  String get zoneOther => 'assets/graphics/icons/zone_other.svg';
 
   String get zoneRest => 'assets/graphics/icons/zone_rest.svg';
 
@@ -1396,10 +1396,10 @@ class $AssetsGraphicsIconsGen {
         weaponReload,
         weight,
         wildlife,
+        zoneActive,
         zoneDrink,
         zoneFeed,
         zoneNothing,
-        zoneOther,
         zoneRest
       ];
 }

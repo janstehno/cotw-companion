@@ -55,7 +55,7 @@ class Interface {
   static const Color trophySilver = grey;
   static const Color trophyGold = orange;
   static const Color trophyDiamond = blue;
-  static const Color rarityCommon = ff75;
+  static const Color rarityCommon = grey;
   static const Color rarityUncommon = lightGreen;
   static const Color rarityRare = blue;
   static const Color rarityMission = red;
@@ -63,7 +63,7 @@ class Interface {
   static const Color zoneFeed = lightGreen;
   static const Color zoneDrink = blue;
   static const Color zoneRest = orange;
-  static const Color zoneOther = ff75;
+  static const Color zoneActive = grey;
   static const Color genderMale = blue;
   static const Color genderFemale = red;
   static const Color environmentSummer = yellow;

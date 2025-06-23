@@ -29,7 +29,7 @@ class WidgetAnimalFurs extends StatelessWidget {
       children: [
         WidgetTagTap.small(
           value: tr("RARITY_COMMON"),
-          color: Interface.light,
+          color: Interface.alwaysDark,
           background: Interface.rarityCommon,
           onTap: () => _onToggled(FurRarity.common),
         ),

@@ -47,7 +47,7 @@ class AnimalZone {
       case 2:
         return Interface.zoneRest;
       case 3:
-        return Interface.zoneOther;
+        return Interface.zoneActive;
       default:
         return Interface.zoneNothing;
     }
@@ -62,7 +62,7 @@ class AnimalZone {
       case 2:
         return Assets.graphics.icons.zoneRest;
       case 3:
-        return Assets.graphics.icons.zoneOther;
+        return Assets.graphics.icons.zoneActive;
       default:
         return Assets.graphics.icons.zoneNothing;
     }
@@ -70,7 +70,6 @@ class AnimalZone {
 
   static Color iconColorFor(int zone) {
     if (zone == 4) return Interface.dark;
-    if (zone == 3) return Interface.light;
     return Interface.alwaysDark;
   }
 

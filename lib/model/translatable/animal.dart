@@ -207,7 +207,7 @@ class Animal extends Translatable {
 
   bool get hasRestZones => HelperJSON.getAnimalZonesFor(this).entries.any((e) => e.value.any((z) => z.zone == 2));
 
-  bool get hasOtherZones => HelperJSON.getAnimalZonesFor(this).entries.any((e) => e.value.any((z) => z.zone == 3));
+  bool get hasActiveZones => HelperJSON.getAnimalZonesFor(this).entries.any((e) => e.value.any((z) => z.zone == 3));
 
   bool get hasSenses => _sight > 0 || _hearing > 0 || _smell > 0;
 

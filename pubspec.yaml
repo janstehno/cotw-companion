@@ -14,7 +14,7 @@ dependencies:
   another_xlider: ^3.0.2
   auto_size_text: 3.0.0
   blurrycontainer: 2.1.0
-  board_datetime_picker: 2.5.0
+  board_datetime_picker: ^2.8.0
   collection: ^1.18.0
   device_info_plus: ^11.2.0
   dropdown_button2: ^2.3.9
@@ -22,7 +22,7 @@ dependencies:
   easy_rich_text: ^2.1.0
   equatable: ^2.0.7
   file_picker: ^10.1.2
-  fl_chart: ^0.71.0
+  fl_chart: ^1.0.0
   flutter_spinkit: ^5.2.1
   flutter_svg: ^2.0.10+1
   http: ^1.2.2
@@ -41,7 +41,7 @@ dev_dependencies:
   build_runner: ^2.4.10
   flutter_gen: ^5.6.0
   flutter_gen_runner: ^5.6.0
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   logger: ^2.3.0
   change_app_package_name: ^1.4.0
   flutter_test:

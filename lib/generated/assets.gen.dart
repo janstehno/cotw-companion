@@ -1827,6 +1827,8 @@ class $AssetsGraphicsWeaponsGen {
 class $AssetsRawMapsGen {
   const $AssetsRawMapsGen();
 
+  String get askiyridgehuntingpreserve => 'assets/raw/maps/askiyridgehuntingpreserve.json';
+
   String get cuatrocolinasgamereserve => 'assets/raw/maps/cuatrocolinasgamereserve.json';
 
   String get emeraldcoastaustralia => 'assets/raw/maps/emeraldcoastaustralia.json';
@@ -1860,6 +1862,7 @@ class $AssetsRawMapsGen {
   String get yukonvalley => 'assets/raw/maps/yukonvalley.json';
 
   List<String> get values => [
+        askiyridgehuntingpreserve,
         cuatrocolinasgamereserve,
         emeraldcoastaustralia,
         hirschfeldenhuntingreserve,

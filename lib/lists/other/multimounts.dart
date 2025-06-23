@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
+import 'package:cotwcompanion/helpers/filter.dart';
 import 'package:cotwcompanion/helpers/multimounts.dart';
+import 'package:cotwcompanion/lists/general/translatables.dart';
 import 'package:cotwcompanion/model/translatable/multimount.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
@@ -7,38 +9,54 @@ import 'package:cotwcompanion/widgets/parts/multimounts/multimount.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class ListMultimounts extends StatelessWidget {
+class ListMultimounts extends ListTranslatable {
   final HelperMultimounts _helperMultimounts;
 
   const ListMultimounts({
     super.key,
     required HelperMultimounts helperMultimounts,
-  }) : _helperMultimounts = helperMultimounts;
+  })  : _helperMultimounts = helperMultimounts,
+        super("CONTENT_MATMATS_MULTIMOUNTS");
 
-  List<Multimount> get _multimounts => _helperMultimounts.multimounts.sorted(Multimount.sortByName);
+  HelperMultimounts get helperMultimounts => _helperMultimounts;
 
-  Widget _buildMultimount(Multimount multimount) {
+  @override
+  ListMultimountsState createState() => ListMultimountsState();
+}
+
+class ListMultimountsState extends ListTranslatableState<Multimount> {
+  @override
+  void initState() {
+    filter = HelperFilter.filterMultimounts;
+    super.initState();
+  }
+
+  @override
+  List<Multimount> initialItems() {
+    return (widget as ListMultimounts).helperMultimounts.multimounts.sorted(Multimount.sortByName);
+  }
+
+  @override
+  Widget buildEntry(index, item) {
     return WidgetMultimount(
-      multimount,
-      i: _multimounts.indexOf(multimount),
+      item,
+      i: index,
     );
   }
 
-  List<Widget> _listMultimounts() {
-    return _multimounts.map((e) => _buildMultimount(e)).toList();
-  }
-
-  Widget _buildWidgets(BuildContext context) {
+  Widget _buildWidgets() {
     return WidgetScaffold(
       appBar: WidgetAppBar(
-        tr("CONTENT_MATMATS_MULTIMOUNTS"),
+        tr(widget.title),
         context: context,
         helpUrl: "https://github.com/janstehno/cotw-companion/wiki/Matmat's-multi-trophy-mounts",
       ),
-      children: _listMultimounts(),
+      searchController: controller,
+      filterChanged: filter.isActive(),
+      children: listEntries(),
     );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets(context);
+  Widget build(BuildContext context) => _buildWidgets();
 }

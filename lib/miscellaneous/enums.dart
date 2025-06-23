@@ -252,6 +252,7 @@ enum FilterType {
   callers,
   enumerators,
   counters,
+  multimounts,
 }
 
 enum LogsView {

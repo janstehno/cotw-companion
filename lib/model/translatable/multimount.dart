@@ -1,5 +1,7 @@
+import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/helpers/log.dart';
 import 'package:cotwcompanion/model/exportable/log.dart';
+import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/translatable.dart';
 
 class Multimount extends Translatable {
@@ -23,7 +25,7 @@ class Multimount extends Translatable {
 
   String get sizeAsString => _size.toString().toUpperCase();
 
-  List<dynamic> get animals => _animals;
+  List<MultimountAnimal> get animals => _animals.cast();
 
   factory Multimount.fromJson(Map<String, dynamic> json) {
     return Multimount(
@@ -52,6 +54,8 @@ class MultimountAnimal {
         _count = count;
 
   int get id => _id;
+
+  Animal? get animal => HelperJSON.getAnimal(_id);
 
   bool get isFemale => !_male;
 

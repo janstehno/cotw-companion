@@ -60,7 +60,7 @@ abstract class ListTranslatableState<I extends Translatable> extends State<ListT
 
   Widget buildEntry(int index, I item);
 
-  List<Widget> _listEntries() {
+  List<Widget> listEntries() {
     if (_initialItems.isEmpty) _initialize();
     if (_filteredItems.isEmpty) filterItems();
     return _filteredItems.mapIndexed((i, e) => buildEntry(i, e)).toList();
@@ -75,7 +75,7 @@ abstract class ListTranslatableState<I extends Translatable> extends State<ListT
       searchController: controller,
       filterChanged: filter.isActive(),
       onFilterTap: activityFilter != null ? _buildFilter : null,
-      children: _listEntries(),
+      children: listEntries(),
     );
   }
 

@@ -8,6 +8,7 @@ import 'package:cotwcompanion/filters/enumerators.dart';
 import 'package:cotwcompanion/filters/filter.dart';
 import 'package:cotwcompanion/filters/hunting_pass.dart';
 import 'package:cotwcompanion/filters/logs.dart';
+import 'package:cotwcompanion/filters/multimounts.dart';
 import 'package:cotwcompanion/filters/reserves.dart';
 import 'package:cotwcompanion/filters/weapons.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
@@ -15,6 +16,7 @@ import 'package:cotwcompanion/miscellaneous/logger.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/exportable/enumerator.dart';
+import 'package:cotwcompanion/model/translatable/multimount.dart';
 
 class HelperFilter {
   static final HelperLogger _logger = HelperLogger.loadingFilter();
@@ -27,6 +29,7 @@ class HelperFilter {
   static final FilterLogs filterLogs = FilterLogs();
   static final FilterEnumerators filterEnumerators = FilterEnumerators();
   static final Filter<Counter> filterCounters = FilterCounters();
+  static final Filter<Multimount> filterMultimounts = FilterMultimounts();
 
   static void setFilters(Map<String, dynamic> filters) {
     _logger.i("Initializing filters in HelperFilter...");
@@ -65,6 +68,8 @@ class HelperFilter {
           case FilterType.counters:
             filterCounters.setValue(filterKey, value);
             break;
+          case FilterType.multimounts:
+            filterMultimounts.setValue(filterKey, value);
         }
       }
     });
@@ -92,6 +97,7 @@ class HelperFilter {
       if (filterLogs.isActive()) FilterType.logs.name: _filterToJson(filterLogs.filters),
       if (filterEnumerators.isActive()) FilterType.enumerators.name: _filterToJson(filterEnumerators.filters),
       if (filterCounters.isActive()) FilterType.counters.name: _filterToJson(filterCounters.filters),
+      if (filterMultimounts.isActive()) FilterType.multimounts.name: _filterToJson(filterMultimounts.filters),
     };
 
     final String content = json.encode(filterData);

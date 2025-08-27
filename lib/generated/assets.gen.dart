@@ -1658,6 +1658,8 @@ class $AssetsGraphicsWeaponsGen {
 
   String get alexanderlongbow => 'assets/graphics/weapons/alexanderlongbow.svg';
 
+  String get ananthaaction22mag => 'assets/graphics/weapons/ananthaaction22mag.svg';
+
   String get andersson22lr => 'assets/graphics/weapons/andersson22lr.svg';
 
   String get arzyna300magtactical => 'assets/graphics/weapons/arzyna300magtactical.svg';
@@ -1682,7 +1684,11 @@ class $AssetsGraphicsWeaponsGen {
 
   String get forselite300 => 'assets/graphics/weapons/forselite300.svg';
 
+  String get frost257 => 'assets/graphics/weapons/frost257.svg';
+
   String get gandharerifle => 'assets/graphics/weapons/gandharerifle.svg';
+
+  String get giddingsssc410coyote => 'assets/graphics/weapons/giddingsssc410coyote.svg';
 
   String get gopi10ggrand => 'assets/graphics/weapons/gopi10ggrand.svg';
 
@@ -1771,6 +1777,7 @@ class $AssetsGraphicsWeaponsGen {
         a45rolleston,
         a7mmregentmagnum,
         alexanderlongbow,
+        ananthaaction22mag,
         andersson22lr,
         arzyna300magtactical,
         bearclawlitecb60,
@@ -1783,7 +1790,9 @@ class $AssetsGraphicsWeaponsGen {
         eckers3006,
         focoso357,
         forselite300,
+        frost257,
         gandharerifle,
+        giddingsssc410coyote,
         gopi10ggrand,
         grelckdrillingrifle,
         hansson3006,

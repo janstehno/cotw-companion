@@ -389,6 +389,9 @@ class Graphics {
     "WEAPON:HANSSON_3006": Assets.graphics.weapons.hansson3006,
     "WEAPON:QUIST_REAPER_762X39": Assets.graphics.weapons.quistreaper762x39,
     "WEAPON:LAPERRIERE_OUTRIDER_3030": Assets.graphics.weapons.laperriereoutrider3030,
+    "WEAPON:GIDDINGS_SSC_410_COYOTE": Assets.graphics.weapons.giddingsssc410coyote,
+    "WEAPON:ANANTHA_ACTION_22MAG": Assets.graphics.weapons.ananthaaction22mag,
+    "WEAPON:FROST_257": Assets.graphics.weapons.frost257,
   };
 
   static final Map<String, String> _callers = {

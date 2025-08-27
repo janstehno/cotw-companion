@@ -210,7 +210,8 @@ enum AnimalTaxonomy {
   hares(23, "TAXONOMY_HARES"),
   horned(24, "TAXONOMY_HORNED"),
   sheep(25, "TAXONOMY_SHEEP"),
-  rabbits(26, "TAXONOMY_RABBITS");
+  rabbits(26, "TAXONOMY_RABBITS"),
+  goats(27, "TAXONOMY_GOATS");
 
   final int id;
   final String key;

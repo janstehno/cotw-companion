@@ -120,6 +120,8 @@ class $AssetsGraphicsAnatomyGen {
 
   AssetGenImage get coyote => const AssetGenImage('assets/graphics/anatomy/coyote.webp');
 
+  AssetGenImage get desertBighornSheep => const AssetGenImage('assets/graphics/anatomy/desert_bighorn_sheep.webp');
+
   AssetGenImage get easternGrayKangaroo => const AssetGenImage('assets/graphics/anatomy/eastern_gray_kangaroo.webp');
 
   AssetGenImage get eurasianLynx => const AssetGenImage('assets/graphics/anatomy/eurasian_lynx.webp');
@@ -245,6 +247,7 @@ class $AssetsGraphicsAnatomyGen {
         collaredPeccary,
         commonRaccoon,
         coyote,
+        desertBighornSheep,
         easternGrayKangaroo,
         eurasianLynx,
         europeanBison,
@@ -764,6 +767,8 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get coyote => const AssetGenImage('assets/graphics/heads/coyote.webp');
 
+  AssetGenImage get desertbighornsheep => const AssetGenImage('assets/graphics/heads/desertbighornsheep.webp');
+
   AssetGenImage get duskygrouse => const AssetGenImage('assets/graphics/heads/duskygrouse.webp');
 
   AssetGenImage get easterncottontailrabbit =>
@@ -953,6 +958,7 @@ class $AssetsGraphicsHeadsGen {
         collaredpeccary,
         commonraccoon,
         coyote,
+        desertbighornsheep,
         duskygrouse,
         easterncottontailrabbit,
         easterngraykangaroo,
@@ -1892,7 +1898,7 @@ class $AssetsRawMapsGen {
 }
 
 class Assets {
-  Assets._();
+  const Assets._();
 
   static const $AssetsGraphicsGen graphics = $AssetsGraphicsGen();
   static const $AssetsRawGen raw = $AssetsRawGen();
@@ -1903,12 +1909,14 @@ class AssetGenImage {
     this._assetName, {
     this.size,
     this.flavors = const {},
+    this.animation,
   });
 
   final String _assetName;
 
   final Size? size;
   final Set<String> flavors;
+  final AssetGenImageAnimation? animation;
 
   Image image({
     Key? key,
@@ -1931,7 +1939,7 @@ class AssetGenImage {
     bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
-    FilterQuality filterQuality = FilterQuality.low,
+    FilterQuality filterQuality = FilterQuality.medium,
     int? cacheWidth,
     int? cacheHeight,
   }) {
@@ -1977,4 +1985,16 @@ class AssetGenImage {
   String get path => _assetName;
 
   String get keyName => _assetName;
+}
+
+class AssetGenImageAnimation {
+  const AssetGenImageAnimation({
+    required this.isAnimation,
+    required this.duration,
+    required this.frames,
+  });
+
+  final bool isAnimation;
+  final Duration duration;
+  final int frames;
 }

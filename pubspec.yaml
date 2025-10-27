@@ -3,7 +3,7 @@ description: Companion for the game theHunter Call of the Wild
 
 publish_to: 'none'
 
-version: 1.11.5+100
+version: 1.11.6+101
 
 environment:
   sdk: '>=3.0.6 <4.0.0'

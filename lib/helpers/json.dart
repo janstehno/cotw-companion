@@ -182,14 +182,6 @@ class HelperJSON {
     }
   }
 
-  static AnimalFur? getAnimalFur(int animalFurId) {
-    try {
-      return animalsFurs.firstWhereOrNull((e) => e.id == animalFurId);
-    } catch (e) {
-      throw Exception("AnimalFur with ID: $animalFurId does not exist");
-    }
-  }
-
   static AnimalFur? getAnimalFurByParameters(int animalId, int furId, bool male, bool female) {
     try {
       return animalsFurs.firstWhereOrNull((animalFur) {

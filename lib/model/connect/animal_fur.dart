@@ -2,7 +2,6 @@ import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 
 class AnimalFur {
-  final int _id;
   final int _animalId;
   final int _furId;
   final FurRarity _rarity;
@@ -11,7 +10,6 @@ class AnimalFur {
   final bool _female;
 
   AnimalFur({
-    required int id,
     required int animalId,
     required int furId,
     required FurRarity rarity,
@@ -19,15 +17,12 @@ class AnimalFur {
     required bool male,
     required bool female,
     required bool chosen,
-  })  : _id = id,
-        _animalId = animalId,
+  })  : _animalId = animalId,
         _furId = furId,
         _rarity = rarity,
         _perCent = perCent,
         _male = male,
         _female = female;
-
-  int get id => _id;
 
   int get animalId => _animalId;
 
@@ -51,7 +46,6 @@ class AnimalFur {
 
   factory AnimalFur.fromJson(Map<String, dynamic> json) {
     return AnimalFur(
-      id: json['ID'],
       animalId: json['ANIMAL_ID'],
       furId: json['FUR_ID'],
       rarity: FurRarity.values.firstWhere((e) => e.id == json['RARITY']),

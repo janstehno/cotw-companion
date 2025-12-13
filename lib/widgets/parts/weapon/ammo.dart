@@ -27,10 +27,11 @@ class WidgetWeaponAmmo extends StatelessWidget {
         runSpacing: 5,
         children: [
           WidgetParameterPrice(price: _ammo.price),
-          WidgetParameter(
-            text: tr("REQUIREMENT_SCORE"),
-            value: _ammo.score,
-          ),
+          if (_ammo.hasRequirements)
+            WidgetParameter(
+              text: tr("REQUIREMENT_SCORE"),
+              value: _ammo.score,
+            ),
         ],
       ),
     );
@@ -48,7 +49,7 @@ class WidgetWeaponAmmo extends StatelessWidget {
   Widget _buildWidgets(BuildContext context) {
     return Column(
       children: [
-        if (_ammo.hasRequirements) _buildRequirements(),
+        _buildRequirements(),
         _buildStatistics(context),
       ],
     );

@@ -85,17 +85,15 @@ class EntryLogState extends WidgetLogsDismissibleState {
 
   @override
   void endToStart() {
-    if ((widget as WidgetLog).log.reserve != null) {
-      Utils.buildSnackBarMessage(
-        (widget as WidgetLogsDismissible).log.isInLodge ? tr("ITEM_REMOVED_FROM_LODGE") : tr("ITEM_MOVED_TO_LODGE"),
-        Process.info,
-        (widget as WidgetLog).context,
-      );
-      setState(() {
-        HelperLog.moveLogToLodge((widget as WidgetLogsDismissible).log);
-        if ((widget as WidgetLog).callback != null) (widget as WidgetLog).callback!();
-      });
-    }
+    Utils.buildSnackBarMessage(
+      (widget as WidgetLogsDismissible).log.isInLodge ? tr("ITEM_REMOVED_FROM_LODGE") : tr("ITEM_MOVED_TO_LODGE"),
+      Process.info,
+      (widget as WidgetLog).context,
+    );
+    setState(() {
+      HelperLog.moveLogToLodge((widget as WidgetLogsDismissible).log);
+      if ((widget as WidgetLog).callback != null) (widget as WidgetLog).callback!();
+    });
   }
 
   Widget buildLodge() {

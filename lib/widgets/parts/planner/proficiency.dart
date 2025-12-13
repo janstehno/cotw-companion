@@ -40,7 +40,7 @@ class WidgetProficiency<I extends Proficiency> extends StatefulWidget {
 
   Function get rebuild => _rebuild;
 
-  get showDetail => _showDetail;
+  Function get showDetail => _showDetail;
 
   @override
   State<StatefulWidget> createState() => WidgetProficiencyState<I>();

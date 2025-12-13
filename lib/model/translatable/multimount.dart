@@ -46,9 +46,9 @@ class MultimountAnimal {
   final int _count;
 
   MultimountAnimal({
-    required id,
-    required male,
-    required count,
+    required int id,
+    required bool male,
+    required int count,
   })  : _id = id,
         _male = male,
         _count = count;

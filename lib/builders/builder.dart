@@ -28,9 +28,9 @@ abstract class BuilderBuilderState extends State<BuilderBuilder> {
 
   void initializeData(AsyncSnapshot<Map<String, dynamic>> snapshot, BuildContext context);
 
-  loadData();
+  dynamic loadData();
 
-  buildFutureWidget(BuildContext context);
+  Widget buildFutureWidget(BuildContext context);
 
   Widget _buildLoadingBackground() {
     ImageProvider background = AssetImage(Assets.graphics.images.cotw.path);

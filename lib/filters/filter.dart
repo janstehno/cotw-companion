@@ -138,7 +138,7 @@ abstract class Filter<T> {
     sortingKeys.clear();
   }
 
-  compareItems(T a, T b, SortKey key, bool ascending, [BuildContext? context]) => 0;
+  int compareItems(T a, T b, SortKey key, bool ascending, [BuildContext? context]) => 0;
 
   Map<K, V> _deepCopyFilters<K, V>(Map<K, V> original) {
     return Map.from(original.map((key, value) {

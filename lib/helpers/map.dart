@@ -77,7 +77,7 @@ class HelperMap {
   ];
 
   HelperMap({
-    required reserve,
+    required Reserve reserve,
   }) : _reserve = reserve;
 
   Reserve get reserve => _reserve;

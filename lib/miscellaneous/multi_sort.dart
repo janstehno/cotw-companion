@@ -1,9 +1,9 @@
-library multi_sort;
+library;
 
 import 'package:flutter/material.dart';
 
 extension MultiSort on List {
-  multiSort(BuildContext context, List<bool> criteria, List<String> preferences) {
+  List multiSort(BuildContext context, List<bool> criteria, List<String> preferences) {
     if (criteria.isEmpty || preferences.isEmpty || isEmpty) {
       return this;
     }
@@ -31,5 +31,7 @@ extension MultiSort on List {
     }
 
     sort((a, b) => sortAll(a, b));
+
+    return this;
   }
 }

@@ -229,7 +229,6 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
         ],
       );
     }
-    ;
     return SizedBox.shrink();
   }
 

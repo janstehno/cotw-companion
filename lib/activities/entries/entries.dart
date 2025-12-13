@@ -105,7 +105,7 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     });
   }
 
-  fileLoaded() async => false;
+  Future<bool> fileLoaded() async => false;
 
   void _loadFile() async {
     final bool loaded = await fileLoaded();
@@ -128,7 +128,7 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     }
   }
 
-  fileSaved() async => false;
+  Future<bool> fileSaved() async => false;
 
   void _saveFile() async {
     final bool saved = await fileSaved();

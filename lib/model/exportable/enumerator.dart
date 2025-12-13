@@ -69,9 +69,9 @@ class Counter extends Exportable {
   int _value;
 
   Counter({
-    required name,
-    required order,
-    required value,
+    required String name,
+    required int? order,
+    required int? value,
   })  : _name = name,
         _order = order ?? 0,
         _value = value ?? 0;

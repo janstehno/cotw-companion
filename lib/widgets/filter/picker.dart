@@ -40,7 +40,7 @@ abstract class WidgetFilterPicker<E> extends StatefulWidget {
 
   List<Color> get colors => _colors;
 
-  get backgrounds => _backgrounds;
+  List<Color> get backgrounds => _backgrounds;
 }
 
 abstract class WidgetFilterPickerState extends State<WidgetFilterPicker> {

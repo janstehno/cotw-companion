@@ -48,7 +48,7 @@ class Settings extends ChangeNotifier {
   late SharedPreferences _sharedPreferences;
 
   Settings({
-    required language,
+    required int language,
     required bool darkMode,
     required imperialUnits,
     required mapZonesType,

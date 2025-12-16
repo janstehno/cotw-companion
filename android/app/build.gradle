@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.toastyapps.cotwcompanion"
-    compileSdk flutter.compileSdkVersion
+    compileSdk 36
 
     String systemNdkPath = System.getenv("ANDROID_NDK_PATH")
     if (systemNdkPath != null) {
@@ -44,13 +44,13 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     defaultConfig {
         applicationId "com.toastyapps.cotwcompanion"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

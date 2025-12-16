@@ -33,13 +33,12 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.2.3
   simple_shadow: 0.3.1
-  smooth_page_indicator: ^1.2.0+3
+  smooth_page_indicator: ^2.0.1
   url_launcher: ^6.2.6
   package_info_plus: ^9.0.0
 
 dev_dependencies:
   build_runner: ^2.4.10
-  flutter_gen: ^5.6.0
   flutter_gen_runner: ^5.6.0
   flutter_lints: ^6.0.0
   logger: ^2.3.0
@@ -124,6 +123,9 @@ flutter:
     - assets/graphics/maps/askiyridgehuntingpreserve/1/
     - assets/graphics/maps/askiyridgehuntingpreserve/2/
     - assets/graphics/maps/askiyridgehuntingpreserve/3/
+    - assets/graphics/maps/torrnansitheanhuntingestate/1/
+    - assets/graphics/maps/torrnansitheanhuntingestate/2/
+    - assets/graphics/maps/torrnansitheanhuntingestate/3/
   fonts:
     - family: Normal
       fonts:

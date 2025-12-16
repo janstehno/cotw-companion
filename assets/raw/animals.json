@@ -601,7 +601,8 @@
         "RESERVES": [
             1,
             9,
-            14
+            14,
+            18
         ],
         "SIGHT": 4,
         "SILVER": 104.89,
@@ -1216,7 +1217,8 @@
             5,
             7,
             9,
-            14
+            14,
+            18
         ],
         "SIGHT": 0,
         "SILVER": 90.5,
@@ -1268,7 +1270,8 @@
             6,
             13,
             14,
-            16
+            16,
+            18
         ],
         "SIGHT": 4,
         "SILVER": 4.66,
@@ -1365,7 +1368,8 @@
         "NAME": "ANIMAL:ROE_DEER",
         "RESERVES": [
             1,
-            7
+            7,
+            18
         ],
         "SIGHT": 0,
         "SILVER": 41.04,
@@ -1776,24 +1780,40 @@
         "DIAMOND": 144.25,
         "DIFFICULTY": 5,
         "DLC": false,
+        "FUR_GO": [
+            1057,
+            1058,
+            1059,
+            1060,
+            1061,
+            1062,
+            1063,
+            1064,
+            1065
+        ],
         "GOLD": 98.5,
         "HEARING": 4,
         "ID": 52,
         "LATIN": "Sus Scrofa",
         "LEVEL": 5,
         "MAX_TROPHY_FEMALE": 81.5,
+        "MAX_TROPHY_GO": 180.0,
         "MAX_TROPHY_MALE": 159.5,
         "MAX_WEIGHT_FEMALE": 168.0,
+        "MAX_WEIGHT_GO": 261.0,
         "MAX_WEIGHT_MALE": 240.0,
         "MIN_TROPHY_FEMALE": 7.0,
+        "MIN_TROPHY_GO": 160.0,
         "MIN_TROPHY_MALE": 7.0,
         "MIN_WEIGHT_FEMALE": 25.0,
+        "MIN_WEIGHT_GO": 241.0,
         "MIN_WEIGHT_MALE": 32.0,
         "NAME": "ANIMAL:WILD_BOAR",
         "RESERVES": [
             1,
             3,
-            7
+            7,
+            18
         ],
         "SIGHT": 0,
         "SILVER": 37.5,
@@ -1854,7 +1874,8 @@
         "NAME": "ANIMAL:FERAL_GOAT",
         "RESERVES": [
             9,
-            14
+            14,
+            18
         ],
         "SIGHT": 3,
         "SILVER": 89.44,
@@ -1924,7 +1945,8 @@
         "MIN_WEIGHT_MALE": 30.0,
         "NAME": "ANIMAL:SIKA_DEER",
         "RESERVES": [
-            9
+            9,
+            18
         ],
         "SIGHT": 2,
         "SILVER": 53.29,
@@ -1974,7 +1996,8 @@
             10,
             13,
             16,
-            17
+            17,
+            18
         ],
         "SIGHT": 3,
         "SILVER": 9.1,
@@ -2437,7 +2460,8 @@
         "RESERVES": [
             4,
             12,
-            16
+            16,
+            18
         ],
         "SIGHT": 4,
         "SILVER": 590.0,
@@ -2537,7 +2561,8 @@
         "NAME": "ANIMAL:BLACK_GROUSE",
         "RESERVES": [
             12,
-            16
+            16,
+            18
         ],
         "SIGHT": 3,
         "SILVER": 85.0,
@@ -2601,7 +2626,8 @@
         "NAME": "ANIMAL:WESTERN_CAPERCAILLIE",
         "RESERVES": [
             3,
-            12
+            12,
+            18
         ],
         "SIGHT": 3,
         "SILVER": 2.2,
@@ -2694,7 +2720,8 @@
         "MIN_WEIGHT_MALE": 2.0,
         "NAME": "ANIMAL:MOUNTAIN_HARE",
         "RESERVES": [
-            12
+            12,
+            18
         ],
         "SIGHT": 0,
         "SILVER": 2.8,
@@ -2770,21 +2797,21 @@
         ]
     },
     {
-        "DIAMOND": 238.0,
+        "DIAMOND": 126.0,
         "DIFFICULTY": 3,
         "DLC": true,
-        "GOLD": 202.0,
+        "GOLD": 114.0,
         "GROUNDED": true,
         "HEARING": 2,
         "ID": 82,
         "LATIN": "Coturnix Pectoralis",
         "LEVEL": 1,
-        "MAX_TROPHY_FEMALE": 175.0,
-        "MAX_TROPHY_MALE": 250.0,
+        "MAX_TROPHY_FEMALE": 130.0,
+        "MAX_TROPHY_MALE": 130.0,
         "MAX_WEIGHT_FEMALE": 0.12999999523162842,
         "MAX_WEIGHT_MALE": 0.12999999523162842,
-        "MIN_TROPHY_FEMALE": 130.0,
-        "MIN_TROPHY_MALE": 130.0,
+        "MIN_TROPHY_FEMALE": 90.0,
+        "MIN_TROPHY_MALE": 90.0,
         "MIN_WEIGHT_FEMALE": 0.09000000357627869,
         "MIN_WEIGHT_MALE": 0.09000000357627869,
         "NAME": "ANIMAL:STUBBLE_QUAIL",
@@ -2792,7 +2819,7 @@
             14
         ],
         "SIGHT": 2,
-        "SILVER": 154.0,
+        "SILVER": 98.0,
         "SMELL": 1,
         "TAXONOMY": [
             15,
@@ -2804,20 +2831,20 @@
         "CALLERS": [
             24
         ],
-        "DIAMOND": 3.85,
+        "DIAMOND": 3.02,
         "DIFFICULTY": 5,
         "DLC": true,
-        "GOLD": 3.4,
+        "GOLD": 2.48,
         "HEARING": 2,
         "ID": 83,
         "LATIN": "Anseranas Semipalmata",
         "LEVEL": 1,
-        "MAX_TROPHY_FEMALE": 3.5,
-        "MAX_TROPHY_MALE": 4.0,
+        "MAX_TROPHY_FEMALE": 2.799999952316284,
+        "MAX_TROPHY_MALE": 3.200000047683716,
         "MAX_WEIGHT_FEMALE": 2.799999952316284,
         "MAX_WEIGHT_MALE": 3.200000047683716,
-        "MIN_TROPHY_FEMALE": 2.5,
-        "MIN_TROPHY_MALE": 2.5,
+        "MIN_TROPHY_FEMALE": 1.399999976158142,
+        "MIN_TROPHY_MALE": 1.7999999523162842,
         "MIN_WEIGHT_FEMALE": 1.399999976158142,
         "MIN_WEIGHT_MALE": 1.7999999523162842,
         "NAME": "ANIMAL:MAGPIE_GOOSE",
@@ -2825,7 +2852,7 @@
             14
         ],
         "SIGHT": 4,
-        "SILVER": 2.8,
+        "SILVER": 1.76,
         "SMELL": 2,
         "TAXONOMY": [
             15,
@@ -3684,6 +3711,152 @@
             7,
             24,
             25
+        ]
+    },
+    {
+        "DIAMOND": 41.03,
+        "DIAMOND_FEMALE": true,
+        "DIFFICULTY": 3,
+        "DLC": true,
+        "GOLD": 34.52,
+        "GROUNDED": true,
+        "HEARING": 3,
+        "ID": 111,
+        "LATIN": "Scolopax Rusticola",
+        "LEVEL": 1,
+        "MAX_TROPHY_FEMALE": 43.20000076293945,
+        "MAX_TROPHY_MALE": 39.29999923706055,
+        "MAX_WEIGHT_FEMALE": 0.4320000112056732,
+        "MAX_WEIGHT_MALE": 0.3930000066757202,
+        "MIN_TROPHY_FEMALE": 23.700000762939453,
+        "MIN_TROPHY_MALE": 21.5,
+        "MIN_WEIGHT_FEMALE": 0.2370000034570694,
+        "MIN_WEIGHT_MALE": 0.2150000035762787,
+        "NAME": "ANIMAL:EURASIAN_WOODCOCK",
+        "RESERVES": [
+            18
+        ],
+        "SIGHT": 4,
+        "SILVER": 25.84,
+        "SMELL": 2,
+        "TAXONOMY": [
+            15,
+            19,
+            20
+        ]
+    },
+    {
+        "DIAMOND": 72.75,
+        "DIFFICULTY": 3,
+        "DLC": true,
+        "GOLD": 66.0,
+        "HEARING": 3,
+        "ID": 112,
+        "LATIN": "Lagopus Scotica",
+        "LEVEL": 1,
+        "MAX_TROPHY_FEMALE": 70.0,
+        "MAX_TROPHY_MALE": 75.0,
+        "MAX_WEIGHT_FEMALE": 0.699999988079071,
+        "MAX_WEIGHT_MALE": 0.75,
+        "MIN_TROPHY_FEMALE": 52.5,
+        "MIN_TROPHY_MALE": 53.5,
+        "MIN_WEIGHT_FEMALE": 0.5249999761581421,
+        "MIN_WEIGHT_MALE": 0.5350000262260437,
+        "NAME": "ANIMAL:RED_GROUSE",
+        "RESERVES": [
+            18
+        ],
+        "SIGHT": 4,
+        "SILVER": 57.0,
+        "SMELL": 1,
+        "TAXONOMY": [
+            15,
+            19,
+            20
+        ]
+    },
+    {
+        "DIAMOND": 151.0,
+        "DIFFICULTY": 5,
+        "DLC": true,
+        "GOLD": 124.0,
+        "HEARING": 4,
+        "ID": 113,
+        "LATIN": "Neogale Vison",
+        "LEVEL": 1,
+        "MAX_TROPHY_FEMALE": 110.0,
+        "MAX_TROPHY_MALE": 160.0,
+        "MAX_WEIGHT_FEMALE": 1.100000023841858,
+        "MAX_WEIGHT_MALE": 1.600000023841858,
+        "MIN_TROPHY_FEMALE": 70.0,
+        "MIN_TROPHY_MALE": 100.0,
+        "MIN_WEIGHT_FEMALE": 0.699999988079071,
+        "MIN_WEIGHT_MALE": 1.0,
+        "NAME": "ANIMAL:AMERICAN_MINK",
+        "RESERVES": [
+            18
+        ],
+        "SIGHT": 2,
+        "SILVER": 88.0,
+        "SMELL": 4,
+        "TAXONOMY": [
+            0
+        ]
+    },
+    {
+        "DIAMOND": 208.0,
+        "DIFFICULTY": 5,
+        "DLC": true,
+        "GOLD": 172.0,
+        "HEARING": 3,
+        "ID": 114,
+        "LATIN": "Martes Martes",
+        "LEVEL": 1,
+        "MAX_TROPHY_FEMALE": 160.0,
+        "MAX_TROPHY_MALE": 220.0,
+        "MAX_WEIGHT_FEMALE": 1.600000023841858,
+        "MAX_WEIGHT_MALE": 2.200000047683716,
+        "MIN_TROPHY_FEMALE": 100.0,
+        "MIN_TROPHY_MALE": 150.0,
+        "MIN_WEIGHT_FEMALE": 1.0,
+        "MIN_WEIGHT_MALE": 1.5,
+        "NAME": "ANIMAL:EURASIAN_PINE_MARTEN",
+        "RESERVES": [
+            18
+        ],
+        "SIGHT": 1,
+        "SILVER": 124.0,
+        "SMELL": 4,
+        "TAXONOMY": [
+            0
+        ]
+    },
+    {
+        "DIAMOND": 16.0,
+        "DIFFICULTY": 5,
+        "DLC": true,
+        "GOLD": 13.0,
+        "HEARING": 2,
+        "ID": 115,
+        "LATIN": "Meles Meles",
+        "LEVEL": 2,
+        "MAX_TROPHY_FEMALE": 14.0,
+        "MAX_TROPHY_MALE": 17.0,
+        "MAX_WEIGHT_FEMALE": 14.0,
+        "MAX_WEIGHT_MALE": 17.0,
+        "MIN_TROPHY_FEMALE": 7.0,
+        "MIN_TROPHY_MALE": 9.0,
+        "MIN_WEIGHT_FEMALE": 7.0,
+        "MIN_WEIGHT_MALE": 9.0,
+        "NAME": "ANIMAL:EUROPEAN_BADGER",
+        "RESERVES": [
+            18
+        ],
+        "SIGHT": 1,
+        "SILVER": 9.0,
+        "SMELL": 4,
+        "TAXONOMY": [
+            0
         ]
     }
 ]

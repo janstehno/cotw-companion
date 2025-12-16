@@ -126,6 +126,8 @@ class $AssetsGraphicsAnatomyGen {
 
   AssetGenImage get eurasianLynx => const AssetGenImage('assets/graphics/anatomy/eurasian_lynx.webp');
 
+  AssetGenImage get europeanBadger => const AssetGenImage('assets/graphics/anatomy/european_badger.webp');
+
   AssetGenImage get europeanBison => const AssetGenImage('assets/graphics/anatomy/european_bison.webp');
 
   AssetGenImage get fallowDeer => const AssetGenImage('assets/graphics/anatomy/fallow_deer.webp');
@@ -250,6 +252,7 @@ class $AssetsGraphicsAnatomyGen {
         desertBighornSheep,
         easternGrayKangaroo,
         eurasianLynx,
+        europeanBadger,
         europeanBison,
         fallowDeer,
         feralGoat,
@@ -308,6 +311,8 @@ class $AssetsGraphicsAnimalsGen {
 
   String get americanalligator => 'assets/graphics/animals/americanalligator.svg';
 
+  String get americanmink => 'assets/graphics/animals/americanmink.svg';
+
   String get antelopejackrabbit => 'assets/graphics/animals/antelopejackrabbit.svg';
 
   String get axisdeer => 'assets/graphics/animals/axisdeer.svg';
@@ -364,9 +369,15 @@ class $AssetsGraphicsAnimalsGen {
 
   String get eurasianlynx => 'assets/graphics/animals/eurasianlynx.svg';
 
+  String get eurasianpinemarten => 'assets/graphics/animals/eurasianpinemarten.svg';
+
   String get eurasianteal => 'assets/graphics/animals/eurasianteal.svg';
 
   String get eurasianwigeon => 'assets/graphics/animals/eurasianwigeon.svg';
+
+  String get eurasianwoodcock => 'assets/graphics/animals/eurasianwoodcock.svg';
+
+  String get europeanbadger => 'assets/graphics/animals/europeanbadger.svg';
 
   String get europeanbison => 'assets/graphics/animals/europeanbison.svg';
 
@@ -450,6 +461,8 @@ class $AssetsGraphicsAnimalsGen {
 
   String get redfox => 'assets/graphics/animals/redfox.svg';
 
+  String get redgrouse => 'assets/graphics/animals/redgrouse.svg';
+
   String get reindeer => 'assets/graphics/animals/reindeer.svg';
 
   String get ringneckedpheasant => 'assets/graphics/animals/ringneckedpheasant.svg';
@@ -518,6 +531,7 @@ class $AssetsGraphicsAnimalsGen {
 
   List<String> get values => [
         americanalligator,
+        americanmink,
         antelopejackrabbit,
         axisdeer,
         banteng,
@@ -546,8 +560,11 @@ class $AssetsGraphicsAnimalsGen {
         easterngraykangaroo,
         elk,
         eurasianlynx,
+        eurasianpinemarten,
         eurasianteal,
         eurasianwigeon,
+        eurasianwoodcock,
+        europeanbadger,
         europeanbison,
         europeanhare,
         europeanrabbit,
@@ -589,6 +606,7 @@ class $AssetsGraphicsAnimalsGen {
         raccoondog,
         reddeer,
         redfox,
+        redgrouse,
         reindeer,
         ringneckedpheasant,
         rockptarmigan,
@@ -721,6 +739,8 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get americanalligator => const AssetGenImage('assets/graphics/heads/americanalligator.webp');
 
+  AssetGenImage get americanmink => const AssetGenImage('assets/graphics/heads/americanmink.webp');
+
   AssetGenImage get antelopejackrabbit => const AssetGenImage('assets/graphics/heads/antelopejackrabbit.webp');
 
   AssetGenImage get axisdeer => const AssetGenImage('assets/graphics/heads/axisdeer.webp');
@@ -778,9 +798,15 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get eurasianlynx => const AssetGenImage('assets/graphics/heads/eurasianlynx.webp');
 
+  AssetGenImage get eurasianpinemarten => const AssetGenImage('assets/graphics/heads/eurasianpinemarten.webp');
+
   AssetGenImage get eurasianteal => const AssetGenImage('assets/graphics/heads/eurasianteal.webp');
 
   AssetGenImage get eurasianwigeon => const AssetGenImage('assets/graphics/heads/eurasianwigeon.webp');
+
+  AssetGenImage get eurasianwoodcock => const AssetGenImage('assets/graphics/heads/eurasianwoodcock.webp');
+
+  AssetGenImage get europeanbadger => const AssetGenImage('assets/graphics/heads/europeanbadger.webp');
 
   AssetGenImage get europeanbison => const AssetGenImage('assets/graphics/heads/europeanbison.webp');
 
@@ -864,6 +890,8 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get redfox => const AssetGenImage('assets/graphics/heads/redfox.webp');
 
+  AssetGenImage get redgrouse => const AssetGenImage('assets/graphics/heads/redgrouse.webp');
+
   AssetGenImage get reindeer => const AssetGenImage('assets/graphics/heads/reindeer.webp');
 
   AssetGenImage get ringneckedpheasant => const AssetGenImage('assets/graphics/heads/ringneckedpheasant.webp');
@@ -935,6 +963,7 @@ class $AssetsGraphicsHeadsGen {
 
   List<AssetGenImage> get values => [
         americanalligator,
+        americanmink,
         antelopejackrabbit,
         axisdeer,
         banteng,
@@ -963,8 +992,11 @@ class $AssetsGraphicsHeadsGen {
         easterncottontailrabbit,
         easterngraykangaroo,
         eurasianlynx,
+        eurasianpinemarten,
         eurasianteal,
         eurasianwigeon,
+        eurasianwoodcock,
+        europeanbadger,
         europeanbison,
         europeanhare,
         europeanrabbit,
@@ -1006,6 +1038,7 @@ class $AssetsGraphicsHeadsGen {
         raccoondog,
         reddeer,
         redfox,
+        redgrouse,
         reindeer,
         ringneckedpheasant,
         rockptarmigan,
@@ -1612,6 +1645,8 @@ class $AssetsGraphicsReservesGen {
 
   String get teawaroanationalpark => 'assets/graphics/reserves/teawaroanationalpark.svg';
 
+  String get torrnansitheanhuntingestate => 'assets/graphics/reserves/torrnansitheanhuntingestate.svg';
+
   String get vurhongasavannareserve => 'assets/graphics/reserves/vurhongasavannareserve.svg';
 
   String get yukonvalley => 'assets/graphics/reserves/yukonvalley.svg';
@@ -1632,6 +1667,7 @@ class $AssetsGraphicsReservesGen {
         silverridgepeaks,
         sundarpatanhuntingreserve,
         teawaroanationalpark,
+        torrnansitheanhuntingestate,
         vurhongasavannareserve,
         yukonvalley
       ];
@@ -1671,6 +1707,8 @@ class $AssetsGraphicsWeaponsGen {
   String get arzyna300magtactical => 'assets/graphics/weapons/arzyna300magtactical.svg';
 
   String get bearclawlitecb60 => 'assets/graphics/weapons/bearclawlitecb60.svg';
+
+  String get benelhag12g => 'assets/graphics/weapons/benelhag12g.svg';
 
   String get cacciatore12g => 'assets/graphics/weapons/cacciatore12g.svg';
 
@@ -1787,6 +1825,7 @@ class $AssetsGraphicsWeaponsGen {
         andersson22lr,
         arzyna300magtactical,
         bearclawlitecb60,
+        benelhag12g,
         cacciatore12g,
         cavershamsteward12g,
         coachmatelever4570,
@@ -1872,6 +1911,8 @@ class $AssetsRawMapsGen {
 
   String get teawaroanationalpark => 'assets/raw/maps/teawaroanationalpark.json';
 
+  String get torrnansitheanhuntingestate => 'assets/raw/maps/torrnansitheanhuntingestate.json';
+
   String get vurhongasavannareserve => 'assets/raw/maps/vurhongasavannareserve.json';
 
   String get yukonvalley => 'assets/raw/maps/yukonvalley.json';
@@ -1892,6 +1933,7 @@ class $AssetsRawMapsGen {
         silverridgepeaks,
         sundarpatanhuntingreserve,
         teawaroanationalpark,
+        torrnansitheanhuntingestate,
         vurhongasavannareserve,
         yukonvalley
       ];

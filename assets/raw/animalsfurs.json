@@ -1676,7 +1676,7 @@
         "FEMALE": true,
         "FUR_ID": 17,
         "MALE": true,
-        "PERCENT": 37.322008493629774,
+        "PERCENT": 37.29405891163255,
         "RARITY": 0
     },
     {
@@ -1684,7 +1684,7 @@
         "FEMALE": true,
         "FUR_ID": 6,
         "MALE": true,
-        "PERCENT": 37.322008493629774,
+        "PERCENT": 37.29405891163255,
         "RARITY": 0
     },
     {
@@ -1692,7 +1692,7 @@
         "FEMALE": true,
         "FUR_ID": 4,
         "MALE": true,
-        "PERCENT": 24.98126405196103,
+        "PERCENT": 24.962556165751373,
         "RARITY": 0
     },
     {
@@ -1700,7 +1700,7 @@
         "FEMALE": true,
         "FUR_ID": 36,
         "MALE": true,
-        "PERCENT": 0.19985011241568823,
+        "PERCENT": 0.199700449326011,
         "RARITY": 2
     },
     {
@@ -1708,7 +1708,31 @@
         "FEMALE": true,
         "FUR_ID": 3,
         "MALE": true,
-        "PERCENT": 0.09992505620784412,
+        "PERCENT": 0.0998502246630055,
+        "RARITY": 2
+    },
+    {
+        "ANIMAL_ID": 31,
+        "FEMALE": true,
+        "FUR_ID": 107,
+        "MALE": true,
+        "PERCENT": 0.024962556165751375,
+        "RARITY": 2
+    },
+    {
+        "ANIMAL_ID": 31,
+        "FEMALE": true,
+        "FUR_ID": 106,
+        "MALE": true,
+        "PERCENT": 0.024962556165751375,
+        "RARITY": 2
+    },
+    {
+        "ANIMAL_ID": 31,
+        "FEMALE": true,
+        "FUR_ID": 103,
+        "MALE": true,
+        "PERCENT": 0.024962556165751375,
         "RARITY": 2
     },
     {
@@ -1716,7 +1740,7 @@
         "FEMALE": true,
         "FUR_ID": 16,
         "MALE": true,
-        "PERCENT": 0.02498126405196103,
+        "PERCENT": 0.024962556165751375,
         "RARITY": 2
     },
     {
@@ -1724,7 +1748,7 @@
         "FEMALE": true,
         "FUR_ID": 2,
         "MALE": true,
-        "PERCENT": 0.02498126405196103,
+        "PERCENT": 0.024962556165751375,
         "RARITY": 2
     },
     {
@@ -1732,7 +1756,7 @@
         "FEMALE": true,
         "FUR_ID": 1,
         "MALE": true,
-        "PERCENT": 0.02498126405196103,
+        "PERCENT": 0.024962556165751375,
         "RARITY": 2
     },
     {

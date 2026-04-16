@@ -38,11 +38,6 @@ class WidgetHomeSearchState extends State<WidgetHomeSearch> {
   final TextEditingController _controller = TextEditingController();
   final FilterSearch _filter = FilterSearch();
 
-  int _itemLimit = 1;
-
-  late Timer _timer;
-  String _hintText = "";
-
   final List<String> _names = [
     ...HelperJSON.animals.map((a) => a.name),
     ...HelperJSON.weapons.map((a) => a.name),
@@ -51,8 +46,14 @@ class WidgetHomeSearchState extends State<WidgetHomeSearch> {
     ...HelperJSON.callers.map((a) => a.name),
   ];
 
+  late Timer _timer;
+
+  int _itemLimit = 1;
+  String _hintText = "";
   int _hintIndex = 0;
   int _charIndex = 0;
+  int _waitTicks = 0;
+  bool _waiting = false;
   bool _deleting = false;
   bool _hasFocus = false;
 
@@ -79,37 +80,62 @@ class WidgetHomeSearchState extends State<WidgetHomeSearch> {
 
   void _onFocusChange() {
     setState(() {
-      _hasFocus = FocusScope.of(context).hasFocus;
+      _hasFocus = _controller.selection.baseOffset != -1 && FocusScope.of(context).hasFocus;
+
       if (_hasFocus) {
         _itemLimit = (_controller.text.length * 1.5).round();
         _hintText = "";
         _timer.cancel();
       } else {
+        _resetHintState();
         _startTypingAnimation();
       }
     });
   }
 
+  void _resetHintState() {
+    _charIndex = 0;
+    _waiting = false;
+    _waitTicks = 0;
+    _deleting = false;
+    _hintText = "";
+  }
+
   void _startTypingAnimation() {
-    _timer = Timer.periodic(const Duration(milliseconds: 70), (timer) {
-      if (_hasFocus) return;
+    _timer = Timer.periodic(const Duration(milliseconds: 100), (_) {
+      if (!mounted || _hasFocus) return;
 
       setState(() {
-        if (!_deleting) {
-          if (_charIndex < _names[_hintIndex].length) {
-            _hintText = _names[_hintIndex].substring(0, _charIndex + 1);
-            _charIndex++;
-          } else {
+        final text = _names[_hintIndex];
+
+        if (_waiting) {
+          _waitTicks++;
+          if (_waitTicks >= 8) {
+            _waiting = false;
+            _waitTicks = 0;
             _deleting = true;
-            Future.delayed(const Duration(seconds: 1), () {
-              setState(() {
-                _hintText = "";
-                _charIndex = 0;
-                _hintIndex = (_hintIndex + 1) % _names.length;
-                _deleting = false;
-              });
-            });
           }
+          return;
+        }
+
+        if (_deleting) {
+          if (_charIndex > 0) {
+            _charIndex -= 3;
+            if (_charIndex < 0) _charIndex = 0;
+
+            _hintText = text.substring(0, _charIndex);
+          } else {
+            _deleting = false;
+            _hintIndex = (_hintIndex + 1) % _names.length;
+          }
+          return;
+        }
+
+        if (_charIndex < text.length) {
+          _charIndex++;
+          _hintText = text.substring(0, _charIndex);
+        } else {
+          _waiting = true;
         }
       });
     });

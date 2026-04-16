@@ -166,9 +166,8 @@ class WidgetHomeMenuState extends State<WidgetHomeMenu> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (e) => ActivitySettings(callback: () {
-                      setState(() {});
-                    })),
+              builder: (e) => const ActivitySettings(),
+            ),
           );
         },
       ),

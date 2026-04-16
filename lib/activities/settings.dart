@@ -12,14 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ActivitySettings extends StatefulWidget {
-  final Function _callback;
-
   const ActivitySettings({
     super.key,
-    required Function callback,
-  }) : _callback = callback;
-
-  Function get callback => _callback;
+  });
 
   @override
   ActivitySettingsState createState() => ActivitySettingsState();
@@ -51,7 +46,6 @@ class ActivitySettingsState extends State<ActivitySettings> {
           setState(() {
             _settings.changeLanguage(value);
             EasyLocalization.of(context)!.setLocale(_settings.getLocale(value));
-            widget.callback();
           });
         },
       )
@@ -66,7 +60,6 @@ class ActivitySettingsState extends State<ActivitySettings> {
       onTap: () {
         setState(() {
           _settings.changeTheme(false);
-          widget.callback();
         });
       },
     );
@@ -79,7 +72,6 @@ class ActivitySettingsState extends State<ActivitySettings> {
       onTap: () {
         setState(() {
           _settings.changeTheme(true);
-          widget.callback();
         });
       },
     );

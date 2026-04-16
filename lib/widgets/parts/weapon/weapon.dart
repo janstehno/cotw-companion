@@ -66,7 +66,11 @@ class WidgetWeapon extends StatelessWidget {
       ),
       WidgetTag.big(
         icon: Assets.graphics.icons.weaponMag,
-        value: _weapon.id == 21 ? "1/2" : _weapon.mag.toString(),
+        value: _weapon.id == 21
+            ? "1/2"
+            : _weapon.id == 70
+                ? "1/1"
+                : _weapon.mag.toString(),
         color: Interface.dark,
         background: Interface.tag,
       )

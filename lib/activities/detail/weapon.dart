@@ -30,7 +30,11 @@ class ActivityDetailWeapon extends StatelessWidget {
   Widget _buildMagazine() {
     return WidgetParameter(
       text: tr("WEAPON_MAGAZINE"),
-      value: _weapon.id == 21 ? "1/2" : _weapon.mag,
+      value: _weapon.id == 21
+          ? "1/2"
+          : _weapon.id == 70
+              ? "1/1"
+              : _weapon.mag,
     );
   }
 

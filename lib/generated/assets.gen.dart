@@ -1700,6 +1700,8 @@ class $AssetsGraphicsWeaponsGen {
 
   String get alexanderlongbow => 'assets/graphics/weapons/alexanderlongbow.svg';
 
+  String get alisprecisionshot2506 => 'assets/graphics/weapons/alisprecisionshot2506.svg';
+
   String get ananthaaction22mag => 'assets/graphics/weapons/ananthaaction22mag.svg';
 
   String get andersson22lr => 'assets/graphics/weapons/andersson22lr.svg';
@@ -1711,6 +1713,8 @@ class $AssetsGraphicsWeaponsGen {
   String get benelhag12g => 'assets/graphics/weapons/benelhag12g.svg';
 
   String get cacciatore12g => 'assets/graphics/weapons/cacciatore12g.svg';
+
+  String get cassidycombinationshotgun => 'assets/graphics/weapons/cassidycombinationshotgun.svg';
 
   String get cavershamsteward12g => 'assets/graphics/weapons/cavershamsteward12g.svg';
 
@@ -1748,6 +1752,8 @@ class $AssetsGraphicsWeaponsGen {
 
   String get johansson450 => 'assets/graphics/weapons/johansson450.svg';
 
+  String get joneros17hmr => 'assets/graphics/weapons/joneros17hmr.svg';
+
   String get king470db => 'assets/graphics/weapons/king470db.svg';
 
   String get kotercb65 => 'assets/graphics/weapons/kotercb65.svg';
@@ -1781,6 +1787,8 @@ class $AssetsGraphicsWeaponsGen {
   String get razorbacklitecb60 => 'assets/graphics/weapons/razorbacklitecb60.svg';
 
   String get rhino454 => 'assets/graphics/weapons/rhino454.svg';
+
+  String get richardsson500 => 'assets/graphics/weapons/richardsson500.svg';
 
   String get solokhinmn1890 => 'assets/graphics/weapons/solokhinmn1890.svg';
 
@@ -1821,12 +1829,14 @@ class $AssetsGraphicsWeaponsGen {
         a45rolleston,
         a7mmregentmagnum,
         alexanderlongbow,
+        alisprecisionshot2506,
         ananthaaction22mag,
         andersson22lr,
         arzyna300magtactical,
         bearclawlitecb60,
         benelhag12g,
         cacciatore12g,
+        cassidycombinationshotgun,
         cavershamsteward12g,
         coachmatelever4570,
         cousomodel1897,
@@ -1845,6 +1855,7 @@ class $AssetsGraphicsWeaponsGen {
         houyirecurvebow,
         hudzik50caplock,
         johansson450,
+        joneros17hmr,
         king470db,
         kotercb65,
         kullman22h,
@@ -1862,6 +1873,7 @@ class $AssetsGraphicsWeaponsGen {
         rangemaster338,
         razorbacklitecb60,
         rhino454,
+        richardsson500,
         solokhinmn1890,
         stenbergtakedownrecurvebow,
         strandberg10saexecutive,

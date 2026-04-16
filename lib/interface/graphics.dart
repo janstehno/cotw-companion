@@ -408,6 +408,10 @@ class Graphics {
     "WEAPON:ZARZA10_308": Assets.graphics.weapons.zarza10308,
     "WEAPON:ZARZA15_22LR": Assets.graphics.weapons.zarza1522lr,
     "WEAPON:ZARZA15_223": Assets.graphics.weapons.zarza15223,
+    "WEAPON:JONEROS_17HMR": Assets.graphics.weapons.joneros17hmr,
+    "WEAPON:ALIS_PRECISION_SHOT_2506": Assets.graphics.weapons.alisprecisionshot2506,
+    "WEAPON:RICHARDSSON_500": Assets.graphics.weapons.richardsson500,
+    "WEAPON:CASSIDY_COMBINATION_SHOTGUN": Assets.graphics.weapons.cassidycombinationshotgun,
   };
 
   static final Map<String, String> _callers = {

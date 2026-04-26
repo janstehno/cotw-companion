@@ -10,10 +10,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+  await windowManager.ensureInitialized();
+  windowManager.waitUntilReadyToShow(
+    const WindowOptions(
+      size: Size(550, 825),
+      minimumSize: Size(550, 825),
+      maximumSize: Size(1440, 2160),
+      center: true,
+      title: 'COTW Companion',
+    ),
+    () async {
+      await windowManager.show();
+      await windowManager.focus();
+    },
+  );
 
   await EasyLocalization.ensureInitialized();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

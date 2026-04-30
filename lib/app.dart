@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:cotwcompanion/builders/home.dart';
-import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/generated/fonts.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/scroll_behavior.dart';
@@ -16,20 +17,22 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
-  await windowManager.ensureInitialized();
-  windowManager.waitUntilReadyToShow(
-    const WindowOptions(
-      size: Size(550, 825),
-      minimumSize: Size(550, 825),
-      maximumSize: Size(1440, 2160),
-      center: true,
-      title: 'COTW Companion',
-    ),
-    () async {
-      await windowManager.show();
-      await windowManager.focus();
-    },
-  );
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await windowManager.ensureInitialized();
+    windowManager.waitUntilReadyToShow(
+      const WindowOptions(
+        size: Size(550, 825),
+        minimumSize: Size(550, 825),
+        maximumSize: Size(1440, 2160),
+        center: true,
+        title: 'COTW Companion',
+      ),
+      () async {
+        await windowManager.show();
+        await windowManager.focus();
+      },
+    );
+  }
 
   await EasyLocalization.ensureInitialized();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -90,6 +93,11 @@ class App extends StatelessWidget {
 
   ThemeData get _themeData {
     return ThemeData(
+      pageTransitionsTheme: PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: ZoomPageTransitionsBuilder(),
+        },
+      ),
       scrollbarTheme: ScrollbarThemeData(
         thumbColor: WidgetStateProperty.all(Interface.ff42),
       ),
@@ -106,6 +114,16 @@ class App extends StatelessWidget {
     );
   }
 
+  ThemeData get _lightTheme => _themeData.copyWith(
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Interface.fffe,
+      );
+
+  ThemeData get _darkTheme => _themeData.copyWith(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Interface.ff06,
+      );
+
   ScrollConfiguration _scrollConfiguration(Widget? widget) {
     return ScrollConfiguration(
       behavior: InvisibleScrollBehavior(),
@@ -114,17 +132,20 @@ class App extends StatelessWidget {
   }
 
   MaterialApp _buildApp(BuildContext context) {
-    precacheImage(AssetImage(Assets.graphics.images.cotw.path), context);
+    final settings = context.watch<Settings>();
+
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
+      theme: _lightTheme,
+      darkTheme: _darkTheme,
+      themeMode: settings.darkMode ? ThemeMode.dark : ThemeMode.light,
       builder: (BuildContext context, Widget? widget) {
         _errorBuilder;
         return _scrollConfiguration(widget);
       },
-      theme: _themeData,
       home: BuilderHome(),
     );
   }

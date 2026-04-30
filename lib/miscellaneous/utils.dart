@@ -78,6 +78,22 @@ class Utils {
     return text.replaceAll(RegExp(r'(\.0+|0+)$'), '');
   }
 
+  static String formatNumber(num value, [num? thousands, num? millions, num? billions]) {
+    if (value >= (billions ?? 1000000000)) {
+      final v = value / 1000000000;
+      return "${v.toStringAsFixed(v % 1 == 0 ? 0 : 1)}B";
+    }
+    if (value >= (millions ?? 1000000)) {
+      final v = value / 1000000;
+      return "${v.toStringAsFixed(v % 1 == 0 ? 0 : 1)}M";
+    }
+    if (value >= (thousands ?? 1000)) {
+      final v = value / 1000;
+      return "${v.toStringAsFixed(v % 1 == 0 ? 0 : 1)}K";
+    }
+    return value.toString();
+  }
+
   static Future<List<dynamic>> _getDataFrom(RepositoryData data) async {
     try {
       final url = Uri.parse("https://api.github.com/repos/janstehno/cotw-companion/${data.name}?state=open");

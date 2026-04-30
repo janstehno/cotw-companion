@@ -18,6 +18,8 @@ class $StyleNormal {
   $StyleNormalSize18 get s18 => const $StyleNormalSize18();
 
   $StyleNormalSize22 get s22 => const $StyleNormalSize22();
+
+  $StyleNormalSize24 get s24 => const $StyleNormalSize24();
 }
 
 class $StyleNormalSize8 {
@@ -82,6 +84,8 @@ class $StyleNormalSize16 {
         height: Values.normalLineHeight,
       );
 
+  TextStyle get w400 => w300.copyWith(fontWeight: FontWeight.w400);
+
   TextStyle get w500 => w300.copyWith(fontWeight: FontWeight.w500);
 
   TextStyle get w700 => w300.copyWith(fontWeight: FontWeight.w700);
@@ -109,6 +113,21 @@ class $StyleNormalSize22 {
         fontFamily: FontFamily.normal,
         height: Values.normalLineHeight,
       );
+
+  TextStyle get w600 => w400.copyWith(fontWeight: FontWeight.w600);
+}
+
+class $StyleNormalSize24 {
+  const $StyleNormalSize24();
+
+  TextStyle get w400 => const TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w400,
+        fontFamily: FontFamily.normal,
+        height: Values.normalLineHeight,
+      );
+
+  TextStyle get w600 => w400.copyWith(fontWeight: FontWeight.w600);
 }
 
 class $StyleCondensed {

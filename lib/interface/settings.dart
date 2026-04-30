@@ -99,6 +99,13 @@ class Settings extends ChangeNotifier {
 
   String getLocaleName(int i) => _languages.elementAt(i);
 
+  Future<void> changeLanguage(int languageId) async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    _language = languageId;
+    await _sharedPreferences.setInt("language", languageId);
+    notifyListeners();
+  }
+
   Future<void> changeTheme(bool darkMode) async {
     _sharedPreferences = await SharedPreferences.getInstance();
     _darkMode = darkMode;
@@ -111,14 +118,6 @@ class Settings extends ChangeNotifier {
     _sharedPreferences = await SharedPreferences.getInstance();
     _imperialUnits = imperialUnits;
     await _sharedPreferences.setBool("imperialUnits", imperialUnits);
-    notifyListeners();
-  }
-
-  Future<void> changeLanguage(int languageId) async {
-    _sharedPreferences = await SharedPreferences.getInstance();
-    _language = languageId;
-    await _sharedPreferences.setInt("language", languageId);
-    notifyListeners();
   }
 
   Future<void> changeMapZonesType() async {
@@ -130,7 +129,6 @@ class Settings extends ChangeNotifier {
       _mapZonesType = true;
       await _sharedPreferences.setBool("mapZonesType", true);
     }
-    notifyListeners();
   }
 
   Future<void> changeMapZonesStyle() async {
@@ -142,7 +140,6 @@ class Settings extends ChangeNotifier {
       _mapZonesStyle = true;
       await _sharedPreferences.setBool("mapZonesStyle", true);
     }
-    notifyListeners();
   }
 
   Future<void> changeMapZonesAccuracy() async {
@@ -154,7 +151,6 @@ class Settings extends ChangeNotifier {
       _mapZonesCount = true;
       await _sharedPreferences.setBool("mapZonesCount", true);
     }
-    notifyListeners();
   }
 
   Future<void> changeMapPerformanceMode() async {
@@ -166,7 +162,6 @@ class Settings extends ChangeNotifier {
       _mapPerformanceMode = true;
       await _sharedPreferences.setBool("mapPerformanceMode", true);
     }
-    notifyListeners();
   }
 
   Future<void> changeBestWeaponsForAnimal() async {
@@ -178,7 +173,6 @@ class Settings extends ChangeNotifier {
       _bestWeaponsForAnimal = true;
       await _sharedPreferences.setBool("bestWeaponsForAnimal", true);
     }
-    notifyListeners();
   }
 
   Future<void> changeTrophyWeightDistribution() async {
@@ -190,7 +184,6 @@ class Settings extends ChangeNotifier {
       _trophyWeightDistribution = true;
       await _sharedPreferences.setBool("trophyWeightDistribution", true);
     }
-    notifyListeners();
   }
 
   Future<void> changeFurRarityPerCent() async {
@@ -202,6 +195,5 @@ class Settings extends ChangeNotifier {
       _furRarityPerCent = true;
       await _sharedPreferences.setBool("furRarityPerCent", true);
     }
-    notifyListeners();
   }
 }

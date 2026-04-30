@@ -1,8 +1,11 @@
 import 'package:cotwcompanion/activities/modify/edit/counters.dart';
+import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/exportable/enumerator.dart';
-import 'package:cotwcompanion/widgets/app/padding.dart';
+import 'package:cotwcompanion/widgets/button/button_icon.dart';
 import 'package:cotwcompanion/widgets/parts/enumerators/dismissible.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:flutter/material.dart';
@@ -43,22 +46,10 @@ class WidgetCounterState extends WidgetEnumeratorEntryState {
   }
 
   @override
-  void onTap() {
-    setState(() {
-      (widget as WidgetCounter).counter.add();
-      (widget as WidgetCounter).helperEnumerator.save();
-      if (widget.callback != null) widget.callback!();
-    });
-  }
+  void onTap() {}
 
   @override
-  void onDoubleTap() {
-    setState(() {
-      (widget as WidgetCounter).counter.subtract();
-      (widget as WidgetCounter).helperEnumerator.save();
-      if (widget.callback != null) widget.callback!();
-    });
-  }
+  void onDoubleTap() {}
 
   @override
   void endToStart() {
@@ -77,35 +68,96 @@ class WidgetCounterState extends WidgetEnumeratorEntryState {
     if (widget.callback != null) widget.callback!();
   }
 
-  Widget _buildName() {
-    return Container(
-      margin: const EdgeInsets.only(right: 30),
-      child: WidgetText(
-        (widget as WidgetCounter).counter.name,
-        color: Interface.dark,
-        style: Style.normal.s16.w300,
-        maxLines: 2,
-      ),
+  Widget _buildMinusButton() {
+    return WidgetButtonIcon(
+      Assets.graphics.icons.minus,
+      size: Values.tapSize / 3,
+      color: Interface.dark,
+      background: Interface.search,
+      onTap: () {
+        setState(() {
+          (widget as WidgetCounter).counter.subtract();
+          (widget as WidgetCounter).helperEnumerator.save();
+          if (widget.callback != null) widget.callback!();
+        });
+      },
     );
   }
 
-  Widget _buildValue() {
-    return WidgetText(
-      (widget as WidgetCounter).counter.value.toString(),
+  Widget _buildPlusButton() {
+    return WidgetButtonIcon(
+      Assets.graphics.icons.plus,
+      size: Values.tapSize / 3,
       color: Interface.dark,
-      style: Style.normal.s18.w500,
+      background: Interface.search,
+      onTap: () {
+        setState(() {
+          (widget as WidgetCounter).counter.add();
+          (widget as WidgetCounter).helperEnumerator.save();
+          if (widget.callback != null) widget.callback!();
+        });
+      },
+    );
+  }
+
+  Widget _buildName(Counter counter) {
+    return Row(
+      children: [
+        if (counter.icon.id != 0 || counter.color.id != 0)
+          WidgetButtonIcon(
+            counter.icon.asset,
+            color: counter.color.id == 0 ? Interface.dark : counter.color.color,
+            background: counter.color.id == 0 ? Interface.transparent : counter.color.background,
+            onTap: () {},
+          ),
+        if (counter.icon.id != 0 || counter.color.id != 0) SizedBox(width: 10),
+        Expanded(
+          child: WidgetText(
+            counter.name,
+            color: Interface.dark,
+            style: Style.normal.s16.w400,
+            autoSize: true,
+            maxLines: 2,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildValue(Counter counter) {
+    return WidgetText(
+      Utils.formatNumber(counter.value, 1000000),
+      color: Interface.dark,
+      style: Style.normal.s24.w600,
     );
   }
 
   @override
   Widget buildEntry() {
-    return WidgetPadding.h30(
-      child: Row(
-        children: [
-          Expanded(child: _buildName()),
-          _buildValue(),
-        ],
-      ),
+    Counter counter = (widget as WidgetCounter).counter;
+
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Container(
+            height: Values.section * 1.2,
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            alignment: Alignment.center,
+            child: Row(
+              children: [
+                _buildMinusButton(),
+                SizedBox(width: 10),
+                Expanded(child: _buildName(counter)),
+                SizedBox(width: 30),
+                _buildValue(counter),
+                SizedBox(width: 10),
+                _buildPlusButton(),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

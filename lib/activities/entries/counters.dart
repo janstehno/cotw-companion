@@ -48,13 +48,13 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
   @override
   void removeAll() {
     _helperEnumerator.removeAllCounters((widget as ActivityCounters).enumerator);
-    filterItems();
+    filterItems(true);
   }
 
   @override
   void onReorder(int oldIndex, int newIndex) {
     _helperEnumerator.changeOrderOfCounters((widget as ActivityCounters).enumerator, oldIndex, newIndex);
-    filterItems();
+    filterItems(false);
   }
 
   @override
@@ -66,7 +66,7 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
       enumerator: (widget as ActivityCounters).enumerator,
       helperEnumerator: _helperEnumerator,
       context: context,
-      callback: filterItems,
+      callback: () => filterItems(true),
     );
   }
 
@@ -78,7 +78,7 @@ class ActivityCountersState extends ActivityEntriesReorderableState<Counter> {
         ActivityAddCounters(
           helperEnumerator: (widget as ActivityCounters).helperEnumerator,
           enumerator: (widget as ActivityCounters).enumerator,
-          onSuccess: filterItems,
+          onSuccess: () => filterItems(true),
         ),
       ),
     ];

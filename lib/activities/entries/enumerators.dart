@@ -41,19 +41,19 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState<Enumerato
   @override
   void removeAll() {
     _helperEnumerator.removeAllEnumerators();
-    filterItems();
+    filterItems(true);
   }
 
   @override
   void onReorder(int oldIndex, int newIndex) {
     _helperEnumerator.changeOrderOfEnumerators(oldIndex, newIndex);
-    filterItems();
+    filterItems(false);
   }
 
   @override
   Future<bool> fileLoaded() async {
     bool imported = await _helperEnumerator.importFile();
-    if (imported) filterItems();
+    if (imported) filterItems(true);
     return imported;
   }
 
@@ -68,7 +68,7 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState<Enumerato
       enumerator: item,
       helperEnumerator: _helperEnumerator,
       context: context,
-      callback: filterItems,
+      callback: () => filterItems(true),
     );
   }
 
@@ -79,7 +79,7 @@ class ActivityEnumeratorsState extends ActivityEntriesReorderableState<Enumerato
       buildMenuAdd(
         ActivityAddEnumerators(
           helperEnumerator: _helperEnumerator,
-          onSuccess: filterItems,
+          onSuccess: () => filterItems(true),
         ),
       ),
     ];

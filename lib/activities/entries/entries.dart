@@ -57,7 +57,7 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
 
   @override
   void initState() {
-    controller.addListener(() => filterItems());
+    controller.addListener(() => filterItems(true));
     super.initState();
   }
 
@@ -78,8 +78,9 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
     _initialItems = initialItems();
   }
 
-  void filterItems() {
+  void filterItems(bool reloadInitialItems) {
     setState(() {
+      if (reloadInitialItems) _initialize();
       filteredItems = filter.filter(items, controller.text, context);
     });
   }
@@ -91,8 +92,7 @@ abstract class ActivityEntriesState<I extends Exportable> extends State<Activity
   Widget buildEntry(int i, I item);
 
   List<Widget> _listEntries() {
-    if (_initialItems.isEmpty) _initialize();
-    if (filteredItems.isEmpty) filterItems();
+    if (filteredItems.isEmpty) filterItems(_initialItems.isEmpty);
     return filteredItems.mapIndexed((i, e) => buildEntry(i, e)).toList();
   }
 

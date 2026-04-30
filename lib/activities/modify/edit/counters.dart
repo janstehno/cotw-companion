@@ -29,6 +29,8 @@ class ActivityEditCountersState extends ActivityAddCountersState {
     _counter = (widget as ActivityEditCounters).counter;
     textController.text = _counter.name;
     valueController.text = _counter.value.toString();
+    color = _counter.color.id;
+    icon = _counter.icon.id;
     errorMessage = "";
     super.initState();
   }
@@ -36,7 +38,9 @@ class ActivityEditCountersState extends ActivityAddCountersState {
   @override
   void onSuccess() {
     _counter.setName(textController.text);
-    _counter.setValue(int.parse(valueController.text));
+    _counter.setValue(int.tryParse(valueController.text) ?? 0);
+    _counter.setColor(color);
+    _counter.setIcon(icon);
     (widget as ActivityAddCounters).helperEnumerator.save();
   }
 }

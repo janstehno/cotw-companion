@@ -35,7 +35,7 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
   @override
   ActivityFilter<Log> get activityFilter => ActivityFilterLogs(
         filter: filter as FilterLogs,
-        onConfirm: filterItems,
+        onConfirm: () => filterItems(false),
       );
 
   @override
@@ -46,13 +46,13 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
   @override
   void removeAll() {
     HelperLog.removeAll();
-    filterItems();
+    filterItems(true);
   }
 
   @override
   Future<bool> fileLoaded() async {
     bool imported = await HelperLog.importFile();
-    if (imported) filterItems();
+    if (imported) filterItems(true);
     return imported;
   }
 
@@ -65,7 +65,7 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
       i,
       log: item,
       context: context,
-      callback: filterItems,
+      callback: () => filterItems(false),
     );
   }
 
@@ -139,7 +139,7 @@ class ActivityLogsState extends ActivityEntriesState<Log> {
       _buildMenuSeparator(),
       buildMenuAdd(
         ActivityAddLogs(
-          onSuccess: filterItems,
+          onSuccess: () => filterItems(true),
           context: context,
         ),
       ),

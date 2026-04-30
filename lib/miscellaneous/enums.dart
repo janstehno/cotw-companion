@@ -1,3 +1,4 @@
+import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:flutter/material.dart';
 
@@ -153,6 +154,7 @@ enum FilterKey {
   logsDate,
   logsInformation,
   logsViewEntry,
+  countersButtons,
 }
 
 enum TrophyRating {
@@ -274,4 +276,79 @@ enum SortKey {
 enum RepositoryData {
   issues,
   discussions,
+}
+
+enum CounterColor {
+  none(0, Interface.transparent, Interface.transparent),
+  red(1, Interface.red, Interface.alwaysLight),
+  orange(2, Interface.orange, Interface.alwaysDark),
+  yellow(3, Interface.yellow, Interface.alwaysDark),
+  lightGreen(4, Interface.lightGreen, Interface.alwaysDark),
+  green(5, Interface.green, Interface.alwaysDark),
+  blue(6, Interface.blue, Interface.alwaysDark),
+  oceanBlue(7, Interface.oceanBlue, Interface.alwaysLight),
+  purple(8, Interface.purple, Interface.alwaysLight),
+  lightBrown(9, Interface.lightBrown, Interface.alwaysLight),
+  grey(10, Interface.grey, Interface.alwaysDark);
+
+  final int id;
+  final Color _background;
+  final Color _color;
+
+  Color get background {
+    if (this == none) return Interface.light;
+    return _background;
+  }
+
+  Color get color {
+    if (this == none) return Interface.dark;
+    return _color;
+  }
+
+  const CounterColor(this.id, this._background, this._color);
+}
+
+enum CounterIcon {
+  none(0),
+  trophyNone(1),
+  trophyBronze(2),
+  trophySilver(3),
+  trophyGold(4),
+  trophyDiamond(5),
+  trophyGreatOne(6),
+  trophyLodge(7),
+  fur(8),
+  male(9),
+  female(10);
+
+  final int id;
+
+  const CounterIcon(this.id);
+
+  String get asset {
+    switch (this) {
+      case none:
+        return Assets.graphics.icons.placeholder;
+      case trophyNone:
+        return Assets.graphics.icons.trophyNone;
+      case trophyBronze:
+        return Assets.graphics.icons.trophyBronze;
+      case trophySilver:
+        return Assets.graphics.icons.trophySilver;
+      case trophyGold:
+        return Assets.graphics.icons.trophyGold;
+      case trophyDiamond:
+        return Assets.graphics.icons.trophyDiamond;
+      case trophyGreatOne:
+        return Assets.graphics.icons.trophyGreatOne;
+      case trophyLodge:
+        return Assets.graphics.icons.trophyLodge;
+      case fur:
+        return Assets.graphics.icons.fur;
+      case male:
+        return Assets.graphics.icons.genderMale;
+      case female:
+        return Assets.graphics.icons.genderFemale;
+    }
+  }
 }

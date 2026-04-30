@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:collection/collection.dart';
 import 'package:cotwcompanion/helpers/json.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/exportable/exportable.dart';
 
 class Enumerator extends Exportable {
@@ -67,14 +68,20 @@ class Counter extends Exportable {
   String _name;
   int _order;
   int _value;
+  int _color;
+  int _icon;
 
   Counter({
     required String name,
     required int? order,
     required int? value,
+    required int? color,
+    required int? icon,
   })  : _name = name,
         _order = order ?? 0,
-        _value = value ?? 0;
+        _value = value ?? 0,
+        _color = color ?? 0,
+        _icon = icon ?? 0;
 
   String get name => _name;
 
@@ -82,9 +89,17 @@ class Counter extends Exportable {
 
   int get value => _value;
 
+  CounterColor get color => CounterColor.values.firstWhereOrNull((e) => e.id == _color) ?? CounterColor.none;
+
+  CounterIcon get icon => CounterIcon.values.firstWhereOrNull((e) => e.id == _icon) ?? CounterIcon.none;
+
   void setName(String name) => _name = name;
 
   void setOrder(int newOrder) => _order = newOrder;
+
+  void setColor(int newColor) => _color = newColor;
+
+  void setIcon(int newIcon) => _icon = newIcon;
 
   void add() => _value++;
 
@@ -92,11 +107,13 @@ class Counter extends Exportable {
 
   void setValue(int value) => _value = value;
 
-  static Counter create(String name, int order, int value) {
+  static Counter create(String name, int order, int value, int color, int icon) {
     return Counter(
       name: name,
       order: order,
       value: value,
+      color: color,
+      icon: icon,
     );
   }
 
@@ -105,6 +122,8 @@ class Counter extends Exportable {
       name: json['NAME'],
       order: json['ID'],
       value: json['VALUE'],
+      color: json['COLOR'],
+      icon: json['ICON'],
     );
   }
 
@@ -113,7 +132,9 @@ class Counter extends Exportable {
     return '''{
       "NAME":"$_name",
       "ID":$_order,
-      "VALUE":$_value
+      "VALUE":$_value,
+      "COLOR":$_color,
+      "ICON":$_icon
     }''';
   }
 

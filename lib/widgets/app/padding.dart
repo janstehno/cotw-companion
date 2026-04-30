@@ -29,6 +29,18 @@ class WidgetPadding extends StatelessWidget {
         _padding = EdgeInsets.all(padding),
         _child = child;
 
+  WidgetPadding.symmetric(
+    double horizontal,
+    double vertical, {
+    super.key,
+    Color? background,
+    Alignment? alignment,
+    required Widget child,
+  })  : _background = background,
+        _alignment = alignment,
+        _padding = EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
+        _child = child;
+
   WidgetPadding.fromLTRB(
     double left,
     double top,

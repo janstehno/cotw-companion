@@ -7,20 +7,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WidgetTitleImageTap extends WidgetTitleTap {
-  final Widget _child;
   final Color? _titleColor;
+  final Widget? _before;
+  final Widget? _after;
+  final Widget _child;
 
   const WidgetTitleImageTap(
     super.text, {
     super.key,
     Color? titleColor,
+    Widget? before,
+    Widget? after,
     required Widget child,
     required super.onTap,
   })  : _titleColor = titleColor,
+        _before = before,
+        _after = after,
         _child = child;
 
   @override
   Color get titleColor => _titleColor ?? super.titleColor;
+
+  @override
+  Widget? buildBefore() {
+    return _before ?? super.buildBefore();
+  }
+
+  @override
+  Widget? buildAfter() {
+    return _after ?? super.buildAfter();
+  }
 
   @override
   Widget buildContainer() {

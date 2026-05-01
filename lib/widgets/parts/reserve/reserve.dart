@@ -6,6 +6,7 @@ import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/parts/items/item.dart';
 import 'package:cotwcompanion/widgets/tag/tag.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class WidgetReserve extends StatelessWidget {
@@ -48,6 +49,7 @@ class WidgetReserve extends StatelessWidget {
       _index,
       text: _reserve.name,
       icon: Graphics.getReserveIcon(_reserve),
+      buttonText: tr("MAP"),
       buttonIcon: Assets.graphics.icons.map,
       tags: _listTags(),
       onTap: () {

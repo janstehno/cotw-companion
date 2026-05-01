@@ -9,6 +9,7 @@ import 'package:cotwcompanion/lists/reserve_info/reserve_missions.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/app/bar_app.dart';
 import 'package:cotwcompanion/widgets/app/scaffold.dart';
+import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:cotwcompanion/widgets/title/title_image_tap.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -33,6 +34,10 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
     return WidgetTitleImageTap(
       tr("MAP"),
       titleColor: Interface.alwaysLight,
+      before: WidgetIcon(
+        Assets.graphics.icons.map,
+        color: Interface.alwaysLight,
+      ),
       onTap: () {
         Navigator.push(
           context,
@@ -76,6 +81,10 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
     return WidgetTitleImageTap(
       tr("MISSIONS"),
       titleColor: Interface.alwaysLight,
+      before: WidgetIcon(
+        Assets.graphics.icons.missions,
+        color: Interface.alwaysLight,
+      ),
       onTap: () {
         Navigator.push(
           context,
@@ -113,8 +122,8 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
         context: context,
       ),
       children: [
-        _buildMap(context),
         ..._listEnvironment(),
+        _buildMap(context),
         _buildMissions(context),
         ..._listAnimals(),
         ..._listCallers(),

@@ -2,7 +2,7 @@ import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/style.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
-import 'package:cotwcompanion/widgets/button/button_icon.dart';
+import 'package:cotwcompanion/widgets/button/button_text_icon.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/tag/tag.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
@@ -12,6 +12,7 @@ class WidgetItem extends StatelessWidget {
   final int _index;
   final String _text;
   final String? _icon;
+  final String? _buttonText;
   final String? _buttonIcon;
   final List<WidgetTag> _tags;
   final Function _onTap;
@@ -22,6 +23,7 @@ class WidgetItem extends StatelessWidget {
     super.key,
     required String text,
     String? icon,
+    String? buttonText,
     String? buttonIcon,
     List<WidgetTag> tags = const [],
     required Function onTap,
@@ -29,6 +31,7 @@ class WidgetItem extends StatelessWidget {
   })  : _index = i,
         _text = text,
         _icon = icon,
+        _buttonText = buttonText,
         _buttonIcon = buttonIcon,
         _tags = tags,
         _onTap = onTap,
@@ -79,12 +82,12 @@ class WidgetItem extends StatelessWidget {
 
   Widget _buildButton() {
     return Container(
-      width: _iconSize,
       alignment: Alignment.bottomCenter,
-      child: WidgetButtonIcon(
-        _buttonIcon!,
+      child: WidgetButtonTextIcon(
+        _buttonText,
+        icon: _buttonIcon,
         color: Interface.alwaysDark,
-        background: Interface.primary,
+        background: Interface.blue,
         onTap: () => _onButtonTap!(),
       ),
     );

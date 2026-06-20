@@ -160,6 +160,13 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
       height: 320,
       alignment: Alignment.center,
       fit: BoxFit.contain,
+      errorBuilder: (_, __, ___) {
+        return Image.asset(
+          Assets.graphics.images.placeholder.path,
+          alignment: Alignment.center,
+          fit: BoxFit.contain,
+        );
+      },
     );
   }
 
@@ -191,17 +198,14 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
 
   Widget _buildBody() {
     return Container(
-      color: Interface.body,
-      child: Column(
+      height: 320,
+      alignment: Alignment.center,
+      child: Stack(
+        fit: StackFit.expand,
+        alignment: Alignment.topRight,
         children: [
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              _buildImageView(),
-              if (_selectedFurImages.isNotEmpty && _selectedFur.hasBoth) _buildGenderButton(),
-            ],
-          ),
-          if (_selectedFurImages.length > 1) _buildPageIndicator(),
+          _buildImageView(),
+          if (_selectedFurImages.isNotEmpty && _selectedFur.hasBoth) _buildGenderButton(),
         ],
       ),
     );
@@ -220,16 +224,14 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
   }
 
   Widget _buildWidgets() {
-    if (_furImages.isNotEmpty) {
-      return Column(
-        children: [
-          _buildDropdown(),
-          _buildBody(),
-          _buildDisclaimer(),
-        ],
-      );
-    }
-    return SizedBox.shrink();
+    return Column(
+      children: [
+        if (_furImages.isNotEmpty) _buildDropdown(),
+        _buildBody(),
+        if (_selectedFurImages.length > 1) _buildPageIndicator(),
+        _buildDisclaimer(),
+      ],
+    );
   }
 
   @override

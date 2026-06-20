@@ -5,6 +5,7 @@ import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/caller.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/model/translatable/weapon.dart';
+import 'package:flutter/material.dart';
 
 class Graphics {
   static final Map<String, String> _animals = {
@@ -505,7 +506,7 @@ class Graphics {
 
   static String getAnimalHead(Animal animal) => _heads[animal.asset] ?? _pngPlaceholder;
 
-  static String getAnimalAnatomy(Animal animal) => _anatomy[animal.asset] ?? _svgPlaceholder;
+  static String getAnimalAnatomy(Animal animal) => _anatomy[animal.asset] ?? _pngPlaceholder;
 
   static String getSenseIcon(Sense sense) {
     switch (sense) {
@@ -525,30 +526,6 @@ class Graphics {
   static String getCallerIcon(Caller caller) => _callers[caller.asset] ?? _svgPlaceholder;
 
   static String getProficiencyIcon(Proficiency proficiency) => _proficiency[proficiency.asset] ?? _svgPlaceholder;
-
-  static String getTile(Reserve reserve, int x, int y, int z) {
-    int gridSize, correction;
-
-    switch (z) {
-      case 1:
-        gridSize = 4;
-        correction = 1;
-        break;
-      case 2:
-        gridSize = 8;
-        correction = 2;
-        break;
-      case 3:
-        gridSize = 16;
-        correction = 4;
-        break;
-      default:
-        throw Exception("Zoom level: $z is not supported");
-    }
-
-    int i = (y + correction) * gridSize + (x + correction);
-    return "assets/graphics/maps/${reserve.asset.replaceAll(RegExp(r'\S+:'), "").replaceAll("_", "").toLowerCase()}/$z/$i.webp";
-  }
 
   static String getMapObjectIcon(MapLocationType type) {
     switch (type) {
@@ -591,5 +568,39 @@ class Graphics {
       case Process.info:
         return Assets.graphics.icons.info;
     }
+  }
+
+  static Widget getTileImage(Reserve reserve, int x, int y, int z) {
+    int gridSize, correction;
+
+    switch (z) {
+      case 1:
+        gridSize = 4;
+        correction = 1;
+        break;
+      case 2:
+        gridSize = 8;
+        correction = 2;
+        break;
+      case 3:
+        gridSize = 16;
+        correction = 4;
+        break;
+      default:
+        throw Exception("Zoom level: $z is not supported");
+    }
+
+    int i = (y + correction) * gridSize + (x + correction);
+
+    return Image.asset(
+      "assets/graphics/maps/${reserve.asset.replaceAll(RegExp(r'\S+:'), "").replaceAll("_", "").toLowerCase()}/$z/$i.webp",
+      fit: BoxFit.fitWidth,
+      errorBuilder: (_, __, ___) {
+        return Image.asset(
+          Assets.graphics.images.placeholder.path,
+          fit: BoxFit.fitWidth,
+        );
+      },
+    );
   }
 }

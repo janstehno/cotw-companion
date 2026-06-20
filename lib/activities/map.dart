@@ -207,10 +207,7 @@ class ActivityMapState extends State<ActivityMap> {
       if ((z == 1 && (x >= -1 && y >= -1 && x <= 2 && y <= 2)) ||
           (z == 2 && (x >= -2 && y >= -2 && x <= 5 && y <= 5)) ||
           (z == 3 && (x >= -4 && y >= -4 && x <= 11 && y <= 11))) {
-        return Image.asset(
-          Graphics.getTile(widget.helperMap.reserve, x, y, z),
-          fit: BoxFit.fitWidth,
-        );
+        return Graphics.getTileImage(widget.helperMap.reserve, x, y, z);
       }
       return const SizedBox.shrink();
     });

@@ -47,24 +47,9 @@ class ActivityDetailReserveState extends State<ActivityDetailReserve> {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(
-            child: Image.asset(
-              Graphics.getTile(widget.reserve, -1, 2, 2),
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-          Expanded(
-            child: Image.asset(
-              Graphics.getTile(widget.reserve, 0, 2, 2),
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-          Expanded(
-            child: Image.asset(
-              Graphics.getTile(widget.reserve, 1, 2, 2),
-              fit: BoxFit.fitWidth,
-            ),
-          ),
+          Expanded(child: Graphics.getTileImage(widget.reserve, -1, 2, 2)),
+          Expanded(child: Graphics.getTileImage(widget.reserve, 0, 2, 2)),
+          Expanded(child: Graphics.getTileImage(widget.reserve, 1, 2, 2)),
         ],
       ),
     );

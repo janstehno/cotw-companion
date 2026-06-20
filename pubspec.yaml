@@ -127,6 +127,9 @@ flutter:
     - assets/graphics/maps/torrnansitheanhuntingestate/1/
     - assets/graphics/maps/torrnansitheanhuntingestate/2/
     - assets/graphics/maps/torrnansitheanhuntingestate/3/
+    - assets/graphics/maps/intisuyuhuntingreserve/1/
+    - assets/graphics/maps/intisuyuhuntingreserve/2/
+    - assets/graphics/maps/intisuyuhuntingreserve/3/
   fonts:
     - family: Normal
       fonts:

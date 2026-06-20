@@ -27,8 +27,8 @@ class ActivityAddLogsSource extends ActivityAddLogs {
 class ActivityAddLogsSourceState extends ActivityAddLogsState {
   @override
   void initializeData() {
-    selectedReserve = (widget as ActivityAddLogsSource).reserve;
-    selectedAnimal = (widget as ActivityAddLogsSource).animal;
-    selectedAnimalFur = animalFurs.first;
+    reserveValueListenable = ValueNotifier((widget as ActivityAddLogsSource).reserve);
+    animalValueListenable = ValueNotifier((widget as ActivityAddLogsSource).animal);
+    animalFurValueListenable = ValueNotifier(animalFurs.first);
   }
 }

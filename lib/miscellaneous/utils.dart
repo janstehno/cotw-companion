@@ -144,7 +144,7 @@ class Utils {
     try {
       Uint8List bytes = Uint8List.fromList(utf8.encode(content));
 
-      final String? result = await FilePicker.platform.saveFile(
+      final String? result = await FilePicker.saveFile(
         dialogTitle: 'Export Data',
         fileName: name,
         bytes: bytes,
@@ -164,7 +164,7 @@ class Utils {
   }
 
   static Future<bool> importFile(Function after) async {
-    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+    final FilePickerResult? result = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: ["json"],
     );

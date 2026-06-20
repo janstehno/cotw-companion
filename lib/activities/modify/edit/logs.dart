@@ -31,9 +31,9 @@ class ActivityEditLogsState extends ActivityAddLogsState {
   void initializeData() {
     _log = (widget as ActivityEditLogs).log;
     dateTime = _log.dateTime;
-    selectedReserve = _log.reserve;
-    selectedAnimal = _log.animal!;
-    selectedAnimalFur = _log.animalFur!;
+    reserveValueListenable = ValueNotifier(_log.reserve);
+    animalValueListenable = ValueNotifier(_log.animal!);
+    animalFurValueListenable = ValueNotifier(_log.animalFur!);
     trophyRating = _log.trophyRating;
     trophy = _log.trophy;
     weight = _log.weight;

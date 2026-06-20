@@ -26,6 +26,7 @@ import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:cotwcompanion/widgets/title/title_button_icon.dart';
 import 'package:cotwcompanion/widgets/title/title_switch_icon.dart';
 import 'package:cotwcompanion/widgets/title/title_tap.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,13 +48,19 @@ class ActivityAddLogs extends ActivityModify {
 }
 
 class ActivityAddLogsState extends ActivityModifyState {
+  Reserve? get selectedReserve => reserveValueListenable.value;
+
+  Animal get selectedAnimal => animalValueListenable.value;
+
+  AnimalFur get selectedAnimalFur => animalFurValueListenable.value;
+
   final RegExp rxDouble = RegExp(r"^\d{1,4}([.,]\d{0,3})?$");
   final TextEditingController trophyController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
 
-  late Reserve? selectedReserve;
-  late Animal selectedAnimal;
-  late AnimalFur selectedAnimalFur;
+  late final ValueNotifier<Reserve?> reserveValueListenable;
+  late final ValueNotifier<Animal> animalValueListenable;
+  late final ValueNotifier<AnimalFur> animalFurValueListenable;
 
   DateTime dateTime = DateTime.now();
 
@@ -99,21 +106,21 @@ class ActivityAddLogsState extends ActivityModifyState {
   }
 
   void initializeData() {
-    selectedReserve = reserves.first;
-    selectedAnimal = reserveAnimals.first;
-    selectedAnimalFur = animalFurs.first;
+    reserveValueListenable = ValueNotifier(reserves.first);
+    animalValueListenable = ValueNotifier(reserveAnimals.first);
+    animalFurValueListenable = ValueNotifier(animalFurs.first);
   }
 
   void _updateData(Change change) {
     setState(() {
       switch (change) {
         case Change.reserve:
-          selectedAnimal = reserveAnimals.first;
-          selectedAnimalFur = animalFurs.first;
+          animalValueListenable.value = reserveAnimals.first;
+          animalFurValueListenable.value = animalFurs.first;
         case Change.animal:
-          selectedAnimalFur = animalFurs.first;
+          animalFurValueListenable.value = animalFurs.first;
         case Change.gender:
-          selectedAnimalFur = animalFurs.first;
+          animalFurValueListenable.value = animalFurs.first;
         case Change.fur:
           break;
         case Change.other:
@@ -206,16 +213,16 @@ class ActivityAddLogsState extends ActivityModifyState {
     );
   }
 
-  DropdownMenuItem _buildReserveItem(Reserve reserve) {
-    return DropdownMenuItem(
-      value: reserves.indexOf(reserve),
+  DropdownItem<Reserve> _buildReserveItem(Reserve reserve) {
+    return DropdownItem<Reserve>(
+      value: reserve,
       child: WidgetDropDownItem(
         text: reserve.name,
       ),
     );
   }
 
-  List<DropdownMenuItem> _listReserves() {
+  List<DropdownItem<Reserve>> _listReserves() {
     return reserves.map((e) => _buildReserveItem(e)).toList();
   }
 
@@ -235,23 +242,23 @@ class ActivityAddLogsState extends ActivityModifyState {
           setState(() {
             if (selectedReserve == null) {
               if (widget.type == ModifyType.edit) {
-                selectedReserve = HelperJSON.getAnimalReserves(selectedAnimal).first;
+                reserveValueListenable.value = HelperJSON.getAnimalReserves(selectedAnimal).first;
               } else {
-                selectedReserve = reserves.first;
+                reserveValueListenable.value = reserves.first;
               }
             } else {
-              selectedReserve = null;
+              reserveValueListenable.value = null;
             }
             if (widget.type == ModifyType.add) _updateData(Change.reserve);
           });
         },
       ),
       if (selectedReserve != null)
-        WidgetDropDown<int>(
-          value: reserves.indexOf(selectedReserve!),
+        WidgetDropDown<Reserve?>(
+          valueListenable: reserveValueListenable,
           items: _listReserves(),
-          onChange: (dynamic value) {
-            selectedReserve = reserves.elementAt(value);
+          onChange: (Reserve? value) {
+            reserveValueListenable.value = value;
             _updateData(Change.reserve);
           },
         ),
@@ -259,25 +266,25 @@ class ActivityAddLogsState extends ActivityModifyState {
     ];
   }
 
-  DropdownMenuItem _buildAnimalItem(Animal animal) {
-    return DropdownMenuItem(
-      value: reserveAnimals.indexOf(animal),
+  DropdownItem<Animal> _buildAnimalItem(Animal animal) {
+    return DropdownItem<Animal>(
+      value: animal,
       child: WidgetDropDownItem(text: animal.name),
     );
   }
 
-  List<DropdownMenuItem> _listAnimals() {
+  List<DropdownItem<Animal>> _listAnimals() {
     return reserveAnimals.map((e) => _buildAnimalItem(e)).toList();
   }
 
   List<Widget> _listAnimal() {
     return [
       WidgetTitle(tr("ANIMAL")),
-      WidgetDropDown<int>(
-        value: reserveAnimals.indexOf(selectedAnimal),
+      WidgetDropDown<Animal>(
+        valueListenable: animalValueListenable,
         items: _listAnimals(),
-        onChange: (dynamic value) {
-          selectedAnimal = reserveAnimals.elementAt(value);
+        onChange: (Animal value) {
+          animalValueListenable.value = value;
           _updateData(Change.animal);
         },
       ),
@@ -303,9 +310,9 @@ class ActivityAddLogsState extends ActivityModifyState {
     );
   }
 
-  DropdownMenuItem _buildAnimalFurItem(AnimalFur animalFur) {
-    return DropdownMenuItem(
-      value: animalFurs.indexOf(animalFur),
+  DropdownItem<AnimalFur> _buildAnimalFurItem(AnimalFur animalFur) {
+    return DropdownItem<AnimalFur>(
+      value: animalFur,
       child: WidgetDropDownItemFur(
         text: animalFur.furName,
         color: animalFur.rarity.color,
@@ -313,18 +320,18 @@ class ActivityAddLogsState extends ActivityModifyState {
     );
   }
 
-  List<DropdownMenuItem> _listAnimalFurs() {
+  List<DropdownItem<AnimalFur>> _listAnimalFurs() {
     return animalFurs.map((e) => _buildAnimalFurItem(e)).toList();
   }
 
   List<Widget> _listFur() {
     return [
       WidgetTitle(tr("ANIMAL_FUR")),
-      WidgetDropDown<int>(
-        value: animalFurs.indexOf(selectedAnimalFur),
+      WidgetDropDown<AnimalFur>(
+        valueListenable: animalFurValueListenable,
         items: _listAnimalFurs(),
-        onChange: (dynamic value) {
-          selectedAnimalFur = animalFurs.elementAt(value);
+        onChange: (AnimalFur value) {
+          animalFurValueListenable.value = value;
           _updateData(Change.fur);
         },
       ),

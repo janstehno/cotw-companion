@@ -103,7 +103,6 @@ class Settings extends ChangeNotifier {
     _sharedPreferences = await SharedPreferences.getInstance();
     _language = languageId;
     await _sharedPreferences.setInt("language", languageId);
-    notifyListeners();
   }
 
   Future<void> changeTheme(bool darkMode) async {

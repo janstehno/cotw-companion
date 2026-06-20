@@ -20,6 +20,7 @@ import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
 import 'package:cotwcompanion/widgets/title/title_button_icon.dart';
 import 'package:cotwcompanion/widgets/title/title_switch_icon.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -33,8 +34,11 @@ class ActivityNeedZones extends StatefulWidget {
 }
 
 class ActivityNeedZonesState extends State<ActivityNeedZones> {
+  Reserve get _selectedReserve => _reserveValueListenable.value;
+
   final ScrollController _leftScrollController = ScrollController(initialScrollOffset: 0);
   final ScrollController _rightScrollController = ScrollController(initialScrollOffset: 0);
+  final ValueNotifier<Reserve> _reserveValueListenable = ValueNotifier(HelperJSON.reserves.first);
 
   final int _classes = 9;
   final Map<int, bool> _shownClasses = {};
@@ -49,8 +53,6 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
   int _minute = 30;
   int _second = 0;
   int _inGameSecond = 995572;
-
-  Reserve _reserve = HelperJSON.reserves.first;
 
   @override
   void initState() {
@@ -105,7 +107,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     for (int i = 0; i < _classes; i++) {
       _shownClasses[i] = false;
       _disabledClasses[i] = true;
-      if (_reserve.allClasses.contains(i + 1)) {
+      if (_selectedReserve.allClasses.contains(i + 1)) {
         _shownClasses[i] = true;
         _disabledClasses[i] = false;
       }
@@ -140,9 +142,9 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     );
   }
 
-  DropdownMenuItem _buildDropDownReserve(Reserve reserve) {
-    return DropdownMenuItem(
-      value: reserve.id,
+  DropdownItem<Reserve> _buildDropDownReserve(Reserve reserve) {
+    return DropdownItem<Reserve>(
+      value: reserve,
       child: WidgetPadding.h30(
         background: Interface.body,
         child: WidgetText(
@@ -154,18 +156,18 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
     );
   }
 
-  List<DropdownMenuItem> _listReserves() {
+  List<DropdownItem<Reserve>> _listReserves() {
     return HelperJSON.reserves.sorted(Reserve.sortById).toList().map((e) => _buildDropDownReserve(e)).toList();
   }
 
   Widget _buildReserves() {
     if (!_compact) {
-      return WidgetDropDown<int>(
-        value: _reserve.id,
+      return WidgetDropDown<Reserve>(
+        valueListenable: _reserveValueListenable,
         items: _listReserves(),
-        onChange: (dynamic value) {
+        onChange: (Reserve value) {
           setState(() {
-            _reserve = HelperJSON.getReserve(value)!;
+            _reserveValueListenable.value = value;
             _resetSwitches();
           });
         },
@@ -259,7 +261,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (e) => BuilderMap(reserve: _reserve)),
+              MaterialPageRoute(builder: (e) => BuilderMap(reserve: _selectedReserve)),
             );
           },
         ),
@@ -293,7 +295,7 @@ class ActivityNeedZonesState extends State<ActivityNeedZones> {
         if (!_compact) WidgetTitle(tr("ANIMAL_NEED_ZONES")),
         if (_classSwitches) _buildClass(),
         ListNeedZones(
-          _reserve,
+          _selectedReserve,
           hour: _hour,
           classes: _shownClasses,
           compact: _compact,

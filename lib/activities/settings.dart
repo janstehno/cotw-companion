@@ -7,6 +7,7 @@ import 'package:cotwcompanion/widgets/handling/drop_down_item.dart';
 import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
 import 'package:cotwcompanion/widgets/section/section_indicator_tap_align.dart';
 import 'package:cotwcompanion/widgets/title/title.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,10 +22,18 @@ class ActivitySettings extends StatefulWidget {
 }
 
 class ActivitySettingsState extends State<ActivitySettings> {
-  Settings get _settings => Provider.of<Settings>(context, listen: false);
+  late final Settings _settings;
+  late final ValueNotifier<int> _languageValueListenable;
 
-  DropdownMenuItem _buildDropdownItem(String language) {
-    return DropdownMenuItem(
+  @override
+  void initState() {
+    super.initState();
+    _settings = context.read<Settings>();
+    _languageValueListenable = ValueNotifier(_settings.language);
+  }
+
+  DropdownItem<int> _buildDropdownItem(String language) {
+    return DropdownItem<int>(
       value: _settings.languages.indexOf(language),
       child: WidgetDropDownItem(
         text: _settings.getLocaleName(_settings.languages.indexOf(language)),
@@ -32,7 +41,7 @@ class ActivitySettingsState extends State<ActivitySettings> {
     );
   }
 
-  List<DropdownMenuItem> _listLanguages() {
+  List<DropdownItem<int>> _listLanguages() {
     return _settings.languages.map((e) => _buildDropdownItem(e)).toList();
   }
 
@@ -40,13 +49,12 @@ class ActivitySettingsState extends State<ActivitySettings> {
     return [
       WidgetTitle(tr("LANGUAGE")),
       WidgetDropDown<int>(
-        value: _settings.language,
+        valueListenable: _languageValueListenable,
         items: _listLanguages(),
-        onChange: (dynamic value) {
-          setState(() {
-            _settings.changeLanguage(value);
-            EasyLocalization.of(context)!.setLocale(_settings.getLocale(value));
-          });
+        onChange: (value) async {
+          _settings.changeLanguage(value);
+          _languageValueListenable.value = value;
+          await EasyLocalization.of(context)!.setLocale(_settings.getLocale(value));
         },
       )
     ];

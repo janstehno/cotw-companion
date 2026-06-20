@@ -30,11 +30,11 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.toastyapps.cotwcompanion"
+    ndkVersion = "28.2.13676358"
     compileSdk 36
 
     String systemNdkPath = System.getenv("ANDROID_NDK_PATH")
     if (systemNdkPath != null) {
-        ndkVersion = flutter.ndkVersion
         ndkPath = systemNdkPath
     }
 

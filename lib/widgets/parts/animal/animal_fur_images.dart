@@ -12,6 +12,7 @@ import 'package:cotwcompanion/widgets/handling/drop_down.dart';
 import 'package:cotwcompanion/widgets/handling/drop_down_item.dart';
 import 'package:cotwcompanion/widgets/indicator/page_indicator.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -30,12 +31,13 @@ class WidgetAnimalFurImages extends StatefulWidget {
 }
 
 class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
+  AnimalFurImage get _selectedFur => _animalFurImageValueListenable.value;
+
   late final PageController _pageController;
+  late final ValueNotifier<AnimalFurImage> _animalFurImageValueListenable;
   late final List<AnimalFurImage> _furImages;
 
-  late AnimalFurImage _selectedFur;
-  late List<String> _selectedFurImages;
-
+  List<String> _selectedFurImages = [];
   CategoryType _selectedCategory = CategoryType.male;
 
   @override
@@ -43,7 +45,7 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
     super.initState();
     _furImages = HelperJSON.getAnimalsFursImages(widget.animal.id);
     if (_furImages.isNotEmpty) {
-      _selectedFur = _furImages.first;
+      _animalFurImageValueListenable = ValueNotifier(_furImages.first);
       _selectedFurImages = _selectedFur.imagesFor(_selectedCategory);
     }
     _initializeController();
@@ -55,7 +57,7 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
 
   void _updateSelectedFur(AnimalFurImage furImage) {
     setState(() {
-      _selectedFur = furImage;
+      _animalFurImageValueListenable.value = furImage;
       _selectedCategory = furImage.hasBoth
           ? CategoryType.male
           : furImage.hasMale
@@ -120,9 +122,9 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
 
   Widget _buildDropdown() {
     return WidgetDropDown<AnimalFurImage>(
-      value: _selectedFur,
+      valueListenable: _animalFurImageValueListenable,
       items: _furImages.map((furImage) {
-        return DropdownMenuItem(
+        return DropdownItem(
           value: furImage,
           child: WidgetDropDownItem(
             text: furImage.furName,
@@ -133,7 +135,7 @@ class WidgetAnimalFurImagesState extends State<WidgetAnimalFurImages> {
         );
       }).toList(),
       background: Interface.odd,
-      onChange: (fur) => _onFurSelected(fur!),
+      onChange: (AnimalFurImage fur) => _onFurSelected(fur),
     );
   }
 

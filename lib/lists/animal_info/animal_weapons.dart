@@ -2,7 +2,7 @@ import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
-import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
+import 'package:cotwcompanion/miscellaneous/pair.dart';
 import 'package:cotwcompanion/model/translatable/ammo.dart';
 import 'package:cotwcompanion/model/translatable/weapon.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
@@ -32,9 +32,9 @@ class ListAnimalWeapons extends StatefulWidget {
 class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
   bool get _bestOnly => Provider.of<Settings>(context, listen: false).bestWeaponsForAnimal;
 
-  final List<WeaponAmmo> _items = [];
-  final List<WeaponAmmo> _bestNonDlc = [];
-  final List<WeaponAmmo> _bestFromDlc = [];
+  final List<Pair<Weapon, Ammo>> _items = [];
+  final List<Pair<Weapon, Ammo>> _bestNonDlc = [];
+  final List<Pair<Weapon, Ammo>> _bestFromDlc = [];
 
   @override
   void initState() {
@@ -44,12 +44,12 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
 
   void _initializeWeapons() {
     _items.clear();
-    for (WeaponAmmo wa in HelperJSON.weaponsAmmo) {
-      Weapon weapon = HelperJSON.getWeapon(wa.weaponId)!;
-      Ammo ammo = HelperJSON.getAmmo(wa.ammoId)!;
-      if (weapon.type == widget.weaponType) {
-        if (ammo.min <= widget.animalLevel && widget.animalLevel <= ammo.max) {
-          _items.add(wa);
+    for (Weapon w in HelperJSON.weapons) {
+      for (Ammo a in HelperJSON.getWeaponsAmmo(w.id)) {
+        if (w.type == widget.weaponType) {
+          if (a.min <= widget.animalLevel && widget.animalLevel <= a.max) {
+            _items.add(Pair(w, a));
+          }
         }
       }
     }
@@ -60,14 +60,14 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
   void _sortWeapons() {
     if (widget.weaponType == WeaponType.shotgun || widget.weaponType == WeaponType.bow) {
       _items.sort((a, b) {
-        String nA = HelperJSON.getAmmo(a.ammoId)!.name;
-        String nB = HelperJSON.getAmmo(b.ammoId)!.name;
+        String nA = HelperJSON.getAmmo(a.second.id)!.name;
+        String nB = HelperJSON.getAmmo(b.second.id)!.name;
         return nA.compareTo(nB);
       });
     } else {
       _items.sort((a, b) {
-        String nA = HelperJSON.getWeapon(a.weaponId)!.name;
-        String nB = HelperJSON.getWeapon(b.weaponId)!.name;
+        String nA = HelperJSON.getWeapon(a.first.id)!.name;
+        String nB = HelperJSON.getWeapon(b.first.id)!.name;
         return nA.compareTo(nB);
       });
     }
@@ -75,9 +75,9 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
 
   void _getBestWeapons() {
     int minNoDlc = 0, penNoDlc = 0, minDlc = 0, penDlc = 0;
-    for (WeaponAmmo wa in _items) {
-      Weapon weapon = HelperJSON.getWeapon(wa.weaponId)!;
-      Ammo ammo = HelperJSON.getAmmo(wa.ammoId)!;
+    for (var wa in _items) {
+      Weapon weapon = HelperJSON.getWeapon(wa.first.id)!;
+      Ammo ammo = HelperJSON.getAmmo(wa.second.id)!;
       if (weapon.isFromDlc) {
         if (ammo.min > minDlc) minDlc = ammo.min;
         if (ammo.penetration > penDlc) penDlc = ammo.penetration;
@@ -92,9 +92,9 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
   void _setBestWeapons(int minDlc, int penDlc, int minNoDlc, int penNoDlc) {
     _bestNonDlc.clear();
     _bestFromDlc.clear();
-    for (WeaponAmmo wa in _items) {
-      Weapon weapon = HelperJSON.getWeapon(wa.weaponId)!;
-      Ammo ammo = HelperJSON.getAmmo(wa.ammoId)!;
+    for (var wa in _items) {
+      Weapon weapon = HelperJSON.getWeapon(wa.first.id)!;
+      Ammo ammo = HelperJSON.getAmmo(wa.second.id)!;
       if (weapon.isFromDlc) {
         if (ammo.min >= minDlc && ammo.penetration >= penDlc) {
           _bestFromDlc.add(wa);
@@ -107,16 +107,16 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
     }
   }
 
-  bool _isBetter(WeaponAmmo item, List<WeaponAmmo> items) {
-    for (WeaponAmmo wa in items) {
+  bool _isBetter(Pair<Weapon, Ammo> item, List<Pair<Weapon, Ammo>> items) {
+    for (var wa in items) {
       if (widget.weaponType == WeaponType.shotgun || widget.weaponType == WeaponType.bow) {
-        if (item.ammoId == wa.ammoId) {
-          if (HelperJSON.getWeapon(item.weaponId)!.accuracy < HelperJSON.getWeapon(wa.weaponId)!.accuracy) {
+        if (item.second.id == wa.second.id) {
+          if (HelperJSON.getWeapon(item.first.id)!.accuracy < HelperJSON.getWeapon(wa.first.id)!.accuracy) {
             return false;
           }
         }
-      } else if (item.weaponId == wa.weaponId) {
-        if (HelperJSON.getAmmo(item.ammoId)!.penetration < HelperJSON.getAmmo(wa.ammoId)!.penetration) {
+      } else if (item.first.id == wa.first.id) {
+        if (HelperJSON.getAmmo(item.second.id)!.penetration < HelperJSON.getAmmo(wa.second.id)!.penetration) {
           return false;
         }
       }
@@ -124,22 +124,22 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
     return true;
   }
 
-  List<WeaponAmmo> _removeWorse(List<WeaponAmmo> items) {
+  List<Pair<Weapon, Ammo>> _removeWorse(List<Pair<Weapon, Ammo>> items) {
     if (_bestOnly) {
       return items;
     } else {
-      List<WeaponAmmo> reduced = [];
-      for (WeaponAmmo item in items) {
+      List<Pair<Weapon, Ammo>> reduced = [];
+      for (var item in items) {
         if (_isBetter(item, items)) reduced.add(item);
       }
       return reduced;
     }
   }
 
-  List<Widget> _listWeapons(List<WeaponAmmo> items) {
+  List<Widget> _listWeapons(List<Pair<Weapon, Ammo>> items) {
     return _removeWorse(items).map((e) {
-      Weapon weapon = HelperJSON.getWeapon(e.weaponId)!;
-      Ammo ammo = HelperJSON.getAmmo(e.ammoId)!;
+      Weapon weapon = HelperJSON.getWeapon(e.first.id)!;
+      Ammo ammo = HelperJSON.getAmmo(e.second.id)!;
       bool dlc = weapon.isFromDlc;
       String text = weapon.name;
       String subText = ammo.name;
@@ -159,7 +159,7 @@ class ListAnimalWeaponsState extends State<ListAnimalWeapons> {
     }).toList();
   }
 
-  Widget _buildWeapons(List<WeaponAmmo> items) {
+  Widget _buildWeapons(List<Pair<Weapon, Ammo>> items) {
     return Column(children: _listWeapons(items));
   }
 

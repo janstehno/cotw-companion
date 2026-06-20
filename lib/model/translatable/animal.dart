@@ -220,9 +220,9 @@ class Animal extends Translatable {
       callers: json["CALLERS"] ?? [],
       level: json['LEVEL'],
       difficulty: json['DIFFICULTY'],
-      silver: json['SILVER'],
-      gold: json['GOLD'],
-      diamond: json['DIAMOND'],
+      silver: json['TROPHY_SILVER'],
+      gold: json['TROPHY_GOLD'],
+      diamond: json['TROPHY_DIAMOND'],
       maxTrophyMale: json['MAX_TROPHY_MALE'] ?? 0.0,
       minTrophyMale: json['MIN_TROPHY_MALE'] ?? 0.0,
       maxWeightMale: json['MAX_WEIGHT_MALE'] ?? 0.0,
@@ -237,9 +237,9 @@ class Animal extends Translatable {
       minWeightGO: json['MIN_WEIGHT_GO'] ?? 0.0,
       taxonomy: json["TAXONOMY"] ?? [],
       furGO: json["FUR_GO"] ?? [],
-      sight: json['SIGHT'],
-      hearing: json['HEARING'],
-      smell: json['SMELL'],
+      sight: json['SENSE_SIGHT'],
+      hearing: json['SENSE_HEARING'],
+      smell: json['SENSE_SMELL'],
       diamondFemale: json['DIAMOND_FEMALE'] ?? false,
       grounded: json['GROUNDED'] ?? false,
       dlc: json['DLC'],
@@ -261,7 +261,9 @@ class Animal extends Translatable {
 
   String getNameByReserve(Locale locale, Reserve? reserve) {
     if (reserve == null) return getNameByLocale(locale);
-    if ((locale.languageCode.toString() == "en" && id == 34 && reserve.id == 5 /*Puma in PF*/) ||
+    if ((locale.languageCode.toString() == "en" &&
+            id == 34 &&
+            (reserve.id == 5 || reserve.id == 19) /*Puma in PF/IHR*/) ||
         ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") &&
             id == 55 &&
             (reserve.id == 9 || reserve.id == 14) /*Feral Pig in TANP & ECA*/) ||

@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 class Weapon extends Translatable {
   final WeaponType _type;
   final int _mag;
+  final List<dynamic> _ammo;
   final int _accuracy;
   final int _recoil;
   final int _reload;
@@ -23,6 +24,7 @@ class Weapon extends Translatable {
     required super.name,
     required WeaponType type,
     required int mag,
+    required List<dynamic> ammo,
     required int accuracy,
     required int recoil,
     required int reload,
@@ -32,6 +34,7 @@ class Weapon extends Translatable {
     required bool dlc,
   })  : _type = type,
         _mag = mag,
+        _ammo = ammo,
         _accuracy = accuracy,
         _recoil = recoil,
         _reload = reload,
@@ -43,6 +46,8 @@ class Weapon extends Translatable {
   WeaponType get type => _type;
 
   int get mag => _mag;
+
+  List<int> get ammo => _ammo.cast();
 
   int get accuracy => _accuracy;
 
@@ -79,6 +84,7 @@ class Weapon extends Translatable {
       id: json['ID'],
       name: json['NAME'],
       type: WeaponType.values.firstWhere((e) => e.id == json['TYPE']),
+      ammo: json["AMMO"] ?? [],
       mag: json['MAG'],
       accuracy: json['ACCURACY'],
       recoil: json['RECOIL'],

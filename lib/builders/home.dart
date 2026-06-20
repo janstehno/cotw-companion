@@ -8,7 +8,6 @@ import 'package:cotwcompanion/helpers/log.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
 import 'package:cotwcompanion/model/connect/animal_fur_image.dart';
 import 'package:cotwcompanion/model/connect/animal_zone.dart';
-import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
 import 'package:cotwcompanion/model/describable/dlc.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
 import 'package:cotwcompanion/model/exportable/log.dart';
@@ -42,10 +41,9 @@ class BuilderHomeState extends BuilderBuilderState {
     List<Fur> furs = snapshot.data!["furs"] ?? [];
     List<Reserve> reserves = snapshot.data!["reserves"] ?? [];
     List<Weapon> weapons = snapshot.data!["weapons"] ?? [];
-    List<WeaponAmmo> weaponsAmmo = snapshot.data!["weaponsAmmo"] ?? [];
     List<Mission> missions = snapshot.data!["missions"] ?? [];
-    HelperJSON.setLists(ammo, animals, animalsFurs, animalsFursImages, animalsZones, callers, dlcs, furs, reserves,
-        weapons, weaponsAmmo, missions);
+    HelperJSON.setLists(
+        ammo, animals, animalsFurs, animalsFursImages, animalsZones, callers, dlcs, furs, reserves, weapons, missions);
     List<Log> logs = snapshot.data!["logs"] ?? [];
     Map<String, dynamic> filters = snapshot.data!["filters"] ?? [];
     HelperLog.setLogs(logs);
@@ -74,8 +72,6 @@ class BuilderHomeState extends BuilderBuilderState {
     updateProgress("reserves", reserves);
     List<Weapon> weapons = await HelperJSON.readWeapons();
     updateProgress("weapons", weapons);
-    List<WeaponAmmo> weaponsAmmo = await HelperJSON.readWeaponsAmmo();
-    updateProgress("weaponsAmmo", weaponsAmmo);
     List<Mission> missions = await HelperJSON.readMissions();
     updateProgress("missions", missions);
     List<Log> logs = await HelperLog.readFile();

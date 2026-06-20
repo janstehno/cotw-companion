@@ -8,7 +8,6 @@ import 'package:cotwcompanion/miscellaneous/logger.dart';
 import 'package:cotwcompanion/model/connect/animal_fur.dart';
 import 'package:cotwcompanion/model/connect/animal_fur_image.dart';
 import 'package:cotwcompanion/model/connect/animal_zone.dart';
-import 'package:cotwcompanion/model/connect/weapon_ammo.dart';
 import 'package:cotwcompanion/model/describable/dlc.dart';
 import 'package:cotwcompanion/model/describable/mission.dart';
 import 'package:cotwcompanion/model/translatable/ammo.dart';
@@ -32,7 +31,6 @@ class HelperJSON {
   static final List<Fur> furs = [];
   static final List<Reserve> reserves = [];
   static final List<Weapon> weapons = [];
-  static final List<WeaponAmmo> weaponsAmmo = [];
   static final List<Mission> missions = [];
 
   static void setLists(
@@ -46,7 +44,6 @@ class HelperJSON {
     List<Fur> sFurs,
     List<Reserve> sReserves,
     List<Weapon> sWeapons,
-    List<WeaponAmmo> sWeaponsAmmo,
     List<Mission> sMissions,
   ) {
     _logger.i("Initializing sets in HelperJSON...");
@@ -61,7 +58,6 @@ class HelperJSON {
     furs.addAll(sFurs);
     reserves.addAll(sReserves);
     weapons.addAll(sWeapons);
-    weaponsAmmo.addAll(sWeaponsAmmo);
     missions.addAll(sMissions);
     _logger.t("Sets initialized");
   }
@@ -77,7 +73,6 @@ class HelperJSON {
     furs.clear();
     reserves.clear();
     weapons.clear();
-    weaponsAmmo.clear();
     missions.clear();
   }
 
@@ -90,11 +85,7 @@ class HelperJSON {
   }
 
   static List<Weapon> getAmmoWeapons(int ammoId) {
-    return weapons.where((weapon) {
-      return weaponsAmmo.where((weaponAmmo) {
-        return weaponAmmo.ammoId == ammoId && weaponAmmo.weaponId == weapon.id;
-      }).isNotEmpty;
-    }).toList();
+    return weapons.where((weapon) => weapon.id == weapon.id && weapon.ammo.contains(ammoId)).toList();
   }
 
   static Animal? getAnimal(int animalId) {
@@ -219,18 +210,10 @@ class HelperJSON {
 
   static List<Ammo> getWeaponsAmmo(int weaponId) {
     return ammo.where((ammo) {
-      return weaponsAmmo.where((weaponAmmo) {
-        return weaponAmmo.weaponId == weaponId && weaponAmmo.ammoId == ammo.id;
+      return weapons.where((weapon) {
+        return weapon.id == weaponId && weapon.ammo.contains(ammo.id);
       }).isNotEmpty;
     }).toList();
-  }
-
-  static WeaponAmmo? getWeaponAmmo(int weaponAmmoId) {
-    try {
-      return weaponsAmmo.firstWhereOrNull((e) => e.id == weaponAmmoId);
-    } catch (e) {
-      throw Exception("WeaponAmmo with ID: $weaponAmmoId does not exist");
-    }
   }
 
   static Mission? getMission(int missionId) {
@@ -375,19 +358,6 @@ class HelperJSON {
       return weapons;
     } catch (e) {
       _logger.w("Weapons not loaded");
-      rethrow;
-    }
-  }
-
-  static Future<List<WeaponAmmo>> readWeaponsAmmo() async {
-    try {
-      final data = await getData(Assets.raw.weaponsammo);
-      final list = json.decode(data) as List<dynamic>;
-      final List<WeaponAmmo> weaponsAmmo = list.map((e) => WeaponAmmo.fromJson(e)).toList();
-      _logger.t("${weaponsAmmo.length} weapon's ammo loaded");
-      return weaponsAmmo;
-    } catch (e) {
-      _logger.w("Weapon's ammo not loaded");
       rethrow;
     }
   }

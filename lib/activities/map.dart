@@ -53,9 +53,8 @@ class ActivityMapState extends State<ActivityMap> {
   Settings get _settings => Provider.of<Settings>(context, listen: false);
 
   Offset? _dragStart;
+  double _scaleDiff = 0.0;
   double _scaleStart = 1.0;
-  double _centerLatEnd = LatLng.degree(0, 0).latitude.degrees;
-  double _centerLngEnd = LatLng.degree(0, 0).longitude.degrees;
   double _distanceThreshold = 0.3;
 
   double _dotSize = 5;
@@ -111,9 +110,9 @@ class ActivityMapState extends State<ActivityMap> {
 
   void _getTileSize(Orientation orientation) {
     if (orientation == Orientation.portrait) {
-      _tileSize = MediaQuery.of(context).size.height / 4;
+      _tileSize = MediaQuery.of(context).size.height / 4.25;
     } else {
-      _tileSize = MediaQuery.of(context).size.width / 4;
+      _tileSize = MediaQuery.of(context).size.width / 4.25;
     }
   }
 
@@ -146,60 +145,23 @@ class ActivityMapState extends State<ActivityMap> {
     });
   }
 
-  void _onScaleMove(ScaleUpdateDetails details) {
-    final scaleDiff = details.scale - _scaleStart;
-    _scaleStart = details.scale;
+  void _onScaleUpdate(ScaleUpdateDetails details) {
+    _scaleDiff = details.scale - _scaleStart;
 
-    if (scaleDiff > 0) {
-      setState(() {
-        _mapController.zoom = _clamp(_mapController.zoom + _zoomSpeed, _minZoom, _maxZoom);
-      });
-    } else if (scaleDiff < 0) {
-      setState(() {
-        _mapController.zoom = _clamp(_mapController.zoom - _zoomSpeed, _minZoom, _maxZoom);
-      });
+    if (_scaleDiff > 0) {
+      _mapController.zoom = _clamp(_mapController.zoom + _zoomSpeed, _minZoom, _maxZoom);
+    } else if (_scaleDiff < 0) {
+      _mapController.zoom = _clamp(_mapController.zoom - _zoomSpeed, _minZoom, _maxZoom);
     } else {
       final now = details.focalPoint;
       final diff = now - _dragStart!;
-      setState(() {
-        _dragStart = now;
-        _mapTransformer.drag(diff.dx, diff.dy);
-      });
+      _dragStart = now;
+      _mapTransformer.drag(diff.dx, diff.dy);
     }
-  }
 
-  void _onScaleBorder() {
-    if (_mapTransformer.toOffset(LatLng.degree(_mapController.center.latitude.degrees, -360)).dx > 0) {
-      double y = _centerLngEnd + (-360 - _mapTransformer.toLatLng(const Offset(0, 0)).longitude.degrees);
-      y = y > 0 ? 0 : y;
-      _mapController.center = LatLng.degree(_mapController.center.latitude.degrees, y);
-    }
-    if (_mapTransformer.toOffset(LatLng.degree(_mapController.center.latitude.degrees, 360)).dx <
-        MediaQuery.of(context).size.width) {
-      double y = _centerLngEnd +
-          (360 - _mapTransformer.toLatLng(Offset(MediaQuery.of(context).size.width, 0)).longitude.degrees);
-      y = y < 0 ? 0 : y;
-      _mapController.center = LatLng.degree(_mapController.center.latitude.degrees, y);
-    }
-    if (_mapTransformer.toOffset(LatLng.degree(-360, _mapController.center.longitude.degrees)).dy > 0) {
-      double x = _centerLatEnd + (-360 - _mapTransformer.toLatLng(const Offset(0, 0)).latitude.degrees);
-      x = x > 0 ? 0 : x;
-      _mapController.center = LatLng.degree(x, _mapController.center.longitude.degrees);
-    }
-    if (_mapTransformer.toOffset(LatLng.degree(360, _mapController.center.longitude.degrees)).dy <
-        MediaQuery.of(context).size.height) {
-      double x = _centerLatEnd +
-          (360 - _mapTransformer.toLatLng(Offset(0, MediaQuery.of(context).size.height)).latitude.degrees);
-      x = x < 0 ? 0 : x;
-      _mapController.center = LatLng.degree(x, _mapController.center.longitude.degrees);
-    }
-    _centerLatEnd = _mapController.center.latitude.degrees;
-    _centerLngEnd = _mapController.center.longitude.degrees;
-  }
-
-  void _onScaleUpdate(ScaleUpdateDetails details) {
-    _onScaleMove(details);
-    _onScaleBorder();
+    setState(() {
+      _scaleStart = details.scale;
+    });
   }
 
   TileLayer _buildTileLayer() {
@@ -467,9 +429,12 @@ class ActivityMapState extends State<ActivityMap> {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: GestureDetector(
-          onLongPress: () => _onLongPress(),
-          child: _buildStack(),
+        child: Container(
+          color: Colors.black,
+          child: GestureDetector(
+            onLongPress: () => _onLongPress(),
+            child: _buildStack(),
+          ),
         ),
       ),
     );

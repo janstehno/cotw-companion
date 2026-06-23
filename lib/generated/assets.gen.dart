@@ -57,8 +57,6 @@ class $AssetsRawGen {
 
   String get weapons => 'assets/raw/weapons.json';
 
-  String get weaponsammo => 'assets/raw/weaponsammo.json';
-
   List<String> get values => [
         ammo,
         animals,
@@ -74,8 +72,7 @@ class $AssetsRawGen {
         perks,
         reserves,
         skills,
-        weapons,
-        weaponsammo
+        weapons
       ];
 }
 
@@ -98,6 +95,8 @@ class $AssetsGraphicsAnatomyGen {
 
   AssetGenImage get blackBear => const AssetGenImage('assets/graphics/anatomy/black_bear.webp');
 
+  AssetGenImage get blackCaiman => const AssetGenImage('assets/graphics/anatomy/black_caiman.webp');
+
   AssetGenImage get blackbuck => const AssetGenImage('assets/graphics/anatomy/blackbuck.webp');
 
   AssetGenImage get blacktailDeer => const AssetGenImage('assets/graphics/anatomy/blacktail_deer.webp');
@@ -109,6 +108,8 @@ class $AssetsGraphicsAnatomyGen {
   AssetGenImage get brownBear => const AssetGenImage('assets/graphics/anatomy/brown_bear.webp');
 
   AssetGenImage get capeBuffalo => const AssetGenImage('assets/graphics/anatomy/cape_buffalo.webp');
+
+  AssetGenImage get capybara => const AssetGenImage('assets/graphics/anatomy/capybara.webp');
 
   AssetGenImage get caribou => const AssetGenImage('assets/graphics/anatomy/caribou.webp');
 
@@ -152,6 +153,8 @@ class $AssetsGraphicsAnatomyGen {
 
   AssetGenImage get iberianWolf => const AssetGenImage('assets/graphics/anatomy/iberian_wolf.webp');
 
+  AssetGenImage get jaguar => const AssetGenImage('assets/graphics/anatomy/jaguar.webp');
+
   AssetGenImage get javanRusa => const AssetGenImage('assets/graphics/anatomy/javan_rusa.webp');
 
   AssetGenImage get lesserKudu => const AssetGenImage('assets/graphics/anatomy/lesser_kudu.webp');
@@ -173,6 +176,8 @@ class $AssetsGraphicsAnatomyGen {
   AssetGenImage get northAmericanBeaver => const AssetGenImage('assets/graphics/anatomy/north_american_beaver.webp');
 
   AssetGenImage get northernRedMuntjac => const AssetGenImage('assets/graphics/anatomy/northern_red_muntjac.webp');
+
+  AssetGenImage get ocelot => const AssetGenImage('assets/graphics/anatomy/ocelot.webp');
 
   AssetGenImage get plainsBison => const AssetGenImage('assets/graphics/anatomy/plains_bison.webp');
 
@@ -208,14 +213,22 @@ class $AssetsGraphicsAnatomyGen {
 
   AssetGenImage get snowLeopard => const AssetGenImage('assets/graphics/anatomy/snow_leopard.webp');
 
+  AssetGenImage get southAmericanTapir => const AssetGenImage('assets/graphics/anatomy/south_american_tapir.webp');
+
   AssetGenImage get southeasternSpanishIbex =>
       const AssetGenImage('assets/graphics/anatomy/southeastern_spanish_ibex.webp');
+
+  AssetGenImage get spectacledBear => const AssetGenImage('assets/graphics/anatomy/spectacled_bear.webp');
 
   AssetGenImage get springbok => const AssetGenImage('assets/graphics/anatomy/springbok.webp');
 
   AssetGenImage get tahr => const AssetGenImage('assets/graphics/anatomy/tahr.webp');
 
+  AssetGenImage get taruca => const AssetGenImage('assets/graphics/anatomy/taruca.webp');
+
   AssetGenImage get tibetanFox => const AssetGenImage('assets/graphics/anatomy/tibetan_fox.webp');
+
+  AssetGenImage get vicuna => const AssetGenImage('assets/graphics/anatomy/vicuna.webp');
 
   AssetGenImage get warthog => const AssetGenImage('assets/graphics/anatomy/warthog.webp');
 
@@ -238,12 +251,14 @@ class $AssetsGraphicsAnatomyGen {
         bengalTiger,
         bighornSheep,
         blackBear,
+        blackCaiman,
         blackbuck,
         blacktailDeer,
         blueSheep,
         blueWildebeest,
         brownBear,
         capeBuffalo,
+        capybara,
         caribou,
         chamois,
         collaredPeccary,
@@ -265,6 +280,7 @@ class $AssetsGraphicsAnatomyGen {
         hogDeer,
         iberianMouflon,
         iberianWolf,
+        jaguar,
         javanRusa,
         lesserKudu,
         lion,
@@ -276,6 +292,7 @@ class $AssetsGraphicsAnatomyGen {
         nilgai,
         northAmericanBeaver,
         northernRedMuntjac,
+        ocelot,
         plainsBison,
         pronghorn,
         puma,
@@ -293,10 +310,14 @@ class $AssetsGraphicsAnatomyGen {
         sideStripedJackal,
         sikaDeer,
         snowLeopard,
+        southAmericanTapir,
         southeasternSpanishIbex,
+        spectacledBear,
         springbok,
         tahr,
+        taruca,
         tibetanFox,
+        vicuna,
         warthog,
         waterBuffalo,
         whitetailDeer,
@@ -331,6 +352,8 @@ class $AssetsGraphicsAnimalsGen {
 
   String get blackbuck => 'assets/graphics/animals/blackbuck.svg';
 
+  String get blackcaiman => 'assets/graphics/animals/blackcaiman.svg';
+
   String get blackgrouse => 'assets/graphics/animals/blackgrouse.svg';
 
   String get blacktaildeer => 'assets/graphics/animals/blacktaildeer.svg';
@@ -346,6 +369,8 @@ class $AssetsGraphicsAnimalsGen {
   String get canadagoose => 'assets/graphics/animals/canadagoose.svg';
 
   String get capebuffalo => 'assets/graphics/animals/capebuffalo.svg';
+
+  String get capybara => 'assets/graphics/animals/capybara.svg';
 
   String get caribou => 'assets/graphics/animals/caribou.svg';
 
@@ -403,6 +428,8 @@ class $AssetsGraphicsAnimalsGen {
 
   String get graywolf => 'assets/graphics/animals/graywolf.svg';
 
+  String get greatergrison => 'assets/graphics/animals/greatergrison.svg';
+
   String get gredosibex => 'assets/graphics/animals/gredosibex.svg';
 
   String get greylaggoose => 'assets/graphics/animals/greylaggoose.svg';
@@ -418,6 +445,8 @@ class $AssetsGraphicsAnimalsGen {
   String get iberianmouflon => 'assets/graphics/animals/iberianmouflon.svg';
 
   String get iberianwolf => 'assets/graphics/animals/iberianwolf.svg';
+
+  String get jaguar => 'assets/graphics/animals/jaguar.svg';
 
   String get javanrusa => 'assets/graphics/animals/javanrusa.svg';
 
@@ -448,6 +477,8 @@ class $AssetsGraphicsAnimalsGen {
   String get northernpintail => 'assets/graphics/animals/northernpintail.svg';
 
   String get northernredmuntjac => 'assets/graphics/animals/northernredmuntjac.svg';
+
+  String get ocelot => 'assets/graphics/animals/ocelot.svg';
 
   String get plainsbison => 'assets/graphics/animals/plainsbison.svg';
 
@@ -489,13 +520,19 @@ class $AssetsGraphicsAnimalsGen {
 
   String get snowleopard => 'assets/graphics/animals/snowleopard.svg';
 
+  String get southamericantapir => 'assets/graphics/animals/southamericantapir.svg';
+
   String get southeasternspanishibex => 'assets/graphics/animals/southeasternspanishibex.svg';
+
+  String get spectacledbear => 'assets/graphics/animals/spectacledbear.svg';
 
   String get springbok => 'assets/graphics/animals/springbok.svg';
 
   String get stubblequail => 'assets/graphics/animals/stubblequail.svg';
 
   String get tahr => 'assets/graphics/animals/tahr.svg';
+
+  String get taruca => 'assets/graphics/animals/taruca.svg';
 
   String get tibetanfox => 'assets/graphics/animals/tibetanfox.svg';
 
@@ -505,11 +542,15 @@ class $AssetsGraphicsAnimalsGen {
 
   String get turkey => 'assets/graphics/animals/turkey.svg';
 
+  String get vicuna => 'assets/graphics/animals/vicuna.svg';
+
   String get warthog => 'assets/graphics/animals/warthog.svg';
 
   String get waterbuffalo => 'assets/graphics/animals/waterbuffalo.svg';
 
   String get westerncapercaillie => 'assets/graphics/animals/westerncapercaillie.svg';
+
+  String get westernmountaincoati => 'assets/graphics/animals/westernmountaincoati.svg';
 
   String get whitetaildeer => 'assets/graphics/animals/whitetaildeer.svg';
 
@@ -541,6 +582,7 @@ class $AssetsGraphicsAnimalsGen {
         bighornsheep,
         blackbear,
         blackbuck,
+        blackcaiman,
         blackgrouse,
         blacktaildeer,
         bluesheep,
@@ -549,6 +591,7 @@ class $AssetsGraphicsAnimalsGen {
         brownbear,
         canadagoose,
         capebuffalo,
+        capybara,
         caribou,
         chamois,
         cinnamonteal,
@@ -577,6 +620,7 @@ class $AssetsGraphicsAnimalsGen {
         goldeneye,
         grayfox,
         graywolf,
+        greatergrison,
         gredosibex,
         greylaggoose,
         grizzlybear,
@@ -585,6 +629,7 @@ class $AssetsGraphicsAnimalsGen {
         hogdeer,
         iberianmouflon,
         iberianwolf,
+        jaguar,
         javanrusa,
         lesserkudu,
         lion,
@@ -600,6 +645,7 @@ class $AssetsGraphicsAnimalsGen {
         northamericanbeaver,
         northernpintail,
         northernredmuntjac,
+        ocelot,
         plainsbison,
         pronghorn,
         puma,
@@ -620,17 +666,22 @@ class $AssetsGraphicsAnimalsGen {
         sikadeer,
         snowgoose,
         snowleopard,
+        southamericantapir,
         southeasternspanishibex,
+        spectacledbear,
         springbok,
         stubblequail,
         tahr,
+        taruca,
         tibetanfox,
         tuftedduck,
         tundrabeangoose,
         turkey,
+        vicuna,
         warthog,
         waterbuffalo,
         westerncapercaillie,
+        westernmountaincoati,
         whitetaildeer,
         whitetailedjackrabbit,
         wildboar,
@@ -759,6 +810,8 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get blackbuck => const AssetGenImage('assets/graphics/heads/blackbuck.webp');
 
+  AssetGenImage get blackcaiman => const AssetGenImage('assets/graphics/heads/blackcaiman.webp');
+
   AssetGenImage get blackgrouse => const AssetGenImage('assets/graphics/heads/blackgrouse.webp');
 
   AssetGenImage get blacktaildeer => const AssetGenImage('assets/graphics/heads/blacktaildeer.webp');
@@ -774,6 +827,8 @@ class $AssetsGraphicsHeadsGen {
   AssetGenImage get canadagoose => const AssetGenImage('assets/graphics/heads/canadagoose.webp');
 
   AssetGenImage get capebuffalo => const AssetGenImage('assets/graphics/heads/capebuffalo.webp');
+
+  AssetGenImage get capybara => const AssetGenImage('assets/graphics/heads/capybara.webp');
 
   AssetGenImage get caribou => const AssetGenImage('assets/graphics/heads/caribou.webp');
 
@@ -832,6 +887,8 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get graywolf => const AssetGenImage('assets/graphics/heads/graywolf.webp');
 
+  AssetGenImage get greatergrison => const AssetGenImage('assets/graphics/heads/greatergrison.webp');
+
   AssetGenImage get gredosibex => const AssetGenImage('assets/graphics/heads/gredosibex.webp');
 
   AssetGenImage get greylaggoose => const AssetGenImage('assets/graphics/heads/greylaggoose.webp');
@@ -847,6 +904,8 @@ class $AssetsGraphicsHeadsGen {
   AssetGenImage get iberianmouflon => const AssetGenImage('assets/graphics/heads/iberianmouflon.webp');
 
   AssetGenImage get iberianwolf => const AssetGenImage('assets/graphics/heads/iberianwolf.webp');
+
+  AssetGenImage get jaguar => const AssetGenImage('assets/graphics/heads/jaguar.webp');
 
   AssetGenImage get javanrusa => const AssetGenImage('assets/graphics/heads/javanrusa.webp');
 
@@ -877,6 +936,8 @@ class $AssetsGraphicsHeadsGen {
   AssetGenImage get northernpintail => const AssetGenImage('assets/graphics/heads/northernpintail.webp');
 
   AssetGenImage get northernredmuntjac => const AssetGenImage('assets/graphics/heads/northernredmuntjac.webp');
+
+  AssetGenImage get ocelot => const AssetGenImage('assets/graphics/heads/ocelot.webp');
 
   AssetGenImage get plainsbison => const AssetGenImage('assets/graphics/heads/plainsbison.webp');
 
@@ -922,14 +983,20 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get snowleopard => const AssetGenImage('assets/graphics/heads/snowleopard.webp');
 
+  AssetGenImage get southamericantapir => const AssetGenImage('assets/graphics/heads/southamericantapir.webp');
+
   AssetGenImage get southeasternspanishibex =>
       const AssetGenImage('assets/graphics/heads/southeasternspanishibex.webp');
+
+  AssetGenImage get spectacledbear => const AssetGenImage('assets/graphics/heads/spectacledbear.webp');
 
   AssetGenImage get springbok => const AssetGenImage('assets/graphics/heads/springbok.webp');
 
   AssetGenImage get stubblequail => const AssetGenImage('assets/graphics/heads/stubblequail.webp');
 
   AssetGenImage get tahr => const AssetGenImage('assets/graphics/heads/tahr.webp');
+
+  AssetGenImage get taruca => const AssetGenImage('assets/graphics/heads/taruca.webp');
 
   AssetGenImage get tibetanfox => const AssetGenImage('assets/graphics/heads/tibetanfox.webp');
 
@@ -939,11 +1006,15 @@ class $AssetsGraphicsHeadsGen {
 
   AssetGenImage get turkey => const AssetGenImage('assets/graphics/heads/turkey.webp');
 
+  AssetGenImage get vicuna => const AssetGenImage('assets/graphics/heads/vicuna.webp');
+
   AssetGenImage get warthog => const AssetGenImage('assets/graphics/heads/warthog.webp');
 
   AssetGenImage get waterbuffalo => const AssetGenImage('assets/graphics/heads/waterbuffalo.webp');
 
   AssetGenImage get westerncapercaillie => const AssetGenImage('assets/graphics/heads/westerncapercaillie.webp');
+
+  AssetGenImage get westernmountaincoati => const AssetGenImage('assets/graphics/heads/westernmountaincoati.webp');
 
   AssetGenImage get whitetaildeer => const AssetGenImage('assets/graphics/heads/whitetaildeer.webp');
 
@@ -973,6 +1044,7 @@ class $AssetsGraphicsHeadsGen {
         bighornsheep,
         blackbear,
         blackbuck,
+        blackcaiman,
         blackgrouse,
         blacktaildeer,
         bluesheep,
@@ -981,6 +1053,7 @@ class $AssetsGraphicsHeadsGen {
         brownbear,
         canadagoose,
         capebuffalo,
+        capybara,
         caribou,
         chamois,
         cinnamonteal,
@@ -1009,6 +1082,7 @@ class $AssetsGraphicsHeadsGen {
         goldeneye,
         grayfox,
         graywolf,
+        greatergrison,
         gredosibex,
         greylaggoose,
         grizzlybear,
@@ -1017,6 +1091,7 @@ class $AssetsGraphicsHeadsGen {
         hogdeer,
         iberianmouflon,
         iberianwolf,
+        jaguar,
         javanrusa,
         lesserkudu,
         lion,
@@ -1032,6 +1107,7 @@ class $AssetsGraphicsHeadsGen {
         northamericanbeaver,
         northernpintail,
         northernredmuntjac,
+        ocelot,
         plainsbison,
         pronghorn,
         puma,
@@ -1054,17 +1130,22 @@ class $AssetsGraphicsHeadsGen {
         sikadeer,
         snowgoose,
         snowleopard,
+        southamericantapir,
         southeasternspanishibex,
+        spectacledbear,
         springbok,
         stubblequail,
         tahr,
+        taruca,
         tibetanfox,
         tuftedduck,
         tundrabeangoose,
         turkey,
+        vicuna,
         warthog,
         waterbuffalo,
         westerncapercaillie,
+        westernmountaincoati,
         whitetaildeer,
         whitetailedjackrabbit,
         wildboar,
@@ -1623,6 +1704,8 @@ class $AssetsGraphicsReservesGen {
 
   String get hirschfeldenhuntingreserve => 'assets/graphics/reserves/hirschfeldenhuntingreserve.svg';
 
+  String get intisuyuhuntingreserve => 'assets/graphics/reserves/intisuyuhuntingreserve.svg';
+
   String get laytonlakedistrict => 'assets/graphics/reserves/laytonlakedistrict.svg';
 
   String get medvedtaiganationalpark => 'assets/graphics/reserves/medvedtaiganationalpark.svg';
@@ -1656,6 +1739,7 @@ class $AssetsGraphicsReservesGen {
         cuatrocolinasgamereserve,
         emeraldcoastaustralia,
         hirschfeldenhuntingreserve,
+        intisuyuhuntingreserve,
         laytonlakedistrict,
         medvedtaiganationalpark,
         mississippiacrespreserve,
@@ -1725,6 +1809,8 @@ class $AssetsGraphicsWeaponsGen {
   String get crosspointcb165 => 'assets/graphics/weapons/crosspointcb165.svg';
 
   String get curman50inline => 'assets/graphics/weapons/curman50inline.svg';
+
+  String get dahlerrecurvedrawcb150 => 'assets/graphics/weapons/dahlerrecurvedrawcb150.svg';
 
   String get eckers3006 => 'assets/graphics/weapons/eckers3006.svg';
 
@@ -1842,6 +1928,7 @@ class $AssetsGraphicsWeaponsGen {
         cousomodel1897,
         crosspointcb165,
         curman50inline,
+        dahlerrecurvedrawcb150,
         eckers3006,
         focoso357,
         forselite300,

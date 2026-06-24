@@ -21,7 +21,7 @@ abstract class ActivityEntriesReorderableState<I extends Exportable> extends Act
       itemBuilder: (context, i) {
         return widgets.elementAt(i);
       },
-      onReorder: (int oldIndex, int newIndex) {
+      onReorderItem: (int oldIndex, int newIndex) {
         onReorder(oldIndex, newIndex);
       },
     );

@@ -2,6 +2,7 @@ import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/interface/interface.dart';
 import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/miscellaneous/utils.dart';
+import 'package:cotwcompanion/model/translatable/multimount.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/model/translatable/translatable.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -261,23 +262,61 @@ class Animal extends Translatable {
 
   String getNameByReserve(Locale locale, Reserve? reserve) {
     if (reserve == null) return getNameByLocale(locale);
-    if ((locale.languageCode.toString() == "en" &&
-            id == 34 &&
-            (reserve.id == 5 || reserve.id == 19) /*Puma in PF/IHR*/) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") &&
-            id == 55 &&
-            (reserve.id == 9 || reserve.id == 14) /*Feral Pig in TANP & ECA*/) ||
-        (locale.languageCode.toString() != "pl" && (id == 60 && reserve.id == 10) /*Mexican Bobcat in RDA*/)) {
-      return name.split("/")[0];
-    } else if ((locale.languageCode.toString() == "en" && id == 34 && reserve.id == 8 /*Mountain Lion in SRP*/) ||
-        ((locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") &&
-            id == 55 &&
-            reserve.id == 11 /*Wild Hog in MAP*/) ||
-        (locale.languageCode.toString() != "pl" && (id == 60 && reserve.id == 13) /*Bobcat in NEM*/)) {
-      return name.split("/")[1];
-    } else {
-      return name;
+
+    if (locale.languageCode.toString() == "en") {
+      /*Puma in PF/IHR*/
+      if (id == 34 && (reserve.id == 5 || reserve.id == 19)) {
+        return name.split("/")[0];
+      }
+      /*Mountain Lion in SRP*/
+      if (id == 34 && reserve.id == 8) {
+        return name.split("/")[1];
+      }
     }
+
+    if (locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") {
+      /*Feral Pig in TANP/ECA*/
+      if (id == 55 && (reserve.id == 9 || reserve.id == 14)) {
+        return name.split("/")[0];
+      }
+      /*Wild Hog in MAP*/
+      if (id == 55 && reserve.id == 11) {
+        return name.split("/")[1];
+      }
+    }
+
+    if (locale.languageCode.toString() != "pl") {
+      /*Mexican Bobcat in RDA*/
+      if (id == 60 && reserve.id == 10) {
+        return name.split("/")[0];
+      }
+      /*Bobcat in NEM*/
+      if (id == 60 && reserve.id == 13) {
+        return name.split("/")[1];
+      }
+    }
+
+    return name;
+  }
+
+  String getNameByMultimount(Locale locale, Multimount? multimount) {
+    if (multimount == null) return getNameByLocale(locale);
+
+    if (locale.languageCode.toString() == "en") {
+      /*Puma*/
+      if (id == 34 && (multimount.id == 8 || multimount.id == 37 || multimount.id == 57)) {
+        return name.split("/")[0];
+      }
+    }
+
+    if (locale.languageCode.toString() != "pl") {
+      /*Mexican Bobcat*/
+      if (id == 60 && multimount.id == 29) {
+        return name.split("/")[0];
+      }
+    }
+
+    return name;
   }
 
   int senseStrength(Sense sense) {

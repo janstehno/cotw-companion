@@ -8,7 +8,10 @@ import 'package:cotwcompanion/model/translatable/multimount.dart';
 import 'package:cotwcompanion/widgets/app/margin.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
+import 'package:cotwcompanion/widgets/parts/stats/parameter.dart';
+import 'package:cotwcompanion/widgets/parts/stats/price.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class WidgetMultimount extends StatelessWidget {
@@ -38,7 +41,7 @@ class WidgetMultimount extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(MultimountAnimal multimountAnimal, Set<Log> usedLogs) {
+  Widget _buildRow(BuildContext context, MultimountAnimal multimountAnimal, Set<Log> usedLogs) {
     return WidgetMargin.bottom(
       7,
       child: Row(
@@ -52,7 +55,7 @@ class WidgetMultimount extends StatelessWidget {
           const SizedBox(width: 5),
           Expanded(
             child: WidgetText(
-              HelperJSON.getAnimal(multimountAnimal.id)!.name,
+              HelperJSON.getAnimal(multimountAnimal.id)!.getNameByMultimount(context.locale, _multimount),
               color: Interface.dark,
               style: Style.normal.s16.w300,
             ),
@@ -62,26 +65,37 @@ class WidgetMultimount extends StatelessWidget {
     );
   }
 
-  Widget _buildAnimals(MultimountAnimal multimountAnimal, Set<Log> usedLogs) {
+  Widget _buildAnimals(BuildContext context, MultimountAnimal multimountAnimal, Set<Log> usedLogs) {
     return Column(children: [
-      ...List.generate(multimountAnimal.count, (i) => i).map((e) => _buildRow(multimountAnimal, usedLogs)),
+      ...List.generate(multimountAnimal.count, (i) => i).map((e) => _buildRow(context, multimountAnimal, usedLogs)),
     ]);
   }
 
-  List<Widget> _listMultimountAnimals(Set<Log> usedLogs) {
-    return _multimount.animals.map((e) => _buildAnimals(e, usedLogs)).toList();
+  List<Widget> _listMultimountAnimals(BuildContext context, Set<Log> usedLogs) {
+    return _multimount.animals.map((e) => _buildAnimals(context, e, usedLogs)).toList();
   }
 
   Widget _buildName() {
     return WidgetText(
       _multimount.name,
       color: Interface.dark,
-      style: Style.normal.s18.w300,
+      style: Style.normal.s18.w500,
       maxLines: 2,
     );
   }
 
-  Widget _buildWidgets() {
+  Widget _buildSize() {
+    return WidgetParameter(
+      text: tr("SIZE"),
+      value: _multimount.size.name,
+    );
+  }
+
+  Widget _buildPrice() {
+    return WidgetParameterPrice(price: _multimount.price);
+  }
+
+  Widget _buildWidgets(BuildContext context) {
     Set<Log> usedLogs = {};
     return WidgetPadding.a30(
       background: Utils.backgroundAt(_index),
@@ -91,13 +105,16 @@ class WidgetMultimount extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildName(),
+          const SizedBox(height: 7),
+          _buildSize(),
+          _buildPrice(),
           const SizedBox(height: 15),
-          ..._listMultimountAnimals(usedLogs),
+          ..._listMultimountAnimals(context, usedLogs),
         ],
       ),
     );
   }
 
   @override
-  Widget build(BuildContext context) => _buildWidgets();
+  Widget build(BuildContext context) => _buildWidgets(context);
 }

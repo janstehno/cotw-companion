@@ -1,19 +1,20 @@
 import 'package:cotwcompanion/helpers/json.dart';
 import 'package:cotwcompanion/helpers/log.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
 import 'package:cotwcompanion/model/exportable/log.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/translatable.dart';
 
 class Multimount extends Translatable {
   final int _price;
-  final int _size;
+  final MultimountSize _size;
   final List<dynamic> _animals;
 
   Multimount({
     required super.id,
     required super.name,
     required int price,
-    required int size,
+    required MultimountSize size,
     required List<dynamic> animals,
   })  : _price = price,
         _size = size,
@@ -21,9 +22,7 @@ class Multimount extends Translatable {
 
   int get price => _price;
 
-  int get size => _size;
-
-  String get sizeAsString => _size.toString().toUpperCase();
+  MultimountSize get size => _size;
 
   List<MultimountAnimal> get animals => _animals.cast();
 
@@ -32,7 +31,7 @@ class Multimount extends Translatable {
       id: json['ID'],
       name: json['NAME'],
       price: json['PRICE'],
-      size: json['SIZE'],
+      size: MultimountSize.values.firstWhere((e) => e.id == json['SIZE']),
       animals: json['ANIMALS'].map((e) => MultimountAnimal.fromJson(e)).toList(),
     );
   }

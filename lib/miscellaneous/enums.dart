@@ -99,6 +99,20 @@ enum CategoryType {
   female,
 }
 
+enum MultimountSize {
+  xs(0, "XS"),
+  s(1, "S"),
+  m(2, "M"),
+  l(3, "L"),
+  xl(4, "XL"),
+  xxl(5, "XXL");
+
+  final int id;
+  final String name;
+
+  const MultimountSize(this.id, this.name);
+}
+
 enum ModifyType {
   add,
   edit,

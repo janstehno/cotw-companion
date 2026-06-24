@@ -1988,6 +1988,8 @@ class $AssetsRawMapsGen {
 
   String get hirschfeldenhuntingreserve => 'assets/raw/maps/hirschfeldenhuntingreserve.json';
 
+  String get intisuyuhuntingreserve => 'assets/raw/maps/intisuyuhuntingreserve.json';
+
   String get laytonlakedistrict => 'assets/raw/maps/laytonlakedistrict.json';
 
   String get medvedtaiganationalpark => 'assets/raw/maps/medvedtaiganationalpark.json';
@@ -2021,6 +2023,7 @@ class $AssetsRawMapsGen {
         cuatrocolinasgamereserve,
         emeraldcoastaustralia,
         hirschfeldenhuntingreserve,
+        intisuyuhuntingreserve,
         laytonlakedistrict,
         medvedtaiganationalpark,
         mississippiacrespreserve,

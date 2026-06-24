@@ -42,6 +42,7 @@ class BuilderMapState extends BuilderBuilderState {
     "RESERVE:SALZWIESEN_PARK": Assets.raw.maps.salzwiesenpark,
     "RESERVE:ASKIY_RIDGE_HUNTING_PRESERVE": Assets.raw.maps.askiyridgehuntingpreserve,
     "RESERVE:TORR_NAN_SITHEAN_HUNTING_ESTATE": Assets.raw.maps.torrnansitheanhuntingestate,
+    "RESERVE:INTISUYU_HUNTING_RESERVE": Assets.raw.maps.intisuyuhuntingreserve,
   };
 
   @override

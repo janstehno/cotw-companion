@@ -274,7 +274,9 @@ class Animal extends Translatable {
       }
     }
 
-    if (locale.languageCode.toString() == "en" || locale.languageCode.toString() == "cs") {
+    if (locale.languageCode.toString() == "en" ||
+        locale.languageCode.toString() == "cs" ||
+        locale.languageCode.toString() == "pt") {
       /*Feral Pig in TANP/ECA*/
       if (id == 55 && (reserve.id == 9 || reserve.id == 14)) {
         return name.split("/")[0];

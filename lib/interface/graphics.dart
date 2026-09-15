@@ -443,6 +443,9 @@ class Graphics {
     "WEAPON:ALIS_PRECISION_SHOT_2506": Assets.graphics.weapons.alisprecisionshot2506,
     "WEAPON:RICHARDSSON_500": Assets.graphics.weapons.richardsson500,
     "WEAPON:CASSIDY_COMBINATION_SHOTGUN": Assets.graphics.weapons.cassidycombinationshotgun,
+    "WEAPON:HWEEN_4590_BUFFALO": Assets.graphics.weapons.hween4590buffalo,
+    "WEAPON:HUMPHREY_10G_COACHGUN": Assets.graphics.weapons.humphrey10gcoachgun,
+    "WEAPON:MAJO_4440_SPECIAL": Assets.graphics.weapons.majo4440special,
   };
 
   static final Map<String, String> _callers = {
@@ -555,7 +558,8 @@ class Graphics {
 
   static String getCallerIcon(Caller caller) => _callers[caller.asset] ?? _svgPlaceholder;
 
-  static String getProficiencyIcon(Proficiency proficiency) => _proficiency[proficiency.asset] ?? _svgPlaceholder;
+  static String getProficiencyIcon(Proficiency proficiency) =>
+      _proficiency[proficiency.asset] ?? _svgPlaceholder;
 
   static String getMapObjectIcon(MapLocationType type) {
     switch (type) {

@@ -1,5 +1,5 @@
 class Values {
-  static const String version = "1.11.11";
+  static const String version = "1.11.12";
 
   static const int greatOneId = 1000;
 
@@ -63,6 +63,7 @@ class Values {
     "Peter Schnell": ["08.01.2023"],
     "Peter Bakic": ["03.11.2022"],
     "John Hines": ["11.02.2025"],
+    "Pontus": ["17.07.2026"],
     "Michael Sturm": ["20.09.2024"],
     "Ringo Deckert": ["12.04.2025"],
     "Jutta Deg": ["20.06.2025"],
@@ -76,6 +77,7 @@ class Values {
     "Steven Liddicoat": ["09.12.2023"],
     "Dirk Luchs": ["26.11.2023"],
     "Michael Heiden": ["05.02.2026"],
+    "Anita Sundfær Hatland": ["25.06.2026"],
     "Steven Oyler": ["22.06.2024"],
     "Hana Čechová": ["07.11.2025"],
     "L Choitz": ["11.12.2025"],
@@ -115,6 +117,7 @@ class Values {
     "Riley Donovan": ["26.12.2022"],
     "Jesse Walker": ["02.06.2024"],
     "David Berthelot": ["05.04.2026"],
+    "Hannah Young": ["08.07.2026"],
     "Tomasz Lewandowski": ["01.09.2021"],
     "Peter Podhradsky": ["19.02.2021"],
     "Jonas Teichmann": ["17.12.2021"],

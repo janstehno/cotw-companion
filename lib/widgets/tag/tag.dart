@@ -8,6 +8,7 @@ class WidgetTag extends StatelessWidget {
   final double _height;
   final String? _left, _right;
   final Color _color, _background;
+  final Color? _iconColor;
 
   WidgetTag.big({
     super.key,
@@ -15,12 +16,14 @@ class WidgetTag extends StatelessWidget {
     String? value,
     required Color color,
     required Color background,
+    Color? iconColor,
   })  : assert((icon != null && icon.isNotEmpty) || (value != null && value.isNotEmpty)),
         _height = Values.bigTag,
         _left = icon,
         _right = value,
         _color = color,
-        _background = background;
+        _background = background,
+        _iconColor = iconColor;
 
   WidgetTag.small({
     super.key,
@@ -28,12 +31,14 @@ class WidgetTag extends StatelessWidget {
     String? value,
     required Color color,
     required Color background,
+    Color? iconColor,
   })  : assert((icon != null && icon.isNotEmpty) || (value != null && value.isNotEmpty)),
         _height = Values.smallTag,
         _left = icon,
         _right = value,
         _color = color,
-        _background = background;
+        _background = background,
+        _iconColor = iconColor;
 
   WidgetTag.mini({
     super.key,
@@ -41,12 +46,14 @@ class WidgetTag extends StatelessWidget {
     String? value,
     required Color color,
     required Color background,
+    Color? iconColor,
   })  : assert((icon != null && icon.isNotEmpty) || (value != null && value.isNotEmpty)),
         _height = Values.miniTag,
         _left = icon,
         _right = value,
         _color = color,
-        _background = background;
+        _background = background,
+        _iconColor = iconColor;
 
   double get height => _height;
 
@@ -68,7 +75,7 @@ class WidgetTag extends StatelessWidget {
         margin: _leftMargin,
         child: WidgetIcon.withSize(
           value,
-          color: color,
+          color: _iconColor ?? color,
           size: Values.indicatorSize - (_right != null ? 5 : 0),
         ),
       );

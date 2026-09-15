@@ -1,16 +1,21 @@
 import 'package:cotwcompanion/activities/modify/add/logs_source.dart';
 import 'package:cotwcompanion/generated/assets.gen.dart';
 import 'package:cotwcompanion/interface/interface.dart';
+import 'package:cotwcompanion/interface/settings.dart';
 import 'package:cotwcompanion/interface/style.dart';
+import 'package:cotwcompanion/miscellaneous/enums.dart';
+import 'package:cotwcompanion/miscellaneous/utils.dart';
 import 'package:cotwcompanion/miscellaneous/values.dart';
 import 'package:cotwcompanion/model/translatable/animal.dart';
 import 'package:cotwcompanion/model/translatable/reserve.dart';
 import 'package:cotwcompanion/widgets/app/padding.dart';
 import 'package:cotwcompanion/widgets/icon/icon.dart';
 import 'package:cotwcompanion/widgets/section/section_indicator_tap.dart';
+import 'package:cotwcompanion/widgets/tag/tag.dart';
 import 'package:cotwcompanion/widgets/text/text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
   final Animal _animal;
@@ -42,7 +47,8 @@ class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
     Navigator.push(
       _context,
       MaterialPageRoute(
-        builder: (e) => ActivityAddLogsSource(animal: _animal, reserve: _reserve, context: context, onSuccess: () {}),
+        builder: (e) =>
+            ActivityAddLogsSource(animal: _animal, reserve: _reserve, context: context, onSuccess: () {}),
       ),
     );
     return false;
@@ -66,28 +72,90 @@ class WidgetReserveAnimal extends WidgetSectionIndicatorTap {
     );
   }
 
+  Widget _buildDiamond() {
+    return WidgetTag.small(
+      icon: Assets.graphics.icons.trophyDiamond,
+      value: _animal.trophyAsString(_animal.diamond),
+      color: Interface.dark,
+      background: Colors.transparent,
+      iconColor: Interface.trophyDiamond,
+    );
+  }
+
+  Widget _buildMaxWeight() {
+    final units = context.read<Settings>().imperialUnits ? Units.imperial : Units.metric;
+
+    return WidgetTag.small(
+      icon: Assets.graphics.icons.weight,
+      value: "${Utils.removePointZero(_animal.weight(
+            ThresholdLevel.max,
+            _animal.femaleDiamond ? CategoryType.female : CategoryType.male,
+            units,
+          ), 2)}${units == Units.metric ? tr("KILOGRAMS") : tr("POUNDS")}",
+      color: Interface.dark,
+      background: Colors.transparent,
+      iconColor: Interface.disabled,
+    );
+  }
+
   Widget _buildGreatOne() {
-    if (_animal.hasGO) {
-      return WidgetIcon.withSize(
-        Assets.graphics.icons.trophyGreatOne,
-        color: Interface.dark,
-        size: Values.dotSize + 5,
-      );
-    }
-    return const SizedBox(width: Values.dotSize + 5);
+    return WidgetIcon.withSize(
+      Assets.graphics.icons.trophyGreatOne,
+      color: Interface.dark,
+      size: Values.dotSize + 5,
+    );
+  }
+
+  Widget _buildTrailingLeft() {
+    return Container(
+      width: 100,
+      alignment: Alignment.center,
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildDiamond(),
+                _buildMaxWeight(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTrailingRight() {
+    return Container(
+      width: 20,
+      alignment: Alignment.center,
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              spacing: 10,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (_animal.hasGO) _buildGreatOne(),
+                if (_animal.isFromDlc) buildIndicator(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget buildRow() {
     return Row(
+      spacing: 10,
       children: [
         _buildLevel(),
-        const SizedBox(width: 15),
         Expanded(child: super.buildTitle()),
-        const SizedBox(width: 15),
-        _buildGreatOne(),
-        const SizedBox(width: 15),
-        buildIndicator(),
+        _buildTrailingLeft(),
+        _buildTrailingRight(),
       ],
     );
   }

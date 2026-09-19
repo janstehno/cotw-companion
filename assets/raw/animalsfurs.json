@@ -6672,6 +6672,14 @@
         "RARITY": 2
     },
     {
+        "ANIMAL_ID": 120,
+        "FEMALE": false,
+        "FUR_ID": 1000,
+        "MALE": true,
+        "PERCENT": 0.0,
+        "RARITY": 4
+    },
+    {
         "ANIMAL_ID": 121,
         "FEMALE": true,
         "FUR_ID": 20,
